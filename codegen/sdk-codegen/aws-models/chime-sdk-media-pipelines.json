@@ -29,6 +29,49 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.chimesdkmediapipelines#ActiveSpeakerOnlyConfiguration": {
+            "type": "structure",
+            "members": {
+                "ActiveSpeakerPosition": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ActiveSpeakerPosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position of the <code>ActiveSpeakerOnly</code> video tile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the configuration for an <code>ActiveSpeakerOnly</code> video tile.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ActiveSpeakerPosition": {
+            "type": "enum",
+            "members": {
+                "TopLeft": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TopLeft"
+                    }
+                },
+                "TopRight": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TopRight"
+                    }
+                },
+                "BottomLeft": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BottomLeft"
+                    }
+                },
+                "BottomRight": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BottomRight"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmediapipelines#AmazonResourceName": {
             "type": "string",
             "traits": {
@@ -134,8 +177,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.chimesdkmediapipelines#CallAnalyticsLanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code that represents the language spoken in your audio.</p>\n         <p>If you're unsure of the language spoken in your audio, consider using\n            <code>IdentifyLanguage</code> to enable automatic language identification.</p>\n         <p>For a list of languages that real-time Call Analytics supports, see the <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported languages table</a> \n         in the <i>Amazon Transcribe Developer Guide</i>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The language code that represents the language spoken in your audio.</p>\n         <p>If you're unsure of the language spoken in your audio, consider using\n            <code>IdentifyLanguage</code> to enable automatic language identification.</p>\n         <p>For a list of languages that real-time Call Analytics supports, see the <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported languages table</a> \n         in the <i>Amazon Transcribe Developer Guide</i>.</p>"
                     }
                 },
                 "VocabularyName": {
@@ -205,6 +247,37 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If true, <code>TranscriptEvents</code> with <code>IsPartial: true</code> are filtered out of the insights target.</p>"
+                    }
+                },
+                "IdentifyLanguage": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Turns language identification on or off.</p>"
+                    }
+                },
+                "LanguageOptions": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#LanguageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language options for the transcription, such as automatic language detection.</p>"
+                    }
+                },
+                "PreferredLanguage": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#CallAnalyticsLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred language for the transcription.</p>"
+                    }
+                },
+                "VocabularyNames": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#VocabularyNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the custom vocabulary or vocabularies used during transcription.</p>"
+                    }
+                },
+                "VocabularyFilterNames": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#VocabularyFilterNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the custom vocabulary filter or filters using during transcription.</p>"
                     }
                 }
             },
@@ -475,6 +548,56 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.chimesdkmediapipelines#BorderColor": {
+            "type": "enum",
+            "members": {
+                "Black": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Black"
+                    }
+                },
+                "Blue": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Blue"
+                    }
+                },
+                "Red": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Red"
+                    }
+                },
+                "Green": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Green"
+                    }
+                },
+                "White": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "White"
+                    }
+                },
+                "Yellow": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Yellow"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#BorderThickness": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
         "com.amazonaws.chimesdkmediapipelines#CallAnalyticsLanguageCode": {
             "type": "enum",
             "members": {
@@ -530,6 +653,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "pt-BR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#CanvasOrientation": {
+            "type": "enum",
+            "members": {
+                "Landscape": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Landscape"
+                    }
+                },
+                "Portrait": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Portrait"
                     }
                 }
             }
@@ -1712,6 +1852,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Vertical"
                     }
+                },
+                "ActiveSpeakerOnly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ActiveSpeakerOnly"
+                    }
                 }
             }
         },
@@ -1723,6 +1869,15 @@
                     "traits": {
                         "smithy.api#enumValue": "PII"
                     }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#CornerRadius": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
                 }
             }
         },
@@ -2103,7 +2258,7 @@
                 "S3RecordingSinkRuntimeConfiguration": {
                     "target": "com.amazonaws.chimesdkmediapipelines#S3RecordingSinkRuntimeConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The runtime configuration for the S3 recording sink.</p>"
+                        "smithy.api#documentation": "<p>The runtime configuration for the S3 recording sink. If specified, the settings in this structure override any settings in <code>S3RecordingSinkConfiguration</code>.</p>"
                     }
                 },
                 "Tags": {
@@ -2778,6 +2933,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Defines the configuration options for a presenter only video tile.</p>"
                     }
+                },
+                "ActiveSpeakerOnlyConfiguration": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ActiveSpeakerOnlyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for an <code>ActiveSpeakerOnly</code> video tile.</p>"
+                    }
+                },
+                "HorizontalLayoutConfiguration": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#HorizontalLayoutConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for a horizontal layout.</p>"
+                    }
+                },
+                "VerticalLayoutConfiguration": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#VerticalLayoutConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for a vertical layout.</p>"
+                    }
+                },
+                "VideoAttribute": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#VideoAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute settings for the video tiles.</p>"
+                    }
+                },
+                "CanvasOrientation": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#CanvasOrientation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The orientation setting, horizontal or vertical.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2792,6 +2977,96 @@
                     "max": 36
                 },
                 "smithy.api#pattern": "^[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}$"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#HighlightColor": {
+            "type": "enum",
+            "members": {
+                "Black": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Black"
+                    }
+                },
+                "Blue": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Blue"
+                    }
+                },
+                "Red": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Red"
+                    }
+                },
+                "Green": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Green"
+                    }
+                },
+                "White": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "White"
+                    }
+                },
+                "Yellow": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Yellow"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#HorizontalLayoutConfiguration": {
+            "type": "structure",
+            "members": {
+                "TileOrder": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TileOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the automatic ordering of the video tiles.</p>"
+                    }
+                },
+                "TilePosition": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#HorizontalTilePosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the position of horizontal tiles.</p>"
+                    }
+                },
+                "TileCount": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TileCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of video tiles to display.</p>"
+                    }
+                },
+                "TileAspectRatio": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TileAspectRatio",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the aspect ratio of the video tiles, such as 16:9.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the configuration settings for the horizontal layout.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#HorizontalTilePosition": {
+            "type": "enum",
+            "members": {
+                "Top": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Top"
+                    }
+                },
+                "Bottom": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bottom"
+                    }
+                }
             }
         },
         "com.amazonaws.chimesdkmediapipelines#Iso8601Timestamp": {
@@ -2953,6 +3228,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that contains the configuration settings for an AWS Lambda function's data sink.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#LanguageOptions": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[a-zA-Z-,]+$"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#LayoutOption": {
@@ -4932,6 +5217,38 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.chimesdkmediapipelines#TileAspectRatio": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{1,2}\\/\\d{1,2}$"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#TileCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#TileOrder": {
+            "type": "enum",
+            "members": {
+                "JoinSequence": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JoinSequence"
+                    }
+                },
+                "SpeakerSequence": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SpeakerSequence"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmediapipelines#Timestamp": {
             "type": "timestamp"
         },
@@ -5222,6 +5539,55 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.chimesdkmediapipelines#VerticalLayoutConfiguration": {
+            "type": "structure",
+            "members": {
+                "TileOrder": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TileOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the automatic ordering of the video tiles.</p>"
+                    }
+                },
+                "TilePosition": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#VerticalTilePosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the position of vertical tiles.</p>"
+                    }
+                },
+                "TileCount": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TileCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tiles to display.</p>"
+                    }
+                },
+                "TileAspectRatio": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TileAspectRatio",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the aspect ratio of the video tiles, such as 16:9.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the configuration settings for a vertial layout.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#VerticalTilePosition": {
+            "type": "enum",
+            "members": {
+                "Left": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Left"
+                    }
+                },
+                "Right": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Right"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmediapipelines#VideoArtifactsConfiguration": {
             "type": "structure",
             "members": {
@@ -5241,6 +5607,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The video artifact configuration object.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#VideoAttribute": {
+            "type": "structure",
+            "members": {
+                "CornerRadius": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#CornerRadius",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the corner radius of all video tiles.</p>"
+                    }
+                },
+                "BorderColor": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BorderColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the border color of all video tiles.</p>"
+                    }
+                },
+                "HighlightColor": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#HighlightColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the highlight color for the active video tile.</p>"
+                    }
+                },
+                "BorderThickness": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BorderThickness",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the border thickness for all video tiles.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the settings for a video tile.</p>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#VideoConcatenationConfiguration": {
@@ -5302,6 +5700,16 @@
                 "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
             }
         },
+        "com.amazonaws.chimesdkmediapipelines#VocabularyFilterNames": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9,-._]+$"
+            }
+        },
         "com.amazonaws.chimesdkmediapipelines#VocabularyName": {
             "type": "string",
             "traits": {
@@ -5310,6 +5718,16 @@
                     "max": 200
                 },
                 "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#VocabularyNames": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9,-._]+$"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#VoiceAnalyticsConfigurationStatus": {

@@ -91,6 +91,9 @@
                     "target": "com.amazonaws.costexplorer#GetRightsizingRecommendation"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#GetSavingsPlanPurchaseRecommendationDetails"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#GetSavingsPlansCoverage"
                 },
                 {
@@ -299,208 +302,40 @@
                                                                 },
                                                                 "aws"
                                                             ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
                                                         }
                                                     ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
+                                                    "endpoint": {
+                                                        "url": "https://ce.us-east-1.amazonaws.com",
+                                                        "properties": {
+                                                            "authSchemes": [
                                                                 {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        },
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ce-fips.{Region}.api.aws",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error"
+                                                                    "name": "sigv4",
+                                                                    "signingName": "ce",
+                                                                    "signingRegion": "us-east-1"
                                                                 }
                                                             ]
                                                         },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ce-fips.{Region}.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ce.{Region}.api.aws",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://ce.us-east-1.amazonaws.com",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "ce",
-                                                                            "signingRegion": "us-east-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
                                                 },
                                                 {
                                                     "conditions": [
@@ -518,208 +353,40 @@
                                                                 },
                                                                 "aws-cn"
                                                             ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
                                                         }
                                                     ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
+                                                    "endpoint": {
+                                                        "url": "https://ce.cn-northwest-1.amazonaws.com.cn",
+                                                        "properties": {
+                                                            "authSchemes": [
                                                                 {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        },
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ce-fips.{Region}.api.amazonwebservices.com.cn",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error"
+                                                                    "name": "sigv4",
+                                                                    "signingName": "ce",
+                                                                    "signingRegion": "cn-northwest-1"
                                                                 }
                                                             ]
                                                         },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ce-fips.{Region}.amazonaws.com.cn",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ce.{Region}.api.amazonwebservices.com.cn",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://ce.cn-northwest-1.amazonaws.com.cn",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "ce",
-                                                                            "signingRegion": "cn-northwest-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
                                                 },
                                                 {
                                                     "conditions": [
@@ -924,60 +591,6 @@
                                                     "type": "tree",
                                                     "rules": [
                                                         {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "aws-global"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://ce.us-east-1.amazonaws.com",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "ce",
-                                                                            "signingRegion": "us-east-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "aws-cn-global"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://ce.cn-northwest-1.amazonaws.com.cn",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "ce",
-                                                                            "signingRegion": "cn-northwest-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://ce.{Region}.{PartitionResult#dnsSuffix}",
@@ -1021,8 +634,8 @@
                             },
                             "params": {
                                 "Region": "aws-global",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1034,8 +647,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1047,8 +660,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1060,8 +673,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1082,8 +695,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1104,8 +717,8 @@
                             },
                             "params": {
                                 "Region": "aws-cn-global",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1117,8 +730,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1130,8 +743,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1143,8 +756,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1165,8 +778,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1178,8 +791,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1191,8 +804,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1204,8 +817,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1217,8 +830,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1230,8 +854,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1243,8 +878,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1256,8 +902,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1269,8 +926,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1282,8 +939,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1295,8 +952,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1307,8 +964,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1319,9 +976,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1595,13 +1258,13 @@
                         "smithy.api#deprecated": {
                             "message": "Threshold has been deprecated in favor of ThresholdExpression"
                         },
-                        "smithy.api#documentation": "<p>(deprecated)</p>\n         <p>The dollar value that triggers a notification if the threshold is exceeded. </p>\n         <p>This field has been deprecated. To specify a threshold, use ThresholdExpression.\n            Continued use of Threshold will be treated as shorthand syntax for a\n            ThresholdExpression.</p>\n         <p>One of Threshold or ThresholdExpression is required for this resource.</p>"
+                        "smithy.api#documentation": "<p>(deprecated)</p>\n         <p>An absolute dollar value that must be exceeded by the anomaly's total impact (see\n                <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html\">Impact</a> for\n            more details) for an anomaly notification to be generated.</p>\n         <p>This field has been deprecated. To specify a threshold, use ThresholdExpression.\n            Continued use of Threshold will be treated as shorthand syntax for a\n            ThresholdExpression.</p>\n         <p>One of Threshold or ThresholdExpression is required for this resource. You cannot\n            specify both.</p>"
                     }
                 },
                 "Frequency": {
                     "target": "com.amazonaws.costexplorer#AnomalySubscriptionFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The frequency that anomaly reports are sent over email. </p>",
+                        "smithy.api#documentation": "<p>The frequency that anomaly notifications are sent. Notifications are sent either over\n            email (for DAILY and WEEKLY frequencies) or SNS (for IMMEDIATE frequency). For more\n            information, see <a href=\"https://docs.aws.amazon.com/cost-management/latest/userguide/ad-SNS.html\">Creating an Amazon SNS topic for\n                anomaly notifications</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1615,12 +1278,12 @@
                 "ThresholdExpression": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to specify the anomalies that you want to generate alerts for. This supports\n            dimensions and nested expressions. The supported dimensions are\n                <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and\n                <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>. The supported nested expression types\n            are <code>AND</code> and <code>OR</code>. The match option\n                <code>GREATER_THAN_OR_EQUAL</code> is required. Values must be numbers between 0 and\n            10,000,000,000.</p>\n         <p>One of Threshold or ThresholdExpression is required for this resource.</p>\n         <p>The following are examples of valid ThresholdExpressions:</p>\n         <ul>\n            <li>\n               <p>Absolute threshold: <code>{ \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>Percentage threshold: <code>{ \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AND</code> two thresholds together: <code>{ \"And\": [ { \"Dimensions\": {\n                        \"Key\": \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [\n                        \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } }, { \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> two thresholds together: <code>{ \"Or\": [ { \"Dimensions\": {\n                        \"Key\": \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [\n                        \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } }, { \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to specify the anomalies that you want to generate alerts for. This supports\n            dimensions and nested expressions. The supported dimensions are\n                <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and\n                <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>, corresponding to an anomaly’s\n            TotalImpact and TotalImpactPercentage, respectively (see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html\">Impact</a> for\n            more details). The supported nested expression types are <code>AND</code> and\n                <code>OR</code>. The match option <code>GREATER_THAN_OR_EQUAL</code> is required.\n            Values must be numbers between 0 and 10,000,000,000 in string format.</p>\n         <p>One of Threshold or ThresholdExpression is required for this resource. You cannot\n            specify both.</p>\n         <p>The following are examples of valid ThresholdExpressions:</p>\n         <ul>\n            <li>\n               <p>Absolute threshold: <code>{ \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>Percentage threshold: <code>{ \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AND</code> two thresholds together: <code>{ \"And\": [ { \"Dimensions\": {\n                        \"Key\": \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [\n                        \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } }, { \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> two thresholds together: <code>{ \"Or\": [ { \"Dimensions\": {\n                        \"Key\": \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [\n                        \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } }, { \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The association between a monitor, threshold, and list of subscribers used to deliver\n            notifications about anomalies detected by a monitor that exceeds a threshold. The\n            content consists of the detailed metadata and the current status of the\n                <code>AnomalySubscription</code> object. </p>"
+                "smithy.api#documentation": "<p>An <code>AnomalySubscription</code> resource (also referred to as an alert\n            subscription) sends notifications about specific anomalies that meet an alerting\n            criteria defined by you.</p>\n         <p>You can specify the frequency of the alerts and the subscribers to notify.</p>\n         <p>Anomaly subscriptions can be associated with one or more <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html\">\n               <code>AnomalyMonitor</code>\n            </a>  resources, and they only send\n            notifications about anomalies detected by those associated monitors. You can also\n            configure a threshold to further control which anomalies are included in the\n            notifications.</p>\n         <p>Anomalies that don’t exceed the chosen threshold and therefore don’t trigger\n            notifications from an anomaly subscription will still be available on the console and\n            from the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetAnomalies.html\">\n               <code>GetAnomalies</code>\n            </a> API.</p>"
             }
         },
         "com.amazonaws.costexplorer#AnomalySubscriptionFrequency": {
@@ -2061,7 +1724,7 @@
                 "Rule": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n                <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, and\n                <code>LINKED_ACCOUNT_NAME</code>.</p>\n         <p>Root level <code>OR</code> isn't supported. We recommend that you create a separate\n            rule instead.</p>\n         <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for Cost Category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n\n            <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, and <code>USAGE_TYPE</code>.</p>\n         <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for Cost Category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User\n                Guide</i>.</p>"
                     }
                 },
                 "InheritedValue": {
@@ -2506,6 +2169,9 @@
                         "smithy.api#documentation": "<p>An optional list of tags to associate with the specified <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html\">\n               <code>AnomalyMonitor</code>\n            </a>. You can use resource tags to control access to your\n        <code>monitor</code> using IAM policies.</p>\n         <p>Each tag consists of a key and a value, and each key must be unique for the resource. The\n      following restrictions apply to resource tags:</p>\n         <ul>\n            <li>\n               <p>Although the maximum number of array members is 200, you can assign a maximum of 50\n          user-tags to one resource. The remaining are reserved for Amazon Web Services use</p>\n            </li>\n            <li>\n               <p>The maximum length of a key is 128 characters</p>\n            </li>\n            <li>\n               <p>The maximum length of a value is 256 characters</p>\n            </li>\n            <li>\n               <p>Keys and values can only contain alphanumeric characters, spaces, and any of the\n          following: <code>_.:/=+@-</code>\n               </p>\n            </li>\n            <li>\n               <p>Keys and values are case sensitive</p>\n            </li>\n            <li>\n               <p>Keys and values are trimmed for any leading or trailing whitespaces</p>\n            </li>\n            <li>\n               <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for\n            Amazon Web Services use</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#CreateAnomalyMonitorResponse": {
@@ -2518,6 +2184,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#CreateAnomalySubscription": {
@@ -2556,6 +2225,9 @@
                         "smithy.api#documentation": "<p>An optional list of tags to associate with the specified <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html\">\n               <code>AnomalySubscription</code>\n            </a>. You can use resource tags to control access to\n      your <code>subscription</code> using IAM policies.</p>\n         <p>Each tag consists of a key and a value, and each key must be unique for the resource. The\n      following restrictions apply to resource tags:</p>\n         <ul>\n            <li>\n               <p>Although the maximum number of array members is 200, you can assign a maximum of 50\n          user-tags to one resource. The remaining are reserved for Amazon Web Services use</p>\n            </li>\n            <li>\n               <p>The maximum length of a key is 128 characters</p>\n            </li>\n            <li>\n               <p>The maximum length of a value is 256 characters</p>\n            </li>\n            <li>\n               <p>Keys and values can only contain alphanumeric characters, spaces, and any of the\n          following: <code>_.:/=+@-</code>\n               </p>\n            </li>\n            <li>\n               <p>Keys and values are case sensitive</p>\n            </li>\n            <li>\n               <p>Keys and values are trimmed for any leading or trailing whitespaces</p>\n            </li>\n            <li>\n               <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for\n            Amazon Web Services use</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#CreateAnomalySubscriptionResponse": {
@@ -2568,6 +2240,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#CreateCostCategoryDefinition": {
@@ -2633,6 +2308,9 @@
                         "smithy.api#documentation": "<p>An optional list of tags to associate with the specified <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html\">\n               <code>CostCategory</code>\n            </a>. You can use resource tags to control access to your\n        <code>cost category</code> using IAM policies.</p>\n         <p>Each tag consists of a key and a value, and each key must be unique for the resource. The\n      following restrictions apply to resource tags:</p>\n         <ul>\n            <li>\n               <p>Although the maximum number of array members is 200, you can assign a maximum of 50\n          user-tags to one resource. The remaining are reserved for Amazon Web Services use</p>\n            </li>\n            <li>\n               <p>The maximum length of a key is 128 characters</p>\n            </li>\n            <li>\n               <p>The maximum length of a value is 256 characters</p>\n            </li>\n            <li>\n               <p>Keys and values can only contain alphanumeric characters, spaces, and any of the\n          following: <code>_.:/=+@-</code>\n               </p>\n            </li>\n            <li>\n               <p>Keys and values are case sensitive</p>\n            </li>\n            <li>\n               <p>Keys and values are trimmed for any leading or trailing whitespaces</p>\n            </li>\n            <li>\n               <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for\n            Amazon Web Services use</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#CreateCostCategoryDefinitionResponse": {
@@ -2650,6 +2328,9 @@
                         "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#CurrentInstance": {
@@ -2790,11 +2471,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#DeleteAnomalyMonitorResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.costexplorer#DeleteAnomalySubscription": {
             "type": "operation",
@@ -2826,11 +2513,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#DeleteAnomalySubscriptionResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.costexplorer#DeleteCostCategoryDefinition": {
             "type": "operation",
@@ -2862,6 +2555,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#DeleteCostCategoryDefinitionResponse": {
@@ -2879,6 +2575,9 @@
                         "smithy.api#documentation": "<p>The effective end date of the Cost Category as a result of deleting it. No costs after\n      this date is categorized by the deleted Cost Category. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#DescribeCostCategoryDefinition": {
@@ -2917,6 +2616,9 @@
                         "smithy.api#documentation": "<p>The date when the Cost Category was effective. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#DescribeCostCategoryDefinitionResponse": {
@@ -2925,6 +2627,9 @@
                 "CostCategory": {
                     "target": "com.amazonaws.costexplorer#CostCategory"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#Dimension": {
@@ -3569,7 +3274,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter in various Cost Explorer APIs.</p>\n         <p>Not all <code>Expression</code> types are supported in each API. Refer to the\n            documentation for each specific API to see what is supported.</p>\n         <p>There are two patterns:</p>\n         <ul>\n            <li>\n               <p>Simple dimension values.</p>\n               <ul>\n                  <li>\n                     <p>There are three types of simple dimension values:\n                                <code>CostCategories</code>, <code>Tags</code>, and\n                                <code>Dimensions</code>.</p>\n                     <ul>\n                        <li>\n                           <p>Specify the <code>CostCategories</code> field to define a\n                                    filter that acts on Cost Categories.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>Tags</code> field to define a filter that\n                                    acts on Cost Allocation Tags.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>Dimensions</code> field to define a filter\n                                    that acts on the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html\">\n                                 <code>DimensionValues</code>\n                              </a>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>For each filter type, you can set the dimension name and values for\n                            the filters that you plan to use.</p>\n                     <ul>\n                        <li>\n                           <p>For example, you can filter for <code>REGION==us-east-1 OR\n                                        REGION==us-west-1</code>. For\n                                        <code>GetRightsizingRecommendation</code>, the Region is a\n                                    full name (for example, <code>REGION==US East (N.\n                                        Virginia)</code>.</p>\n                        </li>\n                        <li>\n                           <p>The corresponding <code>Expression</code> for this example is\n                                    as follows: <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [\n                                        \"us-east-1\", “us-west-1” ] } }</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>As shown in the previous example, lists of dimension values\n                                    are combined with <code>OR</code> when applying the\n                                    filter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>You can also set different match options to further control how the\n                            filter behaves. Not all APIs support match options. Refer to the\n                            documentation for each specific API to see what is supported.</p>\n                     <ul>\n                        <li>\n                           <p>For example, you can filter for linked account names that\n                                    start with “a”.</p>\n                        </li>\n                        <li>\n                           <p>The corresponding <code>Expression</code> for this example is\n                                    as follows: <code>{ \"Dimensions\": { \"Key\":\n                                        \"LINKED_ACCOUNT_NAME\", \"MatchOptions\": [ \"STARTS_WITH\" ],\n                                        \"Values\": [ \"a\" ] } }</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Compound <code>Expression</code> types with logical operations.</p>\n               <ul>\n                  <li>\n                     <p>You can use multiple <code>Expression</code> types and the logical\n                            operators <code>AND/OR/NOT</code> to create a list of one or more\n                                <code>Expression</code> objects. By doing this, you can filter by\n                            more advanced options.</p>\n                  </li>\n                  <li>\n                     <p>For example, you can filter by <code>((REGION == us-east-1 OR REGION\n                                == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=\n                                DataTransfer)</code>.</p>\n                  </li>\n                  <li>\n                     <p>The corresponding <code>Expression</code> for this example is as\n                            follows: <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\",\n                                \"Values\": [ \"us-east-1\", \"us-west-1\" ] }}, {\"Tags\": { \"Key\":\n                                \"TagName\", \"Values\": [\"Value1\"] } } ]}, {\"Not\": {\"Dimensions\": {\n                                \"Key\": \"USAGE_TYPE\", \"Values\": [\"DataTransfer\"] }}} ] }\n                            </code>\n                     </p>\n                  </li>\n               </ul>\n               <note>\n                  <p>Because each <code>Expression</code> can have only one operator, the\n                        service returns an error if more than one is specified. The following\n                        example shows an <code>Expression</code> object that creates an error:\n                            <code> { \"And\": [ ... ], \"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\":\n                            [ \"DataTransfer\" ] } } </code>\n                  </p>\n                  <p>The following is an example of the corresponding error message:\n                            <code>\"Expression has more than one roots. Only one root operator is\n                            allowed for each expression: And, Or, Not, Dimensions, Tags,\n                            CostCategories\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>\n         <note>\n            <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and\n                NOT isn't supported. OR isn't supported between different dimensions, or dimensions\n                and tags. NOT operators aren't supported. Dimensions are also limited to\n                    <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or\n                    <code>RIGHTSIZING_TYPE</code>.</p>\n            <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is\n                supported. AND and OR aren't supported. Dimensions are limited to\n                    <code>LINKED_ACCOUNT</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter in various Cost Explorer APIs.</p>\n         <p>Not all <code>Expression</code> types are supported in each API. Refer to the\n            documentation for each specific API to see what is supported.</p>\n         <p>There are two patterns:</p>\n         <ul>\n            <li>\n               <p>Simple dimension values.</p>\n               <ul>\n                  <li>\n                     <p>There are three types of simple dimension values:\n                                <code>CostCategories</code>, <code>Tags</code>, and\n                                <code>Dimensions</code>.</p>\n                     <ul>\n                        <li>\n                           <p>Specify the <code>CostCategories</code> field to define a\n                                    filter that acts on Cost Categories.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>Tags</code> field to define a filter that\n                                    acts on Cost Allocation Tags.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>Dimensions</code> field to define a filter\n                                    that acts on the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html\">\n                                 <code>DimensionValues</code>\n                              </a>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>For each filter type, you can set the dimension name and values for\n                            the filters that you plan to use.</p>\n                     <ul>\n                        <li>\n                           <p>For example, you can filter for <code>REGION==us-east-1 OR\n                                        REGION==us-west-1</code>. For\n                                        <code>GetRightsizingRecommendation</code>, the Region is a\n                                    full name (for example, <code>REGION==US East (N.\n                                        Virginia)</code>.</p>\n                        </li>\n                        <li>\n                           <p>The corresponding <code>Expression</code> for this example is\n                                    as follows: <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [\n                                        \"us-east-1\", \"us-west-1\" ] } }</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>As shown in the previous example, lists of dimension values\n                                    are combined with <code>OR</code> when applying the\n                                    filter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>You can also set different match options to further control how the\n                            filter behaves. Not all APIs support match options. Refer to the\n                            documentation for each specific API to see what is supported.</p>\n                     <ul>\n                        <li>\n                           <p>For example, you can filter for linked account names that\n                                    start with \"a\".</p>\n                        </li>\n                        <li>\n                           <p>The corresponding <code>Expression</code> for this example is\n                                    as follows: <code>{ \"Dimensions\": { \"Key\":\n                                        \"LINKED_ACCOUNT_NAME\", \"MatchOptions\": [ \"STARTS_WITH\" ],\n                                        \"Values\": [ \"a\" ] } }</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Compound <code>Expression</code> types with logical operations.</p>\n               <ul>\n                  <li>\n                     <p>You can use multiple <code>Expression</code> types and the logical\n                            operators <code>AND/OR/NOT</code> to create a list of one or more\n                                <code>Expression</code> objects. By doing this, you can filter by\n                            more advanced options.</p>\n                  </li>\n                  <li>\n                     <p>For example, you can filter by <code>((REGION == us-east-1 OR REGION\n                                == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=\n                                DataTransfer)</code>.</p>\n                  </li>\n                  <li>\n                     <p>The corresponding <code>Expression</code> for this example is as\n                            follows: <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\",\n                                \"Values\": [ \"us-east-1\", \"us-west-1\" ] }}, {\"Tags\": { \"Key\":\n                                \"TagName\", \"Values\": [\"Value1\"] } } ]}, {\"Not\": {\"Dimensions\": {\n                                \"Key\": \"USAGE_TYPE\", \"Values\": [\"DataTransfer\"] }}} ] }\n                            </code>\n                     </p>\n                  </li>\n               </ul>\n               <note>\n                  <p>Because each <code>Expression</code> can have only one operator, the\n                        service returns an error if more than one is specified. The following\n                        example shows an <code>Expression</code> object that creates an error:\n                            <code> { \"And\": [ ... ], \"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\":\n                            [ \"DataTransfer\" ] } } </code>\n                  </p>\n                  <p>The following is an example of the corresponding error message:\n                            <code>\"Expression has more than one roots. Only one root operator is\n                            allowed for each expression: And, Or, Not, Dimensions, Tags,\n                            CostCategories\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>\n         <note>\n            <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and\n                NOT isn't supported. OR isn't supported between different dimensions, or dimensions\n                and tags. NOT operators aren't supported. Dimensions are also limited to\n                    <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or\n                    <code>RIGHTSIZING_TYPE</code>.</p>\n            <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is\n                supported. AND and OR aren't supported. Dimensions are limited to\n                    <code>LINKED_ACCOUNT</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.costexplorer#Expressions": {
@@ -3885,6 +3590,9 @@
                         "smithy.api#documentation": "<p>The number of entries a paginated response contains. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetAnomaliesResponse": {
@@ -3903,6 +3611,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when\n      the response from a previous call has more results than the maximum page size. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetAnomalyMonitors": {
@@ -3949,6 +3660,9 @@
                         "smithy.api#documentation": "<p>The number of entries that a paginated response contains. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetAnomalyMonitorsResponse": {
@@ -3967,6 +3681,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when\n      the response from a previous call has more results than the maximum page size. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetAnomalySubscriptions": {
@@ -4019,6 +3736,9 @@
                         "smithy.api#documentation": "<p>The number of entries a paginated response contains. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetAnomalySubscriptionsResponse": {
@@ -4037,6 +3757,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when\n      the response from a previous call has more results than the maximum page size. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetCostAndUsage": {
@@ -4110,6 +3833,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token\n      when the response from a previous call has more results than the maximum page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetCostAndUsageResponse": {
@@ -4139,6 +3865,9 @@
                         "smithy.api#documentation": "<p>The attributes that apply to a specific dimension value. For example, if the value is a\n      linked account, the attribute is that account name.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetCostAndUsageWithResources": {
@@ -4212,6 +3941,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token\n      when the response from a previous call has more results than the maximum page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetCostAndUsageWithResourcesResponse": {
@@ -4241,6 +3973,9 @@
                         "smithy.api#documentation": "<p>The attributes that apply to a specific dimension value. For example, if the value is a\n      linked account, the attribute is that account name.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetCostCategories": {
@@ -4312,6 +4047,9 @@
                         "smithy.api#documentation": "<p>If the number of objects that are still available for retrieval exceeds the quota, Amazon Web Services returns a NextPageToken value in the response. To retrieve the next batch of\n      objects, provide the NextPageToken from the previous call in your next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetCostCategoriesResponse": {
@@ -4349,6 +4087,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetCostForecast": {
@@ -4407,6 +4148,9 @@
                         "smithy.api#documentation": "<p>Cost Explorer always returns the mean forecast as a single point. You can request a\n      prediction interval around the mean by specifying a confidence level. The higher the\n      confidence level, the more confident Cost Explorer is about the actual value falling in the\n      prediction interval. Higher confidence levels result in wider prediction intervals.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetCostForecastResponse": {
@@ -4424,6 +4168,9 @@
                         "smithy.api#documentation": "<p>The forecasts for your query, in order. For <code>DAILY</code> forecasts, this is a list\n      of days. For <code>MONTHLY</code> forecasts, this is a list of months.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetDimensionValues": {
@@ -4506,6 +4253,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token\n      when the response from a previous call has more results than the maximum page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetDimensionValuesResponse": {
@@ -4538,6 +4288,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of retrievable results. Amazon Web Services provides the token\n      when the response from a previous call has more results than the maximum page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetReservationCoverage": {
@@ -4618,7 +4371,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You can use the following request parameters to query for how much of your instance\n      usage a reservation covered.</p>"
+                "smithy.api#documentation": "<p>You can use the following request parameters to query for how much of your instance\n      usage a reservation covered.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetReservationCoverageResponse": {
@@ -4643,6 +4397,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of retrievable results. Amazon Web Services provides the token\n      when the response from a previous call has more results than the maximum page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetReservationPurchaseRecommendation": {
@@ -4730,6 +4487,9 @@
                         "smithy.api#documentation": "<p>The pagination token that indicates the next set of results that you want to\n      retrieve.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetReservationPurchaseRecommendationResponse": {
@@ -4753,6 +4513,9 @@
                         "smithy.api#documentation": "<p>The pagination token for the next set of retrievable results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetReservationUtilization": {
@@ -4825,6 +4588,9 @@
                         "smithy.api#documentation": "<p>The maximum number of objects that you returned for this request. If more objects are\n      available, in the response, Amazon Web Services provides a NextPageToken value that you can use\n      in a subsequent call to get the next batch of objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetReservationUtilizationResponse": {
@@ -4849,6 +4615,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of retrievable results. Amazon Web Services provides the token\n      when the response from a previous call has more results than the maximum page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetRightsizingRecommendation": {
@@ -4903,6 +4672,9 @@
                         "smithy.api#documentation": "<p>The pagination token that indicates the next set of results that you want to\n      retrieve.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetRightsizingRecommendationResponse": {
@@ -4938,6 +4710,64 @@
                         "smithy.api#documentation": "<p>You can use Configuration to customize recommendations across two attributes. You can\n      choose to view recommendations for instances within the same instance families or across\n      different instance families. You can also choose to view your estimated savings that are\n      associated with recommendations with consideration of existing Savings Plans or RI benefits,\n      or neither. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.costexplorer#GetSavingsPlanPurchaseRecommendationDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#GetSavingsPlanPurchaseRecommendationDetailsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#GetSavingsPlanPurchaseRecommendationDetailsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details for a Savings Plan recommendation. These details include the hourly\n      data-points that construct the new cost, coverage, and utilization charts.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#GetSavingsPlanPurchaseRecommendationDetailsRequest": {
+            "type": "structure",
+            "members": {
+                "RecommendationDetailId": {
+                    "target": "com.amazonaws.costexplorer#RecommendationDetailId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID that is associated with the Savings Plan recommendation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#GetSavingsPlanPurchaseRecommendationDetailsResponse": {
+            "type": "structure",
+            "members": {
+                "RecommendationDetailId": {
+                    "target": "com.amazonaws.costexplorer#RecommendationDetailId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID that is associated with the Savings Plan recommendation.</p>"
+                    }
+                },
+                "RecommendationDetailData": {
+                    "target": "com.amazonaws.costexplorer#RecommendationDetailData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about a specific Savings Plan recommendation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetSavingsPlansCoverage": {
@@ -5021,6 +4851,9 @@
                         "smithy.api#documentation": "<p>The value that you want to sort the data by.</p>\n         <p>The following values are supported for <code>Key</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SpendCoveredBySavingsPlan</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OnDemandCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CoveragePercentage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InstanceFamily</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Service</code>\n               </p>\n            </li>\n         </ul>\n         <p>The supported values for <code>SortOrder</code> are <code>ASCENDING</code> and\n        <code>DESCENDING</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetSavingsPlansCoverageResponse": {
@@ -5039,6 +4872,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when\n      the response from a previous call has more results than the maximum page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetSavingsPlansPurchaseRecommendation": {
@@ -5117,6 +4953,9 @@
                         "smithy.api#documentation": "<p>You can filter your recommendations by Account ID with the <code>LINKED_ACCOUNT</code>\n      dimension. To filter your recommendations by Account ID, specify <code>Key</code> as\n        <code>LINKED_ACCOUNT</code> and <code>Value</code> as the comma-separated Acount ID(s) that\n      you want to see Savings Plans purchase recommendations for.</p>\n         <p>For GetSavingsPlansPurchaseRecommendation, the <code>Filter</code> doesn't include\n        <code>CostCategories</code> or <code>Tags</code>. It only includes <code>Dimensions</code>.\n      With <code>Dimensions</code>, <code>Key</code> must be <code>LINKED_ACCOUNT</code> and\n        <code>Value</code> can be a single Account ID or multiple comma-separated Account IDs that\n      you want to see Savings Plans Purchase Recommendations for. <code>AND</code> and\n        <code>OR</code> operators are not supported.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetSavingsPlansPurchaseRecommendationResponse": {
@@ -5140,6 +4979,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of retrievable results. Amazon Web Services provides the token\n      when the response from a previous call has more results than the maximum page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetSavingsPlansUtilization": {
@@ -5231,6 +5073,9 @@
                         "smithy.api#documentation": "<p>The value that you want to sort the data by.</p>\n         <p>The following values are supported for <code>Key</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UtilizationPercentage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsedCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnusedCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetSavings</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedRecurringCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedUpfrontCommitment</code>\n               </p>\n            </li>\n         </ul>\n         <p>The supported values for <code>SortOrder</code> are <code>ASCENDING</code> and\n        <code>DESCENDING</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetSavingsPlansUtilizationDetailsResponse": {
@@ -5261,6 +5106,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when\n      the response from a previous call has more results than the maximum page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetSavingsPlansUtilizationRequest": {
@@ -5291,6 +5139,9 @@
                         "smithy.api#documentation": "<p>The value that you want to sort the data by.</p>\n         <p>The following values are supported for <code>Key</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UtilizationPercentage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsedCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnusedCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetSavings</code>\n               </p>\n            </li>\n         </ul>\n         <p>The supported values for <code>SortOrder</code> are <code>ASCENDING</code> and\n        <code>DESCENDING</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetSavingsPlansUtilizationResponse": {
@@ -5309,6 +5160,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetTags": {
@@ -5384,6 +5238,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token\n      when the response from a previous call has more results than the maximum page size.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetTagsResponse": {
@@ -5416,6 +5273,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#GetUsageForecast": {
@@ -5477,6 +5337,9 @@
                         "smithy.api#documentation": "<p>Amazon Web Services Cost Explorer always returns the mean forecast as a single point.\n      You can request a prediction interval around the mean by specifying a confidence level. The\n      higher the confidence level, the more confident Cost Explorer is about the actual value\n      falling in the prediction interval. Higher confidence levels result in wider prediction\n      intervals.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#GetUsageForecastResponse": {
@@ -5494,6 +5357,9 @@
                         "smithy.api#documentation": "<p>The forecasts for your query, in order. For <code>DAILY</code> forecasts, this is a\n      list of days. For <code>MONTHLY</code> forecasts, this is a list of months.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#Granularity": {
@@ -5775,6 +5641,9 @@
                         "smithy.api#documentation": "<p>The maximum number of objects that are returned for this request. By default, the request\n      returns 100 results. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#ListCostAllocationTagsResponse": {
@@ -5792,6 +5661,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when\n      the response from a previous call has more results than the maximum page size. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#ListCostCategoryDefinitions": {
@@ -5838,6 +5710,9 @@
                         "smithy.api#documentation": "<p>The number of entries a paginated response contains. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#ListCostCategoryDefinitionsResponse": {
@@ -5855,6 +5730,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when\n      the response from a previous call has more results than the maximum page size. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#ListSavingsPlansPurchaseRecommendationGeneration": {
@@ -5866,6 +5744,9 @@
                 "target": "com.amazonaws.costexplorer#ListSavingsPlansPurchaseRecommendationGenerationResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
                 {
                     "target": "com.amazonaws.costexplorer#InvalidNextTokenException"
                 },
@@ -5905,6 +5786,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#ListSavingsPlansPurchaseRecommendationGenerationResponse": {
@@ -5922,6 +5806,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#ListTagsForResource": {
@@ -5954,6 +5841,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#ListTagsForResourceResponse": {
@@ -5965,6 +5855,9 @@
                         "smithy.api#documentation": "<p>A list of tag key value pairs that are associated with the resource. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#LookbackPeriodInDays": {
@@ -6154,6 +6047,12 @@
             },
             "value": {
                 "target": "com.amazonaws.costexplorer#MetricValue"
+            }
+        },
+        "com.amazonaws.costexplorer#MetricsOverLookbackPeriod": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#RecommendationDetailHourlyMetrics"
             }
         },
         "com.amazonaws.costexplorer#ModifyRecommendationDetail": {
@@ -6464,6 +6363,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#ProvideAnomalyFeedbackResponse": {
@@ -6476,6 +6378,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#PurchasedHours": {
@@ -6553,6 +6458,227 @@
         },
         "com.amazonaws.costexplorer#RealizedSavings": {
             "type": "string"
+        },
+        "com.amazonaws.costexplorer#RecommendationDetailData": {
+            "type": "structure",
+            "members": {
+                "AccountScope": {
+                    "target": "com.amazonaws.costexplorer#AccountScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account scope that you want your recommendations for. Amazon Web Services\n            calculates recommendations including the management account and member accounts if the\n            value is set to PAYER. If the value is LINKED, recommendations are calculated for\n            individual member accounts only.</p>"
+                    }
+                },
+                "LookbackPeriodInDays": {
+                    "target": "com.amazonaws.costexplorer#LookbackPeriodInDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How many days of previous usage that Amazon Web Services considers when making this\n            recommendation.</p>"
+                    }
+                },
+                "SavingsPlansType": {
+                    "target": "com.amazonaws.costexplorer#SupportedSavingsPlansType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested Savings Plan recommendation type.</p>"
+                    }
+                },
+                "TermInYears": {
+                    "target": "com.amazonaws.costexplorer#TermInYears",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The term of the commitment in years.</p>"
+                    }
+                },
+                "PaymentOption": {
+                    "target": "com.amazonaws.costexplorer#PaymentOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment option for the commitment (for example, All Upfront or No Upfront).</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AccountID that the recommendation is generated for.</p>"
+                    }
+                },
+                "CurrencyCode": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency code that Amazon Web Services used to generate the recommendation and\n            present potential savings.</p>"
+                    }
+                },
+                "InstanceFamily": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance family of the recommended Savings Plan.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region the recommendation is generated for.</p>"
+                    }
+                },
+                "OfferingId": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that's used to distinguish Savings Plans from one another.</p>"
+                    }
+                },
+                "GenerationTimestamp": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime"
+                },
+                "LatestUsageTimestamp": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime"
+                },
+                "CurrentAverageHourlyOnDemandSpend": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The average value of hourly On-Demand spend over the lookback period of the applicable\n            usage type.</p>"
+                    }
+                },
+                "CurrentMaximumHourlyOnDemandSpend": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The highest value of hourly On-Demand spend over the lookback period of the applicable\n            usage type.</p>"
+                    }
+                },
+                "CurrentMinimumHourlyOnDemandSpend": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lowest value of hourly On-Demand spend over the lookback period of the applicable\n            usage type.</p>"
+                    }
+                },
+                "EstimatedAverageUtilization": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated utilization of the recommended Savings Plan.</p>"
+                    }
+                },
+                "EstimatedMonthlySavingsAmount": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated monthly savings amount based on the recommended Savings Plan.</p>"
+                    }
+                },
+                "EstimatedOnDemandCost": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The remaining On-Demand cost estimated to not be covered by the recommended Savings\n            Plan, over the length of the lookback period.</p>"
+                    }
+                },
+                "EstimatedOnDemandCostWithCurrentCommitment": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated On-Demand costs you expect with no additional commitment, based on your\n            usage of the selected time period and the Savings Plan you own.</p>"
+                    }
+                },
+                "EstimatedROI": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated return on investment that's based on the recommended Savings Plan that\n            you purchased. This is calculated as estimatedSavingsAmount/estimatedSPCost*100.</p>"
+                    }
+                },
+                "EstimatedSPCost": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cost of the recommended Savings Plan over the length of the lookback\n            period.</p>"
+                    }
+                },
+                "EstimatedSavingsAmount": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated savings amount that's based on the recommended Savings Plan over the\n            length of the lookback period.</p>"
+                    }
+                },
+                "EstimatedSavingsPercentage": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated savings percentage relative to the total cost of applicable On-Demand\n            usage over the lookback period.</p>"
+                    }
+                },
+                "ExistingHourlyCommitment": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The existing hourly commitment for the Savings Plan type.</p>"
+                    }
+                },
+                "HourlyCommitmentToPurchase": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended hourly commitment level for the Savings Plan type and the\n            configuration that's based on the usage during the lookback period.</p>"
+                    }
+                },
+                "UpfrontCost": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upfront cost of the recommended Savings Plan, based on the selected payment\n            option.</p>"
+                    }
+                },
+                "CurrentAverageCoverage": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The average value of hourly coverage over the lookback period.</p>"
+                    }
+                },
+                "EstimatedAverageCoverage": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated coverage of the recommended Savings Plan.</p>"
+                    }
+                },
+                "MetricsOverLookbackPeriod": {
+                    "target": "com.amazonaws.costexplorer#MetricsOverLookbackPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The related hourly cost, coverage, and utilization metrics over the lookback\n            period.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details and metrics for the given recommendation.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#RecommendationDetailHourlyMetrics": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime"
+                },
+                "EstimatedOnDemandCost": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The remaining On-Demand cost estimated to not be covered by the recommended Savings\n            Plan, over the length of the lookback period.</p>"
+                    }
+                },
+                "CurrentCoverage": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current amount of Savings Plans eligible usage that the Savings Plan\n            covered.</p>"
+                    }
+                },
+                "EstimatedCoverage": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated coverage amount based on the recommended Savings Plan.</p>"
+                    }
+                },
+                "EstimatedNewCommitmentUtilization": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated utilization for the recommended Savings Plan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the hourly metrics for the given recommendation over the lookback period.\n        </p>"
+            }
+        },
+        "com.amazonaws.costexplorer#RecommendationDetailId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[\\S\\s]{8}-[\\S\\s]{4}-[\\S\\s]{4}-[\\S\\s]{4}-[\\S\\s]{12}$"
+            }
         },
         "com.amazonaws.costexplorer#RecommendationId": {
             "type": "string",
@@ -7701,6 +7827,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The average value of hourly On-Demand spend over the lookback period of the applicable\n            usage type.</p>"
                     }
+                },
+                "RecommendationDetailId": {
+                    "target": "com.amazonaws.costexplorer#RecommendationDetailId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about a specific Savings Plan recommendation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8076,6 +8208,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#GenerationExistsException"
                 },
                 {
@@ -8091,7 +8226,10 @@
         },
         "com.amazonaws.costexplorer#StartSavingsPlansPurchaseRecommendationGenerationRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.costexplorer#StartSavingsPlansPurchaseRecommendationGenerationResponse": {
             "type": "structure",
@@ -8114,6 +8252,9 @@
                         "smithy.api#documentation": "<p>The estimated time for when the recommendation generation will complete.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#Subscriber": {
@@ -8271,11 +8412,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.costexplorer#TagValues": {
             "type": "structure",
@@ -8545,11 +8692,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.costexplorer#UnusedHours": {
             "type": "string"
@@ -8593,6 +8746,9 @@
                         "smithy.api#documentation": "<p>The new name for the cost anomaly monitor. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#UpdateAnomalyMonitorResponse": {
@@ -8605,6 +8761,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#UpdateAnomalySubscription": {
@@ -8627,7 +8786,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing cost anomaly monitor subscription. </p>"
+                "smithy.api#documentation": "<p>Updates an existing cost anomaly subscription. Specify the fields that you want to update.\n      Omitted fields are unchanged.</p>\n         <note>\n            <p>The JSON below describes the generic construct for each type. See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_UpdateAnomalySubscription.html#API_UpdateAnomalySubscription_RequestParameters\">Request Parameters</a> for possible values as they apply to\n          <code>AnomalySubscription</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.costexplorer#UpdateAnomalySubscriptionRequest": {
@@ -8646,7 +8805,7 @@
                         "smithy.api#deprecated": {
                             "message": "Threshold has been deprecated in favor of ThresholdExpression"
                         },
-                        "smithy.api#documentation": "<p>(deprecated)</p>\n         <p>The update to the threshold value for receiving notifications. </p>\n         <p>This field has been deprecated. To update a threshold, use ThresholdExpression. Continued\n      use of Threshold will be treated as shorthand syntax for a ThresholdExpression.</p>"
+                        "smithy.api#documentation": "<p>(deprecated)</p>\n         <p>The update to the threshold value for receiving notifications. </p>\n         <p>This field has been deprecated. To update a threshold, use ThresholdExpression. Continued\n      use of Threshold will be treated as shorthand syntax for a ThresholdExpression.</p>\n         <p>You can specify either Threshold or ThresholdExpression, but not both.</p>"
                     }
                 },
                 "Frequency": {
@@ -8676,9 +8835,12 @@
                 "ThresholdExpression": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The update to the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object\n      used to specify the anomalies that you want to generate alerts for. This supports dimensions\n      and nested expressions. The supported dimensions are\n        <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>.\n      The supported nested expression types are <code>AND</code> and <code>OR</code>. The match\n      option <code>GREATER_THAN_OR_EQUAL</code> is required. Values must be numbers between 0 and\n      10,000,000,000.</p>\n         <p>The following are examples of valid ThresholdExpressions:</p>\n         <ul>\n            <li>\n               <p>Absolute threshold: <code>{ \"Dimensions\": { \"Key\": \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\",\n            \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>Percentage threshold: <code>{ \"Dimensions\": { \"Key\":\n            \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ],\n            \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AND</code> two thresholds together: <code>{ \"And\": [ { \"Dimensions\": { \"Key\":\n            \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\":\n            [ \"100\" ] } }, { \"Dimensions\": { \"Key\": \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\",\n            \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> two thresholds together: <code>{ \"Or\": [ { \"Dimensions\": { \"Key\":\n            \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\":\n            [ \"100\" ] } }, { \"Dimensions\": { \"Key\": \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\",\n            \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The update to the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object\n      used to specify the anomalies that you want to generate alerts for. This supports dimensions\n      and nested expressions. The supported dimensions are\n        <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>,\n      corresponding to an anomaly’s TotalImpact and TotalImpactPercentage, respectively (see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html\">Impact</a> for more details). The supported nested expression types are\n        <code>AND</code> and <code>OR</code>. The match option <code>GREATER_THAN_OR_EQUAL</code> is\n      required. Values must be numbers between 0 and 10,000,000,000 in string format.</p>\n         <p>You can specify either Threshold or ThresholdExpression, but not both.</p>\n         <p>The following are examples of valid ThresholdExpressions:</p>\n         <ul>\n            <li>\n               <p>Absolute threshold: <code>{ \"Dimensions\": { \"Key\": \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\",\n            \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>Percentage threshold: <code>{ \"Dimensions\": { \"Key\":\n            \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ],\n            \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AND</code> two thresholds together: <code>{ \"And\": [ { \"Dimensions\": { \"Key\":\n            \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\":\n            [ \"100\" ] } }, { \"Dimensions\": { \"Key\": \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\",\n            \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> two thresholds together: <code>{ \"Or\": [ { \"Dimensions\": { \"Key\":\n            \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\":\n            [ \"100\" ] } }, { \"Dimensions\": { \"Key\": \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\",\n            \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#UpdateAnomalySubscriptionResponse": {
@@ -8691,6 +8853,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#UpdateCostAllocationTagsStatus": {
@@ -8758,6 +8923,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#UpdateCostAllocationTagsStatusResponse": {
@@ -8769,6 +8937,9 @@
                         "smithy.api#documentation": "<p>A list of <code>UpdateCostAllocationTagsStatusError</code> objects with error details\n      about each cost allocation tag that can't be updated. If there's no failure, an empty array\n      returns. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#UpdateCostCategoryDefinition": {
@@ -8832,6 +9003,9 @@
                         "smithy.api#documentation": "<p> The split charge rules used to allocate your charges between your Cost Category values.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.costexplorer#UpdateCostCategoryDefinitionResponse": {
@@ -8849,6 +9023,9 @@
                         "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#UtilizationByTime": {

@@ -236,6 +236,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Aggregation for date values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COUNT</code>: Aggregate by the total number of values, including duplicates.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISTINCT_COUNT</code>: Aggregate by the total number of distinct values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MIN</code>: Select the smallest date value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAX</code>: Select the largest date value.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "AttributeAggregationFunction": {
+                    "target": "com.amazonaws.quicksight#AttributeAggregationFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Aggregation for attributes.</p>"
+                    }
                 }
             },
             "traits": {
@@ -850,6 +856,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The settings that you want to use with the Q search bar.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AnonymousUserSnapshotJobResult": {
+            "type": "structure",
+            "members": {
+                "FileGroups": {
+                    "target": "com.amazonaws.quicksight#SnapshotJobResultFileGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>SnapshotJobResultFileGroup</code> objects that contain information on the files that are requested during a <code>StartDashboardSnapshotJob</code> API call. If the job succeeds, these objects contain the location where the snapshot artifacts are stored. If the job fails, the objects contain information about the error that caused the job to fail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the file groups that are requested for the artifact generation in a <code>StartDashboardSnapshotJob</code> API call.\n        </p>"
+            }
+        },
+        "com.amazonaws.quicksight#AnonymousUserSnapshotJobResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AnonymousUserSnapshotJobResult"
             }
         },
         "com.amazonaws.quicksight#ArcAxisConfiguration": {
@@ -2324,6 +2350,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Parameters for Amazon Athena.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AttributeAggregationFunction": {
+            "type": "structure",
+            "members": {
+                "SimpleAttributeAggregation": {
+                    "target": "com.amazonaws.quicksight#SimpleAttributeAggregationFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The built-in aggregation functions for attributes.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UNIQUE_VALUE</code>: Returns the unique value for a field, aggregated by the dimension fields.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ValueForMultipleValues": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used by the <code>UNIQUE_VALUE</code> aggregation function. If there are multiple values for the field used by the aggregation, the value for this property will be returned instead. Defaults to '*'.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Aggregation for attributes.</p>"
             }
         },
         "com.amazonaws.quicksight#AuroraParameters": {
@@ -11795,6 +11841,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Customize how dates are formatted in controls.</p>"
                     }
+                },
+                "InfoIconLabelOptions": {
+                    "target": "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of info icon label options.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12289,6 +12341,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
                 },
                 {
                     "target": "com.amazonaws.quicksight#ResourceNotFoundException"
@@ -15762,6 +15820,277 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeDashboardSnapshotJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeDashboardSnapshotJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeDashboardSnapshotJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an existing snapshot job.</p>\n         <p>Poll job descriptions after a job starts to know the status of the job. For information on available status codes, see <code>JobStatus</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs/{SnapshotJobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDashboardSnapshotJobRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DashboardId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dashboard that you have started a snapshot job for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnapshotJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job to be described. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDashboardSnapshotJobResponse": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.\n        </p>"
+                    }
+                },
+                "DashboardId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dashboard that you have started a snapshot job for.</p>"
+                    }
+                },
+                "SnapshotJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job to be described. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.</p>"
+                    }
+                },
+                "UserConfiguration": {
+                    "target": "com.amazonaws.quicksight#SnapshotUserConfigurationRedacted",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user configuration for the snapshot job. This information is provided when you make a <code>StartDashboardSnapshotJob</code> API call.</p>"
+                    }
+                },
+                "SnapshotConfiguration": {
+                    "target": "com.amazonaws.quicksight#SnapshotConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The snapshot configuration of the job. This information is provided when you make a <code>StartDashboardSnapshotJob</code> API call.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the snapshot job. The job ARN is generated when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.quicksight#SnapshotJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of a job. The status updates as the job executes. This shows one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - The job was completed successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The job failed to execute.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUED</code> - The job is queued and hasn't started yet.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> - The job is still running.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time that the snapshot job was created.\n        </p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time that the snapshot job status was last updated.\n        </p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services request ID for this operation.\n        </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDashboardSnapshotJobResult": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeDashboardSnapshotJobResultRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeDashboardSnapshotJobResultResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the result of an existing snapshot job that has finished running.</p>\n         <p>A finished snapshot job will return a <code>COMPLETED</code> or <code>FAILED</code> status when you poll the job with a <code>DescribeDashboardSnapshotJob</code> API call.</p>\n         <p>If the job has not finished running, this operation returns a message that says <code>Dashboard Snapshot Job with id <SnapshotjobId> has not reached a terminal state.</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs/{SnapshotJobId}/result",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDashboardSnapshotJobResultRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DashboardId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dashboard that you have started a snapshot job for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnapshotJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job to be described. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDashboardSnapshotJobResultResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the snapshot job. The job ARN is generated when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.quicksight#SnapshotJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of a job after it has reached a terminal state. A finished snapshot job will retuen a <code>COMPLETED</code> or <code>FAILED</code> status.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that a snapshot job was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that a snapshot job status was last updated.</p>"
+                    }
+                },
+                "Result": {
+                    "target": "com.amazonaws.quicksight#SnapshotJobResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result of the snapshot job. Jobs that have successfully completed will return the S3Uri where they are located. Jobs that have failedwill return information on the error that caused the job to fail.</p>"
+                    }
+                },
+                "ErrorInfo": {
+                    "target": "com.amazonaws.quicksight#SnapshotJobErrorInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays information for the error that caused a job to fail.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeDataSet": {
             "type": "operation",
             "input": {
@@ -18865,6 +19194,12 @@
                     "target": "com.amazonaws.quicksight#LabelOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The options to configure the title visibility, name, and font size.</p>"
+                    }
+                },
+                "InfoIconLabelOptions": {
+                    "target": "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of info icon label options.</p>"
                     }
                 }
             },
@@ -26269,6 +26604,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The options to configure the title visibility, name, and font size.</p>"
                     }
+                },
+                "InfoIconLabelOptions": {
+                    "target": "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of info icon label options.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26989,6 +27330,12 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}/members",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "GroupMemberList",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -27113,6 +27460,12 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/groups",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "GroupList",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -27223,6 +27576,12 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/v2/iam-policy-assignments",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "IAMPolicyAssignments",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -27263,6 +27622,12 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}/iam-policy-assignments",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ActiveAssignments",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -28762,6 +29127,12 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}/groups",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "GroupList",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -28886,6 +29257,12 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/users",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "UserList",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -33471,6 +33848,12 @@
                     "target": "com.amazonaws.quicksight#DescribeDashboardPermissions"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeDashboardSnapshotJob"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeDashboardSnapshotJobResult"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeDataSet"
                 },
                 {
@@ -33682,6 +34065,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#StartAssetBundleImportJob"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#StartDashboardSnapshotJob"
                 },
                 {
                     "target": "com.amazonaws.quicksight#TagResource"
@@ -35897,6 +36283,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Customize how dates are formatted in controls.</p>"
                     }
+                },
+                "InfoIconLabelOptions": {
+                    "target": "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of info icon label options.</p>"
+                    }
                 }
             },
             "traits": {
@@ -36670,6 +37062,35 @@
                     "min": 1,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.quicksight#S3BucketConfiguration": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an existing Amazon S3 bucket where the generated snapshot artifacts are sent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BucketPrefix": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix of the Amazon S3 bucket that the generated snapshots are stored in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BucketRegion": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region that the Amazon S3 bucket is located in. The bucket must be located in the same region that the <code>StartDashboardSnapshotJob</code> API call is made.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An optional structure that contains the Amazon S3 bucket configuration that the generated snapshots are stored in. If you don't provide this information, generated snapshots are stored in the default Amazon QuickSight bucket.</p>"
             }
         },
         "com.amazonaws.quicksight#S3Key": {
@@ -37735,6 +38156,12 @@
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/groups-search",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "GroupList",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -38208,6 +38635,13 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.quicksight#SensitiveS3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(https|s3)://([^/]+)/?(.*)$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.quicksight#SensitiveString": {
             "type": "string",
             "traits": {
@@ -38344,6 +38778,18 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#SessionTagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SessionTagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.quicksight#SessionTagList": {
             "type": "list",
             "member": {
@@ -38465,6 +38911,35 @@
                     "traits": {
                         "smithy.api#enumValue": "DATE_RANGE"
                     }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions": {
+            "type": "structure",
+            "members": {
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of info icon label options.</p>"
+                    }
+                },
+                "InfoIconText": {
+                    "target": "com.amazonaws.quicksight#SheetControlInfoIconText",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The text content of info icon.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A control to display info icons for filters and parameters.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SheetControlInfoIconText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -38937,6 +39412,17 @@
                 "smithy.api#documentation": "<p>A <code>SignupResponse</code> object that contains a summary of a newly created account.</p>"
             }
         },
+        "com.amazonaws.quicksight#SimpleAttributeAggregationFunction": {
+            "type": "enum",
+            "members": {
+                "UNIQUE_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNIQUE_VALUE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#SimpleClusterMarker": {
             "type": "structure",
             "members": {
@@ -39038,6 +39524,12 @@
                     "target": "com.amazonaws.quicksight#LabelOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The options to configure the title visibility, name, and font size.</p>"
+                    }
+                },
+                "InfoIconLabelOptions": {
+                    "target": "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of info icon label options.</p>"
                     }
                 }
             },
@@ -39147,6 +39639,443 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Options that determine the layout and display options of a chart's small multiples.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotAnonymousUser": {
+            "type": "structure",
+            "members": {
+                "RowLevelPermissionTags": {
+                    "target": "com.amazonaws.quicksight#SessionTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be used for row-level security (RLS). Make sure that the relevant datasets have RLS tags configured before you start a snapshot export job. You can configure the RLS tags of a dataset with a <code>DataSet$RowLevelPermissionTagConfiguration</code> API call.</p>\n         <p>These are not the tags that are used for Amazon Web Services resource tagging. For more information on row level security in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html\">Using Row-Level Security (RLS) with Tags</a>in the <i>Amazon QuickSight User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information on the anonymous user configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotAnonymousUserList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SnapshotAnonymousUser"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotAnonymousUserRedacted": {
+            "type": "structure",
+            "members": {
+                "RowLevelPermissionTagKeys": {
+                    "target": "com.amazonaws.quicksight#SessionTagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys for the <code>RowLevelPermissionTags</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use this structure to redact sensitive information that you provide about an anonymous user from the snapshot.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotAnonymousUserRedactedList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SnapshotAnonymousUserRedacted"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotConfiguration": {
+            "type": "structure",
+            "members": {
+                "FileGroups": {
+                    "target": "com.amazonaws.quicksight#SnapshotFileGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>SnapshotJobResultFileGroup</code> objects that contain information about the snapshot that is generated. This list can hold a maximum of 6 <code>FileGroup</code> configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationConfiguration": {
+                    "target": "com.amazonaws.quicksight#SnapshotDestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains information on the Amazon S3 bucket that the generated snapshot is stored in.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.quicksight#Parameters"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of the dashboard snapshot.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotDestinationConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3Destinations": {
+                    "target": "com.amazonaws.quicksight#SnapshotS3DestinationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of <code>SnapshotS3DestinationConfiguration</code> objects that contain Amazon S3 destination configurations. This structure can hold a maximum of 1 <code>S3DestinationConfiguration</code>.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information on the Amazon S3 destinations of the generated snapshot.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotFile": {
+            "type": "structure",
+            "members": {
+                "SheetSelections": {
+                    "target": "com.amazonaws.quicksight#SnapshotFileSheetSelectionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>SnapshotFileSheetSelection</code> objects that contain information on the dashboard sheet that is exported. These objects provide information about the snapshot artifacts that are generated during the job. This structure can hold a maximum of 5 CSV configurations or 1 configuration for PDF.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FormatType": {
+                    "target": "com.amazonaws.quicksight#SnapshotFileFormatType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the snapshot file to be generated. You can choose between <code>CSV</code> and <code>PDF</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the information for the snapshot that you want to generate. This information is provided by you when you start a new snapshot job.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotFileFormatType": {
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                },
+                "PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PDF"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotFileGroup": {
+            "type": "structure",
+            "members": {
+                "Files": {
+                    "target": "com.amazonaws.quicksight#SnapshotFileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>SnapshotFile</code> objects that contain the information on the snapshot files that need to be generated. This structure can hold 1 configuration at a time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the information on the snapshot files.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotFileGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SnapshotFileGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotFileList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SnapshotFile"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotFileSheetSelection": {
+            "type": "structure",
+            "members": {
+                "SheetId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV or PDF format types.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SelectionScope": {
+                    "target": "com.amazonaws.quicksight#SnapshotFileSheetSelectionScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selection scope of the visuals on a sheet of a dashboard that you are generating a snapthot of. You can choose one of the following options.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_VISUALS</code> - Selects all visuals that are on the sheet. This value is required if the snapshot is a PDF.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SELECTED_VISUALS</code> - Select the visual that you want to add to the snapshot. This value is required if the snapshot is a CSV.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VisualIds": {
+                    "target": "com.amazonaws.quicksight#SnapshotFileSheetSelectionVisualIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A structure that lists the IDs of the visuals in the selected sheet. Supported visual types are table, pivot table visuals. This value is required if you are generating a CSV. This value supports a maximum of 1 visual ID.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information that identifies the snapshot that needs to be generated.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotFileSheetSelectionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SnapshotFileSheetSelection"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotFileSheetSelectionScope": {
+            "type": "enum",
+            "members": {
+                "ALL_VISUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_VISUALS"
+                    }
+                },
+                "SELECTED_VISUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELECTED_VISUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotFileSheetSelectionVisualIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotJobErrorInfo": {
+            "type": "structure",
+            "members": {
+                "ErrorMessage": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>"
+                    }
+                },
+                "ErrorType": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information on the error that caused the snapshot job to fail.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotJobResult": {
+            "type": "structure",
+            "members": {
+                "AnonymousUsers": {
+                    "target": "com.amazonaws.quicksight#AnonymousUserSnapshotJobResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of <code>AnonymousUserSnapshotJobResult</code> objects that contain information on anonymous users and their user configurations. This data provided by you when you make a <code>StartDashboardSnapshotJob</code> API call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that provides information on the result of a snapshot job. This object provides information about the job, the job status, and the location of the generated file.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotJobResultErrorInfo": {
+            "type": "structure",
+            "members": {
+                "ErrorMessage": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>"
+                    }
+                },
+                "ErrorType": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information on the error that caused the snapshot job to fail.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotJobResultErrorInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SnapshotJobResultErrorInfo"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotJobResultFileGroup": {
+            "type": "structure",
+            "members": {
+                "Files": {
+                    "target": "com.amazonaws.quicksight#SnapshotFileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of <code>SnapshotFile</code> objects.</p>"
+                    }
+                },
+                "S3Results": {
+                    "target": "com.amazonaws.quicksight#SnapshotJobS3ResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of <code>SnapshotJobS3Result</code> objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information on the generated snapshot file groups.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotJobResultFileGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SnapshotJobResultFileGroup"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotJobS3Result": {
+            "type": "structure",
+            "members": {
+                "S3DestinationConfiguration": {
+                    "target": "com.amazonaws.quicksight#SnapshotS3DestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon S3 bucket configurations that are provided when you make a <code>StartDashboardSnapshotJob</code> API call.\n        </p>"
+                    }
+                },
+                "S3Uri": {
+                    "target": "com.amazonaws.quicksight#SensitiveS3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 Uri.</p>"
+                    }
+                },
+                "ErrorInfo": {
+                    "target": "com.amazonaws.quicksight#SnapshotJobResultErrorInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of error records that describe any failures that occur while the dashboard snapshot job runs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 result from the snapshot job. The result includes the <code>DestinationConfiguration</code> and the Amazon S3 Uri. If an error occured during the job, the result returns information on the error.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotJobS3ResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SnapshotJobS3Result"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotJobStatus": {
+            "type": "enum",
+            "members": {
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotS3DestinationConfiguration": {
+            "type": "structure",
+            "members": {
+                "BucketConfiguration": {
+                    "target": "com.amazonaws.quicksight#S3BucketConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains details about the Amazon S3 bucket that the generated dashboard snapshot is saved in.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that describes the Amazon S3 settings to use to save the generated dashboard snapshot.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotS3DestinationConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SnapshotS3DestinationConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotUserConfiguration": {
+            "type": "structure",
+            "members": {
+                "AnonymousUsers": {
+                    "target": "com.amazonaws.quicksight#SnapshotAnonymousUserList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of records that describe the anonymous users that the dashboard snapshot is generated for.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about the users that the dashboard snapshot is generated for.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SnapshotUserConfigurationRedacted": {
+            "type": "structure",
+            "members": {
+                "AnonymousUsers": {
+                    "target": "com.amazonaws.quicksight#SnapshotAnonymousUserRedactedList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of records that describe anonymous users that the dashboard snapshot is generated for. Sensitive user information is excluded.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about the users that the dashboard snapshot is generated for. Sensitive user information is excluded.\n        </p>"
             }
         },
         "com.amazonaws.quicksight#SnowflakeParameters": {
@@ -39568,6 +40497,131 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the response.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#StartDashboardSnapshotJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#StartDashboardSnapshotJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#StartDashboardSnapshotJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedPricingPlanException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a dashboard snapshot. You can request up to one paginated PDF and up to five CSVs per API call.</p>\n         <p>Poll job descriptions with a <code>DescribeDashboardSnapshotJob</code> API call. Once the job succeeds, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the download URIs that the job generates.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#StartDashboardSnapshotJobRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DashboardId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dashboard that you want to start a snapshot job for.\n        </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnapshotJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ID for the dashboard snapshot job. This ID is unique to the dashboard while the job is running. This ID can be used to poll the status of a job with a <code>DescribeDashboardSnapshotJob</code> while the job runs. You can reuse this ID for another job 24 hours after the current job is completed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserConfiguration": {
+                    "target": "com.amazonaws.quicksight#SnapshotUserConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A structure that contains information about the anonymous users that the generated snapshot is for. This API will not return information about registered Amazon QuickSight.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnapshotConfiguration": {
+                    "target": "com.amazonaws.quicksight#SnapshotConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that describes the configuration of the dashboard snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#StartDashboardSnapshotJobResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the dashboard snapshot job.</p>"
+                    }
+                },
+                "SnapshotJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services request ID for this operation.\n        </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 }
@@ -41376,6 +42430,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of the placeholder options in a text area control.</p>"
                     }
+                },
+                "InfoIconLabelOptions": {
+                    "target": "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of info icon label options.</p>"
+                    }
                 }
             },
             "traits": {
@@ -41435,6 +42495,12 @@
                     "target": "com.amazonaws.quicksight#TextControlPlaceholderOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of the placeholder options in a text field control.</p>"
+                    }
+                },
+                "InfoIconLabelOptions": {
+                    "target": "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of info icon label options.</p>"
                     }
                 }
             },

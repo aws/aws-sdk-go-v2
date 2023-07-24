@@ -79,7 +79,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API is managed by API Gateway. You can't update or delete a managed API by using API Gateway. A managed API can be deleted only through the tooling or service that created it.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -122,7 +121,6 @@
                 "DisableSchemaValidation": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "disableSchemaValidation"
                     }
@@ -130,7 +128,6 @@
                 "DisableExecuteApiEndpoint": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>",
                         "smithy.api#jsonName": "disableExecuteApiEndpoint"
                     }
@@ -788,8 +785,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -801,8 +798,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -814,8 +811,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -827,8 +824,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -840,8 +837,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -853,8 +850,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -866,8 +863,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -879,8 +876,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -892,8 +889,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -905,8 +902,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -918,8 +915,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -931,8 +928,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -944,8 +941,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -957,8 +954,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -970,8 +967,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -983,8 +980,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -996,8 +993,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1009,8 +1006,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1022,8 +1019,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1035,8 +1032,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1048,8 +1045,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1061,8 +1058,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1074,8 +1071,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1087,8 +1084,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1100,8 +1097,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1113,8 +1110,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1126,8 +1123,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1139,8 +1136,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1152,8 +1149,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1165,8 +1162,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1178,8 +1175,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1191,8 +1188,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1204,8 +1201,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1217,8 +1214,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1230,8 +1227,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1243,8 +1251,30 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1256,8 +1286,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1269,8 +1310,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1282,8 +1323,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1295,8 +1336,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1307,8 +1348,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1319,9 +1360,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1383,27 +1430,35 @@
             }
         },
         "com.amazonaws.apigatewayv2#AuthorizationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The authorization type. For WebSocket APIs, valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer. For HTTP APIs, valid values are NONE for open access, JWT for using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "AWS_IAM",
-                        "name": "AWS_IAM"
-                    },
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
-                    },
-                    {
-                        "value": "JWT",
-                        "name": "JWT"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "AWS_IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_IAM"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "JWT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JWT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The authorization type. For WebSocket APIs, valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer. For HTTP APIs, valid values are NONE for open access, JWT for using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#Authorizer": {
@@ -1433,7 +1488,6 @@
                 "AuthorizerResultTtlInSeconds": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween0And3600",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers.</p>",
                         "smithy.api#jsonName": "authorizerResultTtlInSeconds"
                     }
@@ -1455,7 +1509,6 @@
                 "EnableSimpleResponses": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a Lambda authorizer returns a response in a simple format. If enabled, the Lambda authorizer can return a boolean value instead of an IAM policy. Supported only for HTTP APIs. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html\">Working with AWS Lambda authorizers for HTTP APIs</a></p>",
                         "smithy.api#jsonName": "enableSimpleResponses"
                     }
@@ -1495,19 +1548,23 @@
             }
         },
         "com.amazonaws.apigatewayv2#AuthorizerType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The authorizer type. Specify REQUEST for a Lambda function using incoming request parameters. Specify JWT to use JSON Web Tokens (supported only for HTTP APIs).</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "REQUEST",
-                        "name": "REQUEST"
-                    },
-                    {
-                        "value": "JWT",
-                        "name": "JWT"
+            "type": "enum",
+            "members": {
+                "REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST"
                     }
-                ]
+                },
+                "JWT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JWT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The authorizer type. Specify REQUEST for a Lambda function using incoming request parameters. Specify JWT to use JSON Web Tokens (supported only for HTTP APIs).</p>"
             }
         },
         "com.amazonaws.apigatewayv2#BadRequestException": {
@@ -1545,35 +1602,43 @@
             }
         },
         "com.amazonaws.apigatewayv2#ConnectionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Represents a connection type.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "INTERNET",
-                        "name": "INTERNET"
-                    },
-                    {
-                        "value": "VPC_LINK",
-                        "name": "VPC_LINK"
+            "type": "enum",
+            "members": {
+                "INTERNET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNET"
                     }
-                ]
+                },
+                "VPC_LINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_LINK"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a connection type.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#ContentHandlingStrategy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Specifies how to handle response payload content type conversions. Supported only for WebSocket APIs.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "CONVERT_TO_BINARY",
-                        "name": "CONVERT_TO_BINARY"
-                    },
-                    {
-                        "value": "CONVERT_TO_TEXT",
-                        "name": "CONVERT_TO_TEXT"
+            "type": "enum",
+            "members": {
+                "CONVERT_TO_BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONVERT_TO_BINARY"
                     }
-                ]
+                },
+                "CONVERT_TO_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONVERT_TO_TEXT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how to handle response payload content type conversions. Supported only for WebSocket APIs.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#Cors": {
@@ -1582,7 +1647,6 @@
                 "AllowCredentials": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether credentials are included in the CORS request. Supported only for HTTP APIs.</p>",
                         "smithy.api#jsonName": "allowCredentials"
                     }
@@ -1618,7 +1682,6 @@
                 "MaxAge": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetweenMinus1And86400",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of seconds that the browser should cache preflight request results. Supported only for HTTP APIs.</p>",
                         "smithy.api#jsonName": "maxAge"
                     }
@@ -1753,7 +1816,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new ApiMapping resource to represent an API mapping.</p>"
+                "smithy.api#documentation": "<p>Creates a new ApiMapping resource to represent an API mapping.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateApiMappingResponse": {
@@ -1787,6 +1851,9 @@
                         "smithy.api#jsonName": "stage"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateApiRequest": {
@@ -1823,7 +1890,6 @@
                 "DisableSchemaValidation": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "disableSchemaValidation"
                     }
@@ -1831,7 +1897,6 @@
                 "DisableExecuteApiEndpoint": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>",
                         "smithy.api#jsonName": "disableExecuteApiEndpoint"
                     }
@@ -1889,7 +1954,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Api resource to represent an API.</p>"
+                "smithy.api#documentation": "<p>Creates a new Api resource to represent an API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateApiResponse": {
@@ -1905,7 +1971,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API is managed by API Gateway. You can't update or delete a managed API by using API Gateway. A managed API can be deleted only through the tooling or service that created it.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -1948,7 +2013,6 @@
                 "DisableSchemaValidation": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "disableSchemaValidation"
                     }
@@ -1956,7 +2020,6 @@
                 "DisableExecuteApiEndpoint": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>",
                         "smithy.api#jsonName": "disableExecuteApiEndpoint"
                     }
@@ -2010,6 +2073,9 @@
                         "smithy.api#jsonName": "warnings"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateAuthorizer": {
@@ -2071,7 +2137,6 @@
                 "AuthorizerResultTtlInSeconds": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween0And3600",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers.</p>",
                         "smithy.api#jsonName": "authorizerResultTtlInSeconds"
                     }
@@ -2094,7 +2159,6 @@
                 "EnableSimpleResponses": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a Lambda authorizer returns a response in a simple format. By default, a Lambda authorizer must return an IAM policy. If enabled, the Lambda authorizer can return a boolean value instead of an IAM policy. Supported only for HTTP APIs. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html\">Working with AWS Lambda authorizers for HTTP APIs</a></p>",
                         "smithy.api#jsonName": "enableSimpleResponses"
                     }
@@ -2131,7 +2195,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Authorizer resource to represent an authorizer.</p>"
+                "smithy.api#documentation": "<p>Creates a new Authorizer resource to represent an authorizer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateAuthorizerResponse": {
@@ -2161,7 +2226,6 @@
                 "AuthorizerResultTtlInSeconds": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween0And3600",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers.</p>",
                         "smithy.api#jsonName": "authorizerResultTtlInSeconds"
                     }
@@ -2183,7 +2247,6 @@
                 "EnableSimpleResponses": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a Lambda authorizer returns a response in a simple format. If enabled, the Lambda authorizer can return a boolean value instead of an IAM policy. Supported only for HTTP APIs. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html\">Working with AWS Lambda authorizers for HTTP APIs</a></p>",
                         "smithy.api#jsonName": "enableSimpleResponses"
                     }
@@ -2216,6 +2279,9 @@
                         "smithy.api#jsonName": "name"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateDeployment": {
@@ -2276,7 +2342,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Deployment resource to represent a deployment.</p>"
+                "smithy.api#documentation": "<p>Creates a new Deployment resource to represent a deployment.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateDeploymentResponse": {
@@ -2285,7 +2352,6 @@
                 "AutoDeployed": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a deployment was automatically released.</p>",
                         "smithy.api#jsonName": "autoDeployed"
                     }
@@ -2325,6 +2391,9 @@
                         "smithy.api#jsonName": "description"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateDomainName": {
@@ -2395,7 +2464,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new DomainName resource to represent a domain name.</p>"
+                "smithy.api#documentation": "<p>Creates a new DomainName resource to represent a domain name.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateDomainNameResponse": {
@@ -2436,6 +2506,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateIntegration": {
@@ -2589,7 +2662,6 @@
                 "TimeoutInMillis": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween50And30000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>",
                         "smithy.api#jsonName": "timeoutInMillis"
                     }
@@ -2603,7 +2675,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Integration resource to represent an integration.</p>"
+                "smithy.api#documentation": "<p>Creates a new Integration resource to represent an integration.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateIntegrationResponse": {
@@ -2694,7 +2767,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new IntegrationResponse resource to represent an integration response.</p>"
+                "smithy.api#documentation": "<p>Creates a new IntegrationResponse resource to represent an integration response.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateIntegrationResponseResponse": {
@@ -2742,6 +2816,9 @@
                         "smithy.api#jsonName": "templateSelectionExpression"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateIntegrationResult": {
@@ -2750,7 +2827,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an integration is managed by API Gateway. If you created an API using using quick create, the resulting integration is managed by API Gateway. You can update a managed integration, but you can't delete it.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -2849,7 +2925,7 @@
                 "RequestParameters": {
                     "target": "com.amazonaws.apigatewayv2#IntegrationParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API itegrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>",
+                        "smithy.api#documentation": "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>",
                         "smithy.api#jsonName": "requestParameters"
                     }
                 },
@@ -2877,7 +2953,6 @@
                 "TimeoutInMillis": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween50And30000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>",
                         "smithy.api#jsonName": "timeoutInMillis"
                     }
@@ -2889,6 +2964,9 @@
                         "smithy.api#jsonName": "tlsConfig"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateModel": {
@@ -2965,7 +3043,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Model.</p>"
+                "smithy.api#documentation": "<p>Creates a new Model.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateModelResponse": {
@@ -3006,6 +3085,9 @@
                         "smithy.api#jsonName": "schema"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateRoute": {
@@ -3053,7 +3135,6 @@
                 "ApiKeyRequired": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API key is required for the route. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "apiKeyRequired"
                     }
@@ -3131,7 +3212,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Route resource to represent a route.</p>"
+                "smithy.api#documentation": "<p>Creates a new Route resource to represent a route.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateRouteResponse": {
@@ -3215,7 +3297,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new RouteResponse resource to represent a route response.</p>"
+                "smithy.api#documentation": "<p>Creates a new RouteResponse resource to represent a route response.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateRouteResponseResponse": {
@@ -3256,6 +3339,9 @@
                         "smithy.api#jsonName": "routeResponseKey"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateRouteResult": {
@@ -3264,7 +3350,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a route is managed by API Gateway. If you created an API using quick create, the $default route is managed by API Gateway. You can't modify the $default route key.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -3272,7 +3357,6 @@
                 "ApiKeyRequired": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API key is required for this route. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "apiKeyRequired"
                     }
@@ -3354,6 +3438,9 @@
                         "smithy.api#jsonName": "target"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateStage": {
@@ -3408,7 +3495,6 @@
                 "AutoDeploy": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether updates to an API automatically trigger a new deployment. The default value is false.</p>",
                         "smithy.api#jsonName": "autoDeploy"
                     }
@@ -3472,7 +3558,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Stage resource to represent a stage.</p>"
+                "smithy.api#documentation": "<p>Creates a new Stage resource to represent a stage.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateStageResponse": {
@@ -3488,7 +3575,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a stage is managed by API Gateway. If you created an API using quick create, the $default stage is managed by API Gateway. You can't modify the $default stage.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -3496,7 +3582,6 @@
                 "AutoDeploy": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether updates to an API automatically trigger a new deployment. The default value is false.</p>",
                         "smithy.api#jsonName": "autoDeploy"
                     }
@@ -3578,6 +3663,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateVpcLink": {
@@ -3640,7 +3728,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a VPC link</p>"
+                "smithy.api#documentation": "<p>Creates a VPC link</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#CreateVpcLinkResponse": {
@@ -3709,6 +3798,9 @@
                         "smithy.api#jsonName": "vpcLinkVersion"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteAccessLogSettings": {
@@ -3755,6 +3847,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteApi": {
@@ -3829,6 +3924,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteApiRequest": {
@@ -3842,6 +3940,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteAuthorizer": {
@@ -3888,6 +3989,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteCorsConfiguration": {
@@ -3926,6 +4030,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteDeployment": {
@@ -3972,6 +4079,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteDomainName": {
@@ -4010,6 +4120,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteIntegration": {
@@ -4056,6 +4169,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteIntegrationResponse": {
@@ -4110,6 +4226,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteModel": {
@@ -4156,6 +4275,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteRoute": {
@@ -4202,6 +4324,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteRouteRequestParameter": {
@@ -4221,7 +4346,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a route request parameter.</p>",
+                "smithy.api#documentation": "<p>Deletes a route request parameter. Supported only for WebSocket APIs.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/v2/apis/{ApiId}/routes/{RouteId}/requestparameters/{RequestParameterKey}",
@@ -4256,6 +4381,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteRouteResponse": {
@@ -4310,6 +4438,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteRouteSettings": {
@@ -4364,6 +4495,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteStage": {
@@ -4410,6 +4544,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteVpcLink": {
@@ -4448,11 +4585,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#DeleteVpcLinkResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.apigatewayv2#Deployment": {
             "type": "structure",
@@ -4460,7 +4603,6 @@
                 "AutoDeployed": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a deployment was automatically released.</p>",
                         "smithy.api#jsonName": "autoDeployed"
                     }
@@ -4506,23 +4648,29 @@
             }
         },
         "com.amazonaws.apigatewayv2#DeploymentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Represents a deployment status.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "DEPLOYED",
-                        "name": "DEPLOYED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DEPLOYED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPLOYED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a deployment status.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#DomainName": {
@@ -4657,43 +4805,55 @@
             }
         },
         "com.amazonaws.apigatewayv2#DomainNameStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "PENDING_CERTIFICATE_REIMPORT",
-                        "name": "PENDING_CERTIFICATE_REIMPORT"
-                    },
-                    {
-                        "value": "PENDING_OWNERSHIP_VERIFICATION",
-                        "name": "PENDING_OWNERSHIP_VERIFICATION"
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
                     }
-                ]
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "PENDING_CERTIFICATE_REIMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_CERTIFICATE_REIMPORT"
+                    }
+                },
+                "PENDING_OWNERSHIP_VERIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_OWNERSHIP_VERIFICATION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#EndpointType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Represents an endpoint type.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "REGIONAL",
-                        "name": "REGIONAL"
-                    },
-                    {
-                        "value": "EDGE",
-                        "name": "EDGE"
+            "type": "enum",
+            "members": {
+                "REGIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGIONAL"
                     }
-                ]
+                },
+                "EDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDGE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an endpoint type.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#ExportApi": {
@@ -4744,7 +4904,6 @@
                 "IncludeExtensions": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to include <a href=\"https://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-swagger-extensions.html\">API Gateway extensions</a> in the exported API definition. API Gateway extensions are included by default.</p>",
                         "smithy.api#httpQuery": "includeExtensions"
                     }
@@ -4772,6 +4931,9 @@
                         "smithy.api#httpQuery": "stageName"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#ExportApiResponse": {
@@ -4783,6 +4945,9 @@
                         "smithy.api#httpPayload": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#ExportedApi": {
@@ -4863,6 +5028,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetApiMappingResponse": {
@@ -4896,6 +5064,9 @@
                         "smithy.api#jsonName": "stage"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetApiMappings": {
@@ -4951,6 +5122,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetApiMappingsResponse": {
@@ -4970,6 +5144,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetApiRequest": {
@@ -4983,6 +5160,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetApiResponse": {
@@ -4998,7 +5178,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API is managed by API Gateway. You can't update or delete a managed API by using API Gateway. A managed API can be deleted only through the tooling or service that created it.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -5041,7 +5220,6 @@
                 "DisableSchemaValidation": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "disableSchemaValidation"
                     }
@@ -5049,7 +5227,6 @@
                 "DisableExecuteApiEndpoint": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>",
                         "smithy.api#jsonName": "disableExecuteApiEndpoint"
                     }
@@ -5103,6 +5280,9 @@
                         "smithy.api#jsonName": "warnings"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetApis": {
@@ -5150,6 +5330,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetApisResponse": {
@@ -5169,6 +5352,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetAuthorizer": {
@@ -5215,6 +5401,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetAuthorizerResponse": {
@@ -5244,7 +5433,6 @@
                 "AuthorizerResultTtlInSeconds": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween0And3600",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers.</p>",
                         "smithy.api#jsonName": "authorizerResultTtlInSeconds"
                     }
@@ -5266,7 +5454,6 @@
                 "EnableSimpleResponses": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a Lambda authorizer returns a response in a simple format. If enabled, the Lambda authorizer can return a boolean value instead of an IAM policy. Supported only for HTTP APIs. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html\">Working with AWS Lambda authorizers for HTTP APIs</a></p>",
                         "smithy.api#jsonName": "enableSimpleResponses"
                     }
@@ -5299,6 +5486,9 @@
                         "smithy.api#jsonName": "name"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetAuthorizers": {
@@ -5354,6 +5544,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetAuthorizersResponse": {
@@ -5373,6 +5566,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetDeployment": {
@@ -5419,6 +5615,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetDeploymentResponse": {
@@ -5427,7 +5626,6 @@
                 "AutoDeployed": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a deployment was automatically released.</p>",
                         "smithy.api#jsonName": "autoDeployed"
                     }
@@ -5467,6 +5665,9 @@
                         "smithy.api#jsonName": "description"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetDeployments": {
@@ -5522,6 +5723,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetDeploymentsResponse": {
@@ -5541,6 +5745,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetDomainName": {
@@ -5579,6 +5786,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetDomainNameResponse": {
@@ -5619,6 +5829,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetDomainNames": {
@@ -5666,6 +5879,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetDomainNamesResponse": {
@@ -5685,6 +5901,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetIntegration": {
@@ -5731,6 +5950,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetIntegrationResponse": {
@@ -5785,6 +6007,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetIntegrationResponseResponse": {
@@ -5832,6 +6057,9 @@
                         "smithy.api#jsonName": "templateSelectionExpression"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetIntegrationResponses": {
@@ -5895,6 +6123,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetIntegrationResponsesResponse": {
@@ -5914,6 +6145,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetIntegrationResult": {
@@ -5922,7 +6156,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an integration is managed by API Gateway. If you created an API using using quick create, the resulting integration is managed by API Gateway. You can update a managed integration, but you can't delete it.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -6021,7 +6254,7 @@
                 "RequestParameters": {
                     "target": "com.amazonaws.apigatewayv2#IntegrationParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API itegrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>",
+                        "smithy.api#documentation": "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>",
                         "smithy.api#jsonName": "requestParameters"
                     }
                 },
@@ -6049,7 +6282,6 @@
                 "TimeoutInMillis": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween50And30000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>",
                         "smithy.api#jsonName": "timeoutInMillis"
                     }
@@ -6061,6 +6293,9 @@
                         "smithy.api#jsonName": "tlsConfig"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetIntegrations": {
@@ -6116,6 +6351,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetIntegrationsResponse": {
@@ -6135,6 +6373,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetModel": {
@@ -6181,6 +6422,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetModelResponse": {
@@ -6221,6 +6465,9 @@
                         "smithy.api#jsonName": "schema"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetModelTemplate": {
@@ -6267,6 +6514,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetModelTemplateResponse": {
@@ -6279,6 +6529,9 @@
                         "smithy.api#jsonName": "value"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetModels": {
@@ -6334,6 +6587,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetModelsResponse": {
@@ -6353,6 +6609,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetRoute": {
@@ -6399,6 +6658,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetRouteResponse": {
@@ -6453,6 +6715,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetRouteResponseResponse": {
@@ -6493,6 +6758,9 @@
                         "smithy.api#jsonName": "routeResponseKey"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetRouteResponses": {
@@ -6556,6 +6824,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetRouteResponsesResponse": {
@@ -6575,6 +6846,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetRouteResult": {
@@ -6583,7 +6857,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a route is managed by API Gateway. If you created an API using quick create, the $default route is managed by API Gateway. You can't modify the $default route key.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -6591,7 +6864,6 @@
                 "ApiKeyRequired": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API key is required for this route. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "apiKeyRequired"
                     }
@@ -6673,6 +6945,9 @@
                         "smithy.api#jsonName": "target"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetRoutes": {
@@ -6728,6 +7003,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetRoutesResponse": {
@@ -6747,6 +7025,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetStage": {
@@ -6793,6 +7074,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetStageResponse": {
@@ -6808,7 +7092,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a stage is managed by API Gateway. If you created an API using quick create, the $default stage is managed by API Gateway. You can't modify the $default stage.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -6816,7 +7099,6 @@
                 "AutoDeploy": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether updates to an API automatically trigger a new deployment. The default value is false.</p>",
                         "smithy.api#jsonName": "autoDeploy"
                     }
@@ -6898,6 +7180,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetStages": {
@@ -6953,6 +7238,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetStagesResponse": {
@@ -6972,6 +7260,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetTags": {
@@ -7016,6 +7307,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetTagsResponse": {
@@ -7027,6 +7321,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetVpcLink": {
@@ -7065,6 +7362,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetVpcLinkResponse": {
@@ -7133,6 +7433,9 @@
                         "smithy.api#jsonName": "vpcLinkVersion"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetVpcLinks": {
@@ -7177,6 +7480,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#GetVpcLinksResponse": {
@@ -7196,6 +7502,9 @@
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#Id": {
@@ -7265,14 +7574,14 @@
                 "FailOnWarnings": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to rollback the API creation when a warning is encountered. By default, API creation continues if a warning is encountered.</p>",
                         "smithy.api#httpQuery": "failOnWarnings"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#ImportApiResponse": {
@@ -7288,7 +7597,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API is managed by API Gateway. You can't update or delete a managed API by using API Gateway. A managed API can be deleted only through the tooling or service that created it.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -7331,7 +7639,6 @@
                 "DisableSchemaValidation": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "disableSchemaValidation"
                     }
@@ -7339,7 +7646,6 @@
                 "DisableExecuteApiEndpoint": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>",
                         "smithy.api#jsonName": "disableExecuteApiEndpoint"
                     }
@@ -7393,12 +7699,14 @@
                         "smithy.api#jsonName": "warnings"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#IntegerWithLengthBetween0And3600": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#documentation": "<p>An integer with a value between [0-3600].</p>",
                 "smithy.api#range": {
                     "min": 0,
@@ -7409,7 +7717,6 @@
         "com.amazonaws.apigatewayv2#IntegerWithLengthBetween50And30000": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#documentation": "<p>An integer with a value between [50-30000].</p>",
                 "smithy.api#range": {
                     "min": 50,
@@ -7420,7 +7727,6 @@
         "com.amazonaws.apigatewayv2#IntegerWithLengthBetweenMinus1And86400": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#documentation": "<p>An integer with a value between -1 and 86400. Supported only for HTTP APIs.</p>",
                 "smithy.api#range": {
                     "min": -1,
@@ -7434,7 +7740,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an integration is managed by API Gateway. If you created an API using using quick create, the resulting integration is managed by API Gateway. You can update a managed integration, but you can't delete it.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -7533,7 +7838,7 @@
                 "RequestParameters": {
                     "target": "com.amazonaws.apigatewayv2#IntegrationParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API itegrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>",
+                        "smithy.api#documentation": "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>",
                         "smithy.api#jsonName": "requestParameters"
                     }
                 },
@@ -7561,7 +7866,6 @@
                 "TimeoutInMillis": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween50And30000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>",
                         "smithy.api#jsonName": "timeoutInMillis"
                     }
@@ -7642,31 +7946,41 @@
             }
         },
         "com.amazonaws.apigatewayv2#IntegrationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Represents an API method integration type.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "AWS",
-                        "name": "AWS"
-                    },
-                    {
-                        "value": "HTTP",
-                        "name": "HTTP"
-                    },
-                    {
-                        "value": "MOCK",
-                        "name": "MOCK"
-                    },
-                    {
-                        "value": "HTTP_PROXY",
-                        "name": "HTTP_PROXY"
-                    },
-                    {
-                        "value": "AWS_PROXY",
-                        "name": "AWS_PROXY"
+            "type": "enum",
+            "members": {
+                "AWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS"
                     }
-                ]
+                },
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP"
+                    }
+                },
+                "MOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MOCK"
+                    }
+                },
+                "HTTP_PROXY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP_PROXY"
+                    }
+                },
+                "AWS_PROXY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_PROXY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an API method integration type.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#JWTConfiguration": {
@@ -7692,23 +8006,29 @@
             }
         },
         "com.amazonaws.apigatewayv2#LoggingLevel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The logging level.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "INFO",
-                        "name": "INFO"
-                    },
-                    {
-                        "value": "OFF",
-                        "name": "OFF"
+            "type": "enum",
+            "members": {
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
                     }
-                ]
+                },
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                },
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logging level.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#Model": {
@@ -7836,7 +8156,6 @@
                 "Required": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether or not the parameter is required.</p>",
                         "smithy.api#jsonName": "required"
                     }
@@ -7847,39 +8166,49 @@
             }
         },
         "com.amazonaws.apigatewayv2#PassthroughBehavior": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Represents passthrough behavior for an integration response. Supported only for WebSocket APIs.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "WHEN_NO_MATCH",
-                        "name": "WHEN_NO_MATCH"
-                    },
-                    {
-                        "value": "NEVER",
-                        "name": "NEVER"
-                    },
-                    {
-                        "value": "WHEN_NO_TEMPLATES",
-                        "name": "WHEN_NO_TEMPLATES"
+            "type": "enum",
+            "members": {
+                "WHEN_NO_MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WHEN_NO_MATCH"
                     }
-                ]
+                },
+                "NEVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEVER"
+                    }
+                },
+                "WHEN_NO_TEMPLATES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WHEN_NO_TEMPLATES"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents passthrough behavior for an integration response. Supported only for WebSocket APIs.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#ProtocolType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Represents a protocol type.",
-                "smithy.api#enum": [
-                    {
-                        "value": "WEBSOCKET",
-                        "name": "WEBSOCKET"
-                    },
-                    {
-                        "value": "HTTP",
-                        "name": "HTTP"
+            "type": "enum",
+            "members": {
+                "WEBSOCKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBSOCKET"
                     }
-                ]
+                },
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents a protocol type."
             }
         },
         "com.amazonaws.apigatewayv2#ReimportApi": {
@@ -7942,14 +8271,14 @@
                 "FailOnWarnings": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to rollback the API creation when a warning is encountered. By default, API creation continues if a warning is encountered.</p>",
                         "smithy.api#httpQuery": "failOnWarnings"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#ReimportApiResponse": {
@@ -7965,7 +8294,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API is managed by API Gateway. You can't update or delete a managed API by using API Gateway. A managed API can be deleted only through the tooling or service that created it.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -8008,7 +8336,6 @@
                 "DisableSchemaValidation": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "disableSchemaValidation"
                     }
@@ -8016,7 +8343,6 @@
                 "DisableExecuteApiEndpoint": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>",
                         "smithy.api#jsonName": "disableExecuteApiEndpoint"
                     }
@@ -8070,6 +8396,9 @@
                         "smithy.api#jsonName": "warnings"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#ResetAuthorizersCache": {
@@ -8116,6 +8445,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#ResponseParameters": {
@@ -8136,7 +8468,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a route is managed by API Gateway. If you created an API using quick create, the $default route is managed by API Gateway. You can't modify the $default route key.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -8144,7 +8475,6 @@
                 "ApiKeyRequired": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API key is required for this route. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "apiKeyRequired"
                     }
@@ -8306,7 +8636,6 @@
                 "DataTraceEnabled": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether (true) or not (false) data trace logging is enabled for this route. This property affects the log entries pushed to Amazon CloudWatch Logs. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "dataTraceEnabled"
                     }
@@ -8314,7 +8643,6 @@
                 "DetailedMetricsEnabled": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether detailed metrics are enabled.</p>",
                         "smithy.api#jsonName": "detailedMetricsEnabled"
                     }
@@ -8329,7 +8657,6 @@
                 "ThrottlingBurstLimit": {
                     "target": "com.amazonaws.apigatewayv2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the throttling burst limit.</p>",
                         "smithy.api#jsonName": "throttlingBurstLimit"
                     }
@@ -8337,7 +8664,6 @@
                 "ThrottlingRateLimit": {
                     "target": "com.amazonaws.apigatewayv2#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the throttling rate limit.</p>",
                         "smithy.api#jsonName": "throttlingRateLimit"
                     }
@@ -8369,19 +8695,23 @@
             }
         },
         "com.amazonaws.apigatewayv2#SecurityPolicy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "TLS_1_0",
-                        "name": "TLS_1_0"
-                    },
-                    {
-                        "value": "TLS_1_2",
-                        "name": "TLS_1_2"
+            "type": "enum",
+            "members": {
+                "TLS_1_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_1_0"
                     }
-                ]
+                },
+                "TLS_1_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_1_2"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#SelectionExpression": {
@@ -8409,7 +8739,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a stage is managed by API Gateway. If you created an API using quick create, the $default stage is managed by API Gateway. You can't modify the $default stage.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -8417,7 +8746,6 @@
                 "AutoDeploy": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether updates to an API automatically trigger a new deployment. The default value is false.</p>",
                         "smithy.api#jsonName": "autoDeploy"
                     }
@@ -8631,12 +8959,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Tag resource to represent a tag.</p>"
+                "smithy.api#documentation": "<p>Creates a new Tag resource to represent a tag.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.apigatewayv2#Tags": {
             "type": "map",
@@ -8766,6 +9098,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateApi": {
@@ -8873,7 +9208,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates an ApiMapping.</p>"
+                "smithy.api#documentation": "<p>Updates an ApiMapping.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateApiMappingResponse": {
@@ -8907,6 +9243,9 @@
                         "smithy.api#jsonName": "stage"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateApiRequest": {
@@ -8951,7 +9290,6 @@
                 "DisableSchemaValidation": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "disableSchemaValidation"
                     }
@@ -8959,7 +9297,6 @@
                 "DisableExecuteApiEndpoint": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>",
                         "smithy.api#jsonName": "disableExecuteApiEndpoint"
                     }
@@ -9001,7 +9338,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Api.</p>"
+                "smithy.api#documentation": "<p>Updates an Api.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateApiResponse": {
@@ -9017,7 +9355,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API is managed by API Gateway. You can't update or delete a managed API by using API Gateway. A managed API can be deleted only through the tooling or service that created it.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -9060,7 +9397,6 @@
                 "DisableSchemaValidation": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "disableSchemaValidation"
                     }
@@ -9068,7 +9404,6 @@
                 "DisableExecuteApiEndpoint": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>",
                         "smithy.api#jsonName": "disableExecuteApiEndpoint"
                     }
@@ -9122,6 +9457,9 @@
                         "smithy.api#jsonName": "warnings"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateAuthorizer": {
@@ -9191,7 +9529,6 @@
                 "AuthorizerResultTtlInSeconds": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween0And3600",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers.</p>",
                         "smithy.api#jsonName": "authorizerResultTtlInSeconds"
                     }
@@ -9213,7 +9550,6 @@
                 "EnableSimpleResponses": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a Lambda authorizer returns a response in a simple format. By default, a Lambda authorizer must return an IAM policy. If enabled, the Lambda authorizer can return a boolean value instead of an IAM policy. Supported only for HTTP APIs. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html\">Working with AWS Lambda authorizers for HTTP APIs</a></p>",
                         "smithy.api#jsonName": "enableSimpleResponses"
                     }
@@ -9248,7 +9584,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Authorizer.</p>"
+                "smithy.api#documentation": "<p>Updates an Authorizer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateAuthorizerResponse": {
@@ -9278,7 +9615,6 @@
                 "AuthorizerResultTtlInSeconds": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween0And3600",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers.</p>",
                         "smithy.api#jsonName": "authorizerResultTtlInSeconds"
                     }
@@ -9300,7 +9636,6 @@
                 "EnableSimpleResponses": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a Lambda authorizer returns a response in a simple format. If enabled, the Lambda authorizer can return a boolean value instead of an IAM policy. Supported only for HTTP APIs. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html\">Working with AWS Lambda authorizers for HTTP APIs</a></p>",
                         "smithy.api#jsonName": "enableSimpleResponses"
                     }
@@ -9333,6 +9668,9 @@
                         "smithy.api#jsonName": "name"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateDeployment": {
@@ -9394,7 +9732,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates a Deployment.</p>"
+                "smithy.api#documentation": "<p>Updates a Deployment.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateDeploymentResponse": {
@@ -9403,7 +9742,6 @@
                 "AutoDeployed": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a deployment was automatically released.</p>",
                         "smithy.api#jsonName": "autoDeployed"
                     }
@@ -9443,6 +9781,9 @@
                         "smithy.api#jsonName": "description"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateDomainName": {
@@ -9503,7 +9844,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates a DomainName.</p>"
+                "smithy.api#documentation": "<p>Updates a DomainName.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateDomainNameResponse": {
@@ -9544,6 +9886,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateIntegration": {
@@ -9676,7 +10021,7 @@
                 "RequestParameters": {
                     "target": "com.amazonaws.apigatewayv2#IntegrationParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.\">Transforming API requests and responses</a>.</p>",
+                        "smithy.api#documentation": "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>",
                         "smithy.api#jsonName": "requestParameters"
                     }
                 },
@@ -9704,7 +10049,6 @@
                 "TimeoutInMillis": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween50And30000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>",
                         "smithy.api#jsonName": "timeoutInMillis"
                     }
@@ -9718,7 +10062,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Integration.</p>"
+                "smithy.api#documentation": "<p>Updates an Integration.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateIntegrationResponse": {
@@ -9816,7 +10161,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates an IntegrationResponses.</p>"
+                "smithy.api#documentation": "<p>Updates an IntegrationResponses.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateIntegrationResponseResponse": {
@@ -9864,6 +10210,9 @@
                         "smithy.api#jsonName": "templateSelectionExpression"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateIntegrationResult": {
@@ -9872,7 +10221,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an integration is managed by API Gateway. If you created an API using using quick create, the resulting integration is managed by API Gateway. You can update a managed integration, but you can't delete it.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -9971,7 +10319,7 @@
                 "RequestParameters": {
                     "target": "com.amazonaws.apigatewayv2#IntegrationParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API itegrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>",
+                        "smithy.api#documentation": "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>",
                         "smithy.api#jsonName": "requestParameters"
                     }
                 },
@@ -9999,7 +10347,6 @@
                 "TimeoutInMillis": {
                     "target": "com.amazonaws.apigatewayv2#IntegerWithLengthBetween50And30000",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>",
                         "smithy.api#jsonName": "timeoutInMillis"
                     }
@@ -10011,6 +10358,9 @@
                         "smithy.api#jsonName": "tlsConfig"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateModel": {
@@ -10093,7 +10443,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates a Model.</p>"
+                "smithy.api#documentation": "<p>Updates a Model.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateModelResponse": {
@@ -10134,6 +10485,9 @@
                         "smithy.api#jsonName": "schema"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateRoute": {
@@ -10181,7 +10535,6 @@
                 "ApiKeyRequired": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API key is required for the route. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "apiKeyRequired"
                     }
@@ -10266,7 +10619,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates a Route.</p>"
+                "smithy.api#documentation": "<p>Updates a Route.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateRouteResponse": {
@@ -10357,7 +10711,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates a RouteResponse.</p>"
+                "smithy.api#documentation": "<p>Updates a RouteResponse.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateRouteResponseResponse": {
@@ -10398,6 +10753,9 @@
                         "smithy.api#jsonName": "routeResponseKey"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateRouteResult": {
@@ -10406,7 +10764,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a route is managed by API Gateway. If you created an API using quick create, the $default route is managed by API Gateway. You can't modify the $default route key.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -10414,7 +10771,6 @@
                 "ApiKeyRequired": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an API key is required for this route. Supported only for WebSocket APIs.</p>",
                         "smithy.api#jsonName": "apiKeyRequired"
                     }
@@ -10496,6 +10852,9 @@
                         "smithy.api#jsonName": "target"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateStage": {
@@ -10550,7 +10909,6 @@
                 "AutoDeploy": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether updates to an API automatically trigger a new deployment. The default value is false.</p>",
                         "smithy.api#jsonName": "autoDeploy"
                     }
@@ -10607,7 +10965,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates a Stage.</p>"
+                "smithy.api#documentation": "<p>Updates a Stage.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateStageResponse": {
@@ -10623,7 +10982,6 @@
                 "ApiGatewayManaged": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a stage is managed by API Gateway. If you created an API using quick create, the $default stage is managed by API Gateway. You can't modify the $default stage.</p>",
                         "smithy.api#jsonName": "apiGatewayManaged"
                     }
@@ -10631,7 +10989,6 @@
                 "AutoDeploy": {
                     "target": "com.amazonaws.apigatewayv2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether updates to an API automatically trigger a new deployment. The default value is false.</p>",
                         "smithy.api#jsonName": "autoDeploy"
                     }
@@ -10713,6 +11070,9 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateVpcLink": {
@@ -10763,7 +11123,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates a VPC link.</p>"
+                "smithy.api#documentation": "<p>Updates a VPC link.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigatewayv2#UpdateVpcLinkResponse": {
@@ -10832,6 +11193,9 @@
                         "smithy.api#jsonName": "vpcLinkVersion"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigatewayv2#UriWithLengthBetween1And2048": {
@@ -10916,62 +11280,65 @@
             }
         },
         "com.amazonaws.apigatewayv2#VpcLinkStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The status of the VPC link.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the VPC link.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#VpcLinkVersion": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The version of the VPC link.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "V2",
-                        "name": "V2"
+            "type": "enum",
+            "members": {
+                "V2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "V2"
                     }
-                ]
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The version of the VPC link.</p>"
             }
         },
         "com.amazonaws.apigatewayv2#__boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.apigatewayv2#__double": {
-            "type": "double",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "double"
         },
         "com.amazonaws.apigatewayv2#__integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "integer"
         },
         "com.amazonaws.apigatewayv2#__listOfApi": {
             "type": "list",

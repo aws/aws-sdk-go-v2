@@ -5282,6 +5282,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies your data quality evaluation criteria. Allows multiple input data and returns a collection of Dynamic Frames.</p>"
                     }
+                },
+                "Recipe": {
+                    "target": "com.amazonaws.glue#Recipe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a Glue DataBrew recipe node.</p>"
+                    }
                 }
             },
             "traits": {
@@ -25977,6 +25983,66 @@
                     "traits": {
                         "smithy.api#enumValue": "disabled"
                     }
+                }
+            }
+        },
+        "com.amazonaws.glue#Recipe": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue Studio node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.glue#OneInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nodes that are inputs to the recipe node, identified by id.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecipeReference": {
+                    "target": "com.amazonaws.glue#RecipeReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A reference to the DataBrew recipe used by the node.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A Glue Studio node that uses a Glue DataBrew recipe in Glue jobs.</p>"
+            }
+        },
+        "com.amazonaws.glue#RecipeReference": {
+            "type": "structure",
+            "members": {
+                "RecipeArn": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the DataBrew recipe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecipeVersion": {
+                    "target": "com.amazonaws.glue#RecipeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RecipeVersion of the DataBrew recipe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a Glue DataBrew recipe.</p>"
+            }
+        },
+        "com.amazonaws.glue#RecipeVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
                 }
             }
         },
