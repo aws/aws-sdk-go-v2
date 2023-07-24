@@ -625,7 +625,6 @@ public final class EndpointGenerator implements Runnable {
             writer.write("return fn(region, options)");
         });
 
-
         // Generate EndpointResolverFromURL helper
         writer.writeDocs(String.format("%s returns an EndpointResolver configured using the provided endpoint url. "
                                        + "By default, the resolved endpoint resolver uses the client region as signing region, and  "
