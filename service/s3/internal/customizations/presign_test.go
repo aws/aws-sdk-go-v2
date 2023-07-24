@@ -183,7 +183,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 					}
 				},
 			},
-			expectError: "Multi-Region access point ARNs are disabled",
+			expectError: "Invalid configuration: Multi-Region Access Point ARNs are disabled.",
 		},
 		"standard case with checksum preset checksum": {
 			input: s3.PutObjectInput{
