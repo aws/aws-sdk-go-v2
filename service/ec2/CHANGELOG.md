@@ -1,3 +1,7 @@
+# v1.106.0 (2023-07-24)
+
+* **Feature**: Add "disabled" enum value to SpotInstanceState.
+
 # v1.105.1 (2023-07-19)
 
 * **Documentation**: Amazon EC2 documentation updates.

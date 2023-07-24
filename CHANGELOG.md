@@ -1,3 +1,21 @@
+# Release (2023-07-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.13.15](service/apigatewayv2/CHANGELOG.md#v11315-2023-07-24)
+  * **Documentation**: Documentation updates for Amazon API Gateway.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.5.0](service/chimesdkmediapipelines/CHANGELOG.md#v150-2023-07-24)
+  * **Feature**: AWS Media Pipeline compositing enhancement and Media Insights Pipeline auto language identification.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.32.0](service/cloudformation/CHANGELOG.md#v1320-2023-07-24)
+  * **Feature**: This release supports filtering by DRIFT_STATUS for existing API ListStackInstances and adds support for a new API ListStackInstanceResourceDrifts. Customers can now view resource drift information from their StackSet management accounts.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.26.0](service/costexplorer/CHANGELOG.md#v1260-2023-07-24)
+  * **Feature**: This release introduces the new API 'GetSavingsPlanPurchaseRecommendationDetails', which retrieves the details for a Savings Plan recommendation. It also updates the existing API 'GetSavingsPlansPurchaseRecommendation' to include the recommendation detail ID.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.106.0](service/ec2/CHANGELOG.md#v11060-2023-07-24)
+  * **Feature**: Add "disabled" enum value to SpotInstanceState.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.57.0](service/glue/CHANGELOG.md#v1570-2023-07-24)
+  * **Feature**: Added support for Data Preparation Recipe node in Glue Studio jobs
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.39.0](service/quicksight/CHANGELOG.md#v1390-2023-07-24)
+  * **Feature**: This release launches new Snapshot APIs for CSV and PDF exports, adds support for info icon for filters and parameters in Exploration APIs, adds modeled exception to the DeleteAccountCustomization API, and introduces AttributeAggregationFunction's ability to add UNIQUE_VALUE aggregation in tooltips.
+
 # Release (2023-07-21)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.57.0 (2023-07-24)
+
+* **Feature**: Added support for Data Preparation Recipe node in Glue Studio jobs
+
 # v1.56.0 (2023-07-21)
 
 * **Feature**: This release adds support for AWS Glue Crawler with Apache Hudi Tables, allowing Crawlers to discover Hudi Tables in S3 and register them in Glue Data Catalog for query engines to query against.

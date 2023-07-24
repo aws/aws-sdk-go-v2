@@ -1,8 +1,0 @@
-{
-    "id": "fb3a0c20-5c08-4f36-bd91-c99fc92ddbf0",
-    "type": "feature",
-    "description": "Added support for Data Preparation Recipe node in Glue Studio jobs",
-    "modules": [
-        "service/glue"
-    ]
-}
