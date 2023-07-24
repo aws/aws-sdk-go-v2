@@ -117,17 +117,6 @@ func awsRestxml_serializeOpHttpBindingsAbortMultipartUploadInput(v *AbortMultipa
 
 func awsRestxml_serializeOpDocumentAbortMultipartUploadInput(v *AbortMultipartUploadInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -553,17 +542,6 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 
 func awsRestxml_serializeOpDocumentCopyObjectInput(v *CopyObjectInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -916,17 +894,6 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 
 func awsRestxml_serializeOpDocumentCreateMultipartUploadInput(v *CreateMultipartUploadInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1011,17 +978,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInput(v *DeleteBucketInput, e
 
 func awsRestxml_serializeOpDocumentDeleteBucketInput(v *DeleteBucketInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1110,17 +1066,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketAnalyticsConfigurationInput(v
 
 func awsRestxml_serializeOpDocumentDeleteBucketAnalyticsConfigurationInput(v *DeleteBucketAnalyticsConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1205,17 +1150,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketCorsInput(v *DeleteBucketCors
 
 func awsRestxml_serializeOpDocumentDeleteBucketCorsInput(v *DeleteBucketCorsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1300,17 +1234,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketEncryptionInput(v *DeleteBuck
 
 func awsRestxml_serializeOpDocumentDeleteBucketEncryptionInput(v *DeleteBucketEncryptionInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1394,17 +1317,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketIntelligentTieringConfigurati
 
 func awsRestxml_serializeOpDocumentDeleteBucketIntelligentTieringConfigurationInput(v *DeleteBucketIntelligentTieringConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1493,17 +1405,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInventoryConfigurationInput(v
 
 func awsRestxml_serializeOpDocumentDeleteBucketInventoryConfigurationInput(v *DeleteBucketInventoryConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1588,17 +1489,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketLifecycleInput(v *DeleteBucke
 
 func awsRestxml_serializeOpDocumentDeleteBucketLifecycleInput(v *DeleteBucketLifecycleInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1687,17 +1577,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketMetricsConfigurationInput(v *
 
 func awsRestxml_serializeOpDocumentDeleteBucketMetricsConfigurationInput(v *DeleteBucketMetricsConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1782,17 +1661,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketOwnershipControlsInput(v *Del
 
 func awsRestxml_serializeOpDocumentDeleteBucketOwnershipControlsInput(v *DeleteBucketOwnershipControlsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1877,17 +1745,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketPolicyInput(v *DeleteBucketPo
 
 func awsRestxml_serializeOpDocumentDeleteBucketPolicyInput(v *DeleteBucketPolicyInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -1972,17 +1829,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketReplicationInput(v *DeleteBuc
 
 func awsRestxml_serializeOpDocumentDeleteBucketReplicationInput(v *DeleteBucketReplicationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -2067,17 +1913,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketTaggingInput(v *DeleteBucketT
 
 func awsRestxml_serializeOpDocumentDeleteBucketTaggingInput(v *DeleteBucketTaggingInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -2162,17 +1997,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketWebsiteInput(v *DeleteBucketW
 
 func awsRestxml_serializeOpDocumentDeleteBucketWebsiteInput(v *DeleteBucketWebsiteInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -2285,17 +2109,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput, e
 
 func awsRestxml_serializeOpDocumentDeleteObjectInput(v *DeleteObjectInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -2498,17 +2311,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectTaggingInput(v *DeleteObjectT
 
 func awsRestxml_serializeOpDocumentDeleteObjectTaggingInput(v *DeleteObjectTaggingInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -2593,17 +2395,6 @@ func awsRestxml_serializeOpHttpBindingsDeletePublicAccessBlockInput(v *DeletePub
 
 func awsRestxml_serializeOpDocumentDeletePublicAccessBlockInput(v *DeletePublicAccessBlockInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -2688,17 +2479,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAccelerateConfigurationInput(v *
 
 func awsRestxml_serializeOpDocumentGetBucketAccelerateConfigurationInput(v *GetBucketAccelerateConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -2783,17 +2563,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAclInput(v *GetBucketAclInput, e
 
 func awsRestxml_serializeOpDocumentGetBucketAclInput(v *GetBucketAclInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -2882,17 +2651,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAnalyticsConfigurationInput(v *G
 
 func awsRestxml_serializeOpDocumentGetBucketAnalyticsConfigurationInput(v *GetBucketAnalyticsConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -2977,17 +2735,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketCorsInput(v *GetBucketCorsInput,
 
 func awsRestxml_serializeOpDocumentGetBucketCorsInput(v *GetBucketCorsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -3072,17 +2819,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketEncryptionInput(v *GetBucketEncr
 
 func awsRestxml_serializeOpDocumentGetBucketEncryptionInput(v *GetBucketEncryptionInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -3166,17 +2902,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketIntelligentTieringConfigurationI
 
 func awsRestxml_serializeOpDocumentGetBucketIntelligentTieringConfigurationInput(v *GetBucketIntelligentTieringConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -3265,17 +2990,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketInventoryConfigurationInput(v *G
 
 func awsRestxml_serializeOpDocumentGetBucketInventoryConfigurationInput(v *GetBucketInventoryConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -3360,17 +3074,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLifecycleConfigurationInput(v *G
 
 func awsRestxml_serializeOpDocumentGetBucketLifecycleConfigurationInput(v *GetBucketLifecycleConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -3455,17 +3158,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLocationInput(v *GetBucketLocati
 
 func awsRestxml_serializeOpDocumentGetBucketLocationInput(v *GetBucketLocationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -3550,17 +3242,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLoggingInput(v *GetBucketLogging
 
 func awsRestxml_serializeOpDocumentGetBucketLoggingInput(v *GetBucketLoggingInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -3649,17 +3330,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketMetricsConfigurationInput(v *Get
 
 func awsRestxml_serializeOpDocumentGetBucketMetricsConfigurationInput(v *GetBucketMetricsConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -3744,17 +3414,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketNotificationConfigurationInput(v
 
 func awsRestxml_serializeOpDocumentGetBucketNotificationConfigurationInput(v *GetBucketNotificationConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -3839,17 +3498,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketOwnershipControlsInput(v *GetBuc
 
 func awsRestxml_serializeOpDocumentGetBucketOwnershipControlsInput(v *GetBucketOwnershipControlsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -3934,17 +3582,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketPolicyInput(v *GetBucketPolicyIn
 
 func awsRestxml_serializeOpDocumentGetBucketPolicyInput(v *GetBucketPolicyInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -4029,17 +3666,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketPolicyStatusInput(v *GetBucketPo
 
 func awsRestxml_serializeOpDocumentGetBucketPolicyStatusInput(v *GetBucketPolicyStatusInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -4124,17 +3750,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketReplicationInput(v *GetBucketRep
 
 func awsRestxml_serializeOpDocumentGetBucketReplicationInput(v *GetBucketReplicationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -4219,17 +3834,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketRequestPaymentInput(v *GetBucket
 
 func awsRestxml_serializeOpDocumentGetBucketRequestPaymentInput(v *GetBucketRequestPaymentInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -4314,17 +3918,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketTaggingInput(v *GetBucketTagging
 
 func awsRestxml_serializeOpDocumentGetBucketTaggingInput(v *GetBucketTaggingInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -4409,17 +4002,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketVersioningInput(v *GetBucketVers
 
 func awsRestxml_serializeOpDocumentGetBucketVersioningInput(v *GetBucketVersioningInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -4504,17 +4086,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketWebsiteInput(v *GetBucketWebsite
 
 func awsRestxml_serializeOpDocumentGetBucketWebsiteInput(v *GetBucketWebsiteInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -4690,17 +4261,6 @@ func awsRestxml_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encoder
 
 func awsRestxml_serializeOpDocumentGetObjectInput(v *GetObjectInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -4803,17 +4363,6 @@ func awsRestxml_serializeOpHttpBindingsGetObjectAclInput(v *GetObjectAclInput, e
 
 func awsRestxml_serializeOpDocumentGetObjectAclInput(v *GetObjectAclInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -4955,17 +4504,6 @@ func awsRestxml_serializeOpHttpBindingsGetObjectAttributesInput(v *GetObjectAttr
 
 func awsRestxml_serializeOpDocumentGetObjectAttributesInput(v *GetObjectAttributesInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -5068,17 +4606,6 @@ func awsRestxml_serializeOpHttpBindingsGetObjectLegalHoldInput(v *GetObjectLegal
 
 func awsRestxml_serializeOpDocumentGetObjectLegalHoldInput(v *GetObjectLegalHoldInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -5163,17 +4690,6 @@ func awsRestxml_serializeOpHttpBindingsGetObjectLockConfigurationInput(v *GetObj
 
 func awsRestxml_serializeOpDocumentGetObjectLockConfigurationInput(v *GetObjectLockConfigurationInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -5276,17 +4792,6 @@ func awsRestxml_serializeOpHttpBindingsGetObjectRetentionInput(v *GetObjectReten
 
 func awsRestxml_serializeOpDocumentGetObjectRetentionInput(v *GetObjectRetentionInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -5389,17 +4894,6 @@ func awsRestxml_serializeOpHttpBindingsGetObjectTaggingInput(v *GetObjectTagging
 
 func awsRestxml_serializeOpDocumentGetObjectTaggingInput(v *GetObjectTaggingInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -5498,17 +4992,6 @@ func awsRestxml_serializeOpHttpBindingsGetObjectTorrentInput(v *GetObjectTorrent
 
 func awsRestxml_serializeOpDocumentGetObjectTorrentInput(v *GetObjectTorrentInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -5593,17 +5076,6 @@ func awsRestxml_serializeOpHttpBindingsGetPublicAccessBlockInput(v *GetPublicAcc
 
 func awsRestxml_serializeOpDocumentGetPublicAccessBlockInput(v *GetPublicAccessBlockInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -5688,17 +5160,6 @@ func awsRestxml_serializeOpHttpBindingsHeadBucketInput(v *HeadBucketInput, encod
 
 func awsRestxml_serializeOpDocumentHeadBucketInput(v *HeadBucketInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -5850,17 +5311,6 @@ func awsRestxml_serializeOpHttpBindingsHeadObjectInput(v *HeadObjectInput, encod
 
 func awsRestxml_serializeOpDocumentHeadObjectInput(v *HeadObjectInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -5949,17 +5399,6 @@ func awsRestxml_serializeOpHttpBindingsListBucketAnalyticsConfigurationsInput(v 
 
 func awsRestxml_serializeOpDocumentListBucketAnalyticsConfigurationsInput(v *ListBucketAnalyticsConfigurationsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -6043,17 +5482,6 @@ func awsRestxml_serializeOpHttpBindingsListBucketIntelligentTieringConfiguration
 
 func awsRestxml_serializeOpDocumentListBucketIntelligentTieringConfigurationsInput(v *ListBucketIntelligentTieringConfigurationsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -6142,17 +5570,6 @@ func awsRestxml_serializeOpHttpBindingsListBucketInventoryConfigurationsInput(v 
 
 func awsRestxml_serializeOpDocumentListBucketInventoryConfigurationsInput(v *ListBucketInventoryConfigurationsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -6241,17 +5658,6 @@ func awsRestxml_serializeOpHttpBindingsListBucketMetricsConfigurationsInput(v *L
 
 func awsRestxml_serializeOpDocumentListBucketMetricsConfigurationsInput(v *ListBucketMetricsConfigurationsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -6412,17 +5818,6 @@ func awsRestxml_serializeOpHttpBindingsListMultipartUploadsInput(v *ListMultipar
 
 func awsRestxml_serializeOpDocumentListMultipartUploadsInput(v *ListMultipartUploadsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -6532,17 +5927,6 @@ func awsRestxml_serializeOpHttpBindingsListObjectsInput(v *ListObjectsInput, enc
 
 func awsRestxml_serializeOpDocumentListObjectsInput(v *ListObjectsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -6660,17 +6044,6 @@ func awsRestxml_serializeOpHttpBindingsListObjectsV2Input(v *ListObjectsV2Input,
 
 func awsRestxml_serializeOpDocumentListObjectsV2Input(v *ListObjectsV2Input, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -6779,17 +6152,6 @@ func awsRestxml_serializeOpHttpBindingsListObjectVersionsInput(v *ListObjectVers
 
 func awsRestxml_serializeOpDocumentListObjectVersionsInput(v *ListObjectVersionsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -6915,17 +6277,6 @@ func awsRestxml_serializeOpHttpBindingsListPartsInput(v *ListPartsInput, encoder
 
 func awsRestxml_serializeOpDocumentListPartsInput(v *ListPartsInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
@@ -9774,17 +9125,6 @@ func awsRestxml_serializeOpHttpBindingsSelectObjectContentInput(v *SelectObjectC
 
 func awsRestxml_serializeOpDocumentSelectObjectContentInput(v *SelectObjectContentInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	if v.Expression != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -10175,17 +9515,6 @@ func awsRestxml_serializeOpHttpBindingsUploadPartCopyInput(v *UploadPartCopyInpu
 
 func awsRestxml_serializeOpDocumentUploadPartCopyInput(v *UploadPartCopyInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Bucket != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Bucket",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.Bucket)
-	}
 	return nil
 }
 
