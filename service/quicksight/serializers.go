@@ -4829,6 +4829,158 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDashboardPermissionsInput(v *De
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeDashboardSnapshotJob struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeDashboardSnapshotJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeDashboardSnapshotJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeDashboardSnapshotJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs/{SnapshotJobId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeDashboardSnapshotJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeDashboardSnapshotJobInput(v *DescribeDashboardSnapshotJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.DashboardId == nil || len(*v.DashboardId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DashboardId must not be empty")}
+	}
+	if v.DashboardId != nil {
+		if err := encoder.SetURI("DashboardId").String(*v.DashboardId); err != nil {
+			return err
+		}
+	}
+
+	if v.SnapshotJobId == nil || len(*v.SnapshotJobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotJobId must not be empty")}
+	}
+	if v.SnapshotJobId != nil {
+		if err := encoder.SetURI("SnapshotJobId").String(*v.SnapshotJobId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeDashboardSnapshotJobResult struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeDashboardSnapshotJobResult) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeDashboardSnapshotJobResult) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeDashboardSnapshotJobResultInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs/{SnapshotJobId}/result")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeDashboardSnapshotJobResultInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeDashboardSnapshotJobResultInput(v *DescribeDashboardSnapshotJobResultInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.DashboardId == nil || len(*v.DashboardId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DashboardId must not be empty")}
+	}
+	if v.DashboardId != nil {
+		if err := encoder.SetURI("DashboardId").String(*v.DashboardId); err != nil {
+			return err
+		}
+	}
+
+	if v.SnapshotJobId == nil || len(*v.SnapshotJobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotJobId must not be empty")}
+	}
+	if v.SnapshotJobId != nil {
+		if err := encoder.SetURI("SnapshotJobId").String(*v.SnapshotJobId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeDataSet struct {
 }
 
@@ -10262,6 +10414,110 @@ func awsRestjson1_serializeOpDocumentStartAssetBundleImportJobInput(v *StartAsse
 	return nil
 }
 
+type awsRestjson1_serializeOpStartDashboardSnapshotJob struct {
+}
+
+func (*awsRestjson1_serializeOpStartDashboardSnapshotJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartDashboardSnapshotJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartDashboardSnapshotJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartDashboardSnapshotJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartDashboardSnapshotJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartDashboardSnapshotJobInput(v *StartDashboardSnapshotJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.DashboardId == nil || len(*v.DashboardId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DashboardId must not be empty")}
+	}
+	if v.DashboardId != nil {
+		if err := encoder.SetURI("DashboardId").String(*v.DashboardId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartDashboardSnapshotJobInput(v *StartDashboardSnapshotJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SnapshotConfiguration != nil {
+		ok := object.Key("SnapshotConfiguration")
+		if err := awsRestjson1_serializeDocumentSnapshotConfiguration(v.SnapshotConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SnapshotJobId != nil {
+		ok := object.Key("SnapshotJobId")
+		ok.String(*v.SnapshotJobId)
+	}
+
+	if v.UserConfiguration != nil {
+		ok := object.Key("UserConfiguration")
+		if err := awsRestjson1_serializeDocumentSnapshotUserConfiguration(v.UserConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -13446,6 +13702,13 @@ func awsRestjson1_serializeDocumentAggregationFunction(v *types.AggregationFunct
 	object := value.Object()
 	defer object.Close()
 
+	if v.AttributeAggregationFunction != nil {
+		ok := object.Key("AttributeAggregationFunction")
+		if err := awsRestjson1_serializeDocumentAttributeAggregationFunction(v.AttributeAggregationFunction, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.CategoricalAggregationFunction) > 0 {
 		ok := object.Key("CategoricalAggregationFunction")
 		ok.String(string(v.CategoricalAggregationFunction))
@@ -14672,6 +14935,23 @@ func awsRestjson1_serializeDocumentAthenaParameters(v *types.AthenaParameters, v
 	if v.WorkGroup != nil {
 		ok := object.Key("WorkGroup")
 		ok.String(*v.WorkGroup)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAttributeAggregationFunction(v *types.AttributeAggregationFunction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SimpleAttributeAggregation) > 0 {
+		ok := object.Key("SimpleAttributeAggregation")
+		ok.String(string(v.SimpleAttributeAggregation))
+	}
+
+	if v.ValueForMultipleValues != nil {
+		ok := object.Key("ValueForMultipleValues")
+		ok.String(*v.ValueForMultipleValues)
 	}
 
 	return nil
@@ -19041,6 +19321,13 @@ func awsRestjson1_serializeDocumentDateTimePickerControlDisplayOptions(v *types.
 		ok.String(*v.DateTimeFormat)
 	}
 
+	if v.InfoIconLabelOptions != nil {
+		ok := object.Key("InfoIconLabelOptions")
+		if err := awsRestjson1_serializeDocumentSheetControlInfoIconLabelOptions(v.InfoIconLabelOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TitleOptions != nil {
 		ok := object.Key("TitleOptions")
 		if err := awsRestjson1_serializeDocumentLabelOptions(v.TitleOptions, ok); err != nil {
@@ -19648,6 +19935,13 @@ func awsRestjson1_serializeDocumentDrillDownFilterList(v []types.DrillDownFilter
 func awsRestjson1_serializeDocumentDropDownControlDisplayOptions(v *types.DropDownControlDisplayOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.InfoIconLabelOptions != nil {
+		ok := object.Key("InfoIconLabelOptions")
+		if err := awsRestjson1_serializeDocumentSheetControlInfoIconLabelOptions(v.InfoIconLabelOptions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.SelectAllOptions != nil {
 		ok := object.Key("SelectAllOptions")
@@ -24086,6 +24380,13 @@ func awsRestjson1_serializeDocumentListControlDisplayOptions(v *types.ListContro
 	object := value.Object()
 	defer object.Close()
 
+	if v.InfoIconLabelOptions != nil {
+		ok := object.Key("InfoIconLabelOptions")
+		if err := awsRestjson1_serializeDocumentSheetControlInfoIconLabelOptions(v.InfoIconLabelOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SearchOptions != nil {
 		ok := object.Key("SearchOptions")
 		if err := awsRestjson1_serializeDocumentListControlSearchOptions(v.SearchOptions, ok); err != nil {
@@ -27815,6 +28116,13 @@ func awsRestjson1_serializeDocumentRelativeDateTimeControlDisplayOptions(v *type
 		ok.String(*v.DateTimeFormat)
 	}
 
+	if v.InfoIconLabelOptions != nil {
+		ok := object.Key("InfoIconLabelOptions")
+		if err := awsRestjson1_serializeDocumentSheetControlInfoIconLabelOptions(v.InfoIconLabelOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TitleOptions != nil {
 		ok := object.Key("TitleOptions")
 		if err := awsRestjson1_serializeDocumentLabelOptions(v.TitleOptions, ok); err != nil {
@@ -28056,6 +28364,28 @@ func awsRestjson1_serializeDocumentRowSortList(v []types.FieldSortOptions, value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3BucketConfiguration(v *types.S3BucketConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("BucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.BucketPrefix != nil {
+		ok := object.Key("BucketPrefix")
+		ok.String(*v.BucketPrefix)
+	}
+
+	if v.BucketRegion != nil {
+		ok := object.Key("BucketRegion")
+		ok.String(*v.BucketRegion)
+	}
+
 	return nil
 }
 
@@ -28950,6 +29280,23 @@ func awsRestjson1_serializeDocumentShapeConditionalFormat(v *types.ShapeConditio
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSheetControlInfoIconLabelOptions(v *types.SheetControlInfoIconLabelOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InfoIconText != nil {
+		ok := object.Key("InfoIconText")
+		ok.String(*v.InfoIconText)
+	}
+
+	if len(v.Visibility) > 0 {
+		ok := object.Key("Visibility")
+		ok.String(string(v.Visibility))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSheetControlLayout(v *types.SheetControlLayout, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -29267,6 +29614,13 @@ func awsRestjson1_serializeDocumentSliderControlDisplayOptions(v *types.SliderCo
 	object := value.Object()
 	defer object.Close()
 
+	if v.InfoIconLabelOptions != nil {
+		ok := object.Key("InfoIconLabelOptions")
+		if err := awsRestjson1_serializeDocumentSheetControlInfoIconLabelOptions(v.InfoIconLabelOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TitleOptions != nil {
 		ok := object.Key("TitleOptions")
 		if err := awsRestjson1_serializeDocumentLabelOptions(v.TitleOptions, ok); err != nil {
@@ -29338,6 +29692,223 @@ func awsRestjson1_serializeDocumentSmallMultiplesOptions(v *types.SmallMultiples
 	if v.YAxis != nil {
 		ok := object.Key("YAxis")
 		if err := awsRestjson1_serializeDocumentSmallMultiplesAxisProperties(v.YAxis, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotAnonymousUser(v *types.SnapshotAnonymousUser, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RowLevelPermissionTags != nil {
+		ok := object.Key("RowLevelPermissionTags")
+		if err := awsRestjson1_serializeDocumentSessionTagList(v.RowLevelPermissionTags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotAnonymousUserList(v []types.SnapshotAnonymousUser, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSnapshotAnonymousUser(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotConfiguration(v *types.SnapshotConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationConfiguration != nil {
+		ok := object.Key("DestinationConfiguration")
+		if err := awsRestjson1_serializeDocumentSnapshotDestinationConfiguration(v.DestinationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FileGroups != nil {
+		ok := object.Key("FileGroups")
+		if err := awsRestjson1_serializeDocumentSnapshotFileGroupList(v.FileGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsRestjson1_serializeDocumentParameters(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotDestinationConfiguration(v *types.SnapshotDestinationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Destinations != nil {
+		ok := object.Key("S3Destinations")
+		if err := awsRestjson1_serializeDocumentSnapshotS3DestinationConfigurationList(v.S3Destinations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotFile(v *types.SnapshotFile, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FormatType) > 0 {
+		ok := object.Key("FormatType")
+		ok.String(string(v.FormatType))
+	}
+
+	if v.SheetSelections != nil {
+		ok := object.Key("SheetSelections")
+		if err := awsRestjson1_serializeDocumentSnapshotFileSheetSelectionList(v.SheetSelections, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotFileGroup(v *types.SnapshotFileGroup, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Files != nil {
+		ok := object.Key("Files")
+		if err := awsRestjson1_serializeDocumentSnapshotFileList(v.Files, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotFileGroupList(v []types.SnapshotFileGroup, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSnapshotFileGroup(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotFileList(v []types.SnapshotFile, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSnapshotFile(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotFileSheetSelection(v *types.SnapshotFileSheetSelection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SelectionScope) > 0 {
+		ok := object.Key("SelectionScope")
+		ok.String(string(v.SelectionScope))
+	}
+
+	if v.SheetId != nil {
+		ok := object.Key("SheetId")
+		ok.String(*v.SheetId)
+	}
+
+	if v.VisualIds != nil {
+		ok := object.Key("VisualIds")
+		if err := awsRestjson1_serializeDocumentSnapshotFileSheetSelectionVisualIdList(v.VisualIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotFileSheetSelectionList(v []types.SnapshotFileSheetSelection, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSnapshotFileSheetSelection(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotFileSheetSelectionVisualIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotS3DestinationConfiguration(v *types.SnapshotS3DestinationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketConfiguration != nil {
+		ok := object.Key("BucketConfiguration")
+		if err := awsRestjson1_serializeDocumentS3BucketConfiguration(v.BucketConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotS3DestinationConfigurationList(v []types.SnapshotS3DestinationConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSnapshotS3DestinationConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotUserConfiguration(v *types.SnapshotUserConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnonymousUsers != nil {
+		ok := object.Key("AnonymousUsers")
+		if err := awsRestjson1_serializeDocumentSnapshotAnonymousUserList(v.AnonymousUsers, ok); err != nil {
 			return err
 		}
 	}
@@ -30581,6 +31152,13 @@ func awsRestjson1_serializeDocumentTextAreaControlDisplayOptions(v *types.TextAr
 	object := value.Object()
 	defer object.Close()
 
+	if v.InfoIconLabelOptions != nil {
+		ok := object.Key("InfoIconLabelOptions")
+		if err := awsRestjson1_serializeDocumentSheetControlInfoIconLabelOptions(v.InfoIconLabelOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PlaceholderOptions != nil {
 		ok := object.Key("PlaceholderOptions")
 		if err := awsRestjson1_serializeDocumentTextControlPlaceholderOptions(v.PlaceholderOptions, ok); err != nil {
@@ -30641,6 +31219,13 @@ func awsRestjson1_serializeDocumentTextControlPlaceholderOptions(v *types.TextCo
 func awsRestjson1_serializeDocumentTextFieldControlDisplayOptions(v *types.TextFieldControlDisplayOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.InfoIconLabelOptions != nil {
+		ok := object.Key("InfoIconLabelOptions")
+		if err := awsRestjson1_serializeDocumentSheetControlInfoIconLabelOptions(v.InfoIconLabelOptions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.PlaceholderOptions != nil {
 		ok := object.Key("PlaceholderOptions")

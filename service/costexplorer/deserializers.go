@@ -2233,6 +2233,120 @@ func awsAwsjson11_deserializeOpErrorGetRightsizingRecommendation(response *smith
 	}
 }
 
+type awsAwsjson11_deserializeOpGetSavingsPlanPurchaseRecommendationDetails struct {
+}
+
+func (*awsAwsjson11_deserializeOpGetSavingsPlanPurchaseRecommendationDetails) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpGetSavingsPlanPurchaseRecommendationDetails) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetSavingsPlanPurchaseRecommendationDetails(response, &metadata)
+	}
+	output := &GetSavingsPlanPurchaseRecommendationDetailsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetSavingsPlanPurchaseRecommendationDetailsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorGetSavingsPlanPurchaseRecommendationDetails(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("DataUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorDataUnavailableException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpGetSavingsPlansCoverage struct {
 }
 
@@ -3258,6 +3372,9 @@ func awsAwsjson11_deserializeOpErrorListSavingsPlansPurchaseRecommendationGenera
 	}
 
 	switch {
+	case strings.EqualFold("DataUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorDataUnavailableException(response, errorBody)
+
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
 
@@ -3597,6 +3714,9 @@ func awsAwsjson11_deserializeOpErrorStartSavingsPlansPurchaseRecommendationGener
 	}
 
 	switch {
+	case strings.EqualFold("DataUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorDataUnavailableException(response, errorBody)
+
 	case strings.EqualFold("GenerationExistsException", errorCode):
 		return awsAwsjson11_deserializeErrorGenerationExistsException(response, errorBody)
 
@@ -8486,6 +8606,40 @@ func awsAwsjson11_deserializeDocumentMetrics(v *map[string]types.MetricValue, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMetricsOverLookbackPeriod(v *[]types.RecommendationDetailHourlyMetrics, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RecommendationDetailHourlyMetrics
+	if *v == nil {
+		cv = []types.RecommendationDetailHourlyMetrics{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RecommendationDetailHourlyMetrics
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRecommendationDetailHourlyMetrics(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentMetricValue(v **types.MetricValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8811,6 +8965,370 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 					return fmt.Errorf("expected GenericBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.SizeFlexEligible = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.RecommendationDetailData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecommendationDetailData
+	if *v == nil {
+		sv = &types.RecommendationDetailData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "AccountScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountScope to be of type string, got %T instead", value)
+				}
+				sv.AccountScope = types.AccountScope(jtv)
+			}
+
+		case "CurrencyCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CurrencyCode = ptr.String(jtv)
+			}
+
+		case "CurrentAverageCoverage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CurrentAverageCoverage = ptr.String(jtv)
+			}
+
+		case "CurrentAverageHourlyOnDemandSpend":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CurrentAverageHourlyOnDemandSpend = ptr.String(jtv)
+			}
+
+		case "CurrentMaximumHourlyOnDemandSpend":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CurrentMaximumHourlyOnDemandSpend = ptr.String(jtv)
+			}
+
+		case "CurrentMinimumHourlyOnDemandSpend":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CurrentMinimumHourlyOnDemandSpend = ptr.String(jtv)
+			}
+
+		case "EstimatedAverageCoverage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedAverageCoverage = ptr.String(jtv)
+			}
+
+		case "EstimatedAverageUtilization":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedAverageUtilization = ptr.String(jtv)
+			}
+
+		case "EstimatedMonthlySavingsAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedMonthlySavingsAmount = ptr.String(jtv)
+			}
+
+		case "EstimatedOnDemandCost":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedOnDemandCost = ptr.String(jtv)
+			}
+
+		case "EstimatedOnDemandCostWithCurrentCommitment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedOnDemandCostWithCurrentCommitment = ptr.String(jtv)
+			}
+
+		case "EstimatedROI":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedROI = ptr.String(jtv)
+			}
+
+		case "EstimatedSavingsAmount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedSavingsAmount = ptr.String(jtv)
+			}
+
+		case "EstimatedSavingsPercentage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedSavingsPercentage = ptr.String(jtv)
+			}
+
+		case "EstimatedSPCost":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedSPCost = ptr.String(jtv)
+			}
+
+		case "ExistingHourlyCommitment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.ExistingHourlyCommitment = ptr.String(jtv)
+			}
+
+		case "GenerationTimestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ZonedDateTime to be of type string, got %T instead", value)
+				}
+				sv.GenerationTimestamp = ptr.String(jtv)
+			}
+
+		case "HourlyCommitmentToPurchase":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.HourlyCommitmentToPurchase = ptr.String(jtv)
+			}
+
+		case "InstanceFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.InstanceFamily = ptr.String(jtv)
+			}
+
+		case "LatestUsageTimestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ZonedDateTime to be of type string, got %T instead", value)
+				}
+				sv.LatestUsageTimestamp = ptr.String(jtv)
+			}
+
+		case "LookbackPeriodInDays":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LookbackPeriodInDays to be of type string, got %T instead", value)
+				}
+				sv.LookbackPeriodInDays = types.LookbackPeriodInDays(jtv)
+			}
+
+		case "MetricsOverLookbackPeriod":
+			if err := awsAwsjson11_deserializeDocumentMetricsOverLookbackPeriod(&sv.MetricsOverLookbackPeriod, value); err != nil {
+				return err
+			}
+
+		case "OfferingId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.OfferingId = ptr.String(jtv)
+			}
+
+		case "PaymentOption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaymentOption to be of type string, got %T instead", value)
+				}
+				sv.PaymentOption = types.PaymentOption(jtv)
+			}
+
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "SavingsPlansType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SupportedSavingsPlansType to be of type string, got %T instead", value)
+				}
+				sv.SavingsPlansType = types.SupportedSavingsPlansType(jtv)
+			}
+
+		case "TermInYears":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TermInYears to be of type string, got %T instead", value)
+				}
+				sv.TermInYears = types.TermInYears(jtv)
+			}
+
+		case "UpfrontCost":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.UpfrontCost = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecommendationDetailHourlyMetrics(v **types.RecommendationDetailHourlyMetrics, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecommendationDetailHourlyMetrics
+	if *v == nil {
+		sv = &types.RecommendationDetailHourlyMetrics{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentCoverage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CurrentCoverage = ptr.String(jtv)
+			}
+
+		case "EstimatedCoverage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedCoverage = ptr.String(jtv)
+			}
+
+		case "EstimatedNewCommitmentUtilization":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedNewCommitmentUtilization = ptr.String(jtv)
+			}
+
+		case "EstimatedOnDemandCost":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.EstimatedOnDemandCost = ptr.String(jtv)
+			}
+
+		case "StartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ZonedDateTime to be of type string, got %T instead", value)
+				}
+				sv.StartTime = ptr.String(jtv)
 			}
 
 		default:
@@ -10929,6 +11447,15 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
 				}
 				sv.HourlyCommitmentToPurchase = ptr.String(jtv)
+			}
+
+		case "RecommendationDetailId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationDetailId to be of type string, got %T instead", value)
+				}
+				sv.RecommendationDetailId = ptr.String(jtv)
 			}
 
 		case "SavingsPlansDetails":
@@ -13255,6 +13782,51 @@ func awsAwsjson11_deserializeOpDocumentGetRightsizingRecommendationOutput(v **Ge
 		case "Summary":
 			if err := awsAwsjson11_deserializeDocumentRightsizingRecommendationSummary(&sv.Summary, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentGetSavingsPlanPurchaseRecommendationDetailsOutput(v **GetSavingsPlanPurchaseRecommendationDetailsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetSavingsPlanPurchaseRecommendationDetailsOutput
+	if *v == nil {
+		sv = &GetSavingsPlanPurchaseRecommendationDetailsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RecommendationDetailData":
+			if err := awsAwsjson11_deserializeDocumentRecommendationDetailData(&sv.RecommendationDetailData, value); err != nil {
+				return err
+			}
+
+		case "RecommendationDetailId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationDetailId to be of type string, got %T instead", value)
+				}
+				sv.RecommendationDetailId = ptr.String(jtv)
 			}
 
 		default:

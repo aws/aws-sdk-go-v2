@@ -350,6 +350,26 @@ func (m *validateOpGetRightsizingRecommendation) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSavingsPlanPurchaseRecommendationDetails struct {
+}
+
+func (*validateOpGetSavingsPlanPurchaseRecommendationDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSavingsPlanPurchaseRecommendationDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSavingsPlanPurchaseRecommendationDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSavingsPlanPurchaseRecommendationDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSavingsPlansCoverage struct {
 }
 
@@ -696,6 +716,10 @@ func addOpGetReservationUtilizationValidationMiddleware(stack *middleware.Stack)
 
 func addOpGetRightsizingRecommendationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRightsizingRecommendation{}, middleware.After)
+}
+
+func addOpGetSavingsPlanPurchaseRecommendationDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSavingsPlanPurchaseRecommendationDetails{}, middleware.After)
 }
 
 func addOpGetSavingsPlansCoverageValidationMiddleware(stack *middleware.Stack) error {
@@ -1403,6 +1427,21 @@ func validateOpGetRightsizingRecommendationInput(v *GetRightsizingRecommendation
 	}
 	if v.Service == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSavingsPlanPurchaseRecommendationDetailsInput(v *GetSavingsPlanPurchaseRecommendationDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSavingsPlanPurchaseRecommendationDetailsInput"}
+	if v.RecommendationDetailId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationDetailId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

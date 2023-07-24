@@ -894,6 +894,7 @@ type StackInstanceFilterName string
 const (
 	StackInstanceFilterNameDetailedStatus  StackInstanceFilterName = "DETAILED_STATUS"
 	StackInstanceFilterNameLastOperationId StackInstanceFilterName = "LAST_OPERATION_ID"
+	StackInstanceFilterNameDriftStatus     StackInstanceFilterName = "DRIFT_STATUS"
 )
 
 // Values returns all known values for StackInstanceFilterName. Note that this can
@@ -903,6 +904,7 @@ func (StackInstanceFilterName) Values() []StackInstanceFilterName {
 	return []StackInstanceFilterName{
 		"DETAILED_STATUS",
 		"LAST_OPERATION_ID",
+		"DRIFT_STATUS",
 	}
 }
 

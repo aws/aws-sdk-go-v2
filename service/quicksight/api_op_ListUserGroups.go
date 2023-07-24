@@ -4,6 +4,7 @@ package quicksight
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
@@ -140,6 +141,96 @@ func (c *Client) addOperationListUserGroupsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// ListUserGroupsAPIClient is a client that implements the ListUserGroups
+// operation.
+type ListUserGroupsAPIClient interface {
+	ListUserGroups(context.Context, *ListUserGroupsInput, ...func(*Options)) (*ListUserGroupsOutput, error)
+}
+
+var _ ListUserGroupsAPIClient = (*Client)(nil)
+
+// ListUserGroupsPaginatorOptions is the paginator options for ListUserGroups
+type ListUserGroupsPaginatorOptions struct {
+	// The maximum number of results to return from this request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListUserGroupsPaginator is a paginator for ListUserGroups
+type ListUserGroupsPaginator struct {
+	options   ListUserGroupsPaginatorOptions
+	client    ListUserGroupsAPIClient
+	params    *ListUserGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListUserGroupsPaginator returns a new ListUserGroupsPaginator
+func NewListUserGroupsPaginator(client ListUserGroupsAPIClient, params *ListUserGroupsInput, optFns ...func(*ListUserGroupsPaginatorOptions)) *ListUserGroupsPaginator {
+	if params == nil {
+		params = &ListUserGroupsInput{}
+	}
+
+	options := ListUserGroupsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListUserGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListUserGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListUserGroups page.
+func (p *ListUserGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListUserGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListUserGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListUserGroups(region string) *awsmiddleware.RegisterServiceMetadata {

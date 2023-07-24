@@ -1,0 +1,8 @@
+{
+    "id": "ef10920f-d2a6-433e-8edc-eeca9deb1887",
+    "type": "feature",
+    "description": "This release launches new Snapshot APIs for CSV and PDF exports, adds support for info icon for filters and parameters in Exploration APIs, adds modeled exception to the DeleteAccountCustomization API, and introduces AttributeAggregationFunction's ability to add UNIQUE_VALUE aggregation in tooltips.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

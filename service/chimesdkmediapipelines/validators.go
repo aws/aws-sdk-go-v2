@@ -414,21 +414,6 @@ func validateAmazonTranscribeCallAnalyticsProcessorConfiguration(v *types.Amazon
 	}
 }
 
-func validateAmazonTranscribeProcessorConfiguration(v *types.AmazonTranscribeProcessorConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AmazonTranscribeProcessorConfiguration"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateArtifactsConcatenationConfiguration(v *types.ArtifactsConcatenationConfiguration) error {
 	if v == nil {
 		return nil
@@ -1046,11 +1031,6 @@ func validateMediaInsightsPipelineConfigurationElement(v *types.MediaInsightsPip
 	if v.AmazonTranscribeCallAnalyticsProcessorConfiguration != nil {
 		if err := validateAmazonTranscribeCallAnalyticsProcessorConfiguration(v.AmazonTranscribeCallAnalyticsProcessorConfiguration); err != nil {
 			invalidParams.AddNested("AmazonTranscribeCallAnalyticsProcessorConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AmazonTranscribeProcessorConfiguration != nil {
-		if err := validateAmazonTranscribeProcessorConfiguration(v.AmazonTranscribeProcessorConfiguration); err != nil {
-			invalidParams.AddNested("AmazonTranscribeProcessorConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

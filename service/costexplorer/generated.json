@@ -27,6 +27,7 @@
         "api_op_GetReservationPurchaseRecommendation.go",
         "api_op_GetReservationUtilization.go",
         "api_op_GetRightsizingRecommendation.go",
+        "api_op_GetSavingsPlanPurchaseRecommendationDetails.go",
         "api_op_GetSavingsPlansCoverage.go",
         "api_op_GetSavingsPlansPurchaseRecommendation.go",
         "api_op_GetSavingsPlansUtilization.go",

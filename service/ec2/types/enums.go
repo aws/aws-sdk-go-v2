@@ -6470,6 +6470,7 @@ const (
 	SpotInstanceStateClosed    SpotInstanceState = "closed"
 	SpotInstanceStateCancelled SpotInstanceState = "cancelled"
 	SpotInstanceStateFailed    SpotInstanceState = "failed"
+	SpotInstanceStateDisabled  SpotInstanceState = "disabled"
 )
 
 // Values returns all known values for SpotInstanceState. Note that this can be
@@ -6482,6 +6483,7 @@ func (SpotInstanceState) Values() []SpotInstanceState {
 		"closed",
 		"cancelled",
 		"failed",
+		"disabled",
 	}
 }
 

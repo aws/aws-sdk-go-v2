@@ -3304,6 +3304,23 @@ func (SheetControlSliderType) Values() []SheetControlSliderType {
 	}
 }
 
+type SimpleAttributeAggregationFunction string
+
+// Enum values for SimpleAttributeAggregationFunction
+const (
+	SimpleAttributeAggregationFunctionUniqueValue SimpleAttributeAggregationFunction = "UNIQUE_VALUE"
+)
+
+// Values returns all known values for SimpleAttributeAggregationFunction. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SimpleAttributeAggregationFunction) Values() []SimpleAttributeAggregationFunction {
+	return []SimpleAttributeAggregationFunction{
+		"UNIQUE_VALUE",
+	}
+}
+
 type SimpleNumericalAggregationFunction string
 
 // Enum values for SimpleNumericalAggregationFunction
@@ -3374,6 +3391,65 @@ func (SmallMultiplesAxisScale) Values() []SmallMultiplesAxisScale {
 	return []SmallMultiplesAxisScale{
 		"SHARED",
 		"INDEPENDENT",
+	}
+}
+
+type SnapshotFileFormatType string
+
+// Enum values for SnapshotFileFormatType
+const (
+	SnapshotFileFormatTypeCsv SnapshotFileFormatType = "CSV"
+	SnapshotFileFormatTypePdf SnapshotFileFormatType = "PDF"
+)
+
+// Values returns all known values for SnapshotFileFormatType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotFileFormatType) Values() []SnapshotFileFormatType {
+	return []SnapshotFileFormatType{
+		"CSV",
+		"PDF",
+	}
+}
+
+type SnapshotFileSheetSelectionScope string
+
+// Enum values for SnapshotFileSheetSelectionScope
+const (
+	SnapshotFileSheetSelectionScopeAllVisuals      SnapshotFileSheetSelectionScope = "ALL_VISUALS"
+	SnapshotFileSheetSelectionScopeSelectedVisuals SnapshotFileSheetSelectionScope = "SELECTED_VISUALS"
+)
+
+// Values returns all known values for SnapshotFileSheetSelectionScope. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SnapshotFileSheetSelectionScope) Values() []SnapshotFileSheetSelectionScope {
+	return []SnapshotFileSheetSelectionScope{
+		"ALL_VISUALS",
+		"SELECTED_VISUALS",
+	}
+}
+
+type SnapshotJobStatus string
+
+// Enum values for SnapshotJobStatus
+const (
+	SnapshotJobStatusQueued    SnapshotJobStatus = "QUEUED"
+	SnapshotJobStatusRunning   SnapshotJobStatus = "RUNNING"
+	SnapshotJobStatusCompleted SnapshotJobStatus = "COMPLETED"
+	SnapshotJobStatusFailed    SnapshotJobStatus = "FAILED"
+)
+
+// Values returns all known values for SnapshotJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotJobStatus) Values() []SnapshotJobStatus {
+	return []SnapshotJobStatus{
+		"QUEUED",
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 

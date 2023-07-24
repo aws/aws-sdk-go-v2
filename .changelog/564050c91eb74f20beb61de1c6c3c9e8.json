@@ -1,0 +1,8 @@
+{
+    "id": "564050c9-1eb7-4f20-beb6-1de1c6c3c9e8",
+    "type": "feature",
+    "description": "Add \"disabled\" enum value to SpotInstanceState.",
+    "modules": [
+        "service/ec2"
+    ]
+}

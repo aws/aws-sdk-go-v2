@@ -1130,6 +1130,46 @@ func (m *validateOpDescribeDashboardPermissions) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDashboardSnapshotJob struct {
+}
+
+func (*validateOpDescribeDashboardSnapshotJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDashboardSnapshotJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDashboardSnapshotJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDashboardSnapshotJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDashboardSnapshotJobResult struct {
+}
+
+func (*validateOpDescribeDashboardSnapshotJobResult) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDashboardSnapshotJobResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDashboardSnapshotJobResultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDashboardSnapshotJobResultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDataSet struct {
 }
 
@@ -2550,6 +2590,26 @@ func (m *validateOpStartAssetBundleImportJob) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartDashboardSnapshotJob struct {
+}
+
+func (*validateOpStartDashboardSnapshotJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDashboardSnapshotJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDashboardSnapshotJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDashboardSnapshotJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -3394,6 +3454,14 @@ func addOpDescribeDashboardPermissionsValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpDescribeDashboardPermissions{}, middleware.After)
 }
 
+func addOpDescribeDashboardSnapshotJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDashboardSnapshotJob{}, middleware.After)
+}
+
+func addOpDescribeDashboardSnapshotJobResultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDashboardSnapshotJobResult{}, middleware.After)
+}
+
 func addOpDescribeDataSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDataSet{}, middleware.After)
 }
@@ -3676,6 +3744,10 @@ func addOpStartAssetBundleExportJobValidationMiddleware(stack *middleware.Stack)
 
 func addOpStartAssetBundleImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAssetBundleImportJob{}, middleware.After)
+}
+
+func addOpStartDashboardSnapshotJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDashboardSnapshotJob{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -13081,6 +13153,27 @@ func validateRowSortList(v []types.FieldSortOptions) error {
 	}
 }
 
+func validateS3BucketConfiguration(v *types.S3BucketConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketConfiguration"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.BucketPrefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketPrefix"))
+	}
+	if v.BucketRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3Parameters(v *types.S3Parameters) error {
 	if v == nil {
 		return nil
@@ -13837,6 +13930,245 @@ func validateSmallMultiplesDimensionFieldList(v []types.DimensionField) error {
 	for i := range v {
 		if err := validateDimensionField(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotAnonymousUser(v *types.SnapshotAnonymousUser) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotAnonymousUser"}
+	if v.RowLevelPermissionTags != nil {
+		if err := validateSessionTagList(v.RowLevelPermissionTags); err != nil {
+			invalidParams.AddNested("RowLevelPermissionTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotAnonymousUserList(v []types.SnapshotAnonymousUser) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotAnonymousUserList"}
+	for i := range v {
+		if err := validateSnapshotAnonymousUser(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotConfiguration(v *types.SnapshotConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotConfiguration"}
+	if v.FileGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileGroups"))
+	} else if v.FileGroups != nil {
+		if err := validateSnapshotFileGroupList(v.FileGroups); err != nil {
+			invalidParams.AddNested("FileGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationConfiguration != nil {
+		if err := validateSnapshotDestinationConfiguration(v.DestinationConfiguration); err != nil {
+			invalidParams.AddNested("DestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Parameters != nil {
+		if err := validateParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotDestinationConfiguration(v *types.SnapshotDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotDestinationConfiguration"}
+	if v.S3Destinations != nil {
+		if err := validateSnapshotS3DestinationConfigurationList(v.S3Destinations); err != nil {
+			invalidParams.AddNested("S3Destinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotFile(v *types.SnapshotFile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotFile"}
+	if v.SheetSelections == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SheetSelections"))
+	} else if v.SheetSelections != nil {
+		if err := validateSnapshotFileSheetSelectionList(v.SheetSelections); err != nil {
+			invalidParams.AddNested("SheetSelections", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.FormatType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FormatType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotFileGroup(v *types.SnapshotFileGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotFileGroup"}
+	if v.Files != nil {
+		if err := validateSnapshotFileList(v.Files); err != nil {
+			invalidParams.AddNested("Files", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotFileGroupList(v []types.SnapshotFileGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotFileGroupList"}
+	for i := range v {
+		if err := validateSnapshotFileGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotFileList(v []types.SnapshotFile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotFileList"}
+	for i := range v {
+		if err := validateSnapshotFile(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotFileSheetSelection(v *types.SnapshotFileSheetSelection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotFileSheetSelection"}
+	if v.SheetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SheetId"))
+	}
+	if len(v.SelectionScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionScope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotFileSheetSelectionList(v []types.SnapshotFileSheetSelection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotFileSheetSelectionList"}
+	for i := range v {
+		if err := validateSnapshotFileSheetSelection(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotS3DestinationConfiguration(v *types.SnapshotS3DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotS3DestinationConfiguration"}
+	if v.BucketConfiguration != nil {
+		if err := validateS3BucketConfiguration(v.BucketConfiguration); err != nil {
+			invalidParams.AddNested("BucketConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotS3DestinationConfigurationList(v []types.SnapshotS3DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotS3DestinationConfigurationList"}
+	for i := range v {
+		if err := validateSnapshotS3DestinationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotUserConfiguration(v *types.SnapshotUserConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotUserConfiguration"}
+	if v.AnonymousUsers != nil {
+		if err := validateSnapshotAnonymousUserList(v.AnonymousUsers); err != nil {
+			invalidParams.AddNested("AnonymousUsers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -17360,6 +17692,48 @@ func validateOpDescribeDashboardPermissionsInput(v *DescribeDashboardPermissions
 	}
 }
 
+func validateOpDescribeDashboardSnapshotJobInput(v *DescribeDashboardSnapshotJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDashboardSnapshotJobInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if v.SnapshotJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDashboardSnapshotJobResultInput(v *DescribeDashboardSnapshotJobResultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDashboardSnapshotJobResultInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if v.SnapshotJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDataSetInput(v *DescribeDataSetInput) error {
 	if v == nil {
 		return nil
@@ -18705,6 +19079,41 @@ func validateOpStartAssetBundleImportJobInput(v *StartAssetBundleImportJobInput)
 	if v.OverrideParameters != nil {
 		if err := validateAssetBundleImportJobOverrideParameters(v.OverrideParameters); err != nil {
 			invalidParams.AddNested("OverrideParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDashboardSnapshotJobInput(v *StartDashboardSnapshotJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDashboardSnapshotJobInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if v.SnapshotJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotJobId"))
+	}
+	if v.UserConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserConfiguration"))
+	} else if v.UserConfiguration != nil {
+		if err := validateSnapshotUserConfiguration(v.UserConfiguration); err != nil {
+			invalidParams.AddNested("UserConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SnapshotConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotConfiguration"))
+	} else if v.SnapshotConfiguration != nil {
+		if err := validateSnapshotConfiguration(v.SnapshotConfiguration); err != nil {
+			invalidParams.AddNested("SnapshotConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

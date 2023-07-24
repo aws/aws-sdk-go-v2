@@ -3161,6 +3161,46 @@ func awsRestjson1_deserializeErrorUnauthorizedClientException(response *smithyht
 	return output
 }
 
+func awsRestjson1_deserializeDocumentActiveSpeakerOnlyConfiguration(v **types.ActiveSpeakerOnlyConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ActiveSpeakerOnlyConfiguration
+	if *v == nil {
+		sv = &types.ActiveSpeakerOnlyConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActiveSpeakerPosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActiveSpeakerPosition to be of type string, got %T instead", value)
+				}
+				sv.ActiveSpeakerPosition = types.ActiveSpeakerPosition(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAmazonTranscribeCallAnalyticsProcessorConfiguration(v **types.AmazonTranscribeCallAnalyticsProcessorConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3359,6 +3399,15 @@ func awsRestjson1_deserializeDocumentAmazonTranscribeProcessorConfiguration(v **
 				sv.FilterPartialResults = jtv
 			}
 
+		case "IdentifyLanguage":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IdentifyLanguage = jtv
+			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3377,6 +3426,15 @@ func awsRestjson1_deserializeDocumentAmazonTranscribeProcessorConfiguration(v **
 				sv.LanguageModelName = ptr.String(jtv)
 			}
 
+		case "LanguageOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageOptions to be of type string, got %T instead", value)
+				}
+				sv.LanguageOptions = ptr.String(jtv)
+			}
+
 		case "PartialResultsStability":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3393,6 +3451,15 @@ func awsRestjson1_deserializeDocumentAmazonTranscribeProcessorConfiguration(v **
 					return fmt.Errorf("expected PiiEntityTypes to be of type string, got %T instead", value)
 				}
 				sv.PiiEntityTypes = ptr.String(jtv)
+			}
+
+		case "PreferredLanguage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CallAnalyticsLanguageCode to be of type string, got %T instead", value)
+				}
+				sv.PreferredLanguage = types.CallAnalyticsLanguageCode(jtv)
 			}
 
 		case "ShowSpeakerLabel":
@@ -3422,6 +3489,15 @@ func awsRestjson1_deserializeDocumentAmazonTranscribeProcessorConfiguration(v **
 				sv.VocabularyFilterName = ptr.String(jtv)
 			}
 
+		case "VocabularyFilterNames":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VocabularyFilterNames to be of type string, got %T instead", value)
+				}
+				sv.VocabularyFilterNames = ptr.String(jtv)
+			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3429,6 +3505,15 @@ func awsRestjson1_deserializeDocumentAmazonTranscribeProcessorConfiguration(v **
 					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
 				}
 				sv.VocabularyName = ptr.String(jtv)
+			}
+
+		case "VocabularyNames":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VocabularyNames to be of type string, got %T instead", value)
+				}
+				sv.VocabularyNames = ptr.String(jtv)
 			}
 
 		default:
@@ -4590,6 +4675,20 @@ func awsRestjson1_deserializeDocumentGridViewConfiguration(v **types.GridViewCon
 
 	for key, value := range shape {
 		switch key {
+		case "ActiveSpeakerOnlyConfiguration":
+			if err := awsRestjson1_deserializeDocumentActiveSpeakerOnlyConfiguration(&sv.ActiveSpeakerOnlyConfiguration, value); err != nil {
+				return err
+			}
+
+		case "CanvasOrientation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CanvasOrientation to be of type string, got %T instead", value)
+				}
+				sv.CanvasOrientation = types.CanvasOrientation(jtv)
+			}
+
 		case "ContentShareLayout":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4599,9 +4698,95 @@ func awsRestjson1_deserializeDocumentGridViewConfiguration(v **types.GridViewCon
 				sv.ContentShareLayout = types.ContentShareLayoutOption(jtv)
 			}
 
+		case "HorizontalLayoutConfiguration":
+			if err := awsRestjson1_deserializeDocumentHorizontalLayoutConfiguration(&sv.HorizontalLayoutConfiguration, value); err != nil {
+				return err
+			}
+
 		case "PresenterOnlyConfiguration":
 			if err := awsRestjson1_deserializeDocumentPresenterOnlyConfiguration(&sv.PresenterOnlyConfiguration, value); err != nil {
 				return err
+			}
+
+		case "VerticalLayoutConfiguration":
+			if err := awsRestjson1_deserializeDocumentVerticalLayoutConfiguration(&sv.VerticalLayoutConfiguration, value); err != nil {
+				return err
+			}
+
+		case "VideoAttribute":
+			if err := awsRestjson1_deserializeDocumentVideoAttribute(&sv.VideoAttribute, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHorizontalLayoutConfiguration(v **types.HorizontalLayoutConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HorizontalLayoutConfiguration
+	if *v == nil {
+		sv = &types.HorizontalLayoutConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TileAspectRatio":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TileAspectRatio to be of type string, got %T instead", value)
+				}
+				sv.TileAspectRatio = ptr.String(jtv)
+			}
+
+		case "TileCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TileCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileCount = ptr.Int32(int32(i64))
+			}
+
+		case "TileOrder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TileOrder to be of type string, got %T instead", value)
+				}
+				sv.TileOrder = types.TileOrder(jtv)
+			}
+
+		case "TilePosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HorizontalTilePosition to be of type string, got %T instead", value)
+				}
+				sv.TilePosition = types.HorizontalTilePosition(jtv)
 			}
 
 		default:
@@ -7541,6 +7726,77 @@ func awsRestjson1_deserializeDocumentUnauthorizedClientException(v **types.Unaut
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentVerticalLayoutConfiguration(v **types.VerticalLayoutConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VerticalLayoutConfiguration
+	if *v == nil {
+		sv = &types.VerticalLayoutConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TileAspectRatio":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TileAspectRatio to be of type string, got %T instead", value)
+				}
+				sv.TileAspectRatio = ptr.String(jtv)
+			}
+
+		case "TileCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TileCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileCount = ptr.Int32(int32(i64))
+			}
+
+		case "TileOrder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TileOrder to be of type string, got %T instead", value)
+				}
+				sv.TileOrder = types.TileOrder(jtv)
+			}
+
+		case "TilePosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VerticalTilePosition to be of type string, got %T instead", value)
+				}
+				sv.TilePosition = types.VerticalTilePosition(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentVideoArtifactsConfiguration(v **types.VideoArtifactsConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7579,6 +7835,81 @@ func awsRestjson1_deserializeDocumentVideoArtifactsConfiguration(v **types.Video
 					return fmt.Errorf("expected ArtifactsState to be of type string, got %T instead", value)
 				}
 				sv.State = types.ArtifactsState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoAttribute(v **types.VideoAttribute, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoAttribute
+	if *v == nil {
+		sv = &types.VideoAttribute{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BorderColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BorderColor to be of type string, got %T instead", value)
+				}
+				sv.BorderColor = types.BorderColor(jtv)
+			}
+
+		case "BorderThickness":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BorderThickness to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BorderThickness = ptr.Int32(int32(i64))
+			}
+
+		case "CornerRadius":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CornerRadius to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CornerRadius = ptr.Int32(int32(i64))
+			}
+
+		case "HighlightColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HighlightColor to be of type string, got %T instead", value)
+				}
+				sv.HighlightColor = types.HighlightColor(jtv)
 			}
 
 		default:

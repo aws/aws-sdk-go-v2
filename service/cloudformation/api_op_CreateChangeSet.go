@@ -87,7 +87,7 @@ type CreateChangeSetInput struct {
 	//   - AWS::IAM::User (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
 	//   - AWS::IAM::UserToGroupAddition (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
 	//   For more information, see Acknowledging IAM resources in CloudFormation
-	//   templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
+	//   templates (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
 	//   .
 	//   - CAPABILITY_AUTO_EXPAND Some template contain macros. Macros perform custom
 	//   processing on templates; this can include simple actions like find-and-replace
@@ -97,15 +97,15 @@ type CreateChangeSetInput struct {
 	//   actually creating the stack. If your stack template contains one or more macros,
 	//   and you choose to create a stack directly from the processed template, without
 	//   first reviewing the resulting changes in a change set, you must acknowledge this
-	//   capability. This includes the AWS::Include (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
-	//   and AWS::Serverless (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
+	//   capability. This includes the AWS::Include (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
+	//   and AWS::Serverless (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
 	//   transforms, which are macros hosted by CloudFormation. This capacity doesn't
 	//   apply to creating change sets, and specifying it when creating change sets has
 	//   no effect. If you want to create a stack from a stack template that contains
 	//   macros and nested stacks, you must create or update the stack directly from the
 	//   template using the CreateStack or UpdateStack action, and specifying this
 	//   capability. For more information about macros, see Using CloudFormation
-	//   macros to perform custom processing on templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html)
+	//   macros to perform custom processing on templates (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html)
 	//   .
 	Capabilities []types.Capability
 

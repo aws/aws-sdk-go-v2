@@ -53,6 +53,7 @@
         "api_op_ListChangeSets.go",
         "api_op_ListExports.go",
         "api_op_ListImports.go",
+        "api_op_ListStackInstanceResourceDrifts.go",
         "api_op_ListStackInstances.go",
         "api_op_ListStackResources.go",
         "api_op_ListStackSetOperationResults.go",

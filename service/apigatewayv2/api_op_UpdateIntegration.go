@@ -140,7 +140,7 @@ type UpdateIntegrationInput struct {
 	// <action>:<header|querystring|path>.<location> where action can be append,
 	// overwrite or remove. For values, you can provide static values, or map request
 	// data, stage variables, or context variables that are evaluated at runtime. To
-	// learn more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.)
+	// learn more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html)
 	// .
 	RequestParameters map[string]string
 
@@ -286,7 +286,7 @@ type UpdateIntegrationOutput struct {
 	// AWS_PROXY integrations. You can provide static values, or map request data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
 	// more, see Working with AWS service integrations for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html)
-	// . For HTTP API itegrations, without a specified integrationSubtype request
+	// . For HTTP API integrations, without a specified integrationSubtype request
 	// parameters are a key-value map specifying how to transform HTTP requests before
 	// sending them to backend integrations. The key should follow the pattern
 	// <action>:<header|querystring|path>.<location>. The action can be append,

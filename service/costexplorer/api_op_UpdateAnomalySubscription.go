@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing cost anomaly monitor subscription.
+// Updates an existing cost anomaly subscription. Specify the fields that you want
+// to update. Omitted fields are unchanged. The JSON below describes the generic
+// construct for each type. See Request Parameters (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_UpdateAnomalySubscription.html#API_UpdateAnomalySubscription_RequestParameters)
+// for possible values as they apply to AnomalySubscription .
 func (c *Client) UpdateAnomalySubscription(ctx context.Context, params *UpdateAnomalySubscriptionInput, optFns ...func(*Options)) (*UpdateAnomalySubscriptionOutput, error) {
 	if params == nil {
 		params = &UpdateAnomalySubscriptionInput{}
@@ -49,7 +52,8 @@ type UpdateAnomalySubscriptionInput struct {
 	// (deprecated) The update to the threshold value for receiving notifications.
 	// This field has been deprecated. To update a threshold, use ThresholdExpression.
 	// Continued use of Threshold will be treated as shorthand syntax for a
-	// ThresholdExpression.
+	// ThresholdExpression. You can specify either Threshold or ThresholdExpression,
+	// but not both.
 	//
 	// Deprecated: Threshold has been deprecated in favor of ThresholdExpression
 	Threshold *float64
@@ -57,10 +61,14 @@ type UpdateAnomalySubscriptionInput struct {
 	// The update to the Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object used to specify the anomalies that you want to generate alerts for. This
 	// supports dimensions and nested expressions. The supported dimensions are
-	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE . The
-	// supported nested expression types are AND and OR . The match option
-	// GREATER_THAN_OR_EQUAL is required. Values must be numbers between 0 and
-	// 10,000,000,000. The following are examples of valid ThresholdExpressions:
+	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE ,
+	// corresponding to an anomaly’s TotalImpact and TotalImpactPercentage,
+	// respectively (see Impact (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html)
+	// for more details). The supported nested expression types are AND and OR . The
+	// match option GREATER_THAN_OR_EQUAL is required. Values must be numbers between
+	// 0 and 10,000,000,000 in string format. You can specify either Threshold or
+	// ThresholdExpression, but not both. The following are examples of valid
+	// ThresholdExpressions:
 	//   - Absolute threshold: { "Dimensions": { "Key":
 	//   "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
 	//   "Values": [ "100" ] } }

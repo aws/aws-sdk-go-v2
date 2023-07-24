@@ -1,0 +1,8 @@
+{
+    "id": "ec0efb17-3403-4374-8e55-22d2b68c2af0",
+    "type": "feature",
+    "description": "AWS Media Pipeline compositing enhancement and Media Insights Pipeline auto language identification.",
+    "modules": [
+        "service/chimesdkmediapipelines"
+    ]
+}

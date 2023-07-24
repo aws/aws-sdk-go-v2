@@ -590,6 +590,26 @@ func (m *validateOpListImports) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListStackInstanceResourceDrifts struct {
+}
+
+func (*validateOpListStackInstanceResourceDrifts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStackInstanceResourceDrifts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStackInstanceResourceDriftsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStackInstanceResourceDriftsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListStackInstances struct {
 }
 
@@ -1004,6 +1024,10 @@ func addOpListChangeSetsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListImportsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImports{}, middleware.After)
+}
+
+func addOpListStackInstanceResourceDriftsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStackInstanceResourceDrifts{}, middleware.After)
 }
 
 func addOpListStackInstancesValidationMiddleware(stack *middleware.Stack) error {
@@ -1692,6 +1716,30 @@ func validateOpListImportsInput(v *ListImportsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListImportsInput"}
 	if v.ExportName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExportName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListStackInstanceResourceDriftsInput(v *ListStackInstanceResourceDriftsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStackInstanceResourceDriftsInput"}
+	if v.StackSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
+	}
+	if v.StackInstanceAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackInstanceAccount"))
+	}
+	if v.StackInstanceRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackInstanceRegion"))
+	}
+	if v.OperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

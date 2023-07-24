@@ -4,6 +4,7 @@ package quicksight
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
@@ -139,6 +140,99 @@ func (c *Client) addOperationListIAMPolicyAssignmentsForUserMiddlewares(stack *m
 		return err
 	}
 	return nil
+}
+
+// ListIAMPolicyAssignmentsForUserAPIClient is a client that implements the
+// ListIAMPolicyAssignmentsForUser operation.
+type ListIAMPolicyAssignmentsForUserAPIClient interface {
+	ListIAMPolicyAssignmentsForUser(context.Context, *ListIAMPolicyAssignmentsForUserInput, ...func(*Options)) (*ListIAMPolicyAssignmentsForUserOutput, error)
+}
+
+var _ ListIAMPolicyAssignmentsForUserAPIClient = (*Client)(nil)
+
+// ListIAMPolicyAssignmentsForUserPaginatorOptions is the paginator options for
+// ListIAMPolicyAssignmentsForUser
+type ListIAMPolicyAssignmentsForUserPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListIAMPolicyAssignmentsForUserPaginator is a paginator for
+// ListIAMPolicyAssignmentsForUser
+type ListIAMPolicyAssignmentsForUserPaginator struct {
+	options   ListIAMPolicyAssignmentsForUserPaginatorOptions
+	client    ListIAMPolicyAssignmentsForUserAPIClient
+	params    *ListIAMPolicyAssignmentsForUserInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListIAMPolicyAssignmentsForUserPaginator returns a new
+// ListIAMPolicyAssignmentsForUserPaginator
+func NewListIAMPolicyAssignmentsForUserPaginator(client ListIAMPolicyAssignmentsForUserAPIClient, params *ListIAMPolicyAssignmentsForUserInput, optFns ...func(*ListIAMPolicyAssignmentsForUserPaginatorOptions)) *ListIAMPolicyAssignmentsForUserPaginator {
+	if params == nil {
+		params = &ListIAMPolicyAssignmentsForUserInput{}
+	}
+
+	options := ListIAMPolicyAssignmentsForUserPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListIAMPolicyAssignmentsForUserPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListIAMPolicyAssignmentsForUserPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListIAMPolicyAssignmentsForUser page.
+func (p *ListIAMPolicyAssignmentsForUserPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListIAMPolicyAssignmentsForUserOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListIAMPolicyAssignmentsForUser(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListIAMPolicyAssignmentsForUser(region string) *awsmiddleware.RegisterServiceMetadata {

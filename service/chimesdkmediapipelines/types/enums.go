@@ -2,6 +2,28 @@
 
 package types
 
+type ActiveSpeakerPosition string
+
+// Enum values for ActiveSpeakerPosition
+const (
+	ActiveSpeakerPositionTopLeft     ActiveSpeakerPosition = "TopLeft"
+	ActiveSpeakerPositionTopRight    ActiveSpeakerPosition = "TopRight"
+	ActiveSpeakerPositionBottomLeft  ActiveSpeakerPosition = "BottomLeft"
+	ActiveSpeakerPositionBottomRight ActiveSpeakerPosition = "BottomRight"
+)
+
+// Values returns all known values for ActiveSpeakerPosition. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActiveSpeakerPosition) Values() []ActiveSpeakerPosition {
+	return []ActiveSpeakerPosition{
+		"TopLeft",
+		"TopRight",
+		"BottomLeft",
+		"BottomRight",
+	}
+}
+
 type ArtifactsConcatenationState string
 
 // Enum values for ArtifactsConcatenationState
@@ -93,6 +115,32 @@ func (AudioMuxType) Values() []AudioMuxType {
 	}
 }
 
+type BorderColor string
+
+// Enum values for BorderColor
+const (
+	BorderColorBlack  BorderColor = "Black"
+	BorderColorBlue   BorderColor = "Blue"
+	BorderColorRed    BorderColor = "Red"
+	BorderColorGreen  BorderColor = "Green"
+	BorderColorWhite  BorderColor = "White"
+	BorderColorYellow BorderColor = "Yellow"
+)
+
+// Values returns all known values for BorderColor. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BorderColor) Values() []BorderColor {
+	return []BorderColor{
+		"Black",
+		"Blue",
+		"Red",
+		"Green",
+		"White",
+		"Yellow",
+	}
+}
+
 type CallAnalyticsLanguageCode string
 
 // Enum values for CallAnalyticsLanguageCode
@@ -122,6 +170,24 @@ func (CallAnalyticsLanguageCode) Values() []CallAnalyticsLanguageCode {
 		"it-IT",
 		"de-DE",
 		"pt-BR",
+	}
+}
+
+type CanvasOrientation string
+
+// Enum values for CanvasOrientation
+const (
+	CanvasOrientationLandscape CanvasOrientation = "Landscape"
+	CanvasOrientationPortrait  CanvasOrientation = "Portrait"
+)
+
+// Values returns all known values for CanvasOrientation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CanvasOrientation) Values() []CanvasOrientation {
+	return []CanvasOrientation{
+		"Landscape",
+		"Portrait",
 	}
 }
 
@@ -195,9 +261,10 @@ type ContentShareLayoutOption string
 
 // Enum values for ContentShareLayoutOption
 const (
-	ContentShareLayoutOptionPresenterOnly ContentShareLayoutOption = "PresenterOnly"
-	ContentShareLayoutOptionHorizontal    ContentShareLayoutOption = "Horizontal"
-	ContentShareLayoutOptionVertical      ContentShareLayoutOption = "Vertical"
+	ContentShareLayoutOptionPresenterOnly     ContentShareLayoutOption = "PresenterOnly"
+	ContentShareLayoutOptionHorizontal        ContentShareLayoutOption = "Horizontal"
+	ContentShareLayoutOptionVertical          ContentShareLayoutOption = "Vertical"
+	ContentShareLayoutOptionActiveSpeakerOnly ContentShareLayoutOption = "ActiveSpeakerOnly"
 )
 
 // Values returns all known values for ContentShareLayoutOption. Note that this
@@ -208,6 +275,7 @@ func (ContentShareLayoutOption) Values() []ContentShareLayoutOption {
 		"PresenterOnly",
 		"Horizontal",
 		"Vertical",
+		"ActiveSpeakerOnly",
 	}
 }
 
@@ -270,6 +338,50 @@ func (FragmentSelectorType) Values() []FragmentSelectorType {
 	return []FragmentSelectorType{
 		"ProducerTimestamp",
 		"ServerTimestamp",
+	}
+}
+
+type HighlightColor string
+
+// Enum values for HighlightColor
+const (
+	HighlightColorBlack  HighlightColor = "Black"
+	HighlightColorBlue   HighlightColor = "Blue"
+	HighlightColorRed    HighlightColor = "Red"
+	HighlightColorGreen  HighlightColor = "Green"
+	HighlightColorWhite  HighlightColor = "White"
+	HighlightColorYellow HighlightColor = "Yellow"
+)
+
+// Values returns all known values for HighlightColor. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HighlightColor) Values() []HighlightColor {
+	return []HighlightColor{
+		"Black",
+		"Blue",
+		"Red",
+		"Green",
+		"White",
+		"Yellow",
+	}
+}
+
+type HorizontalTilePosition string
+
+// Enum values for HorizontalTilePosition
+const (
+	HorizontalTilePositionTop    HorizontalTilePosition = "Top"
+	HorizontalTilePositionBottom HorizontalTilePosition = "Bottom"
+)
+
+// Values returns all known values for HorizontalTilePosition. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HorizontalTilePosition) Values() []HorizontalTilePosition {
+	return []HorizontalTilePosition{
+		"Top",
+		"Bottom",
 	}
 }
 
@@ -591,6 +703,42 @@ const (
 func (SentimentType) Values() []SentimentType {
 	return []SentimentType{
 		"NEGATIVE",
+	}
+}
+
+type TileOrder string
+
+// Enum values for TileOrder
+const (
+	TileOrderJoinSequence    TileOrder = "JoinSequence"
+	TileOrderSpeakerSequence TileOrder = "SpeakerSequence"
+)
+
+// Values returns all known values for TileOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TileOrder) Values() []TileOrder {
+	return []TileOrder{
+		"JoinSequence",
+		"SpeakerSequence",
+	}
+}
+
+type VerticalTilePosition string
+
+// Enum values for VerticalTilePosition
+const (
+	VerticalTilePositionLeft  VerticalTilePosition = "Left"
+	VerticalTilePositionRight VerticalTilePosition = "Right"
+)
+
+// Values returns all known values for VerticalTilePosition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VerticalTilePosition) Values() []VerticalTilePosition {
+	return []VerticalTilePosition{
+		"Left",
+		"Right",
 	}
 }
 

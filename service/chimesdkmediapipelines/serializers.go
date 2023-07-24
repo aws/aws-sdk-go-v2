@@ -1400,6 +1400,18 @@ func awsRestjson1_serializeOpDocumentUpdateMediaInsightsPipelineStatusInput(v *U
 	return nil
 }
 
+func awsRestjson1_serializeDocumentActiveSpeakerOnlyConfiguration(v *types.ActiveSpeakerOnlyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ActiveSpeakerPosition) > 0 {
+		ok := object.Key("ActiveSpeakerPosition")
+		ok.String(string(v.ActiveSpeakerPosition))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAmazonTranscribeCallAnalyticsProcessorConfiguration(v *types.AmazonTranscribeCallAnalyticsProcessorConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1500,6 +1512,11 @@ func awsRestjson1_serializeDocumentAmazonTranscribeProcessorConfiguration(v *typ
 		ok.Boolean(v.FilterPartialResults)
 	}
 
+	if v.IdentifyLanguage {
+		ok := object.Key("IdentifyLanguage")
+		ok.Boolean(v.IdentifyLanguage)
+	}
+
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
@@ -1510,6 +1527,11 @@ func awsRestjson1_serializeDocumentAmazonTranscribeProcessorConfiguration(v *typ
 		ok.String(*v.LanguageModelName)
 	}
 
+	if v.LanguageOptions != nil {
+		ok := object.Key("LanguageOptions")
+		ok.String(*v.LanguageOptions)
+	}
+
 	if len(v.PartialResultsStability) > 0 {
 		ok := object.Key("PartialResultsStability")
 		ok.String(string(v.PartialResultsStability))
@@ -1518,6 +1540,11 @@ func awsRestjson1_serializeDocumentAmazonTranscribeProcessorConfiguration(v *typ
 	if v.PiiEntityTypes != nil {
 		ok := object.Key("PiiEntityTypes")
 		ok.String(*v.PiiEntityTypes)
+	}
+
+	if len(v.PreferredLanguage) > 0 {
+		ok := object.Key("PreferredLanguage")
+		ok.String(string(v.PreferredLanguage))
 	}
 
 	if v.ShowSpeakerLabel {
@@ -1535,9 +1562,19 @@ func awsRestjson1_serializeDocumentAmazonTranscribeProcessorConfiguration(v *typ
 		ok.String(*v.VocabularyFilterName)
 	}
 
+	if v.VocabularyFilterNames != nil {
+		ok := object.Key("VocabularyFilterNames")
+		ok.String(*v.VocabularyFilterNames)
+	}
+
 	if v.VocabularyName != nil {
 		ok := object.Key("VocabularyName")
 		ok.String(*v.VocabularyName)
+	}
+
+	if v.VocabularyNames != nil {
+		ok := object.Key("VocabularyNames")
+		ok.String(*v.VocabularyNames)
 	}
 
 	return nil
@@ -1951,9 +1988,28 @@ func awsRestjson1_serializeDocumentGridViewConfiguration(v *types.GridViewConfig
 	object := value.Object()
 	defer object.Close()
 
+	if v.ActiveSpeakerOnlyConfiguration != nil {
+		ok := object.Key("ActiveSpeakerOnlyConfiguration")
+		if err := awsRestjson1_serializeDocumentActiveSpeakerOnlyConfiguration(v.ActiveSpeakerOnlyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.CanvasOrientation) > 0 {
+		ok := object.Key("CanvasOrientation")
+		ok.String(string(v.CanvasOrientation))
+	}
+
 	if len(v.ContentShareLayout) > 0 {
 		ok := object.Key("ContentShareLayout")
 		ok.String(string(v.ContentShareLayout))
+	}
+
+	if v.HorizontalLayoutConfiguration != nil {
+		ok := object.Key("HorizontalLayoutConfiguration")
+		if err := awsRestjson1_serializeDocumentHorizontalLayoutConfiguration(v.HorizontalLayoutConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PresenterOnlyConfiguration != nil {
@@ -1961,6 +2017,47 @@ func awsRestjson1_serializeDocumentGridViewConfiguration(v *types.GridViewConfig
 		if err := awsRestjson1_serializeDocumentPresenterOnlyConfiguration(v.PresenterOnlyConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VerticalLayoutConfiguration != nil {
+		ok := object.Key("VerticalLayoutConfiguration")
+		if err := awsRestjson1_serializeDocumentVerticalLayoutConfiguration(v.VerticalLayoutConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VideoAttribute != nil {
+		ok := object.Key("VideoAttribute")
+		if err := awsRestjson1_serializeDocumentVideoAttribute(v.VideoAttribute, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHorizontalLayoutConfiguration(v *types.HorizontalLayoutConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TileAspectRatio != nil {
+		ok := object.Key("TileAspectRatio")
+		ok.String(*v.TileAspectRatio)
+	}
+
+	if v.TileCount != nil {
+		ok := object.Key("TileCount")
+		ok.Integer(*v.TileCount)
+	}
+
+	if len(v.TileOrder) > 0 {
+		ok := object.Key("TileOrder")
+		ok.String(string(v.TileOrder))
+	}
+
+	if len(v.TilePosition) > 0 {
+		ok := object.Key("TilePosition")
+		ok.String(string(v.TilePosition))
 	}
 
 	return nil
@@ -2673,6 +2770,33 @@ func awsRestjson1_serializeDocumentTranscriptionMessagesConcatenationConfigurati
 	return nil
 }
 
+func awsRestjson1_serializeDocumentVerticalLayoutConfiguration(v *types.VerticalLayoutConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TileAspectRatio != nil {
+		ok := object.Key("TileAspectRatio")
+		ok.String(*v.TileAspectRatio)
+	}
+
+	if v.TileCount != nil {
+		ok := object.Key("TileCount")
+		ok.Integer(*v.TileCount)
+	}
+
+	if len(v.TileOrder) > 0 {
+		ok := object.Key("TileOrder")
+		ok.String(string(v.TileOrder))
+	}
+
+	if len(v.TilePosition) > 0 {
+		ok := object.Key("TilePosition")
+		ok.String(string(v.TilePosition))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVideoArtifactsConfiguration(v *types.VideoArtifactsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2685,6 +2809,33 @@ func awsRestjson1_serializeDocumentVideoArtifactsConfiguration(v *types.VideoArt
 	if len(v.State) > 0 {
 		ok := object.Key("State")
 		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoAttribute(v *types.VideoAttribute, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BorderColor) > 0 {
+		ok := object.Key("BorderColor")
+		ok.String(string(v.BorderColor))
+	}
+
+	if v.BorderThickness != nil {
+		ok := object.Key("BorderThickness")
+		ok.Integer(*v.BorderThickness)
+	}
+
+	if v.CornerRadius != nil {
+		ok := object.Key("CornerRadius")
+		ok.Integer(*v.CornerRadius)
+	}
+
+	if len(v.HighlightColor) > 0 {
+		ok := object.Key("HighlightColor")
+		ok.String(string(v.HighlightColor))
 	}
 
 	return nil

@@ -111,6 +111,9 @@ type AdHocFilteringOption struct {
 // attributes can be defined.
 type AggregationFunction struct {
 
+	// Aggregation for attributes.
+	AttributeAggregationFunction *AttributeAggregationFunction
+
 	// Aggregation for categorical values.
 	//   - COUNT : Aggregate by the total number of values, including duplicates.
 	//   - DISTINCT_COUNT : Aggregate by the total number of distinct values.
@@ -439,6 +442,20 @@ type AnonymousUserQSearchBarEmbeddingConfiguration struct {
 	//
 	// This member is required.
 	InitialTopicId *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the file groups that are requested for the artifact
+// generation in a StartDashboardSnapshotJob API call.
+type AnonymousUserSnapshotJobResult struct {
+
+	// A list of SnapshotJobResultFileGroup objects that contain information on the
+	// files that are requested during a StartDashboardSnapshotJob API call. If the
+	// job succeeds, these objects contain the location where the snapshot artifacts
+	// are stored. If the job fails, the objects contain information about the error
+	// that caused the job to fail.
+	FileGroups []SnapshotJobResultFileGroup
 
 	noSmithyDocumentSerde
 }
@@ -1007,6 +1024,22 @@ type AthenaParameters struct {
 
 	// The workgroup that Amazon Athena uses.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
+}
+
+// Aggregation for attributes.
+type AttributeAggregationFunction struct {
+
+	// The built-in aggregation functions for attributes.
+	//   - UNIQUE_VALUE : Returns the unique value for a field, aggregated by the
+	//   dimension fields.
+	SimpleAttributeAggregation SimpleAttributeAggregationFunction
+
+	// Used by the UNIQUE_VALUE aggregation function. If there are multiple values for
+	// the field used by the aggregation, the value for this property will be returned
+	// instead. Defaults to '*'.
+	ValueForMultipleValues *string
 
 	noSmithyDocumentSerde
 }
@@ -4190,6 +4223,9 @@ type DateTimePickerControlDisplayOptions struct {
 	// Customize how dates are formatted in controls.
 	DateTimeFormat *string
 
+	// The configuration of info icon label options.
+	InfoIconLabelOptions *SheetControlInfoIconLabelOptions
+
 	// The options to configure the title visibility, name, and font size.
 	TitleOptions *LabelOptions
 
@@ -4550,6 +4586,9 @@ type DrillDownFilter struct {
 
 // The display options of a control.
 type DropDownControlDisplayOptions struct {
+
+	// The configuration of info icon label options.
+	InfoIconLabelOptions *SheetControlInfoIconLabelOptions
 
 	// The configuration of the Select all options in a dropdown control.
 	SelectAllOptions *ListControlSelectAllOptions
@@ -7368,6 +7407,9 @@ type LinkSharingConfiguration struct {
 // The display options of a control.
 type ListControlDisplayOptions struct {
 
+	// The configuration of info icon label options.
+	InfoIconLabelOptions *SheetControlInfoIconLabelOptions
+
 	// The configuration of the search options in a list control.
 	SearchOptions *ListControlSearchOptions
 
@@ -9835,6 +9877,9 @@ type RelativeDateTimeControlDisplayOptions struct {
 	// Customize how dates are formatted in controls.
 	DateTimeFormat *string
 
+	// The configuration of info icon label options.
+	InfoIconLabelOptions *SheetControlInfoIconLabelOptions
+
 	// The options to configure the title visibility, name, and font size.
 	TitleOptions *LabelOptions
 
@@ -9999,6 +10044,31 @@ type RowLevelPermissionTagRule struct {
 	// A string that you want to use to delimit the values when you pass the values at
 	// run time. For example, you can delimit the values with a comma.
 	TagMultiValueDelimiter *string
+
+	noSmithyDocumentSerde
+}
+
+// An optional structure that contains the Amazon S3 bucket configuration that the
+// generated snapshots are stored in. If you don't provide this information,
+// generated snapshots are stored in the default Amazon QuickSight bucket.
+type S3BucketConfiguration struct {
+
+	// The name of an existing Amazon S3 bucket where the generated snapshot artifacts
+	// are sent.
+	//
+	// This member is required.
+	BucketName *string
+
+	// The prefix of the Amazon S3 bucket that the generated snapshots are stored in.
+	//
+	// This member is required.
+	BucketPrefix *string
+
+	// The region that the Amazon S3 bucket is located in. The bucket must be located
+	// in the same region that the StartDashboardSnapshotJob API call is made.
+	//
+	// This member is required.
+	BucketRegion *string
 
 	noSmithyDocumentSerde
 }
@@ -10539,6 +10609,18 @@ type Sheet struct {
 	noSmithyDocumentSerde
 }
 
+// A control to display info icons for filters and parameters.
+type SheetControlInfoIconLabelOptions struct {
+
+	// The text content of info icon.
+	InfoIconText *string
+
+	// The visibility configuration of info icon label options.
+	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
 // A grid layout to define the placement of sheet control.
 type SheetControlLayout struct {
 
@@ -10756,6 +10838,9 @@ type SimpleClusterMarker struct {
 // The display options of a control.
 type SliderControlDisplayOptions struct {
 
+	// The configuration of info icon label options.
+	InfoIconLabelOptions *SheetControlInfoIconLabelOptions
+
 	// The options to configure the title visibility, name, and font size.
 	TitleOptions *LabelOptions
 
@@ -10799,6 +10884,226 @@ type SmallMultiplesOptions struct {
 
 	// The properties of a small multiples Y axis.
 	YAxis *SmallMultiplesAxisProperties
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information on the anonymous user configuration.
+type SnapshotAnonymousUser struct {
+
+	// The tags to be used for row-level security (RLS). Make sure that the relevant
+	// datasets have RLS tags configured before you start a snapshot export job. You
+	// can configure the RLS tags of a dataset with a
+	// DataSet$RowLevelPermissionTagConfiguration API call. These are not the tags that
+	// are used for Amazon Web Services resource tagging. For more information on row
+	// level security in Amazon QuickSight, see Using Row-Level Security (RLS) with
+	// Tags (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html)
+	// in the Amazon QuickSight User Guide.
+	RowLevelPermissionTags []SessionTag
+
+	noSmithyDocumentSerde
+}
+
+// Use this structure to redact sensitive information that you provide about an
+// anonymous user from the snapshot.
+type SnapshotAnonymousUserRedacted struct {
+
+	// The tag keys for the RowLevelPermissionTags .
+	RowLevelPermissionTagKeys []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration of the dashboard snapshot.
+type SnapshotConfiguration struct {
+
+	// A list of SnapshotJobResultFileGroup objects that contain information about the
+	// snapshot that is generated. This list can hold a maximum of 6 FileGroup
+	// configurations.
+	//
+	// This member is required.
+	FileGroups []SnapshotFileGroup
+
+	// A structure that contains information on the Amazon S3 bucket that the
+	// generated snapshot is stored in.
+	DestinationConfiguration *SnapshotDestinationConfiguration
+
+	// A list of Amazon QuickSight parameters and the list's override values.
+	Parameters *Parameters
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information on the Amazon S3 destinations of the
+// generated snapshot.
+type SnapshotDestinationConfiguration struct {
+
+	// A list of SnapshotS3DestinationConfiguration objects that contain Amazon S3
+	// destination configurations. This structure can hold a maximum of 1
+	// S3DestinationConfiguration .
+	S3Destinations []SnapshotS3DestinationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the information for the snapshot that you want to
+// generate. This information is provided by you when you start a new snapshot job.
+type SnapshotFile struct {
+
+	// The format of the snapshot file to be generated. You can choose between CSV and
+	// PDF .
+	//
+	// This member is required.
+	FormatType SnapshotFileFormatType
+
+	// A list of SnapshotFileSheetSelection objects that contain information on the
+	// dashboard sheet that is exported. These objects provide information about the
+	// snapshot artifacts that are generated during the job. This structure can hold a
+	// maximum of 5 CSV configurations or 1 configuration for PDF.
+	//
+	// This member is required.
+	SheetSelections []SnapshotFileSheetSelection
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the information on the snapshot files.
+type SnapshotFileGroup struct {
+
+	// A list of SnapshotFile objects that contain the information on the snapshot
+	// files that need to be generated. This structure can hold 1 configuration at a
+	// time.
+	Files []SnapshotFile
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information that identifies the snapshot that needs
+// to be generated.
+type SnapshotFileSheetSelection struct {
+
+	// The selection scope of the visuals on a sheet of a dashboard that you are
+	// generating a snapthot of. You can choose one of the following options.
+	//   - ALL_VISUALS - Selects all visuals that are on the sheet. This value is
+	//   required if the snapshot is a PDF.
+	//   - SELECTED_VISUALS - Select the visual that you want to add to the snapshot.
+	//   This value is required if the snapshot is a CSV.
+	//
+	// This member is required.
+	SelectionScope SnapshotFileSheetSelectionScope
+
+	// The sheet ID of the dashboard to generate the snapshot artifact from. This
+	// value is required for CSV or PDF format types.
+	//
+	// This member is required.
+	SheetId *string
+
+	// A structure that lists the IDs of the visuals in the selected sheet. Supported
+	// visual types are table, pivot table visuals. This value is required if you are
+	// generating a CSV. This value supports a maximum of 1 visual ID.
+	VisualIds []string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the error that caused the snapshot job
+// to fail.
+type SnapshotJobErrorInfo struct {
+
+	// The error message.
+	ErrorMessage *string
+
+	// The error type.
+	ErrorType *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that provides information on the result of a snapshot job. This
+// object provides information about the job, the job status, and the location of
+// the generated file.
+type SnapshotJobResult struct {
+
+	// A list of AnonymousUserSnapshotJobResult objects that contain information on
+	// anonymous users and their user configurations. This data provided by you when
+	// you make a StartDashboardSnapshotJob API call.
+	AnonymousUsers []AnonymousUserSnapshotJobResult
+
+	noSmithyDocumentSerde
+}
+
+// Information on the error that caused the snapshot job to fail.
+type SnapshotJobResultErrorInfo struct {
+
+	// The error message.
+	ErrorMessage *string
+
+	// The error type.
+	ErrorType *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information on the generated snapshot file groups.
+type SnapshotJobResultFileGroup struct {
+
+	// A list of SnapshotFile objects.
+	Files []SnapshotFile
+
+	// A list of SnapshotJobS3Result objects.
+	S3Results []SnapshotJobS3Result
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 result from the snapshot job. The result includes the
+// DestinationConfiguration and the Amazon S3 Uri. If an error occured during the
+// job, the result returns information on the error.
+type SnapshotJobS3Result struct {
+
+	// An array of error records that describe any failures that occur while the
+	// dashboard snapshot job runs.
+	ErrorInfo []SnapshotJobResultErrorInfo
+
+	// A list of Amazon S3 bucket configurations that are provided when you make a
+	// StartDashboardSnapshotJob API call.
+	S3DestinationConfiguration *SnapshotS3DestinationConfiguration
+
+	// The Amazon S3 Uri.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes the Amazon S3 settings to use to save the generated
+// dashboard snapshot.
+type SnapshotS3DestinationConfiguration struct {
+
+	// A structure that contains details about the Amazon S3 bucket that the generated
+	// dashboard snapshot is saved in.
+	BucketConfiguration *S3BucketConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about the users that the dashboard
+// snapshot is generated for.
+type SnapshotUserConfiguration struct {
+
+	// An array of records that describe the anonymous users that the dashboard
+	// snapshot is generated for.
+	AnonymousUsers []SnapshotAnonymousUser
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about the users that the dashboard
+// snapshot is generated for. Sensitive user information is excluded.
+type SnapshotUserConfigurationRedacted struct {
+
+	// An array of records that describe anonymous users that the dashboard snapshot
+	// is generated for. Sensitive user information is excluded.
+	AnonymousUsers []SnapshotAnonymousUserRedacted
 
 	noSmithyDocumentSerde
 }
@@ -11715,6 +12020,9 @@ type TeradataParameters struct {
 // The display options of a control.
 type TextAreaControlDisplayOptions struct {
 
+	// The configuration of info icon label options.
+	InfoIconLabelOptions *SheetControlInfoIconLabelOptions
+
 	// The configuration of the placeholder options in a text area control.
 	PlaceholderOptions *TextControlPlaceholderOptions
 
@@ -11750,6 +12058,9 @@ type TextControlPlaceholderOptions struct {
 
 // The display options of a control.
 type TextFieldControlDisplayOptions struct {
+
+	// The configuration of info icon label options.
+	InfoIconLabelOptions *SheetControlInfoIconLabelOptions
 
 	// The configuration of the placeholder options in a text field control.
 	PlaceholderOptions *TextControlPlaceholderOptions

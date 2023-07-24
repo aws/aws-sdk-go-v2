@@ -1,0 +1,8 @@
+{
+    "id": "c48a0ba6-10af-4e0c-aca5-2f7ef64f3284",
+    "type": "feature",
+    "description": "This release supports filtering by DRIFT_STATUS for existing API ListStackInstances and adds support for a new API ListStackInstanceResourceDrifts. Customers can now view resource drift information from their StackSet management accounts.",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

@@ -57,13 +57,13 @@ type GetCostCategoriesInput struct {
 	//   GetRightsizingRecommendation , the Region is a full name (for example,
 	//   REGION==US East (N. Virginia) .
 	//   - The corresponding Expression for this example is as follows: {
-	//   "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }
+	//   "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] } }
 	//   - As shown in the previous example, lists of dimension values are combined
 	//   with OR when applying the filter.
 	//   - You can also set different match options to further control how the filter
 	//   behaves. Not all APIs support match options. Refer to the documentation for each
 	//   specific API to see what is supported.
-	//   - For example, you can filter for linked account names that start with “a”.
+	//   - For example, you can filter for linked account names that start with "a".
 	//   - The corresponding Expression for this example is as follows: {
 	//   "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [ "STARTS_WITH" ],
 	//   "Values": [ "a" ] } }

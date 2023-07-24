@@ -114,13 +114,13 @@ type AnomalyMonitor struct {
 	//   GetRightsizingRecommendation , the Region is a full name (for example,
 	//   REGION==US East (N. Virginia) .
 	//   - The corresponding Expression for this example is as follows: {
-	//   "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }
+	//   "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] } }
 	//   - As shown in the previous example, lists of dimension values are combined
 	//   with OR when applying the filter.
 	//   - You can also set different match options to further control how the filter
 	//   behaves. Not all APIs support match options. Refer to the documentation for each
 	//   specific API to see what is supported.
-	//   - For example, you can filter for linked account names that start with “a”.
+	//   - For example, you can filter for linked account names that start with "a".
 	//   - The corresponding Expression for this example is as follows: {
 	//   "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [ "STARTS_WITH" ],
 	//   "Values": [ "a" ] } }
@@ -168,13 +168,24 @@ type AnomalyScore struct {
 	noSmithyDocumentSerde
 }
 
-// The association between a monitor, threshold, and list of subscribers used to
-// deliver notifications about anomalies detected by a monitor that exceeds a
-// threshold. The content consists of the detailed metadata and the current status
-// of the AnomalySubscription object.
+// An AnomalySubscription resource (also referred to as an alert subscription)
+// sends notifications about specific anomalies that meet an alerting criteria
+// defined by you. You can specify the frequency of the alerts and the subscribers
+// to notify. Anomaly subscriptions can be associated with one or more
+// AnomalyMonitor (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html)
+// resources, and they only send notifications about anomalies detected by those
+// associated monitors. You can also configure a threshold to further control which
+// anomalies are included in the notifications. Anomalies that don’t exceed the
+// chosen threshold and therefore don’t trigger notifications from an anomaly
+// subscription will still be available on the console and from the GetAnomalies (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetAnomalies.html)
+// API.
 type AnomalySubscription struct {
 
-	// The frequency that anomaly reports are sent over email.
+	// The frequency that anomaly notifications are sent. Notifications are sent
+	// either over email (for DAILY and WEEKLY frequencies) or SNS (for IMMEDIATE
+	// frequency). For more information, see Creating an Amazon SNS topic for anomaly
+	// notifications (https://docs.aws.amazon.com/cost-management/latest/userguide/ad-SNS.html)
+	// .
 	//
 	// This member is required.
 	Frequency AnomalySubscriptionFrequency
@@ -200,11 +211,13 @@ type AnomalySubscription struct {
 	// The AnomalySubscription Amazon Resource Name (ARN).
 	SubscriptionArn *string
 
-	// (deprecated) The dollar value that triggers a notification if the threshold is
-	// exceeded. This field has been deprecated. To specify a threshold, use
-	// ThresholdExpression. Continued use of Threshold will be treated as shorthand
-	// syntax for a ThresholdExpression. One of Threshold or ThresholdExpression is
-	// required for this resource.
+	// (deprecated) An absolute dollar value that must be exceeded by the anomaly's
+	// total impact (see Impact (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html)
+	// for more details) for an anomaly notification to be generated. This field has
+	// been deprecated. To specify a threshold, use ThresholdExpression. Continued use
+	// of Threshold will be treated as shorthand syntax for a ThresholdExpression. One
+	// of Threshold or ThresholdExpression is required for this resource. You cannot
+	// specify both.
 	//
 	// Deprecated: Threshold has been deprecated in favor of ThresholdExpression
 	Threshold *float64
@@ -212,11 +225,14 @@ type AnomalySubscription struct {
 	// An Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object used to specify the anomalies that you want to generate alerts for. This
 	// supports dimensions and nested expressions. The supported dimensions are
-	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE . The
-	// supported nested expression types are AND and OR . The match option
-	// GREATER_THAN_OR_EQUAL is required. Values must be numbers between 0 and
-	// 10,000,000,000. One of Threshold or ThresholdExpression is required for this
-	// resource. The following are examples of valid ThresholdExpressions:
+	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE ,
+	// corresponding to an anomaly’s TotalImpact and TotalImpactPercentage,
+	// respectively (see Impact (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html)
+	// for more details). The supported nested expression types are AND and OR . The
+	// match option GREATER_THAN_OR_EQUAL is required. Values must be numbers between
+	// 0 and 10,000,000,000 in string format. One of Threshold or ThresholdExpression
+	// is required for this resource. You cannot specify both. The following are
+	// examples of valid ThresholdExpressions:
 	//   - Absolute threshold: { "Dimensions": { "Key":
 	//   "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
 	//   "Values": [ "100" ] } }
@@ -407,12 +423,11 @@ type CostCategoryRule struct {
 	// An Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object used to categorize costs. This supports dimensions, tags, and nested
 	// expressions. Currently the only dimensions supported are LINKED_ACCOUNT ,
-	// SERVICE_CODE , RECORD_TYPE , and LINKED_ACCOUNT_NAME . Root level OR isn't
-	// supported. We recommend that you create a separate rule instead. RECORD_TYPE is
-	// a dimension used for Cost Explorer APIs, and is also supported for Cost Category
-	// expressions. This dimension uses different terms, depending on whether you're
-	// using the console or API/JSON editor. For a detailed comparison, see Term
-	// Comparisons (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms)
+	// SERVICE_CODE , RECORD_TYPE , LINKED_ACCOUNT_NAME , REGION , and USAGE_TYPE .
+	// RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported
+	// for Cost Category expressions. This dimension uses different terms, depending on
+	// whether you're using the console or API/JSON editor. For a detailed comparison,
+	// see Term Comparisons (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms)
 	// in the Billing and Cost Management User Guide.
 	Rule *Expression
 
@@ -898,13 +913,13 @@ type ESInstanceDetails struct {
 //     GetRightsizingRecommendation , the Region is a full name (for example,
 //     REGION==US East (N. Virginia) .
 //   - The corresponding Expression for this example is as follows: {
-//     "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }
+//     "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] } }
 //   - As shown in the previous example, lists of dimension values are combined
 //     with OR when applying the filter.
 //   - You can also set different match options to further control how the filter
 //     behaves. Not all APIs support match options. Refer to the documentation for each
 //     specific API to see what is supported.
-//   - For example, you can filter for linked account names that start with “a”.
+//   - For example, you can filter for linked account names that start with "a".
 //   - The corresponding Expression for this example is as follows: {
 //     "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [ "STARTS_WITH" ],
 //     "Values": [ "a" ] } }
@@ -1146,6 +1161,140 @@ type RDSInstanceDetails struct {
 
 	// Determines whether the recommended reservation is size flexible.
 	SizeFlexEligible bool
+
+	noSmithyDocumentSerde
+}
+
+// The details and metrics for the given recommendation.
+type RecommendationDetailData struct {
+
+	// The AccountID that the recommendation is generated for.
+	AccountId *string
+
+	// The account scope that you want your recommendations for. Amazon Web Services
+	// calculates recommendations including the management account and member accounts
+	// if the value is set to PAYER. If the value is LINKED, recommendations are
+	// calculated for individual member accounts only.
+	AccountScope AccountScope
+
+	// The currency code that Amazon Web Services used to generate the recommendation
+	// and present potential savings.
+	CurrencyCode *string
+
+	// The average value of hourly coverage over the lookback period.
+	CurrentAverageCoverage *string
+
+	// The average value of hourly On-Demand spend over the lookback period of the
+	// applicable usage type.
+	CurrentAverageHourlyOnDemandSpend *string
+
+	// The highest value of hourly On-Demand spend over the lookback period of the
+	// applicable usage type.
+	CurrentMaximumHourlyOnDemandSpend *string
+
+	// The lowest value of hourly On-Demand spend over the lookback period of the
+	// applicable usage type.
+	CurrentMinimumHourlyOnDemandSpend *string
+
+	// The estimated coverage of the recommended Savings Plan.
+	EstimatedAverageCoverage *string
+
+	// The estimated utilization of the recommended Savings Plan.
+	EstimatedAverageUtilization *string
+
+	// The estimated monthly savings amount based on the recommended Savings Plan.
+	EstimatedMonthlySavingsAmount *string
+
+	// The remaining On-Demand cost estimated to not be covered by the recommended
+	// Savings Plan, over the length of the lookback period.
+	EstimatedOnDemandCost *string
+
+	// The estimated On-Demand costs you expect with no additional commitment, based
+	// on your usage of the selected time period and the Savings Plan you own.
+	EstimatedOnDemandCostWithCurrentCommitment *string
+
+	// The estimated return on investment that's based on the recommended Savings Plan
+	// that you purchased. This is calculated as
+	// estimatedSavingsAmount/estimatedSPCost*100.
+	EstimatedROI *string
+
+	// The cost of the recommended Savings Plan over the length of the lookback period.
+	EstimatedSPCost *string
+
+	// The estimated savings amount that's based on the recommended Savings Plan over
+	// the length of the lookback period.
+	EstimatedSavingsAmount *string
+
+	// The estimated savings percentage relative to the total cost of applicable
+	// On-Demand usage over the lookback period.
+	EstimatedSavingsPercentage *string
+
+	// The existing hourly commitment for the Savings Plan type.
+	ExistingHourlyCommitment *string
+
+	// The period of time that you want the usage and costs for.
+	GenerationTimestamp *string
+
+	// The recommended hourly commitment level for the Savings Plan type and the
+	// configuration that's based on the usage during the lookback period.
+	HourlyCommitmentToPurchase *string
+
+	// The instance family of the recommended Savings Plan.
+	InstanceFamily *string
+
+	// The period of time that you want the usage and costs for.
+	LatestUsageTimestamp *string
+
+	// How many days of previous usage that Amazon Web Services considers when making
+	// this recommendation.
+	LookbackPeriodInDays LookbackPeriodInDays
+
+	// The related hourly cost, coverage, and utilization metrics over the lookback
+	// period.
+	MetricsOverLookbackPeriod []RecommendationDetailHourlyMetrics
+
+	// The unique ID that's used to distinguish Savings Plans from one another.
+	OfferingId *string
+
+	// The payment option for the commitment (for example, All Upfront or No Upfront).
+	PaymentOption PaymentOption
+
+	// The region the recommendation is generated for.
+	Region *string
+
+	// The requested Savings Plan recommendation type.
+	SavingsPlansType SupportedSavingsPlansType
+
+	// The term of the commitment in years.
+	TermInYears TermInYears
+
+	// The upfront cost of the recommended Savings Plan, based on the selected payment
+	// option.
+	UpfrontCost *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the hourly metrics for the given recommendation over the lookback
+// period.
+type RecommendationDetailHourlyMetrics struct {
+
+	// The current amount of Savings Plans eligible usage that the Savings Plan
+	// covered.
+	CurrentCoverage *string
+
+	// The estimated coverage amount based on the recommended Savings Plan.
+	EstimatedCoverage *string
+
+	// The estimated utilization for the recommended Savings Plan.
+	EstimatedNewCommitmentUtilization *string
+
+	// The remaining On-Demand cost estimated to not be covered by the recommended
+	// Savings Plan, over the length of the lookback period.
+	EstimatedOnDemandCost *string
+
+	// The period of time that you want the usage and costs for.
+	StartTime *string
 
 	noSmithyDocumentSerde
 }
@@ -1745,6 +1894,9 @@ type SavingsPlansPurchaseRecommendationDetail struct {
 	// The recommended hourly commitment level for the Savings Plans type and the
 	// configuration that's based on the usage during the lookback period.
 	HourlyCommitmentToPurchase *string
+
+	// Contains detailed information about a specific Savings Plan recommendation.
+	RecommendationDetailId *string
 
 	// Details for your recommended Savings Plans.
 	SavingsPlansDetails *SavingsPlansDetails

@@ -7,6 +7,15 @@ import (
 	"time"
 )
 
+// Defines the configuration for an ActiveSpeakerOnly video tile.
+type ActiveSpeakerOnlyConfiguration struct {
+
+	// The position of the ActiveSpeakerOnly video tile.
+	ActiveSpeakerPosition ActiveSpeakerPosition
+
+	noSmithyDocumentSerde
+}
+
 // A structure that contains the configuration settings for an Amazon Transcribe
 // call analytics processor.
 type AmazonTranscribeCallAnalyticsProcessorConfiguration struct {
@@ -110,15 +119,6 @@ type AmazonTranscribeCallAnalyticsProcessorConfiguration struct {
 // processor.
 type AmazonTranscribeProcessorConfiguration struct {
 
-	// The language code that represents the language spoken in your audio. If you're
-	// unsure of the language spoken in your audio, consider using IdentifyLanguage to
-	// enable automatic language identification. For a list of languages that real-time
-	// Call Analytics supports, see the Supported languages table (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-	// in the Amazon Transcribe Developer Guide.
-	//
-	// This member is required.
-	LanguageCode CallAnalyticsLanguageCode
-
 	// Labels all personally identifiable information (PII) identified in your
 	// transcript. Content identification is performed at the segment level; PII
 	// specified in PiiEntityTypes is flagged upon complete transcription of an audio
@@ -148,6 +148,16 @@ type AmazonTranscribeProcessorConfiguration struct {
 	// target.
 	FilterPartialResults bool
 
+	// Turns language identification on or off.
+	IdentifyLanguage bool
+
+	// The language code that represents the language spoken in your audio. If you're
+	// unsure of the language spoken in your audio, consider using IdentifyLanguage to
+	// enable automatic language identification. For a list of languages that real-time
+	// Call Analytics supports, see the Supported languages table (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// in the Amazon Transcribe Developer Guide.
+	LanguageCode CallAnalyticsLanguageCode
+
 	// The name of the custom language model that you want to use when processing your
 	// transcription. Note that language model names are case sensitive. The language
 	// of the specified language model must match the language code you specify in your
@@ -156,6 +166,10 @@ type AmazonTranscribeProcessorConfiguration struct {
 	// mismatch. For more information, see Custom language models (https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html)
 	// in the Amazon Transcribe Developer Guide.
 	LanguageModelName *string
+
+	// The language options for the transcription, such as automatic language
+	// detection.
+	LanguageOptions *string
 
 	// The level of stability to use when you enable partial results stabilization (
 	// EnablePartialResultsStabilization ). Low stability provides the highest
@@ -174,6 +188,9 @@ type AmazonTranscribeProcessorConfiguration struct {
 	// the default behavior is equivalent to ALL .
 	PiiEntityTypes *string
 
+	// The preferred language for the transcription.
+	PreferredLanguage CallAnalyticsLanguageCode
+
 	// Enables speaker partitioning (diarization) in your transcription output.
 	// Speaker partitioning labels the speech from individual speakers in your media
 	// file. For more information, see Partitioning speakers (diarization) (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html)
@@ -188,9 +205,15 @@ type AmazonTranscribeProcessorConfiguration struct {
 	// 200.
 	VocabularyFilterName *string
 
+	// The names of the custom vocabulary filter or filters using during transcription.
+	VocabularyFilterNames *string
+
 	// The name of the custom vocabulary that you specified in your Call Analytics
 	// request. Length Constraints: Minimum length of 1. Maximum length of 200.
 	VocabularyName *string
+
+	// The names of the custom vocabulary or vocabularies used during transcription.
+	VocabularyNames *string
 
 	noSmithyDocumentSerde
 }
@@ -478,8 +501,41 @@ type GridViewConfiguration struct {
 	// This member is required.
 	ContentShareLayout ContentShareLayoutOption
 
+	// The configuration settings for an ActiveSpeakerOnly video tile.
+	ActiveSpeakerOnlyConfiguration *ActiveSpeakerOnlyConfiguration
+
+	// The orientation setting, horizontal or vertical.
+	CanvasOrientation CanvasOrientation
+
+	// The configuration settings for a horizontal layout.
+	HorizontalLayoutConfiguration *HorizontalLayoutConfiguration
+
 	// Defines the configuration options for a presenter only video tile.
 	PresenterOnlyConfiguration *PresenterOnlyConfiguration
+
+	// The configuration settings for a vertical layout.
+	VerticalLayoutConfiguration *VerticalLayoutConfiguration
+
+	// The attribute settings for the video tiles.
+	VideoAttribute *VideoAttribute
+
+	noSmithyDocumentSerde
+}
+
+// Defines the configuration settings for the horizontal layout.
+type HorizontalLayoutConfiguration struct {
+
+	// Sets the aspect ratio of the video tiles, such as 16:9.
+	TileAspectRatio *string
+
+	// The maximum number of video tiles to display.
+	TileCount *int32
+
+	// Sets the automatic ordering of the video tiles.
+	TileOrder TileOrder
+
+	// Sets the position of horizontal tiles.
+	TilePosition HorizontalTilePosition
 
 	noSmithyDocumentSerde
 }
@@ -1186,6 +1242,24 @@ type TranscriptionMessagesConcatenationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the configuration settings for a vertial layout.
+type VerticalLayoutConfiguration struct {
+
+	// Sets the aspect ratio of the video tiles, such as 16:9.
+	TileAspectRatio *string
+
+	// The maximum number of tiles to display.
+	TileCount *int32
+
+	// Sets the automatic ordering of the video tiles.
+	TileOrder TileOrder
+
+	// Sets the position of vertical tiles.
+	TilePosition VerticalTilePosition
+
+	noSmithyDocumentSerde
+}
+
 // The video artifact configuration object.
 type VideoArtifactsConfiguration struct {
 
@@ -1196,6 +1270,24 @@ type VideoArtifactsConfiguration struct {
 
 	// The MUX type of the video artifact configuration object.
 	MuxType VideoMuxType
+
+	noSmithyDocumentSerde
+}
+
+// Defines the settings for a video tile.
+type VideoAttribute struct {
+
+	// Defines the border color of all video tiles.
+	BorderColor BorderColor
+
+	// Defines the border thickness for all video tiles.
+	BorderThickness *int32
+
+	// Sets the corner radius of all video tiles.
+	CornerRadius *int32
+
+	// Defines the highlight color for the active video tile.
+	HighlightColor HighlightColor
 
 	noSmithyDocumentSerde
 }

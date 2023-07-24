@@ -939,6 +939,9 @@ type CodeGenConfigurationNode struct {
 	// Specifies a target that uses Postgres SQL.
 	PostgreSQLCatalogTarget *PostgreSQLCatalogTarget
 
+	// Specifies a Glue DataBrew recipe node.
+	Recipe *Recipe
+
 	// Specifies an Amazon Redshift data store.
 	RedshiftSource *RedshiftSource
 
@@ -5501,6 +5504,43 @@ type PropertyPredicate struct {
 
 	// The value of the property.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A Glue Studio node that uses a Glue DataBrew recipe in Glue jobs.
+type Recipe struct {
+
+	// The nodes that are inputs to the recipe node, identified by id.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the Glue Studio node.
+	//
+	// This member is required.
+	Name *string
+
+	// A reference to the DataBrew recipe used by the node.
+	//
+	// This member is required.
+	RecipeReference *RecipeReference
+
+	noSmithyDocumentSerde
+}
+
+// A reference to a Glue DataBrew recipe.
+type RecipeReference struct {
+
+	// The ARN of the DataBrew recipe.
+	//
+	// This member is required.
+	RecipeArn *string
+
+	// The RecipeVersion of the DataBrew recipe.
+	//
+	// This member is required.
+	RecipeVersion *string
 
 	noSmithyDocumentSerde
 }

@@ -49,7 +49,8 @@ type CreateMediaInsightsPipelineInput struct {
 	// map of strings.
 	MediaInsightsRuntimeMetadata map[string]string
 
-	// The runtime configuration for the S3 recording sink.
+	// The runtime configuration for the S3 recording sink. If specified, the settings
+	// in this structure override any settings in S3RecordingSinkConfiguration .
 	S3RecordingSinkRuntimeConfiguration *types.S3RecordingSinkRuntimeConfiguration
 
 	// The tags assigned to the media insights pipeline.

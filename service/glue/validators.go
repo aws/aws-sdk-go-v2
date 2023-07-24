@@ -4861,6 +4861,11 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("EvaluateDataQualityMultiFrame", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Recipe != nil {
+		if err := validateRecipe(v.Recipe); err != nil {
+			invalidParams.AddNested("Recipe", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6622,6 +6627,49 @@ func validatePostgreSQLCatalogTarget(v *types.PostgreSQLCatalogTarget) error {
 	}
 	if v.Table == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecipe(v *types.Recipe) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Recipe"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.RecipeReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecipeReference"))
+	} else if v.RecipeReference != nil {
+		if err := validateRecipeReference(v.RecipeReference); err != nil {
+			invalidParams.AddNested("RecipeReference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecipeReference(v *types.RecipeReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecipeReference"}
+	if v.RecipeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecipeArn"))
+	}
+	if v.RecipeVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecipeVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

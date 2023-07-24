@@ -12399,6 +12399,13 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 		}
 	}
 
+	if v.Recipe != nil {
+		ok := object.Key("Recipe")
+		if err := awsAwsjson11_serializeDocumentRecipe(v.Recipe, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RedshiftSource != nil {
 		ok := object.Key("RedshiftSource")
 		if err := awsAwsjson11_serializeDocumentRedshiftSource(v.RedshiftSource, ok); err != nil {
@@ -16797,6 +16804,49 @@ func awsAwsjson11_serializeDocumentPublicKeysList(v []string, value smithyjson.V
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecipe(v *types.Recipe, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Inputs != nil {
+		ok := object.Key("Inputs")
+		if err := awsAwsjson11_serializeDocumentOneInput(v.Inputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.RecipeReference != nil {
+		ok := object.Key("RecipeReference")
+		if err := awsAwsjson11_serializeDocumentRecipeReference(v.RecipeReference, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecipeReference(v *types.RecipeReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RecipeArn != nil {
+		ok := object.Key("RecipeArn")
+		ok.String(*v.RecipeArn)
+	}
+
+	if v.RecipeVersion != nil {
+		ok := object.Key("RecipeVersion")
+		ok.String(*v.RecipeVersion)
+	}
+
 	return nil
 }
 

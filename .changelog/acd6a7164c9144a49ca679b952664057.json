@@ -1,0 +1,8 @@
+{
+    "id": "acd6a716-4c91-44a4-9ca6-79b952664057",
+    "type": "feature",
+    "description": "This release introduces the new API 'GetSavingsPlanPurchaseRecommendationDetails', which retrieves the details for a Savings Plan recommendation. It also updates the existing API 'GetSavingsPlansPurchaseRecommendation' to include the recommendation detail ID.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}
