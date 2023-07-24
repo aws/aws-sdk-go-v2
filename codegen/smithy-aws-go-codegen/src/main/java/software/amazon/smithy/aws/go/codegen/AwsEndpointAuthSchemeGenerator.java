@@ -194,17 +194,20 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
             if (serviceId.equalsIgnoreCase("S3")) {
                 writer.write(
                     """
-                    ctx = $T(ctx, v4aScheme.Name)
+                    ctx = $T(ctx, $T)
                     """,
-                    SymbolUtils.createValueSymbolBuilder("SetSignerVersion", AwsCustomGoDependency.S3_CUSTOMIZATION).build()
+                    SymbolUtils.createValueSymbolBuilder("SetSignerVersion", AwsCustomGoDependency.S3_CUSTOMIZATION).build(),
+                    SymbolUtils.createValueSymbolBuilder("Version", AwsGoDependency.INTERNAL_SIGV4A).build()
                 );
             } else if (serviceId.equalsIgnoreCase("EventBridge")) {
                 writer.write(
                     """
-                    ctx = $T(ctx, v4aScheme.Name)
+                    ctx = $T(ctx, $T)
                     """,
-                    SymbolUtils.createValueSymbolBuilder("SetSignerVersion", AwsCustomGoDependency.EVENTBRIDGE_CUSTOMIZATION).build()
-                );            } else {
+                    SymbolUtils.createValueSymbolBuilder("SetSignerVersion", AwsCustomGoDependency.EVENTBRIDGE_CUSTOMIZATION).build(),
+                    SymbolUtils.createValueSymbolBuilder("Version", AwsGoDependency.INTERNAL_SIGV4A).build()
+                );
+            } else {
                 writer.write("");
             }
         };
