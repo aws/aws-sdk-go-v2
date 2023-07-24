@@ -1310,13 +1310,8 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 			options: s3.Options{
 				Region: "ap-north-1",
 			},
-			bucket:         "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com.cn/",
-			expectedHeader: map[string]string{
-				v4a.AmzRegionSetKey: "*",
-			},
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "*",
+			bucket:      "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedErr: "Client was configured for partition `aws` but bucket referred to partition `aws-cn`",
 		},
 		"region as us-west-2 with mrap disabled": {
 			options: s3.Options{
@@ -1443,10 +1438,8 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				Region:                         "us-west-2",
 				DisableMultiRegionAccessPoints: false,
 			},
-			bucket:                "arn:aws:s3:us-west-2:123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedReqURL:        "https://mfzwi23gnjvgw.mrap-123456789012.s3-accesspoint.us-west-2.amazonaws.com/",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
+			bucket:      "arn:aws:s3:us-west-2:123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedErr: "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`",
 		},
 	}
 
