@@ -3,4 +3,4 @@
 package lakeformation
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.21.7"
+const goModuleVersion = "1.22.0"
