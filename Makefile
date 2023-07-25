@@ -81,6 +81,10 @@ generate: smithy-generate update-requires gen-repo-mod-replace update-module-met
 gen-config-asserts gen-internal-codegen copy-attributevalue-feature gen-mod-dropreplace-smithy-. min-go-version-. \
 tidy-modules-. add-module-license-files gen-aws-ptrs format
 
+generate-tmpreplace-smithy: smithy-generate update-requires gen-repo-mod-replace update-module-metadata smithy-annotate-stable \
+gen-config-asserts gen-internal-codegen copy-attributevalue-feature gen-mod-replace-smithy-. min-go-version-. \
+tidy-modules-. add-module-license-files gen-aws-ptrs format gen-mod-dropreplace-smithy-.
+
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
 
