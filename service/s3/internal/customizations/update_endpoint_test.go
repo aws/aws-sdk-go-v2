@@ -965,7 +965,7 @@ func TestVPC_CustomEndpoint(t *testing.T) {
 				}),
 				Region: "us-west-2",
 			},
-			expectedReqURL:        "https://bucketname.s3.us-west-2.amazonaws.com/g",
+			expectedReqURL:        "https://bucketname.s3.us-west-2.amazonaws.com/",
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "us-west-2",
 		},
