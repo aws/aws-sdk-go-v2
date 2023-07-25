@@ -151,7 +151,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the details for a connector object. The connector object is used for AS2 outbound\n      processes, to connect the Transfer Family customer with the trading partner.</p>"
+                "smithy.api#documentation": "<p>Contains the details for an AS2 connector object. The connector object is used for AS2 outbound\n      processes, to connect the Transfer Family customer with the trading partner.</p>"
             }
         },
         "com.amazonaws.transfer#As2ConnectorSecretId": {
@@ -642,7 +642,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the connector, which captures the parameters for an outbound connection for the\n      AS2 protocol. The connector is required for sending files to an externally hosted AS2 server.\n      For more details about connectors, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector\">Create AS2 connectors</a>.</p>"
+                "smithy.api#documentation": "<p>Creates the connector, which captures the parameters for an outbound connection for the\n      AS2 or SFTP protocol. The connector is required for sending files to an externally hosted AS2 or SFTP server.\n      For more details about AS2 connectors, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector\">Create AS2 connectors</a>.</p>\n         <note>\n            <p>You must specify exactly one configuration object: either for AS2 (<code>As2Config</code>) or SFTP (<code>SftpConfig</code>).</p>\n         </note>"
             }
         },
         "com.amazonaws.transfer#CreateConnectorRequest": {
@@ -651,15 +651,14 @@
                 "Url": {
                     "target": "com.amazonaws.transfer#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the partner's AS2 endpoint.</p>",
+                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "As2Config": {
                     "target": "com.amazonaws.transfer#As2ConnectorConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the parameters for a connector object.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A structure that contains the parameters for an AS2 connector object.</p>"
                     }
                 },
                 "AccessRole": {
@@ -679,6 +678,12 @@
                     "target": "com.amazonaws.transfer#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose.</p>"
+                    }
+                },
+                "SftpConfig": {
+                    "target": "com.amazonaws.transfer#SftpConnectorConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the parameters for an SFTP connector object.</p>"
                     }
                 }
             },
@@ -980,7 +985,7 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) \n      role provides access to paths in <code>Target</code>. This value\n      can be set only when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\":\n        \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the session policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) \n      role provides access to paths in <code>Target</code>. This value\n      can be set only when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\":\n        \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the session policy to lock your user down\n      to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the value the user\n      should see for their home directory when they log in.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
                     }
                 },
                 "Policy": {
@@ -1406,7 +1411,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the agreement that's specified in the provided <code>ConnectorId</code>.</p>"
+                "smithy.api#documentation": "<p>Deletes the connector that's specified in the provided <code>ConnectorId</code>.</p>"
             }
         },
         "com.amazonaws.transfer#DeleteConnectorRequest": {
@@ -2682,13 +2687,13 @@
                 "Url": {
                     "target": "com.amazonaws.transfer#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the partner's AS2 endpoint.</p>"
+                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>"
                     }
                 },
                 "As2Config": {
                     "target": "com.amazonaws.transfer#As2ConnectorConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the parameters for a connector object.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the parameters for an AS2 connector object.</p>"
                     }
                 },
                 "AccessRole": {
@@ -2707,6 +2712,12 @@
                     "target": "com.amazonaws.transfer#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for connectors.</p>"
+                    }
+                },
+                "SftpConfig": {
+                    "target": "com.amazonaws.transfer#SftpConnectorConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the parameters for an SFTP connector object.</p>"
                     }
                 }
             },
@@ -5231,7 +5242,7 @@
                 "Url": {
                     "target": "com.amazonaws.transfer#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the partner's AS2 endpoint.</p>"
+                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>"
                     }
                 }
             },
@@ -6130,6 +6141,15 @@
                 }
             }
         },
+        "com.amazonaws.transfer#SecretId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.transfer#SecurityGroupId": {
             "type": "string",
             "traits": {
@@ -6353,6 +6373,47 @@
                 }
             }
         },
+        "com.amazonaws.transfer#SftpConnectorConfig": {
+            "type": "structure",
+            "members": {
+                "UserSecretId": {
+                    "target": "com.amazonaws.transfer#SecretId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers for the secrets (in Amazon Web Services Secrets Manager) that contain the SFTP user's private keys or passwords.</p>"
+                    }
+                },
+                "TrustedHostKeys": {
+                    "target": "com.amazonaws.transfer#SftpConnectorTrustedHostKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p>\n         <p>The three standard SSH public key format elements are <code><key type></code>,\n      <code><body base64></code>, and  an optional <code><comment></code>, with spaces\n      between each element.</p>\n         <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the key type  is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the key type is either <code>ecdsa-sha2-nistp256</code>,\n          <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the\n          size of the key you generated.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details for an SFTP connector object. The connector object is used for transferring files to and from a\n      partner's SFTP server.</p>"
+            }
+        },
+        "com.amazonaws.transfer#SftpConnectorTrustedHostKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.transfer#SftpConnectorTrustedHostKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#SftpConnectorTrustedHostKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.transfer#SigningAlg": {
             "type": "enum",
             "members": {
@@ -6497,7 +6558,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Begins an outbound file transfer to a remote AS2 server. You specify the <code>ConnectorId</code> and the file\n      paths for where to send the files. </p>"
+                "smithy.api#documentation": "<p>Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.</p>\n         <ul>\n            <li>\n               <p>For an AS2 connector, you specify the <code>ConnectorId</code> and one or more <code>SendFilePaths</code> to identify the files\n          you want to transfer.</p>\n            </li>\n            <li>\n               <p>For an SFTP connector, the file transfer can be either outbound or inbound. In both\n          cases, you specify the <code>ConnectorId</code>. Depending on the direction of the transfer,\n          you also specify the following items:</p>\n               <ul>\n                  <li>\n                     <p>If you are transferring file from a partner's SFTP server to a Transfer Family\n              server, you specify one or more <code>RetreiveFilePaths</code> to identify the files\n              you want to transfer, and a <code>LocalDirectoryPath</code> to specify the destination\n              folder.</p>\n                  </li>\n                  <li>\n                     <p>If you are transferring file to a partner's SFTP server from Amazon Web Services\n              storage, you specify one or more <code>SendFilePaths</code> to identify the files you\n              want to transfer, and a <code>RemoteDirectoryPath</code> to specify the destination\n              folder.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.transfer#StartFileTransferRequest": {
@@ -6506,15 +6567,32 @@
                 "ConnectorId": {
                     "target": "com.amazonaws.transfer#ConnectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the connector. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the connector.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SendFilePaths": {
                     "target": "com.amazonaws.transfer#FilePaths",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings. Each string represents the absolute path for one outbound file transfer. For example,\n          <code>\n               <i>DOC-EXAMPLE-BUCKET</i>/<i>myfile.txt</i>\n            </code>. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>One or more source paths for the Transfer Family server. Each string represents a source file path for one outbound file transfer. For example,\n      <code>\n               <i>DOC-EXAMPLE-BUCKET</i>/<i>myfile.txt</i>\n            </code>.</p>"
+                    }
+                },
+                "RetrieveFilePaths": {
+                    "target": "com.amazonaws.transfer#FilePaths",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more source paths for the partner's SFTP server. Each string represents a source file path for one inbound file transfer.</p>"
+                    }
+                },
+                "LocalDirectoryPath": {
+                    "target": "com.amazonaws.transfer#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For an inbound transfer, the <code>LocaDirectoryPath</code> specifies the destination for one or more files\n      that are transferred from the partner's SFTP server.</p>"
+                    }
+                },
+                "RemoteDirectoryPath": {
+                    "target": "com.amazonaws.transfer#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For an outbound transfer, the <code>RemoteDirectoryPath</code> specifies the destination\n      for one or more files that are transferred to the partner's SFTP server. If you don't specify\n      a <code>RemoteDirectoryPath</code>, the destination for transferred files is the SFTP user's\n      home directory.</p>"
                     }
                 }
             },
@@ -6528,7 +6606,7 @@
                 "TransferId": {
                     "target": "com.amazonaws.transfer#TransferId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the unique identifier for this file transfer. </p>",
+                        "smithy.api#documentation": "<p>Returns the unique identifier for the file transfer.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6624,6 +6702,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes the condition of a file transfer protocol-enabled server with respect to its\n      ability to perform file operations. There are six possible states: <code>OFFLINE</code>,\n        <code>ONLINE</code>, <code>STARTING</code>, <code>STOPPING</code>,\n      <code>START_FAILED</code>, and <code>STOP_FAILED</code>.</p>\n         <p>\n            <code>OFFLINE</code> indicates that the server exists, but that it is not available for\n      file operations. <code>ONLINE</code> indicates that the server is available to perform file\n      operations. <code>STARTING</code> indicates that the server's was instantiated, but the\n      server is not yet available to perform file operations. Under normal conditions, it can take a\n      couple of minutes for the server to be completely operational. Both <code>START_FAILED</code>\n      and <code>STOP_FAILED</code> are error conditions.</p>"
             }
+        },
+        "com.amazonaws.transfer#Status": {
+            "type": "string"
         },
         "com.amazonaws.transfer#StatusCode": {
             "type": "integer",
@@ -6841,6 +6922,73 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.transfer#TestConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#TestConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#TestConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tests whether your SFTP connector is set up successfully. We highly recommend that you call this\n    operation to test your ability to transfer files between a Transfer Family server and a trading partner's\n    SFTP server.</p>"
+            }
+        },
+        "com.amazonaws.transfer#TestConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectorId": {
+                    "target": "com.amazonaws.transfer#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#TestConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "ConnectorId": {
+                    "target": "com.amazonaws.transfer#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the identifier of the connector object that you are testing.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.transfer#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns <code>OK</code> for successful test, or <code>ERROR</code> if the test fails.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.transfer#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns <code>Connection succeeded</code> if the test is successful. Or, returns a descriptive error message \n    if the test fails. The following list provides the details for some error messages and troubleshooting steps for each.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Unable to access secrets manager</b>: Verify that your secret name aligns with the one in\n          Transfer Role permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Unknown Host/Connection failed</b>: Verify the server URL in the connector\n          configuration , and\n          verify that the login credentials work successfully outside of the connector.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Private key not found</b>: Verify that the secret exists and is formatted correctly.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Invalid trusted host keys</b>: Verify that the trusted host key in the connector\n          configuration matches the <code>ssh-keyscan</code> output.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.transfer#TestIdentityProvider": {
@@ -7140,6 +7288,9 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.transfer#TestConnection"
                 },
                 {
                     "target": "com.amazonaws.transfer#TestIdentityProvider"
@@ -8587,13 +8738,13 @@
                 "Url": {
                     "target": "com.amazonaws.transfer#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the partner's AS2 endpoint.</p>"
+                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>"
                     }
                 },
                 "As2Config": {
                     "target": "com.amazonaws.transfer#As2ConnectorConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the parameters for a connector object.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the parameters for an AS2 connector object.</p>"
                     }
                 },
                 "AccessRole": {
@@ -8606,6 +8757,12 @@
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a connector to turn\n      on CloudWatch logging for Amazon S3 events. When set, you can view connector\n      activity in your CloudWatch logs.</p>"
+                    }
+                },
+                "SftpConfig": {
+                    "target": "com.amazonaws.transfer#SftpConnectorConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the parameters for an SFTP connector object.</p>"
                     }
                 }
             },

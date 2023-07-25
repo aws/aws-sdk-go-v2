@@ -53867,13 +53867,15 @@
                 "ContentColumn": {
                     "target": "com.amazonaws.sagemaker#ContentColumn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the column used to provide the sentences to be classified. It should not be\n         the same as the target column (Required).</p>"
+                        "smithy.api#documentation": "<p>The name of the column used to provide the sentences to be classified. It should not be\n         the same as the target column.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "TargetLabelColumn": {
                     "target": "com.amazonaws.sagemaker#TargetLabelColumn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the column used to provide the class labels. It should not be same as the\n         content column (Required).</p>"
+                        "smithy.api#documentation": "<p>The name of the column used to provide the class labels. It should not be same as the\n         content column.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },

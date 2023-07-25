@@ -680,7 +680,7 @@
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful \n            when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this \n            field is set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding.\u2028 The default value of this field is <code>false</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding \n            matches the criteria for multiple rules, and each rule has different actions. If a rule is terminal, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding. By default, a rule isn't terminal.\n        </p>"
                     }
                 },
                 "Criteria": {
@@ -1035,7 +1035,7 @@
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>\n            Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful \n            when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this \n            field is set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding.\u2028 The default value of this field is <code>false</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding \n            matches the criteria for multiple rules, and each rule has different actions. If a rule is terminal, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding. By default, a rule isn't terminal.\n        </p>"
                     }
                 },
                 "CreatedAt": {
@@ -2252,6 +2252,86 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>\n            Specifies the authorization configuration for using Amazon Cognito user pools with your AppSync GraphQL API \n            endpoint.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsAthenaWorkGroupConfigurationDetails": {
+            "type": "structure",
+            "members": {
+                "ResultConfiguration": {
+                    "target": "com.amazonaws.securityhub#AwsAthenaWorkGroupConfigurationResultConfigurationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The location in Amazon S3 where query and calculation results are stored and the \n            encryption option, if any, used for query and calculation results. These are known as client-side settings. If \n            workgroup settings override client-side settings, then the query uses the workgroup settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The configuration of the workgroup, which includes the location in Amazon Simple Storage Service (Amazon S3) where \n            query results are stored, the encryption option, if any, used for query results, whether Amazon CloudWatch\n            metrics are enabled for the workgroup, and the limit for the amount of bytes scanned (cutoff) per query, if it is \n            specified.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsAthenaWorkGroupConfigurationResultConfigurationDetails": {
+            "type": "structure",
+            "members": {
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.securityhub#AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies the method used to encrypt the user’s data stores in the Athena workgroup.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The location in Amazon Simple Storage Service (Amazon S3) where query and calculation results are stored and the encryption option, if any, \n            used for query and calculation results. These are known as client-side settings. If workgroup settings override \n            client-side settings, then the query uses the workgroup settings.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails": {
+            "type": "structure",
+            "members": {
+                "EncryptionOption": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether Amazon Simple Storage Service (Amazon S3) server-side encryption with Amazon S3 managed \n            keys (SSE_S3), server-side encryption with KMS keys (SSE_KMS), or client-side encryption with \n            KMS customer managed keys (CSE_KMS) is used.\n        </p>"
+                    }
+                },
+                "KmsKey": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            For <code>SSE_KMS</code> and <code>CSE_KMS</code>, this is the KMS key Amazon Resource Name (ARN) or ID.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Specifies the method used to encrypt the user’s data stores in the Athena workgroup.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsAthenaWorkGroupDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The workgroup name.\n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The workgroup description.\n        </p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Whether the workgroup is enabled or disabled.\n        </p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.securityhub#AwsAthenaWorkGroupConfigurationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The configuration of the workgroup, which includes the location in Amazon Simple Storage Service (Amazon S3) \n            where query results are stored, the encryption option, if any, used for query results, whether \n            Amazon CloudWatch metrics are enabled for the workgroup, and the limit for the amount of bytes scanned \n            (cutoff) per query, if it is specified.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides information about an Amazon Athena workgroup.\n        </p>"
             }
         },
         "com.amazonaws.securityhub#AwsAutoScalingAutoScalingGroupAvailabilityZonesList": {
@@ -14021,6 +14101,32 @@
                 "target": "com.amazonaws.securityhub#AwsRdsDbClusterOptionGroupMembership"
             }
         },
+        "com.amazonaws.securityhub#AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute": {
+            "type": "structure",
+            "members": {
+                "AttributeName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the manual DB cluster snapshot attribute. The attribute named <code>restore</code> refers to the list of \n            Amazon Web Services accounts that have permission to copy or restore the manual DB cluster snapshot.\n        </p>"
+                    }
+                },
+                "AttributeValues": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The value(s) for the manual DB cluster snapshot attribute. If the <code>AttributeName</code> field is set to \n            <code>restore</code>, then this element returns a list of IDs of the Amazon Web Services accounts that are authorized \n            to copy or restore the manual DB cluster snapshot. If a value of <code>all</code> is in the list, then the manual \n            DB cluster snapshot is public and available for any Amazon Web Services account to copy or restore.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains the name and values of a manual Amazon Relational Database Service (RDS) DB cluster snapshot attribute.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsRdsDbClusterSnapshotDbClusterSnapshotAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute"
+            }
+        },
         "com.amazonaws.securityhub#AwsRdsDbClusterSnapshotDetails": {
             "type": "structure",
             "members": {
@@ -14135,6 +14241,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether mapping of IAM accounts to database accounts is enabled.</p>"
+                    }
+                },
+                "DbClusterSnapshotAttributes": {
+                    "target": "com.amazonaws.securityhub#AwsRdsDbClusterSnapshotDbClusterSnapshotAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains the name and values of a manual DB cluster snapshot attribute.\n        </p>"
                     }
                 }
             },
@@ -20873,7 +20985,7 @@
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding \n            matches the criteria for multiple rules, and each rule has different actions. If the value of this field is \n            set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding. The default value of this field is <code>false</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding \n            matches the criteria for multiple rules, and each rule has different actions. If a rule is terminal, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding. By default, a rule isn't terminal.\n        </p>"
                     }
                 },
                 "Criteria": {
@@ -25223,18 +25335,18 @@
                 "Value": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value for the key in the map filter. Filter values are case sensitive. For example,\n         one of the values for a tag called <code>Department</code> might be <code>Security</code>.\n         If you provide <code>security</code> as the filter value, then there is no match.</p>"
+                        "smithy.api#documentation": "<p>The value for the key in the map filter. Filter values are case sensitive. For example,\n         one of the values for a tag called <code>Department</code> might be <code>Security</code>.\n         If you provide <code>security</code> as the filter value, then there's no match.</p>"
                     }
                 },
                 "Comparison": {
                     "target": "com.amazonaws.securityhub#MapFilterComparison",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition to apply to the key value when querying for findings with a map\n         filter.</p>\n         <p>To search for values that exactly match the filter value, use <code>EQUALS</code>. For\n         example, for the <code>ResourceTags</code> field, the filter <code>Department EQUALS\n            Security</code> matches findings that have the value <code>Security</code> for the tag\n            <code>Department</code>.</p>\n         <p>To search for values other than the filter value, use <code>NOT_EQUALS</code>. For\n         example, for the <code>ResourceTags</code> field, the filter <code>Department NOT_EQUALS\n            Finance</code> matches findings that do not have the value <code>Finance</code> for the\n         tag <code>Department</code>.</p>\n         <p>\n            <code>EQUALS</code> filters on the same field are joined by <code>OR</code>. A finding\n         matches if it matches any one of those filters.</p>\n         <p>\n            <code>NOT_EQUALS</code> filters on the same field are joined by <code>AND</code>. A\n         finding matches only if it matches all of those filters.</p>\n         <p>You cannot have both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> filter\n         on the same field.</p>"
+                        "smithy.api#documentation": "<p>The condition to apply to the key value when filtering Security Hub findings with a map\n         filter.</p>\n         <p>To search for values that have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that include the filter value, use <code>CONTAINS</code>. For example, for the \n               <code>ResourceTags</code> field, the filter <code>Department CONTAINS Security</code> matches findings that \n               include the value <code>Security</code> for the <code>Department</code> tag. In the same example, a finding with a value of\n               <code>Security team</code> for the <code>Department</code> tag is a match.</p>\n            </li>\n            <li>\n               <p>To search for values that exactly match the filter value, use <code>EQUALS</code>. For example, for \n               the <code>ResourceTags</code> field, the filter <code>Department EQUALS Security</code> matches findings that \n               have the value <code>Security</code> for the <code>Department</code> tag.</p>\n            </li>\n         </ul>\n         <p>\n            <code>CONTAINS</code> and <code>EQUALS</code> filters on the same field are joined by <code>OR</code>. A \n           finding matches if it matches any one of those filters. For example, the filters <code>Department CONTAINS Security OR \n               Department CONTAINS Finance</code> match a finding that includes either <code>Security</code>, \n           <code>Finance</code>, or both values.</p>\n         <p>To search for values that don't have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that exclude the filter value, use <code>NOT_CONTAINS</code>. For example, for \n               the <code>ResourceTags</code> field, the filter <code>Department NOT_CONTAINS Finance</code> matches findings \n               that exclude the value <code>Finance</code> for the <code>Department</code> tag.</p>\n            </li>\n            <li>\n               <p>To search for values other than the filter value, use <code>NOT_EQUALS</code>. For example, for the \n               <code>ResourceTags</code> field, the filter <code>Department NOT_EQUALS Finance</code> matches findings that \n               don’t have the value <code>Finance</code> for the <code>Department</code> tag.</p>\n            </li>\n         </ul>\n         <p>\n            <code>NOT_CONTAINS</code> and <code>NOT_EQUALS</code> filters on the same field are joined by <code>AND</code>. \n           A finding matches only if it matches all of those filters. For example, the filters <code>Department NOT_CONTAINS Security AND \n               Department NOT_CONTAINS Finance</code> match a finding that excludes both the <code>Security</code> and \n           <code>Finance</code> values.</p>\n         <p>\n            <code>CONTAINS</code> filters can only be used with other <code>CONTAINS</code> filters. <code>NOT_CONTAINS</code> \n           filters can only be used with other <code>NOT_CONTAINS</code> filters.</p>\n         <p>You can’t have both a <code>CONTAINS</code> filter and a <code>NOT_CONTAINS</code> filter on the same field. \n           Similarly, you can’t have both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> filter on the same field. \n            Combining filters in this way returns an error.\n       </p>\n         <p>\n            <code>CONTAINS</code> and <code>NOT_CONTAINS</code> operators can be used only with automation rules. For more information, \n           see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html\">Automation rules</a> in the <i>Security Hub User Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A map filter for querying findings. Each map filter provides the field to check, the\n         value to look for, and the comparison operator.</p>"
+                "smithy.api#documentation": "<p>A map filter for filtering Security Hub findings. Each map filter provides the field to check for, the\n         value to check for, and the comparison operator.</p>"
             }
         },
         "com.amazonaws.securityhub#MapFilterComparison": {
@@ -25250,6 +25362,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NOT_EQUALS"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "NOT_CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_CONTAINS"
                     }
                 }
             }
@@ -26854,6 +26978,12 @@
                     "target": "com.amazonaws.securityhub#AwsStepFunctionStateMachineDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Provides details about an Step Functions state machine, which is a workflow consisting of a series of event-driven steps.\n        </p>"
+                    }
+                },
+                "AwsAthenaWorkGroup": {
+                    "target": "com.amazonaws.securityhub#AwsAthenaWorkGroupDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides information about an Amazon Athena workgroup. A workgroup helps you separate users, teams, \n            applications, or workloads. It also helps you set limits on data processing and track costs.\n        </p>"
                     }
                 }
             },
@@ -29842,18 +29972,18 @@
                 "Value": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string filter value. Filter values are case sensitive. For example, the product name\n         for control-based findings is <code>Security Hub</code>. If you provide <code>security hub</code>\n         as the filter text, then there is no match.</p>"
+                        "smithy.api#documentation": "<p>The string filter value. Filter values are case sensitive. For example, the product name\n         for control-based findings is <code>Security Hub</code>. If you provide <code>security hub</code>\n         as the filter value, there's no match.</p>"
                     }
                 },
                 "Comparison": {
                     "target": "com.amazonaws.securityhub#StringFilterComparison",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition to apply to a string value when querying for findings. To search for\n         values that contain the filter criteria value, use one of the following comparison\n         operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that exactly match the filter value, use\n               <code>EQUALS</code>.</p>\n               <p>For example, the filter <code>ResourceType EQUALS AwsEc2SecurityGroup</code> only\n               matches findings that have a resource type of\n               <code>AwsEc2SecurityGroup</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that start with the filter value, use\n               <code>PREFIX</code>.</p>\n               <p>For example, the filter <code>ResourceType PREFIX AwsIam</code> matches findings\n               that have a resource type that starts with <code>AwsIam</code>. Findings with a\n               resource type of <code>AwsIamPolicy</code>, <code>AwsIamRole</code>, or\n                  <code>AwsIamUser</code> would all match.</p>\n            </li>\n         </ul>\n         <p>\n            <code>EQUALS</code> and <code>PREFIX</code> filters on the same field are joined by\n            <code>OR</code>. A finding matches if it matches any one of those filters.</p>\n         <p>To search for values that do not contain the filter criteria value, use one of the\n         following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that do not exactly match the filter value, use\n                  <code>NOT_EQUALS</code>.</p>\n               <p>For example, the filter <code>ResourceType NOT_EQUALS AwsIamPolicy</code> matches\n               findings that have a resource type other than <code>AwsIamPolicy</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that do not start with the filter value, use\n                  <code>PREFIX_NOT_EQUALS</code>.</p>\n               <p>For example, the filter <code>ResourceType PREFIX_NOT_EQUALS AwsIam</code> matches\n               findings that have a resource type that does not start with <code>AwsIam</code>.\n               Findings with a resource type of <code>AwsIamPolicy</code>, <code>AwsIamRole</code>,\n               or <code>AwsIamUser</code> would all be excluded from the results.</p>\n            </li>\n         </ul>\n         <p>\n            <code>NOT_EQUALS</code> and <code>PREFIX_NOT_EQUALS</code> filters on the same field are\n         joined by <code>AND</code>. A finding matches only if it matches all of those\n         filters.</p>\n         <p>For filters on the same field, you cannot provide both an <code>EQUALS</code> filter and\n         a <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filter. Combining filters in\n         this way always returns an error, even if the provided filter values would return valid\n         results.</p>\n         <p>You can combine <code>PREFIX</code> filters with <code>NOT_EQUALS</code> or\n         <code>PREFIX_NOT_EQUALS</code> filters for the same field. Security Hub first processes the\n            <code>PREFIX</code> filters, then the <code>NOT_EQUALS</code> or\n            <code>PREFIX_NOT_EQUALS</code> filters.</p>\n         <p> For example, for the following filter, Security Hub first identifies findings that have\n         resource types that start with either <code>AwsIAM</code> or <code>AwsEc2</code>. It then\n         excludes findings that have a resource type of <code>AwsIamPolicy</code> and findings that\n         have a resource type of <code>AwsEc2NetworkInterface</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsIam</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsEc2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsIamPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsEc2NetworkInterface</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The condition to apply to a string value when filtering Security Hub findings.</p>\n         <p>To search for values that have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that include the filter value, use <code>CONTAINS</code>. For example, the \n               filter <code>Title CONTAINS CloudFront</code> matches findings that have a <code>Title</code> that \n               includes the string CloudFront.</p>\n            </li>\n            <li>\n               <p>To search for values that exactly match the filter value, use <code>EQUALS</code>. For example, \n               the filter <code>AwsAccountId EQUALS 123456789012</code> only matches findings that have an account ID of \n               <code>123456789012</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that start with the filter value, use <code>PREFIX</code>. For example, the \n               filter <code>ResourceRegion PREFIX us</code> matches findings that have a <code>ResourceRegion</code> that starts \n               with <code>us</code>. A <code>ResourceRegion</code> that starts with a different value, such as <code>af</code>, \n               <code>ap</code>, or <code>ca</code>, doesn't match.</p>\n            </li>\n         </ul>\n         <p>\n            <code>CONTAINS</code>, <code>EQUALS</code>, and <code>PREFIX</code> filters on the same field are joined by \n           <code>OR</code>. A finding matches if it matches any one of those filters. For example, the filters <code>Title CONTAINS CloudFront OR \n               Title CONTAINS CloudWatch</code> match a finding that includes either <code>CloudFront</code>, \n           <code>CloudWatch</code>, or both strings in the title.</p>\n         <p>To search for values that don’t have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that exclude the filter value, use <code>NOT_CONTAINS</code>. For example, the \n               filter <code>Title NOT_CONTAINS CloudFront</code> matches findings that have a <code>Title</code> that \n               excludes the string CloudFront.</p>\n            </li>\n            <li>\n               <p>To search for values other than the filter value, use <code>NOT_EQUALS</code>. For \n               example, the filter <code>AwsAccountId NOT_EQUALS 123456789012</code> only matches findings that have an account \n               ID other than <code>123456789012</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that don't start with the filter value, use <code>PREFIX_NOT_EQUALS</code>. For \n               example, the filter <code>ResourceRegion PREFIX_NOT_EQUALS us</code> matches findings with a \n               <code>ResourceRegion</code> that starts with a value other than <code>us</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <code>NOT_CONTAINS</code>, <code>NOT_EQUALS</code>, and <code>PREFIX_NOT_EQUALS</code> filters on the same field \n           are joined by <code>AND</code>. A finding matches only if it matches all of those filters. For example, the filters <code>Title NOT_CONTAINS CloudFront AND \n               Title NOT_CONTAINS CloudWatch</code> match a finding that excludes both <code>CloudFront</code> and \n           <code>CloudWatch</code> in the title.</p>\n         <p>You can’t have both a <code>CONTAINS</code> filter and a <code>NOT_CONTAINS</code> filter on the same field. Similarly, \n            you can't provide both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> or \n           <code>PREFIX_NOT_EQUALS</code> filter on the same field. Combining filters in this way returns an error. <code>CONTAINS</code> filters \n           can only be used with other <code>CONTAINS</code> filters. <code>NOT_CONTAINS</code> filters can only be used with \n           other <code>NOT_CONTAINS</code> filters. </p>\n         <p>You can combine <code>PREFIX</code> filters with <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters for the same field. \n           Security Hub first processes the <code>PREFIX</code> filters, and then the <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters.</p>\n         <p>For example, for the following filters, Security Hub first identifies findings that have resource types \n           that start with either <code>AwsIam</code> or <code>AwsEc2</code>. It then excludes findings that have a resource \n           type of <code>AwsIamPolicy</code> and findings that have a resource type of <code>AwsEc2NetworkInterface</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsIam</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsEc2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsIamPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsEc2NetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <code>CONTAINS</code> and <code>NOT_CONTAINS</code> operators can be used only with automation rules. For more information, \n           see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html\">Automation rules</a> in the <i>Security Hub User Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A string filter for querying findings.</p>"
+                "smithy.api#documentation": "<p>A string filter for filtering Security Hub findings.</p>"
             }
         },
         "com.amazonaws.securityhub#StringFilterComparison": {
@@ -29881,6 +30011,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PREFIX_NOT_EQUALS"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "NOT_CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_CONTAINS"
                     }
                 }
             }
@@ -30542,7 +30684,7 @@
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful \n            when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this \n            field is set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding.\u2028 The default value of this field is <code>false</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding \n            matches the criteria for multiple rules, and each rule has different actions. If a rule is terminal, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding. By default, a rule isn't terminal.\n        </p>"
                     }
                 },
                 "Criteria": {

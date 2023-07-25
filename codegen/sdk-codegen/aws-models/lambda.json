@@ -9979,6 +9979,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ruby3.2"
                     }
+                },
+                "python311": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "python3.11"
+                    }
                 }
             }
         },
