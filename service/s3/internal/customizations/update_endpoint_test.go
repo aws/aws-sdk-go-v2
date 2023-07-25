@@ -957,6 +957,18 @@ func TestVPC_CustomEndpoint(t *testing.T) {
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "us-west-2",
 		},
+		"custom resolver to v2 fallback": {
+			bucket: "bucketname",
+			options: s3.Options{
+				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
+					return aws.Endpoint{}, &aws.EndpointNotFoundError{}
+				}),
+				Region: "us-west-2",
+			},
+			expectedReqURL:        "https://bucketname.s3.us-west-2.amazonaws.com/",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
 		"AccessPoint with custom endpoint url": {
 			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
 			options: s3.Options{
