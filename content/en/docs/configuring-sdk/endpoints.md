@@ -20,141 +20,23 @@ service.
 ## Customization
 
 There are two "versions" of endpoint resolution config within the SDK.
-behavior of endpoint resolution within the SDK:
-1. v1, released alongside the SDK, configured via:
-  * `EndpointResolver`
-1. v2, released in Q3 of 2023, configured via:
+* v2, released in Q3 of 2023, configured via:
   * `EndpointResolverV2`
   * `BaseEndpoint`
+* v1, released alongside the SDK, configured via:
+  * `EndpointResolver`
 
-## V1: `EndpointResolver`
-
-{{% pageinfo color="warning" %}}
-Endpoint resolution v1 is retained for backwards compatibility and is isolated
-from the modern behavior in endpoint resolution v2. It will only be used if the
-`EndpointResolver` field is set by the caller.
-
-Use of v1 will most likely prevent you from accessing endpoint-related service
-features introduced with or after the release of v2 resolution. See "Migration"
-for instructions on how to upgrade.
-{{% /pageinfo %}}
-
-A [EndpointResolver]({{< apiref "aws#EndpointResolver" >}}) can be configured
-to provide custom endpoint resolution logic for service clients. You can use a
-custom endpoint resolver to override a service's endpoint resolution logic for
-all endpoints, or a just specific regional endpoint. Custom endpoint resolver
-can trigger the service's endpoint resolution logic to fallback if a custom
-resolver does not wish to resolve a requested endpoint.
-[EndpointResolverWithOptionsFunc]({{< apiref
-"aws#EndpointResolverWithOptionsFunc" >}}) can be used to easily wrap functions
-to satisfy the `EndpointResolverWithOptions` interface.
-
-A `EndpointResolver` can be easily configured by passing the resolver wrapped
-with [WithEndpointResolverWithOptions]({{< apiref
-"config#WithEndpointResolverWithOptions" >}}) to [LoadDefaultConfig]({{< apiref
-"config#LoadDefaultConfig" >}}), allowing for the ability to override endpoints
-when loading credentials, as well as configuring the resulting `aws.Config`
-with your custom endpoint resolver.
-
-The endpoint resolver is given the service and region as a string, allowing for
-the resolver to dynamically drive its behavior. Each service client package has
-an exported `ServiceID` constant which can be used to determine which service
-client is invoking your endpoint resolver.
-
-An endpoint resolver can use the [EndpointNotFoundError]({{< apiref
-"aws#EndpointNotFoundError" >}}) sentinel error value to trigger fallback
-resolution to the service clients default resolution logic. This allows you to
-selectively override one or more endpoints seamlessly without having to handle
-fallback logic.
-
-If your endpoint resolver implementation returns an error other than
-`EndpointNotFoundError`, endpoint resolution will stop and the service
-operation returns an error to your application.
-
-### Examples
-
-#### With fallback
-
-The following code snippet shows how a single service endpoint can be
-overridden for {{% alias service=DDB %}} with fallback behavior for other
-endpoints:
-
-```go
-customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
-    if service == dynamodb.ServiceID && region == "us-west-2" {
-        return aws.Endpoint{
-            PartitionID:   "aws",
-            URL:           "https://test.us-west-2.amazonaws.com",
-            SigningRegion: "us-west-2",
-        }, nil
-    }
-    // returning EndpointNotFoundError will allow the service to fallback to it's default resolution
-    return aws.Endpoint{}, &aws.EndpointNotFoundError{}
-})
-
-cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolverWithOptions(customResolver))
-```
-
-#### Without fallback
-
-The following code snippet shows how a single service endpoint can be
-overridden for {{% alias service=DDB %}} without fallback behavior for other
-endpoints:
-
-```go
-customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
-    if service == dynamodb.ServiceID && region == "us-west-2" {
-        return aws.Endpoint{
-            PartitionID:   "aws",
-            URL:           "https://test.us-west-2.amazonaws.com",
-            SigningRegion: "us-west-2",
-        }, nil
-    }
-    return aws.Endpoint{}, fmt.Errorf("unknown endpoint requested")
-})
-
-cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolverWithOptions(customResolver))
-```
-
-### Immutable endpoints
-
-{{% pageinfo color="warning" %}}
-Setting an endpoint as immutable may prevent some service client features from
-functioning correctly, and could result in undefined behavior. Caution should
-be taken when defining an endpoint as immutable.
-{{% /pageinfo %}}
-
-Some service clients, such as {{% alias service=S3 %}}, may modify the endpoint
-returned by the resolver for certain service operations. For example, the {{%
-alias service=S3 %}} will automatically handle [Virtual Bucket
-Addressing](https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html)
-by mutating the resolved endpoint. You can prevent the SDK from mutating your
-custom endpoints by setting [HostnameImmutable]({{< apiref
-"aws#Endpoint.HostnameImmutable" >}}) to`true`. For example:
-
-```go
-customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
-    if service == dynamodb.ServiceID && region == "us-west-2" {
-        return aws.Endpoint{
-            PartitionID:   "aws",
-            URL:           "https://test.us-west-2.amazonaws.com",
-            SigningRegion: "us-west-2",
-            HostnameImmutable: true,
-        }, nil
-    }
-    return aws.Endpoint{}, fmt.Errorf("unknown endpoint requested")
-})
-
-cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolverWithOptions(customResolver))
-```
+We recommend users of v1 endpoint resolution migrate to v2 to obtain access to
+newer endpoint-related service features.
 
 ## V2: `EndpointResolverV2` + `BaseEndpoint`
 
 In resolution v2, `EndpointResolverV2` is the definitive mechanism through
 which endpoint resolution occurs. The resolver's `ResolveEndpoint` method is
 invoked as part of the workflow for every request you make in the SDK. The
-`Endpoint` value returned by the resolver is used **as-is** when making the
-request.
+hostname of the `Endpoint` returned by the resolver is used **as-is** when
+making the request (operation serializers can still append to the HTTP path,
+however).
 
 Resolution v2 includes an additional client-level config, `BaseEndpoint`, which
 is used to specify a "base" hostname for the instance of your service. The
@@ -316,6 +198,128 @@ When run, the above program outputs the following:
 The endpoint provided in config is https://endpoint.dev/
 ```
 
+
+## V1: `EndpointResolver`
+
+{{% pageinfo color="warning" %}}
+Endpoint resolution v1 is retained for backwards compatibility and is isolated
+from the modern behavior in endpoint resolution v2. It will only be used if the
+`EndpointResolver` field is set by the caller.
+
+Use of v1 will most likely prevent you from accessing endpoint-related service
+features introduced with or after the release of v2 resolution. See "Migration"
+for instructions on how to upgrade.
+{{% /pageinfo %}}
+
+A [EndpointResolver]({{< apiref "aws#EndpointResolver" >}}) can be configured
+to provide custom endpoint resolution logic for service clients. You can use a
+custom endpoint resolver to override a service's endpoint resolution logic for
+all endpoints, or a just specific regional endpoint. Custom endpoint resolver
+can trigger the service's endpoint resolution logic to fallback if a custom
+resolver does not wish to resolve a requested endpoint.
+[EndpointResolverWithOptionsFunc]({{< apiref
+"aws#EndpointResolverWithOptionsFunc" >}}) can be used to easily wrap functions
+to satisfy the `EndpointResolverWithOptions` interface.
+
+A `EndpointResolver` can be easily configured by passing the resolver wrapped
+with [WithEndpointResolverWithOptions]({{< apiref
+"config#WithEndpointResolverWithOptions" >}}) to [LoadDefaultConfig]({{< apiref
+"config#LoadDefaultConfig" >}}), allowing for the ability to override endpoints
+when loading credentials, as well as configuring the resulting `aws.Config`
+with your custom endpoint resolver.
+
+The endpoint resolver is given the service and region as a string, allowing for
+the resolver to dynamically drive its behavior. Each service client package has
+an exported `ServiceID` constant which can be used to determine which service
+client is invoking your endpoint resolver.
+
+An endpoint resolver can use the [EndpointNotFoundError]({{< apiref
+"aws#EndpointNotFoundError" >}}) sentinel error value to trigger fallback
+resolution to the service clients default resolution logic. This allows you to
+selectively override one or more endpoints seamlessly without having to handle
+fallback logic.
+
+If your endpoint resolver implementation returns an error other than
+`EndpointNotFoundError`, endpoint resolution will stop and the service
+operation returns an error to your application.
+
+### Examples
+
+#### With fallback
+
+The following code snippet shows how a single service endpoint can be
+overridden for {{% alias service=DDB %}} with fallback behavior for other
+endpoints:
+
+```go
+customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
+    if service == dynamodb.ServiceID && region == "us-west-2" {
+        return aws.Endpoint{
+            PartitionID:   "aws",
+            URL:           "https://test.us-west-2.amazonaws.com",
+            SigningRegion: "us-west-2",
+        }, nil
+    }
+    // returning EndpointNotFoundError will allow the service to fallback to it's default resolution
+    return aws.Endpoint{}, &aws.EndpointNotFoundError{}
+})
+
+cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolverWithOptions(customResolver))
+```
+
+#### Without fallback
+
+The following code snippet shows how a single service endpoint can be
+overridden for {{% alias service=DDB %}} without fallback behavior for other
+endpoints:
+
+```go
+customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
+    if service == dynamodb.ServiceID && region == "us-west-2" {
+        return aws.Endpoint{
+            PartitionID:   "aws",
+            URL:           "https://test.us-west-2.amazonaws.com",
+            SigningRegion: "us-west-2",
+        }, nil
+    }
+    return aws.Endpoint{}, fmt.Errorf("unknown endpoint requested")
+})
+
+cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolverWithOptions(customResolver))
+```
+
+### Immutable endpoints
+
+{{% pageinfo color="warning" %}}
+Setting an endpoint as immutable may prevent some service client features from
+functioning correctly, and could result in undefined behavior. Caution should
+be taken when defining an endpoint as immutable.
+{{% /pageinfo %}}
+
+Some service clients, such as {{% alias service=S3 %}}, may modify the endpoint
+returned by the resolver for certain service operations. For example, {{% alias
+service=S3 %}} will automatically handle [Virtual Bucket
+Addressing](https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html)
+by mutating the resolved endpoint. You can prevent the SDK from mutating your
+custom endpoints by setting [HostnameImmutable]({{< apiref
+"aws#Endpoint.HostnameImmutable" >}}) to `true`. For example:
+
+```go
+customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
+    if service == dynamodb.ServiceID && region == "us-west-2" {
+        return aws.Endpoint{
+            PartitionID:   "aws",
+            URL:           "https://test.us-west-2.amazonaws.com",
+            SigningRegion: "us-west-2",
+            HostnameImmutable: true,
+        }, nil
+    }
+    return aws.Endpoint{}, fmt.Errorf("unknown endpoint requested")
+})
+
+cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolverWithOptions(customResolver))
+```
+
 ## Migration
 
 When migrating from v1 to v2 of endpoint resolution, the following general principles apply:
@@ -328,6 +332,13 @@ When migrating from v1 to v2 of endpoint resolution, the following general princ
   originally returned URL from v1.
 
 Examples for these cases are provided below.
+
+{{% pageinfo color="warning" %}}
+V1 immutable endpoints and V2 resolution are not equivalent in behavior. For
+example, signing overrides for custom features like S3 Object Lambda would
+still be set for immutable endpoints returned via v1 code, but the same will
+not be done for v2.
+{{% /pageinfo %}}
 
 ### Examples
 
@@ -380,11 +391,4 @@ client := svc.NewFromConfig(cfg, func (o *svc.Options) {
     o.EndpointResolverV2 = &staticResolver{}
 })
 ```
-
-{{% pageinfo color="warning" %}}
-V1 immutable endpoints and V2 resolution are not equivalent in behavior. For
-example, signing overrides for custom features like S3 Object Lambda would
-still be set for immutable endpoints returned via v1 code, but the same will
-not be done for v2.
-{{% /pageinfo %}}
 
