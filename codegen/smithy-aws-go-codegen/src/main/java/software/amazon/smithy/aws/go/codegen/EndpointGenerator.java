@@ -394,33 +394,26 @@ public final class EndpointGenerator implements Runnable {
         writer.write("""
                      type $T struct {
                          awsResolver $T
-                         resolver $T
                      }
-                     """, wrappedResolverSymbol, endpointResolverWithOptions, resolverInterface);
+                     """, wrappedResolverSymbol, endpointResolverWithOptions);
+        var endpointNotFoundError = SymbolUtils.createValueSymbolBuilder("EndpointNotFoundError",
+            AwsGoDependency.AWS_CORE).build();
 
         writeExternalResolveEndpointImplementation(writer, wrappedResolverSymbol, "w", () -> {
-            var endpointNotFoundError = SymbolUtils.createValueSymbolBuilder("EndpointNotFoundError",
-                    AwsGoDependency.AWS_CORE).build();
-            var errorf = SymbolUtils.createValueSymbolBuilder("Errorf",
-                    SmithyGoDependency.FMT).build();
             writer.write("""
-                         if w.awsResolver == nil {
-                             goto fallback
-                         }
                          endpoint, err = w.awsResolver.ResolveEndpoint(ServiceID, region, options)
                          if err == nil {
                              return endpoint, nil
                          }
 
-                         if nf := (&$T{}); !errors.As(err, &nf) {
-                             return endpoint, err
+                         if nf := (&$T{}); errors.As(err, &nf) {
+                             return endpoint, nil
                          }
 
-                         fallback:
-                         if w.resolver == nil {
-                             return endpoint, $T("default endpoint resolver provided was nil")
-                         }
-                         return w.resolver.ResolveEndpoint(region, options)""", endpointNotFoundError, errorf);
+                         return endpoint, err
+
+
+                        """, endpointNotFoundError);
 
             writer.addUseImports(SmithyGoDependency.ERRORS);
         });
@@ -441,28 +434,30 @@ public final class EndpointGenerator implements Runnable {
         // Generate exported helper for constructing a wrapper around the AWS EndpointResolver type that is compatible
         // with the clients EndpointResolver interface.
         writer.write("""
-                     // $L returns an EndpointResolver that first delegates endpoint resolution to the awsResolver.
-                     // If awsResolver returns aws.EndpointNotFoundError error, the resolver will use the the provided
-                     // fallbackResolver for resolution.
+                     // $1L returns an $3T that first delegates endpoint resolution to the awsResolver.
+                     // If awsResolver returns $7T error, the resolver will swallow the error, such
+                     // that fallback will occur when $8L is invoked via its middleware.
                      //
-                     // fallbackResolver must not be nil
-                     func $L(awsResolver $T, awsResolverWithOptions $T, fallbackResolver $T) $T {
-                         var resolver $T
+                     // If another error (besides $7T) is returned, then that error will be propagated.
+                     func $1L(awsResolver $2T, awsResolverWithOptions $3T) $6L {
+                         var resolver $3T
 
                          if awsResolverWithOptions != nil {
                              resolver = awsResolverWithOptions
                          } else if awsResolver != nil {
-                             resolver = $L(awsResolver.ResolveEndpoint)
+                             resolver = $4L(awsResolver.ResolveEndpoint)
                          }
 
-                         return &$T{
+                         return &$5T{
                              awsResolver: resolver,
-                             resolver: fallbackResolver,
                          }
                      }
-                     """, AWS_ENDPOINT_RESOLVER_HELPER, AWS_ENDPOINT_RESOLVER_HELPER,
-                endpointResolver, endpointResolverWithOptions, resolverInterface,
-                resolverInterface, endpointResolverWithOptions, AWS_ENDPOINT_RESOLVER_ADAPTOR, wrappedResolverSymbol);
+                     """, AWS_ENDPOINT_RESOLVER_HELPER,
+                endpointResolver, endpointResolverWithOptions,
+                AWS_ENDPOINT_RESOLVER_ADAPTOR, wrappedResolverSymbol,
+                resolverInterface, endpointNotFoundError,
+                EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME
+                );
     }
 
     private void generateMiddleware(GoWriter writer) {

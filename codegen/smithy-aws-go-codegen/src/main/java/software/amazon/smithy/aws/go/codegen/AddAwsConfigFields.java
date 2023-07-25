@@ -588,13 +588,12 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.putContext("wrapperHelper", EndpointGenerator.AWS_ENDPOINT_RESOLVER_HELPER);
         writer.putContext("awsResolver", ENDPOINT_RESOLVER_CONFIG_NAME);
         writer.putContext("awsResolverWithOptions", AWS_ENDPOINT_RESOLVER_WITH_OPTIONS);
-        writer.putContext("newResolver", EndpointGenerator.RESOLVER_CONSTRUCTOR_NAME);
         writer.write("""
                 func $resolverName:L(cfg aws.Config, o *Options) {
                     if cfg.$awsResolver:L == nil && cfg.$awsResolverWithOptions:L == nil {
                         return
                     }
-                    o.$clientOption:L = $wrapperHelper:L(cfg.$awsResolver:L, cfg.$awsResolverWithOptions:L, $newResolver:L())
+                    o.$clientOption:L = $wrapperHelper:L(cfg.$awsResolver:L, cfg.$awsResolverWithOptions:L)
                 }
                 """);
         writer.popState();
