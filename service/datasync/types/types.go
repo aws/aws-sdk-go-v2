@@ -25,6 +25,23 @@ type AgentListEntry struct {
 	noSmithyDocumentSerde
 }
 
+// The shared access signature (SAS) configuration that allows DataSync to access
+// your Microsoft Azure Blob Storage. For more information, see SAS tokens (https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-sas-tokens)
+// for accessing your Azure Blob Storage.
+type AzureBlobSasConfiguration struct {
+
+	// Specifies a SAS token that provides permissions at the Azure storage account,
+	// container, or folder level. The token is part of the SAS URI string that comes
+	// after the storage resource URI and a question mark. A token looks something like
+	// this:
+	// sp=r&st=2023-12-20T14:54:52Z&se=2023-12-20T22:54:52Z&spr=https&sv=2021-06-08&sr=c&sig=aBBKDWQvyuVcTPH9EBp%2FXTI9E%2F%2Fmq171%2BZU178wcwqU%3D
+	//
+	// This member is required.
+	Token *string
+
+	noSmithyDocumentSerde
+}
+
 // The storage capacity of an on-premises storage system resource (for example, a
 // volume).
 type Capacity struct {
@@ -719,27 +736,24 @@ type P95Metrics struct {
 	noSmithyDocumentSerde
 }
 
-// The VPC endpoint, subnet, and security group that an agent uses to access IP
-// addresses in a VPC (Virtual Private Cloud).
+// Specifies how your DataSync agent connects to Amazon Web Services using a
+// virtual private cloud (VPC) service endpoint. An agent that uses a VPC endpoint
+// isn't accessible over the public internet.
 type PrivateLinkConfig struct {
 
-	// The private endpoint that is configured for an agent that has access to IP
-	// addresses in a PrivateLink (https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html)
-	// . An agent that is configured with this endpoint will not be accessible over the
-	// public internet.
+	// Specifies the VPC endpoint provided by Amazon Web Services PrivateLink (https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html)
+	// that your agent connects to.
 	PrivateLinkEndpoint *string
 
-	// The Amazon Resource Names (ARNs) of the security groups that are configured for
-	// the EC2 resource that hosts an agent activated in a VPC or an agent that has
-	// access to a VPC endpoint.
+	// Specifies the Amazon Resource Names (ARN) of the security group that provides
+	// DataSync access to your VPC endpoint. You can only specify one ARN.
 	SecurityGroupArns []string
 
-	// The Amazon Resource Names (ARNs) of the subnets that are configured for an
-	// agent activated in a VPC or an agent that has access to a VPC endpoint.
+	// Specifies the ARN of the subnet where your VPC endpoint is located. You can
+	// only specify one ARN.
 	SubnetArns []string
 
-	// The ID of the VPC endpoint that is configured for an agent. An agent that is
-	// configured with a VPC endpoint will not be accessible over the public internet.
+	// Specifies the ID of the VPC endpoint that your agent connects to.
 	VpcEndpointId *string
 
 	noSmithyDocumentSerde

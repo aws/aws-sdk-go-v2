@@ -12,7 +12,8 @@ import (
 )
 
 // Creates an endpoint for a Server Message Block (SMB) file server that DataSync
-// can access for a transfer. For more information, see Creating an SMB location (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html)
+// can use for a data transfer. Before you begin, make sure that you understand how
+// DataSync accesses an SMB file server (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html)
 // .
 func (c *Client) CreateLocationSmb(ctx context.Context, params *CreateLocationSmbInput, optFns ...func(*Options)) (*CreateLocationSmbOutput, error) {
 	if params == nil {

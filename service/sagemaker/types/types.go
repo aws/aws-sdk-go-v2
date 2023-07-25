@@ -13158,17 +13158,21 @@ type TensorBoardOutputConfig struct {
 // AutoML job V2.
 type TextClassificationJobConfig struct {
 
-	// How long a job is allowed to run, or how many candidates a job is allowed to
-	// generate.
-	CompletionCriteria *AutoMLJobCompletionCriteria
-
 	// The name of the column used to provide the sentences to be classified. It
-	// should not be the same as the target column (Required).
+	// should not be the same as the target column.
+	//
+	// This member is required.
 	ContentColumn *string
 
 	// The name of the column used to provide the class labels. It should not be same
-	// as the content column (Required).
+	// as the content column.
+	//
+	// This member is required.
 	TargetLabelColumn *string
+
+	// How long a job is allowed to run, or how many candidates a job is allowed to
+	// generate.
+	CompletionCriteria *AutoMLJobCompletionCriteria
 
 	noSmithyDocumentSerde
 }

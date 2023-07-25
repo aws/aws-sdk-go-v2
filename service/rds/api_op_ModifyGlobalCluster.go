@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modify a setting for an Amazon Aurora global cluster. You can change one or
+// Modifies a setting for an Amazon Aurora global cluster. You can change one or
 // more database configuration parameters by specifying these parameters and the
 // new values in the request. For more information on Amazon Aurora, see What is
 // Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
+// in the Amazon Aurora User Guide. This operation only applies to Aurora global
+// database clusters.
 func (c *Client) ModifyGlobalCluster(ctx context.Context, params *ModifyGlobalClusterInput, optFns ...func(*Options)) (*ModifyGlobalClusterOutput, error) {
 	if params == nil {
 		params = &ModifyGlobalClusterInput{}
@@ -33,43 +34,40 @@ func (c *Client) ModifyGlobalCluster(ctx context.Context, params *ModifyGlobalCl
 
 type ModifyGlobalClusterInput struct {
 
-	// A value that indicates whether major version upgrades are allowed. Constraints:
-	// You must allow major version upgrades when specifying a value for the
-	// EngineVersion parameter that is a different major version than the DB cluster's
-	// current version. If you upgrade the major version of a global database, the
-	// cluster and DB instance parameter groups are set to the default parameter groups
-	// for the new version. Apply any custom parameter groups after completing the
-	// upgrade.
+	// Specifies whether to allow major version upgrades. Constraints: Must be enabled
+	// if you specify a value for the EngineVersion parameter that's a different major
+	// version than the global cluster's current version. If you upgrade the major
+	// version of a global database, the cluster and DB instance parameter groups are
+	// set to the default parameter groups for the new version. Apply any custom
+	// parameter groups after completing the upgrade.
 	AllowMajorVersionUpgrade *bool
 
-	// Indicates if the global database cluster has deletion protection enabled. The
-	// global database cluster can't be deleted when deletion protection is enabled.
+	// Specifies whether to enable deletion protection for the global database
+	// cluster. The global database cluster can't be deleted when deletion protection
+	// is enabled.
 	DeletionProtection *bool
 
-	// The version number of the database engine to which you want to upgrade.
-	// Changing this parameter results in an outage. The change is applied during the
-	// next maintenance window unless ApplyImmediately is enabled. To list all of the
-	// available engine versions for aurora-mysql (for MySQL-based Aurora global
-	// databases), use the following command: aws rds describe-db-engine-versions
-	// --engine aurora-mysql --query '*[]|[?SupportsGlobalDatabases ==
-	// `true`].[EngineVersion]' To list all of the available engine versions for
-	// aurora-postgresql (for PostgreSQL-based Aurora global databases), use the
-	// following command: aws rds describe-db-engine-versions --engine
-	// aurora-postgresql --query '*[]|[?SupportsGlobalDatabases ==
-	// `true`].[EngineVersion]'
+	// The version number of the database engine to which you want to upgrade. To list
+	// all of the available engine versions for aurora-mysql (for MySQL-based Aurora
+	// global databases), use the following command: aws rds
+	// describe-db-engine-versions --engine aurora-mysql --query
+	// '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' To list all of the
+	// available engine versions for aurora-postgresql (for PostgreSQL-based Aurora
+	// global databases), use the following command: aws rds
+	// describe-db-engine-versions --engine aurora-postgresql --query
+	// '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'
 	EngineVersion *string
 
-	// The DB cluster identifier for the global cluster being modified. This parameter
-	// isn't case-sensitive. Constraints:
+	// The cluster identifier for the global cluster to modify. This parameter isn't
+	// case-sensitive. Constraints:
 	//   - Must match the identifier of an existing global database cluster.
 	GlobalClusterIdentifier *string
 
-	// The new cluster identifier for the global database cluster when modifying a
-	// global database cluster. This value is stored as a lowercase string.
-	// Constraints:
-	//   - Must contain from 1 to 63 letters, numbers, or hyphens
-	//   - The first character must be a letter
-	//   - Can't end with a hyphen or contain two consecutive hyphens
+	// The new cluster identifier for the global database cluster. This value is
+	// stored as a lowercase string. Constraints:
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//   - The first character must be a letter.
+	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	// Example: my-cluster2
 	NewGlobalClusterIdentifier *string
 

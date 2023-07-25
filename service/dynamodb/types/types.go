@@ -2957,7 +2957,7 @@ type Update struct {
 
 	// Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Update
 	// condition fails. For ReturnValuesOnConditionCheckFailure , the valid values are:
-	// NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW.
+	// NONE and ALL_OLD.
 	ReturnValuesOnConditionCheckFailure ReturnValuesOnConditionCheckFailure
 
 	noSmithyDocumentSerde

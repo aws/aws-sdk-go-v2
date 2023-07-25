@@ -25,7 +25,7 @@ type AccountAssociationsListElement struct {
 }
 
 // The set of accounts that will be under the billing group. The set of accounts
-// resemble the linked accounts in a consolidated family.
+// resemble the linked accounts in a consolidated billing family.
 type AccountGrouping struct {
 
 	// The account IDs that make up the billing group. Account IDs must be a part of
@@ -33,6 +33,10 @@ type AccountGrouping struct {
 	//
 	// This member is required.
 	LinkedAccountIds []string
+
+	// Specifies if this billing group will automatically associate newly added Amazon
+	// Web Services accounts that join your consolidated billing family.
+	AutoAssociate *bool
 
 	noSmithyDocumentSerde
 }
@@ -89,6 +93,10 @@ type BillingGroupCostReportElement struct {
 
 // A representation of a billing group.
 type BillingGroupListElement struct {
+
+	// Specifies if the billing group has automatic account association ( AutoAssociate
+	// ) enabled.
+	AccountGrouping *ListBillingGroupAccountGrouping
 
 	// The Amazon Resource Number (ARN) that can be used to uniquely identify the
 	// billing group.
@@ -355,6 +363,16 @@ type ListAccountAssociationsFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies if the billing group has the following features enabled.
+type ListBillingGroupAccountGrouping struct {
+
+	// Specifies if this billing group will automatically associate newly added Amazon
+	// Web Services accounts that join your consolidated billing family.
+	AutoAssociate *bool
+
+	noSmithyDocumentSerde
+}
+
 // The filter used to retrieve specific BillingGroupCostReportElements .
 type ListBillingGroupCostReportsFilter struct {
 
@@ -371,6 +389,10 @@ type ListBillingGroupsFilter struct {
 
 	// The list of billing group Amazon Resource Names (ARNs) to retrieve information.
 	Arns []string
+
+	// Specifies if this billing group will automatically associate newly added Amazon
+	// Web Services accounts that join your consolidated billing family.
+	AutoAssociate *bool
 
 	// The pricing plan Amazon Resource Names (ARNs) to retrieve information.
 	PricingPlan *string
@@ -608,6 +630,16 @@ type Tiering struct {
 	//
 	// This member is required.
 	FreeTier *FreeTierConfig
+
+	noSmithyDocumentSerde
+}
+
+// Specifies if the billing group has the following features enabled.
+type UpdateBillingGroupAccountGrouping struct {
+
+	// Specifies if this billing group will automatically associate newly added Amazon
+	// Web Services accounts that join your consolidated billing family.
+	AutoAssociate *bool
 
 	noSmithyDocumentSerde
 }

@@ -181,6 +181,61 @@ func (m *awsAwsjson11_serializeOpCreateAgent) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateLocationAzureBlob struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateLocationAzureBlob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateLocationAzureBlob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLocationAzureBlobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("FmrsService.CreateLocationAzureBlob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateLocationAzureBlobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateLocationEfs struct {
 }
 
@@ -1046,6 +1101,61 @@ func (m *awsAwsjson11_serializeOpDescribeDiscoveryJob) HandleSerialize(ctx conte
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeDiscoveryJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeLocationAzureBlob struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeLocationAzureBlob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeLocationAzureBlob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeLocationAzureBlobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("FmrsService.DescribeLocationAzureBlob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeLocationAzureBlobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2766,6 +2876,61 @@ func (m *awsAwsjson11_serializeOpUpdateDiscoveryJob) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateLocationAzureBlob struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateLocationAzureBlob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateLocationAzureBlob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLocationAzureBlobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("FmrsService.UpdateLocationAzureBlob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateLocationAzureBlobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateLocationHdfs struct {
 }
 
@@ -3158,6 +3323,18 @@ func awsAwsjson11_serializeDocumentAgentArnList(v []string, value smithyjson.Val
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAzureBlobSasConfiguration(v *types.AzureBlobSasConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Token != nil {
+		ok := object.Key("Token")
+		ok.String(*v.Token)
+	}
+
 	return nil
 }
 
@@ -3817,6 +3994,59 @@ func awsAwsjson11_serializeOpDocumentCreateAgentInput(v *CreateAgentInput, value
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateLocationAzureBlobInput(v *CreateLocationAzureBlobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AccessTier) > 0 {
+		ok := object.Key("AccessTier")
+		ok.String(string(v.AccessTier))
+	}
+
+	if v.AgentArns != nil {
+		ok := object.Key("AgentArns")
+		if err := awsAwsjson11_serializeDocumentAgentArnList(v.AgentArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
+	if len(v.BlobType) > 0 {
+		ok := object.Key("BlobType")
+		ok.String(string(v.BlobType))
+	}
+
+	if v.ContainerUrl != nil {
+		ok := object.Key("ContainerUrl")
+		ok.String(*v.ContainerUrl)
+	}
+
+	if v.SasConfiguration != nil {
+		ok := object.Key("SasConfiguration")
+		if err := awsAwsjson11_serializeDocumentAzureBlobSasConfiguration(v.SasConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subdirectory != nil {
+		ok := object.Key("Subdirectory")
+		ok.String(*v.Subdirectory)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentInputTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateLocationEfsInput(v *CreateLocationEfsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4413,6 +4643,18 @@ func awsAwsjson11_serializeOpDocumentDescribeDiscoveryJobInput(v *DescribeDiscov
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeLocationAzureBlobInput(v *DescribeLocationAzureBlobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LocationArn != nil {
+		ok := object.Key("LocationArn")
+		ok.String(*v.LocationArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeLocationEfsInput(v *DescribeLocationEfsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4984,6 +5226,52 @@ func awsAwsjson11_serializeOpDocumentUpdateDiscoveryJobInput(v *UpdateDiscoveryJ
 	if v.DiscoveryJobArn != nil {
 		ok := object.Key("DiscoveryJobArn")
 		ok.String(*v.DiscoveryJobArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateLocationAzureBlobInput(v *UpdateLocationAzureBlobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AccessTier) > 0 {
+		ok := object.Key("AccessTier")
+		ok.String(string(v.AccessTier))
+	}
+
+	if v.AgentArns != nil {
+		ok := object.Key("AgentArns")
+		if err := awsAwsjson11_serializeDocumentAgentArnList(v.AgentArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
+	if len(v.BlobType) > 0 {
+		ok := object.Key("BlobType")
+		ok.String(string(v.BlobType))
+	}
+
+	if v.LocationArn != nil {
+		ok := object.Key("LocationArn")
+		ok.String(*v.LocationArn)
+	}
+
+	if v.SasConfiguration != nil {
+		ok := object.Key("SasConfiguration")
+		if err := awsAwsjson11_serializeDocumentAzureBlobSasConfiguration(v.SasConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subdirectory != nil {
+		ok := object.Key("Subdirectory")
+		ok.String(*v.Subdirectory)
 	}
 
 	return nil

@@ -63,7 +63,8 @@ type BatchExecuteStatementOutput struct {
 	// ordered according to the ordering of the statements.
 	ConsumedCapacity []types.ConsumedCapacity
 
-	// The response to each PartiQL statement in the batch.
+	// The response to each PartiQL statement in the batch. The values of the list are
+	// ordered according to the ordering of the request statements.
 	Responses []types.BatchStatementResponse
 
 	// Metadata pertaining to the operation's result.

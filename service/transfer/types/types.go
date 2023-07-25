@@ -7,9 +7,9 @@ import (
 	"time"
 )
 
-// Contains the details for a connector object. The connector object is used for
-// AS2 outbound processes, to connect the Transfer Family customer with the trading
-// partner.
+// Contains the details for an AS2 connector object. The connector object is used
+// for AS2 outbound processes, to connect the Transfer Family customer with the
+// trading partner.
 type As2ConnectorConfig struct {
 
 	// Provides Basic authentication support to the AS2 Connectors API. To use Basic
@@ -394,7 +394,7 @@ type DescribedConnector struct {
 	// role also needs the kms:Decrypt permission for that key.
 	AccessRole *string
 
-	// A structure that contains the parameters for a connector object.
+	// A structure that contains the parameters for an AS2 connector object.
 	As2Config *As2ConnectorConfig
 
 	// The unique identifier for the connector.
@@ -405,10 +405,13 @@ type DescribedConnector struct {
 	// set, you can view connector activity in your CloudWatch logs.
 	LoggingRole *string
 
+	// A structure that contains the parameters for an SFTP connector object.
+	SftpConfig *SftpConnectorConfig
+
 	// Key-value pairs that can be used to group and search for connectors.
 	Tags []Tag
 
-	// The URL of the partner's AS2 endpoint.
+	// The URL of the partner's AS2 or SFTP endpoint.
 	Url *string
 
 	noSmithyDocumentSerde
@@ -1131,7 +1134,7 @@ type ListedConnector struct {
 	// The unique identifier for the connector.
 	ConnectorId *string
 
-	// The URL of the partner's AS2 endpoint.
+	// The URL of the partner's AS2 or SFTP endpoint.
 	Url *string
 
 	noSmithyDocumentSerde
@@ -1512,6 +1515,29 @@ type ServiceMetadata struct {
 	//
 	// This member is required.
 	UserDetails *UserDetails
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details for an SFTP connector object. The connector object is used
+// for transferring files to and from a partner's SFTP server.
+type SftpConnectorConfig struct {
+
+	// The public portion of the host key, or keys, that are used to authenticate the
+	// user to the external server to which you are connecting. You can use the
+	// ssh-keyscan command against the SFTP server to retrieve the necessary key. The
+	// three standard SSH public key format elements are , , and an optional , with
+	// spaces between each element. For the trusted host key, Transfer Family accepts
+	// RSA and ECDSA keys.
+	//   - For RSA keys, the key type is ssh-rsa .
+	//   - For ECDSA keys, the key type is either ecdsa-sha2-nistp256 ,
+	//   ecdsa-sha2-nistp384 , or ecdsa-sha2-nistp521 , depending on the size of the
+	//   key you generated.
+	TrustedHostKeys []string
+
+	// The identifiers for the secrets (in Amazon Web Services Secrets Manager) that
+	// contain the SFTP user's private keys or passwords.
+	UserSecretId *string
 
 	noSmithyDocumentSerde
 }

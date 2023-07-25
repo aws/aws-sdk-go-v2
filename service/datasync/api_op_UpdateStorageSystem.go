@@ -37,7 +37,7 @@ type UpdateStorageSystemInput struct {
 	StorageSystemArn *string
 
 	// Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to
-	// and reads your on-premises storage system.
+	// and reads your on-premises storage system. You can only specify one ARN.
 	AgentArns []string
 
 	// Specifies the ARN of the Amazon CloudWatch log group for monitoring and logging

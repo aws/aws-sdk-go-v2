@@ -1451,6 +1451,9 @@ type DBInstance struct {
 	// subelements.
 	PendingModifiedValues *PendingModifiedValues
 
+	// The progress of the storage optimization operation as a percentage.
+	PercentProgress *string
+
 	// Indicates whether Performance Insights is enabled for the DB instance.
 	PerformanceInsightsEnabled *bool
 

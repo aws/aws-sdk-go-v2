@@ -34,6 +34,10 @@ type UpdateBillingGroupInput struct {
 	// This member is required.
 	Arn *string
 
+	// Specifies if the billing group has automatic account association ( AutoAssociate
+	// ) enabled.
+	AccountGrouping *types.UpdateBillingGroupAccountGrouping
+
 	// The preferences and settings that will be used to compute the Amazon Web
 	// Services charges for a billing group.
 	ComputationPreference *types.ComputationPreference
@@ -51,6 +55,10 @@ type UpdateBillingGroupInput struct {
 }
 
 type UpdateBillingGroupOutput struct {
+
+	// Specifies if the billing group has automatic account association ( AutoAssociate
+	// ) enabled.
+	AccountGrouping *types.UpdateBillingGroupAccountGrouping
 
 	// The Amazon Resource Name (ARN) of the billing group that was updated.
 	Arn *string

@@ -13809,6 +13809,190 @@ func awsRestjson1_deserializeDocumentAwsAppSyncGraphQlApiUserPoolConfigDetails(v
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsAthenaWorkGroupConfigurationDetails(v **types.AwsAthenaWorkGroupConfigurationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsAthenaWorkGroupConfigurationDetails
+	if *v == nil {
+		sv = &types.AwsAthenaWorkGroupConfigurationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ResultConfiguration":
+			if err := awsRestjson1_deserializeDocumentAwsAthenaWorkGroupConfigurationResultConfigurationDetails(&sv.ResultConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsAthenaWorkGroupConfigurationResultConfigurationDetails(v **types.AwsAthenaWorkGroupConfigurationResultConfigurationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsAthenaWorkGroupConfigurationResultConfigurationDetails
+	if *v == nil {
+		sv = &types.AwsAthenaWorkGroupConfigurationResultConfigurationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EncryptionConfiguration":
+			if err := awsRestjson1_deserializeDocumentAwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails(&sv.EncryptionConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails(v **types.AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails
+	if *v == nil {
+		sv = &types.AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EncryptionOption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EncryptionOption = ptr.String(jtv)
+			}
+
+		case "KmsKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.KmsKey = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsAthenaWorkGroupDetails(v **types.AwsAthenaWorkGroupDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsAthenaWorkGroupDetails
+	if *v == nil {
+		sv = &types.AwsAthenaWorkGroupDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Configuration":
+			if err := awsRestjson1_deserializeDocumentAwsAthenaWorkGroupConfigurationDetails(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsAutoScalingAutoScalingGroupAvailabilityZonesList(v *[]types.AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -38543,6 +38727,85 @@ func awsRestjson1_deserializeDocumentAwsRdsDbClusterOptionGroupMemberships(v *[]
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsRdsDbClusterSnapshotDbClusterSnapshotAttribute(v **types.AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute
+	if *v == nil {
+		sv = &types.AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttributeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AttributeName = ptr.String(jtv)
+			}
+
+		case "AttributeValues":
+			if err := awsRestjson1_deserializeDocumentNonEmptyStringList(&sv.AttributeValues, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsRdsDbClusterSnapshotDbClusterSnapshotAttributes(v *[]types.AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute
+	if *v == nil {
+		cv = []types.AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAwsRdsDbClusterSnapshotDbClusterSnapshotAttribute(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsRdsDbClusterSnapshotDetails(v **types.AwsRdsDbClusterSnapshotDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -38599,6 +38862,11 @@ func awsRestjson1_deserializeDocumentAwsRdsDbClusterSnapshotDetails(v **types.Aw
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.DbClusterIdentifier = ptr.String(jtv)
+			}
+
+		case "DbClusterSnapshotAttributes":
+			if err := awsRestjson1_deserializeDocumentAwsRdsDbClusterSnapshotDbClusterSnapshotAttributes(&sv.DbClusterSnapshotAttributes, value); err != nil {
+				return err
 			}
 
 		case "DbClusterSnapshotIdentifier":
@@ -55255,6 +55523,11 @@ func awsRestjson1_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 
 		case "AwsAppSyncGraphQlApi":
 			if err := awsRestjson1_deserializeDocumentAwsAppSyncGraphQlApiDetails(&sv.AwsAppSyncGraphQlApi, value); err != nil {
+				return err
+			}
+
+		case "AwsAthenaWorkGroup":
+			if err := awsRestjson1_deserializeDocumentAwsAthenaWorkGroupDetails(&sv.AwsAthenaWorkGroup, value); err != nil {
 				return err
 			}
 

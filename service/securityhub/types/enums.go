@@ -290,8 +290,10 @@ type MapFilterComparison string
 
 // Enum values for MapFilterComparison
 const (
-	MapFilterComparisonEquals    MapFilterComparison = "EQUALS"
-	MapFilterComparisonNotEquals MapFilterComparison = "NOT_EQUALS"
+	MapFilterComparisonEquals      MapFilterComparison = "EQUALS"
+	MapFilterComparisonNotEquals   MapFilterComparison = "NOT_EQUALS"
+	MapFilterComparisonContains    MapFilterComparison = "CONTAINS"
+	MapFilterComparisonNotContains MapFilterComparison = "NOT_CONTAINS"
 )
 
 // Values returns all known values for MapFilterComparison. Note that this can be
@@ -301,6 +303,8 @@ func (MapFilterComparison) Values() []MapFilterComparison {
 	return []MapFilterComparison{
 		"EQUALS",
 		"NOT_EQUALS",
+		"CONTAINS",
+		"NOT_CONTAINS",
 	}
 }
 
@@ -510,6 +514,8 @@ const (
 	StringFilterComparisonPrefix          StringFilterComparison = "PREFIX"
 	StringFilterComparisonNotEquals       StringFilterComparison = "NOT_EQUALS"
 	StringFilterComparisonPrefixNotEquals StringFilterComparison = "PREFIX_NOT_EQUALS"
+	StringFilterComparisonContains        StringFilterComparison = "CONTAINS"
+	StringFilterComparisonNotContains     StringFilterComparison = "NOT_CONTAINS"
 )
 
 // Values returns all known values for StringFilterComparison. Note that this can
@@ -521,6 +527,8 @@ func (StringFilterComparison) Values() []StringFilterComparison {
 		"PREFIX",
 		"NOT_EQUALS",
 		"PREFIX_NOT_EQUALS",
+		"CONTAINS",
+		"NOT_CONTAINS",
 	}
 }
 

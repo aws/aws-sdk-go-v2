@@ -51,13 +51,13 @@ type CreateAgentInput struct {
 	// Specifies the Amazon Resource Name (ARN) of the security group that protects
 	// your task's network interfaces (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
 	// when using a virtual private cloud (VPC) endpoint (https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc)
-	// .
+	// . You can only specify one ARN.
 	SecurityGroupArns []string
 
 	// Specifies the ARN of the subnet where you want to run your DataSync task when
 	// using a VPC endpoint. This is the subnet where DataSync creates and manages the
 	// network interfaces (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
-	// for your transfer.
+	// for your transfer. You can only specify one ARN.
 	SubnetArns []string
 
 	// Specifies labels that help you categorize, filter, and search for your Amazon

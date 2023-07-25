@@ -32,7 +32,8 @@ func (c *Client) AddStorageSystem(ctx context.Context, params *AddStorageSystemI
 type AddStorageSystemInput struct {
 
 	// Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to
-	// and reads from your on-premises storage system's management interface.
+	// and reads from your on-premises storage system's management interface. You can
+	// only specify one ARN.
 	//
 	// This member is required.
 	AgentArns []string

@@ -6318,6 +6318,11 @@ func validateAutoMLProblemTypeConfig(v types.AutoMLProblemTypeConfig) error {
 			invalidParams.AddNested("[TabularJobConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.AutoMLProblemTypeConfigMemberTextClassificationJobConfig:
+		if err := validateTextClassificationJobConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[TextClassificationJobConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig:
 		if err := validateTimeSeriesForecastingJobConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[TimeSeriesForecastingJobConfig]", err.(smithy.InvalidParamsError))
@@ -10832,6 +10837,24 @@ func validateTensorBoardOutputConfig(v *types.TensorBoardOutputConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TensorBoardOutputConfig"}
 	if v.S3OutputPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextClassificationJobConfig(v *types.TextClassificationJobConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextClassificationJobConfig"}
+	if v.ContentColumn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentColumn"))
+	}
+	if v.TargetLabelColumn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetLabelColumn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

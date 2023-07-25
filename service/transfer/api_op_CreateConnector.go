@@ -12,10 +12,11 @@ import (
 )
 
 // Creates the connector, which captures the parameters for an outbound connection
-// for the AS2 protocol. The connector is required for sending files to an
-// externally hosted AS2 server. For more details about connectors, see Create AS2
-// connectors (https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector)
-// .
+// for the AS2 or SFTP protocol. The connector is required for sending files to an
+// externally hosted AS2 or SFTP server. For more details about AS2 connectors, see
+// Create AS2 connectors (https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector)
+// . You must specify exactly one configuration object: either for AS2 ( As2Config
+// ) or SFTP ( SftpConfig ).
 func (c *Client) CreateConnector(ctx context.Context, params *CreateConnectorInput, optFns ...func(*Options)) (*CreateConnectorOutput, error) {
 	if params == nil {
 		params = &CreateConnectorInput{}
@@ -51,20 +52,21 @@ type CreateConnectorInput struct {
 	// This member is required.
 	AccessRole *string
 
-	// A structure that contains the parameters for a connector object.
-	//
-	// This member is required.
-	As2Config *types.As2ConnectorConfig
-
-	// The URL of the partner's AS2 endpoint.
+	// The URL of the partner's AS2 or SFTP endpoint.
 	//
 	// This member is required.
 	Url *string
+
+	// A structure that contains the parameters for an AS2 connector object.
+	As2Config *types.As2ConnectorConfig
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a connector to turn on CloudWatch logging for Amazon S3 events. When
 	// set, you can view connector activity in your CloudWatch logs.
 	LoggingRole *string
+
+	// A structure that contains the parameters for an SFTP connector object.
+	SftpConfig *types.SftpConnectorConfig
 
 	// Key-value pairs that can be used to group and search for connectors. Tags are
 	// metadata attached to connectors for any purpose.

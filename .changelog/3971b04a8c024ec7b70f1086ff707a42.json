@@ -1,0 +1,8 @@
+{
+    "id": "3971b04a-8c02-4ec7-b70f-1086ff707a42",
+    "type": "feature",
+    "description": "Added support for Auto-Assocate Billing Groups for CreateBillingGroup, UpdateBillingGroup, and ListBillingGroups.",
+    "modules": [
+        "service/billingconductor"
+    ]
+}

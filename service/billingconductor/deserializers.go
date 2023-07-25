@@ -4574,6 +4574,11 @@ func awsRestjson1_deserializeOpDocumentUpdateBillingGroupOutput(v **UpdateBillin
 
 	for key, value := range shape {
 		switch key {
+		case "AccountGrouping":
+			if err := awsRestjson1_deserializeDocumentUpdateBillingGroupAccountGrouping(&sv.AccountGrouping, value); err != nil {
+				return err
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6142,6 +6147,11 @@ func awsRestjson1_deserializeDocumentBillingGroupListElement(v **types.BillingGr
 
 	for key, value := range shape {
 		switch key {
+		case "AccountGrouping":
+			if err := awsRestjson1_deserializeDocumentListBillingGroupAccountGrouping(&sv.AccountGrouping, value); err != nil {
+				return err
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6874,6 +6884,46 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 					return err
 				}
 				sv.RetryAfterSeconds = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListBillingGroupAccountGrouping(v **types.ListBillingGroupAccountGrouping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ListBillingGroupAccountGrouping
+	if *v == nil {
+		sv = &types.ListBillingGroupAccountGrouping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutoAssociate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoAssociate = ptr.Bool(jtv)
 			}
 
 		default:
@@ -7832,6 +7882,46 @@ func awsRestjson1_deserializeDocumentTiering(v **types.Tiering, value interface{
 		case "FreeTier":
 			if err := awsRestjson1_deserializeDocumentFreeTierConfig(&sv.FreeTier, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUpdateBillingGroupAccountGrouping(v **types.UpdateBillingGroupAccountGrouping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UpdateBillingGroupAccountGrouping
+	if *v == nil {
+		sv = &types.UpdateBillingGroupAccountGrouping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutoAssociate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoAssociate = ptr.Bool(jtv)
 			}
 
 		default:

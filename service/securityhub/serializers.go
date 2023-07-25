@@ -6366,6 +6366,80 @@ func awsRestjson1_serializeDocumentAwsAppSyncGraphQlApiUserPoolConfigDetails(v *
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsAthenaWorkGroupConfigurationDetails(v *types.AwsAthenaWorkGroupConfigurationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResultConfiguration != nil {
+		ok := object.Key("ResultConfiguration")
+		if err := awsRestjson1_serializeDocumentAwsAthenaWorkGroupConfigurationResultConfigurationDetails(v.ResultConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAthenaWorkGroupConfigurationResultConfigurationDetails(v *types.AwsAthenaWorkGroupConfigurationResultConfigurationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsRestjson1_serializeDocumentAwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails(v *types.AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptionOption != nil {
+		ok := object.Key("EncryptionOption")
+		ok.String(*v.EncryptionOption)
+	}
+
+	if v.KmsKey != nil {
+		ok := object.Key("KmsKey")
+		ok.String(*v.KmsKey)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsAthenaWorkGroupDetails(v *types.AwsAthenaWorkGroupDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Configuration != nil {
+		ok := object.Key("Configuration")
+		if err := awsRestjson1_serializeDocumentAwsAthenaWorkGroupConfigurationDetails(v.Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.State != nil {
+		ok := object.Key("State")
+		ok.String(*v.State)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsAutoScalingAutoScalingGroupAvailabilityZonesList(v []types.AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -17664,6 +17738,38 @@ func awsRestjson1_serializeDocumentAwsRdsDbClusterOptionGroupMemberships(v []typ
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsRdsDbClusterSnapshotDbClusterSnapshotAttribute(v *types.AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributeName != nil {
+		ok := object.Key("AttributeName")
+		ok.String(*v.AttributeName)
+	}
+
+	if v.AttributeValues != nil {
+		ok := object.Key("AttributeValues")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.AttributeValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsRdsDbClusterSnapshotDbClusterSnapshotAttributes(v []types.AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsRdsDbClusterSnapshotDbClusterSnapshotAttribute(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsRdsDbClusterSnapshotDetails(v *types.AwsRdsDbClusterSnapshotDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17688,6 +17794,13 @@ func awsRestjson1_serializeDocumentAwsRdsDbClusterSnapshotDetails(v *types.AwsRd
 	if v.DbClusterIdentifier != nil {
 		ok := object.Key("DbClusterIdentifier")
 		ok.String(*v.DbClusterIdentifier)
+	}
+
+	if v.DbClusterSnapshotAttributes != nil {
+		ok := object.Key("DbClusterSnapshotAttributes")
+		if err := awsRestjson1_serializeDocumentAwsRdsDbClusterSnapshotDbClusterSnapshotAttributes(v.DbClusterSnapshotAttributes, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.DbClusterSnapshotIdentifier != nil {
@@ -24901,6 +25014,13 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 	if v.AwsAppSyncGraphQlApi != nil {
 		ok := object.Key("AwsAppSyncGraphQlApi")
 		if err := awsRestjson1_serializeDocumentAwsAppSyncGraphQlApiDetails(v.AwsAppSyncGraphQlApi, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsAthenaWorkGroup != nil {
+		ok := object.Key("AwsAthenaWorkGroup")
+		if err := awsRestjson1_serializeDocumentAwsAthenaWorkGroupDetails(v.AwsAthenaWorkGroup, ok); err != nil {
 			return err
 		}
 	}

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns metadata about a task.
+// Provides information about an DataSync transfer task.
 func (c *Client) DescribeTask(ctx context.Context, params *DescribeTaskInput, optFns ...func(*Options)) (*DescribeTaskOutput, error) {
 	if params == nil {
 		params = &DescribeTaskInput{}
@@ -31,7 +31,7 @@ func (c *Client) DescribeTask(ctx context.Context, params *DescribeTaskInput, op
 // DescribeTaskRequest
 type DescribeTaskInput struct {
 
-	// The Amazon Resource Name (ARN) of the task to describe.
+	// Specifies the Amazon Resource Name (ARN) of the transfer task.
 	//
 	// This member is required.
 	TaskArn *string

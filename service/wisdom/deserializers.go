@@ -5057,6 +5057,11 @@ func awsRestjson1_deserializeDocumentAssistantData(v **types.AssistantData, valu
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "integrationConfiguration":
+			if err := awsRestjson1_deserializeDocumentAssistantIntegrationConfiguration(&sv.IntegrationConfiguration, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5092,6 +5097,46 @@ func awsRestjson1_deserializeDocumentAssistantData(v **types.AssistantData, valu
 					return fmt.Errorf("expected AssistantType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.AssistantType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssistantIntegrationConfiguration(v **types.AssistantIntegrationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssistantIntegrationConfiguration
+	if *v == nil {
+		sv = &types.AssistantIntegrationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "topicIntegrationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericArn to be of type string, got %T instead", value)
+				}
+				sv.TopicIntegrationArn = ptr.String(jtv)
 			}
 
 		default:
@@ -5184,6 +5229,11 @@ func awsRestjson1_deserializeDocumentAssistantSummary(v **types.AssistantSummary
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "integrationConfiguration":
+			if err := awsRestjson1_deserializeDocumentAssistantIntegrationConfiguration(&sv.IntegrationConfiguration, value); err != nil {
+				return err
 			}
 
 		case "name":
@@ -7035,6 +7085,11 @@ func awsRestjson1_deserializeDocumentSessionData(v **types.SessionData, value in
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "integrationConfiguration":
+			if err := awsRestjson1_deserializeDocumentSessionIntegrationConfiguration(&sv.IntegrationConfiguration, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7065,6 +7120,46 @@ func awsRestjson1_deserializeDocumentSessionData(v **types.SessionData, value in
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSessionIntegrationConfiguration(v **types.SessionIntegrationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SessionIntegrationConfiguration
+	if *v == nil {
+		sv = &types.SessionIntegrationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "topicIntegrationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericArn to be of type string, got %T instead", value)
+				}
+				sv.TopicIntegrationArn = ptr.String(jtv)
 			}
 
 		default:

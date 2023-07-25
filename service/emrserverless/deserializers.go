@@ -2694,6 +2694,78 @@ func awsRestjson1_deserializeDocumentAutoStopConfig(v **types.AutoStopConfig, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCloudWatchLoggingConfiguration(v **types.CloudWatchLoggingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CloudWatchLoggingConfiguration
+	if *v == nil {
+		sv = &types.CloudWatchLoggingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "encryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionKeyArn to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
+		case "logGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogGroupName to be of type string, got %T instead", value)
+				}
+				sv.LogGroupName = ptr.String(jtv)
+			}
+
+		case "logStreamNamePrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogStreamNamePrefix to be of type string, got %T instead", value)
+				}
+				sv.LogStreamNamePrefix = ptr.String(jtv)
+			}
+
+		case "logTypes":
+			if err := awsRestjson1_deserializeDocumentLogTypeMap(&sv.LogTypes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConfiguration(v **types.Configuration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3563,6 +3635,76 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentLogTypeList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected LogTypeString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLogTypeMap(v *map[string][]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string][]string
+	if *v == nil {
+		mv = map[string][]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal []string
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentLogTypeList(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentManagedPersistenceMonitoringConfiguration(v **types.ManagedPersistenceMonitoringConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3692,6 +3834,11 @@ func awsRestjson1_deserializeDocumentMonitoringConfiguration(v **types.Monitorin
 
 	for key, value := range shape {
 		switch key {
+		case "cloudWatchLoggingConfiguration":
+			if err := awsRestjson1_deserializeDocumentCloudWatchLoggingConfiguration(&sv.CloudWatchLoggingConfiguration, value); err != nil {
+				return err
+			}
+
 		case "managedPersistenceMonitoringConfiguration":
 			if err := awsRestjson1_deserializeDocumentManagedPersistenceMonitoringConfiguration(&sv.ManagedPersistenceMonitoringConfiguration, value); err != nil {
 				return err

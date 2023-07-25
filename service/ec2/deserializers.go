@@ -77997,6 +77997,23 @@ func awsEc2query_deserializeDocumentInferenceAcceleratorInfo(v **types.Inference
 				return err
 			}
 
+		case strings.EqualFold("totalInferenceMemoryInMiB", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.TotalInferenceMemoryInMiB = ptr.Int32(int32(i64))
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -78061,6 +78078,12 @@ func awsEc2query_deserializeDocumentInferenceDeviceInfo(v **types.InferenceDevic
 			{
 				xtv := string(val)
 				sv.Manufacturer = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("memoryInfo", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentInferenceDeviceMemoryInfo(&sv.MemoryInfo, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("name", t.Name.Local):
@@ -78158,6 +78181,59 @@ func awsEc2query_deserializeDocumentInferenceDeviceInfoListUnwrapped(v *[]types.
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentInferenceDeviceMemoryInfo(v **types.InferenceDeviceMemoryInfo, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InferenceDeviceMemoryInfo
+	if *v == nil {
+		sv = &types.InferenceDeviceMemoryInfo{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("sizeInMiB", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.SizeInMiB = ptr.Int32(int32(i64))
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentInsideCidrBlocksStringList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -96497,6 +96573,23 @@ func awsEc2query_deserializeDocumentNetworkCardInfo(v **types.NetworkCardInfo, d
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("baselineBandwidthInGbps", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.BaselineBandwidthInGbps = ptr.Float64(f64)
+			}
+
 		case strings.EqualFold("maximumNetworkInterfaces", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -96542,6 +96635,23 @@ func awsEc2query_deserializeDocumentNetworkCardInfo(v **types.NetworkCardInfo, d
 			{
 				xtv := string(val)
 				sv.NetworkPerformance = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("peakBandwidthInGbps", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.PeakBandwidthInGbps = ptr.Float64(f64)
 			}
 
 		default:

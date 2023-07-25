@@ -346,6 +346,21 @@ func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
 }
 
+func validateCloudWatchLoggingConfiguration(v *types.CloudWatchLoggingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLoggingConfiguration"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConfiguration(v *types.Configuration) error {
 	if v == nil {
 		return nil
@@ -391,6 +406,11 @@ func validateConfigurationOverrides(v *types.ConfigurationOverrides) error {
 	if v.ApplicationConfiguration != nil {
 		if err := validateConfigurationList(v.ApplicationConfiguration); err != nil {
 			invalidParams.AddNested("ApplicationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonitoringConfiguration != nil {
+		if err := validateMonitoringConfiguration(v.MonitoringConfiguration); err != nil {
+			invalidParams.AddNested("MonitoringConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -484,6 +504,23 @@ func validateMaximumAllowedResources(v *types.MaximumAllowedResources) error {
 	}
 	if v.Memory == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Memory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonitoringConfiguration(v *types.MonitoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonitoringConfiguration"}
+	if v.CloudWatchLoggingConfiguration != nil {
+		if err := validateCloudWatchLoggingConfiguration(v.CloudWatchLoggingConfiguration); err != nil {
+			invalidParams.AddNested("CloudWatchLoggingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

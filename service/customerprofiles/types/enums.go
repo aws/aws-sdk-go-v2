@@ -2,6 +2,24 @@
 
 package types
 
+type AttributeMatchingModel string
+
+// Enum values for AttributeMatchingModel
+const (
+	AttributeMatchingModelOneToOne   AttributeMatchingModel = "ONE_TO_ONE"
+	AttributeMatchingModelManyToMany AttributeMatchingModel = "MANY_TO_MANY"
+)
+
+// Values returns all known values for AttributeMatchingModel. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AttributeMatchingModel) Values() []AttributeMatchingModel {
+	return []AttributeMatchingModel{
+		"ONE_TO_ONE",
+		"MANY_TO_MANY",
+	}
+}
+
 type ConflictResolvingModel string
 
 // Enum values for ConflictResolvingModel
@@ -239,6 +257,24 @@ func (MarketoConnectorOperator) Values() []MarketoConnectorOperator {
 	}
 }
 
+type MatchType string
+
+// Enum values for MatchType
+const (
+	MatchTypeRuleBasedMatching MatchType = "RULE_BASED_MATCHING"
+	MatchTypeMlBasedMatching   MatchType = "ML_BASED_MATCHING"
+)
+
+// Values returns all known values for MatchType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MatchType) Values() []MatchType {
+	return []MatchType{
+		"RULE_BASED_MATCHING",
+		"ML_BASED_MATCHING",
+	}
+}
+
 type Operator string
 
 // Enum values for Operator
@@ -320,6 +356,26 @@ func (PartyType) Values() []PartyType {
 		"INDIVIDUAL",
 		"BUSINESS",
 		"OTHER",
+	}
+}
+
+type RuleBasedMatchingStatus string
+
+// Enum values for RuleBasedMatchingStatus
+const (
+	RuleBasedMatchingStatusPending    RuleBasedMatchingStatus = "PENDING"
+	RuleBasedMatchingStatusInProgress RuleBasedMatchingStatus = "IN_PROGRESS"
+	RuleBasedMatchingStatusActive     RuleBasedMatchingStatus = "ACTIVE"
+)
+
+// Values returns all known values for RuleBasedMatchingStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RuleBasedMatchingStatus) Values() []RuleBasedMatchingStatus {
+	return []RuleBasedMatchingStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"ACTIVE",
 	}
 }
 

@@ -2325,6 +2325,13 @@ func awsRestjson1_serializeOpDocumentUpdateBillingGroupInput(v *UpdateBillingGro
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountGrouping != nil {
+		ok := object.Key("AccountGrouping")
+		if err := awsRestjson1_serializeDocumentUpdateBillingGroupAccountGrouping(v.AccountGrouping, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Arn != nil {
 		ok := object.Key("Arn")
 		ok.String(*v.Arn)
@@ -2637,6 +2644,11 @@ func awsRestjson1_serializeDocumentAccountGrouping(v *types.AccountGrouping, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoAssociate != nil {
+		ok := object.Key("AutoAssociate")
+		ok.Boolean(*v.AutoAssociate)
+	}
+
 	if v.LinkedAccountIds != nil {
 		ok := object.Key("LinkedAccountIds")
 		if err := awsRestjson1_serializeDocumentAccountIdList(v.LinkedAccountIds, ok); err != nil {
@@ -2933,6 +2945,11 @@ func awsRestjson1_serializeDocumentListBillingGroupsFilter(v *types.ListBillingG
 		}
 	}
 
+	if v.AutoAssociate != nil {
+		ok := object.Key("AutoAssociate")
+		ok.Boolean(*v.AutoAssociate)
+	}
+
 	if v.PricingPlan != nil {
 		ok := object.Key("PricingPlan")
 		ok.String(*v.PricingPlan)
@@ -3099,6 +3116,18 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateBillingGroupAccountGrouping(v *types.UpdateBillingGroupAccountGrouping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoAssociate != nil {
+		ok := object.Key("AutoAssociate")
+		ok.Boolean(*v.AutoAssociate)
+	}
+
 	return nil
 }
 

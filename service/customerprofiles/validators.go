@@ -510,6 +510,26 @@ func (m *validateOpGetProfileObjectTypeTemplate) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSimilarProfiles struct {
+}
+
+func (*validateOpGetSimilarProfiles) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSimilarProfiles) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSimilarProfilesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSimilarProfilesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWorkflow struct {
 }
 
@@ -705,6 +725,26 @@ func (m *validateOpListProfileObjectTypes) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListProfileObjectTypesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRuleBasedMatches struct {
+}
+
+func (*validateOpListRuleBasedMatches) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRuleBasedMatches) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRuleBasedMatchesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRuleBasedMatchesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1050,6 +1090,10 @@ func addOpGetProfileObjectTypeTemplateValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpGetProfileObjectTypeTemplate{}, middleware.After)
 }
 
+func addOpGetSimilarProfilesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSimilarProfiles{}, middleware.After)
+}
+
 func addOpGetWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkflow{}, middleware.After)
 }
@@ -1088,6 +1132,10 @@ func addOpListProfileObjectsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListProfileObjectTypesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProfileObjectTypes{}, middleware.After)
+}
+
+func addOpListRuleBasedMatchesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRuleBasedMatches{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1243,6 +1291,21 @@ func validateAttributeList(v []types.AttributeItem) error {
 		if err := validateAttributeItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttributeTypesSelector(v *types.AttributeTypesSelector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeTypesSelector"}
+	if len(v.AttributeMatchingModel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeMatchingModel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1499,6 +1562,38 @@ func validateMatchingRequest(v *types.MatchingRequest) error {
 	}
 }
 
+func validateMatchingRule(v *types.MatchingRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchingRule"}
+	if v.Rule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchingRules(v []types.MatchingRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchingRules"}
+	for i := range v {
+		if err := validateMatchingRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateObjectFilter(v *types.ObjectFilter) error {
 	if v == nil {
 		return nil
@@ -1524,6 +1619,41 @@ func validateRange(v *types.Range) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Range"}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleBasedMatchingRequest(v *types.RuleBasedMatchingRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleBasedMatchingRequest"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if v.MatchingRules != nil {
+		if err := validateMatchingRules(v.MatchingRules); err != nil {
+			invalidParams.AddNested("MatchingRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AttributeTypesSelector != nil {
+		if err := validateAttributeTypesSelector(v.AttributeTypesSelector); err != nil {
+			invalidParams.AddNested("AttributeTypesSelector", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConflictResolution != nil {
+		if err := validateConflictResolution(v.ConflictResolution); err != nil {
+			invalidParams.AddNested("ConflictResolution", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExportingConfig != nil {
+		if err := validateExportingConfig(v.ExportingConfig); err != nil {
+			invalidParams.AddNested("ExportingConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1842,6 +1972,11 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v.Matching != nil {
 		if err := validateMatchingRequest(v.Matching); err != nil {
 			invalidParams.AddNested("Matching", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuleBasedMatching != nil {
+		if err := validateRuleBasedMatchingRequest(v.RuleBasedMatching); err != nil {
+			invalidParams.AddNested("RuleBasedMatching", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2274,6 +2409,30 @@ func validateOpGetProfileObjectTypeTemplateInput(v *GetProfileObjectTypeTemplate
 	}
 }
 
+func validateOpGetSimilarProfilesInput(v *GetSimilarProfilesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSimilarProfilesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if len(v.MatchType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchType"))
+	}
+	if v.SearchKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SearchKey"))
+	}
+	if v.SearchValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SearchValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetWorkflowInput(v *GetWorkflowInput) error {
 	if v == nil {
 		return nil
@@ -2434,6 +2593,21 @@ func validateOpListProfileObjectTypesInput(v *ListProfileObjectTypesInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListProfileObjectTypesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRuleBasedMatchesInput(v *ListRuleBasedMatchesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRuleBasedMatchesInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
@@ -2653,6 +2827,11 @@ func validateOpUpdateDomainInput(v *UpdateDomainInput) error {
 	if v.Matching != nil {
 		if err := validateMatchingRequest(v.Matching); err != nil {
 			invalidParams.AddNested("Matching", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuleBasedMatching != nil {
+		if err := validateRuleBasedMatchingRequest(v.RuleBasedMatching); err != nil {
+			invalidParams.AddNested("RuleBasedMatching", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

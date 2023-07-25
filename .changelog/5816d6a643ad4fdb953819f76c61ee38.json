@@ -1,0 +1,8 @@
+{
+    "id": "5816d6a6-43ad-4fdb-9538-19f76c61ee38",
+    "type": "feature",
+    "description": "This release adds support for publishing application logs to CloudWatch.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

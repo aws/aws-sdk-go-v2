@@ -70,6 +70,26 @@ func (m *validateOpCreateAgent) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLocationAzureBlob struct {
+}
+
+func (*validateOpCreateLocationAzureBlob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLocationAzureBlob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLocationAzureBlobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLocationAzureBlobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLocationEfs struct {
 }
 
@@ -385,6 +405,26 @@ func (m *validateOpDescribeDiscoveryJob) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeDiscoveryJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeLocationAzureBlob struct {
+}
+
+func (*validateOpDescribeLocationAzureBlob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeLocationAzureBlob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeLocationAzureBlobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeLocationAzureBlobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -930,6 +970,26 @@ func (m *validateOpUpdateDiscoveryJob) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLocationAzureBlob struct {
+}
+
+func (*validateOpUpdateLocationAzureBlob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationAzureBlob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationAzureBlobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationAzureBlobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLocationHdfs struct {
 }
 
@@ -1082,6 +1142,10 @@ func addOpCreateAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAgent{}, middleware.After)
 }
 
+func addOpCreateLocationAzureBlobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLocationAzureBlob{}, middleware.After)
+}
+
 func addOpCreateLocationEfsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLocationEfs{}, middleware.After)
 }
@@ -1144,6 +1208,10 @@ func addOpDescribeAgentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeDiscoveryJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDiscoveryJob{}, middleware.After)
+}
+
+func addOpDescribeLocationAzureBlobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeLocationAzureBlob{}, middleware.After)
 }
 
 func addOpDescribeLocationEfsValidationMiddleware(stack *middleware.Stack) error {
@@ -1254,6 +1322,10 @@ func addOpUpdateDiscoveryJobValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUpdateDiscoveryJob{}, middleware.After)
 }
 
+func addOpUpdateLocationAzureBlobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationAzureBlob{}, middleware.After)
+}
+
 func addOpUpdateLocationHdfsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLocationHdfs{}, middleware.After)
 }
@@ -1280,6 +1352,21 @@ func addOpUpdateTaskExecutionValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTask{}, middleware.After)
+}
+
+func validateAzureBlobSasConfiguration(v *types.AzureBlobSasConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureBlobSasConfiguration"}
+	if v.Token == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Token"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateCredentials(v *types.Credentials) error {
@@ -1618,6 +1705,37 @@ func validateOpCreateAgentInput(v *CreateAgentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAgentInput"}
 	if v.ActivationKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActivationKey"))
+	}
+	if v.Tags != nil {
+		if err := validateInputTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLocationAzureBlobInput(v *CreateLocationAzureBlobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationAzureBlobInput"}
+	if v.ContainerUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerUrl"))
+	}
+	if len(v.AuthenticationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
+	if v.SasConfiguration != nil {
+		if err := validateAzureBlobSasConfiguration(v.SasConfiguration); err != nil {
+			invalidParams.AddNested("SasConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
 	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
@@ -2010,6 +2128,21 @@ func validateOpDescribeDiscoveryJobInput(v *DescribeDiscoveryJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDiscoveryJobInput"}
 	if v.DiscoveryJobArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryJobArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeLocationAzureBlobInput(v *DescribeLocationAzureBlobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeLocationAzureBlobInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2463,6 +2596,26 @@ func validateOpUpdateDiscoveryJobInput(v *UpdateDiscoveryJobInput) error {
 	}
 	if v.CollectionDurationMinutes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionDurationMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLocationAzureBlobInput(v *UpdateLocationAzureBlobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationAzureBlobInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if v.SasConfiguration != nil {
+		if err := validateAzureBlobSasConfiguration(v.SasConfiguration); err != nil {
+			invalidParams.AddNested("SasConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

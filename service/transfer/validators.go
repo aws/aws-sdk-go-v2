@@ -850,6 +850,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTestConnection struct {
+}
+
+func (*validateOpTestConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTestConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TestConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTestConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTestIdentityProvider struct {
 }
 
@@ -1216,6 +1236,10 @@ func addOpStopServerValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpTestConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTestConnection{}, middleware.After)
 }
 
 func addOpTestIdentityProviderValidationMiddleware(stack *middleware.Stack) error {
@@ -1599,9 +1623,6 @@ func validateOpCreateConnectorInput(v *CreateConnectorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectorInput"}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
-	}
-	if v.As2Config == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("As2Config"))
 	}
 	if v.AccessRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessRole"))
@@ -2265,9 +2286,6 @@ func validateOpStartFileTransferInput(v *StartFileTransferInput) error {
 	if v.ConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
 	}
-	if v.SendFilePaths == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SendFilePaths"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2319,6 +2337,21 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTestConnectionInput(v *TestConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestConnectionInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

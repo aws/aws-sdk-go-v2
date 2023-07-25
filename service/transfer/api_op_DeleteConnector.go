@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the agreement that's specified in the provided ConnectorId .
+// Deletes the connector that's specified in the provided ConnectorId .
 func (c *Client) DeleteConnector(ctx context.Context, params *DeleteConnectorInput, optFns ...func(*Options)) (*DeleteConnectorOutput, error) {
 	if params == nil {
 		params = &DeleteConnectorInput{}

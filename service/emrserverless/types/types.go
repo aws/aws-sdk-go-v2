@@ -160,6 +160,39 @@ type AutoStopConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon CloudWatch configuration for monitoring logs. You can configure your
+// jobs to send log information to CloudWatch.
+type CloudWatchLoggingConfiguration struct {
+
+	// Enables CloudWatch logging.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The Key Management Service (KMS) key ARN to encrypt the logs that you store in
+	// CloudWatch Logs.
+	EncryptionKeyArn *string
+
+	// The name of the log group in Amazon CloudWatch Logs where you want to publish
+	// your logs.
+	LogGroupName *string
+
+	// Prefix for the CloudWatch log stream name.
+	LogStreamNamePrefix *string
+
+	// The types of logs that you want to publish to CloudWatch. If you don't specify
+	// any log types, driver STDOUT and STDERR logs will be published to CloudWatch
+	// Logs by default. For more information including the supported worker types for
+	// Hive and Spark, see Logging for EMR Serverless with CloudWatch (https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/logging.html#jobs-log-storage-cw)
+	// .
+	//   - Key Valid Values: SPARK_DRIVER , SPARK_EXECUTOR , HIVE_DRIVER , TEZ_TASK
+	//   - Array Members Valid Values: STDOUT , STDERR , HIVE_LOG , TEZ_AM ,
+	//   SYSTEM_LOGS
+	LogTypes map[string][]string
+
+	noSmithyDocumentSerde
+}
+
 // A configuration specification to be used when provisioning an application. A
 // configuration consists of a classification, properties, and optional nested
 // configurations. A classification refers to an application-specific configuration
@@ -469,6 +502,10 @@ type MaximumAllowedResources struct {
 
 // The configuration setting for monitoring.
 type MonitoringConfiguration struct {
+
+	// The Amazon CloudWatch configuration for monitoring logs. You can configure your
+	// jobs to send log information to CloudWatch.
+	CloudWatchLoggingConfiguration *CloudWatchLoggingConfiguration
 
 	// The managed log persistence configuration for a job run.
 	ManagedPersistenceMonitoringConfiguration *ManagedPersistenceMonitoringConfiguration

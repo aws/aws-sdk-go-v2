@@ -1226,6 +1226,40 @@ func awsRestjson1_serializeDocumentAutoStopConfig(v *types.AutoStopConfig, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCloudWatchLoggingConfiguration(v *types.CloudWatchLoggingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("encryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
+
+	if v.LogGroupName != nil {
+		ok := object.Key("logGroupName")
+		ok.String(*v.LogGroupName)
+	}
+
+	if v.LogStreamNamePrefix != nil {
+		ok := object.Key("logStreamNamePrefix")
+		ok.String(*v.LogStreamNamePrefix)
+	}
+
+	if v.LogTypes != nil {
+		ok := object.Key("logTypes")
+		if err := awsRestjson1_serializeDocumentLogTypeMap(v.LogTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConfiguration(v *types.Configuration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1388,6 +1422,33 @@ func awsRestjson1_serializeDocumentJobDriver(v types.JobDriver, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentLogTypeList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLogTypeMap(v map[string][]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentLogTypeList(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentManagedPersistenceMonitoringConfiguration(v *types.ManagedPersistenceMonitoringConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1430,6 +1491,13 @@ func awsRestjson1_serializeDocumentMaximumAllowedResources(v *types.MaximumAllow
 func awsRestjson1_serializeDocumentMonitoringConfiguration(v *types.MonitoringConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CloudWatchLoggingConfiguration != nil {
+		ok := object.Key("cloudWatchLoggingConfiguration")
+		if err := awsRestjson1_serializeDocumentCloudWatchLoggingConfiguration(v.CloudWatchLoggingConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ManagedPersistenceMonitoringConfiguration != nil {
 		ok := object.Key("managedPersistenceMonitoringConfiguration")

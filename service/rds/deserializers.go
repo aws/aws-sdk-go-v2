@@ -28544,6 +28544,19 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				return err
 			}
 
+		case strings.EqualFold("PercentProgress", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PercentProgress = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("PerformanceInsightsEnabled", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

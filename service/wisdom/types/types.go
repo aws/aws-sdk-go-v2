@@ -195,11 +195,24 @@ type AssistantData struct {
 	// The description.
 	Description *string
 
+	// The configuration information for the Wisdom assistant integration.
+	IntegrationConfiguration *AssistantIntegrationConfiguration
+
 	// The KMS key used for encryption.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration information for the Wisdom assistant integration.
+type AssistantIntegrationConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for
+	// streaming chat messages.
+	TopicIntegrationArn *string
 
 	noSmithyDocumentSerde
 }
@@ -234,6 +247,9 @@ type AssistantSummary struct {
 
 	// The description of the assistant.
 	Description *string
+
+	// The configuration information for the Wisdom assistant integration.
+	IntegrationConfiguration *AssistantIntegrationConfiguration
 
 	// The KMS key used for encryption.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
@@ -751,8 +767,21 @@ type SessionData struct {
 	// The description of the session.
 	Description *string
 
+	// The configuration information for the session integration.
+	IntegrationConfiguration *SessionIntegrationConfiguration
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration information for the session integration.
+type SessionIntegrationConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for
+	// streaming chat messages.
+	TopicIntegrationArn *string
 
 	noSmithyDocumentSerde
 }

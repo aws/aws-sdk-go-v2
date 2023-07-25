@@ -203,6 +203,60 @@ type AttributeItem struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information about the AttributeTypesSelector where the rule-based
+// identity resolution uses to match profiles. You can choose how profiles are
+// compared across attribute types and which attribute to use for matching from
+// each type. There are three attribute types you can configure:
+//   - Email type
+//   - You can choose from Email , BusinessEmail , and PersonalEmail
+//   - Phone number type
+//   - You can choose from Phone , HomePhone , and MobilePhone
+//   - Address type
+//   - You can choose from Address , BusinessAddress , MaillingAddress , and
+//     ShippingAddress
+//
+// You can either choose ONE_TO_ONE or MANY_TO_MANY as the AttributeMatchingModel .
+// When choosing MANY_TO_MANY , the system can match attribute across the sub-types
+// of an attribute type. For example, if the value of the Email field of Profile A
+// and the value of BusinessEmail field of Profile B matches, the two profiles are
+// matched on the Email type. When choosing ONE_TO_ONE the system can only match
+// if the sub-types are exact matches. For example, only when the value of the
+// Email field of Profile A and the value of the Email field of Profile B matches,
+// the two profiles are matched on the Email type.
+type AttributeTypesSelector struct {
+
+	// Configures the AttributeMatchingModel , you can either choose ONE_TO_ONE or
+	// MANY_TO_MANY .
+	//
+	// This member is required.
+	AttributeMatchingModel AttributeMatchingModel
+
+	// The Address type. You can choose from Address , BusinessAddress ,
+	// MaillingAddress , and ShippingAddress . You only can use the Address type in the
+	// MatchingRule . For example, if you want to match profile based on
+	// BusinessAddress.City or MaillingAddress.City , you need to choose the
+	// BusinessAddress and the MaillingAddress to represent the Address type and
+	// specify the Address.City on the matching rule.
+	Address []string
+
+	// The Email type. You can choose from EmailAddress , BusinessEmailAddress and
+	// PersonalEmailAddress . You only can use the EmailAddress type in the
+	// MatchingRule . For example, if you want to match profile based on
+	// PersonalEmailAddress or BusinessEmailAddress , you need to choose the
+	// PersonalEmailAddress and the BusinessEmailAddress to represent the EmailAddress
+	// type and only specify the EmailAddress on the matching rule.
+	EmailAddress []string
+
+	// The PhoneNumber type. You can choose from PhoneNumber , HomePhoneNumber , and
+	// MobilePhoneNumber . You only can use the PhoneNumber type in the MatchingRule .
+	// For example, if you want to match a profile based on Phone or HomePhone , you
+	// need to choose the Phone and the HomePhone to represent the PhoneNumber type
+	// and only specify the PhoneNumber on the matching rule.
+	PhoneNumber []string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration settings for how to perform the auto-merging of profiles.
 type AutoMerging struct {
 
@@ -919,6 +973,36 @@ type MatchingResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies how does the rule-based matching process should match profiles. You
+// can choose from the following attributes to build the matching Rule:
+//   - AccountNumber
+//   - Address.Address
+//   - Address.City
+//   - Address.Country
+//   - Address.County
+//   - Address.PostalCode
+//   - Address.State
+//   - Address.Province
+//   - BirthDate
+//   - BusinessName
+//   - EmailAddress
+//   - FirstName
+//   - Gender
+//   - LastName
+//   - MiddleName
+//   - PhoneNumber
+//   - Any customized profile attributes that start with the Attributes
+type MatchingRule struct {
+
+	// A single rule level of the MatchRules . Configures how the rule-based matching
+	// process should match profiles.
+	//
+	// This member is required.
+	Rule []string
+
+	noSmithyDocumentSerde
+}
+
 // The Match group object.
 type MatchItem struct {
 
@@ -1116,6 +1200,92 @@ type Range struct {
 	//
 	// This member is required.
 	Value int32
+
+	noSmithyDocumentSerde
+}
+
+// The request to enable the rule-based matching.
+type RuleBasedMatchingRequest struct {
+
+	// The flag that enables the rule-based matching process of duplicate profiles.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// Configures information about the AttributeTypesSelector where the rule-based
+	// identity resolution uses to match profiles.
+	AttributeTypesSelector *AttributeTypesSelector
+
+	// How the auto-merging process should resolve conflicts between different
+	// profiles.
+	ConflictResolution *ConflictResolution
+
+	// Configuration information about the S3 bucket where Identity Resolution Jobs
+	// writes result files. You need to give Customer Profiles service principal write
+	// permission to your S3 bucket. Otherwise, you'll get an exception in the API
+	// response. For an example policy, see Amazon Connect Customer Profiles
+	// cross-service confused deputy prevention (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service)
+	// .
+	ExportingConfig *ExportingConfig
+
+	// Configures how the rule-based matching process should match profiles. You can
+	// have up to 15 MatchingRule in the MatchingRules .
+	MatchingRules []MatchingRule
+
+	// Indicates the maximum allowed rule level.
+	MaxAllowedRuleLevelForMatching *int32
+
+	// MatchingRule (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html)
+	MaxAllowedRuleLevelForMerging *int32
+
+	noSmithyDocumentSerde
+}
+
+// The response of the Rule-based matching request.
+type RuleBasedMatchingResponse struct {
+
+	// Configures information about the AttributeTypesSelector where the rule-based
+	// identity resolution uses to match profiles.
+	AttributeTypesSelector *AttributeTypesSelector
+
+	// How the auto-merging process should resolve conflicts between different
+	// profiles.
+	ConflictResolution *ConflictResolution
+
+	// The flag that enables the rule-based matching process of duplicate profiles.
+	Enabled *bool
+
+	// Configuration information about the S3 bucket where Identity Resolution Jobs
+	// writes result files. You need to give Customer Profiles service principal write
+	// permission to your S3 bucket. Otherwise, you'll get an exception in the API
+	// response. For an example policy, see Amazon Connect Customer Profiles
+	// cross-service confused deputy prevention (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service)
+	// .
+	ExportingConfig *ExportingConfig
+
+	// Configures how the rule-based matching process should match profiles. You can
+	// have up to 15 MatchingRule in the MatchingRules .
+	MatchingRules []MatchingRule
+
+	// Indicates the maximum allowed rule level.
+	MaxAllowedRuleLevelForMatching *int32
+
+	// MatchingRule (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html)
+	MaxAllowedRuleLevelForMerging *int32
+
+	// PENDING
+	//   - The first status after configuration a rule-based matching rule. If it is
+	//   an existing domain, the rule-based Identity Resolution waits one hour before
+	//   creating the matching rule. If it is a new domain, the system will skip the
+	//   PENDING stage.
+	// IN_PROGRESS
+	//   - The system is creating the rule-based matching rule. Under this status, the
+	//   system is evaluating the existing data and you can no longer change the
+	//   Rule-based matching configuration.
+	// ACTIVE
+	//   - The rule is ready to use. You can change the rule a day after the status is
+	//   in ACTIVE .
+	Status RuleBasedMatchingStatus
 
 	noSmithyDocumentSerde
 }

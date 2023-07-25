@@ -1,0 +1,8 @@
+{
+    "id": "5dc2c957-0dd2-4cc9-b4d4-aea029b62a9f",
+    "type": "feature",
+    "description": "This release adds support for monitoring storage optimization progress on the DescribeDBInstances API.",
+    "modules": [
+        "service/rds"
+    ]
+}

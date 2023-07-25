@@ -255,10 +255,10 @@ type AutomationRulesConfig struct {
 
 	// Specifies whether a rule is the last to be applied with respect to a finding
 	// that matches the rule criteria. This is useful when a finding matches the
-	// criteria for multiple rules, and each rule has different actions. If the value
-	// of this field is set to true for a rule, Security Hub applies the rule action
-	// to a finding that matches the rule criteria and doesn't evaluate other rules for
-	// the finding.  The default value of this field is false .
+	// criteria for multiple rules, and each rule has different actions. If a rule is
+	// terminal, Security Hub applies the rule action to a finding that matches the
+	// rule criteria and doesn't evaluate other rules for the finding. By default, a
+	// rule isn't terminal.
 	IsTerminal bool
 
 	// The Amazon Resource Name (ARN) of a rule.
@@ -491,10 +491,10 @@ type AutomationRulesMetadata struct {
 
 	// Specifies whether a rule is the last to be applied with respect to a finding
 	// that matches the rule criteria. This is useful when a finding matches the
-	// criteria for multiple rules, and each rule has different actions. If the value
-	// of this field is set to true for a rule, Security Hub applies the rule action
-	// to a finding that matches the rule criteria and doesn't evaluate other rules for
-	// the finding.  The default value of this field is false .
+	// criteria for multiple rules, and each rule has different actions. If a rule is
+	// terminal, Security Hub applies the rule action to a finding that matches the
+	// rule criteria and doesn't evaluate other rules for the finding. By default, a
+	// rule isn't terminal.
 	IsTerminal bool
 
 	// The Amazon Resource Name (ARN) for the rule.
@@ -1264,6 +1264,74 @@ type AwsAppSyncGraphQlApiUserPoolConfigDetails struct {
 
 	// The user pool ID.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the workgroup, which includes the location in Amazon
+// Simple Storage Service (Amazon S3) where query results are stored, the
+// encryption option, if any, used for query results, whether Amazon CloudWatch
+// metrics are enabled for the workgroup, and the limit for the amount of bytes
+// scanned (cutoff) per query, if it is specified.
+type AwsAthenaWorkGroupConfigurationDetails struct {
+
+	// The location in Amazon S3 where query and calculation results are stored and
+	// the encryption option, if any, used for query and calculation results. These are
+	// known as client-side settings. If workgroup settings override client-side
+	// settings, then the query uses the workgroup settings.
+	ResultConfiguration *AwsAthenaWorkGroupConfigurationResultConfigurationDetails
+
+	noSmithyDocumentSerde
+}
+
+// The location in Amazon Simple Storage Service (Amazon S3) where query and
+// calculation results are stored and the encryption option, if any, used for query
+// and calculation results. These are known as client-side settings. If workgroup
+// settings override client-side settings, then the query uses the workgroup
+// settings.
+type AwsAthenaWorkGroupConfigurationResultConfigurationDetails struct {
+
+	// Specifies the method used to encrypt the user’s data stores in the Athena
+	// workgroup.
+	EncryptionConfiguration *AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the method used to encrypt the user’s data stores in the Athena
+// workgroup.
+type AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails struct {
+
+	// Indicates whether Amazon Simple Storage Service (Amazon S3) server-side
+	// encryption with Amazon S3 managed keys (SSE_S3), server-side encryption with KMS
+	// keys (SSE_KMS), or client-side encryption with KMS customer managed keys
+	// (CSE_KMS) is used.
+	EncryptionOption *string
+
+	// For SSE_KMS and CSE_KMS , this is the KMS key Amazon Resource Name (ARN) or ID.
+	KmsKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an Amazon Athena workgroup.
+type AwsAthenaWorkGroupDetails struct {
+
+	// The configuration of the workgroup, which includes the location in Amazon
+	// Simple Storage Service (Amazon S3) where query results are stored, the
+	// encryption option, if any, used for query results, whether Amazon CloudWatch
+	// metrics are enabled for the workgroup, and the limit for the amount of bytes
+	// scanned (cutoff) per query, if it is specified.
+	Configuration *AwsAthenaWorkGroupConfigurationDetails
+
+	// The workgroup description.
+	Description *string
+
+	// The workgroup name.
+	Name *string
+
+	// Whether the workgroup is enabled or disabled.
+	State *string
 
 	noSmithyDocumentSerde
 }
@@ -8493,6 +8561,26 @@ type AwsRdsDbClusterOptionGroupMembership struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the name and values of a manual Amazon Relational Database Service
+// (RDS) DB cluster snapshot attribute.
+type AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute struct {
+
+	// The name of the manual DB cluster snapshot attribute. The attribute named
+	// restore refers to the list of Amazon Web Services accounts that have permission
+	// to copy or restore the manual DB cluster snapshot.
+	AttributeName *string
+
+	// The value(s) for the manual DB cluster snapshot attribute. If the AttributeName
+	// field is set to restore , then this element returns a list of IDs of the Amazon
+	// Web Services accounts that are authorized to copy or restore the manual DB
+	// cluster snapshot. If a value of all is in the list, then the manual DB cluster
+	// snapshot is public and available for any Amazon Web Services account to copy or
+	// restore.
+	AttributeValues []string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Amazon RDS DB cluster snapshot.
 type AwsRdsDbClusterSnapshotDetails struct {
 
@@ -8511,6 +8599,9 @@ type AwsRdsDbClusterSnapshotDetails struct {
 
 	// The DB cluster identifier.
 	DbClusterIdentifier *string
+
+	// Contains the name and values of a manual DB cluster snapshot attribute.
+	DbClusterSnapshotAttributes []AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute
 
 	// The identifier of the DB cluster snapshot.
 	DbClusterSnapshotIdentifier *string
@@ -12762,21 +12853,44 @@ type Malware struct {
 	noSmithyDocumentSerde
 }
 
-// A map filter for querying findings. Each map filter provides the field to
-// check, the value to look for, and the comparison operator.
+// A map filter for filtering Security Hub findings. Each map filter provides the
+// field to check for, the value to check for, and the comparison operator.
 type MapFilter struct {
 
-	// The condition to apply to the key value when querying for findings with a map
-	// filter. To search for values that exactly match the filter value, use EQUALS .
-	// For example, for the ResourceTags field, the filter Department EQUALS Security
-	// matches findings that have the value Security for the tag Department . To search
-	// for values other than the filter value, use NOT_EQUALS . For example, for the
-	// ResourceTags field, the filter Department NOT_EQUALS Finance matches findings
-	// that do not have the value Finance for the tag Department . EQUALS filters on
-	// the same field are joined by OR . A finding matches if it matches any one of
-	// those filters. NOT_EQUALS filters on the same field are joined by AND . A
-	// finding matches only if it matches all of those filters. You cannot have both an
-	// EQUALS filter and a NOT_EQUALS filter on the same field.
+	// The condition to apply to the key value when filtering Security Hub findings
+	// with a map filter. To search for values that have the filter value, use one of
+	// the following comparison operators:
+	//   - To search for values that include the filter value, use CONTAINS . For
+	//   example, for the ResourceTags field, the filter Department CONTAINS Security
+	//   matches findings that include the value Security for the Department tag. In
+	//   the same example, a finding with a value of Security team for the Department
+	//   tag is a match.
+	//   - To search for values that exactly match the filter value, use EQUALS . For
+	//   example, for the ResourceTags field, the filter Department EQUALS Security
+	//   matches findings that have the value Security for the Department tag.
+	// CONTAINS and EQUALS filters on the same field are joined by OR . A finding
+	// matches if it matches any one of those filters. For example, the filters
+	// Department CONTAINS Security OR Department CONTAINS Finance match a finding that
+	// includes either Security , Finance , or both values. To search for values that
+	// don't have the filter value, use one of the following comparison operators:
+	//   - To search for values that exclude the filter value, use NOT_CONTAINS . For
+	//   example, for the ResourceTags field, the filter Department NOT_CONTAINS
+	//   Finance matches findings that exclude the value Finance for the Department
+	//   tag.
+	//   - To search for values other than the filter value, use NOT_EQUALS . For
+	//   example, for the ResourceTags field, the filter Department NOT_EQUALS Finance
+	//   matches findings that don’t have the value Finance for the Department tag.
+	// NOT_CONTAINS and NOT_EQUALS filters on the same field are joined by AND . A
+	// finding matches only if it matches all of those filters. For example, the
+	// filters Department NOT_CONTAINS Security AND Department NOT_CONTAINS Finance
+	// match a finding that excludes both the Security and Finance values. CONTAINS
+	// filters can only be used with other CONTAINS filters. NOT_CONTAINS filters can
+	// only be used with other NOT_CONTAINS filters. You can’t have both a CONTAINS
+	// filter and a NOT_CONTAINS filter on the same field. Similarly, you can’t have
+	// both an EQUALS filter and a NOT_EQUALS filter on the same field. Combining
+	// filters in this way returns an error. CONTAINS and NOT_CONTAINS operators can
+	// be used only with automation rules. For more information, see Automation rules (https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html)
+	// in the Security Hub User Guide.
 	Comparison MapFilterComparison
 
 	// The key of the map filter. For example, for ResourceTags , Key identifies the
@@ -12785,7 +12899,7 @@ type MapFilter struct {
 
 	// The value for the key in the map filter. Filter values are case sensitive. For
 	// example, one of the values for a tag called Department might be Security . If
-	// you provide security as the filter value, then there is no match.
+	// you provide security as the filter value, then there's no match.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -13394,6 +13508,11 @@ type ResourceDetails struct {
 	// Provides details about an AppSync Graph QL API, which lets you query multiple
 	// databases, microservices, and APIs from a single GraphQL endpoint.
 	AwsAppSyncGraphQlApi *AwsAppSyncGraphQlApiDetails
+
+	// Provides information about an Amazon Athena workgroup. A workgroup helps you
+	// separate users, teams, applications, or workloads. It also helps you set limits
+	// on data processing and track costs.
+	AwsAthenaWorkGroup *AwsAthenaWorkGroupDetails
 
 	// Details for an autoscaling group.
 	AwsAutoScalingAutoScalingGroup *AwsAutoScalingAutoScalingGroupDetails
@@ -14623,50 +14742,66 @@ type StatusReason struct {
 	noSmithyDocumentSerde
 }
 
-// A string filter for querying findings.
+// A string filter for filtering Security Hub findings.
 type StringFilter struct {
 
-	// The condition to apply to a string value when querying for findings. To search
-	// for values that contain the filter criteria value, use one of the following
+	// The condition to apply to a string value when filtering Security Hub findings.
+	// To search for values that have the filter value, use one of the following
 	// comparison operators:
+	//   - To search for values that include the filter value, use CONTAINS . For
+	//   example, the filter Title CONTAINS CloudFront matches findings that have a
+	//   Title that includes the string CloudFront.
 	//   - To search for values that exactly match the filter value, use EQUALS . For
-	//   example, the filter ResourceType EQUALS AwsEc2SecurityGroup only matches
-	//   findings that have a resource type of AwsEc2SecurityGroup .
+	//   example, the filter AwsAccountId EQUALS 123456789012 only matches findings
+	//   that have an account ID of 123456789012 .
 	//   - To search for values that start with the filter value, use PREFIX . For
-	//   example, the filter ResourceType PREFIX AwsIam matches findings that have a
-	//   resource type that starts with AwsIam . Findings with a resource type of
-	//   AwsIamPolicy , AwsIamRole , or AwsIamUser would all match.
-	// EQUALS and PREFIX filters on the same field are joined by OR . A finding matches
-	// if it matches any one of those filters. To search for values that do not contain
-	// the filter criteria value, use one of the following comparison operators:
-	//   - To search for values that do not exactly match the filter value, use
-	//   NOT_EQUALS . For example, the filter ResourceType NOT_EQUALS AwsIamPolicy
-	//   matches findings that have a resource type other than AwsIamPolicy .
-	//   - To search for values that do not start with the filter value, use
-	//   PREFIX_NOT_EQUALS . For example, the filter ResourceType PREFIX_NOT_EQUALS
-	//   AwsIam matches findings that have a resource type that does not start with
-	//   AwsIam . Findings with a resource type of AwsIamPolicy , AwsIamRole , or
-	//   AwsIamUser would all be excluded from the results.
-	// NOT_EQUALS and PREFIX_NOT_EQUALS filters on the same field are joined by AND . A
-	// finding matches only if it matches all of those filters. For filters on the same
-	// field, you cannot provide both an EQUALS filter and a NOT_EQUALS or
-	// PREFIX_NOT_EQUALS filter. Combining filters in this way always returns an error,
-	// even if the provided filter values would return valid results. You can combine
-	// PREFIX filters with NOT_EQUALS or PREFIX_NOT_EQUALS filters for the same field.
-	// Security Hub first processes the PREFIX filters, then the NOT_EQUALS or
-	// PREFIX_NOT_EQUALS filters. For example, for the following filter, Security Hub
-	// first identifies findings that have resource types that start with either AwsIAM
-	// or AwsEc2 . It then excludes findings that have a resource type of AwsIamPolicy
-	// and findings that have a resource type of AwsEc2NetworkInterface .
+	//   example, the filter ResourceRegion PREFIX us matches findings that have a
+	//   ResourceRegion that starts with us . A ResourceRegion that starts with a
+	//   different value, such as af , ap , or ca , doesn't match.
+	// CONTAINS , EQUALS , and PREFIX filters on the same field are joined by OR . A
+	// finding matches if it matches any one of those filters. For example, the filters
+	// Title CONTAINS CloudFront OR Title CONTAINS CloudWatch match a finding that
+	// includes either CloudFront , CloudWatch , or both strings in the title. To
+	// search for values that don’t have the filter value, use one of the following
+	// comparison operators:
+	//   - To search for values that exclude the filter value, use NOT_CONTAINS . For
+	//   example, the filter Title NOT_CONTAINS CloudFront matches findings that have a
+	//   Title that excludes the string CloudFront.
+	//   - To search for values other than the filter value, use NOT_EQUALS . For
+	//   example, the filter AwsAccountId NOT_EQUALS 123456789012 only matches findings
+	//   that have an account ID other than 123456789012 .
+	//   - To search for values that don't start with the filter value, use
+	//   PREFIX_NOT_EQUALS . For example, the filter ResourceRegion PREFIX_NOT_EQUALS
+	//   us matches findings with a ResourceRegion that starts with a value other than
+	//   us .
+	// NOT_CONTAINS , NOT_EQUALS , and PREFIX_NOT_EQUALS filters on the same field are
+	// joined by AND . A finding matches only if it matches all of those filters. For
+	// example, the filters Title NOT_CONTAINS CloudFront AND Title NOT_CONTAINS
+	// CloudWatch match a finding that excludes both CloudFront and CloudWatch in the
+	// title. You can’t have both a CONTAINS filter and a NOT_CONTAINS filter on the
+	// same field. Similarly, you can't provide both an EQUALS filter and a NOT_EQUALS
+	// or PREFIX_NOT_EQUALS filter on the same field. Combining filters in this way
+	// returns an error. CONTAINS filters can only be used with other CONTAINS
+	// filters. NOT_CONTAINS filters can only be used with other NOT_CONTAINS filters.
+	// You can combine PREFIX filters with NOT_EQUALS or PREFIX_NOT_EQUALS filters for
+	// the same field. Security Hub first processes the PREFIX filters, and then the
+	// NOT_EQUALS or PREFIX_NOT_EQUALS filters. For example, for the following
+	// filters, Security Hub first identifies findings that have resource types that
+	// start with either AwsIam or AwsEc2 . It then excludes findings that have a
+	// resource type of AwsIamPolicy and findings that have a resource type of
+	// AwsEc2NetworkInterface .
 	//   - ResourceType PREFIX AwsIam
 	//   - ResourceType PREFIX AwsEc2
 	//   - ResourceType NOT_EQUALS AwsIamPolicy
 	//   - ResourceType NOT_EQUALS AwsEc2NetworkInterface
+	// CONTAINS and NOT_CONTAINS operators can be used only with automation rules. For
+	// more information, see Automation rules (https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html)
+	// in the Security Hub User Guide.
 	Comparison StringFilterComparison
 
 	// The string filter value. Filter values are case sensitive. For example, the
 	// product name for control-based findings is Security Hub . If you provide
-	// security hub as the filter text, then there is no match.
+	// security hub as the filter value, there's no match.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -14831,10 +14966,10 @@ type UpdateAutomationRulesRequestItem struct {
 
 	// Specifies whether a rule is the last to be applied with respect to a finding
 	// that matches the rule criteria. This is useful when a finding matches the
-	// criteria for multiple rules, and each rule has different actions. If the value
-	// of this field is set to true for a rule, Security Hub applies the rule action
-	// to a finding that matches the rule criteria and doesn't evaluate other rules for
-	// the finding.  The default value of this field is false .
+	// criteria for multiple rules, and each rule has different actions. If a rule is
+	// terminal, Security Hub applies the rule action to a finding that matches the
+	// rule criteria and doesn't evaluate other rules for the finding. By default, a
+	// rule isn't terminal.
 	IsTerminal bool
 
 	// The name of the rule.

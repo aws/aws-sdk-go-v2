@@ -33,7 +33,7 @@ func (c *Client) CreateBillingGroup(ctx context.Context, params *CreateBillingGr
 type CreateBillingGroupInput struct {
 
 	// The set of accounts that will be under the billing group. The set of accounts
-	// resemble the linked accounts in a consolidated family.
+	// resemble the linked accounts in a consolidated billing family.
 	//
 	// This member is required.
 	AccountGrouping *types.AccountGrouping

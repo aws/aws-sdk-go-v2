@@ -5358,6 +5358,10 @@ type InferenceAcceleratorInfo struct {
 	// Describes the Inference accelerators for the instance type.
 	Accelerators []InferenceDeviceInfo
 
+	// The total size of the memory for the inference accelerators for the instance
+	// type, in MiB.
+	TotalInferenceMemoryInMiB *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -5370,8 +5374,20 @@ type InferenceDeviceInfo struct {
 	// The manufacturer of the Inference accelerator.
 	Manufacturer *string
 
+	// Describes the memory available to the inference accelerator.
+	MemoryInfo *InferenceDeviceMemoryInfo
+
 	// The name of the Inference accelerator.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the memory available to the inference accelerator.
+type InferenceDeviceMemoryInfo struct {
+
+	// The size of the memory available to the inference accelerator, in MiB.
+	SizeInMiB *int32
 
 	noSmithyDocumentSerde
 }
@@ -9871,6 +9887,9 @@ type NetworkBandwidthGbpsRequest struct {
 // Describes the network card support of the instance type.
 type NetworkCardInfo struct {
 
+	// The baseline network performance of the network card, in Gbps.
+	BaselineBandwidthInGbps *float64
+
 	// The maximum number of network interfaces for the network card.
 	MaximumNetworkInterfaces *int32
 
@@ -9879,6 +9898,9 @@ type NetworkCardInfo struct {
 
 	// The network performance of the network card.
 	NetworkPerformance *string
+
+	// The peak (burst) network performance of the network card, in Gbps.
+	PeakBandwidthInGbps *float64
 
 	noSmithyDocumentSerde
 }

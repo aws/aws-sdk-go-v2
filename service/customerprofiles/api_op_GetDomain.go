@@ -76,6 +76,15 @@ type GetDomainOutput struct {
 	// in the MatchingRequest , you can download the results from S3.
 	Matching *types.MatchingResponse
 
+	// The process of matching duplicate profiles using the Rule-Based matching. If
+	// RuleBasedMatching = true, Amazon Connect Customer Profiles will start to match
+	// and merge your profiles according to your configuration in the
+	// RuleBasedMatchingRequest . You can use the ListRuleBasedMatches and
+	// GetSimilarProfiles API to return and review the results. Also, if you have
+	// configured ExportingConfig in the RuleBasedMatchingRequest , you can download
+	// the results from S3.
+	RuleBasedMatching *types.RuleBasedMatchingResponse
+
 	// Usage-specific statistics about the domain.
 	Stats *types.DomainStats
 

@@ -52,7 +52,7 @@ type UpdateConnectorInput struct {
 	// role also needs the kms:Decrypt permission for that key.
 	AccessRole *string
 
-	// A structure that contains the parameters for a connector object.
+	// A structure that contains the parameters for an AS2 connector object.
 	As2Config *types.As2ConnectorConfig
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
@@ -60,7 +60,10 @@ type UpdateConnectorInput struct {
 	// set, you can view connector activity in your CloudWatch logs.
 	LoggingRole *string
 
-	// The URL of the partner's AS2 endpoint.
+	// A structure that contains the parameters for an SFTP connector object.
+	SftpConfig *types.SftpConnectorConfig
+
+	// The URL of the partner's AS2 or SFTP endpoint.
 	Url *string
 
 	noSmithyDocumentSerde

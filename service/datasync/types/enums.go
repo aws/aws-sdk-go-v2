@@ -38,6 +38,58 @@ func (Atime) Values() []Atime {
 	}
 }
 
+type AzureAccessTier string
+
+// Enum values for AzureAccessTier
+const (
+	AzureAccessTierHot     AzureAccessTier = "HOT"
+	AzureAccessTierCool    AzureAccessTier = "COOL"
+	AzureAccessTierArchive AzureAccessTier = "ARCHIVE"
+)
+
+// Values returns all known values for AzureAccessTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AzureAccessTier) Values() []AzureAccessTier {
+	return []AzureAccessTier{
+		"HOT",
+		"COOL",
+		"ARCHIVE",
+	}
+}
+
+type AzureBlobAuthenticationType string
+
+// Enum values for AzureBlobAuthenticationType
+const (
+	AzureBlobAuthenticationTypeSas AzureBlobAuthenticationType = "SAS"
+)
+
+// Values returns all known values for AzureBlobAuthenticationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AzureBlobAuthenticationType) Values() []AzureBlobAuthenticationType {
+	return []AzureBlobAuthenticationType{
+		"SAS",
+	}
+}
+
+type AzureBlobType string
+
+// Enum values for AzureBlobType
+const (
+	AzureBlobTypeBlock AzureBlobType = "BLOCK"
+)
+
+// Values returns all known values for AzureBlobType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AzureBlobType) Values() []AzureBlobType {
+	return []AzureBlobType{
+		"BLOCK",
+	}
+}
+
 type DiscoveryJobStatus string
 
 // Enum values for DiscoveryJobStatus

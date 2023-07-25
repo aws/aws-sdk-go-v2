@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Defines a file system on a Network File System (NFS) server that can be read
-// from or written to.
+// Creates an endpoint for an Network File System (NFS) file server that DataSync
+// can use for a data transfer.
 func (c *Client) CreateLocationNfs(ctx context.Context, params *CreateLocationNfsInput, optFns ...func(*Options)) (*CreateLocationNfsOutput, error) {
 	if params == nil {
 		params = &CreateLocationNfsInput{}
@@ -31,52 +31,49 @@ func (c *Client) CreateLocationNfs(ctx context.Context, params *CreateLocationNf
 // CreateLocationNfsRequest
 type CreateLocationNfsInput struct {
 
-	// Contains a list of Amazon Resource Names (ARNs) of agents that are used to
-	// connect to an NFS server. If you are copying data to or from your Snowcone
-	// device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
+	// Specifies the Amazon Resource Names (ARNs) of agents that DataSync uses to
+	// connect to your NFS file server. If you are copying data to or from your
+	// Snowcone device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
 	// for more information.
 	//
 	// This member is required.
 	OnPremConfig *types.OnPremConfig
 
-	// The name of the NFS server. This value is the IP address or Domain Name Service
-	// (DNS) name of the NFS server. An agent that is installed on-premises uses this
-	// hostname to mount the NFS server in a network. If you are copying data to or
-	// from your Snowcone device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
-	// for more information. This name must either be DNS-compliant or must be an IP
-	// version 4 (IPv4) address.
+	// Specifies the IP address or domain name of your NFS file server. An agent that
+	// is installed on-premises uses this hostname to mount the NFS server in a
+	// network. If you are copying data to or from your Snowcone device, see NFS
+	// Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
+	// for more information. You must specify be an IP version 4 address or Domain Name
+	// System (DNS)-compliant name.
 	//
 	// This member is required.
 	ServerHostname *string
 
-	// The subdirectory in the NFS file system that is used to read data from the NFS
-	// source location or write data to the NFS destination. The NFS path should be a
-	// path that's exported by the NFS server, or a subdirectory of that path. The path
-	// should be such that it can be mounted by other NFS clients in your network. To
-	// see all the paths exported by your NFS server, run " showmount -e nfs-server-name
-	// " from an NFS client that has access to your server. You can specify any
-	// directory that appears in the results, and any subdirectory of that directory.
-	// Ensure that the NFS export is accessible without Kerberos authentication. To
-	// transfer all the data in the folder you specified, DataSync needs to have
-	// permissions to read all the data. To ensure this, either configure the NFS
-	// export with no_root_squash, or ensure that the permissions for all of the files
-	// that you want DataSync allow read access for all users. Doing either enables the
-	// agent to read the files. For the agent to access directories, you must
-	// additionally enable all execute access. If you are copying data to or from your
-	// Snowcone device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
-	// for more information. For information about NFS export configuration, see 18.7.
-	// The /etc/exports Configuration File in the Red Hat Enterprise Linux
-	// documentation.
+	// Specifies the subdirectory in the NFS file server that DataSync transfers to or
+	// from. The NFS path should be a path that's exported by the NFS server, or a
+	// subdirectory of that path. The path should be such that it can be mounted by
+	// other NFS clients in your network. To see all the paths exported by your NFS
+	// server, run " showmount -e nfs-server-name " from an NFS client that has access
+	// to your server. You can specify any directory that appears in the results, and
+	// any subdirectory of that directory. Ensure that the NFS export is accessible
+	// without Kerberos authentication. To transfer all the data in the folder you
+	// specified, DataSync needs to have permissions to read all the data. To ensure
+	// this, either configure the NFS export with no_root_squash, or ensure that the
+	// permissions for all of the files that you want DataSync allow read access for
+	// all users. Doing either enables the agent to read the files. For the agent to
+	// access directories, you must additionally enable all execute access. If you are
+	// copying data to or from your Snowcone device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
+	// for more information.
 	//
 	// This member is required.
 	Subdirectory *string
 
-	// The NFS mount options that DataSync can use to mount your NFS share.
+	// Specifies the mount options that DataSync can use to mount your NFS share.
 	MountOptions *types.NfsMountOptions
 
-	// The key-value pair that represents the tag that you want to add to the
-	// location. The value can be an empty string. We recommend using tags to name your
-	// resources.
+	// Specifies labels that help you categorize, filter, and search for your Amazon
+	// Web Services resources. We recommend creating at least a name tag for your
+	// location.
 	Tags []types.TagListEntry
 
 	noSmithyDocumentSerde
@@ -85,8 +82,7 @@ type CreateLocationNfsInput struct {
 // CreateLocationNfsResponse
 type CreateLocationNfsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the source NFS file system location that is
-	// created.
+	// The ARN of the transfer location that you created for your NFS file server.
 	LocationArn *string
 
 	// Metadata pertaining to the operation's result.
