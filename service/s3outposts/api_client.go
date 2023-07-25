@@ -293,6 +293,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
 	resolveAWSRetryMode(cfg, &opts)
+	resolveAWSEndpointResolver(cfg, &opts)
 	resolveUseDualStackEndpoint(cfg, &opts)
 	resolveUseFIPSEndpoint(cfg, &opts)
 	return New(opts, optFns...)
@@ -398,7 +399,7 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	if cfg.EndpointResolver == nil && cfg.EndpointResolverWithOptions == nil {
 		return
 	}
-	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, cfg.EndpointResolverWithOptions, NewDefaultEndpointResolver())
+	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, cfg.EndpointResolverWithOptions)
 }
 
 func addClientUserAgent(stack *middleware.Stack, options Options) error {
@@ -412,6 +413,7 @@ func addClientUserAgent(stack *middleware.Stack, options Options) error {
 
 	return nil
 }
+
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {
 	mw := v4.NewSignHTTPRequestMiddleware(v4.SignHTTPRequestMiddlewareOptions{
