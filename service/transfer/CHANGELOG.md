@@ -1,3 +1,7 @@
+# v1.32.0 (2023-07-25)
+
+* **Feature**: This release adds support for SFTP Connectors.
+
 # v1.31.1 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.94.0 (2023-07-25)
+
+* **Feature**: Mark ContentColumn and TargetLabelColumn as required Targets in TextClassificationJobConfig in CreateAutoMLJobV2API
+
 # v1.93.0 (2023-07-20.2)
 
 * **Feature**: Cross account support for SageMaker Feature Store

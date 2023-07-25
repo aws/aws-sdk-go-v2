@@ -1,3 +1,7 @@
+# v1.26.0 (2023-07-25)
+
+* **Feature**: Amazon Connect Customer Profiles now supports rule-based resolution to match and merge similar profiles into unified profiles, helping companies deliver faster and more personalized customer service by providing access to relevant customer information for agents and automated experiences.
+
 # v1.25.3 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

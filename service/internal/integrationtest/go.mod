@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.19.0
-	github.com/aws/aws-sdk-go-v2/config v1.18.28
+	github.com/aws/aws-sdk-go-v2/config v1.18.29
 	github.com/aws/aws-sdk-go-v2/service/acm v1.17.14
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.14
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.21.3
@@ -30,8 +30,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.18.18
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.22.0
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.20.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.106.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.20.2
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.107.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.14
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.20.4
@@ -53,14 +53,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.38.3
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.15
 	github.com/aws/aws-sdk-go-v2/service/kms v1.23.1
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.37.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.12.13
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.20.8
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.13
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.13
 	github.com/aws/aws-sdk-go-v2/service/polly v1.26.3
-	github.com/aws/aws-sdk-go-v2/service/rds v1.47.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.29.3
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.28.4
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.14
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.8
-	github.com/aws/aws-sdk-go-v2/service/sts v1.19.3
+	github.com/aws/aws-sdk-go-v2/service/sts v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/support v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.14

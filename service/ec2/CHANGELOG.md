@@ -1,3 +1,7 @@
+# v1.107.0 (2023-07-25)
+
+* **Feature**: This release adds an instance's peak and baseline network bandwidth as well as the memory sizes of an instance's inference accelerators to DescribeInstanceTypes.
+
 # v1.106.0 (2023-07-24)
 
 * **Feature**: Add "disabled" enum value to SpotInstanceState.

@@ -1,3 +1,36 @@
+# Release (2023-07-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.7.0](service/billingconductor/CHANGELOG.md#v170-2023-07-25)
+  * **Feature**: Added support for Auto-Assocate Billing Groups for CreateBillingGroup, UpdateBillingGroup, and ListBillingGroups.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.26.0](service/customerprofiles/CHANGELOG.md#v1260-2023-07-25)
+  * **Feature**: Amazon Connect Customer Profiles now supports rule-based resolution to match and merge similar profiles into unified profiles, helping companies deliver faster and more personalized customer service by providing access to relevant customer information for agents and automated experiences.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.26.0](service/datasync/CHANGELOG.md#v1260-2023-07-25)
+  * **Feature**: AWS DataSync now supports Microsoft Azure Blob Storage locations.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.20.2](service/dynamodb/CHANGELOG.md#v1202-2023-07-25)
+  * **Documentation**: Documentation updates for DynamoDB
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.107.0](service/ec2/CHANGELOG.md#v11070-2023-07-25)
+  * **Feature**: This release adds an instance's peak and baseline network bandwidth as well as the memory sizes of an instance's inference accelerators to DescribeInstanceTypes.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.9.0](service/emrserverless/CHANGELOG.md#v190-2023-07-25)
+  * **Feature**: This release adds support for publishing application logs to CloudWatch.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.38.0](service/lambda/CHANGELOG.md#v1380-2023-07-25)
+  * **Feature**: Add Python 3.11 (python3.11) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.48.0](service/rds/CHANGELOG.md#v1480-2023-07-25)
+  * **Feature**: This release adds support for monitoring storage optimization progress on the DescribeDBInstances API.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.94.0](service/sagemaker/CHANGELOG.md#v1940-2023-07-25)
+  * **Feature**: Mark ContentColumn and TargetLabelColumn as required Targets in TextClassificationJobConfig in CreateAutoMLJobV2API
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.34.0](service/securityhub/CHANGELOG.md#v1340-2023-07-25)
+  * **Feature**: Add support for CONTAINS and NOT_CONTAINS comparison operators for Automation Rules string filters and map filters
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.20.0](service/sts/CHANGELOG.md#v1200-2023-07-25)
+  * **Feature**: API updates for the AWS Security Token Service
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.32.0](service/transfer/CHANGELOG.md#v1320-2023-07-25)
+  * **Feature**: This release adds support for SFTP Connectors.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.14.0](service/wisdom/CHANGELOG.md#v1140-2023-07-25)
+  * **Feature**: This release added two new data types: AssistantIntegrationConfiguration, and SessionIntegrationConfiguration to support Wisdom integration with Amazon Connect Chat
+
 # Release (2023-07-24)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "283a45e3-27b4-48d5-8698-50198c7e7aa7",
-    "type": "feature",
-    "description": "This release adds an instance's peak and baseline network bandwidth as well as the memory sizes of an instance's inference accelerators to DescribeInstanceTypes.",
-    "modules": [
-        "service/ec2"
-    ]
-}

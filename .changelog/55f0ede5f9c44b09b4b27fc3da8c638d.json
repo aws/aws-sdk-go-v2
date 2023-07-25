@@ -1,8 +1,0 @@
-{
-    "id": "55f0ede5-f9c4-4b09-b4b2-7fc3da8c638d",
-    "type": "feature",
-    "description": "This release added two new data types: AssistantIntegrationConfiguration, and SessionIntegrationConfiguration to support Wisdom integration with Amazon Connect Chat",
-    "modules": [
-        "service/wisdom"
-    ]
-}

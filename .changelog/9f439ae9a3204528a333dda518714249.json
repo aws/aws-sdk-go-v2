@@ -1,8 +1,0 @@
-{
-    "id": "9f439ae9-a320-4528-a333-dda518714249",
-    "type": "feature",
-    "description": "This release adds support for SFTP Connectors.",
-    "modules": [
-        "service/transfer"
-    ]
-}

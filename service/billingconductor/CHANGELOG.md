@@ -1,3 +1,7 @@
+# v1.7.0 (2023-07-25)
+
+* **Feature**: Added support for Auto-Assocate Billing Groups for CreateBillingGroup, UpdateBillingGroup, and ListBillingGroups.
+
 # v1.6.8 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

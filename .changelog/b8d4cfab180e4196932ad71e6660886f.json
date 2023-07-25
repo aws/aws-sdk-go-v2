@@ -1,8 +1,0 @@
-{
-    "id": "b8d4cfab-180e-4196-932a-d71e6660886f",
-    "type": "feature",
-    "description": "API updates for the AWS Security Token Service",
-    "modules": [
-        "service/sts"
-    ]
-}

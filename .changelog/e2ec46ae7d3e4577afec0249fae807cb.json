@@ -1,8 +1,0 @@
-{
-    "id": "e2ec46ae-7d3e-4577-afec-0249fae807cb",
-    "type": "feature",
-    "description": "Mark ContentColumn and TargetLabelColumn as required Targets in TextClassificationJobConfig in CreateAutoMLJobV2API",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

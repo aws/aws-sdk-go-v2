@@ -1,3 +1,7 @@
+# v1.26.0 (2023-07-25)
+
+* **Feature**: AWS DataSync now supports Microsoft Azure Blob Storage locations.
+
 # v1.25.0 (2023-07-13)
 
 * **Feature**: Added LunCount to the response object of DescribeStorageSystemResourcesResponse, LunCount represents the number of LUNs on a storage system resource.

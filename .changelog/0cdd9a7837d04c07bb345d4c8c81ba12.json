@@ -1,8 +1,0 @@
-{
-    "id": "0cdd9a78-37d0-4c07-bb34-5d4c8c81ba12",
-    "type": "feature",
-    "description": "Add support for CONTAINS and NOT_CONTAINS comparison operators for Automation Rules string filters and map filters",
-    "modules": [
-        "service/securityhub"
-    ]
-}
