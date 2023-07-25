@@ -235,7 +235,7 @@ func newServiceMetadataMiddleware_opListOutpostsWithS3(region string) *awsmiddle
 
 type opListOutpostsWithS3ResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
-	BuiltInResolver  BuiltInParameterResolver
+	BuiltInResolver  builtInParameterResolver
 }
 
 func (*opListOutpostsWithS3ResolveEndpointMiddleware) ID() string {
@@ -283,7 +283,7 @@ func (m *opListOutpostsWithS3ResolveEndpointMiddleware) HandleSerialize(ctx cont
 		if errors.As(err, &nfe) {
 			// if no auth scheme is found, default to sigv4
 			signingName := "s3-outposts"
-			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			signingRegion := m.BuiltInResolver.(*builtInResolver).Region
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 
@@ -309,7 +309,7 @@ func (m *opListOutpostsWithS3ResolveEndpointMiddleware) HandleSerialize(ctx cont
 				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
-				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				signingRegion = m.BuiltInResolver.(*builtInResolver).Region
 			} else {
 				signingRegion = *v4Scheme.SigningRegion
 			}
@@ -347,7 +347,7 @@ func (m *opListOutpostsWithS3ResolveEndpointMiddleware) HandleSerialize(ctx cont
 func addListOutpostsWithS3ResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&opListOutpostsWithS3ResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
-		BuiltInResolver: &BuiltInResolver{
+		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,
 			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
 			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,

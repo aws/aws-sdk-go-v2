@@ -301,7 +301,7 @@ func addCreateAccessPointUpdateEndpoint(stack *middleware.Stack, options Options
 
 type opCreateAccessPointResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
-	BuiltInResolver  BuiltInParameterResolver
+	BuiltInResolver  builtInParameterResolver
 }
 
 func (*opCreateAccessPointResolveEndpointMiddleware) ID() string {
@@ -360,7 +360,7 @@ func (m *opCreateAccessPointResolveEndpointMiddleware) HandleSerialize(ctx conte
 		if errors.As(err, &nfe) {
 			// if no auth scheme is found, default to sigv4
 			signingName := "s3"
-			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			signingRegion := m.BuiltInResolver.(*builtInResolver).Region
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 
@@ -386,7 +386,7 @@ func (m *opCreateAccessPointResolveEndpointMiddleware) HandleSerialize(ctx conte
 				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
-				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				signingRegion = m.BuiltInResolver.(*builtInResolver).Region
 			} else {
 				signingRegion = *v4Scheme.SigningRegion
 			}
@@ -426,7 +426,7 @@ func (m *opCreateAccessPointResolveEndpointMiddleware) HandleSerialize(ctx conte
 func addCreateAccessPointResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&opCreateAccessPointResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
-		BuiltInResolver: &BuiltInResolver{
+		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,
 			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
 			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,

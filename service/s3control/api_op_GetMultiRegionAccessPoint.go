@@ -252,7 +252,7 @@ func addGetMultiRegionAccessPointUpdateEndpoint(stack *middleware.Stack, options
 
 type opGetMultiRegionAccessPointResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
-	BuiltInResolver  BuiltInParameterResolver
+	BuiltInResolver  builtInParameterResolver
 }
 
 func (*opGetMultiRegionAccessPointResolveEndpointMiddleware) ID() string {
@@ -309,7 +309,7 @@ func (m *opGetMultiRegionAccessPointResolveEndpointMiddleware) HandleSerialize(c
 		if errors.As(err, &nfe) {
 			// if no auth scheme is found, default to sigv4
 			signingName := "s3"
-			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			signingRegion := m.BuiltInResolver.(*builtInResolver).Region
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 
@@ -335,7 +335,7 @@ func (m *opGetMultiRegionAccessPointResolveEndpointMiddleware) HandleSerialize(c
 				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
-				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				signingRegion = m.BuiltInResolver.(*builtInResolver).Region
 			} else {
 				signingRegion = *v4Scheme.SigningRegion
 			}
@@ -375,7 +375,7 @@ func (m *opGetMultiRegionAccessPointResolveEndpointMiddleware) HandleSerialize(c
 func addGetMultiRegionAccessPointResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&opGetMultiRegionAccessPointResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
-		BuiltInResolver: &BuiltInResolver{
+		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,
 			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
 			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,

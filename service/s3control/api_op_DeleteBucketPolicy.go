@@ -286,7 +286,7 @@ func addDeleteBucketPolicyUpdateEndpoint(stack *middleware.Stack, options Option
 
 type opDeleteBucketPolicyResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
-	BuiltInResolver  BuiltInParameterResolver
+	BuiltInResolver  builtInParameterResolver
 }
 
 func (*opDeleteBucketPolicyResolveEndpointMiddleware) ID() string {
@@ -345,7 +345,7 @@ func (m *opDeleteBucketPolicyResolveEndpointMiddleware) HandleSerialize(ctx cont
 		if errors.As(err, &nfe) {
 			// if no auth scheme is found, default to sigv4
 			signingName := "s3"
-			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			signingRegion := m.BuiltInResolver.(*builtInResolver).Region
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 
@@ -371,7 +371,7 @@ func (m *opDeleteBucketPolicyResolveEndpointMiddleware) HandleSerialize(ctx cont
 				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
-				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				signingRegion = m.BuiltInResolver.(*builtInResolver).Region
 			} else {
 				signingRegion = *v4Scheme.SigningRegion
 			}
@@ -411,7 +411,7 @@ func (m *opDeleteBucketPolicyResolveEndpointMiddleware) HandleSerialize(ctx cont
 func addDeleteBucketPolicyResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&opDeleteBucketPolicyResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
-		BuiltInResolver: &BuiltInResolver{
+		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,
 			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
 			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
