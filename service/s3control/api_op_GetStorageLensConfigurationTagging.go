@@ -240,7 +240,7 @@ func addGetStorageLensConfigurationTaggingUpdateEndpoint(stack *middleware.Stack
 
 type opGetStorageLensConfigurationTaggingResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
-	BuiltInResolver  BuiltInParameterResolver
+	BuiltInResolver  builtInParameterResolver
 }
 
 func (*opGetStorageLensConfigurationTaggingResolveEndpointMiddleware) ID() string {
@@ -297,7 +297,7 @@ func (m *opGetStorageLensConfigurationTaggingResolveEndpointMiddleware) HandleSe
 		if errors.As(err, &nfe) {
 			// if no auth scheme is found, default to sigv4
 			signingName := "s3"
-			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			signingRegion := m.BuiltInResolver.(*builtInResolver).Region
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 
@@ -323,7 +323,7 @@ func (m *opGetStorageLensConfigurationTaggingResolveEndpointMiddleware) HandleSe
 				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
-				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				signingRegion = m.BuiltInResolver.(*builtInResolver).Region
 			} else {
 				signingRegion = *v4Scheme.SigningRegion
 			}
@@ -363,7 +363,7 @@ func (m *opGetStorageLensConfigurationTaggingResolveEndpointMiddleware) HandleSe
 func addGetStorageLensConfigurationTaggingResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&opGetStorageLensConfigurationTaggingResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
-		BuiltInResolver: &BuiltInResolver{
+		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,
 			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
 			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,

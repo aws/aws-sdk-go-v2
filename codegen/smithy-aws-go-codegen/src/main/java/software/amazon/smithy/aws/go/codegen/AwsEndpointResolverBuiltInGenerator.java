@@ -33,8 +33,8 @@ import java.util.function.Consumer;
 
 public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
 
-    public static final String BUILTIN_RESOLVER_INTERFACE_TYPE = "BuiltInParameterResolver";
-    public static final String BUILTIN_RESOLVER_IMPLEMENTATION_TYPE = "BuiltInResolver";
+    public static final String BUILTIN_RESOLVER_INTERFACE_TYPE = "builtInParameterResolver";
+    public static final String BUILTIN_RESOLVER_IMPLEMENTATION_TYPE = "builtInResolver";
 
     private Map<String, Object> commonCodegenArgs;
 
@@ -186,12 +186,13 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
             writer.write(
                     """
                             $W
-                            func (b *BuiltInResolver) ResolveBuiltIns(params *$L) error {
+                            func (b *$L) ResolveBuiltIns(params *$L) error {
                             """,
                     goDocTemplate(
                             """
                                     Invoked at runtime to resolve BuiltIn Values. Only resolution code specific to each BuiltIn value is generated.
                                     """),
+                    AwsEndpointResolverBuiltInGenerator.BUILTIN_RESOLVER_IMPLEMENTATION_TYPE,
                     EndpointResolutionGenerator.PARAMETERS_TYPE_NAME);
 
             parameters.toList().stream().filter(
@@ -316,7 +317,7 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
         @Override
         public void renderEndpointBuiltInField(GoWriter writer) {
             writer.write("BuiltInResolver $T",
-                    SymbolUtils.createValueSymbolBuilder("BuiltInParameterResolver").build());
+                    SymbolUtils.createValueSymbolBuilder(BUILTIN_RESOLVER_INTERFACE_TYPE).build());
         }
 
         @Override
@@ -332,7 +333,7 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
                                     $W
                                 },
                             """,
-                    SymbolUtils.createValueSymbolBuilder("BuiltInResolver").build(),
+                    SymbolUtils.createValueSymbolBuilder(BUILTIN_RESOLVER_IMPLEMENTATION_TYPE).build(),
                     generateBuiltInInitializeFieldMembers(parameters));
         }
 
