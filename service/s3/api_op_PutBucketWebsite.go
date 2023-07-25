@@ -278,7 +278,7 @@ func addPutBucketWebsiteUpdateEndpoint(stack *middleware.Stack, options Options)
 
 type opPutBucketWebsiteResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
-	BuiltInResolver  BuiltInParameterResolver
+	BuiltInResolver  builtInParameterResolver
 }
 
 func (*opPutBucketWebsiteResolveEndpointMiddleware) ID() string {
@@ -333,7 +333,7 @@ func (m *opPutBucketWebsiteResolveEndpointMiddleware) HandleSerialize(ctx contex
 		if errors.As(err, &nfe) {
 			// if no auth scheme is found, default to sigv4
 			signingName := "s3"
-			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			signingRegion := m.BuiltInResolver.(*builtInResolver).Region
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 			ctx = s3cust.SetSignerVersion(ctx, internalauth.SigV4)
@@ -359,7 +359,7 @@ func (m *opPutBucketWebsiteResolveEndpointMiddleware) HandleSerialize(ctx contex
 				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
-				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				signingRegion = m.BuiltInResolver.(*builtInResolver).Region
 			} else {
 				signingRegion = *v4Scheme.SigningRegion
 			}
@@ -399,7 +399,7 @@ func (m *opPutBucketWebsiteResolveEndpointMiddleware) HandleSerialize(ctx contex
 func addPutBucketWebsiteResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&opPutBucketWebsiteResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
-		BuiltInResolver: &BuiltInResolver{
+		BuiltInResolver: &builtInResolver{
 			Region:                         options.Region,
 			UseFIPS:                        options.EndpointOptions.UseFIPSEndpoint,
 			UseDualStack:                   options.EndpointOptions.UseDualStackEndpoint,

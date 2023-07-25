@@ -224,15 +224,15 @@ func mapPseudoRegion(pr string) (region string, fips aws.FIPSEndpointState) {
 	return region, fips
 }
 
-// BuiltInParameterResolver is the interface responsible for resolving BuiltIn
+// builtInParameterResolver is the interface responsible for resolving BuiltIn
 // values during the sourcing of EndpointParameters
-type BuiltInParameterResolver interface {
+type builtInParameterResolver interface {
 	ResolveBuiltIns(*EndpointParameters) error
 }
 
-// BuiltInResolver resolves modeled BuiltIn values using only the members defined
+// builtInResolver resolves modeled BuiltIn values using only the members defined
 // below.
-type BuiltInResolver struct {
+type builtInResolver struct {
 	// The AWS region used to dispatch the request.
 	Region string
 
@@ -253,7 +253,7 @@ type BuiltInResolver struct {
 
 // Invoked at runtime to resolve BuiltIn Values. Only resolution code specific to
 // each BuiltIn value is generated.
-func (b *BuiltInResolver) ResolveBuiltIns(params *EndpointParameters) error {
+func (b *builtInResolver) ResolveBuiltIns(params *EndpointParameters) error {
 
 	region, _ := mapPseudoRegion(b.Region)
 	if len(region) == 0 {
