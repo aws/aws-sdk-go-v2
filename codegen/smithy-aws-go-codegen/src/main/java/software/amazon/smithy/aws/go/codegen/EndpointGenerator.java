@@ -400,20 +400,7 @@ public final class EndpointGenerator implements Runnable {
             AwsGoDependency.AWS_CORE).build();
 
         writeExternalResolveEndpointImplementation(writer, wrappedResolverSymbol, "w", () -> {
-            writer.write("""
-                         endpoint, err = w.awsResolver.ResolveEndpoint(ServiceID, region, options)
-                         if err == nil {
-                             return endpoint, nil
-                         }
-
-                         if nf := (&$T{}); errors.As(err, &nf) {
-                             return endpoint, nil
-                         }
-
-                         return endpoint, err
-
-
-                        """, endpointNotFoundError);
+            writer.write("return w.awsResolver.ResolveEndpoint(ServiceID, region, options)");
 
             writer.addUseImports(SmithyGoDependency.ERRORS);
         });
@@ -435,8 +422,9 @@ public final class EndpointGenerator implements Runnable {
         // with the clients EndpointResolver interface.
         writer.write("""
                      // $1L returns an $3T that first delegates endpoint resolution to the awsResolver.
-                     // If awsResolver returns $7T error, the resolver will swallow the error, such
-                     // that fallback will occur when $8L is invoked via its middleware.
+                     // If awsResolver returns $7T error, the v1 resolver middleware will swallow the error, 
+                     // and set an appropriate context flag such that fallback will occur when $8L is invoked 
+                     // via its middleware.
                      //
                      // If another error (besides $7T) is returned, then that error will be propagated.
                      func $1L(awsResolver $2T, awsResolverWithOptions $3T) $6L {
@@ -527,9 +515,22 @@ public final class EndpointGenerator implements Runnable {
         w.write("var endpoint $T", SymbolUtils.createValueSymbolBuilder("Endpoint", AwsGoDependency.AWS_CORE)
                 .build());
         w.write("endpoint, err = m.Resolver.ResolveEndpoint(awsmiddleware.GetRegion(ctx), eo)");
-        w.openBlock("if err != nil {", "}", () -> {
-            w.write("return out, metadata, fmt.Errorf(\"failed to resolve service endpoint, %w\", err)");
-        });
+        w.write(
+            """
+                if err != nil {
+                    nf := (&$1T{})
+                    if $2T(err, &nf) {
+                        ctx = $3T(ctx, false)
+                        return next.HandleSerialize(ctx, in)
+                    }
+                    return out, metadata, $4T(\"failed to resolve service endpoint, %w\", err)
+                }
+            """,
+            SymbolUtils.createValueSymbolBuilder("EndpointNotFoundError", AwsGoDependency.AWS_CORE).build(),
+            SymbolUtils.createValueSymbolBuilder("As", SmithyGoDependency.ERRORS).build(),
+            SymbolUtils.createValueSymbolBuilder("SetRequiresLegacyEndpoints", AwsGoDependency.AWS_MIDDLEWARE).build(),
+            SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build()
+        );
         w.write("");
 
         w.write("req.URL, err = url.Parse(endpoint.URL)");
