@@ -16,8 +16,8 @@ import (
 
 func Test_EmptyResponse(t *testing.T) {
 	cases := map[string]struct {
-		response       *http.Response
-		expectError  bool
+		response    *http.Response
+		expectError bool
 	}{
 		"success case with no response body": {
 			response: &http.Response{
@@ -34,7 +34,7 @@ func Test_EmptyResponse(t *testing.T) {
 					``,
 				),
 			},
-			expectError:  true,
+			expectError: true,
 		},
 	}
 
@@ -119,7 +119,7 @@ func TestBucketLocationPopulation(t *testing.T) {
 					`<?xml version="1.0" encoding="UTF-8"?><LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/">`,
 				),
 			},
-			expectError:  "unexpected EOF",
+			expectError: "unexpected EOF",
 		},
 	}
 
@@ -130,7 +130,7 @@ func TestBucketLocationPopulation(t *testing.T) {
 			defer cancelFn()
 
 			cfg := aws.Config{
-				Region: "us-east-1",
+				Region:  "us-east-1",
 				Retryer: func() aws.Retryer { return aws.NopRetryer{} },
 			}
 
