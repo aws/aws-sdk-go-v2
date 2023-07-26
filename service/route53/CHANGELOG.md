@@ -1,3 +1,7 @@
+# v1.28.5 (2023-07-26)
+
+* **Documentation**: Update that corrects the documents for received feedback.
+
 # v1.28.4 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

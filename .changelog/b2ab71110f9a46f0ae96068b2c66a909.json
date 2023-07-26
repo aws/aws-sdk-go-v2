@@ -1,8 +1,0 @@
-{
-    "id": "b2ab7111-0f9a-46f0-ae96-068b2c66a909",
-    "type": "feature",
-    "description": "Release Glue Studio Snowflake Connector Node for SDK/CLI",
-    "modules": [
-        "service/glue"
-    ]
-}

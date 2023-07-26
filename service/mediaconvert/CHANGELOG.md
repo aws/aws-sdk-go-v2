@@ -1,3 +1,7 @@
+# v1.39.1 (2023-07-26)
+
+* **Documentation**: This release includes general updates to user documentation.
+
 # v1.39.0 (2023-07-21)
 
 * **Feature**: This release includes improvements to Preserve 444 handling, compatibility of HEVC sources without frame rates, and general improvements to MP4 outputs.

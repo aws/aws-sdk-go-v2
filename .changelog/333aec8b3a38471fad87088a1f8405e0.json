@@ -1,8 +1,0 @@
-{
-    "id": "333aec8b-3a38-471f-ad87-088a1f8405e0",
-    "type": "feature",
-    "description": "Amazon Polly adds 1 new voice - Lisa (nl-BE)",
-    "modules": [
-        "service/polly"
-    ]
-}

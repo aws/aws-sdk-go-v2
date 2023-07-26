@@ -1,3 +1,7 @@
+# v1.16.4 (2023-07-26)
+
+* **Documentation**: Updating the HealthLake service documentation.
+
 # v1.16.3 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

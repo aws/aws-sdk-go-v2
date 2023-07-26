@@ -1,3 +1,7 @@
+# v1.3.0 (2023-07-26)
+
+* **Feature**: This release adds new collection type VectorSearch.
+
 # v1.2.7 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

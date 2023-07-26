@@ -1,8 +1,0 @@
-{
-    "id": "b537348e-67ce-4e21-acb4-201d99b0bdf5",
-    "type": "documentation",
-    "description": "Updates the documentation for CreateResource.",
-    "modules": [
-        "service/cloudcontrol"
-    ]
-}

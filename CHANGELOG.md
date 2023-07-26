@@ -1,3 +1,27 @@
+# Release (2023-07-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.0.0](service/entityresolution/CHANGELOG.md#v100-2023-07-26)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Entity Resolution can effectively match a source record from a customer relationship management (CRM) system with a source record from a marketing system containing campaign information.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.58.0](service/glue/CHANGELOG.md#v1580-2023-07-26)
+  * **Feature**: Release Glue Studio Snowflake Connector Node for SDK/CLI
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.16.4](service/healthlake/CHANGELOG.md#v1164-2023-07-26)
+  * **Documentation**: Updating the HealthLake service documentation.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.0.0](service/managedblockchainquery/CHANGELOG.md#v100-2023-07-26)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Managed Blockchain (AMB) Query provides serverless access to standardized, multi-blockchain datasets with developer-friendly APIs.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.39.1](service/mediaconvert/CHANGELOG.md#v1391-2023-07-26)
+  * **Documentation**: This release includes general updates to user documentation.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.5.2](service/omics/CHANGELOG.md#v152-2023-07-26)
+  * **Documentation**: The service is renaming as a part of AWS Health.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.3.0](service/opensearchserverless/CHANGELOG.md#v130-2023-07-26)
+  * **Feature**: This release adds new collection type VectorSearch.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.27.0](service/polly/CHANGELOG.md#v1270-2023-07-26)
+  * **Feature**: Amazon Polly adds 1 new voice - Lisa (nl-BE)
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.28.5](service/route53/CHANGELOG.md#v1285-2023-07-26)
+  * **Documentation**: Update that corrects the documents for received feedback.
+
 # Release (2023-07-25)
 
 ## General Highlights

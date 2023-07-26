@@ -1,3 +1,7 @@
+# v1.27.0 (2023-07-26)
+
+* **Feature**: Amazon Polly adds 1 new voice - Lisa (nl-BE)
+
 # v1.26.3 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.58.0 (2023-07-26)
+
+* **Feature**: Release Glue Studio Snowflake Connector Node for SDK/CLI
+
 # v1.57.0 (2023-07-24)
 
 * **Feature**: Added support for Data Preparation Recipe node in Glue Studio jobs
