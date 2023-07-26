@@ -56,6 +56,8 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
         var rulesetTrait = serviceShape.getTrait(EndpointRuleSetTrait.class);
         if (rulesetTrait.isPresent()) {
             ruleset = Optional.of(EndpointRuleSet.fromNode(rulesetTrait.get().getRuleSet()));
+        } else {
+            return;
         }
         Parameters parameters = ruleset.get().getParameters();
 
