@@ -10,14 +10,14 @@ func TestV4(t *testing.T) {
 
 	propsV4 := smithy.Properties{}
 
-	propsV4 = propsV4.Set("authSchemes", []interface{}{
+	propsV4.Set("authSchemes", interface{}([]interface{}{
 		map[string]interface{}{
 			"disableDoubleEncoding": true,
 			"name":                  "sigv4",
 			"signingName":           "s3",
 			"signingRegion":         "us-west-2",
 		},
-	})
+	}))
 
 	result, err := GetAuthenticationSchemes(&propsV4)
 	if err != nil {
@@ -44,7 +44,7 @@ func TestV4A(t *testing.T) {
 
 	propsV4A := smithy.Properties{}
 
-	propsV4A = propsV4A.Set("authSchemes", []interface{}{
+	propsV4A.Set("authSchemes", []interface{}{
 		map[string]interface{}{
 			"disableDoubleEncoding": true,
 			"name":                  "sigv4a",
