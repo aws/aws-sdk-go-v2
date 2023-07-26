@@ -1,6 +1,9 @@
 # Lint rules to ignore
 LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
 LINT_IGNORE_S3MANAGER_INPUT='feature/s3/manager/upload.go:.+struct field SSEKMSKeyId should be SSEKMSKeyID'
+# Names of these are tied to endpoint rules and they're internal so ignore them
+LINT_IGNORE_AWSRULESFN_ARN='internal/endpoints/awsrulesfn/arn.go'
+LINT_IGNORE_AWSRULESFN_PARTITION='internal/endpoints/awsrulesfn/partition.go'
 
 UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
@@ -464,7 +467,9 @@ lint:
 	@lint=`golint ./...`; \
 	dolint=`echo "$$lint" | grep -E -v \
 	-e ${LINT_IGNORE_S3MANAGER_INPUT} \
-	-e ${LINTIGNORESINGLEFIGHT}`; \
+	-e ${LINTIGNORESINGLEFIGHT} \
+	-e ${LINT_IGNORE_AWSRULESFN_ARN} \
+	-e ${LINT_IGNORE_AWSRULESFN_PARTITION}`; \
 	echo "$$dolint"; \
 	if [ "$$dolint" != "" ]; then exit 1; fi
 
