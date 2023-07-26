@@ -414,216 +414,91 @@
                                                                 },
                                                                 "aws"
                                                             ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
                                                         }
                                                     ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
+                                                    "endpoint": {
+                                                        "url": "https://route53.amazonaws.com",
+                                                        "properties": {
+                                                            "authSchemes": [
                                                                 {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        },
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53-fips.{Region}.api.aws",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error"
+                                                                    "name": "sigv4",
+                                                                    "signingName": "route53",
+                                                                    "signingRegion": "us-east-1"
                                                                 }
                                                             ]
                                                         },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
                                                         {
-                                                            "conditions": [
+                                                            "fn": "stringEquals",
+                                                            "argv": [
                                                                 {
-                                                                    "fn": "booleanEquals",
+                                                                    "fn": "getAttr",
                                                                     "argv": [
                                                                         {
-                                                                            "ref": "UseFIPS"
+                                                                            "ref": "PartitionResult"
                                                                         },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53-fips.amazonaws.com",
-                                                                                "properties": {
-                                                                                    "authSchemes": [
-                                                                                        {
-                                                                                            "name": "sigv4",
-                                                                                            "signingName": "route53",
-                                                                                            "signingRegion": "us-east-1"
-                                                                                        }
-                                                                                    ]
-                                                                                },
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
+                                                                        "name"
                                                                     ]
                                                                 },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error"
-                                                                }
+                                                                "aws"
                                                             ]
                                                         },
                                                         {
-                                                            "conditions": [
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
                                                                 {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53.{Region}.api.aws",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
+                                                                    "ref": "UseFIPS"
                                                                 },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error"
-                                                                }
+                                                                true
                                                             ]
                                                         },
                                                         {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://route53.amazonaws.com",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-east-1"
-                                                                        }
-                                                                    ]
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
                                                                 },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
+                                                                false
+                                                            ]
                                                         }
-                                                    ]
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://route53-fips.amazonaws.com",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingName": "route53",
+                                                                    "signingRegion": "us-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
                                                 },
                                                 {
                                                     "conditions": [
@@ -641,208 +516,40 @@
                                                                 },
                                                                 "aws-cn"
                                                             ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
                                                         }
                                                     ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
+                                                    "endpoint": {
+                                                        "url": "https://route53.amazonaws.com.cn",
+                                                        "properties": {
+                                                            "authSchemes": [
                                                                 {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        },
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53-fips.{Region}.api.amazonwebservices.com.cn",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error"
+                                                                    "name": "sigv4",
+                                                                    "signingName": "route53",
+                                                                    "signingRegion": "cn-northwest-1"
                                                                 }
                                                             ]
                                                         },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53-fips.{Region}.amazonaws.com.cn",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53.{Region}.api.amazonwebservices.com.cn",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://route53.amazonaws.com.cn",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "cn-northwest-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
                                                 },
                                                 {
                                                     "conditions": [
@@ -860,216 +567,91 @@
                                                                 },
                                                                 "aws-us-gov"
                                                             ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
                                                         }
                                                     ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
+                                                    "endpoint": {
+                                                        "url": "https://route53.us-gov.amazonaws.com",
+                                                        "properties": {
+                                                            "authSchemes": [
                                                                 {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        },
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53-fips.{Region}.api.aws",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error"
+                                                                    "name": "sigv4",
+                                                                    "signingName": "route53",
+                                                                    "signingRegion": "us-gov-west-1"
                                                                 }
                                                             ]
                                                         },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
                                                         {
-                                                            "conditions": [
+                                                            "fn": "stringEquals",
+                                                            "argv": [
                                                                 {
-                                                                    "fn": "booleanEquals",
+                                                                    "fn": "getAttr",
                                                                     "argv": [
                                                                         {
-                                                                            "ref": "UseFIPS"
+                                                                            "ref": "PartitionResult"
                                                                         },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53.us-gov.amazonaws.com",
-                                                                                "properties": {
-                                                                                    "authSchemes": [
-                                                                                        {
-                                                                                            "name": "sigv4",
-                                                                                            "signingName": "route53",
-                                                                                            "signingRegion": "us-gov-west-1"
-                                                                                        }
-                                                                                    ]
-                                                                                },
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
+                                                                        "name"
                                                                     ]
                                                                 },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error"
-                                                                }
+                                                                "aws-us-gov"
                                                             ]
                                                         },
                                                         {
-                                                            "conditions": [
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
                                                                 {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53.{Region}.api.aws",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
+                                                                    "ref": "UseFIPS"
                                                                 },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error"
-                                                                }
+                                                                true
                                                             ]
                                                         },
                                                         {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://route53.us-gov.amazonaws.com",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-gov-west-1"
-                                                                        }
-                                                                    ]
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
                                                                 },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
+                                                                false
+                                                            ]
                                                         }
-                                                    ]
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://route53.us-gov.amazonaws.com",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingName": "route53",
+                                                                    "signingRegion": "us-gov-west-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
                                                 },
                                                 {
                                                     "conditions": [
@@ -1087,80 +669,40 @@
                                                                 },
                                                                 "aws-iso"
                                                             ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
+                                                        },
                                                         {
-                                                            "conditions": [
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
                                                                 {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53-fips.{Region}.c2s.ic.gov",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
+                                                                    "ref": "UseFIPS"
                                                                 },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error"
-                                                                }
+                                                                false
                                                             ]
                                                         },
                                                         {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://route53.c2s.ic.gov",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-iso-east-1"
-                                                                        }
-                                                                    ]
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
                                                                 },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
+                                                                false
+                                                            ]
                                                         }
-                                                    ]
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://route53.c2s.ic.gov",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingName": "route53",
+                                                                    "signingRegion": "us-iso-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
                                                 },
                                                 {
                                                     "conditions": [
@@ -1178,80 +720,40 @@
                                                                 },
                                                                 "aws-iso-b"
                                                             ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
+                                                        },
                                                         {
-                                                            "conditions": [
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
                                                                 {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53-fips.{Region}.sc2s.sgov.gov",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
+                                                                    "ref": "UseFIPS"
                                                                 },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error"
-                                                                }
+                                                                false
                                                             ]
                                                         },
                                                         {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://route53.sc2s.sgov.gov",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-isob-east-1"
-                                                                        }
-                                                                    ]
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
                                                                 },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
+                                                                false
+                                                            ]
                                                         }
-                                                    ]
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://route53.sc2s.sgov.gov",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingName": "route53",
+                                                                    "signingRegion": "us-isob-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
                                                 },
                                                 {
                                                     "conditions": [
@@ -1374,60 +876,6 @@
                                                                     "type": "tree",
                                                                     "rules": [
                                                                         {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "Region"
-                                                                                        },
-                                                                                        "aws-global"
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53-fips.amazonaws.com",
-                                                                                "properties": {
-                                                                                    "authSchemes": [
-                                                                                        {
-                                                                                            "name": "sigv4",
-                                                                                            "signingName": "route53",
-                                                                                            "signingRegion": "us-east-1"
-                                                                                        }
-                                                                                    ]
-                                                                                },
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "Region"
-                                                                                        },
-                                                                                        "aws-us-gov-global"
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53.us-gov.amazonaws.com",
-                                                                                "properties": {
-                                                                                    "authSchemes": [
-                                                                                        {
-                                                                                            "name": "sigv4",
-                                                                                            "signingName": "route53",
-                                                                                            "signingRegion": "us-gov-west-1"
-                                                                                        }
-                                                                                    ]
-                                                                                },
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
                                                                             "conditions": [],
                                                                             "endpoint": {
                                                                                 "url": "https://route53-fips.{Region}.{PartitionResult#dnsSuffix}",
@@ -1510,141 +958,6 @@
                                                     "type": "tree",
                                                     "rules": [
                                                         {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "aws-global"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://route53.amazonaws.com",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-east-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "aws-cn-global"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://route53.amazonaws.com.cn",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "cn-northwest-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "aws-us-gov-global"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://route53.us-gov.amazonaws.com",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-gov-west-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "aws-iso-global"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://route53.c2s.ic.gov",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-iso-east-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "aws-iso-b-global"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://route53.sc2s.sgov.gov",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-isob-east-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://route53.{Region}.{PartitionResult#dnsSuffix}",
@@ -1688,8 +1001,8 @@
                             },
                             "params": {
                                 "Region": "aws-global",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1710,8 +1023,8 @@
                             },
                             "params": {
                                 "Region": "aws-global",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1723,8 +1036,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1745,8 +1058,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1758,8 +1071,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1780,8 +1093,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1802,8 +1115,8 @@
                             },
                             "params": {
                                 "Region": "aws-cn-global",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1815,8 +1128,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1828,8 +1141,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1841,8 +1154,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1863,8 +1176,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1885,8 +1198,8 @@
                             },
                             "params": {
                                 "Region": "aws-us-gov-global",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1907,8 +1220,8 @@
                             },
                             "params": {
                                 "Region": "aws-us-gov-global",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1920,8 +1233,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1942,8 +1255,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1955,8 +1268,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1977,8 +1290,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1999,8 +1312,19 @@
                             },
                             "params": {
                                 "Region": "aws-iso-global",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2012,8 +1336,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2034,8 +1369,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2056,8 +1391,19 @@
                             },
                             "params": {
                                 "Region": "aws-iso-b-global",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2069,8 +1415,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2091,8 +1448,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2104,8 +1461,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2117,8 +1474,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2129,8 +1486,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2141,9 +1498,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2265,6 +1628,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ActivateKeySigningKeyResponse": {
@@ -2276,6 +1642,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#AlarmIdentifier": {
@@ -2417,7 +1786,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the request to associate a VPC with a\n\t\t\tprivate hosted zone.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the request to associate a VPC with a\n\t\t\tprivate hosted zone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#AssociateVPCWithHostedZoneResponse": {
@@ -2432,7 +1802,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the\n\t\t\t\t<code>AssociateVPCWithHostedZone</code> request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the\n\t\t\t\t<code>AssociateVPCWithHostedZone</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#Change": {
@@ -2562,6 +1933,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ChangeCidrCollectionResponse": {
@@ -2574,6 +1948,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ChangeId": {
@@ -2646,7 +2023,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates, changes, or deletes a resource record set, which contains authoritative DNS\n\t\t\tinformation for a specified domain name or subdomain name. For example, you can use\n\t\t\t\t<code>ChangeResourceRecordSets</code> to create a resource record set that routes\n\t\t\ttraffic for test.example.com to a web server that has an IP address of\n\t\t\t192.0.2.44.</p>\n         <p>\n            <b>Deleting Resource Record Sets</b>\n         </p>\n         <p>To delete a resource record set, you must specify all the same values that you\n\t\t\tspecified when you created it.</p>\n         <p>\n            <b>Change Batches and Transactional Changes</b>\n         </p>\n         <p>The request body must include a document with a\n\t\t\t\t<code>ChangeResourceRecordSetsRequest</code> element. The request body contains a\n\t\t\tlist of change items, known as a change batch. Change batches are considered\n\t\t\ttransactional changes. Route 53 validates the changes in the request and then either\n\t\t\tmakes all or none of the changes in the change batch request. This ensures that DNS\n\t\t\trouting isn't adversely affected by partial changes to the resource record sets in a\n\t\t\thosted zone. </p>\n         <p>For example, suppose a change batch request contains two changes: it deletes the\n\t\t\t\t<code>CNAME</code> resource record set for www.example.com and creates an alias\n\t\t\tresource record set for www.example.com. If validation for both records succeeds, Route\n\t\t\t53 deletes the first resource record set and creates the second resource record set in a\n\t\t\tsingle operation. If validation for either the <code>DELETE</code> or the\n\t\t\t\t<code>CREATE</code> action fails, then the request is canceled, and the original\n\t\t\t\t<code>CNAME</code> record continues to exist.</p>\n         <note>\n            <p>If you try to delete the same resource record set more than once in a single\n\t\t\t\tchange batch, Route 53 returns an <code>InvalidChangeBatch</code> error.</p>\n         </note>\n         <p>\n            <b>Traffic Flow</b>\n         </p>\n         <p>To create resource record sets for complex routing configurations, use either the\n\t\t\ttraffic flow visual editor in the Route 53 console or the API actions for traffic\n\t\t\tpolicies and traffic policy instances. Save the configuration as a traffic policy, then\n\t\t\tassociate the traffic policy with one or more domain names (such as example.com) or\n\t\t\tsubdomain names (such as www.example.com), in the same hosted zone or in multiple hosted\n\t\t\tzones. You can roll back the updates if the new configuration isn't performing as\n\t\t\texpected. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/traffic-flow.html\">Using Traffic Flow to Route\n\t\t\t\tDNS Traffic</a> in the <i>Amazon Route 53 Developer\n\t\t\tGuide</i>.</p>\n         <p>\n            <b>Create, Delete, and Upsert</b>\n         </p>\n         <p>Use <code>ChangeResourceRecordsSetsRequest</code> to perform the following\n\t\t\tactions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE</code>: Creates a resource record set that has the specified\n\t\t\t\t\tvalues.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE</code>: Deletes an existing resource record set that has the\n\t\t\t\t\tspecified values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPSERT</code>: If a resource set exists Route 53 updates it with the\n\t\t\t\t\tvalues in the request. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Syntaxes for Creating, Updating, and Deleting Resource Record\n\t\t\t\tSets</b>\n         </p>\n         <p>The syntax for a request depends on the type of resource record set that you want to\n\t\t\tcreate, delete, or update, such as weighted, alias, or failover. The XML elements in\n\t\t\tyour request must appear in the order listed in the syntax. </p>\n         <p>For an example for each type of resource record set, see \"Examples.\"</p>\n         <p>Don't refer to the syntax in the \"Parameter Syntax\" section, which includes\n\t\t\tall of the elements for every kind of resource record set that you can create, delete,\n\t\t\tor update by using <code>ChangeResourceRecordSets</code>. </p>\n         <p>\n            <b>Change Propagation to Route 53 DNS Servers</b>\n         </p>\n         <p>When you submit a <code>ChangeResourceRecordSets</code> request, Route 53 propagates\n\t\t\tyour changes to all of the Route 53 authoritative DNS servers. While your changes are\n\t\t\tpropagating, <code>GetChange</code> returns a status of <code>PENDING</code>. When\n\t\t\tpropagation is complete, <code>GetChange</code> returns a status of <code>INSYNC</code>.\n\t\t\tChanges generally propagate to all Route 53 name servers within 60 seconds. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html\">GetChange</a>.</p>\n         <p>\n            <b>Limits on ChangeResourceRecordSets Requests</b>\n         </p>\n         <p>For information about the limits on a <code>ChangeResourceRecordSets</code> request,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html\">Limits</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates, changes, or deletes a resource record set, which contains authoritative DNS\n\t\t\tinformation for a specified domain name or subdomain name. For example, you can use\n\t\t\t\t<code>ChangeResourceRecordSets</code> to create a resource record set that routes\n\t\t\ttraffic for test.example.com to a web server that has an IP address of\n\t\t\t192.0.2.44.</p>\n         <p>\n            <b>Deleting Resource Record Sets</b>\n         </p>\n         <p>To delete a resource record set, you must specify all the same values that you\n\t\t\tspecified when you created it.</p>\n         <p>\n            <b>Change Batches and Transactional Changes</b>\n         </p>\n         <p>The request body must include a document with a\n\t\t\t\t<code>ChangeResourceRecordSetsRequest</code> element. The request body contains a\n\t\t\tlist of change items, known as a change batch. Change batches are considered\n\t\t\ttransactional changes. Route 53 validates the changes in the request and then either\n\t\t\tmakes all or none of the changes in the change batch request. This ensures that DNS\n\t\t\trouting isn't adversely affected by partial changes to the resource record sets in a\n\t\t\thosted zone. </p>\n         <p>For example, suppose a change batch request contains two changes: it deletes the\n\t\t\t\t<code>CNAME</code> resource record set for www.example.com and creates an alias\n\t\t\tresource record set for www.example.com. If validation for both records succeeds, Route\n\t\t\t53 deletes the first resource record set and creates the second resource record set in a\n\t\t\tsingle operation. If validation for either the <code>DELETE</code> or the\n\t\t\t\t<code>CREATE</code> action fails, then the request is canceled, and the original\n\t\t\t\t<code>CNAME</code> record continues to exist.</p>\n         <note>\n            <p>If you try to delete the same resource record set more than once in a single\n\t\t\t\tchange batch, Route 53 returns an <code>InvalidChangeBatch</code> error.</p>\n         </note>\n         <p>\n            <b>Traffic Flow</b>\n         </p>\n         <p>To create resource record sets for complex routing configurations, use either the\n\t\t\ttraffic flow visual editor in the Route 53 console or the API actions for traffic\n\t\t\tpolicies and traffic policy instances. Save the configuration as a traffic policy, then\n\t\t\tassociate the traffic policy with one or more domain names (such as example.com) or\n\t\t\tsubdomain names (such as www.example.com), in the same hosted zone or in multiple hosted\n\t\t\tzones. You can roll back the updates if the new configuration isn't performing as\n\t\t\texpected. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/traffic-flow.html\">Using Traffic Flow to Route\n\t\t\t\tDNS Traffic</a> in the <i>Amazon Route 53 Developer\n\t\t\tGuide</i>.</p>\n         <p>\n            <b>Create, Delete, and Upsert</b>\n         </p>\n         <p>Use <code>ChangeResourceRecordsSetsRequest</code> to perform the following\n\t\t\tactions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE</code>: Creates a resource record set that has the specified\n\t\t\t\t\tvalues.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE</code>: Deletes an existing resource record set that has the\n\t\t\t\t\tspecified values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPSERT</code>: If a resource set exists Route 53 updates it with the\n\t\t\t\t\tvalues in the request. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Syntaxes for Creating, Updating, and Deleting Resource Record\n\t\t\t\tSets</b>\n         </p>\n         <p>The syntax for a request depends on the type of resource record set that you want to\n\t\t\tcreate, delete, or update, such as weighted, alias, or failover. The XML elements in\n\t\t\tyour request must appear in the order listed in the syntax. </p>\n         <p>For an example for each type of resource record set, see \"Examples.\"</p>\n         <p>Don't refer to the syntax in the \"Parameter Syntax\" section, which includes\n\t\t\tall of the elements for every kind of resource record set that you can create, delete,\n\t\t\tor update by using <code>ChangeResourceRecordSets</code>. </p>\n         <p>\n            <b>Change Propagation to Route 53 DNS Servers</b>\n         </p>\n         <p>When you submit a <code>ChangeResourceRecordSets</code> request, Route 53 propagates your\n\t\t\tchanges to all of the Route 53 authoritative DNS servers managing the hosted zone. While\n\t\t\tyour changes are propagating, <code>GetChange</code> returns a status of\n\t\t\t\t<code>PENDING</code>. When propagation is complete, <code>GetChange</code> returns a\n\t\t\tstatus of <code>INSYNC</code>. Changes generally propagate to all Route 53 name servers\n\t\t\tmanaging the hosted zone within 60 seconds. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html\">GetChange</a>.</p>\n         <p>\n            <b>Limits on ChangeResourceRecordSets Requests</b>\n         </p>\n         <p>For information about the limits on a <code>ChangeResourceRecordSets</code> request,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html\">Limits</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/hostedzone/{HostedZoneId}/rrset",
@@ -2674,7 +2051,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains change information for the resource record set.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains change information for the resource record set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ChangeResourceRecordSetsResponse": {
@@ -2689,7 +2067,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type containing the response for the request.</p>"
+                "smithy.api#documentation": "<p>A complex type containing the response for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ChangeStatus": {
@@ -2776,14 +2155,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the tags that you want to add, edit, or\n\t\t\tdelete.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the tags that you want to add, edit, or\n\t\t\tdelete.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ChangeTagsForResourceResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Empty response for the request.</p>"
+                "smithy.api#documentation": "<p>Empty response for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#Changes": {
@@ -3523,6 +2904,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#CreateCidrCollectionResponse": {
@@ -3541,6 +2925,9 @@
                         "smithy.api#httpHeader": "Location"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#CreateHealthCheck": {
@@ -3590,7 +2977,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the health check request information.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the health check request information.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#CreateHealthCheckResponse": {
@@ -3613,7 +3001,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type containing the response information for the new health check.</p>"
+                "smithy.api#documentation": "<p>A complex type containing the response information for the new health check.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#CreateHostedZone": {
@@ -3694,12 +3083,13 @@
                 "DelegationSetId": {
                     "target": "com.amazonaws.route53#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you want to associate a reusable delegation set with this hosted zone, the ID that\n\t\t\t\tAmazon Route 53 assigned to the reusable delegation set when you created it.\n\t\t\tFor more information about reusable delegation sets, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html\">CreateReusableDelegationSet</a>.</p>"
+                        "smithy.api#documentation": "<p>If you want to associate a reusable delegation set with this hosted zone, the ID that\n\t\t\t\tAmazon Route 53 assigned to the reusable delegation set when you created it.\n\t\t\tFor more information about reusable delegation sets, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html\">CreateReusableDelegationSet</a>.</p>\n         <p>If you are using a reusable delegation set to create a public hosted zone for a subdomain,\n\t\t\tmake sure that the parent hosted zone doesn't use one or more of the same name servers.\n\t\t\tIf you have overlapping nameservers, the operation will cause a\n\t\t\t\t<code>ConflictingDomainsExist</code> error.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the request to create a public or\n\t\t\tprivate hosted zone.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the request to create a public or\n\t\t\tprivate hosted zone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#CreateHostedZoneResponse": {
@@ -3742,7 +3132,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type containing the response information for the hosted zone.</p>"
+                "smithy.api#documentation": "<p>A complex type containing the response information for the hosted zone.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#CreateKeySigningKey": {
@@ -3832,6 +3223,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#CreateKeySigningKeyResponse": {
@@ -3858,6 +3252,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#CreateQueryLoggingConfig": {
@@ -3914,6 +3311,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#CreateQueryLoggingConfigResponse": {
@@ -3934,6 +3334,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#CreateReusableDelegationSet": {
@@ -3992,6 +3395,9 @@
                         "smithy.api#documentation": "<p>If you want to mark the delegation set for an existing hosted zone as reusable, the ID\n\t\t\tfor that hosted zone.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#CreateReusableDelegationSetResponse": {
@@ -4012,6 +3418,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#CreateTrafficPolicy": {
@@ -4071,7 +3480,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates resource record sets in a specified hosted zone based on the settings in a\n\t\t\tspecified traffic policy version. In addition, <code>CreateTrafficPolicyInstance</code>\n\t\t\tassociates the resource record sets with a specified domain name (such as example.com)\n\t\t\tor subdomain name (such as www.example.com). Amazon Route 53 responds to DNS queries for\n\t\t\tthe domain or subdomain name by using the resource record sets that\n\t\t\t\t<code>CreateTrafficPolicyInstance</code> created.</p>",
+                "smithy.api#documentation": "<p>Creates resource record sets in a specified hosted zone based on the settings in a\n\t\t\tspecified traffic policy version. In addition, <code>CreateTrafficPolicyInstance</code>\n\t\t\tassociates the resource record sets with a specified domain name (such as example.com)\n\t\t\tor subdomain name (such as www.example.com). Amazon Route 53 responds to DNS queries for\n\t\t\tthe domain or subdomain name by using the resource record sets that\n\t\t\t\t<code>CreateTrafficPolicyInstance</code> created.</p>\n         <note>\n            <p>After you submit an <code>CreateTrafficPolicyInstance</code> request, there's a\n\t\t\t\tbrief delay while Amazon Route 53 creates the resource record sets that are\n\t\t\t\tspecified in the traffic policy definition. \n\t\t\t\tUse <code>GetTrafficPolicyInstance</code> with the <code>id</code> of new traffic policy instance to confirm that the <code>CreateTrafficPolicyInstance</code>\n\t\t\t\trequest completed successfully. For more information, see the\n\t\t\t\t<code>State</code> response element.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/trafficpolicyinstance",
@@ -4119,7 +3528,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the resource record sets that you want\n\t\t\tto create based on a specified traffic policy.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the resource record sets that you want\n\t\t\tto create based on a specified traffic policy.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#CreateTrafficPolicyInstanceResponse": {
@@ -4142,7 +3552,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the\n\t\t\t\t<code>CreateTrafficPolicyInstance</code> request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the\n\t\t\t\t<code>CreateTrafficPolicyInstance</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#CreateTrafficPolicyRequest": {
@@ -4170,7 +3581,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the traffic policy that you want to\n\t\t\tcreate.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the traffic policy that you want to\n\t\t\tcreate.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#CreateTrafficPolicyResponse": {
@@ -4193,7 +3605,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the\n\t\t\t\t<code>CreateTrafficPolicy</code> request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the\n\t\t\t\t<code>CreateTrafficPolicy</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#CreateTrafficPolicyVersion": {
@@ -4256,7 +3669,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the traffic policy that you want to\n\t\t\tcreate a new version for.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the traffic policy that you want to\n\t\t\tcreate a new version for.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#CreateTrafficPolicyVersionResponse": {
@@ -4279,7 +3693,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the\n\t\t\t\t<code>CreateTrafficPolicyVersion</code> request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the\n\t\t\t\t<code>CreateTrafficPolicyVersion</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#CreateVPCAssociationAuthorization": {
@@ -4336,7 +3751,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the request to authorize associating a\n\t\t\tVPC with your private hosted zone. Authorization is only required when a private hosted\n\t\t\tzone and a VPC were created by using different accounts.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the request to authorize associating a\n\t\t\tVPC with your private hosted zone. Authorization is only required when a private hosted\n\t\t\tzone and a VPC were created by using different accounts.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#CreateVPCAssociationAuthorizationResponse": {
@@ -4358,7 +3774,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information from a\n\t\t\t\t<code>CreateVPCAssociationAuthorization</code> request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information from a\n\t\t\t\t<code>CreateVPCAssociationAuthorization</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#DNSName": {
@@ -4465,6 +3882,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DeactivateKeySigningKeyResponse": {
@@ -4476,6 +3896,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#DelegationSet": {
@@ -4645,11 +4068,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DeleteCidrCollectionResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.route53#DeleteHealthCheck": {
             "type": "operation",
@@ -4692,14 +4121,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This action deletes a health check.</p>"
+                "smithy.api#documentation": "<p>This action deletes a health check.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DeleteHealthCheckResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An empty element.</p>"
+                "smithy.api#documentation": "<p>An empty element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#DeleteHostedZone": {
@@ -4749,7 +4180,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete a hosted zone.</p>"
+                "smithy.api#documentation": "<p>A request to delete a hosted zone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DeleteHostedZoneResponse": {
@@ -4764,7 +4196,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>DeleteHostedZone</code>\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>DeleteHostedZone</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#DeleteKeySigningKey": {
@@ -4823,6 +4256,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DeleteKeySigningKeyResponse": {
@@ -4834,6 +4270,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#DeleteQueryLoggingConfig": {
@@ -4875,11 +4314,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DeleteQueryLoggingConfigResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.route53#DeleteReusableDelegationSet": {
             "type": "operation",
@@ -4925,14 +4370,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete a reusable delegation set.</p>"
+                "smithy.api#documentation": "<p>A request to delete a reusable delegation set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DeleteReusableDelegationSetResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An empty element.</p>"
+                "smithy.api#documentation": "<p>An empty element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#DeleteTrafficPolicy": {
@@ -5007,14 +4454,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete a specified traffic policy instance.</p>"
+                "smithy.api#documentation": "<p>A request to delete a specified traffic policy instance.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DeleteTrafficPolicyInstanceResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An empty element.</p>"
+                "smithy.api#documentation": "<p>An empty element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#DeleteTrafficPolicyRequest": {
@@ -5038,14 +4487,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete a specified traffic policy version.</p>"
+                "smithy.api#documentation": "<p>A request to delete a specified traffic policy version.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DeleteTrafficPolicyResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>An empty element.</p>"
+                "smithy.api#documentation": "<p>An empty element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#DeleteVPCAssociationAuthorization": {
@@ -5102,14 +4553,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the request to remove authorization to\n\t\t\tassociate a VPC that was created by one Amazon Web Services account with a hosted zone\n\t\t\tthat was created with a different Amazon Web Services account. </p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the request to remove authorization to\n\t\t\tassociate a VPC that was created by one Amazon Web Services account with a hosted zone\n\t\t\tthat was created with a different Amazon Web Services account. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DeleteVPCAssociationAuthorizationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Empty response for the request.</p>"
+                "smithy.api#documentation": "<p>Empty response for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#Dimension": {
@@ -5212,6 +4665,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DisableHostedZoneDNSSECResponse": {
@@ -5223,6 +4679,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#Disabled": {
@@ -5291,7 +4750,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the VPC that you want to disassociate\n\t\t\tfrom a specified private hosted zone.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the VPC that you want to disassociate\n\t\t\tfrom a specified private hosted zone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#DisassociateVPCFromHostedZoneResponse": {
@@ -5306,7 +4766,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the disassociate\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the disassociate\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#EnableHostedZoneDNSSEC": {
@@ -5366,6 +4827,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#EnableHostedZoneDNSSECResponse": {
@@ -5377,6 +4841,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#EnableSNI": {
@@ -5588,7 +5055,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the request to create a hosted\n\t\t\tzone.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the request to create a hosted\n\t\t\tzone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetAccountLimitResponse": {
@@ -5611,7 +5079,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the requested limit. </p>"
+                "smithy.api#documentation": "<p>A complex type that contains the requested limit. </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetChange": {
@@ -5631,7 +5100,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the current status of a change batch request. The status is one of the\n\t\t\tfollowing values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> indicates that the changes in this request have not\n\t\t\t\t\tpropagated to all Amazon Route 53 DNS servers. This is the initial status of all\n\t\t\t\t\tchange batch requests.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSYNC</code> indicates that the changes have propagated to all Route 53\n\t\t\t\t\tDNS servers. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns the current status of a change batch request. The status is one of the\n\t\t\tfollowing values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> indicates that the changes in this request have not\n\t\t\t\t\tpropagated to all Amazon Route 53 DNS servers managing the hosted zone. This is the initial status of all\n\t\t\t\t\tchange batch requests.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSYNC</code> indicates that the changes have propagated to all Route 53\n\t\t\t\t\tDNS servers managing the hosted zone. </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2013-04-01/change/{Id}",
@@ -5669,7 +5138,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input for a GetChange request.</p>"
+                "smithy.api#documentation": "<p>The input for a GetChange request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetChangeResponse": {
@@ -5684,7 +5154,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the <code>ChangeInfo</code> element.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the <code>ChangeInfo</code> element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetCheckerIpRanges": {
@@ -5708,7 +5179,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Empty request.</p>"
+                "smithy.api#documentation": "<p>Empty request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetCheckerIpRangesResponse": {
@@ -5723,7 +5195,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the <code>CheckerIpRanges</code> element.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the <code>CheckerIpRanges</code> element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetDNSSEC": {
@@ -5765,6 +5238,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetDNSSECResponse": {
@@ -5784,6 +5260,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetGeoLocation": {
@@ -5837,7 +5316,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request for information about whether a specified geographic location is supported\n\t\t\tfor Amazon Route 53 geolocation resource record sets.</p>"
+                "smithy.api#documentation": "<p>A request for information about whether a specified geographic location is supported\n\t\t\tfor Amazon Route 53 geolocation resource record sets.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetGeoLocationResponse": {
@@ -5852,7 +5332,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the specified geolocation\n\t\t\tcode.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the specified geolocation\n\t\t\tcode.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetHealthCheck": {
@@ -5904,7 +5385,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>A request for the number of health checks that are associated with the current Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>A request for the number of health checks that are associated with the current Amazon Web Services account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetHealthCheckCountResponse": {
@@ -5919,7 +5401,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>GetHealthCheckCount</code>\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>GetHealthCheckCount</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetHealthCheckLastFailureReason": {
@@ -5960,7 +5443,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request for the reason that a health check failed most recently.</p>"
+                "smithy.api#documentation": "<p>A request for the reason that a health check failed most recently.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetHealthCheckLastFailureReasonResponse": {
@@ -5975,7 +5459,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to a\n\t\t\t\t<code>GetHealthCheckLastFailureReason</code> request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to a\n\t\t\t\t<code>GetHealthCheckLastFailureReason</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetHealthCheckRequest": {
@@ -5991,7 +5476,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get information about a specified health check. </p>"
+                "smithy.api#documentation": "<p>A request to get information about a specified health check. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetHealthCheckResponse": {
@@ -6006,7 +5492,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>GetHealthCheck</code>\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>GetHealthCheck</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetHealthCheckStatus": {
@@ -6047,7 +5534,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get the status for a health check.</p>"
+                "smithy.api#documentation": "<p>A request to get the status for a health check.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetHealthCheckStatusResponse": {
@@ -6062,7 +5550,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>GetHealthCheck</code>\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>GetHealthCheck</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetHostedZone": {
@@ -6116,7 +5605,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>A request to retrieve a count of all the hosted zones that are associated with the\n\t\t\tcurrent Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>A request to retrieve a count of all the hosted zones that are associated with the\n\t\t\tcurrent Amazon Web Services account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetHostedZoneCountResponse": {
@@ -6131,7 +5621,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>GetHostedZoneCount</code>\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>GetHostedZoneCount</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetHostedZoneLimit": {
@@ -6183,7 +5674,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the request to create a hosted\n\t\t\tzone.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the request to create a hosted\n\t\t\tzone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetHostedZoneLimitResponse": {
@@ -6206,7 +5698,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the requested limit. </p>"
+                "smithy.api#documentation": "<p>A complex type that contains the requested limit. </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetHostedZoneRequest": {
@@ -6222,7 +5715,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get information about a specified hosted zone. </p>"
+                "smithy.api#documentation": "<p>A request to get information about a specified hosted zone. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetHostedZoneResponse": {
@@ -6249,7 +5743,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contain the response to a <code>GetHostedZone</code>\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contain the response to a <code>GetHostedZone</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetQueryLoggingConfig": {
@@ -6288,6 +5783,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetQueryLoggingConfigResponse": {
@@ -6300,6 +5798,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetReusableDelegationSet": {
@@ -6376,7 +5877,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the request to create a hosted\n\t\t\tzone.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the request to create a hosted\n\t\t\tzone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetReusableDelegationSetLimitResponse": {
@@ -6399,7 +5901,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the requested limit. </p>"
+                "smithy.api#documentation": "<p>A complex type that contains the requested limit. </p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetReusableDelegationSetRequest": {
@@ -6415,7 +5918,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get information about a specified reusable delegation set.</p>"
+                "smithy.api#documentation": "<p>A request to get information about a specified reusable delegation set.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetReusableDelegationSetResponse": {
@@ -6430,7 +5934,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to the <code>GetReusableDelegationSet</code>\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to the <code>GetReusableDelegationSet</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetTrafficPolicy": {
@@ -6475,7 +5980,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a specified traffic policy instance.</p>\n         <note>\n            <p>After you submit a <code>CreateTrafficPolicyInstance</code> or an\n\t\t\t\t\t<code>UpdateTrafficPolicyInstance</code> request, there's a brief delay while\n\t\t\t\tAmazon Route 53 creates the resource record sets that are specified in the traffic\n\t\t\t\tpolicy definition. For more information, see the <code>State</code> response\n\t\t\t\telement.</p>\n         </note>\n         <note>\n            <p>In the Route 53 console, traffic policy instances are known as policy\n\t\t\t\trecords.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Gets information about a specified traffic policy instance.</p>\n         <note>\n            <p>\n\t\t\t\tUse <code>GetTrafficPolicyInstance</code> with the <code>id</code> of new traffic policy instance to confirm that the \n\t\t\t\t<code>CreateTrafficPolicyInstance</code> or an <code>UpdateTrafficPolicyInstance</code> request completed successfully. \n\t\t\t\tFor more information, see the <code>State</code> response\n\t\t\t\telement.</p>\n         </note>\n         <note>\n            <p>In the Route 53 console, traffic policy instances are known as policy\n\t\t\t\trecords.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2013-04-01/trafficpolicyinstance/{Id}",
@@ -6504,7 +6009,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Request to get the number of traffic policy instances that are associated with the\n\t\t\tcurrent Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>Request to get the number of traffic policy instances that are associated with the\n\t\t\tcurrent Amazon Web Services account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetTrafficPolicyInstanceCountResponse": {
@@ -6519,7 +6025,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the resource record sets that Amazon\n\t\t\tRoute 53 created based on a specified traffic policy.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the resource record sets that Amazon\n\t\t\tRoute 53 created based on a specified traffic policy.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetTrafficPolicyInstanceRequest": {
@@ -6535,7 +6042,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a specified traffic policy instance.</p>"
+                "smithy.api#documentation": "<p>Gets information about a specified traffic policy instance.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetTrafficPolicyInstanceResponse": {
@@ -6550,7 +6058,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the resource record sets that Amazon\n\t\t\tRoute 53 created based on a specified traffic policy.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the resource record sets that Amazon\n\t\t\tRoute 53 created based on a specified traffic policy.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#GetTrafficPolicyRequest": {
@@ -6574,7 +6083,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a specific traffic policy version.</p>"
+                "smithy.api#documentation": "<p>Gets information about a specific traffic policy version.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#GetTrafficPolicyResponse": {
@@ -6589,7 +6099,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#HealthCheck": {
@@ -7797,6 +7308,9 @@
                         "smithy.api#httpQuery": "maxresults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListCidrBlocksResponse": {
@@ -7814,6 +7328,9 @@
                         "smithy.api#documentation": "<p>A complex type that contains information about the CIDR blocks.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListCidrCollections": {
@@ -7861,6 +7378,9 @@
                         "smithy.api#httpQuery": "maxresults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListCidrCollectionsResponse": {
@@ -7878,6 +7398,9 @@
                         "smithy.api#documentation": "<p>A complex type with information about the CIDR collection.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListCidrLocations": {
@@ -7936,6 +7459,9 @@
                         "smithy.api#httpQuery": "maxresults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListCidrLocationsResponse": {
@@ -7953,6 +7479,9 @@
                         "smithy.api#documentation": "<p>A complex type that contains information about the list of CIDR locations.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListGeoLocations": {
@@ -8010,7 +7539,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get a list of geographic locations that Amazon Route 53 supports for\n\t\t\tgeolocation resource record sets. </p>"
+                "smithy.api#documentation": "<p>A request to get a list of geographic locations that Amazon Route 53 supports for\n\t\t\tgeolocation resource record sets. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListGeoLocationsResponse": {
@@ -8058,7 +7588,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type containing the response information for the request.</p>"
+                "smithy.api#documentation": "<p>A complex type containing the response information for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListHealthChecks": {
@@ -8111,7 +7642,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to retrieve a list of the health checks that are associated with the current\n\t\t\t\tAmazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>A request to retrieve a list of the health checks that are associated with the current\n\t\t\t\tAmazon Web Services account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListHealthChecksResponse": {
@@ -8154,7 +7686,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>ListHealthChecks</code>\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>ListHealthChecks</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListHostedZones": {
@@ -8242,7 +7775,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of the public and private hosted zones that are associated with the\n\t\t\tcurrent Amazon Web Services account in ASCII order by domain name. </p>"
+                "smithy.api#documentation": "<p>Retrieves a list of the public and private hosted zones that are associated with the\n\t\t\tcurrent Amazon Web Services account in ASCII order by domain name. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListHostedZonesByNameResponse": {
@@ -8296,7 +7830,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListHostedZonesByVPC": {
@@ -8359,7 +7894,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the private hosted zones that a specified VPC is associated with, regardless\n\t\t\tof which Amazon Web Services account created the hosted zones.</p>"
+                "smithy.api#documentation": "<p>Lists all the private hosted zones that a specified VPC is associated with, regardless\n\t\t\tof which Amazon Web Services account created the hosted zones.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListHostedZonesByVPCResponse": {
@@ -8385,6 +7921,9 @@
                         "smithy.api#documentation": "<p>The value that you will use for <code>NextToken</code> in the next\n\t\t\t\t<code>ListHostedZonesByVPC</code> request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListHostedZonesRequest": {
@@ -8413,7 +7952,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to retrieve a list of the public and private hosted zones that are\n\t\t\tassociated with the current Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>A request to retrieve a list of the public and private hosted zones that are\n\t\t\tassociated with the current Amazon Web Services account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListHostedZonesResponse": {
@@ -8454,6 +7994,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListQueryLoggingConfigs": {
@@ -8514,6 +8057,9 @@
                         "smithy.api#httpQuery": "maxresults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListQueryLoggingConfigsResponse": {
@@ -8532,6 +8078,9 @@
                         "smithy.api#documentation": "<p>If a response includes the last of the query logging configurations that are\n\t\t\tassociated with the current Amazon Web Services account, <code>NextToken</code> doesn't\n\t\t\tappear in the response.</p>\n         <p>If a response doesn't include the last of the configurations, you can get more\n\t\t\tconfigurations by submitting another <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html\">ListQueryLoggingConfigs</a> request. Get the value of <code>NextToken</code>\n\t\t\tthat Amazon Route 53 returned in the previous response and include it in\n\t\t\t\t<code>NextToken</code> in the next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListResourceRecordSets": {
@@ -8600,7 +8149,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request for the resource record sets that are associated with a specified hosted\n\t\t\tzone.</p>"
+                "smithy.api#documentation": "<p>A request for the resource record sets that are associated with a specified hosted\n\t\t\tzone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListResourceRecordSetsResponse": {
@@ -8648,7 +8198,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains list information for the resource record set.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains list information for the resource record set.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListReusableDelegationSets": {
@@ -8692,7 +8243,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get a list of the reusable delegation sets that are associated with the\n\t\t\tcurrent Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>A request to get a list of the reusable delegation sets that are associated with the\n\t\t\tcurrent Amazon Web Services account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListReusableDelegationSetsResponse": {
@@ -8735,7 +8287,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the reusable delegation sets that are\n\t\t\tassociated with the current Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the reusable delegation sets that are\n\t\t\tassociated with the current Amazon Web Services account.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListTagsForResource": {
@@ -8793,7 +8346,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type containing information about a request for a list of the tags that are\n\t\t\tassociated with an individual resource.</p>"
+                "smithy.api#documentation": "<p>A complex type containing information about a request for a list of the tags that are\n\t\t\tassociated with an individual resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListTagsForResourceResponse": {
@@ -8808,7 +8362,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the health checks or hosted zones for\n\t\t\twhich you want to list tags.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the health checks or hosted zones for\n\t\t\twhich you want to list tags.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListTagsForResources": {
@@ -8865,7 +8420,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the health checks or hosted zones for\n\t\t\twhich you want to list tags.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the health checks or hosted zones for\n\t\t\twhich you want to list tags.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListTagsForResourcesResponse": {
@@ -8880,7 +8436,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type containing tags for the specified resources.</p>"
+                "smithy.api#documentation": "<p>A complex type containing tags for the specified resources.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListTrafficPolicies": {
@@ -8924,7 +8481,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the information about the request to list the traffic\n\t\t\tpolicies that are associated with the current Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the information about the request to list the traffic\n\t\t\tpolicies that are associated with the current Amazon Web Services account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListTrafficPoliciesResponse": {
@@ -8961,7 +8519,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListTrafficPolicyInstances": {
@@ -9051,7 +8610,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request for the traffic policy instances that you created in a specified hosted\n\t\t\tzone.</p>"
+                "smithy.api#documentation": "<p>A request for the traffic policy instances that you created in a specified hosted\n\t\t\tzone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListTrafficPolicyInstancesByHostedZoneResponse": {
@@ -9093,7 +8653,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListTrafficPolicyInstancesByPolicy": {
@@ -9173,7 +8734,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the information about the request to list your traffic\n\t\t\tpolicy instances.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the information about the request to list your traffic\n\t\t\tpolicy instances.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListTrafficPolicyInstancesByPolicyResponse": {
@@ -9221,7 +8783,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListTrafficPolicyInstancesRequest": {
@@ -9257,7 +8820,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get information about the traffic policy instances that you created by\n\t\t\tusing the current Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>A request to get information about the traffic policy instances that you created by\n\t\t\tusing the current Amazon Web Services account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListTrafficPolicyInstancesResponse": {
@@ -9305,7 +8869,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListTrafficPolicyVersions": {
@@ -9360,7 +8925,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the information about the request to list your traffic\n\t\t\tpolicies.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the information about the request to list your traffic\n\t\t\tpolicies.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListTrafficPolicyVersionsResponse": {
@@ -9397,7 +8963,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListVPCAssociationAuthorizations": {
@@ -9455,7 +9022,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about that can be associated with your hosted\n\t\t\tzone.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about that can be associated with your hosted\n\t\t\tzone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#ListVPCAssociationAuthorizationsResponse": {
@@ -9483,7 +9051,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#LocationSummaries": {
@@ -10784,7 +10353,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the value that Amazon Route 53 returns in response to a DNS request for a\n\t\t\tspecified record name and type. You can optionally specify the IP address of a DNS\n\t\t\tresolver, an EDNS0 client subnet IP address, and a subnet mask. </p>\n         <p>This call only supports querying public hosted zones.</p>",
+                "smithy.api#documentation": "<p>Gets the value that Amazon Route 53 returns in response to a DNS request for a\n\t\t\tspecified record name and type. You can optionally specify the IP address of a DNS\n\t\t\tresolver, an EDNS0 client subnet IP address, and a subnet mask. </p>\n         <p>This call only supports querying public hosted zones.</p>\n         <note>\n            <p>The <code>TestDnsAnswer </code> returns information similar to what you would expect from the answer\n\t\t\tsection of the <code>dig</code> command. Therefore, if you query for the name\n\t\t\tservers of a subdomain that point to the parent name servers, those will not be\n\t\t\treturned.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2013-04-01/testdnsanswer",
@@ -10842,7 +10411,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets the value that Amazon Route 53 returns in response to a DNS request for a\n\t\t\tspecified record name and type. You can optionally specify the IP address of a DNS\n\t\t\tresolver, an EDNS0 client subnet IP address, and a subnet mask. </p>"
+                "smithy.api#documentation": "<p>Gets the value that Amazon Route 53 returns in response to a DNS request for a\n\t\t\tspecified record name and type. You can optionally specify the IP address of a DNS\n\t\t\tresolver, an EDNS0 client subnet IP address, and a subnet mask. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#TestDNSAnswerResponse": {
@@ -10892,7 +10462,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>TestDNSAnswer</code> request.\n\t\t</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to a <code>TestDNSAnswer</code> request.\n\t\t</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#Threshold": {
@@ -11471,7 +11042,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about a request to update a health\n\t\t\tcheck.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about a request to update a health\n\t\t\tcheck.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#UpdateHealthCheckResponse": {
@@ -11486,7 +11058,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to the <code>UpdateHealthCheck</code>\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to the <code>UpdateHealthCheck</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#UpdateHostedZoneComment": {
@@ -11536,7 +11109,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to update the comment for a hosted zone.</p>"
+                "smithy.api#documentation": "<p>A request to update the comment for a hosted zone.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#UpdateHostedZoneCommentResponse": {
@@ -11551,7 +11125,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response to the <code>UpdateHostedZoneComment</code>\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response to the <code>UpdateHostedZoneComment</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#UpdateTrafficPolicyComment": {
@@ -11610,7 +11185,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the traffic policy that you want to\n\t\t\tupdate the comment for.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the traffic policy that you want to\n\t\t\tupdate the comment for.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#UpdateTrafficPolicyCommentResponse": {
@@ -11625,7 +11201,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains the response information for the traffic policy.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains the response information for the traffic policy.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#UpdateTrafficPolicyInstance": {
@@ -11654,7 +11231,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the resource record sets in a specified hosted zone that were created based on\n\t\t\tthe settings in a specified traffic policy version.</p>\n         <p>When you update a traffic policy instance, Amazon Route 53 continues to respond to DNS\n\t\t\tqueries for the root resource record set name (such as example.com) while it replaces\n\t\t\tone group of resource record sets with another. Route 53 performs the following\n\t\t\toperations:</p>\n         <ol>\n            <li>\n               <p>Route 53 creates a new group of resource record sets based on the specified\n\t\t\t\t\ttraffic policy. This is true regardless of how significant the differences are\n\t\t\t\t\tbetween the existing resource record sets and the new resource record sets.\n\t\t\t\t</p>\n            </li>\n            <li>\n               <p>When all of the new resource record sets have been created, Route 53 starts to\n\t\t\t\t\trespond to DNS queries for the root resource record set name (such as\n\t\t\t\t\texample.com) by using the new resource record sets.</p>\n            </li>\n            <li>\n               <p>Route 53 deletes the old group of resource record sets that are associated\n\t\t\t\t\twith the root resource record set name.</p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<note>\n            <p>After you submit a <code>UpdateTrafficPolicyInstance</code> request, there's a brief delay while Route 53 creates the resource record sets \n\t\t\tthat are specified in the traffic policy definition. Use <code>GetTrafficPolicyInstance</code> with the <code>id</code> of updated traffic policy instance confirm \n\t\t\tthat the \n\t\t\t<code>UpdateTrafficPolicyInstance</code> request completed successfully. For more information, see the <code>State</code> response element.</p>\n         </note>\n         <p>Updates the resource record sets in a specified hosted zone that were created based on\n\t\t\tthe settings in a specified traffic policy version.</p>\n         <p>When you update a traffic policy instance, Amazon Route 53 continues to respond to DNS\n\t\t\tqueries for the root resource record set name (such as example.com) while it replaces\n\t\t\tone group of resource record sets with another. Route 53 performs the following\n\t\t\toperations:</p>\n         <ol>\n            <li>\n               <p>Route 53 creates a new group of resource record sets based on the specified\n\t\t\t\t\ttraffic policy. This is true regardless of how significant the differences are\n\t\t\t\t\tbetween the existing resource record sets and the new resource record sets.\n\t\t\t\t</p>\n            </li>\n            <li>\n               <p>When all of the new resource record sets have been created, Route 53 starts to\n\t\t\t\t\trespond to DNS queries for the root resource record set name (such as\n\t\t\t\t\texample.com) by using the new resource record sets.</p>\n            </li>\n            <li>\n               <p>Route 53 deletes the old group of resource record sets that are associated\n\t\t\t\t\twith the root resource record set name.</p>\n            </li>\n         </ol>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/trafficpolicyinstance/{Id}",
@@ -11696,7 +11273,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the resource record sets that you want\n\t\t\tto update based on a specified traffic policy instance.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the resource record sets that you want\n\t\t\tto update based on a specified traffic policy instance.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53#UpdateTrafficPolicyInstanceResponse": {
@@ -11711,7 +11289,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains information about the resource record sets that Amazon\n\t\t\tRoute 53 created based on a specified traffic policy.</p>"
+                "smithy.api#documentation": "<p>A complex type that contains information about the resource record sets that Amazon\n\t\t\tRoute 53 created based on a specified traffic policy.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#UsageCount": {

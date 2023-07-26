@@ -600,6 +600,11 @@
                         "name": "TIMESERIES",
                         "value": "TIMESERIES",
                         "documentation": "Timeseries collection type"
+                    },
+                    {
+                        "name": "VECTORSEARCH",
+                        "value": "VECTORSEARCH",
+                        "documentation": "Vectorsearch collection type"
                     }
                 ]
             }
@@ -2145,7 +2150,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "OCU Limit Exceeded for service limits",
+                "smithy.api#documentation": "<p>Thrown when the collection you're attempting to create results in a number of search or indexing OCUs that exceeds the account limit. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -4328,7 +4333,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 20480
+                    "max": 51200
                 },
                 "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]+"
             }

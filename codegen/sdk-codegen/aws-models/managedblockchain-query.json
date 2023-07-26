@@ -1,0 +1,2278 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.managedblockchainquery#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.managedblockchainquery#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the exception message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Web Services account doesn’t have access to this resource. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.managedblockchainquery#BatchGetTokenBalance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchainquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to batch calls for GetTokenBalance API",
+                "smithy.api#documentation": "<p>Gets the token balance for a batch of tokens by using the <code>GetTokenBalance</code> \n         action for every token in the request.</p>\n         <note>\n            <p>Only the native tokens BTC,ETH, and the ERC-20, \n         ERC-721, and ERC 1155 token standards are supported.</p>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/batch-get-token-balance",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceErrorItem": {
+            "type": "structure",
+            "members": {
+                "tokenIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#TokenIdentifier"
+                },
+                "ownerIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#OwnerIdentifier"
+                },
+                "atBlockchainInstant": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+                },
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code associated with the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorType": {
+                    "target": "com.amazonaws.managedblockchainquery#ErrorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error generated from a failed <code>BatchGetTokenBalance</code> request.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceErrorItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceInput": {
+            "type": "structure",
+            "members": {
+                "getTokenBalanceInputs": {
+                    "target": "com.amazonaws.managedblockchainquery#GetTokenBalanceInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>GetTokenBalanceInput</code> objects whose balance is being requested.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceInputItem": {
+            "type": "structure",
+            "members": {
+                "tokenIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#TokenIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ownerIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#OwnerIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "atBlockchainInstant": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for the input for getting a token balance.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceOutput": {
+            "type": "structure",
+            "members": {
+                "tokenBalances": {
+                    "target": "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>BatchGetTokenBalanceOutputItem</code> objects returned by the response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>BatchGetTokenBalanceErrorItem</code> objects returned from the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceOutputItem": {
+            "type": "structure",
+            "members": {
+                "ownerIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#OwnerIdentifier"
+                },
+                "tokenIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#TokenIdentifier"
+                },
+                "balance": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the token balance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "atBlockchainInstant": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for the properties of a token balance output.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceOutputItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#BlockHash": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(0x[A-Fa-f0-9]{64}|[A-Fa-f0-9]{64})$"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#BlockchainInstant": {
+            "type": "structure",
+            "members": {
+                "time": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container of the <code>Timestamp</code> of the blockchain instant.</p>\n         <note>\n            <p>This <code>timestamp</code> will only be recorded up to \n         the second.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for time.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ChainAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[-A-Za-z0-9]{13,74}$"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ErrorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VALIDATION_EXCEPTION",
+                        "name": "VALIDATION_EXCEPTION",
+                        "documentation": "An API request validation exception"
+                    },
+                    {
+                        "value": "RESOURCE_NOT_FOUND_EXCEPTION",
+                        "name": "RESOURCE_NOT_FOUND_EXCEPTION",
+                        "documentation": "An API request retrieving an item that can't be found"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ExceptionMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#GetTokenBalance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchainquery#GetTokenBalanceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchainquery#GetTokenBalanceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchainquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to retrieve balance of a token for an address on the blockchain",
+                "smithy.api#documentation": "<p>Gets the balance of a specific token, including native tokens, for a given address (wallet or contract) on the blockchain.</p>\n         <note>\n            <p>Only the native tokens BTC,ETH, and the ERC-20, \n         ERC-721, and ERC 1155 token standards are supported.</p>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/get-token-balance",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#GetTokenBalanceInput": {
+            "type": "structure",
+            "members": {
+                "tokenIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#TokenIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the identifier for the token, including the unique \n         token ID and its blockchain network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ownerIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#OwnerIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the identifier for the owner.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "atBlockchainInstant": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time for when the TokenBalance is requested or \n         the current time if a time is not provided in the request.</p>\n         <note>\n            <p>This time will only be recorded up to the second.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#GetTokenBalanceInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.managedblockchainquery#BatchGetTokenBalanceInputItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#GetTokenBalanceOutput": {
+            "type": "structure",
+            "members": {
+                "ownerIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#OwnerIdentifier"
+                },
+                "tokenIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#TokenIdentifier"
+                },
+                "balance": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the token balance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "atBlockchainInstant": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#GetTransaction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchainquery#GetTransactionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchainquery#GetTransactionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchainquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to retrieve a transaction on the blockchain",
+                "smithy.api#documentation": "<p>Get the details of a transaction.</p>",
+                "smithy.api#http": {
+                    "uri": "/get-transaction",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#GetTransactionInput": {
+            "type": "structure",
+            "members": {
+                "transactionHash": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hash of the transaction.  It is generated whenever a transaction is verified and added to the blockchain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "network": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#GetTransactionOutput": {
+            "type": "structure",
+            "members": {
+                "transaction": {
+                    "target": "com.amazonaws.managedblockchainquery#Transaction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the details of the transaction.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.managedblockchainquery#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the exception message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container of the <code>retryAfterSeconds</code> value.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an internal error in the service.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTokenBalances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchainquery#ListTokenBalancesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchainquery#ListTokenBalancesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchainquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to retrieve multiple balances on the blockchain",
+                "smithy.api#documentation": "<p>This action returns the following for a given a blockchain network:</p>\n         <ul>\n            <li>\n               <p>Lists all token balances owned by an address (either a contact \n          address or a wallet address).</p>\n            </li>\n            <li>\n               <p>Lists all token balances for all tokens created by a contract.</p>\n            </li>\n            <li>\n               <p>Lists all token balances for a given token.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You must always specify the network property of \n                              the <code>tokenFilter</code> when using this operation.</p>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/list-token-balances",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "items": "tokenBalances",
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTokenBalancesInput": {
+            "type": "structure",
+            "members": {
+                "ownerFilter": {
+                    "target": "com.amazonaws.managedblockchainquery#OwnerFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contract or wallet address on the blockchain network by which to filter the \n         request. You must specify the <code>address</code> property of the <code>ownerFilter</code> \n         when listing balances of tokens owned by the address.</p>"
+                    }
+                },
+                "tokenFilter": {
+                    "target": "com.amazonaws.managedblockchainquery#TokenFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contract address or a token identifier on the \n        blockchain network by which to filter the request. You must specify the contractAddress \n        property of this container when listing tokens minted by a contract.</p>\n         <note>\n            <p>You must always specify the network property of this \n                           container when using this operation.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.managedblockchainquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of token balances to return.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 250
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTokenBalancesOutput": {
+            "type": "structure",
+            "members": {
+                "tokenBalances": {
+                    "target": "com.amazonaws.managedblockchainquery#TokenBalanceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>TokenBalance</code> objects. Each object contains details about \n       the token balance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.managedblockchainquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTransactionEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchainquery#ListTransactionEventsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchainquery#ListTransactionEventsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchainquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to retrieve events in a transaction on the blockchain",
+                "smithy.api#documentation": "<p>An array of <code>TransactionEvent</code> objects. Each object contains details \n         about the transaction event.</p>",
+                "smithy.api#http": {
+                    "uri": "/list-transaction-events",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "events",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTransactionEventsInput": {
+            "type": "structure",
+            "members": {
+                "transactionHash": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "network": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network where the transaction events occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.managedblockchainquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of transaction events to list.</p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 250
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTransactionEventsOutput": {
+            "type": "structure",
+            "members": {
+                "events": {
+                    "target": "com.amazonaws.managedblockchainquery#TransactionEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>TransactionEvent</code> objects. Each object contains details \n         about the transaction events.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.managedblockchainquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTransactions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchainquery#ListTransactionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchainquery#ListTransactionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchainquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to retrieve a multiple transactions on a blockchain",
+                "smithy.api#documentation": "<p>Lists all of the transactions on a given wallet address or to a specific contract.</p>",
+                "smithy.api#http": {
+                    "uri": "/list-transactions",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "transactions",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTransactionsInput": {
+            "type": "structure",
+            "members": {
+                "address": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address (either a contract or wallet), whose transactions are being requested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "network": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network where the transactions occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fromBlockchainInstant": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+                },
+                "toBlockchainInstant": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+                },
+                "sort": {
+                    "target": "com.amazonaws.managedblockchainquery#ListTransactionsSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sorts items in an ascending order if the first page starts at <code>fromTime</code>. \n        Sorts items in a descending order if the first page starts at <code>toTime</code>.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.managedblockchainquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of transactions to list.</p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 250
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTransactionsOutput": {
+            "type": "structure",
+            "members": {
+                "transactions": {
+                    "target": "com.amazonaws.managedblockchainquery#TransactionOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of transactions returned by the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.managedblockchainquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTransactionsSort": {
+            "type": "structure",
+            "members": {
+                "sortBy": {
+                    "target": "com.amazonaws.managedblockchainquery#ListTransactionsSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defaults to the value <code>TRANSACTION_TIMESTAMP</code>.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.managedblockchainquery#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the <i>sort order</i> for <code>ListTransactions</code>. \n             The <code>SortOrder</code> field only accepts the values <code>ASCENDING</code> \n             and <code>DESCENDING</code>. Not providing <code>SortOrder</code> will default \n             to <code>ASCENDING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for determining how the list transaction result will \n             be sorted.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListTransactionsSortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TRANSACTION_TIMESTAMP",
+                        "name": "TRANSACTION_TIMESTAMP",
+                        "documentation": "Timestamp of a transaction"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.managedblockchainquery#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 131070
+                }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#OwnerFilter": {
+            "type": "structure",
+            "members": {
+                "address": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contract or wallet address.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for the owner information to filter by.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#OwnerIdentifier": {
+            "type": "structure",
+            "members": {
+                "address": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contract or wallet address for the owner.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for the identifier of the owner.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#QueryNetwork": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ETHEREUM_MAINNET",
+                        "name": "ETHEREUM_MAINNET",
+                        "documentation": "Ethereum main network"
+                    },
+                    {
+                        "value": "BITCOIN_MAINNET",
+                        "name": "BITCOIN_MAINNET",
+                        "documentation": "Bitcoin main network"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.managedblockchainquery#QueryTokenId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9]{1,66}$"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#QueryTransactionEventType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ERC20_TRANSFER",
+                        "name": "ERC20_TRANSFER",
+                        "documentation": "An ERC20 transfer type"
+                    },
+                    {
+                        "value": "ERC20_MINT",
+                        "name": "ERC20_MINT",
+                        "documentation": "An ERC20_MINT transfer type"
+                    },
+                    {
+                        "value": "ERC20_BURN",
+                        "name": "ERC20_BURN",
+                        "documentation": "An ERC20_BURN transfer type"
+                    },
+                    {
+                        "value": "ERC20_DEPOSIT",
+                        "name": "ERC20_DEPOSIT",
+                        "documentation": "An ERC20_DEPOSIT transfer type"
+                    },
+                    {
+                        "value": "ERC20_WITHDRAWAL",
+                        "name": "ERC20_WITHDRAWAL",
+                        "documentation": "An ERC20_WITHDRAWAL transfer type"
+                    },
+                    {
+                        "value": "ERC721_TRANSFER",
+                        "name": "ERC721_TRANSFER",
+                        "documentation": "An ERC721 transfer type"
+                    },
+                    {
+                        "value": "ERC1155_TRANSFER",
+                        "name": "ERC1155_TRANSFER",
+                        "documentation": "An ERC1155 transfer type"
+                    },
+                    {
+                        "value": "BITCOIN_VIN",
+                        "name": "BITCOIN_VIN",
+                        "documentation": "A Bitcoin Vin transfer type"
+                    },
+                    {
+                        "value": "BITCOIN_VOUT",
+                        "name": "BITCOIN_VOUT",
+                        "documentation": "A Bitcoin Vout transfer type"
+                    },
+                    {
+                        "value": "INTERNAL_ETH_TRANSFER",
+                        "name": "INTERNAL_ETH_TRANSFER",
+                        "documentation": "An internal ETH transfer type"
+                    },
+                    {
+                        "value": "ETH_TRANSFER",
+                        "name": "ETH_TRANSFER",
+                        "documentation": "An ETH transfer type"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.managedblockchainquery#QueryTransactionHash": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(0x[A-Fa-f0-9]{64}|[A-Fa-f0-9]{64})$"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#QueryTransactionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FINAL",
+                        "name": "FINAL",
+                        "documentation": "The transaction has been confirmed and is final in the blockchain"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED",
+                        "documentation": "The transaction completed on the blockchain, but failed"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.managedblockchainquery#QuotaCode": {
+            "type": "string"
+        },
+        "com.amazonaws.managedblockchainquery#ResourceId": {
+            "type": "string"
+        },
+        "com.amazonaws.managedblockchainquery#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.managedblockchainquery#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the exception message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.managedblockchainquery#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>resourceId</code> of the resource that caused the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.managedblockchainquery#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>resourceType</code> of the resource that caused the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "collection",
+                        "name": "COLLECTION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ServiceCode": {
+            "type": "string"
+        },
+        "com.amazonaws.managedblockchainquery#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.managedblockchainquery#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the exception message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.managedblockchainquery#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>resourceId</code> of the resource that caused the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.managedblockchainquery#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>resourceType</code> of the resource that caused the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the <code>serviceCode</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "quotaCode": {
+                    "target": "com.amazonaws.managedblockchainquery#QuotaCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the <code>quotaCode</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service quota has been exceeded for this resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.managedblockchainquery#SortOrder": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ASCENDING",
+                        "name": "ASCENDING",
+                        "documentation": "Result sorted in ascending order"
+                    },
+                    {
+                        "value": "DESCENDING",
+                        "name": "DESCENDING",
+                        "documentation": "Result sorted in descending order"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.managedblockchainquery#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the exception message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the <code>serviceCode</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "quotaCode": {
+                    "target": "com.amazonaws.managedblockchainquery#QuotaCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the <code>quotaCode</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container of the <code>retryAfterSeconds</code> value.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request or operation couldn't be performed because a service is throttling \n      requests. The most common source of throttling errors is when you create resources \n      that exceed your service limit for this resource type. Request a limit increase or \n      delete unused resources, if possible.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#TietonChainQueryService": {
+            "type": "service",
+            "version": "2023-05-04",
+            "operations": [
+                {
+                    "target": "com.amazonaws.managedblockchainquery#BatchGetTokenBalance"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#GetTokenBalance"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#GetTransaction"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ListTokenBalances"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ListTransactionEvents"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ListTransactions"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ManagedBlockchain Query",
+                    "arnNamespace": "managedblockchain-query"
+                },
+                "aws.auth#sigv4": {
+                    "name": "managedblockchain-query"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "Authorization",
+                        "Date",
+                        "X-Amz-Date",
+                        "X-Amz-Security-Token",
+                        "X-Amz-Target",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-errormessage",
+                        "x-amzn-trace-id",
+                        "x-amz-apigw-id",
+                        "date"
+                    ],
+                    "maxAge": 86400
+                },
+                "smithy.api#documentation": "<p>Amazon Managed Blockchain (AMB) Query provides you with convenient access to multi-blockchain network data, which makes \n        it easier for you to extract contextual data related to blockchain activity. You can use AMB Query to \n        read data from public blockchain networks, such as Bitcoin Mainnet and Ethereum Mainnet. You can \n        also get information such as the current and historical balances of addresses, or you can get a \n        list of blockchain transactions for a given time period. Additionally, you can get details of a \n        given transaction, such as transaction events, which you can further analyze or use in business \n        logic for your applications.</p>",
+                "smithy.api#title": "Amazon Managed Blockchain Query",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://managedblockchain-query-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://managedblockchain-query-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://managedblockchain-query.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://managedblockchain-query.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://managedblockchain-query.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#TokenBalance": {
+            "type": "structure",
+            "members": {
+                "ownerIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#OwnerIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the identifier of the owner.</p>"
+                    }
+                },
+                "tokenIdentifier": {
+                    "target": "com.amazonaws.managedblockchainquery#TokenIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the token, including the unique token ID and its blockchain network.</p>"
+                    }
+                },
+                "balance": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container of the token balance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "atBlockchainInstant": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time for when the TokenBalance is requested or \n         the current time if a time is not provided in the request.</p>\n         <note>\n            <p>This time will only be recorded up to the second.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>timestamp</code> of the last transaction at which the balance for the token in the wallet was updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The balance of the token.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#TokenBalanceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.managedblockchainquery#TokenBalance"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#TokenFilter": {
+            "type": "structure",
+            "members": {
+                "network": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network of the token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contractAddress": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the address of the contract.</p>"
+                    }
+                },
+                "tokenId": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container of the token filter like the contract address \n       on a given blockchain network or a unique token identifier on a given \n       blockchain network.</p>\n         <note>\n            <p>You must always specify the network property of this \n                           container when using this operation.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#TokenIdentifier": {
+            "type": "structure",
+            "members": {
+                "network": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network of the token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contractAddress": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the token's contract address.</p>"
+                    }
+                },
+                "tokenId": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for the identifier for the token including the unique token ID and its blockchain network.</p>\n         <note>\n            <p>Only the native tokens BTC,ETH, and the ERC-20, \n         ERC-721, and ERC 1155 token standards are supported.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#Transaction": {
+            "type": "structure",
+            "members": {
+                "network": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network where the transaction occured.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "blockHash": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockHash",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The block hash is a unique identifier for a block. It is a fixed-size \n         string that is calculated by using the information in the block. The block \n         hash is used to verify the integrity of the data in the block.</p>"
+                    }
+                },
+                "transactionHash": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "blockNumber": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The block number in which the transaction is recorded.</p>"
+                    }
+                },
+                "transactionTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>Timestamp</code> of the transaction. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "transactionIndex": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the transaction within a blockchain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "numberOfTransactions": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of transactions in the block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTransactionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the transaction.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "to": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "from": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The initiator of the transaction. It is either in the form a public key or a \n         contract address.</p>"
+                    }
+                },
+                "contractAddress": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain address for the contract.</p>"
+                    }
+                },
+                "gasUsed": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of gas used for the transaction.</p>"
+                    }
+                },
+                "cumulativeGasUsed": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of gas used up to the specified point in the block.</p>"
+                    }
+                },
+                "effectiveGasPrice": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective gas price.</p>"
+                    }
+                },
+                "signatureV": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signature of the transaction. The Z coordinate of a point V.</p>"
+                    }
+                },
+                "signatureR": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signature of the transaction. The X coordinate of a point R.</p>"
+                    }
+                },
+                "signatureS": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signature of the transaction. The Y coordinate of a point S.</p>"
+                    }
+                },
+                "transactionFee": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transaction fee.</p>"
+                    }
+                },
+                "transactionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There are two possible types of transactions used for this data type:</p>\n         <ul>\n            <li>\n               <p>A Bitcoin transaction is a movement of BTC from one address to \n            another.</p>\n            </li>\n            <li>\n               <p>An Ethereum transaction refers to an action initiated by an externally \n           owned account, which is an account managed by a human, not a contract. \n            For example, if Bob sends Alice 1 ETH, Bob's account must be debited and \n            Alice's must be credited. This state-changing action occurs within a transaction.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#TransactionEvent": {
+            "type": "structure",
+            "members": {
+                "network": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "transactionHash": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventType": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTransactionEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of transaction event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "from": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The wallet address initiating the transaction. It can either be a public key or a contract.</p>"
+                    }
+                },
+                "to": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The wallet address receiving the transaction.  It can either be a public key or a contract.</p>"
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that was transacted.</p>"
+                    }
+                },
+                "contractAddress": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain address. for the contract</p>"
+                    }
+                },
+                "tokenId": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the token involved in the transaction.</p>"
+                    }
+                },
+                "transactionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>"
+                    }
+                },
+                "voutIndex": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position of the vout in the transaction output list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container for the properties of a transaction event.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#TransactionEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.managedblockchainquery#TransactionEvent"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#TransactionOutputItem": {
+            "type": "structure",
+            "members": {
+                "transactionHash": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "network": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "transactionTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the transaction occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container of the transaction output.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#TransactionOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.managedblockchainquery#TransactionOutputItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.managedblockchainquery#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the exception message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the reason for the exception</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the <code>fieldList</code> of the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource passed is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field that triggered the <code>ValidationException</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>ValidationException</code> message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource passed is invalid.</p>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.managedblockchainquery#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "unknownOperation",
+                        "name": "UNKNOWN_OPERATION"
+                    },
+                    {
+                        "value": "cannotParse",
+                        "name": "CANNOT_PARSE"
+                    },
+                    {
+                        "value": "fieldValidationFailed",
+                        "name": "FIELD_VALIDATION_FAILED"
+                    },
+                    {
+                        "value": "other",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        }
+    }
+}

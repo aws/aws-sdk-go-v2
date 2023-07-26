@@ -2164,7 +2164,7 @@
                 "Data": {
                     "target": "com.amazonaws.glue#AmazonRedshiftNodeData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the data of the Amazon Reshift target node.</p>"
+                        "smithy.api#documentation": "<p>Specifies the data of the Amazon Redshift target node.</p>"
                     }
                 },
                 "Inputs": {
@@ -5287,6 +5287,18 @@
                     "target": "com.amazonaws.glue#Recipe",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a Glue DataBrew recipe node.</p>"
+                    }
+                },
+                "SnowflakeSource": {
+                    "target": "com.amazonaws.glue#SnowflakeSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a Snowflake data source.</p>"
+                    }
+                },
+                "SnowflakeTarget": {
+                    "target": "com.amazonaws.glue#SnowflakeTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a target that writes to a Snowflake data source.</p>"
                     }
                 }
             },
@@ -28878,6 +28890,198 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies skewed values in a table. Skewed values are those that occur with very high\n      frequency.</p>"
+            }
+        },
+        "com.amazonaws.glue#SnowflakeNodeData": {
+            "type": "structure",
+            "members": {
+                "SourceType": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how retrieved data is specified. Valid values: <code>\"table\"</code>, <code>\n      \"query\"</code>.</p>"
+                    }
+                },
+                "Connection": {
+                    "target": "com.amazonaws.glue#Option",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a Glue Data Catalog Connection to a Snowflake endpoint.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a Snowflake database schema for your node to use.</p>"
+                    }
+                },
+                "Table": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a Snowflake table for your node to use.</p>"
+                    }
+                },
+                "Database": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a Snowflake database for your node to use.</p>"
+                    }
+                },
+                "TempDir": {
+                    "target": "com.amazonaws.glue#EnclosedInStringProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Not currently used.</p>"
+                    }
+                },
+                "IamRole": {
+                    "target": "com.amazonaws.glue#Option",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Not currently used.</p>"
+                    }
+                },
+                "AdditionalOptions": {
+                    "target": "com.amazonaws.glue#AdditionalOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional options passed to the Snowflake connector. If options are specified\n      elsewhere in this node, this will take precedence.</p>"
+                    }
+                },
+                "SampleQuery": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SQL string used to retrieve data with the <code>query</code> sourcetype.</p>"
+                    }
+                },
+                "PreAction": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SQL string run before the Snowflake connector performs its standard actions.</p>"
+                    }
+                },
+                "PostAction": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SQL string run after the Snowflake connector performs its standard actions.</p>"
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies what action to take when writing to a table with preexisting data. Valid values: <code>\n      append</code>, <code>merge</code>, <code>truncate</code>, <code>drop</code>.</p>"
+                    }
+                },
+                "Upsert": {
+                    "target": "com.amazonaws.glue#BooleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Used when Action is <code>append</code>. Specifies the resolution behavior when a row\n      already exists. If true, preexisting rows will be updated. If false, those rows will be inserted.</p>"
+                    }
+                },
+                "MergeAction": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a merge action. Valid values: <code>simple</code>, <code>custom</code>. If\n      simple, merge behavior is defined by <code>MergeWhenMatched</code> and <code>\n      MergeWhenNotMatched</code>. If custom, defined by <code>MergeClause</code>.</p>"
+                    }
+                },
+                "MergeWhenMatched": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how to resolve records that match preexisting data when merging. Valid values: <code>\n      update</code>, <code>delete</code>.</p>"
+                    }
+                },
+                "MergeWhenNotMatched": {
+                    "target": "com.amazonaws.glue#GenericLimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how to process records that do not match preexisting data when merging. Valid\n      values: <code>insert</code>, <code>none</code>.</p>"
+                    }
+                },
+                "MergeClause": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SQL statement that specifies a custom merge behavior.</p>"
+                    }
+                },
+                "StagingTable": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a staging table used when performing <code>merge</code> or upsert <code>append</code>\n      actions. Data is written to this table, then moved to <code>table</code> by a generated\n      postaction.</p>"
+                    }
+                },
+                "SelectedColumns": {
+                    "target": "com.amazonaws.glue#OptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the columns combined to identify a record when detecting matches for merges and\n      upserts. A list of structures with <code>value</code>, <code>label</code> and <code>\n      description</code> keys. Each structure describes a column.</p>"
+                    }
+                },
+                "AutoPushdown": {
+                    "target": "com.amazonaws.glue#BooleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether automatic query pushdown is enabled. If pushdown\n      is enabled, then when a query is run on Spark, if part of the query can be \"pushed down\" to\n      the\n      Snowflake server, it is pushed down. This improves performance of some queries.</p>"
+                    }
+                },
+                "TableSchema": {
+                    "target": "com.amazonaws.glue#OptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Manually defines the target schema for the node. A list of structures with <code>value</code>\n      , <code>label</code> and <code>description</code> keys. Each structure defines a column.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configuration for Snowflake nodes in Glue Studio.</p>"
+            }
+        },
+        "com.amazonaws.glue#SnowflakeSource": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Snowflake data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Data": {
+                    "target": "com.amazonaws.glue#SnowflakeNodeData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for the Snowflake data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputSchemas": {
+                    "target": "com.amazonaws.glue#GlueSchemas",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies user-defined schemas for your output data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a Snowflake data source.</p>"
+            }
+        },
+        "com.amazonaws.glue#SnowflakeTarget": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Snowflake target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Data": {
+                    "target": "com.amazonaws.glue#SnowflakeNodeData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data of the Snowflake target node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.glue#OneInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nodes that are inputs to the data target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a Snowflake target.</p>"
             }
         },
         "com.amazonaws.glue#Sort": {
