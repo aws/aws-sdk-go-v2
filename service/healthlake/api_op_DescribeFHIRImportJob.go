@@ -30,7 +30,7 @@ func (c *Client) DescribeFHIRImportJob(ctx context.Context, params *DescribeFHIR
 
 type DescribeFHIRImportJobInput struct {
 
-	// The AWS-generated ID of the Data Store.
+	// The AWS-generated ID of the data store.
 	//
 	// This member is required.
 	DatastoreId *string

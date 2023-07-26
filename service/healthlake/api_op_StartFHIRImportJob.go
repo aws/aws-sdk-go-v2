@@ -35,12 +35,12 @@ type StartFHIRImportJobInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
+	// The Amazon Resource Name (ARN) that gives AWS HealthLake access permission.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// The AWS-generated Data Store ID.
+	// The AWS-generated data store ID.
 	//
 	// This member is required.
 	DatastoreId *string
@@ -73,7 +73,7 @@ type StartFHIRImportJobOutput struct {
 	// This member is required.
 	JobStatus types.JobStatus
 
-	// The AWS-generated Data Store ID.
+	// The AWS-generated data store ID.
 	DatastoreId *string
 
 	// Metadata pertaining to the operation's result.

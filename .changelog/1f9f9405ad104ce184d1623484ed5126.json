@@ -1,0 +1,8 @@
+{
+    "id": "1f9f9405-ad10-4ce1-84d1-623484ed5126",
+    "type": "documentation",
+    "description": "This release includes general updates to user documentation.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

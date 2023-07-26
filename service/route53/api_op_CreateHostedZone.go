@@ -93,7 +93,10 @@ type CreateHostedZoneInput struct {
 	// ID that Amazon Route 53 assigned to the reusable delegation set when you created
 	// it. For more information about reusable delegation sets, see
 	// CreateReusableDelegationSet (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html)
-	// .
+	// . If you are using a reusable delegation set to create a public hosted zone for
+	// a subdomain, make sure that the parent hosted zone doesn't use one or more of
+	// the same name servers. If you have overlapping nameservers, the operation will
+	// cause a ConflictingDomainsExist error.
 	DelegationSetId *string
 
 	// (Optional) A complex type that contains the following optional values:

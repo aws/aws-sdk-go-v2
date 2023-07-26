@@ -58,10 +58,11 @@ import (
 // every kind of resource record set that you can create, delete, or update by
 // using ChangeResourceRecordSets . Change Propagation to Route 53 DNS Servers When
 // you submit a ChangeResourceRecordSets request, Route 53 propagates your changes
-// to all of the Route 53 authoritative DNS servers. While your changes are
-// propagating, GetChange returns a status of PENDING . When propagation is
-// complete, GetChange returns a status of INSYNC . Changes generally propagate to
-// all Route 53 name servers within 60 seconds. For more information, see GetChange (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html)
+// to all of the Route 53 authoritative DNS servers managing the hosted zone. While
+// your changes are propagating, GetChange returns a status of PENDING . When
+// propagation is complete, GetChange returns a status of INSYNC . Changes
+// generally propagate to all Route 53 name servers managing the hosted zone within
+// 60 seconds. For more information, see GetChange (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html)
 // . Limits on ChangeResourceRecordSets Requests For information about the limits
 // on a ChangeResourceRecordSets request, see Limits (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
 // in the Amazon Route 53 Developer Guide.

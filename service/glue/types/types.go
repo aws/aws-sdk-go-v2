@@ -209,7 +209,7 @@ type AmazonRedshiftSource struct {
 // Specifies an Amazon Redshift target.
 type AmazonRedshiftTarget struct {
 
-	// Specifies the data of the Amazon Reshift target node.
+	// Specifies the data of the Amazon Redshift target node.
 	Data *AmazonRedshiftNodeData
 
 	// The nodes that are inputs to the data target.
@@ -1009,6 +1009,12 @@ type CodeGenConfigurationNode struct {
 	// Specifies a transform that chooses one DynamicFrame from a collection of
 	// DynamicFrames . The output is the selected DynamicFrame
 	SelectFromCollection *SelectFromCollection
+
+	// Specifies a Snowflake data source.
+	SnowflakeSource *SnowflakeSource
+
+	// Specifies a target that writes to a Snowflake data source.
+	SnowflakeTarget *SnowflakeTarget
 
 	// Specifies a connector to an Apache Spark data source.
 	SparkConnectorSource *SparkConnectorSource
@@ -6726,6 +6732,129 @@ type SkewedInfo struct {
 
 	// A list of values that appear so frequently as to be considered skewed.
 	SkewedColumnValues []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies configuration for Snowflake nodes in Glue Studio.
+type SnowflakeNodeData struct {
+
+	// Specifies what action to take when writing to a table with preexisting data.
+	// Valid values: append , merge , truncate , drop .
+	Action *string
+
+	// Specifies additional options passed to the Snowflake connector. If options are
+	// specified elsewhere in this node, this will take precedence.
+	AdditionalOptions map[string]string
+
+	// Specifies whether automatic query pushdown is enabled. If pushdown is enabled,
+	// then when a query is run on Spark, if part of the query can be "pushed down" to
+	// the Snowflake server, it is pushed down. This improves performance of some
+	// queries.
+	AutoPushdown bool
+
+	// Specifies a Glue Data Catalog Connection to a Snowflake endpoint.
+	Connection *Option
+
+	// Specifies a Snowflake database for your node to use.
+	Database *string
+
+	// Not currently used.
+	IamRole *Option
+
+	// Specifies a merge action. Valid values: simple , custom . If simple, merge
+	// behavior is defined by MergeWhenMatched and  MergeWhenNotMatched . If custom,
+	// defined by MergeClause .
+	MergeAction *string
+
+	// A SQL statement that specifies a custom merge behavior.
+	MergeClause *string
+
+	// Specifies how to resolve records that match preexisting data when merging.
+	// Valid values: update , delete .
+	MergeWhenMatched *string
+
+	// Specifies how to process records that do not match preexisting data when
+	// merging. Valid values: insert , none .
+	MergeWhenNotMatched *string
+
+	// A SQL string run after the Snowflake connector performs its standard actions.
+	PostAction *string
+
+	// A SQL string run before the Snowflake connector performs its standard actions.
+	PreAction *string
+
+	// A SQL string used to retrieve data with the query sourcetype.
+	SampleQuery *string
+
+	// Specifies a Snowflake database schema for your node to use.
+	Schema *string
+
+	// Specifies the columns combined to identify a record when detecting matches for
+	// merges and upserts. A list of structures with value , label and  description
+	// keys. Each structure describes a column.
+	SelectedColumns []Option
+
+	// Specifies how retrieved data is specified. Valid values: "table" ,  "query" .
+	SourceType *string
+
+	// The name of a staging table used when performing merge or upsert append
+	// actions. Data is written to this table, then moved to table by a generated
+	// postaction.
+	StagingTable *string
+
+	// Specifies a Snowflake table for your node to use.
+	Table *string
+
+	// Manually defines the target schema for the node. A list of structures with value
+	// , label and description keys. Each structure defines a column.
+	TableSchema []Option
+
+	// Not currently used.
+	TempDir *string
+
+	// Used when Action is append . Specifies the resolution behavior when a row
+	// already exists. If true, preexisting rows will be updated. If false, those rows
+	// will be inserted.
+	Upsert bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a Snowflake data source.
+type SnowflakeSource struct {
+
+	// Configuration for the Snowflake data source.
+	//
+	// This member is required.
+	Data *SnowflakeNodeData
+
+	// The name of the Snowflake data source.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies user-defined schemas for your output data.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a Snowflake target.
+type SnowflakeTarget struct {
+
+	// Specifies the data of the Snowflake target node.
+	//
+	// This member is required.
+	Data *SnowflakeNodeData
+
+	// The name of the Snowflake target.
+	//
+	// This member is required.
+	Name *string
+
+	// The nodes that are inputs to the data target.
+	Inputs []string
 
 	noSmithyDocumentSerde
 }

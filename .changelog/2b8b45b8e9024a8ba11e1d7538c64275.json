@@ -1,0 +1,8 @@
+{
+    "id": "2b8b45b8-e902-4a8b-a11e-1d7538c64275",
+    "type": "feature",
+    "description": "AWS Entity Resolution can effectively match a source record from a customer relationship management (CRM) system with a source record from a marketing system containing campaign information.",
+    "modules": [
+        "service/entityresolution"
+    ]
+}

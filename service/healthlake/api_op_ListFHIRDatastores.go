@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all FHIR Data Stores that are in the user’s account, regardless of Data
-// Store status.
+// Lists all FHIR data stores that are in the user’s account, regardless of data
+// store status.
 func (c *Client) ListFHIRDatastores(ctx context.Context, params *ListFHIRDatastoresInput, optFns ...func(*Options)) (*ListFHIRDatastoresOutput, error) {
 	if params == nil {
 		params = &ListFHIRDatastoresInput{}
@@ -31,14 +31,14 @@ func (c *Client) ListFHIRDatastores(ctx context.Context, params *ListFHIRDatasto
 
 type ListFHIRDatastoresInput struct {
 
-	// Lists all filters associated with a FHIR Data Store request.
+	// Lists all filters associated with a FHIR data store request.
 	Filter *types.DatastoreFilter
 
-	// The maximum number of Data Stores returned in a single page of a
+	// The maximum number of data stores returned in a single page of a
 	// ListFHIRDatastoresRequest call.
 	MaxResults *int32
 
-	// Fetches the next page of Data Stores when results are paginated.
+	// Fetches the next page of data stores when results are paginated.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,7 +46,7 @@ type ListFHIRDatastoresInput struct {
 
 type ListFHIRDatastoresOutput struct {
 
-	// All properties associated with the listed Data Stores.
+	// All properties associated with the listed data stores.
 	//
 	// This member is required.
 	DatastorePropertiesList []types.DatastoreProperties
@@ -134,7 +134,7 @@ var _ ListFHIRDatastoresAPIClient = (*Client)(nil)
 // ListFHIRDatastoresPaginatorOptions is the paginator options for
 // ListFHIRDatastores
 type ListFHIRDatastoresPaginatorOptions struct {
-	// The maximum number of Data Stores returned in a single page of a
+	// The maximum number of data stores returned in a single page of a
 	// ListFHIRDatastoresRequest call.
 	Limit int32
 

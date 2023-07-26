@@ -12553,6 +12553,20 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 		}
 	}
 
+	if v.SnowflakeSource != nil {
+		ok := object.Key("SnowflakeSource")
+		if err := awsAwsjson11_serializeDocumentSnowflakeSource(v.SnowflakeSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SnowflakeTarget != nil {
+		ok := object.Key("SnowflakeTarget")
+		if err := awsAwsjson11_serializeDocumentSnowflakeTarget(v.SnowflakeTarget, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SparkConnectorSource != nil {
 		ok := object.Key("SparkConnectorSource")
 		if err := awsAwsjson11_serializeDocumentSparkConnectorSource(v.SparkConnectorSource, ok); err != nil {
@@ -18221,6 +18235,180 @@ func awsAwsjson11_serializeDocumentSkewedInfo(v *types.SkewedInfo, value smithyj
 		if err := awsAwsjson11_serializeDocumentColumnValueStringList(v.SkewedColumnValues, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSnowflakeNodeData(v *types.SnowflakeNodeData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Action != nil {
+		ok := object.Key("Action")
+		ok.String(*v.Action)
+	}
+
+	if v.AdditionalOptions != nil {
+		ok := object.Key("AdditionalOptions")
+		if err := awsAwsjson11_serializeDocumentAdditionalOptions(v.AdditionalOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AutoPushdown {
+		ok := object.Key("AutoPushdown")
+		ok.Boolean(v.AutoPushdown)
+	}
+
+	if v.Connection != nil {
+		ok := object.Key("Connection")
+		if err := awsAwsjson11_serializeDocumentOption(v.Connection, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.IamRole != nil {
+		ok := object.Key("IamRole")
+		if err := awsAwsjson11_serializeDocumentOption(v.IamRole, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MergeAction != nil {
+		ok := object.Key("MergeAction")
+		ok.String(*v.MergeAction)
+	}
+
+	if v.MergeClause != nil {
+		ok := object.Key("MergeClause")
+		ok.String(*v.MergeClause)
+	}
+
+	if v.MergeWhenMatched != nil {
+		ok := object.Key("MergeWhenMatched")
+		ok.String(*v.MergeWhenMatched)
+	}
+
+	if v.MergeWhenNotMatched != nil {
+		ok := object.Key("MergeWhenNotMatched")
+		ok.String(*v.MergeWhenNotMatched)
+	}
+
+	if v.PostAction != nil {
+		ok := object.Key("PostAction")
+		ok.String(*v.PostAction)
+	}
+
+	if v.PreAction != nil {
+		ok := object.Key("PreAction")
+		ok.String(*v.PreAction)
+	}
+
+	if v.SampleQuery != nil {
+		ok := object.Key("SampleQuery")
+		ok.String(*v.SampleQuery)
+	}
+
+	if v.Schema != nil {
+		ok := object.Key("Schema")
+		ok.String(*v.Schema)
+	}
+
+	if v.SelectedColumns != nil {
+		ok := object.Key("SelectedColumns")
+		if err := awsAwsjson11_serializeDocumentOptionList(v.SelectedColumns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceType != nil {
+		ok := object.Key("SourceType")
+		ok.String(*v.SourceType)
+	}
+
+	if v.StagingTable != nil {
+		ok := object.Key("StagingTable")
+		ok.String(*v.StagingTable)
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		ok.String(*v.Table)
+	}
+
+	if v.TableSchema != nil {
+		ok := object.Key("TableSchema")
+		if err := awsAwsjson11_serializeDocumentOptionList(v.TableSchema, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TempDir != nil {
+		ok := object.Key("TempDir")
+		ok.String(*v.TempDir)
+	}
+
+	if v.Upsert {
+		ok := object.Key("Upsert")
+		ok.Boolean(v.Upsert)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSnowflakeSource(v *types.SnowflakeSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Data != nil {
+		ok := object.Key("Data")
+		if err := awsAwsjson11_serializeDocumentSnowflakeNodeData(v.Data, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.OutputSchemas != nil {
+		ok := object.Key("OutputSchemas")
+		if err := awsAwsjson11_serializeDocumentGlueSchemas(v.OutputSchemas, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSnowflakeTarget(v *types.SnowflakeTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Data != nil {
+		ok := object.Key("Data")
+		if err := awsAwsjson11_serializeDocumentSnowflakeNodeData(v.Data, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Inputs != nil {
+		ok := object.Key("Inputs")
+		if err := awsAwsjson11_serializeDocumentOneInput(v.Inputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
 	}
 
 	return nil

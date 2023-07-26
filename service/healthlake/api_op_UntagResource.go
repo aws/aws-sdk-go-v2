@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes tags from a Data Store.
+// Removes tags from a data store.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,13 +28,13 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// "The Amazon Resource Name(ARN) of the Data Store for which tags are being
-	// removed
+	// The Amazon Resource Name(ARN) of the data store for which tags are being
+	// removed.
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// The keys for the tags to be removed from the Healthlake Data Store.
+	// The keys for the tags to be removed from the HealthLake data store.
 	//
 	// This member is required.
 	TagKeys []string

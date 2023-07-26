@@ -7,48 +7,47 @@ import (
 	"time"
 )
 
-// The filters applied to Data Store query.
+// The filters applied to data store query.
 type DatastoreFilter struct {
 
-	// A filter that allows the user to set cutoff dates for records. All Data Stores
+	// A filter that allows the user to set cutoff dates for records. All data stores
 	// created after the specified date will be included in the results.
 	CreatedAfter *time.Time
 
-	// A filter that allows the user to set cutoff dates for records. All Data Stores
+	// A filter that allows the user to set cutoff dates for records. All data stores
 	// created before the specified date will be included in the results.
 	CreatedBefore *time.Time
 
-	// Allows the user to filter Data Store results by name.
+	// Allows the user to filter data store results by name.
 	DatastoreName *string
 
-	// Allows the user to filter Data Store results by status.
+	// Allows the user to filter data store results by status.
 	DatastoreStatus DatastoreStatus
 
 	noSmithyDocumentSerde
 }
 
-// Displays the properties of the Data Store, including the ID, ARN, name, and the
-// status of the Data Store.
+// Displays the properties of the data store, including the ID, ARN, name, and the
+// status of the data store.
 type DatastoreProperties struct {
 
-	// The Amazon Resource Name used in the creation of the Data Store.
+	// The Amazon Resource Name used in the creation of the data store.
 	//
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint for the Data Store. Each Data Store will have it's own
-	// endpoint with Data Store ID in the endpoint URL.
+	// The AWS endpoint for the data store. Each data store will have it's own
+	// endpoint with data store ID in the endpoint URL.
 	//
 	// This member is required.
 	DatastoreEndpoint *string
 
-	// The AWS-generated ID number for the Data Store.
+	// The AWS-generated ID number for the data store.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE',
-	// 'DELETING', or 'DELETED'.
+	// The status of the data store.
 	//
 	// This member is required.
 	DatastoreStatus DatastoreStatus
@@ -58,16 +57,16 @@ type DatastoreProperties struct {
 	// This member is required.
 	DatastoreTypeVersion FHIRVersion
 
-	// The time that a Data Store was created.
+	// The time that a data store was created.
 	CreatedAt *time.Time
 
-	// The user-generated name for the Data Store.
+	// The user-generated name for the data store.
 	DatastoreName *string
 
-	// The identity provider that you selected when you created the Data Store.
+	// The identity provider that you selected when you created the data store.
 	IdentityProviderConfiguration *IdentityProviderConfiguration
 
-	// The preloaded data configuration for the Data Store. Only data preloaded from
+	// The preloaded data configuration for the data store. Only data preloaded from
 	// Synthea is supported.
 	PreloadDataConfig *PreloadDataConfig
 
@@ -82,7 +81,7 @@ type DatastoreProperties struct {
 // status of the job.
 type ExportJobProperties struct {
 
-	// The AWS generated ID for the Data Store from which files are being exported for
+	// The AWS generated ID for the data store from which files are being exported for
 	// an export job.
 	//
 	// This member is required.
@@ -124,16 +123,16 @@ type ExportJobProperties struct {
 	noSmithyDocumentSerde
 }
 
-// The identity provider configuration that you gave when the Data Store was
+// The identity provider configuration that you gave when the data store was
 // created.
 type IdentityProviderConfiguration struct {
 
-	// The authorization strategy that you selected when you created the Data Store.
+	// The authorization strategy that you selected when you created the data store.
 	//
 	// This member is required.
 	AuthorizationStrategy AuthorizationStrategy
 
-	// If you enabled fine-grained authorization when you created the Data Store.
+	// If you enabled fine-grained authorization when you created the data store.
 	FineGrainedAuthorizationEnabled bool
 
 	// The Amazon Resource Name (ARN) of the Lambda function that you want to use to
@@ -159,7 +158,7 @@ type IdentityProviderConfiguration struct {
 }
 
 // Displays the properties of the import job, including the ID, Arn, Name, and the
-// status of the Data Store.
+// status of the data store.
 type ImportJobProperties struct {
 
 	// The datastore id used when the Import job was created.
@@ -188,8 +187,8 @@ type ImportJobProperties struct {
 	// This member is required.
 	SubmitTime *time.Time
 
-	// The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your
-	// input data.
+	// The Amazon Resource Name (ARN) that gives AWS HealthLake access to your input
+	// data.
 	DataAccessRoleArn *string
 
 	// The time that the Import job was completed.
@@ -217,7 +216,7 @@ type InputDataConfig interface {
 }
 
 // The S3Uri is the user specified S3 location of the FHIR data to be imported
-// into Amazon HealthLake.
+// into AWS HealthLake.
 type InputDataConfigMemberS3Uri struct {
 	Value string
 
@@ -226,17 +225,17 @@ type InputDataConfigMemberS3Uri struct {
 
 func (*InputDataConfigMemberS3Uri) isInputDataConfig() {}
 
-// The customer-managed-key(CMK) used when creating a Data Store. If a customer
+// The customer-managed-key(CMK) used when creating a data store. If a customer
 // owned key is not specified, an AWS owned key will be used for encryption.
 type KmsEncryptionConfig struct {
 
-	// The type of customer-managed-key(CMK) used for encyrption. The two types of
+	// The type of customer-managed-key(CMK) used for encryption. The two types of
 	// supported CMKs are customer owned CMKs and AWS owned CMKs.
 	//
 	// This member is required.
 	CmkType CmkType
 
-	// The KMS encryption key id/alias used to encrypt the Data Store contents at rest.
+	// The KMS encryption key id/alias used to encrypt the data store contents at rest.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -260,7 +259,7 @@ type OutputDataConfigMemberS3Configuration struct {
 
 func (*OutputDataConfigMemberS3Configuration) isOutputDataConfig() {}
 
-// The input properties for the preloaded Data Store. Only data preloaded from
+// The input properties for the preloaded data store. Only data preloaded from
 // Synthea is supported.
 type PreloadDataConfig struct {
 
@@ -282,7 +281,7 @@ type S3Configuration struct {
 	KmsKeyId *string
 
 	// The S3Uri is the user specified S3 location of the FHIR data to be imported
-	// into Amazon HealthLake.
+	// into AWS HealthLake.
 	//
 	// This member is required.
 	S3Uri *string

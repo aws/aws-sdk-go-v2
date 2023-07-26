@@ -31,8 +31,8 @@ func (c *Client) ListFHIRExportJobs(ctx context.Context, params *ListFHIRExportJ
 
 type ListFHIRExportJobsInput struct {
 
-	// This parameter limits the response to the export job with the specified Data
-	// Store ID.
+	// This parameter limits the response to the export job with the specified data
+	// store ID.
 	//
 	// This member is required.
 	DatastoreId *string

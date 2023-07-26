@@ -1,0 +1,8 @@
+{
+    "id": "900bd96b-c46e-48d4-9fee-d47ad876ea0d",
+    "type": "documentation",
+    "description": "The service is renaming as a part of AWS Health.",
+    "modules": [
+        "service/omics"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "6df6c4cb-3443-4e59-901c-7eb2a40c6202",
+    "type": "feature",
+    "description": "Amazon Managed Blockchain (AMB) Query provides serverless access to standardized, multi-blockchain datasets with developer-friendly APIs.",
+    "modules": [
+        "service/managedblockchainquery"
+    ]
+}

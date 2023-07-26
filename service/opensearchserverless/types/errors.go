@@ -61,7 +61,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// OCU Limit Exceeded for service limits
+// Thrown when the collection you're attempting to create results in a number of
+// search or indexing OCUs that exceeds the account limit.
 type OcuLimitExceededException struct {
 	Message *string
 

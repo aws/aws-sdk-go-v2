@@ -4866,6 +4866,16 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("Recipe", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SnowflakeSource != nil {
+		if err := validateSnowflakeSource(v.SnowflakeSource); err != nil {
+			invalidParams.AddNested("SnowflakeSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SnowflakeTarget != nil {
+		if err := validateSnowflakeTarget(v.SnowflakeTarget); err != nil {
+			invalidParams.AddNested("SnowflakeTarget", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7182,6 +7192,47 @@ func validateSelectFromCollection(v *types.SelectFromCollection) error {
 	}
 	if v.Inputs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakeSource(v *types.SnowflakeSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakeTarget(v *types.SnowflakeTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

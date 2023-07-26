@@ -30,7 +30,7 @@ func (c *Client) DescribeFHIRExportJob(ctx context.Context, params *DescribeFHIR
 
 type DescribeFHIRExportJobInput struct {
 
-	// The AWS generated ID for the Data Store from which files are being exported
+	// The AWS generated ID for the data store from which files are being exported
 	// from for an export job.
 	//
 	// This member is required.

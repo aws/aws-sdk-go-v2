@@ -1,0 +1,8 @@
+{
+    "id": "1a34dece-0323-423d-b0c8-bb503980931a",
+    "type": "feature",
+    "description": "This release adds new collection type VectorSearch.",
+    "modules": [
+        "service/opensearchserverless"
+    ]
+}

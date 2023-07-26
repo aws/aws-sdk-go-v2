@@ -40,7 +40,7 @@ type StartFHIRExportJobInput struct {
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// The AWS generated ID for the Data Store from which files are being exported for
+	// The AWS generated ID for the data store from which files are being exported for
 	// an export job.
 	//
 	// This member is required.
@@ -70,7 +70,7 @@ type StartFHIRExportJobOutput struct {
 	// This member is required.
 	JobStatus types.JobStatus
 
-	// The AWS generated ID for the Data Store from which files are being exported for
+	// The AWS generated ID for the data store from which files are being exported for
 	// an export job.
 	DatastoreId *string
 

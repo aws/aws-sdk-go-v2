@@ -146,7 +146,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "af-south-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.af-south-1.amazonaws.com",
+				Hostname: "servicediscovery.af-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-east-1",
@@ -155,7 +155,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-east-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ap-east-1.amazonaws.com",
+				Hostname: "servicediscovery.ap-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
@@ -164,7 +164,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-northeast-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ap-northeast-1.amazonaws.com",
+				Hostname: "servicediscovery.ap-northeast-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
@@ -173,7 +173,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-northeast-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ap-northeast-2.amazonaws.com",
+				Hostname: "servicediscovery.ap-northeast-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-3",
@@ -182,7 +182,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-northeast-3",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ap-northeast-3.amazonaws.com",
+				Hostname: "servicediscovery.ap-northeast-3.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-south-1",
@@ -191,7 +191,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-south-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ap-south-1.amazonaws.com",
+				Hostname: "servicediscovery.ap-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-south-2",
@@ -200,7 +200,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-south-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ap-south-2.amazonaws.com",
+				Hostname: "servicediscovery.ap-south-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
@@ -209,7 +209,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-southeast-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ap-southeast-1.amazonaws.com",
+				Hostname: "servicediscovery.ap-southeast-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-2",
@@ -218,7 +218,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-southeast-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ap-southeast-2.amazonaws.com",
+				Hostname: "servicediscovery.ap-southeast-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-3",
@@ -227,7 +227,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-southeast-3",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ap-southeast-3.amazonaws.com",
+				Hostname: "servicediscovery.ap-southeast-3.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-4",
@@ -236,7 +236,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ap-southeast-4",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ap-southeast-4.amazonaws.com",
+				Hostname: "servicediscovery.ap-southeast-4.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ca-central-1",
@@ -249,9 +249,15 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "servicediscovery-fips.ca-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.ca-central-1.amazonaws.com",
+				Hostname: "servicediscovery.ca-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ca-central-1-fips",
@@ -269,7 +275,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-central-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.eu-central-1.amazonaws.com",
+				Hostname: "servicediscovery.eu-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-central-2",
@@ -278,7 +284,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-central-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.eu-central-2.amazonaws.com",
+				Hostname: "servicediscovery.eu-central-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-north-1",
@@ -287,7 +293,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-north-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.eu-north-1.amazonaws.com",
+				Hostname: "servicediscovery.eu-north-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-south-1",
@@ -296,7 +302,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-south-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.eu-south-1.amazonaws.com",
+				Hostname: "servicediscovery.eu-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-south-2",
@@ -305,7 +311,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-south-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.eu-south-2.amazonaws.com",
+				Hostname: "servicediscovery.eu-south-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",
@@ -314,7 +320,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-west-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.eu-west-1.amazonaws.com",
+				Hostname: "servicediscovery.eu-west-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-west-2",
@@ -323,7 +329,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-west-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.eu-west-2.amazonaws.com",
+				Hostname: "servicediscovery.eu-west-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-west-3",
@@ -332,7 +338,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "eu-west-3",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.eu-west-3.amazonaws.com",
+				Hostname: "servicediscovery.eu-west-3.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "me-central-1",
@@ -341,7 +347,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "me-central-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.me-central-1.amazonaws.com",
+				Hostname: "servicediscovery.me-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "me-south-1",
@@ -350,7 +356,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "me-south-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.me-south-1.amazonaws.com",
+				Hostname: "servicediscovery.me-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",
@@ -359,7 +365,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "sa-east-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.sa-east-1.amazonaws.com",
+				Hostname: "servicediscovery.sa-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-1",
@@ -372,9 +378,15 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "servicediscovery-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.us-east-1.amazonaws.com",
+				Hostname: "servicediscovery.us-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-1-fips",
@@ -396,9 +408,15 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "servicediscovery-fips.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.us-east-2.amazonaws.com",
+				Hostname: "servicediscovery.us-east-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-2-fips",
@@ -420,9 +438,15 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "servicediscovery-fips.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.us-west-1.amazonaws.com",
+				Hostname: "servicediscovery.us-west-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-1-fips",
@@ -444,9 +468,15 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			endpoints.EndpointKey{
 				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "servicediscovery-fips.us-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.us-west-2.amazonaws.com",
+				Hostname: "servicediscovery.us-west-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-2-fips",
@@ -501,7 +531,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "cn-north-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.cn-north-1.amazonaws.com.cn",
+				Hostname: "servicediscovery.cn-north-1.api.amazonwebservices.com.cn",
 			},
 			endpoints.EndpointKey{
 				Region: "cn-northwest-1",
@@ -510,7 +540,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "cn-northwest-1",
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname: "servicediscovery.cn-northwest-1.amazonaws.com.cn",
+				Hostname: "servicediscovery.cn-northwest-1.api.amazonwebservices.com.cn",
 			},
 		},
 	},
@@ -665,6 +695,12 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "servicediscovery-fips.us-gov-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "servicediscovery-fips.us-gov-east-1.amazonaws.com",
@@ -687,6 +723,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname: "servicediscovery-fips.us-gov-west-1.amazonaws.com",
+			},
 			endpoints.EndpointKey{
 				Region:  "us-gov-west-1",
 				Variant: endpoints.FIPSVariant,

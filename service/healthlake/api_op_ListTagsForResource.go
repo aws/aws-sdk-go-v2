@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all existing tags associated with a Data Store.
+// Returns a list of all existing tags associated with a data store.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -29,7 +29,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name(ARN) of the Data Store for which tags are being added.
+	// The Amazon Resource Name(ARN) of the data store for which tags are being added.
 	//
 	// This member is required.
 	ResourceARN *string
@@ -39,7 +39,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// Returns a list of tags associated with a Data Store.
+	// Returns a list of tags associated with a data store.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

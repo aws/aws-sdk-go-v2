@@ -28852,6 +28852,16 @@ func awsAwsjson11_deserializeDocumentCodeGenConfigurationNode(v **types.CodeGenC
 				return err
 			}
 
+		case "SnowflakeSource":
+			if err := awsAwsjson11_deserializeDocumentSnowflakeSource(&sv.SnowflakeSource, value); err != nil {
+				return err
+			}
+
+		case "SnowflakeTarget":
+			if err := awsAwsjson11_deserializeDocumentSnowflakeTarget(&sv.SnowflakeTarget, value); err != nil {
+				return err
+			}
+
 		case "SparkConnectorSource":
 			if err := awsAwsjson11_deserializeDocumentSparkConnectorSource(&sv.SparkConnectorSource, value); err != nil {
 				return err
@@ -47717,6 +47727,306 @@ func awsAwsjson11_deserializeDocumentSkewedInfo(v **types.SkewedInfo, value inte
 		case "SkewedColumnValues":
 			if err := awsAwsjson11_deserializeDocumentColumnValueStringList(&sv.SkewedColumnValues, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSnowflakeNodeData(v **types.SnowflakeNodeData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnowflakeNodeData
+	if *v == nil {
+		sv = &types.SnowflakeNodeData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Action = ptr.String(jtv)
+			}
+
+		case "AdditionalOptions":
+			if err := awsAwsjson11_deserializeDocumentAdditionalOptions(&sv.AdditionalOptions, value); err != nil {
+				return err
+			}
+
+		case "AutoPushdown":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.AutoPushdown = jtv
+			}
+
+		case "Connection":
+			if err := awsAwsjson11_deserializeDocumentOption(&sv.Connection, value); err != nil {
+				return err
+			}
+
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Database = ptr.String(jtv)
+			}
+
+		case "IamRole":
+			if err := awsAwsjson11_deserializeDocumentOption(&sv.IamRole, value); err != nil {
+				return err
+			}
+
+		case "MergeAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.MergeAction = ptr.String(jtv)
+			}
+
+		case "MergeClause":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.MergeClause = ptr.String(jtv)
+			}
+
+		case "MergeWhenMatched":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.MergeWhenMatched = ptr.String(jtv)
+			}
+
+		case "MergeWhenNotMatched":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.MergeWhenNotMatched = ptr.String(jtv)
+			}
+
+		case "PostAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.PostAction = ptr.String(jtv)
+			}
+
+		case "PreAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.PreAction = ptr.String(jtv)
+			}
+
+		case "SampleQuery":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.SampleQuery = ptr.String(jtv)
+			}
+
+		case "Schema":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Schema = ptr.String(jtv)
+			}
+
+		case "SelectedColumns":
+			if err := awsAwsjson11_deserializeDocumentOptionList(&sv.SelectedColumns, value); err != nil {
+				return err
+			}
+
+		case "SourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericLimitedString to be of type string, got %T instead", value)
+				}
+				sv.SourceType = ptr.String(jtv)
+			}
+
+		case "StagingTable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.StagingTable = ptr.String(jtv)
+			}
+
+		case "Table":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Table = ptr.String(jtv)
+			}
+
+		case "TableSchema":
+			if err := awsAwsjson11_deserializeDocumentOptionList(&sv.TableSchema, value); err != nil {
+				return err
+			}
+
+		case "TempDir":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnclosedInStringProperty to be of type string, got %T instead", value)
+				}
+				sv.TempDir = ptr.String(jtv)
+			}
+
+		case "Upsert":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.Upsert = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSnowflakeSource(v **types.SnowflakeSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnowflakeSource
+	if *v == nil {
+		sv = &types.SnowflakeSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Data":
+			if err := awsAwsjson11_deserializeDocumentSnowflakeNodeData(&sv.Data, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OutputSchemas":
+			if err := awsAwsjson11_deserializeDocumentGlueSchemas(&sv.OutputSchemas, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSnowflakeTarget(v **types.SnowflakeTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnowflakeTarget
+	if *v == nil {
+		sv = &types.SnowflakeTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Data":
+			if err := awsAwsjson11_deserializeDocumentSnowflakeNodeData(&sv.Data, value); err != nil {
+				return err
+			}
+
+		case "Inputs":
+			if err := awsAwsjson11_deserializeDocumentOneInput(&sv.Inputs, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
 			}
 
 		default:

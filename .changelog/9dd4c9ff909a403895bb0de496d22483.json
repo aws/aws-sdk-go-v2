@@ -1,0 +1,8 @@
+{
+    "id": "9dd4c9ff-909a-4038-95bb-0de496d22483",
+    "type": "documentation",
+    "description": "Updating the HealthLake service documentation.",
+    "modules": [
+        "service/healthlake"
+    ]
+}

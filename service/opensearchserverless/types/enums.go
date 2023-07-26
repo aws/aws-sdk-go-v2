@@ -53,6 +53,8 @@ const (
 	CollectionTypeSearch CollectionType = "SEARCH"
 	// Timeseries collection type
 	CollectionTypeTimeseries CollectionType = "TIMESERIES"
+	// Vectorsearch collection type
+	CollectionTypeVectorsearch CollectionType = "VECTORSEARCH"
 )
 
 // Values returns all known values for CollectionType. Note that this can be
@@ -62,6 +64,7 @@ func (CollectionType) Values() []CollectionType {
 	return []CollectionType{
 		"SEARCH",
 		"TIMESERIES",
+		"VECTORSEARCH",
 	}
 }
 

@@ -3,7 +3,7 @@
 // Package healthlake provides the API client, operations, and parameter types for
 // Amazon HealthLake.
 //
-// Amazon HealthLake is a HIPAA eligibile service that allows customers to store,
+// AWS HealthLake is a HIPAA eligibile service that allows customers to store,
 // transform, query, and analyze their FHIR-formatted data in a consistent fashion
 // in the cloud.
 package healthlake
