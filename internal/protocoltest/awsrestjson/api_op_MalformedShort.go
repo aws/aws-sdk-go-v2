@@ -54,6 +54,9 @@ func (c *Client) addOperationMalformedShortMiddlewares(stack *middleware.Stack, 
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -84,6 +87,9 @@ func (c *Client) addOperationMalformedShortMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addMalformedShortResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpMalformedShortValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -100,6 +106,9 @@ func (c *Client) addOperationMalformedShortMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

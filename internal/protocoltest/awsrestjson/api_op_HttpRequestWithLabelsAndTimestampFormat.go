@@ -69,6 +69,9 @@ func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -99,6 +102,9 @@ func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addHttpRequestWithLabelsAndTimestampFormatResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpHttpRequestWithLabelsAndTimestampFormatValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -115,6 +121,9 @@ func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

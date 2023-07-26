@@ -10,6 +10,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/internal/v4a"
 	ebcust "github.com/aws/aws-sdk-go-v2/service/eventbridge/internal/customizations"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -135,7 +136,7 @@ func newServiceMetadataMiddleware_opDeleteArchive(region string) *awsmiddleware.
 
 type opDeleteArchiveResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
-	BuiltInResolver  BuiltInParameterResolver
+	BuiltInResolver  builtInParameterResolver
 }
 
 func (*opDeleteArchiveResolveEndpointMiddleware) ID() string {
@@ -183,7 +184,7 @@ func (m *opDeleteArchiveResolveEndpointMiddleware) HandleSerialize(ctx context.C
 		if errors.As(err, &nfe) {
 			// if no auth scheme is found, default to sigv4
 			signingName := "events"
-			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			signingRegion := m.BuiltInResolver.(*builtInResolver).Region
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 			ctx = ebcust.SetSignerVersion(ctx, internalauth.SigV4)
@@ -209,7 +210,7 @@ func (m *opDeleteArchiveResolveEndpointMiddleware) HandleSerialize(ctx context.C
 				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
-				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				signingRegion = m.BuiltInResolver.(*builtInResolver).Region
 			} else {
 				signingRegion = *v4Scheme.SigningRegion
 			}
@@ -236,7 +237,7 @@ func (m *opDeleteArchiveResolveEndpointMiddleware) HandleSerialize(ctx context.C
 			}
 			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
-			ctx = ebcust.SetSignerVersion(ctx, v4aScheme.Name)
+			ctx = ebcust.SetSignerVersion(ctx, v4a.Version)
 			break
 		case *internalauth.AuthenticationSchemeNone:
 			break
@@ -249,7 +250,7 @@ func (m *opDeleteArchiveResolveEndpointMiddleware) HandleSerialize(ctx context.C
 func addDeleteArchiveResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&opDeleteArchiveResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
-		BuiltInResolver: &BuiltInResolver{
+		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,
 			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
 			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,

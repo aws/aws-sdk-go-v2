@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
@@ -95,6 +96,9 @@ func (c *Client) addOperationGetLayerVersionMiddlewares(stack *middleware.Stack,
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -152,6 +156,9 @@ func (c *Client) addOperationGetLayerVersionMiddlewares(stack *middleware.Stack,
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -166,16 +173,20 @@ func newServiceMetadataMiddleware_opGetLayerVersion(region string) *awsmiddlewar
 
 type opGetLayerVersionResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
-	BuiltInResolver  BuiltInParameterResolver
+	BuiltInResolver  builtInParameterResolver
 }
 
 func (*opGetLayerVersionResolveEndpointMiddleware) ID() string {
-	return "opGetLayerVersionResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opGetLayerVersionResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
@@ -210,7 +221,7 @@ func (m *opGetLayerVersionResolveEndpointMiddleware) HandleSerialize(ctx context
 		if errors.As(err, &nfe) {
 			// if no auth scheme is found, default to sigv4
 			signingName := "lambda"
-			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			signingRegion := m.BuiltInResolver.(*builtInResolver).Region
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 
@@ -232,9 +243,13 @@ func (m *opGetLayerVersionResolveEndpointMiddleware) HandleSerialize(ctx context
 			var signingName, signingRegion string
 			if v4Scheme.SigningName == nil {
 				signingName = "lambda"
+			} else {
+				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
-				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				signingRegion = m.BuiltInResolver.(*builtInResolver).Region
+			} else {
+				signingRegion = *v4Scheme.SigningRegion
 			}
 			if v4Scheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -247,9 +262,8 @@ func (m *opGetLayerVersionResolveEndpointMiddleware) HandleSerialize(ctx context
 			break
 		case *internalauth.AuthenticationSchemeV4A:
 			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
-			var signingName string
 			if v4aScheme.SigningName == nil {
-				signingName = "lambda"
+				v4aScheme.SigningName = aws.String("lambda")
 			}
 			if v4aScheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -257,7 +271,7 @@ func (m *opGetLayerVersionResolveEndpointMiddleware) HandleSerialize(ctx context
 				// and override the value set at client initialization time.
 				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
-			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
 			break
 		case *internalauth.AuthenticationSchemeNone:
@@ -271,7 +285,7 @@ func (m *opGetLayerVersionResolveEndpointMiddleware) HandleSerialize(ctx context
 func addGetLayerVersionResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&opGetLayerVersionResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
-		BuiltInResolver: &BuiltInResolver{
+		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,
 			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
 			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,

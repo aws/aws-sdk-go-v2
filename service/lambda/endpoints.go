@@ -43,15 +43,6 @@ func (fn EndpointResolverFunc) ResolveEndpoint(region string, options EndpointRe
 	return fn(region, options)
 }
 
-func resolveDefaultEndpointConfiguration(o *Options) {
-	if o.EndpointResolver != nil {
-		return
-	}
-	o.EndpointResolver = &compatibleEndpointResolver{
-		EndpointResolverV2: NewDefaultEndpointResolverV2(),
-	}
-}
-
 // EndpointResolverFromURL returns an EndpointResolver configured using the
 // provided endpoint url. By default, the resolved endpoint resolver uses the
 // client region as signing region, and the endpoint source is set to
@@ -85,6 +76,10 @@ func (*ResolveEndpoint) ID() string {
 func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if !awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
@@ -100,6 +95,11 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 	var endpoint aws.Endpoint
 	endpoint, err = m.Resolver.ResolveEndpoint(awsmiddleware.GetRegion(ctx), eo)
 	if err != nil {
+		nf := (&aws.EndpointNotFoundError{})
+		if errors.As(err, &nf) {
+			ctx = awsmiddleware.SetRequiresLegacyEndpoints(ctx, false)
+			return next.HandleSerialize(ctx, in)
+		}
 		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
 	}
 
@@ -135,27 +135,10 @@ func removeResolveEndpointMiddleware(stack *middleware.Stack) error {
 
 type wrappedEndpointResolver struct {
 	awsResolver aws.EndpointResolverWithOptions
-	resolver    EndpointResolver
 }
 
 func (w *wrappedEndpointResolver) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint aws.Endpoint, err error) {
-	if w.awsResolver == nil {
-		goto fallback
-	}
-	endpoint, err = w.awsResolver.ResolveEndpoint(ServiceID, region, options)
-	if err == nil {
-		return endpoint, nil
-	}
-
-	if nf := (&aws.EndpointNotFoundError{}); !errors.As(err, &nf) {
-		return endpoint, err
-	}
-
-fallback:
-	if w.resolver == nil {
-		return endpoint, fmt.Errorf("default endpoint resolver provided was nil")
-	}
-	return w.resolver.ResolveEndpoint(region, options)
+	return w.awsResolver.ResolveEndpoint(ServiceID, region, options)
 }
 
 type awsEndpointResolverAdaptor func(service, region string) (aws.Endpoint, error)
@@ -166,12 +149,13 @@ func (a awsEndpointResolverAdaptor) ResolveEndpoint(service, region string, opti
 
 var _ aws.EndpointResolverWithOptions = awsEndpointResolverAdaptor(nil)
 
-// withEndpointResolver returns an EndpointResolver that first delegates endpoint resolution to the awsResolver.
-// If awsResolver returns aws.EndpointNotFoundError error, the resolver will use the the provided
-// fallbackResolver for resolution.
+// withEndpointResolver returns an aws.EndpointResolverWithOptions that first delegates endpoint resolution to the awsResolver.
+// If awsResolver returns aws.EndpointNotFoundError error, the v1 resolver middleware will swallow the error,
+// and set an appropriate context flag such that fallback will occur when EndpointResolverV2 is invoked
+// via its middleware.
 //
-// fallbackResolver must not be nil
-func withEndpointResolver(awsResolver aws.EndpointResolver, awsResolverWithOptions aws.EndpointResolverWithOptions, fallbackResolver EndpointResolver) EndpointResolver {
+// If another error (besides aws.EndpointNotFoundError) is returned, then that error will be propagated.
+func withEndpointResolver(awsResolver aws.EndpointResolver, awsResolverWithOptions aws.EndpointResolverWithOptions) EndpointResolver {
 	var resolver aws.EndpointResolverWithOptions
 
 	if awsResolverWithOptions != nil {
@@ -182,7 +166,6 @@ func withEndpointResolver(awsResolver aws.EndpointResolver, awsResolverWithOptio
 
 	return &wrappedEndpointResolver{
 		awsResolver: resolver,
-		resolver:    fallbackResolver,
 	}
 }
 
@@ -205,90 +188,10 @@ func finalizeClientEndpointResolverOptions(options *Options) {
 
 }
 
-type legacyEndpointResolverAdapter struct {
-	legacyResolver EndpointResolver
-	resolver       EndpointResolverV2
-}
-
-func (l *legacyEndpointResolverAdapter) ResolveEndpoint(ctx context.Context, params EndpointParameters) (endpoint smithyendpoints.Endpoint, err error) {
-	var fips aws.FIPSEndpointState
-	var dualStack aws.DualStackEndpointState
-
-	if aws.ToBool(params.UseFIPS) {
-		fips = aws.FIPSEndpointStateEnabled
+func resolveEndpointResolverV2(options *Options) {
+	if options.EndpointResolverV2 == nil {
+		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
 	}
-	if aws.ToBool(params.UseDualStack) {
-		dualStack = aws.DualStackEndpointStateEnabled
-	}
-
-	resolveEndpoint, err := l.legacyResolver.ResolveEndpoint(aws.ToString(params.Region), EndpointResolverOptions{
-		ResolvedRegion:       aws.ToString(params.Region),
-		UseFIPSEndpoint:      fips,
-		UseDualStackEndpoint: dualStack,
-	})
-	if err != nil {
-		return endpoint, err
-	}
-
-	if resolveEndpoint.HostnameImmutable {
-		uriString := resolveEndpoint.URL
-		uri, err := url.Parse(uriString)
-		if err != nil {
-			return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-		}
-
-		return smithyendpoints.Endpoint{
-			URI: *uri,
-		}, nil
-	}
-
-	if resolveEndpoint.Source == aws.EndpointSourceServiceMetadata {
-		return l.resolver.ResolveEndpoint(ctx, params)
-	}
-
-	params = params.WithDefaults()
-	params.Endpoint = &resolveEndpoint.URL
-
-	return l.resolver.ResolveEndpoint(ctx, params)
-}
-
-type isDefaultProvidedImplementation interface {
-	isDefaultProvidedImplementation()
-}
-
-type compatibleEndpointResolver struct {
-	EndpointResolverV2 EndpointResolverV2
-}
-
-func (n *compatibleEndpointResolver) isDefaultProvidedImplementation() {}
-
-func (n *compatibleEndpointResolver) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint aws.Endpoint, err error) {
-	reg := region
-	fips := options.UseFIPSEndpoint
-	if len(options.ResolvedRegion) > 0 {
-		reg = options.ResolvedRegion
-	} else {
-		// EndpointResolverV2 needs to support pseudo-regions to maintain backwards-compatibility
-		// with the legacy EndpointResolver
-		reg, fips = mapPseudoRegion(region)
-	}
-	ctx := context.Background()
-	resolved, err := n.EndpointResolverV2.ResolveEndpoint(ctx, EndpointParameters{
-		Region:       &reg,
-		UseFIPS:      aws.Bool(fips == aws.FIPSEndpointStateEnabled),
-		UseDualStack: aws.Bool(options.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled),
-	})
-	if err != nil {
-		return endpoint, err
-	}
-
-	endpoint = aws.Endpoint{
-		URL:               resolved.URI.String(),
-		HostnameImmutable: false,
-		Source:            aws.EndpointSourceServiceMetadata,
-	}
-
-	return endpoint, nil
 }
 
 // Utility function to aid with translating pseudo-regions to classical regions
@@ -311,33 +214,15 @@ func mapPseudoRegion(pr string) (region string, fips aws.FIPSEndpointState) {
 	return region, fips
 }
 
-func finalizeEndpointResolverV2(options *Options) {
-	// Check if the EndpointResolver was not user provided
-	// but is the SDK's default provided version.
-	_, ok := options.EndpointResolver.(isDefaultProvidedImplementation)
-	if options.EndpointResolverV2 == nil {
-		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
-	}
-	if ok {
-		// Nothing further to do
-		return
-	}
-
-	options.EndpointResolverV2 = &legacyEndpointResolverAdapter{
-		legacyResolver: options.EndpointResolver,
-		resolver:       NewDefaultEndpointResolverV2(),
-	}
-}
-
-// BuiltInParameterResolver is the interface responsible for resolving BuiltIn
+// builtInParameterResolver is the interface responsible for resolving BuiltIn
 // values during the sourcing of EndpointParameters
-type BuiltInParameterResolver interface {
+type builtInParameterResolver interface {
 	ResolveBuiltIns(*EndpointParameters) error
 }
 
-// BuiltInResolver resolves modeled BuiltIn values using only the members defined
+// builtInResolver resolves modeled BuiltIn values using only the members defined
 // below.
-type BuiltInResolver struct {
+type builtInResolver struct {
 	// The AWS region used to dispatch the request.
 	Region string
 
@@ -353,7 +238,7 @@ type BuiltInResolver struct {
 
 // Invoked at runtime to resolve BuiltIn Values. Only resolution code specific to
 // each BuiltIn value is generated.
-func (b *BuiltInResolver) ResolveBuiltIns(params *EndpointParameters) error {
+func (b *builtInResolver) ResolveBuiltIns(params *EndpointParameters) error {
 
 	region, _ := mapPseudoRegion(b.Region)
 	if len(region) == 0 {
@@ -589,7 +474,7 @@ func (r *resolver) ResolveEndpoint(
 				Headers: http.Header{},
 			}, nil
 		}
-		return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 	}
 	return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
 }

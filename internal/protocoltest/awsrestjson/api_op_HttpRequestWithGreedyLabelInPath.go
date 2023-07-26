@@ -51,6 +51,9 @@ func (c *Client) addOperationHttpRequestWithGreedyLabelInPathMiddlewares(stack *
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -81,6 +84,9 @@ func (c *Client) addOperationHttpRequestWithGreedyLabelInPathMiddlewares(stack *
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addHttpRequestWithGreedyLabelInPathResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -97,6 +103,9 @@ func (c *Client) addOperationHttpRequestWithGreedyLabelInPathMiddlewares(stack *
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

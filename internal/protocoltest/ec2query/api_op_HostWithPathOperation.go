@@ -44,6 +44,9 @@ func (c *Client) addOperationHostWithPathOperationMiddlewares(stack *middleware.
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -74,6 +77,9 @@ func (c *Client) addOperationHostWithPathOperationMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addHostWithPathOperationResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHostWithPathOperation(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -87,6 +93,9 @@ func (c *Client) addOperationHostWithPathOperationMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

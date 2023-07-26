@@ -66,7 +66,7 @@ type Options struct {
 
 	// The optional application specific identifier appended to the User-Agent header.
 	AppID string
-	
+
 	// This endpoint will be given as input to an EndpointResolverV2. It is used for
 	// providing a custom base endpoint that is subject to modifications by the
 	// processing EndpointResolverV2.
@@ -413,7 +413,6 @@ func addClientUserAgent(stack *middleware.Stack, options Options) error {
 
 	return nil
 }
-
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {
 	mw := v4.NewSignHTTPRequestMiddleware(v4.SignHTTPRequestMiddlewareOptions{

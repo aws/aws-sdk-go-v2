@@ -49,6 +49,9 @@ func (c *Client) addOperationMalformedTimestampQueryEpochMiddlewares(stack *midd
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -79,6 +82,9 @@ func (c *Client) addOperationMalformedTimestampQueryEpochMiddlewares(stack *midd
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addMalformedTimestampQueryEpochResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpMalformedTimestampQueryEpochValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -95,6 +101,9 @@ func (c *Client) addOperationMalformedTimestampQueryEpochMiddlewares(stack *midd
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

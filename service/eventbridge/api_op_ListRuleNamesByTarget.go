@@ -10,6 +10,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/internal/v4a"
 	ebcust "github.com/aws/aws-sdk-go-v2/service/eventbridge/internal/customizations"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -154,7 +155,7 @@ func newServiceMetadataMiddleware_opListRuleNamesByTarget(region string) *awsmid
 
 type opListRuleNamesByTargetResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
-	BuiltInResolver  BuiltInParameterResolver
+	BuiltInResolver  builtInParameterResolver
 }
 
 func (*opListRuleNamesByTargetResolveEndpointMiddleware) ID() string {
@@ -202,7 +203,7 @@ func (m *opListRuleNamesByTargetResolveEndpointMiddleware) HandleSerialize(ctx c
 		if errors.As(err, &nfe) {
 			// if no auth scheme is found, default to sigv4
 			signingName := "events"
-			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			signingRegion := m.BuiltInResolver.(*builtInResolver).Region
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 			ctx = ebcust.SetSignerVersion(ctx, internalauth.SigV4)
@@ -228,7 +229,7 @@ func (m *opListRuleNamesByTargetResolveEndpointMiddleware) HandleSerialize(ctx c
 				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
-				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				signingRegion = m.BuiltInResolver.(*builtInResolver).Region
 			} else {
 				signingRegion = *v4Scheme.SigningRegion
 			}
@@ -255,7 +256,7 @@ func (m *opListRuleNamesByTargetResolveEndpointMiddleware) HandleSerialize(ctx c
 			}
 			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
-			ctx = ebcust.SetSignerVersion(ctx, v4aScheme.Name)
+			ctx = ebcust.SetSignerVersion(ctx, v4a.Version)
 			break
 		case *internalauth.AuthenticationSchemeNone:
 			break
@@ -268,7 +269,7 @@ func (m *opListRuleNamesByTargetResolveEndpointMiddleware) HandleSerialize(ctx c
 func addListRuleNamesByTargetResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&opListRuleNamesByTargetResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
-		BuiltInResolver: &BuiltInResolver{
+		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,
 			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
 			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
