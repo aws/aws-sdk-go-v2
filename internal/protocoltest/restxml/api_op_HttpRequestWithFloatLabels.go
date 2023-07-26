@@ -51,6 +51,9 @@ func (c *Client) addOperationHttpRequestWithFloatLabelsMiddlewares(stack *middle
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -81,6 +84,9 @@ func (c *Client) addOperationHttpRequestWithFloatLabelsMiddlewares(stack *middle
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addHttpRequestWithFloatLabelsResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpHttpRequestWithFloatLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -97,6 +103,9 @@ func (c *Client) addOperationHttpRequestWithFloatLabelsMiddlewares(stack *middle
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

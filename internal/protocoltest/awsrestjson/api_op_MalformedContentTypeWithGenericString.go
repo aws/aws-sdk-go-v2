@@ -46,6 +46,9 @@ func (c *Client) addOperationMalformedContentTypeWithGenericStringMiddlewares(st
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -76,6 +79,9 @@ func (c *Client) addOperationMalformedContentTypeWithGenericStringMiddlewares(st
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addMalformedContentTypeWithGenericStringResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedContentTypeWithGenericString(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -89,6 +95,9 @@ func (c *Client) addOperationMalformedContentTypeWithGenericStringMiddlewares(st
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

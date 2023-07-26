@@ -57,6 +57,9 @@ func (c *Client) addOperationTestPayloadBlobMiddlewares(stack *middleware.Stack,
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -87,6 +90,9 @@ func (c *Client) addOperationTestPayloadBlobMiddlewares(stack *middleware.Stack,
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTestPayloadBlobResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestPayloadBlob(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -100,6 +106,9 @@ func (c *Client) addOperationTestPayloadBlobMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

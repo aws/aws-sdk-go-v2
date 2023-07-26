@@ -50,6 +50,9 @@ func (c *Client) addOperationXmlAttributesOnPayloadMiddlewares(stack *middleware
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -80,6 +83,9 @@ func (c *Client) addOperationXmlAttributesOnPayloadMiddlewares(stack *middleware
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addXmlAttributesOnPayloadResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opXmlAttributesOnPayload(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -93,6 +99,9 @@ func (c *Client) addOperationXmlAttributesOnPayloadMiddlewares(stack *middleware
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

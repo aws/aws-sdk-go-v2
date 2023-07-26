@@ -52,6 +52,9 @@ func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *mi
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -91,6 +94,9 @@ func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *mi
 	if err = addEndpointPrefix_opEndpointWithHostLabelOperationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointWithHostLabelOperationResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpEndpointWithHostLabelOperationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -107,6 +113,9 @@ func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *mi
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

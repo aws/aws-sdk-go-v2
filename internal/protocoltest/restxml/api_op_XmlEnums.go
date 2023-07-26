@@ -70,6 +70,9 @@ func (c *Client) addOperationXmlEnumsMiddlewares(stack *middleware.Stack, option
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -100,6 +103,9 @@ func (c *Client) addOperationXmlEnumsMiddlewares(stack *middleware.Stack, option
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addXmlEnumsResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opXmlEnums(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -113,6 +119,9 @@ func (c *Client) addOperationXmlEnumsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

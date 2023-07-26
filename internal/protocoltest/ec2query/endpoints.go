@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/internal/endpoints"
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/url"
@@ -37,13 +38,6 @@ type EndpointResolverFunc func(region string, options EndpointResolverOptions) (
 
 func (fn EndpointResolverFunc) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint aws.Endpoint, err error) {
 	return fn(region, options)
-}
-
-func resolveDefaultEndpointConfiguration(o *Options) {
-	if o.EndpointResolver != nil {
-		return
-	}
-	o.EndpointResolver = NewDefaultEndpointResolver()
 }
 
 // EndpointResolverFromURL returns an EndpointResolver configured using the
@@ -79,6 +73,10 @@ func (*ResolveEndpoint) ID() string {
 func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if !awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
@@ -94,6 +92,11 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 	var endpoint aws.Endpoint
 	endpoint, err = m.Resolver.ResolveEndpoint(awsmiddleware.GetRegion(ctx), eo)
 	if err != nil {
+		nf := (&aws.EndpointNotFoundError{})
+		if errors.As(err, &nf) {
+			ctx = awsmiddleware.SetRequiresLegacyEndpoints(ctx, false)
+			return next.HandleSerialize(ctx, in)
+		}
 		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
 	}
 
@@ -129,27 +132,10 @@ func removeResolveEndpointMiddleware(stack *middleware.Stack) error {
 
 type wrappedEndpointResolver struct {
 	awsResolver aws.EndpointResolverWithOptions
-	resolver    EndpointResolver
 }
 
 func (w *wrappedEndpointResolver) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint aws.Endpoint, err error) {
-	if w.awsResolver == nil {
-		goto fallback
-	}
-	endpoint, err = w.awsResolver.ResolveEndpoint(ServiceID, region, options)
-	if err == nil {
-		return endpoint, nil
-	}
-
-	if nf := (&aws.EndpointNotFoundError{}); !errors.As(err, &nf) {
-		return endpoint, err
-	}
-
-fallback:
-	if w.resolver == nil {
-		return endpoint, fmt.Errorf("default endpoint resolver provided was nil")
-	}
-	return w.resolver.ResolveEndpoint(region, options)
+	return w.awsResolver.ResolveEndpoint(ServiceID, region, options)
 }
 
 type awsEndpointResolverAdaptor func(service, region string) (aws.Endpoint, error)
@@ -160,12 +146,13 @@ func (a awsEndpointResolverAdaptor) ResolveEndpoint(service, region string, opti
 
 var _ aws.EndpointResolverWithOptions = awsEndpointResolverAdaptor(nil)
 
-// withEndpointResolver returns an EndpointResolver that first delegates endpoint resolution to the awsResolver.
-// If awsResolver returns aws.EndpointNotFoundError error, the resolver will use the the provided
-// fallbackResolver for resolution.
+// withEndpointResolver returns an aws.EndpointResolverWithOptions that first delegates endpoint resolution to the awsResolver.
+// If awsResolver returns aws.EndpointNotFoundError error, the v1 resolver middleware will swallow the error,
+// and set an appropriate context flag such that fallback will occur when EndpointResolverV2 is invoked
+// via its middleware.
 //
-// fallbackResolver must not be nil
-func withEndpointResolver(awsResolver aws.EndpointResolver, awsResolverWithOptions aws.EndpointResolverWithOptions, fallbackResolver EndpointResolver) EndpointResolver {
+// If another error (besides aws.EndpointNotFoundError) is returned, then that error will be propagated.
+func withEndpointResolver(awsResolver aws.EndpointResolver, awsResolverWithOptions aws.EndpointResolverWithOptions) EndpointResolver {
 	var resolver aws.EndpointResolverWithOptions
 
 	if awsResolverWithOptions != nil {
@@ -176,7 +163,6 @@ func withEndpointResolver(awsResolver aws.EndpointResolver, awsResolverWithOptio
 
 	return &wrappedEndpointResolver{
 		awsResolver: resolver,
-		resolver:    fallbackResolver,
 	}
 }
 
@@ -197,4 +183,41 @@ func finalizeClientEndpointResolverOptions(options *Options) {
 		}
 	}
 
+}
+
+func resolveEndpointResolverV2(options *Options) {
+	if options.EndpointResolverV2 == nil {
+		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
+	}
+}
+
+// EndpointParameters provides the parameters that influence how endpoints are
+// resolved.
+type EndpointParameters struct {
+}
+
+// EndpointResolverV2 provides the interface for resolving service endpoints.
+type EndpointResolverV2 interface {
+	// ResolveEndpoint attempts to resolve the endpoint with the provided options,
+	// returning the endpoint if found. Otherwise an error is returned.
+	ResolveEndpoint(ctx context.Context, params EndpointParameters) (
+		smithyendpoints.Endpoint, error,
+	)
+}
+
+// resolver provides the implementation for resolving endpoints.
+type resolver struct{}
+
+func NewDefaultEndpointResolverV2() EndpointResolverV2 {
+	return &resolver{}
+}
+
+// ResolveEndpoint attempts to resolve the endpoint with the provided options,
+// returning the endpoint if found. Otherwise an error is returned.
+func (r *resolver) ResolveEndpoint(
+	ctx context.Context, params EndpointParameters,
+) (
+	endpoint smithyendpoints.Endpoint, err error,
+) {
+	return endpoint, fmt.Errorf("no endpoint rules defined")
 }

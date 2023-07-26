@@ -71,7 +71,7 @@ type Options struct {
 
 	// The optional application specific identifier appended to the User-Agent header.
 	AppID string
-	
+
 	// This endpoint will be given as input to an EndpointResolverV2. It is used for
 	// providing a custom base endpoint that is subject to modifications by the
 	// processing EndpointResolverV2.
@@ -303,6 +303,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
 	resolveAWSRetryMode(cfg, &opts)
+	resolveAWSEndpointResolver(cfg, &opts)
 	resolveUseDualStackEndpoint(cfg, &opts)
 	resolveUseFIPSEndpoint(cfg, &opts)
 	return New(opts, optFns...)
@@ -408,7 +409,7 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	if cfg.EndpointResolver == nil && cfg.EndpointResolverWithOptions == nil {
 		return
 	}
-	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, cfg.EndpointResolverWithOptions, NewDefaultEndpointResolver())
+	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, cfg.EndpointResolverWithOptions)
 }
 
 func addClientUserAgent(stack *middleware.Stack, options Options) error {

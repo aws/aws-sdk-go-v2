@@ -49,6 +49,9 @@ func (c *Client) addOperationIgnoreQueryParamsInResponseMiddlewares(stack *middl
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -79,6 +82,9 @@ func (c *Client) addOperationIgnoreQueryParamsInResponseMiddlewares(stack *middl
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIgnoreQueryParamsInResponseResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -92,6 +98,9 @@ func (c *Client) addOperationIgnoreQueryParamsInResponseMiddlewares(stack *middl
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

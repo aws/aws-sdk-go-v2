@@ -46,6 +46,9 @@ func (c *Client) addOperationMalformedAcceptWithBodyMiddlewares(stack *middlewar
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -76,6 +79,9 @@ func (c *Client) addOperationMalformedAcceptWithBodyMiddlewares(stack *middlewar
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addMalformedAcceptWithBodyResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedAcceptWithBody(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -89,6 +95,9 @@ func (c *Client) addOperationMalformedAcceptWithBodyMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

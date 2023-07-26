@@ -52,6 +52,9 @@ func (c *Client) addOperationConstantQueryStringMiddlewares(stack *middleware.St
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -82,6 +85,9 @@ func (c *Client) addOperationConstantQueryStringMiddlewares(stack *middleware.St
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addConstantQueryStringResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpConstantQueryStringValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -98,6 +104,9 @@ func (c *Client) addOperationConstantQueryStringMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

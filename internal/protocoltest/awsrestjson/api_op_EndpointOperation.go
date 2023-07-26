@@ -45,6 +45,9 @@ func (c *Client) addOperationEndpointOperationMiddlewares(stack *middleware.Stac
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -78,6 +81,9 @@ func (c *Client) addOperationEndpointOperationMiddlewares(stack *middleware.Stac
 	if err = addEndpointPrefix_opEndpointOperationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointOperationResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEndpointOperation(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -91,6 +97,9 @@ func (c *Client) addOperationEndpointOperationMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

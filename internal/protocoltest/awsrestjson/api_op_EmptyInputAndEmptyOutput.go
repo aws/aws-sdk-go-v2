@@ -48,6 +48,9 @@ func (c *Client) addOperationEmptyInputAndEmptyOutputMiddlewares(stack *middlewa
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -78,6 +81,9 @@ func (c *Client) addOperationEmptyInputAndEmptyOutputMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEmptyInputAndEmptyOutputResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEmptyInputAndEmptyOutput(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -91,6 +97,9 @@ func (c *Client) addOperationEmptyInputAndEmptyOutputMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
