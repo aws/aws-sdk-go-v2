@@ -89,9 +89,6 @@ func (c *Client) addOperationTestPayloadStructureMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTestPayloadStructureResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestPayloadStructure(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -82,9 +82,6 @@ func (c *Client) addOperationMalformedTimestampPathEpochMiddlewares(stack *middl
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addMalformedTimestampPathEpochResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpMalformedTimestampPathEpochValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -88,9 +88,6 @@ func (c *Client) addOperationOperationWithOptionalInputOutputMiddlewares(stack *
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOperationWithOptionalInputOutputResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(options.Region), middleware.Before); err != nil {
 		return err
 	}

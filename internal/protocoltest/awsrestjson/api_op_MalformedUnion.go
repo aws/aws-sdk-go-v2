@@ -80,9 +80,6 @@ func (c *Client) addOperationMalformedUnionMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addMalformedUnionResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedUnion(options.Region), middleware.Before); err != nil {
 		return err
 	}

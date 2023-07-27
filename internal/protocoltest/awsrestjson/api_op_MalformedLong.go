@@ -87,9 +87,6 @@ func (c *Client) addOperationMalformedLongMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addMalformedLongResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpMalformedLongValidationMiddleware(stack); err != nil {
 		return err
 	}

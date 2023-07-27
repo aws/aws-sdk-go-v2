@@ -84,9 +84,6 @@ func (c *Client) addOperationHttpRequestWithFloatLabelsMiddlewares(stack *middle
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHttpRequestWithFloatLabelsResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpHttpRequestWithFloatLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}

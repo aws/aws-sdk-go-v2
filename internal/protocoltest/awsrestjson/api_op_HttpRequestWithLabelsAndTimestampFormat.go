@@ -102,9 +102,6 @@ func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHttpRequestWithLabelsAndTimestampFormatResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpHttpRequestWithLabelsAndTimestampFormatValidationMiddleware(stack); err != nil {
 		return err
 	}

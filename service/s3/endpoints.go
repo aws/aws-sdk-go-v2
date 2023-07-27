@@ -3527,7 +3527,6 @@ func (r *resolver) ResolveEndpoint(
 				return endpoint, fmt.Errorf("endpoint rule error, %s", "Path-style addressing cannot be used with S3 Accelerate")
 			}
 			return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
-			return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 		}
 		if exprVal := params.UseObjectLambdaEndpoint; exprVal != nil {
 			_UseObjectLambdaEndpoint := *exprVal

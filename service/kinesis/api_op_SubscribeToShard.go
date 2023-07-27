@@ -307,7 +307,7 @@ func (m *opSubscribeToShardResolveEndpointMiddleware) HandleSerialize(ctx contex
 
 	params.ConsumerARN = input.ConsumerARN
 
-	params.OperationType = ptr.String(data)
+	params.OperationType = ptr.String("data")
 
 	var resolvedEndpoint smithyendpoints.Endpoint
 	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)

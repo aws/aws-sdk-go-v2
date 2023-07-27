@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.15
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.14
-	github.com/aws/aws-sdk-go-v2/service/glue v1.57.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.58.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/iam v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.13
@@ -59,11 +59,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.20.8
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.13
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.13
-	github.com/aws/aws-sdk-go-v2/service/polly v1.26.3
+	github.com/aws/aws-sdk-go-v2/service/polly v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/rds v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.29.3
-	github.com/aws/aws-sdk-go-v2/service/route53 v1.28.4
+	github.com/aws/aws-sdk-go-v2/service/route53 v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.15.1
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.37.0

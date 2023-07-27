@@ -258,7 +258,7 @@ func (m *opPutRecordResolveEndpointMiddleware) HandleSerialize(ctx context.Conte
 
 	params.StreamARN = input.StreamARN
 
-	params.OperationType = ptr.String(data)
+	params.OperationType = ptr.String("data")
 
 	var resolvedEndpoint smithyendpoints.Endpoint
 	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)

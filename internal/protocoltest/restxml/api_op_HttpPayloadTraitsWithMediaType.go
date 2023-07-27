@@ -91,9 +91,6 @@ func (c *Client) addOperationHttpPayloadTraitsWithMediaTypeMiddlewares(stack *mi
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHttpPayloadTraitsWithMediaTypeResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadTraitsWithMediaType(options.Region), middleware.Before); err != nil {
 		return err
 	}

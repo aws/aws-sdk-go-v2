@@ -79,9 +79,6 @@ func (c *Client) addOperationMalformedContentTypeWithGenericStringMiddlewares(st
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addMalformedContentTypeWithGenericStringResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedContentTypeWithGenericString(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -82,9 +82,6 @@ func (c *Client) addOperationHttpEnumPayloadMiddlewares(stack *middleware.Stack,
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHttpEnumPayloadResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpEnumPayload(options.Region), middleware.Before); err != nil {
 		return err
 	}

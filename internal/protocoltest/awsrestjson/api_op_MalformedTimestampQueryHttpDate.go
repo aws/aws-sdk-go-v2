@@ -82,9 +82,6 @@ func (c *Client) addOperationMalformedTimestampQueryHttpDateMiddlewares(stack *m
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addMalformedTimestampQueryHttpDateResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpMalformedTimestampQueryHttpDateValidationMiddleware(stack); err != nil {
 		return err
 	}

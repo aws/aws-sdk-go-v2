@@ -81,9 +81,6 @@ func (c *Client) addOperationQueryParamsAsStringListMapMiddlewares(stack *middle
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addQueryParamsAsStringListMapResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryParamsAsStringListMap(options.Region), middleware.Before); err != nil {
 		return err
 	}

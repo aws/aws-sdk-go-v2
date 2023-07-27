@@ -80,9 +80,6 @@ func (c *Client) addOperationFlattenedXmlMapWithXmlNamespaceMiddlewares(stack *m
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addFlattenedXmlMapWithXmlNamespaceResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opFlattenedXmlMapWithXmlNamespace(options.Region), middleware.Before); err != nil {
 		return err
 	}

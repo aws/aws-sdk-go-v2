@@ -85,9 +85,6 @@ func (c *Client) addOperationPostUnionWithJsonNameMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addPostUnionWithJsonNameResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPostUnionWithJsonName(options.Region), middleware.Before); err != nil {
 		return err
 	}

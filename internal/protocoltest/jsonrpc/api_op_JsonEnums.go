@@ -110,9 +110,6 @@ func (c *Client) addOperationJsonEnumsMiddlewares(stack *middleware.Stack, optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addJsonEnumsResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opJsonEnums(options.Region), middleware.Before); err != nil {
 		return err
 	}

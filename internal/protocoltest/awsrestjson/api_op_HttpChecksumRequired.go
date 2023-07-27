@@ -85,9 +85,6 @@ func (c *Client) addOperationHttpChecksumRequiredMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHttpChecksumRequiredResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpChecksumRequired(options.Region), middleware.Before); err != nil {
 		return err
 	}
