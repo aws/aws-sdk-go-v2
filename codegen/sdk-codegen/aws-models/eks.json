@@ -641,8 +641,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -654,8 +654,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -667,8 +667,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -680,8 +680,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -693,8 +693,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -706,8 +706,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -719,8 +719,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -732,8 +732,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -745,8 +745,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -758,8 +758,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -771,8 +771,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -784,8 +784,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -797,8 +797,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -810,8 +810,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -823,8 +823,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -836,8 +836,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -849,8 +849,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -862,8 +862,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -875,8 +875,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -888,8 +888,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -901,8 +901,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -914,8 +914,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -927,8 +927,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -940,8 +940,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -953,8 +953,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -966,8 +966,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -979,8 +979,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -992,8 +992,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1005,8 +1005,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1018,8 +1018,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1031,8 +1031,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1044,8 +1044,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1057,8 +1057,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1070,8 +1070,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1083,8 +1083,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1096,8 +1096,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1109,8 +1109,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1122,8 +1122,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1135,8 +1135,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1148,8 +1148,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1161,8 +1172,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1174,8 +1196,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1187,8 +1220,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1200,8 +1244,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1213,8 +1257,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1225,8 +1269,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1237,9 +1281,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1655,6 +1705,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#AssociateEncryptionConfigResponse": {
@@ -1663,6 +1716,9 @@
                 "update": {
                     "target": "com.amazonaws.eks#Update"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#AssociateIdentityProviderConfig": {
@@ -1733,6 +1789,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#AssociateIdentityProviderConfigResponse": {
@@ -1747,6 +1806,9 @@
                         "smithy.api#documentation": "<p>The tags for the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#AutoScalingGroup": {
@@ -2399,6 +2461,9 @@
                         "smithy.api#documentation": "<p>The set of configuration values for the add-on that's created. The values that you\n            provide are validated against the schema in <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html\">\n               <code>DescribeAddonConfiguration</code>\n            </a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#CreateAddonResponse": {
@@ -2407,6 +2472,9 @@
                 "addon": {
                     "target": "com.amazonaws.eks#Addon"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#CreateCluster": {
@@ -2516,6 +2584,9 @@
                         "smithy.api#documentation": "<p>An object representing the configuration of your local Amazon EKS cluster on\n            an Amazon Web Services Outpost. Before creating a local cluster on an Outpost, review\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-overview.html\">Local clusters\n                for Amazon EKS on Amazon Web Services Outposts</a> in the\n            <i>Amazon EKS User Guide</i>. This object isn't available for creating Amazon EKS clusters\n            on the Amazon Web Services cloud.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#CreateClusterResponse": {
@@ -2527,6 +2598,9 @@
                         "smithy.api#documentation": "<p>The full description of your new cluster.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#CreateFargateProfile": {
@@ -2616,6 +2690,9 @@
                         "smithy.api#documentation": "<p>The metadata to apply to the Fargate profile to assist with\n            categorization and organization. Each tag consists of a key and an optional value. You\n            define both. Fargate profile tags do not propagate to any other resources\n            associated with the Fargate profile, such as the pods that are scheduled\n            with it.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#CreateFargateProfileResponse": {
@@ -2627,6 +2704,9 @@
                         "smithy.api#documentation": "<p>The full description of your new Fargate profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#CreateNodegroup": {
@@ -2786,6 +2866,9 @@
                         "smithy.api#documentation": "<p>The AMI version of the Amazon EKS optimized AMI to use with your node group.\n            By default, the latest available AMI version for the node group's current Kubernetes version\n            is used. For information about Linux versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux AMI versions</a> in the <i>Amazon EKS User Guide</i>. Amazon EKS managed node groups support the November 2022 and later releases of the\n            Windows AMIs. For information about Windows versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html\">Amazon EKS optimized Windows AMI versions</a> in the\n            <i>Amazon EKS User Guide</i>.</p>\n         <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify \n                <code>releaseVersion</code>, or the node group  deployment will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#CreateNodegroupResponse": {
@@ -2797,6 +2880,9 @@
                         "smithy.api#documentation": "<p>The full description of your new node group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DeleteAddon": {
@@ -2860,6 +2946,9 @@
                         "smithy.api#httpQuery": "preserve"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DeleteAddonResponse": {
@@ -2868,6 +2957,9 @@
                 "addon": {
                     "target": "com.amazonaws.eks#Addon"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DeleteCluster": {
@@ -2915,6 +3007,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DeleteClusterResponse": {
@@ -2926,6 +3021,9 @@
                         "smithy.api#documentation": "<p>The full description of the cluster to delete.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DeleteFargateProfile": {
@@ -2978,6 +3076,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DeleteFargateProfileResponse": {
@@ -2989,6 +3090,9 @@
                         "smithy.api#documentation": "<p>The deleted Fargate profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DeleteNodegroup": {
@@ -3047,6 +3151,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DeleteNodegroupResponse": {
@@ -3058,6 +3165,9 @@
                         "smithy.api#documentation": "<p>The full description of your deleted node group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DeregisterCluster": {
@@ -3108,6 +3218,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DeregisterClusterResponse": {
@@ -3116,6 +3229,9 @@
                 "cluster": {
                     "target": "com.amazonaws.eks#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DescribeAddon": {
@@ -3257,6 +3373,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DescribeAddonConfigurationResponse": {
@@ -3280,6 +3399,9 @@
                         "smithy.api#documentation": "<p>A JSON schema that's used to validate the configuration values that you provide when\n            an addon is created or updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DescribeAddonRequest": {
@@ -3301,6 +3423,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DescribeAddonResponse": {
@@ -3309,6 +3434,9 @@
                 "addon": {
                     "target": "com.amazonaws.eks#Addon"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DescribeAddonVersions": {
@@ -3397,6 +3525,9 @@
                         "smithy.api#httpQuery": "owners"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DescribeAddonVersionsRequestMaxResults": {
@@ -3423,6 +3554,9 @@
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>DescribeAddonVersionsResponse</code> where <code>maxResults</code> was used\n            and the results exceeded the value of that parameter. Pagination continues from the end\n            of the previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DescribeCluster": {
@@ -3545,6 +3679,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DescribeClusterResponse": {
@@ -3556,6 +3693,9 @@
                         "smithy.api#documentation": "<p>The full description of your specified cluster.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DescribeFargateProfile": {
@@ -3656,6 +3796,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DescribeFargateProfileResponse": {
@@ -3667,6 +3810,9 @@
                         "smithy.api#documentation": "<p>The full description of your Fargate profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DescribeIdentityProviderConfig": {
@@ -3721,6 +3867,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DescribeIdentityProviderConfigResponse": {
@@ -3732,6 +3881,9 @@
                         "smithy.api#documentation": "<p>The object that represents an OpenID Connect (OIDC) identity provider\n            configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DescribeNodegroup": {
@@ -3835,6 +3987,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DescribeNodegroupResponse": {
@@ -3846,6 +4001,9 @@
                         "smithy.api#documentation": "<p>The full description of your node group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DescribeUpdate": {
@@ -3912,6 +4070,9 @@
                         "smithy.api#httpQuery": "addonName"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DescribeUpdateResponse": {
@@ -3923,6 +4084,9 @@
                         "smithy.api#documentation": "<p>The full description of the specified update.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#DisassociateIdentityProviderConfig": {
@@ -3987,6 +4151,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#DisassociateIdentityProviderConfigResponse": {
@@ -3995,6 +4162,9 @@
                 "update": {
                     "target": "com.amazonaws.eks#Update"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#EncryptionConfig": {
@@ -4619,6 +4789,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#ListAddonsRequestMaxResults": {
@@ -4645,6 +4818,9 @@
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListAddonsResponse</code> where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#ListClusters": {
@@ -4708,6 +4884,9 @@
                         "smithy.api#httpQuery": "include"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#ListClustersRequestMaxResults": {
@@ -4734,6 +4913,9 @@
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListClusters</code>\n            request. When the results of a <code>ListClusters</code> request exceed\n                <code>maxResults</code>, you can use this value to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#ListFargateProfiles": {
@@ -4798,6 +4980,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#ListFargateProfilesResponse": {
@@ -4815,6 +5000,9 @@
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>ListFargateProfiles</code> request. When the results of a\n                <code>ListFargateProfiles</code> request exceed <code>maxResults</code>, you can use\n            this value to retrieve the next page of results. This value is <code>null</code> when\n            there are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#ListIdentityProviderConfigs": {
@@ -4882,6 +5070,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#ListIdentityProviderConfigsRequestMaxResults": {
@@ -4908,6 +5099,9 @@
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListIdentityProviderConfigsResponse</code> where <code>maxResults</code> was\n            used and the results exceeded the value of that parameter. Pagination continues from the\n            end of the previous results that returned the <code>nextToken</code> value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#ListNodegroups": {
@@ -4975,6 +5169,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#ListNodegroupsRequestMaxResults": {
@@ -5001,6 +5198,9 @@
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListNodegroups</code>\n            request. When the results of a <code>ListNodegroups</code> request exceed\n                <code>maxResults</code>, you can use this value to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#ListTagsForResource": {
@@ -5039,6 +5239,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#ListTagsForResourceResponse": {
@@ -5050,6 +5253,9 @@
                         "smithy.api#documentation": "<p>The tags for the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#ListUpdates": {
@@ -5128,6 +5334,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#ListUpdatesRequestMaxResults": {
@@ -5154,6 +5363,9 @@
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListUpdates</code>\n            request. When the results of a <code>ListUpdates</code> request exceed\n                <code>maxResults</code>, you can use this value to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#LogSetup": {
@@ -5474,6 +5686,12 @@
                         "smithy.api#enumValue": "IamInstanceProfileNotFound"
                     }
                 },
+                "EC2_SUBNET_MISSING_IPV6_ASSIGNMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2SubnetMissingIpv6Assignment"
+                    }
+                },
                 "IAM_LIMIT_EXCEEDED": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5528,10 +5746,88 @@
                         "smithy.api#enumValue": "ClusterUnreachable"
                     }
                 },
-                "EC2_SUBNET_MISSING_IPV6_ASSIGNMENT": {
+                "AMI_ID_NOT_FOUND": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "Ec2SubnetMissingIpv6Assignment"
+                        "smithy.api#enumValue": "AmiIdNotFound"
+                    }
+                },
+                "AUTO_SCALING_GROUP_OPT_IN_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoScalingGroupOptInRequired"
+                    }
+                },
+                "AUTO_SCALING_GROUP_RATE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoScalingGroupRateLimitExceeded"
+                    }
+                },
+                "EC2_LAUNCH_TEMPLATE_DELETION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2LaunchTemplateDeletionFailure"
+                    }
+                },
+                "EC2_LAUNCH_TEMPLATE_INVALID_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2LaunchTemplateInvalidConfiguration"
+                    }
+                },
+                "EC2_LAUNCH_TEMPLATE_MAX_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2LaunchTemplateMaxLimitExceeded"
+                    }
+                },
+                "EC2_SUBNET_LIST_TOO_LONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2SubnetListTooLong"
+                    }
+                },
+                "IAM_THROTTLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IamThrottling"
+                    }
+                },
+                "NODE_TERMINATION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodeTerminationFailure"
+                    }
+                },
+                "POD_EVICTION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PodEvictionFailure"
+                    }
+                },
+                "SOURCE_EC2_LAUNCH_TEMPLATE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SourceEc2LaunchTemplateNotFound"
+                    }
+                },
+                "LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LimitExceeded"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unknown"
+                    }
+                },
+                "AUTO_SCALING_GROUP_INSTANCE_REFRESH_ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoScalingGroupInstanceRefreshActive"
                     }
                 }
             }
@@ -5975,6 +6271,9 @@
                         "smithy.api#documentation": "<p>The metadata that you apply to the cluster to assist with categorization and\n            organization. Each tag consists of a key and an optional value, both of which you\n            define. Cluster tags do not propagate to any other resources associated with the\n            cluster.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#RegisterClusterResponse": {
@@ -5983,6 +6282,9 @@
                 "cluster": {
                     "target": "com.amazonaws.eks#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#RemoteAccessConfig": {
@@ -6266,11 +6568,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.eks#TagValue": {
             "type": "string",
@@ -6408,11 +6716,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.eks#Update": {
             "type": "structure",
@@ -6545,6 +6859,9 @@
                         "smithy.api#documentation": "<p>The set of configuration values for the add-on that's created. The values that you\n            provide are validated against the schema in <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html\">DescribeAddonConfiguration</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#UpdateAddonResponse": {
@@ -6553,6 +6870,9 @@
                 "update": {
                     "target": "com.amazonaws.eks#Update"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#UpdateClusterConfig": {
@@ -6619,6 +6939,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#UpdateClusterConfigResponse": {
@@ -6627,6 +6950,9 @@
                 "update": {
                     "target": "com.amazonaws.eks#Update"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#UpdateClusterVersion": {
@@ -6691,6 +7017,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#UpdateClusterVersionResponse": {
@@ -6702,6 +7031,9 @@
                         "smithy.api#documentation": "<p>The full description of the specified update</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#UpdateLabelsPayload": {
@@ -6811,6 +7143,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#UpdateNodegroupConfigResponse": {
@@ -6819,6 +7154,9 @@
                 "update": {
                     "target": "com.amazonaws.eks#Update"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#UpdateNodegroupVersion": {
@@ -6909,6 +7247,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.eks#UpdateNodegroupVersionResponse": {
@@ -6917,6 +7258,9 @@
                 "update": {
                     "target": "com.amazonaws.eks#Update"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.eks#UpdateParam": {

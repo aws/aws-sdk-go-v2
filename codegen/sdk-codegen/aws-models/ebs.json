@@ -50,18 +50,20 @@
             }
         },
         "com.amazonaws.ebs#AccessDeniedExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNAUTHORIZED_ACCOUNT",
-                        "name": "UNAUTHORIZED_ACCOUNT"
-                    },
-                    {
-                        "value": "DEPENDENCY_ACCESS_DENIED",
-                        "name": "DEPENDENCY_ACCESS_DENIED"
+            "type": "enum",
+            "members": {
+                "UNAUTHORIZED_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNAUTHORIZED_ACCOUNT"
                     }
-                ]
+                },
+                "DEPENDENCY_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPENDENCY_ACCESS_DENIED"
+                    }
+                }
             }
         },
         "com.amazonaws.ebs#Block": {
@@ -176,14 +178,16 @@
             }
         },
         "com.amazonaws.ebs#ChecksumAggregationMethod": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LINEAR",
-                        "name": "CHECKSUM_AGGREGATION_LINEAR"
+            "type": "enum",
+            "members": {
+                "CHECKSUM_AGGREGATION_LINEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINEAR"
                     }
-                ],
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 32
@@ -192,14 +196,16 @@
             }
         },
         "com.amazonaws.ebs#ChecksumAlgorithm": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SHA256",
-                        "name": "CHECKSUM_ALGORITHM_SHA256"
+            "type": "enum",
+            "members": {
+                "CHECKSUM_ALGORITHM_SHA256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHA256"
                     }
-                ],
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 32
@@ -236,7 +242,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Seals and completes the snapshot after all of the required blocks of data have been\n            written to it. Completing the snapshot changes the status to <code>completed</code>. You\n            cannot write new blocks to a snapshot after it has been completed.</p>",
+                "smithy.api#documentation": "<p>Seals and completes the snapshot after all of the required blocks of data have been\n            written to it. Completing the snapshot changes the status to <code>completed</code>. You\n            cannot write new blocks to a snapshot after it has been completed.</p>\n         <note>\n            <p>You should always retry requests that receive server (<code>5xx</code>) \n    error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> \n    client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the \n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/snapshots/completion/{SnapshotId}",
@@ -266,7 +272,7 @@
                 "Checksum": {
                     "target": "com.amazonaws.ebs#Checksum",
                     "traits": {
-                        "smithy.api#documentation": "<p>An aggregated Base-64 SHA256 checksum based on the checksums of each written\n            block.</p>\n        <p>To generate the aggregated checksum using the linear aggregation method, arrange the\n            checksums for each written block in ascending order of their block index, concatenate\n            them to form a single string, and then generate the checksum on the entire string using\n            the SHA256 algorithm.</p>",
+                        "smithy.api#documentation": "<p>An aggregated Base-64 SHA256 checksum based on the checksums of each written\n            block.</p>\n         <p>To generate the aggregated checksum using the linear aggregation method, arrange the\n            checksums for each written block in ascending order of their block index, concatenate\n            them to form a single string, and then generate the checksum on the entire string using\n            the SHA256 algorithm.</p>",
                         "smithy.api#httpHeader": "x-amz-Checksum"
                     }
                 },
@@ -284,6 +290,9 @@
                         "smithy.api#httpHeader": "x-amz-Checksum-Aggregation-Method"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ebs#CompleteSnapshotResponse": {
@@ -295,6 +304,9 @@
                         "smithy.api#documentation": "<p>The status of the snapshot.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ebs#ConcurrentLimitExceededException": {
@@ -371,7 +383,7 @@
                     "name": "ebs"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>You can use the Amazon Elastic Block Store (Amazon EBS) direct APIs to create Amazon EBS snapshots, write data directly to \n    \t\tyour snapshots, read data on your snapshots, and identify the differences or changes between \n    \t\ttwo snapshots. If you’re an independent software vendor (ISV) who offers backup services for \n    \t\tAmazon EBS, the EBS direct APIs make it more efficient and cost-effective to track incremental changes on \n    \t\tyour Amazon EBS volumes through snapshots. This can be done without having to create new volumes \n    \t\tfrom snapshots, and then use Amazon Elastic Compute Cloud (Amazon EC2) instances to compare the differences.</p>\n    \t\t\n    \t    <p>You can create incremental snapshots directly from data on-premises into volumes and the \n    \t\tcloud to use for quick disaster recovery. With the ability to write and read snapshots, you can \n    \t\twrite your on-premises data to an snapshot during a disaster. Then after recovery, you can \n    \t\trestore it back to Amazon Web Services or on-premises from the snapshot. You no longer need to build and \n    \t\tmaintain complex mechanisms to copy data to and from Amazon EBS.</p>\n\n\n        <p>This API reference provides detailed information about the actions, data types,\n            parameters, and errors of the EBS direct APIs. For more information about the elements that\n            make up the EBS direct APIs, and examples of how to use them effectively, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html\">Accessing the Contents of an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User\n                Guide</i>. For more information about the supported Amazon Web Services Regions, endpoints,\n            and service quotas for the EBS direct APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ebs-service.html\">Amazon Elastic Block Store Endpoints and Quotas</a> in\n            the <i>Amazon Web Services General Reference</i>.</p>",
+                "smithy.api#documentation": "<p>You can use the Amazon Elastic Block Store (Amazon EBS) direct APIs to create Amazon EBS snapshots, write data directly to \n    \t\tyour snapshots, read data on your snapshots, and identify the differences or changes between \n    \t\ttwo snapshots. If you’re an independent software vendor (ISV) who offers backup services for \n    \t\tAmazon EBS, the EBS direct APIs make it more efficient and cost-effective to track incremental changes on \n    \t\tyour Amazon EBS volumes through snapshots. This can be done without having to create new volumes \n    \t\tfrom snapshots, and then use Amazon Elastic Compute Cloud (Amazon EC2) instances to compare the differences.</p>\n         <p>You can create incremental snapshots directly from data on-premises into volumes and the \n    \t\tcloud to use for quick disaster recovery. With the ability to write and read snapshots, you can \n    \t\twrite your on-premises data to an snapshot during a disaster. Then after recovery, you can \n    \t\trestore it back to Amazon Web Services or on-premises from the snapshot. You no longer need to build and \n    \t\tmaintain complex mechanisms to copy data to and from Amazon EBS.</p>\n         <p>This API reference provides detailed information about the actions, data types,\n            parameters, and errors of the EBS direct APIs. For more information about the elements that\n            make up the EBS direct APIs, and examples of how to use them effectively, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html\">Accessing the Contents of an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User\n                Guide</i>. For more information about the supported Amazon Web Services Regions, endpoints,\n            and service quotas for the EBS direct APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ebs-service.html\">Amazon Elastic Block Store Endpoints and Quotas</a> in\n            the <i>Amazon Web Services General Reference</i>.</p>",
                 "smithy.api#title": "Amazon Elastic Block Store",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -734,8 +746,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -747,8 +759,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -760,8 +772,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -773,8 +785,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -786,8 +798,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -799,8 +811,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -812,8 +824,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -825,8 +837,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -838,8 +850,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -851,8 +863,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -864,8 +876,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -877,8 +889,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -890,8 +902,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -903,8 +915,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -916,8 +928,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -929,8 +941,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -942,8 +954,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -955,8 +967,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -968,8 +980,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -981,8 +993,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -994,8 +1006,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1007,8 +1019,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1020,8 +1032,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1033,8 +1045,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1046,8 +1058,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1059,8 +1071,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1072,8 +1084,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1085,8 +1097,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1098,8 +1110,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1111,8 +1123,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1124,8 +1136,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1137,8 +1149,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1150,8 +1162,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1163,8 +1175,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1176,8 +1188,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1189,8 +1201,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1202,8 +1214,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1215,8 +1227,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1228,8 +1240,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1241,8 +1253,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1254,8 +1277,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1267,8 +1301,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1280,8 +1325,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1293,8 +1349,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1306,8 +1362,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1318,8 +1374,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1330,9 +1386,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1378,7 +1440,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the data in a block in an Amazon Elastic Block Store snapshot.</p>",
+                "smithy.api#documentation": "<p>Returns the data in a block in an Amazon Elastic Block Store snapshot.</p>\n         <note>\n            <p>You should always retry requests that receive server (<code>5xx</code>) \n    error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> \n    client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the \n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/snapshots/{SnapshotId}/blocks/{BlockIndex}",
@@ -1392,7 +1454,7 @@
                 "SnapshotId": {
                     "target": "com.amazonaws.ebs#SnapshotId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the snapshot containing the block from which to get data.</p>\n        <important>\n            <p>If the specified snapshot is encrypted, you must have permission to use the \n                KMS key that was used to encrypt the snapshot. For more information, see \n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n        </important>",
+                        "smithy.api#documentation": "<p>The ID of the snapshot containing the block from which to get data.</p>\n         <important>\n            <p>If the specified snapshot is encrypted, you must have permission to use the \n                KMS key that was used to encrypt the snapshot. For more information, see \n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n         </important>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1413,6 +1475,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ebs#GetSnapshotBlockResponse": {
@@ -1447,6 +1512,9 @@
                         "smithy.api#httpHeader": "x-amz-Checksum-Algorithm"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ebs#IdempotencyToken": {
@@ -1467,7 +1535,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An internal error has occurred.</p>",
+                "smithy.api#documentation": "<p>An internal error has occurred. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a>.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -1512,7 +1580,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the blocks that are different between two\n            Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.</p>",
+                "smithy.api#documentation": "<p>Returns information about the blocks that are different between two\n            Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.</p>\n         <note>\n            <p>You should always retry requests that receive server (<code>5xx</code>) \n    error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> \n    client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the \n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/snapshots/{SecondSnapshotId}/changedblocks",
@@ -1531,14 +1599,14 @@
                 "FirstSnapshotId": {
                     "target": "com.amazonaws.ebs#SnapshotId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the first snapshot to use for the comparison.</p>\n        <important>\n            <p>The <code>FirstSnapshotID</code> parameter must be specified with a\n                    <code>SecondSnapshotId</code> parameter; otherwise, an error occurs.</p>\n        </important>",
+                        "smithy.api#documentation": "<p>The ID of the first snapshot to use for the comparison.</p>\n         <important>\n            <p>The <code>FirstSnapshotID</code> parameter must be specified with a\n                    <code>SecondSnapshotId</code> parameter; otherwise, an error occurs.</p>\n         </important>",
                         "smithy.api#httpQuery": "firstSnapshotId"
                     }
                 },
                 "SecondSnapshotId": {
                     "target": "com.amazonaws.ebs#SnapshotId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the second snapshot to use for the comparison.</p>\n        <important>\n            <p>The <code>SecondSnapshotId</code> parameter must be specified with a\n                    <code>FirstSnapshotID</code> parameter; otherwise, an error occurs.</p>\n        </important>",
+                        "smithy.api#documentation": "<p>The ID of the second snapshot to use for the comparison.</p>\n         <important>\n            <p>The <code>SecondSnapshotId</code> parameter must be specified with a\n                    <code>FirstSnapshotID</code> parameter; otherwise, an error occurs.</p>\n         </important>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1546,24 +1614,27 @@
                 "NextToken": {
                     "target": "com.amazonaws.ebs#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>\n        <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>\n         <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
                         "smithy.api#httpQuery": "pageToken"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.ebs#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of blocks to be returned by the request.</p>\n        <p>Even if additional blocks can be retrieved from the snapshot, the request can \n            return less blocks than <b>MaxResults</b> or an empty \n            array of blocks.</p>\n        <p>To retrieve the next set of blocks from the snapshot, make another request with \n            the returned <b>NextToken</b> value. The value of \n            <b>NextToken</b> is <code>null</code> when there are no \n            more blocks to return.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of blocks to be returned by the request.</p>\n         <p>Even if additional blocks can be retrieved from the snapshot, the request can \n            return less blocks than <b>MaxResults</b> or an empty \n            array of blocks.</p>\n         <p>To retrieve the next set of blocks from the snapshot, make another request with \n            the returned <b>NextToken</b> value. The value of \n            <b>NextToken</b> is <code>null</code> when there are no \n            more blocks to return.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "StartingBlockIndex": {
                     "target": "com.amazonaws.ebs#BlockIndex",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block index from which the comparison should start.</p>\n        <p>The list in the response will start from this block index or the next valid block\n            index in the snapshots.</p>\n        <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
+                        "smithy.api#documentation": "<p>The block index from which the comparison should start.</p>\n         <p>The list in the response will start from this block index or the next valid block\n            index in the snapshots.</p>\n         <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
                         "smithy.api#httpQuery": "startingBlockIndex"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ebs#ListChangedBlocksResponse": {
@@ -1599,6 +1670,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there\n            are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ebs#ListSnapshotBlocks": {
@@ -1630,7 +1704,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the blocks in an Amazon Elastic Block Store snapshot.</p>",
+                "smithy.api#documentation": "<p>Returns information about the blocks in an Amazon Elastic Block Store snapshot.</p>\n         <note>\n            <p>You should always retry requests that receive server (<code>5xx</code>) \n    error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> \n    client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the \n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/snapshots/{SnapshotId}/blocks",
@@ -1657,24 +1731,27 @@
                 "NextToken": {
                     "target": "com.amazonaws.ebs#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>\n        <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>\n         <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
                         "smithy.api#httpQuery": "pageToken"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.ebs#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of blocks to be returned by the request.</p>\n        <p>Even if additional blocks can be retrieved from the snapshot, the request can \n            return less blocks than <b>MaxResults</b> or an empty \n            array of blocks.</p>\n        <p>To retrieve the next set of blocks from the snapshot, make another request with \n            the returned <b>NextToken</b> value. The value of \n            <b>NextToken</b> is <code>null</code> when there are no \n            more blocks to return.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of blocks to be returned by the request.</p>\n         <p>Even if additional blocks can be retrieved from the snapshot, the request can \n            return less blocks than <b>MaxResults</b> or an empty \n            array of blocks.</p>\n         <p>To retrieve the next set of blocks from the snapshot, make another request with \n            the returned <b>NextToken</b> value. The value of \n            <b>NextToken</b> is <code>null</code> when there are no \n            more blocks to return.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "StartingBlockIndex": {
                     "target": "com.amazonaws.ebs#BlockIndex",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block index from which the list should start. The list in the response will start\n            from this block index or the next valid block index in the snapshot.</p>\n        <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
+                        "smithy.api#documentation": "<p>The block index from which the list should start. The list in the response will start\n            from this block index or the next valid block index in the snapshot.</p>\n         <p>If you specify <b>NextToken</b>, then \n            <b>StartingBlockIndex</b> is ignored.</p>",
                         "smithy.api#httpQuery": "startingBlockIndex"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ebs#ListSnapshotBlocksResponse": {
@@ -1710,6 +1787,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there\n            are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ebs#MaxResults": {
@@ -1783,7 +1863,7 @@
                 "smithy.api#auth": [
                     "aws.auth#sigv4"
                 ],
-                "smithy.api#documentation": "<p>Writes a block of data to a snapshot. If the specified block contains\n            data, the existing data is overwritten. The target snapshot must be in the\n                <code>pending</code> state.</p>  \t\n    \t    <p>Data written to a snapshot must be aligned with 512-KiB sectors.</p>",
+                "smithy.api#documentation": "<p>Writes a block of data to a snapshot. If the specified block contains\n            data, the existing data is overwritten. The target snapshot must be in the\n                <code>pending</code> state.</p>\n         <p>Data written to a snapshot must be aligned with 512-KiB sectors.</p>\n         <note>\n            <p>You should always retry requests that receive server (<code>5xx</code>) \n    error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> \n    client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the \n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/snapshots/{SnapshotId}/blocks/{BlockIndex}",
@@ -1797,7 +1877,7 @@
                 "SnapshotId": {
                     "target": "com.amazonaws.ebs#SnapshotId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>\n        <important>\n            <p>If the specified snapshot is encrypted, you must have permission to use \n                the KMS key that was used to encrypt the snapshot. For more information, \n                see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>..</p>\n        </important>",
+                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>\n         <important>\n            <p>If the specified snapshot is encrypted, you must have permission to use \n                the KMS key that was used to encrypt the snapshot. For more information, \n                see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>..</p>\n         </important>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1813,7 +1893,7 @@
                 "BlockData": {
                     "target": "com.amazonaws.ebs#BlockData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data to write to the block.</p>\n        <p>The block data is not signed as part of the Signature Version 4 signing process. As a\n            result, you must generate and provide a Base64-encoded SHA256 checksum for the block\n            data using the <b>x-amz-Checksum</b> header. Also, you \n        \tmust specify the checksum algorithm using the <b>x-amz-Checksum-Algorithm</b> \n        \theader. The checksum that you provide is part of the Signature Version 4 signing process. \n        \tIt is validated against a checksum generated by Amazon EBS to ensure the validity and authenticity \n        \tof the data. If the checksums do not correspond, the request fails. For more information, \n        \tsee <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-checksums\">\n                Using checksums with the EBS direct APIs</a> in the <i>Amazon Elastic Compute Cloud User\n                Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The data to write to the block.</p>\n         <p>The block data is not signed as part of the Signature Version 4 signing process. As a\n            result, you must generate and provide a Base64-encoded SHA256 checksum for the block\n            data using the <b>x-amz-Checksum</b> header. Also, you \n        \tmust specify the checksum algorithm using the <b>x-amz-Checksum-Algorithm</b> \n        \theader. The checksum that you provide is part of the Signature Version 4 signing process. \n        \tIt is validated against a checksum generated by Amazon EBS to ensure the validity and authenticity \n        \tof the data. If the checksums do not correspond, the request fails. For more information, \n        \tsee <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-checksums\">\n                Using checksums with the EBS direct APIs</a> in the <i>Amazon Elastic Compute Cloud User\n                Guide</i>.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
@@ -1821,7 +1901,7 @@
                 "DataLength": {
                     "target": "com.amazonaws.ebs#DataLength",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the data to write to the block, in bytes. Currently, the only supported\n            size is <code>524288</code> bytes.</p>\n        <p>Valid values: <code>524288</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The size of the data to write to the block, in bytes. Currently, the only supported\n            size is <code>524288</code> bytes.</p>\n         <p>Valid values: <code>524288</code>\n         </p>",
                         "smithy.api#httpHeader": "x-amz-Data-Length",
                         "smithy.api#required": {}
                     }
@@ -1849,6 +1929,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ebs#PutSnapshotBlockResponse": {
@@ -1868,6 +1951,9 @@
                         "smithy.api#httpHeader": "x-amz-Checksum-Algorithm"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ebs#RequestThrottledException": {
@@ -1884,28 +1970,32 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The number of API requests has exceed the maximum allowed API request throttling\n            limit.</p>",
+                "smithy.api#documentation": "<p>The number of API requests has exceeded the maximum allowed API request \n            throttling limit for the snapshot. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.ebs#RequestThrottledExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCOUNT_THROTTLED",
-                        "name": "ACCOUNT_THROTTLED"
-                    },
-                    {
-                        "value": "DEPENDENCY_REQUEST_THROTTLED",
-                        "name": "DEPENDENCY_REQUEST_THROTTLED"
-                    },
-                    {
-                        "value": "RESOURCE_LEVEL_THROTTLE",
-                        "name": "RESOURCE_LEVEL_THROTTLE"
+            "type": "enum",
+            "members": {
+                "ACCOUNT_THROTTLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_THROTTLED"
                     }
-                ]
+                },
+                "DEPENDENCY_REQUEST_THROTTLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPENDENCY_REQUEST_THROTTLED"
+                    }
+                },
+                "RESOURCE_LEVEL_THROTTLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_LEVEL_THROTTLE"
+                    }
+                }
             }
         },
         "com.amazonaws.ebs#ResourceNotFoundException": {
@@ -1928,18 +2018,55 @@
             }
         },
         "com.amazonaws.ebs#ResourceNotFoundExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SNAPSHOT_NOT_FOUND",
-                        "name": "SNAPSHOT_NOT_FOUND"
-                    },
-                    {
-                        "value": "DEPENDENCY_RESOURCE_NOT_FOUND",
-                        "name": "DEPENDENCY_RESOURCE_NOT_FOUND"
+            "type": "enum",
+            "members": {
+                "SNAPSHOT_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNAPSHOT_NOT_FOUND"
                     }
-                ]
+                },
+                "GRANT_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_NOT_FOUND"
+                    }
+                },
+                "DEPENDENCY_RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPENDENCY_RESOURCE_NOT_FOUND"
+                    }
+                },
+                "IMAGE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_NOT_FOUND"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ebs#SSEType": {
+            "type": "enum",
+            "members": {
+                "SSE_EBS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sse-ebs"
+                    }
+                },
+                "SSE_KMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sse-kms"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                }
             }
         },
         "com.amazonaws.ebs#ServiceQuotaExceededException": {
@@ -1962,14 +2089,14 @@
             }
         },
         "com.amazonaws.ebs#ServiceQuotaExceededExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DEPENDENCY_SERVICE_QUOTA_EXCEEDED",
-                        "name": "DEPENDENCY_SERVICE_QUOTA_EXCEEDED"
+            "type": "enum",
+            "members": {
+                "DEPENDENCY_SERVICE_QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPENDENCY_SERVICE_QUOTA_EXCEEDED"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ebs#SnapshotId": {
@@ -2017,7 +2144,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon EBS snapshot. The new snapshot enters the <code>pending</code> state\n            after the request completes. </p>\n        <p>After creating the snapshot, use <a href=\"https://docs.aws.amazon.com/ebs/latest/APIReference/API_PutSnapshotBlock.html\"> PutSnapshotBlock</a> to\n            write blocks of data to the snapshot.</p>",
+                "smithy.api#documentation": "<p>Creates a new Amazon EBS snapshot. The new snapshot enters the <code>pending</code> state\n            after the request completes. </p>\n         <p>After creating the snapshot, use <a href=\"https://docs.aws.amazon.com/ebs/latest/APIReference/API_PutSnapshotBlock.html\"> PutSnapshotBlock</a> to\n            write blocks of data to the snapshot.</p>\n         <note>\n            <p>You should always retry requests that receive server (<code>5xx</code>) \n    error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> \n    client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the \n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/snapshots",
@@ -2038,7 +2165,7 @@
                 "ParentSnapshotId": {
                     "target": "com.amazonaws.ebs#SnapshotId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the parent snapshot. If there is no parent snapshot, or if you are creating\n            the first snapshot for an on-premises volume, omit this parameter.</p>\n        <p>You can't specify <b>ParentSnapshotId</b> and \n            <b>Encrypted</b> in the same request. If you specify both \n            parameters, the request fails with <code>ValidationException</code>.</p>\n        \n        \n        \n        <p>The encryption status of the snapshot depends on the values that you specify for \n            <b>Encrypted</b>, <b>KmsKeyArn</b>, \n            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account \n            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">\n                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        \n        <important>\n            <p>If you specify an encrypted parent snapshot, you must have permission to use the \n                KMS key that was used to encrypt the parent snapshot. For more information, see \n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">\n                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n        </important>"
+                        "smithy.api#documentation": "<p>The ID of the parent snapshot. If there is no parent snapshot, or if you are creating\n            the first snapshot for an on-premises volume, omit this parameter.</p>\n         <p>You can't specify <b>ParentSnapshotId</b> and \n            <b>Encrypted</b> in the same request. If you specify both \n            parameters, the request fails with <code>ValidationException</code>.</p>\n         <p>The encryption status of the snapshot depends on the values that you specify for \n            <b>Encrypted</b>, <b>KmsKeyArn</b>, \n            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account \n            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">\n                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <important>\n            <p>If you specify an encrypted parent snapshot, you must have permission to use the \n                KMS key that was used to encrypt the parent snapshot. For more information, see \n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">\n                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n         </important>"
                     }
                 },
                 "Tags": {
@@ -2056,28 +2183,31 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ebs#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. Idempotency ensures that an API request completes only once. With an idempotent \n            request, if the original request completes successfully. The subsequent retries with the same \n            client token return the result from the original successful request and they have no additional \n            effect.</p>\n        <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html\">\n    \t\tIdempotency for StartSnapshot API</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. Idempotency ensures that an API request completes only once. With an idempotent \n            request, if the original request completes successfully. The subsequent retries with the same \n            client token return the result from the original successful request and they have no additional \n            effect.</p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html\">\n    \t\tIdempotency for StartSnapshot API</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "Encrypted": {
                     "target": "com.amazonaws.ebs#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to encrypt the snapshot.</p> \n        \n        <p>You can't specify <b>Encrypted</b> and <b>\n            ParentSnapshotId</b> in the same request. If you specify both parameters, the \n            request fails with <code>ValidationException</code>.</p>\n        \n        <p>The encryption status of the snapshot depends on the values that you specify for \n            <b>Encrypted</b>, <b>KmsKeyArn</b>, \n            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account \n            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">\n                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n            Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        \n        \n            \n        <important>\n            <p>To create an encrypted snapshot, you must have permission to use the KMS key. For \n                more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">\n                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n        </important>"
+                        "smithy.api#documentation": "<p>Indicates whether to encrypt the snapshot.</p>\n         <p>You can't specify <b>Encrypted</b> and <b>\n            ParentSnapshotId</b> in the same request. If you specify both parameters, the \n            request fails with <code>ValidationException</code>.</p>\n         <p>The encryption status of the snapshot depends on the values that you specify for \n            <b>Encrypted</b>, <b>KmsKeyArn</b>, \n            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account \n            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">\n                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n            Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <important>\n            <p>To create an encrypted snapshot, you must have permission to use the KMS key. For \n                more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">\n                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n         </important>"
                     }
                 },
                 "KmsKeyArn": {
                     "target": "com.amazonaws.ebs#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to be used to encrypt the snapshot.</p> \n        \n        <p>The encryption status of the snapshot depends on the values that you specify for \n            <b>Encrypted</b>, <b>KmsKeyArn</b>, \n            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account \n            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">\n                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        \n        \n        <important>\n            <p>To create an encrypted snapshot, you must have permission to use the KMS key. For \n                more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">\n                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n        </important>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to be used to encrypt the snapshot.</p>\n         <p>The encryption status of the snapshot depends on the values that you specify for \n            <b>Encrypted</b>, <b>KmsKeyArn</b>, \n            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account \n            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">\n                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">\n                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <important>\n            <p>To create an encrypted snapshot, you must have permission to use the KMS key. For \n                more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">\n                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User \n                        Guide</i>.</p>\n         </important>"
                     }
                 },
                 "Timeout": {
                     "target": "com.amazonaws.ebs#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time (in minutes) after which the snapshot is automatically cancelled\n            if:</p>\n        <ul>\n            <li>\n                <p>No blocks are written to the snapshot.</p>\n            </li>\n            <li>\n                <p>The snapshot is not completed after writing the last block of data.</p>\n            </li>\n         </ul>\n        <p>If no value is specified, the timeout defaults to <code>60</code> minutes.</p>"
+                        "smithy.api#documentation": "<p>The amount of time (in minutes) after which the snapshot is automatically cancelled\n            if:</p>\n         <ul>\n            <li>\n               <p>No blocks are written to the snapshot.</p>\n            </li>\n            <li>\n               <p>The snapshot is not completed after writing the last block of data.</p>\n            </li>\n         </ul>\n         <p>If no value is specified, the timeout defaults to <code>60</code> minutes.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ebs#StartSnapshotResponse": {
@@ -2142,26 +2272,41 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the snapshot.</p>"
                     }
+                },
+                "SseType": {
+                    "target": "com.amazonaws.ebs#SSEType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ebs#Status": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "completed",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "pending",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "error",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "completed"
                     }
-                ],
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "error"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 32
@@ -2246,58 +2391,98 @@
             }
         },
         "com.amazonaws.ebs#ValidationExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INVALID_CUSTOMER_KEY",
-                        "name": "INVALID_CUSTOMER_KEY"
-                    },
-                    {
-                        "value": "INVALID_PAGE_TOKEN",
-                        "name": "INVALID_PAGE_TOKEN"
-                    },
-                    {
-                        "value": "INVALID_BLOCK_TOKEN",
-                        "name": "INVALID_BLOCK_TOKEN"
-                    },
-                    {
-                        "value": "INVALID_SNAPSHOT_ID",
-                        "name": "INVALID_SNAPSHOT_ID"
-                    },
-                    {
-                        "value": "UNRELATED_SNAPSHOTS",
-                        "name": "UNRELATED_SNAPSHOTS"
-                    },
-                    {
-                        "value": "INVALID_BLOCK",
-                        "name": "INVALID_BLOCK"
-                    },
-                    {
-                        "value": "INVALID_CONTENT_ENCODING",
-                        "name": "INVALID_CONTENT_ENCODING"
-                    },
-                    {
-                        "value": "INVALID_TAG",
-                        "name": "INVALID_TAG"
-                    },
-                    {
-                        "value": "INVALID_DEPENDENCY_REQUEST",
-                        "name": "INVALID_DEPENDENCY_REQUEST"
-                    },
-                    {
-                        "value": "INVALID_PARAMETER_VALUE",
-                        "name": "INVALID_PARAMETER_VALUE"
-                    },
-                    {
-                        "value": "INVALID_VOLUME_SIZE",
-                        "name": "INVALID_VOLUME_SIZE"
-                    },
-                    {
-                        "value": "CONFLICTING_BLOCK_UPDATE",
-                        "name": "CONFLICTING_BLOCK_UPDATE"
+            "type": "enum",
+            "members": {
+                "INVALID_CUSTOMER_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_CUSTOMER_KEY"
                     }
-                ]
+                },
+                "INVALID_PAGE_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PAGE_TOKEN"
+                    }
+                },
+                "INVALID_BLOCK_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_BLOCK_TOKEN"
+                    }
+                },
+                "INVALID_GRANT_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_GRANT_TOKEN"
+                    }
+                },
+                "INVALID_SNAPSHOT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SNAPSHOT_ID"
+                    }
+                },
+                "UNRELATED_SNAPSHOTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNRELATED_SNAPSHOTS"
+                    }
+                },
+                "INVALID_BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_BLOCK"
+                    }
+                },
+                "INVALID_CONTENT_ENCODING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_CONTENT_ENCODING"
+                    }
+                },
+                "INVALID_TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_TAG"
+                    }
+                },
+                "INVALID_DEPENDENCY_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DEPENDENCY_REQUEST"
+                    }
+                },
+                "INVALID_PARAMETER_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PARAMETER_VALUE"
+                    }
+                },
+                "INVALID_VOLUME_SIZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_VOLUME_SIZE"
+                    }
+                },
+                "CONFLICTING_BLOCK_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFLICTING_BLOCK_UPDATE"
+                    }
+                },
+                "INVALID_IMAGE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_IMAGE_ID"
+                    }
+                },
+                "WRITE_REQUEST_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WRITE_REQUEST_TIMEOUT"
+                    }
+                }
             }
         },
         "com.amazonaws.ebs#VolumeSize": {

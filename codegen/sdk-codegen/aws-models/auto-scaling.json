@@ -383,7 +383,7 @@
                     "min": 1,
                     "max": 30
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\.\\*]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\.\\*\\-]+$"
             }
         },
         "com.amazonaws.autoscaling#AllowedInstanceTypes": {
@@ -2583,7 +2583,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Completes the lifecycle action for the specified token or instance with the specified\n            result.</p>\n         <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling\n            group:</p>\n         <ol>\n            <li>\n               <p>(Optional) Create a launch template or launch configuration with a user data\n                    script that runs while an instance is in a wait state due to a lifecycle\n                    hook.</p>\n            </li>\n            <li>\n               <p>(Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke\n                    your Lambda function when an instance is put into a wait state due to a\n                    lifecycle hook.</p>\n            </li>\n            <li>\n               <p>(Optional) Create a notification target and an IAM role. The target can be\n                    either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish\n                    lifecycle notifications to the target.</p>\n            </li>\n            <li>\n               <p>Create the lifecycle hook. Specify whether the hook is used when the instances\n                    launch or terminate.</p>\n            </li>\n            <li>\n               <p>If you need more time, record the lifecycle action heartbeat to keep the\n                    instance in a wait state.</p>\n            </li>\n            <li>\n               <p>\n                  <b>If you finish before the timeout period ends, send a\n                        callback by using the <a>CompleteLifecycleAction</a> API\n                        call.</b>\n               </p>\n            </li>\n         </ol>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html\">Amazon EC2 Auto Scaling lifecycle\n                hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Completes the lifecycle action for the specified token or instance with the specified\n            result.</p>\n         <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling\n            group:</p>\n         <ol>\n            <li>\n               <p>(Optional) Create a launch template or launch configuration with a user data\n                    script that runs while an instance is in a wait state due to a lifecycle\n                    hook.</p>\n            </li>\n            <li>\n               <p>(Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke\n                    your Lambda function when an instance is put into a wait state due to a\n                    lifecycle hook.</p>\n            </li>\n            <li>\n               <p>(Optional) Create a notification target and an IAM role. The target can be\n                    either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish\n                    lifecycle notifications to the target.</p>\n            </li>\n            <li>\n               <p>Create the lifecycle hook. Specify whether the hook is used when the instances\n                    launch or terminate.</p>\n            </li>\n            <li>\n               <p>If you need more time, record the lifecycle action heartbeat to keep the\n                    instance in a wait state.</p>\n            </li>\n            <li>\n               <p>\n                  <b>If you finish before the timeout period ends, send a\n                        callback by using the <a>CompleteLifecycleAction</a> API\n                        call.</b>\n               </p>\n            </li>\n         </ol>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/completing-lifecycle-hooks.html\">Complete a lifecycle\n                action</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#CompleteLifecycleActionAnswer": {
@@ -4418,7 +4418,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a warm pool and its instances.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html\">Warm pools for\n                Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Gets information about a warm pool and its instances.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html\">Warm pools for\n                Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Instances",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.autoscaling#DescribeWarmPoolAnswer": {
@@ -4635,7 +4641,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detaches one or more traffic sources from the specified Auto Scaling group.</p>\n         <p>When you detach a taffic, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the traffic source using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>"
+                "smithy.api#documentation": "<p>Detaches one or more traffic sources from the specified Auto Scaling group.</p>\n         <p>When you detach a traffic source, it enters the <code>Removing</code> state while\n            deregistering the instances in the group. When all instances are deregistered, then you\n            can no longer describe the traffic source using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>"
             }
         },
         "com.amazonaws.autoscaling#DetachTrafficSourcesResultType": {
@@ -4883,7 +4889,7 @@
                     "min": 1,
                     "max": 30
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\.\\*]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\.\\*\\-]+$"
             }
         },
         "com.amazonaws.autoscaling#ExcludedInstanceTypes": {
@@ -7731,7 +7737,7 @@
                 "ScalingAdjustment": {
                     "target": "com.amazonaws.autoscaling#PolicyIncrement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount by which to scale, based on the specified adjustment type. A positive value\n            adds to the current capacity while a negative number removes from the current capacity.\n            For exact capacity, you must specify a positive value.</p>\n         <p>Required if the policy type is <code>SimpleScaling</code>. (Not used with any other\n            policy type.) </p>"
+                        "smithy.api#documentation": "<p>The amount by which to scale, based on the specified adjustment type. A positive value\n            adds to the current capacity while a negative number removes from the current capacity.\n            For exact capacity, you must specify a non-negative value.</p>\n         <p>Required if the policy type is <code>SimpleScaling</code>. (Not used with any other\n            policy type.) </p>"
                     }
                 },
                 "Cooldown": {
@@ -8212,7 +8218,8 @@
                 "AutoScalingGroupName": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>"
+                        "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -8926,7 +8933,7 @@
                 "ScalingAdjustment": {
                     "target": "com.amazonaws.autoscaling#PolicyIncrement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount by which to scale, based on the specified adjustment type. A positive value\n            adds to the current capacity while a negative number removes from the current\n            capacity.</p>\n         <p>The amount by which to scale. The adjustment is based on the value that you specified\n            in the <code>AdjustmentType</code> property (either an absolute number or a percentage).\n            A positive value adds to the current capacity and a negative number subtracts from the\n            current capacity. </p>",
+                        "smithy.api#documentation": "<p>The amount by which to scale, based on the specified adjustment type. A positive value\n            adds to the current capacity while a negative number removes from the current\n            capacity. For exact capacity, you must specify a non-negative value.</p>",
                         "smithy.api#required": {}
                     }
                 }
