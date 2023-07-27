@@ -42,6 +42,7 @@ jobs:
       with:
         repository: aws/smithy-go
         path: tmp-smithy-go
+        ref: ep20
 
     - name: Build and publish smithy-go
       working-directory: tmp-smithy-go
