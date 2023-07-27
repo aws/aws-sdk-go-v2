@@ -30,6 +30,7 @@ import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.endpoints.EndpointMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.TopDownIndex;
@@ -107,14 +108,14 @@ public class EndpointDisableHttps implements GoIntegration {
                                                                 func $L(stack $P, o Options) error {
                                                                         return stack.Serialize.Insert(&$L{
                                                                                 EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-                                                                        }, \"$L\", middleware.After)
+                                                                        }, \"$L\", middleware.Before)
                                                                 }
                                                         """,
                                         MIDDLEWARE_ADDER,
                                         SymbolUtils.createPointableSymbolBuilder("Stack",
                                                         SmithyGoDependency.SMITHY_MIDDLEWARE).build(),
                                         MIDDLEWARE_ID,
-                                        EndpointMiddlewareGenerator.MIDDLEWARE_ID);
+                                        ProtocolUtils.OPERATION_SERIALIZER_MIDDLEWARE_ID);
                         writer.write("");
                 });
         }
