@@ -1,8 +1,0 @@
-{
-    "id": "18daa891-967d-40b2-8ab7-d73705b451a2",
-    "type": "feature",
-    "description": "Expose ProfilerConfig attribute in SageMaker Search API response.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.29.0 (2023-07-27)
+
+* **Feature**: This release updates validation for instance types used in the AllowedInstanceTypes and ExcludedInstanceTypes parameters of the InstanceRequirements property of a MixedInstancesPolicy.
+
 # v1.28.10 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

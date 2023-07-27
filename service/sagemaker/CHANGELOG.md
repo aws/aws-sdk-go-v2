@@ -1,3 +1,7 @@
+# v1.95.0 (2023-07-27)
+
+* **Feature**: Expose ProfilerConfig attribute in SageMaker Search API response.
+
 # v1.94.0 (2023-07-25)
 
 * **Feature**: Mark ContentColumn and TargetLabelColumn as required Targets in TextClassificationJobConfig in CreateAutoMLJobV2API

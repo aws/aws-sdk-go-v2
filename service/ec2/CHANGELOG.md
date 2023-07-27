@@ -1,3 +1,7 @@
+# v1.108.0 (2023-07-27)
+
+* **Feature**: SDK and documentation updates for Amazon Elastic Block Store APIs
+
 # v1.107.0 (2023-07-25)
 
 * **Feature**: This release adds an instance's peak and baseline network bandwidth as well as the memory sizes of an instance's inference accelerators to DescribeInstanceTypes.

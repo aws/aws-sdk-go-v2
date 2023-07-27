@@ -1,3 +1,17 @@
+# Release (2023-07-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.29.0](service/autoscaling/CHANGELOG.md#v1290-2023-07-27)
+  * **Feature**: This release updates validation for instance types used in the AllowedInstanceTypes and ExcludedInstanceTypes parameters of the InstanceRequirements property of a MixedInstancesPolicy.
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.17.0](service/ebs/CHANGELOG.md#v1170-2023-07-27)
+  * **Feature**: SDK and documentation updates for Amazon Elastic Block Store API
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.108.0](service/ec2/CHANGELOG.md#v11080-2023-07-27)
+  * **Feature**: SDK and documentation updates for Amazon Elastic Block Store APIs
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.28.0](service/eks/CHANGELOG.md#v1280-2023-07-27)
+  * **Feature**: Add multiple customer error code to handle customer caused failure when managing EKS node groups
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.95.0](service/sagemaker/CHANGELOG.md#v1950-2023-07-27)
+  * **Feature**: Expose ProfilerConfig attribute in SageMaker Search API response.
+
 # Release (2023-07-26)
 
 ## Module Highlights
