@@ -186,6 +186,9 @@ type CreateVolumeOutput struct {
 	// The snapshot from which the volume was created, if applicable.
 	SnapshotId *string
 
+	// Reserved for future use.
+	SseType types.SSEType
+
 	// The volume state.
 	State types.VolumeState
 

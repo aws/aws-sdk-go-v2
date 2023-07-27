@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +44,9 @@ type GetEbsEncryptionByDefaultOutput struct {
 
 	// Indicates whether encryption by default is enabled.
 	EbsEncryptionByDefault *bool
+
+	// Reserved for future use.
+	SseType types.SSEType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

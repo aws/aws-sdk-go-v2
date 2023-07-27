@@ -15,7 +15,11 @@ import (
 
 // Creates a new Amazon EBS snapshot. The new snapshot enters the pending state
 // after the request completes. After creating the snapshot, use PutSnapshotBlock (https://docs.aws.amazon.com/ebs/latest/APIReference/API_PutSnapshotBlock.html)
-// to write blocks of data to the snapshot.
+// to write blocks of data to the snapshot. You should always retry requests that
+// receive server ( 5xx ) error responses, and ThrottlingException and
+// RequestThrottledException client error responses. For more information see
+// Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) StartSnapshot(ctx context.Context, params *StartSnapshotInput, optFns ...func(*Options)) (*StartSnapshotOutput, error) {
 	if params == nil {
 		params = &StartSnapshotInput{}
@@ -123,6 +127,9 @@ type StartSnapshotOutput struct {
 
 	// The ID of the snapshot.
 	SnapshotId *string
+
+	// Reserved for future use.
+	SseType types.SSEType
 
 	// The timestamp when the snapshot was created.
 	StartTime *time.Time

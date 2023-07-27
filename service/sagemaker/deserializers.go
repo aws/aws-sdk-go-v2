@@ -69119,6 +69119,11 @@ func awsAwsjson11_deserializeDocumentTrainingJob(v **types.TrainingJob, value in
 				return err
 			}
 
+		case "ProfilerConfig":
+			if err := awsAwsjson11_deserializeDocumentProfilerConfig(&sv.ProfilerConfig, value); err != nil {
+				return err
+			}
+
 		case "ResourceConfig":
 			if err := awsAwsjson11_deserializeDocumentResourceConfig(&sv.ResourceConfig, value); err != nil {
 				return err

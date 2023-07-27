@@ -1088,6 +1088,15 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 				sv.SnapshotId = ptr.String(jtv)
 			}
 
+		case "SseType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SSEType to be of type string, got %T instead", value)
+				}
+				sv.SseType = types.SSEType(jtv)
+			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {

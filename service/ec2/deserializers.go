@@ -111553,6 +111553,19 @@ func awsEc2query_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				sv.SnapshotId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("sseType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SseType = types.SSEType(xtv)
+			}
+
 		case strings.EqualFold("startTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -111991,6 +112004,19 @@ func awsEc2query_deserializeDocumentSnapshotInfo(v **types.SnapshotInfo, decoder
 			{
 				xtv := string(val)
 				sv.SnapshotId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("sseType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SseType = types.SSEType(xtv)
 			}
 
 		case strings.EqualFold("startTime", t.Name.Local):
@@ -129044,6 +129070,19 @@ func awsEc2query_deserializeDocumentVolume(v **types.Volume, decoder smithyxml.N
 				sv.SnapshotId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("sseType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SseType = types.SSEType(xtv)
+			}
+
 		case strings.EqualFold("status", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -138430,6 +138469,19 @@ func awsEc2query_deserializeOpDocumentCreateSnapshotOutput(v **CreateSnapshotOut
 				sv.SnapshotId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("sseType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SseType = types.SSEType(xtv)
+			}
+
 		case strings.EqualFold("startTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -139780,6 +139832,19 @@ func awsEc2query_deserializeOpDocumentCreateVolumeOutput(v **CreateVolumeOutput,
 			{
 				xtv := string(val)
 				sv.SnapshotId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("sseType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SseType = types.SSEType(xtv)
 			}
 
 		case strings.EqualFold("status", t.Name.Local):
@@ -153978,6 +154043,19 @@ func awsEc2query_deserializeOpDocumentGetEbsEncryptionByDefaultOutput(v **GetEbs
 				sv.EbsEncryptionByDefault = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("sseType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SseType = types.SSEType(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -160925,6 +161003,19 @@ func awsEc2query_deserializeOpDocumentRestoreSnapshotFromRecycleBinOutput(v **Re
 			{
 				xtv := string(val)
 				sv.SnapshotId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("sseType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SseType = types.SSEType(xtv)
 			}
 
 		case strings.EqualFold("startTime", t.Name.Local):

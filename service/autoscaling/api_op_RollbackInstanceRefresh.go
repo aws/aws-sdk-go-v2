@@ -46,6 +46,8 @@ func (c *Client) RollbackInstanceRefresh(ctx context.Context, params *RollbackIn
 type RollbackInstanceRefreshInput struct {
 
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
 
 	noSmithyDocumentSerde
@@ -106,6 +108,9 @@ func (c *Client) addOperationRollbackInstanceRefreshMiddlewares(stack *middlewar
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpRollbackInstanceRefreshValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRollbackInstanceRefresh(options.Region), middleware.Before); err != nil {

@@ -13473,6 +13473,10 @@ type TrainingJob struct {
 	// stored. SageMaker creates subfolders for model artifacts.
 	OutputDataConfig *OutputDataConfig
 
+	// Configuration information for Amazon SageMaker Debugger system monitoring,
+	// framework profiling, and storage paths.
+	ProfilerConfig *ProfilerConfig
+
 	// Resources, including ML compute instances and ML storage volumes, that are
 	// configured for model training.
 	ResourceConfig *ResourceConfig

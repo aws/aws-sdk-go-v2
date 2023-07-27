@@ -78,7 +78,9 @@ type ResourceNotFoundExceptionReason string
 // Enum values for ResourceNotFoundExceptionReason
 const (
 	ResourceNotFoundExceptionReasonSnapshotNotFound           ResourceNotFoundExceptionReason = "SNAPSHOT_NOT_FOUND"
+	ResourceNotFoundExceptionReasonGrantNotFound              ResourceNotFoundExceptionReason = "GRANT_NOT_FOUND"
 	ResourceNotFoundExceptionReasonDependencyResourceNotFound ResourceNotFoundExceptionReason = "DEPENDENCY_RESOURCE_NOT_FOUND"
+	ResourceNotFoundExceptionReasonImageNotFound              ResourceNotFoundExceptionReason = "IMAGE_NOT_FOUND"
 )
 
 // Values returns all known values for ResourceNotFoundExceptionReason. Note that
@@ -88,7 +90,9 @@ const (
 func (ResourceNotFoundExceptionReason) Values() []ResourceNotFoundExceptionReason {
 	return []ResourceNotFoundExceptionReason{
 		"SNAPSHOT_NOT_FOUND",
+		"GRANT_NOT_FOUND",
 		"DEPENDENCY_RESOURCE_NOT_FOUND",
+		"IMAGE_NOT_FOUND",
 	}
 }
 
@@ -106,6 +110,26 @@ const (
 func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExceptionReason {
 	return []ServiceQuotaExceededExceptionReason{
 		"DEPENDENCY_SERVICE_QUOTA_EXCEEDED",
+	}
+}
+
+type SSEType string
+
+// Enum values for SSEType
+const (
+	SSETypeSseEbs SSEType = "sse-ebs"
+	SSETypeSseKms SSEType = "sse-kms"
+	SSETypeNone   SSEType = "none"
+)
+
+// Values returns all known values for SSEType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SSEType) Values() []SSEType {
+	return []SSEType{
+		"sse-ebs",
+		"sse-kms",
+		"none",
 	}
 }
 
@@ -136,6 +160,7 @@ const (
 	ValidationExceptionReasonInvalidCustomerKey       ValidationExceptionReason = "INVALID_CUSTOMER_KEY"
 	ValidationExceptionReasonInvalidPageToken         ValidationExceptionReason = "INVALID_PAGE_TOKEN"
 	ValidationExceptionReasonInvalidBlockToken        ValidationExceptionReason = "INVALID_BLOCK_TOKEN"
+	ValidationExceptionReasonInvalidGrantToken        ValidationExceptionReason = "INVALID_GRANT_TOKEN"
 	ValidationExceptionReasonInvalidSnapshotId        ValidationExceptionReason = "INVALID_SNAPSHOT_ID"
 	ValidationExceptionReasonUnrelatedSnapshots       ValidationExceptionReason = "UNRELATED_SNAPSHOTS"
 	ValidationExceptionReasonInvalidBlock             ValidationExceptionReason = "INVALID_BLOCK"
@@ -145,6 +170,8 @@ const (
 	ValidationExceptionReasonInvalidParameterValue    ValidationExceptionReason = "INVALID_PARAMETER_VALUE"
 	ValidationExceptionReasonInvalidVolumeSize        ValidationExceptionReason = "INVALID_VOLUME_SIZE"
 	ValidationExceptionReasonConflictingBlockUpdate   ValidationExceptionReason = "CONFLICTING_BLOCK_UPDATE"
+	ValidationExceptionReasonInvalidImageId           ValidationExceptionReason = "INVALID_IMAGE_ID"
+	ValidationExceptionReasonWriteRequestTimeout      ValidationExceptionReason = "WRITE_REQUEST_TIMEOUT"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -155,6 +182,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"INVALID_CUSTOMER_KEY",
 		"INVALID_PAGE_TOKEN",
 		"INVALID_BLOCK_TOKEN",
+		"INVALID_GRANT_TOKEN",
 		"INVALID_SNAPSHOT_ID",
 		"UNRELATED_SNAPSHOTS",
 		"INVALID_BLOCK",
@@ -164,5 +192,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"INVALID_PARAMETER_VALUE",
 		"INVALID_VOLUME_SIZE",
 		"CONFLICTING_BLOCK_UPDATE",
+		"INVALID_IMAGE_ID",
+		"WRITE_REQUEST_TIMEOUT",
 	}
 }

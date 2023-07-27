@@ -1,0 +1,8 @@
+{
+    "id": "725d40a1-6980-45a3-b085-3d96c615158a",
+    "type": "feature",
+    "description": "Add multiple customer error code to handle customer caused failure when managing EKS node groups",
+    "modules": [
+        "service/eks"
+    ]
+}

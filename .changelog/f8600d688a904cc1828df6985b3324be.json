@@ -1,0 +1,8 @@
+{
+    "id": "f8600d68-8a90-4cc1-828d-f6985b3324be",
+    "type": "feature",
+    "description": "This release updates validation for instance types used in the AllowedInstanceTypes and ExcludedInstanceTypes parameters of the InstanceRequirements property of a MixedInstancesPolicy.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

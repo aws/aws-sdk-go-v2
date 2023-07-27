@@ -4,6 +4,7 @@ package autoscaling
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
@@ -131,6 +132,97 @@ func (c *Client) addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeWarmPoolAPIClient is a client that implements the DescribeWarmPool
+// operation.
+type DescribeWarmPoolAPIClient interface {
+	DescribeWarmPool(context.Context, *DescribeWarmPoolInput, ...func(*Options)) (*DescribeWarmPoolOutput, error)
+}
+
+var _ DescribeWarmPoolAPIClient = (*Client)(nil)
+
+// DescribeWarmPoolPaginatorOptions is the paginator options for DescribeWarmPool
+type DescribeWarmPoolPaginatorOptions struct {
+	// The maximum number of instances to return with this call. The maximum value is
+	// 50 .
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeWarmPoolPaginator is a paginator for DescribeWarmPool
+type DescribeWarmPoolPaginator struct {
+	options   DescribeWarmPoolPaginatorOptions
+	client    DescribeWarmPoolAPIClient
+	params    *DescribeWarmPoolInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeWarmPoolPaginator returns a new DescribeWarmPoolPaginator
+func NewDescribeWarmPoolPaginator(client DescribeWarmPoolAPIClient, params *DescribeWarmPoolInput, optFns ...func(*DescribeWarmPoolPaginatorOptions)) *DescribeWarmPoolPaginator {
+	if params == nil {
+		params = &DescribeWarmPoolInput{}
+	}
+
+	options := DescribeWarmPoolPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeWarmPoolPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeWarmPoolPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeWarmPool page.
+func (p *DescribeWarmPoolPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeWarmPoolOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeWarmPool(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeWarmPool(region string) *awsmiddleware.RegisterServiceMetadata {

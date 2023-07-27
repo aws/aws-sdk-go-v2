@@ -1,0 +1,8 @@
+{
+    "id": "814f0818-c064-4390-88ef-873f775fdde3",
+    "type": "feature",
+    "description": "SDK and documentation updates for Amazon Elastic Block Store API",
+    "modules": [
+        "service/ebs"
+    ]
+}

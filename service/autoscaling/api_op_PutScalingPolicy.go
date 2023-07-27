@@ -120,7 +120,7 @@ type PutScalingPolicyInput struct {
 
 	// The amount by which to scale, based on the specified adjustment type. A
 	// positive value adds to the current capacity while a negative number removes from
-	// the current capacity. For exact capacity, you must specify a positive value.
+	// the current capacity. For exact capacity, you must specify a non-negative value.
 	// Required if the policy type is SimpleScaling . (Not used with any other policy
 	// type.)
 	ScalingAdjustment *int32

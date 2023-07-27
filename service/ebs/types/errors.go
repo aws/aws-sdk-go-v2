@@ -89,7 +89,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An internal error has occurred.
+// An internal error has occurred. For more information see Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
+// .
 type InternalServerException struct {
 	Message *string
 
@@ -115,8 +116,9 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The number of API requests has exceed the maximum allowed API request
-// throttling limit.
+// The number of API requests has exceeded the maximum allowed API request
+// throttling limit for the snapshot. For more information see Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
+// .
 type RequestThrottledException struct {
 	Message *string
 

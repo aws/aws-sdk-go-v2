@@ -1,0 +1,8 @@
+{
+    "id": "8a37aa67-d724-4b1a-849e-1d3c4f040ae4",
+    "type": "feature",
+    "description": "SDK and documentation updates for Amazon Elastic Block Store APIs",
+    "modules": [
+        "service/ec2"
+    ]
+}

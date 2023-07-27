@@ -340,25 +340,39 @@ type NodegroupIssueCode string
 
 // Enum values for NodegroupIssueCode
 const (
-	NodegroupIssueCodeAutoScalingGroupNotFound             NodegroupIssueCode = "AutoScalingGroupNotFound"
-	NodegroupIssueCodeAutoScalingGroupInvalidConfiguration NodegroupIssueCode = "AutoScalingGroupInvalidConfiguration"
-	NodegroupIssueCodeEc2SecurityGroupNotFound             NodegroupIssueCode = "Ec2SecurityGroupNotFound"
-	NodegroupIssueCodeEc2SecurityGroupDeletionFailure      NodegroupIssueCode = "Ec2SecurityGroupDeletionFailure"
-	NodegroupIssueCodeEc2LaunchTemplateNotFound            NodegroupIssueCode = "Ec2LaunchTemplateNotFound"
-	NodegroupIssueCodeEc2LaunchTemplateVersionMismatch     NodegroupIssueCode = "Ec2LaunchTemplateVersionMismatch"
-	NodegroupIssueCodeEc2SubnetNotFound                    NodegroupIssueCode = "Ec2SubnetNotFound"
-	NodegroupIssueCodeEc2SubnetInvalidConfiguration        NodegroupIssueCode = "Ec2SubnetInvalidConfiguration"
-	NodegroupIssueCodeIamInstanceProfileNotFound           NodegroupIssueCode = "IamInstanceProfileNotFound"
-	NodegroupIssueCodeIamLimitExceeded                     NodegroupIssueCode = "IamLimitExceeded"
-	NodegroupIssueCodeIamNodeRoleNotFound                  NodegroupIssueCode = "IamNodeRoleNotFound"
-	NodegroupIssueCodeNodeCreationFailure                  NodegroupIssueCode = "NodeCreationFailure"
-	NodegroupIssueCodeAsgInstanceLaunchFailures            NodegroupIssueCode = "AsgInstanceLaunchFailures"
-	NodegroupIssueCodeInstanceLimitExceeded                NodegroupIssueCode = "InstanceLimitExceeded"
-	NodegroupIssueCodeInsufficientFreeAddresses            NodegroupIssueCode = "InsufficientFreeAddresses"
-	NodegroupIssueCodeAccessDenied                         NodegroupIssueCode = "AccessDenied"
-	NodegroupIssueCodeInternalFailure                      NodegroupIssueCode = "InternalFailure"
-	NodegroupIssueCodeClusterUnreachable                   NodegroupIssueCode = "ClusterUnreachable"
-	NodegroupIssueCodeEc2SubnetMissingIpv6Assignment       NodegroupIssueCode = "Ec2SubnetMissingIpv6Assignment"
+	NodegroupIssueCodeAutoScalingGroupNotFound              NodegroupIssueCode = "AutoScalingGroupNotFound"
+	NodegroupIssueCodeAutoScalingGroupInvalidConfiguration  NodegroupIssueCode = "AutoScalingGroupInvalidConfiguration"
+	NodegroupIssueCodeEc2SecurityGroupNotFound              NodegroupIssueCode = "Ec2SecurityGroupNotFound"
+	NodegroupIssueCodeEc2SecurityGroupDeletionFailure       NodegroupIssueCode = "Ec2SecurityGroupDeletionFailure"
+	NodegroupIssueCodeEc2LaunchTemplateNotFound             NodegroupIssueCode = "Ec2LaunchTemplateNotFound"
+	NodegroupIssueCodeEc2LaunchTemplateVersionMismatch      NodegroupIssueCode = "Ec2LaunchTemplateVersionMismatch"
+	NodegroupIssueCodeEc2SubnetNotFound                     NodegroupIssueCode = "Ec2SubnetNotFound"
+	NodegroupIssueCodeEc2SubnetInvalidConfiguration         NodegroupIssueCode = "Ec2SubnetInvalidConfiguration"
+	NodegroupIssueCodeIamInstanceProfileNotFound            NodegroupIssueCode = "IamInstanceProfileNotFound"
+	NodegroupIssueCodeEc2SubnetMissingIpv6Assignment        NodegroupIssueCode = "Ec2SubnetMissingIpv6Assignment"
+	NodegroupIssueCodeIamLimitExceeded                      NodegroupIssueCode = "IamLimitExceeded"
+	NodegroupIssueCodeIamNodeRoleNotFound                   NodegroupIssueCode = "IamNodeRoleNotFound"
+	NodegroupIssueCodeNodeCreationFailure                   NodegroupIssueCode = "NodeCreationFailure"
+	NodegroupIssueCodeAsgInstanceLaunchFailures             NodegroupIssueCode = "AsgInstanceLaunchFailures"
+	NodegroupIssueCodeInstanceLimitExceeded                 NodegroupIssueCode = "InstanceLimitExceeded"
+	NodegroupIssueCodeInsufficientFreeAddresses             NodegroupIssueCode = "InsufficientFreeAddresses"
+	NodegroupIssueCodeAccessDenied                          NodegroupIssueCode = "AccessDenied"
+	NodegroupIssueCodeInternalFailure                       NodegroupIssueCode = "InternalFailure"
+	NodegroupIssueCodeClusterUnreachable                    NodegroupIssueCode = "ClusterUnreachable"
+	NodegroupIssueCodeAmiIdNotFound                         NodegroupIssueCode = "AmiIdNotFound"
+	NodegroupIssueCodeAutoScalingGroupOptInRequired         NodegroupIssueCode = "AutoScalingGroupOptInRequired"
+	NodegroupIssueCodeAutoScalingGroupRateLimitExceeded     NodegroupIssueCode = "AutoScalingGroupRateLimitExceeded"
+	NodegroupIssueCodeEc2LaunchTemplateDeletionFailure      NodegroupIssueCode = "Ec2LaunchTemplateDeletionFailure"
+	NodegroupIssueCodeEc2LaunchTemplateInvalidConfiguration NodegroupIssueCode = "Ec2LaunchTemplateInvalidConfiguration"
+	NodegroupIssueCodeEc2LaunchTemplateMaxLimitExceeded     NodegroupIssueCode = "Ec2LaunchTemplateMaxLimitExceeded"
+	NodegroupIssueCodeEc2SubnetListTooLong                  NodegroupIssueCode = "Ec2SubnetListTooLong"
+	NodegroupIssueCodeIamThrottling                         NodegroupIssueCode = "IamThrottling"
+	NodegroupIssueCodeNodeTerminationFailure                NodegroupIssueCode = "NodeTerminationFailure"
+	NodegroupIssueCodePodEvictionFailure                    NodegroupIssueCode = "PodEvictionFailure"
+	NodegroupIssueCodeSourceEc2LaunchTemplateNotFound       NodegroupIssueCode = "SourceEc2LaunchTemplateNotFound"
+	NodegroupIssueCodeLimitExceeded                         NodegroupIssueCode = "LimitExceeded"
+	NodegroupIssueCodeUnknown                               NodegroupIssueCode = "Unknown"
+	NodegroupIssueCodeAutoScalingGroupInstanceRefreshActive NodegroupIssueCode = "AutoScalingGroupInstanceRefreshActive"
 )
 
 // Values returns all known values for NodegroupIssueCode. Note that this can be
@@ -375,6 +389,7 @@ func (NodegroupIssueCode) Values() []NodegroupIssueCode {
 		"Ec2SubnetNotFound",
 		"Ec2SubnetInvalidConfiguration",
 		"IamInstanceProfileNotFound",
+		"Ec2SubnetMissingIpv6Assignment",
 		"IamLimitExceeded",
 		"IamNodeRoleNotFound",
 		"NodeCreationFailure",
@@ -384,7 +399,20 @@ func (NodegroupIssueCode) Values() []NodegroupIssueCode {
 		"AccessDenied",
 		"InternalFailure",
 		"ClusterUnreachable",
-		"Ec2SubnetMissingIpv6Assignment",
+		"AmiIdNotFound",
+		"AutoScalingGroupOptInRequired",
+		"AutoScalingGroupRateLimitExceeded",
+		"Ec2LaunchTemplateDeletionFailure",
+		"Ec2LaunchTemplateInvalidConfiguration",
+		"Ec2LaunchTemplateMaxLimitExceeded",
+		"Ec2SubnetListTooLong",
+		"IamThrottling",
+		"NodeTerminationFailure",
+		"PodEvictionFailure",
+		"SourceEc2LaunchTemplateNotFound",
+		"LimitExceeded",
+		"Unknown",
+		"AutoScalingGroupInstanceRefreshActive",
 	}
 }
 

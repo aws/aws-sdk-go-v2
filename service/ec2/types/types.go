@@ -13311,6 +13311,9 @@ type Snapshot struct {
 	// created.
 	SnapshotId *string
 
+	// Reserved for future use.
+	SseType SSEType
+
 	// The time stamp when the snapshot was initiated.
 	StartTime *time.Time
 
@@ -13422,6 +13425,9 @@ type SnapshotInfo struct {
 
 	// Snapshot id that can be used to describe this snapshot.
 	SnapshotId *string
+
+	// Reserved for future use.
+	SseType SSEType
 
 	// Time this snapshot was started. This is the same for all snapshots initiated by
 	// the same request.
@@ -16781,6 +16787,9 @@ type Volume struct {
 
 	// The snapshot from which the volume was created, if applicable.
 	SnapshotId *string
+
+	// Reserved for future use.
+	SseType SSEType
 
 	// The volume state.
 	State VolumeState

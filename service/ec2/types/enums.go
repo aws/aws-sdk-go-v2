@@ -6523,6 +6523,26 @@ func (SpreadLevel) Values() []SpreadLevel {
 	}
 }
 
+type SSEType string
+
+// Enum values for SSEType
+const (
+	SSETypeSseEbs SSEType = "sse-ebs"
+	SSETypeSseKms SSEType = "sse-kms"
+	SSETypeNone   SSEType = "none"
+)
+
+// Values returns all known values for SSEType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SSEType) Values() []SSEType {
+	return []SSEType{
+		"sse-ebs",
+		"sse-kms",
+		"none",
+	}
+}
+
 type State string
 
 // Enum values for State

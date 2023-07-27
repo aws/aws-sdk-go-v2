@@ -12,7 +12,11 @@ import (
 	"io"
 )
 
-// Returns the data in a block in an Amazon Elastic Block Store snapshot.
+// Returns the data in a block in an Amazon Elastic Block Store snapshot. You
+// should always retry requests that receive server ( 5xx ) error responses, and
+// ThrottlingException and RequestThrottledException client error responses. For
+// more information see Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) GetSnapshotBlock(ctx context.Context, params *GetSnapshotBlockInput, optFns ...func(*Options)) (*GetSnapshotBlockOutput, error) {
 	if params == nil {
 		params = &GetSnapshotBlockInput{}

@@ -68,6 +68,9 @@ type RestoreSnapshotFromRecycleBinOutput struct {
 	// The ID of the snapshot.
 	SnapshotId *string
 
+	// Reserved for future use.
+	SseType types.SSEType
+
 	// The time stamp when the snapshot was initiated.
 	StartTime *time.Time
 

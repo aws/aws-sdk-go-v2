@@ -850,6 +850,26 @@ func (m *validateOpResumeProcesses) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRollbackInstanceRefresh struct {
+}
+
+func (*validateOpRollbackInstanceRefresh) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRollbackInstanceRefresh) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RollbackInstanceRefreshInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRollbackInstanceRefreshInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetDesiredCapacity struct {
 }
 
@@ -1156,6 +1176,10 @@ func addOpRecordLifecycleActionHeartbeatValidationMiddleware(stack *middleware.S
 
 func addOpResumeProcessesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResumeProcesses{}, middleware.After)
+}
+
+func addOpRollbackInstanceRefreshValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRollbackInstanceRefresh{}, middleware.After)
 }
 
 func addOpSetDesiredCapacityValidationMiddleware(stack *middleware.Stack) error {
@@ -2704,6 +2728,21 @@ func validateOpResumeProcessesInput(v *ResumeProcessesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResumeProcessesInput"}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRollbackInstanceRefreshInput(v *RollbackInstanceRefreshInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RollbackInstanceRefreshInput"}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}

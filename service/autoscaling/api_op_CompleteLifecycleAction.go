@@ -29,7 +29,7 @@ import (
 //   - If you finish before the timeout period ends, send a callback by using the
 //     CompleteLifecycleAction API call.
 //
-// For more information, see Amazon EC2 Auto Scaling lifecycle hooks (https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html)
+// For more information, see Complete a lifecycle action (https://docs.aws.amazon.com/autoscaling/ec2/userguide/completing-lifecycle-hooks.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) CompleteLifecycleAction(ctx context.Context, params *CompleteLifecycleActionInput, optFns ...func(*Options)) (*CompleteLifecycleActionOutput, error) {
 	if params == nil {

@@ -14,6 +14,10 @@ import (
 )
 
 // Returns information about the blocks in an Amazon Elastic Block Store snapshot.
+// You should always retry requests that receive server ( 5xx ) error responses,
+// and ThrottlingException and RequestThrottledException client error responses.
+// For more information see Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) ListSnapshotBlocks(ctx context.Context, params *ListSnapshotBlocksInput, optFns ...func(*Options)) (*ListSnapshotBlocksOutput, error) {
 	if params == nil {
 		params = &ListSnapshotBlocksInput{}

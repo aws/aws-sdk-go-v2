@@ -136,6 +136,9 @@ type CreateSnapshotOutput struct {
 	// created.
 	SnapshotId *string
 
+	// Reserved for future use.
+	SseType types.SSEType
+
 	// The time stamp when the snapshot was initiated.
 	StartTime *time.Time
 
