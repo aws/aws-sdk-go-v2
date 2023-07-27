@@ -79,9 +79,6 @@ func (c *Client) addOperationHttpResponseCodeMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHttpResponseCodeResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpResponseCode(options.Region), middleware.Before); err != nil {
 		return err
 	}

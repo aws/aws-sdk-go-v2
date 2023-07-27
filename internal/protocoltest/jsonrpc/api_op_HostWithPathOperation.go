@@ -84,9 +84,6 @@ func (c *Client) addOperationHostWithPathOperationMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHostWithPathOperationResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHostWithPathOperation(options.Region), middleware.Before); err != nil {
 		return err
 	}

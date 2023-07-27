@@ -110,9 +110,6 @@ func (c *Client) addOperationHttpRequestWithLabelsMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHttpRequestWithLabelsResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpHttpRequestWithLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}

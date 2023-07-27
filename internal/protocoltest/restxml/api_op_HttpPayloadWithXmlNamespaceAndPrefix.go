@@ -83,9 +83,6 @@ func (c *Client) addOperationHttpPayloadWithXmlNamespaceAndPrefixMiddlewares(sta
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHttpPayloadWithXmlNamespaceAndPrefixResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespaceAndPrefix(options.Region), middleware.Before); err != nil {
 		return err
 	}

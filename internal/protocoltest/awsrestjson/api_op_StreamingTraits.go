@@ -86,9 +86,6 @@ func (c *Client) addOperationStreamingTraitsMiddlewares(stack *middleware.Stack,
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addStreamingTraitsResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStreamingTraits(options.Region), middleware.Before); err != nil {
 		return err
 	}

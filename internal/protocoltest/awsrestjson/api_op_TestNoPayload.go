@@ -84,9 +84,6 @@ func (c *Client) addOperationTestNoPayloadMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTestNoPayloadResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestNoPayload(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -90,9 +90,6 @@ func (c *Client) addOperationNullAndEmptyHeadersServerMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addNullAndEmptyHeadersServerResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opNullAndEmptyHeadersServer(options.Region), middleware.Before); err != nil {
 		return err
 	}

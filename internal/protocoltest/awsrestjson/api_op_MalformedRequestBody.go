@@ -81,9 +81,6 @@ func (c *Client) addOperationMalformedRequestBodyMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addMalformedRequestBodyResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedRequestBody(options.Region), middleware.Before); err != nil {
 		return err
 	}

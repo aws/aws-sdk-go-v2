@@ -81,9 +81,6 @@ func (c *Client) addOperationXmlMapsMiddlewares(stack *middleware.Stack, options
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addXmlMapsResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opXmlMaps(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -89,9 +89,6 @@ func (c *Client) addOperationQueryListsMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addQueryListsResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryLists(options.Region), middleware.Before); err != nil {
 		return err
 	}

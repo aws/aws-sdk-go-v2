@@ -96,9 +96,6 @@ func (c *Client) addOperationNullOperationMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addNullOperationResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opNullOperation(options.Region), middleware.Before); err != nil {
 		return err
 	}

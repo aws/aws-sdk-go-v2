@@ -87,9 +87,6 @@ func (c *Client) addOperationMalformedByteMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addMalformedByteResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpMalformedByteValidationMiddleware(stack); err != nil {
 		return err
 	}

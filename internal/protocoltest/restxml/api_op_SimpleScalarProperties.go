@@ -117,9 +117,6 @@ func (c *Client) addOperationSimpleScalarPropertiesMiddlewares(stack *middleware
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addSimpleScalarPropertiesResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarProperties(options.Region), middleware.Before); err != nil {
 		return err
 	}

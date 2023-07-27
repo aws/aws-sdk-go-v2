@@ -87,9 +87,6 @@ func (c *Client) addOperationEndpointWithHostLabelHeaderOperationMiddlewares(sta
 	if err = addEndpointPrefix_opEndpointWithHostLabelHeaderOperationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointWithHostLabelHeaderOperationResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpEndpointWithHostLabelHeaderOperationValidationMiddleware(stack); err != nil {
 		return err
 	}

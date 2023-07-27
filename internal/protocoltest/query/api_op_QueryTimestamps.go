@@ -89,9 +89,6 @@ func (c *Client) addOperationQueryTimestampsMiddlewares(stack *middleware.Stack,
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addQueryTimestampsResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryTimestamps(options.Region), middleware.Before); err != nil {
 		return err
 	}

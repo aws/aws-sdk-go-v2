@@ -84,9 +84,6 @@ func (c *Client) addOperationEmptyOperationMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEmptyOperationResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEmptyOperation(options.Region), middleware.Before); err != nil {
 		return err
 	}

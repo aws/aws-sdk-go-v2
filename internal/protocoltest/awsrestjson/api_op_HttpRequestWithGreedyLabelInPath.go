@@ -84,9 +84,6 @@ func (c *Client) addOperationHttpRequestWithGreedyLabelInPathMiddlewares(stack *
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHttpRequestWithGreedyLabelInPathResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack); err != nil {
 		return err
 	}

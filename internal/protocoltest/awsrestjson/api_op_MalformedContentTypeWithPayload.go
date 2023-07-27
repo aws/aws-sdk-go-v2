@@ -81,9 +81,6 @@ func (c *Client) addOperationMalformedContentTypeWithPayloadMiddlewares(stack *m
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addMalformedContentTypeWithPayloadResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedContentTypeWithPayload(options.Region), middleware.Before); err != nil {
 		return err
 	}

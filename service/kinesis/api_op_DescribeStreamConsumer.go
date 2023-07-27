@@ -189,7 +189,7 @@ func (m *opDescribeStreamConsumerResolveEndpointMiddleware) HandleSerialize(ctx 
 
 	params.ConsumerARN = input.ConsumerARN
 
-	params.OperationType = ptr.String(control)
+	params.OperationType = ptr.String("control")
 
 	var resolvedEndpoint smithyendpoints.Endpoint
 	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)

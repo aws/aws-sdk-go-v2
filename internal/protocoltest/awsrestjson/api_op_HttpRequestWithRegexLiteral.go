@@ -81,9 +81,6 @@ func (c *Client) addOperationHttpRequestWithRegexLiteralMiddlewares(stack *middl
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addHttpRequestWithRegexLiteralResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpHttpRequestWithRegexLiteralValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -94,9 +94,6 @@ func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *mi
 	if err = addEndpointPrefix_opEndpointWithHostLabelOperationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointWithHostLabelOperationResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpEndpointWithHostLabelOperationValidationMiddleware(stack); err != nil {
 		return err
 	}

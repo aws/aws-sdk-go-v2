@@ -81,9 +81,6 @@ func (c *Client) addOperationQueryIdempotencyTokenAutoFillMiddlewares(stack *mid
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addQueryIdempotencyTokenAutoFillResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addIdempotencyToken_opQueryIdempotencyTokenAutoFillMiddleware(stack, options); err != nil {
 		return err
 	}

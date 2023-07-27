@@ -192,9 +192,6 @@ func (c *Client) addOperationKitchenSinkOperationMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addKitchenSinkOperationResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opKitchenSinkOperation(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -79,9 +79,6 @@ func (c *Client) addOperationMalformedBlobMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addMalformedBlobResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedBlob(options.Region), middleware.Before); err != nil {
 		return err
 	}

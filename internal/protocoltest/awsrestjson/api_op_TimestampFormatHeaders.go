@@ -107,9 +107,6 @@ func (c *Client) addOperationTimestampFormatHeadersMiddlewares(stack *middleware
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimestampFormatHeadersResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTimestampFormatHeaders(options.Region), middleware.Before); err != nil {
 		return err
 	}

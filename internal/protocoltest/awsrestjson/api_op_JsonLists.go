@@ -127,9 +127,6 @@ func (c *Client) addOperationJsonListsMiddlewares(stack *middleware.Stack, optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addJsonListsResolveEndpointMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opJsonLists(options.Region), middleware.Before); err != nil {
 		return err
 	}
