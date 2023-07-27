@@ -572,5 +572,5 @@ func (m *endpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in
 func addendpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&endpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "ResolveEndpointV2", middleware.After)
+	}, "OperationSerializer", middleware.Before)
 }
