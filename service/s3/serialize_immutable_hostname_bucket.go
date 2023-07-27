@@ -66,7 +66,7 @@ func addSerializeImmutableHostnameBucketMiddleware(stack *middleware.Stack, opti
 		&serializeImmutableHostnameBucketMiddleware{
 			UsePathStyle: options.UsePathStyle,
 		},
-		"ResolveEndpointV2",
-		middleware.After,
+		"OperationSerializer",
+		middleware.Before,
 	)
 }
