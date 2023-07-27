@@ -118,10 +118,10 @@ func (c *Client) addOperationRollbackInstanceRefreshMiddlewares(stack *middlewar
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpRollbackInstanceRefreshValidationMiddleware(stack); err != nil {
+	if err = addRollbackInstanceRefreshResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRollbackInstanceRefreshResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addOpRollbackInstanceRefreshValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRollbackInstanceRefresh(options.Region), middleware.Before); err != nil {
