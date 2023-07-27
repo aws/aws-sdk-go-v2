@@ -1,9 +1,10 @@
 package awsrulesfn
 
 import (
-	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"net/netip"
+	"net"
 	"strings"
+
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // IsVirtualHostableS3Bucket returns if the input is a DNS compatible bucket
@@ -13,7 +14,10 @@ import (
 // address.
 func IsVirtualHostableS3Bucket(input string, allowSubDomains bool) bool {
 	// input should not be formatted as an IP address
-	if _, err := netip.ParseAddr(input); err == nil {
+	// NOTE: this will technically trip up on IPv6 hosts with zone IDs, but
+	// validation further down will catch that anyway (it's guaranteed to have
+	// unfriendly characters % and : if that's the case)
+	if net.ParseIP(input) != nil {
 		return false
 	}
 
