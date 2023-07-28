@@ -1,3 +1,19 @@
+# Release (2023-07-28.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.18.0](service/applicationinsights/CHANGELOG.md#v1180-2023-07-282)
+  * **Feature**: This release enable customer to add/remove/update more than one workload for a component
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.33.0](service/cloudformation/CHANGELOG.md#v1330-2023-07-282)
+  * **Feature**: This SDK release is for the feature launch of AWS CloudFormation RetainExceptOnCreate. It adds a new parameter retainExceptOnCreate in the following APIs: CreateStack, UpdateStack, RollbackStack, ExecuteChangeSet.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.27.0](service/cloudfront/CHANGELOG.md#v1270-2023-07-282)
+  * **Feature**: Add a new JavaScript runtime version for CloudFront Functions.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.62.0](service/connect/CHANGELOG.md#v1620-2023-07-282)
+  * **Feature**: This release adds support for new number types.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.21.0](service/kafka/CHANGELOG.md#v1210-2023-07-282)
+  * **Feature**: Amazon MSK has introduced new versions of ListClusterOperations and DescribeClusterOperation APIs. These v2 APIs provide information and insights into the ongoing operations of both MSK Provisioned and MSK Serverless clusters.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.21.0](service/pinpoint/CHANGELOG.md#v1210-2023-07-282)
+  * **Feature**: Added support for sending push notifications using the FCM v1 API with json credentials. Amazon Pinpoint customers can now deliver messages to Android devices using both FCM v1 API and the legacy FCM/GCM API
+
 # Release (2023-07-28)
 
 ## General Highlights

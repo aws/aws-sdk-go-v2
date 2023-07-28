@@ -1,8 +1,0 @@
-{
-    "id": "a7a088c9-2f8b-4456-8892-b203a3ac3986",
-    "type": "feature",
-    "description": "Added support for sending push notifications using the FCM v1 API with json credentials. Amazon Pinpoint customers can now deliver messages to Android devices using both FCM v1 API and the legacy FCM/GCM API",
-    "modules": [
-        "service/pinpoint"
-    ]
-}

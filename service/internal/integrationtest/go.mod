@@ -11,8 +11,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.30.5
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/batch v1.24.2
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.32.1
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.26.10
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.33.0
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.14
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.13
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.27.3
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.16
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.15
-	github.com/aws/aws-sdk-go-v2/service/glue v1.58.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.58.2
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/iam v1.21.2
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.14

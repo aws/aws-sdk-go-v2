@@ -1,8 +1,0 @@
-{
-    "id": "b19e1e62-4742-4d4a-8379-bda49ac7615f",
-    "type": "feature",
-    "description": "This release adds support for new number types.",
-    "modules": [
-        "service/connect"
-    ]
-}

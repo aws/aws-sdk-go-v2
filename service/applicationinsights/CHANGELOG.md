@@ -1,3 +1,7 @@
+# v1.18.0 (2023-07-28.2)
+
+* **Feature**: This release enable customer to add/remove/update more than one workload for a component
+
 # v1.17.16 (2023-07-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

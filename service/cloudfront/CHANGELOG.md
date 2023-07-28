@@ -1,3 +1,7 @@
+# v1.27.0 (2023-07-28.2)
+
+* **Feature**: Add a new JavaScript runtime version for CloudFront Functions.
+
 # v1.26.10 (2023-07-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

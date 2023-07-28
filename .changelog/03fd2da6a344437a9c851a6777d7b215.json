@@ -1,8 +1,0 @@
-{
-    "id": "03fd2da6-a344-437a-9c85-1a6777d7b215",
-    "type": "feature",
-    "description": "Amazon MSK has introduced new versions of ListClusterOperations and DescribeClusterOperation APIs. These v2 APIs provide information and insights into the ongoing operations of both MSK Provisioned and MSK Serverless clusters.",
-    "modules": [
-        "service/kafka"
-    ]
-}

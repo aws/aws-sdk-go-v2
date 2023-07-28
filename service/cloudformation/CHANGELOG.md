@@ -1,3 +1,7 @@
+# v1.33.0 (2023-07-28.2)
+
+* **Feature**: This SDK release is for the feature launch of AWS CloudFormation RetainExceptOnCreate. It adds a new parameter retainExceptOnCreate in the following APIs: CreateStack, UpdateStack, RollbackStack, ExecuteChangeSet.
+
 # v1.32.1 (2023-07-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

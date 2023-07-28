@@ -1,3 +1,7 @@
+# v1.21.0 (2023-07-28.2)
+
+* **Feature**: Amazon MSK has introduced new versions of ListClusterOperations and DescribeClusterOperation APIs. These v2 APIs provide information and insights into the ongoing operations of both MSK Provisioned and MSK Serverless clusters.
+
 # v1.20.7 (2023-07-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

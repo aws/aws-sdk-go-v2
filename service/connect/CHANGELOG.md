@@ -1,3 +1,7 @@
+# v1.62.0 (2023-07-28.2)
+
+* **Feature**: This release adds support for new number types.
+
 # v1.61.2 (2023-07-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions
