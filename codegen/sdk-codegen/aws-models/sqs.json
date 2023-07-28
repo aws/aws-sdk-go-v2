@@ -1344,7 +1344,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a specified message movement task.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>A message movement can only be cancelled when the current status is\n                        RUNNING.</p>\n               </li>\n               <li>\n                  <p>Cancelling a message movement task does not revert the messages that have\n                        already been moved. It can only stop the messages that have not been moved\n                        yet.</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Cancels a specified message movement task. A message movement can only be cancelled\n            when the current status is RUNNING. Cancelling a message movement task does not revert\n            the messages that have already been moved. It can only stop the messages that have not\n            been moved yet.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This action is currently limited to supporting message redrive from <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">dead-letter queues (DLQs)</a> only. In this context, the source\n                        queue is the dead-letter queue (DLQ), while the destination queue can be the\n                        original source queue (from which the messages were driven to the\n                        dead-letter-queue), or a custom destination queue. </p>\n               </li>\n               <li>\n                  <p>Currently, only standard queues are supported.</p>\n               </li>\n               <li>\n                  <p>Only one active message movement task is supported per queue at any given\n                        time.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.sqs#CancelMessageMoveTaskRequest": {
@@ -2086,7 +2086,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the most recent message movement tasks (up to 10) under a specific source\n            queue.</p>"
+                "smithy.api#documentation": "<p>Gets the most recent message movement tasks (up to 10) under a specific source\n            queue.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This action is currently limited to supporting message redrive from <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">dead-letter queues (DLQs)</a> only. In this context, the source\n                        queue is the dead-letter queue (DLQ), while the destination queue can be the\n                        original source queue (from which the messages were driven to the\n                        dead-letter-queue), or a custom destination queue. </p>\n               </li>\n               <li>\n                  <p>Currently, only standard queues are supported.</p>\n               </li>\n               <li>\n                  <p>Only one active message movement task is supported per queue at any given\n                        time.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.sqs#ListMessageMoveTasksRequest": {
@@ -2299,7 +2299,7 @@
                 "QueueUrls": {
                     "target": "com.amazonaws.sqs#QueueUrlList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of queue URLs, up to 1,000 entries, or the value of <code>MaxResults</code> that you sent in\n            the request.</p>",
+                        "smithy.api#documentation": "<p>A list of queue URLs, up to 1,000 entries, or the value of <code>MaxResults</code>\n            that you sent in the request.</p>",
                         "smithy.api#xmlFlattened": {},
                         "smithy.api#xmlName": "QueueUrl"
                     }
@@ -2629,7 +2629,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the messages in a queue specified by the <code>QueueURL</code>\n            parameter.</p>\n         <important>\n            <p>When you use the <code>PurgeQueue</code> action, you can't retrieve any messages\n                deleted from a queue.</p>\n            <p>The message deletion process takes up to 60 seconds. We recommend waiting for 60\n                seconds regardless of your queue's size. </p>\n         </important>\n         <p>Messages sent to the queue <i>before</i> you call\n                <code>PurgeQueue</code> might be received but are deleted within the next\n            minute.</p>\n         <p>Messages sent to the queue <i>after</i> you call <code>PurgeQueue</code>\n            might be deleted while the queue is being purged.</p>"
+                "smithy.api#documentation": "<p>Deletes available messages in a queue (including in-flight messages) specified by the\n                <code>QueueURL</code> parameter.</p>\n         <important>\n            <p>When you use the <code>PurgeQueue</code> action, you can't retrieve any messages\n                deleted from a queue.</p>\n            <p>The message deletion process takes up to 60 seconds. We recommend waiting for 60\n                seconds regardless of your queue's size. </p>\n         </important>\n         <p>Messages sent to the queue <i>before</i> you call\n                <code>PurgeQueue</code> might be received but are deleted within the next\n            minute.</p>\n         <p>Messages sent to the queue <i>after</i> you call <code>PurgeQueue</code>\n            might be deleted while the queue is being purged.</p>"
             }
         },
         "com.amazonaws.sqs#PurgeQueueInProgress": {
@@ -3383,7 +3383,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous task to move messages from a specified source queue to a\n            specified destination queue.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This action is currently limited to supporting message redrive from\n                        dead-letter queues (DLQs) only. In this context, the source queue is the\n                        dead-letter queue (DLQ), while the destination queue can be the original\n                        source queue (from which the messages were driven to the dead-letter-queue),\n                        or a custom destination queue. </p>\n               </li>\n               <li>\n                  <p>Currently, only standard queues are supported.</p>\n               </li>\n               <li>\n                  <p>Only one active message movement task is supported per queue at any given\n                        time.</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Starts an asynchronous task to move messages from a specified source queue to a\n            specified destination queue.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This action is currently limited to supporting message redrive from queues\n                        that are configured as <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">dead-letter queues (DLQs)</a> of other Amazon SQS queues only. Non-SQS\n                        queue sources of dead-letter queues, such as Lambda or Amazon SNS topics, are\n                        currently not supported.</p>\n               </li>\n               <li>\n                  <p>In dead-letter queues redrive context, the\n                            <code>StartMessageMoveTask</code> the source queue is the DLQ, while the\n                        destination queue can be the original source queue (from which the messages\n                        were driven to the dead-letter-queue), or a custom destination queue.</p>\n               </li>\n               <li>\n                  <p>Currently, only standard queues support redrive. FIFO queues don't support\n                        redrive.</p>\n               </li>\n               <li>\n                  <p>Only one active message movement task is supported per queue at any given\n                        time.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.sqs#StartMessageMoveTaskRequest": {
@@ -3392,7 +3392,7 @@
                 "SourceArn": {
                     "target": "com.amazonaws.sqs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the queue that contains the messages to be moved to another queue.\n            Currently, only dead-letter queue (DLQ) ARNs are accepted.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the queue that contains the messages to be moved to another queue.\n            Currently, only ARNs of dead-letter queues (DLQs) whose sources are other Amazon SQS queues\n            are accepted. DLQs whose sources are non-SQS queues, such as Lambda or Amazon SNS topics, are\n            not currently supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
