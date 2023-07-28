@@ -46,6 +46,91 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.applicationinsights#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.applicationinsights#AddWorkload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationinsights#AddWorkloadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationinsights#AddWorkloadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationinsights#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a workload to a component. Each component can have at most five workloads.</p>"
+            }
+        },
+        "com.amazonaws.applicationinsights#AddWorkloadRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceGroupName": {
+                    "target": "com.amazonaws.applicationinsights#ResourceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComponentName": {
+                    "target": "com.amazonaws.applicationinsights#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkloadConfiguration": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings of the workload. The value is the escaped JSON of the configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#AddWorkloadResponse": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workload.</p>"
+                    }
+                },
+                "WorkloadConfiguration": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings of the workload. The value is the escaped JSON of the configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.applicationinsights#AffectedResource": {
             "type": "string"
         },
@@ -118,6 +203,12 @@
         "com.amazonaws.applicationinsights#ApplicationInfo": {
             "type": "structure",
             "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the owner of the application.</p>"
+                    }
+                },
                 "ResourceGroupName": {
                     "target": "com.amazonaws.applicationinsights#ResourceGroupName",
                     "traits": {
@@ -163,7 +254,7 @@
                 "DiscoveryType": {
                     "target": "com.amazonaws.applicationinsights#DiscoveryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The method used by Application Insights to onboard your resources.\n      </p>"
+                        "smithy.api#documentation": "<p> The method used by Application Insights to onboard your resources. </p>"
                     }
                 }
             },
@@ -210,26 +301,32 @@
             "type": "string"
         },
         "com.amazonaws.applicationinsights#CloudWatchEventSource": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EC2",
-                        "name": "EC2"
-                    },
-                    {
-                        "value": "CODE_DEPLOY",
-                        "name": "CODE_DEPLOY"
-                    },
-                    {
-                        "value": "HEALTH",
-                        "name": "HEALTH"
-                    },
-                    {
-                        "value": "RDS",
-                        "name": "RDS"
+            "type": "enum",
+            "members": {
+                "EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2"
                     }
-                ]
+                },
+                "CODE_DEPLOY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODE_DEPLOY"
+                    }
+                },
+                "HEALTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTH"
+                    }
+                },
+                "RDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDS"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationinsights#CodeDeployApplication": {
@@ -270,6 +367,18 @@
         "com.amazonaws.applicationinsights#ConfigurationEvent": {
             "type": "structure",
             "members": {
+                "ResourceGroupName": {
+                    "target": "com.amazonaws.applicationinsights#ResourceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource group of the application to which the configuration event belongs.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the owner of the application to which the configuration event belongs.</p>"
+                    }
+                },
                 "MonitoredResourceARN": {
                     "target": "com.amazonaws.applicationinsights#ConfigurationEventMonitoredResourceARN",
                     "traits": {
@@ -327,45 +436,55 @@
             "type": "string"
         },
         "com.amazonaws.applicationinsights#ConfigurationEventResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CLOUDWATCH_ALARM",
-                        "name": "CLOUDWATCH_ALARM"
-                    },
-                    {
-                        "value": "CLOUDWATCH_LOG",
-                        "name": "CLOUDWATCH_LOG"
-                    },
-                    {
-                        "value": "CLOUDFORMATION",
-                        "name": "CLOUDFORMATION"
-                    },
-                    {
-                        "value": "SSM_ASSOCIATION",
-                        "name": "SSM_ASSOCIATION"
+            "type": "enum",
+            "members": {
+                "CLOUDWATCH_ALARM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDWATCH_ALARM"
                     }
-                ]
+                },
+                "CLOUDWATCH_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDWATCH_LOG"
+                    }
+                },
+                "CLOUDFORMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDFORMATION"
+                    }
+                },
+                "SSM_ASSOCIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSM_ASSOCIATION"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationinsights#ConfigurationEventStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INFO",
-                        "name": "INFO"
-                    },
-                    {
-                        "value": "WARN",
-                        "name": "WARN"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
                     }
-                ]
+                },
+                "WARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARN"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationinsights#ConfigurationEventTime": {
@@ -451,9 +570,12 @@
                 "GroupingType": {
                     "target": "com.amazonaws.applicationinsights#GroupingType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Application Insights can create applications based on a resource group or on an account.\n      To create an account-based application using all of the resources in the account, set this parameter to <code>ACCOUNT_BASED</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>Application Insights can create applications based on a resource group or on an account.\n         To create an account-based application using all of the resources in the account, set this\n         parameter to <code>ACCOUNT_BASED</code>. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#CreateApplicationResponse": {
@@ -465,6 +587,9 @@
                         "smithy.api#documentation": "<p>Information about the application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#CreateComponent": {
@@ -517,11 +642,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#CreateComponentResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationinsights#CreateLogPattern": {
             "type": "operation",
@@ -588,6 +719,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#CreateLogPatternResponse": {
@@ -605,6 +739,9 @@
                         "smithy.api#documentation": "<p>The name of the resource group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#CustomComponentName": {
@@ -653,11 +790,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DeleteApplicationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationinsights#DeleteComponent": {
             "type": "operation",
@@ -699,11 +842,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DeleteComponentResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationinsights#DeleteLogPattern": {
             "type": "operation",
@@ -755,11 +904,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DeleteLogPatternResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationinsights#DescribeApplication": {
             "type": "operation",
@@ -793,7 +948,16 @@
                         "smithy.api#documentation": "<p>The name of the resource group.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeApplicationResponse": {
@@ -805,6 +969,9 @@
                         "smithy.api#documentation": "<p>Information about the application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeComponent": {
@@ -899,7 +1066,16 @@
                         "smithy.api#documentation": "<p>The tier of the application component.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "RecommendationType": {
+                    "target": "com.amazonaws.applicationinsights#RecommendationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended configuration type.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeComponentConfigurationRecommendationResponse": {
@@ -911,6 +1087,9 @@
                         "smithy.api#documentation": "<p>The recommended configuration settings of the component. The value is the escaped JSON\n         of the configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeComponentConfigurationRequest": {
@@ -929,7 +1108,16 @@
                         "smithy.api#documentation": "<p>The name of the component.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeComponentConfigurationResponse": {
@@ -953,6 +1141,9 @@
                         "smithy.api#documentation": "<p>The configuration settings of the component. The value is the escaped JSON of the\n         configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeComponentRequest": {
@@ -971,7 +1162,16 @@
                         "smithy.api#documentation": "<p>The name of the component.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeComponentResponse": {
@@ -986,6 +1186,9 @@
                         "smithy.api#documentation": "<p>The list of resource ARNs that belong to the component.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeLogPattern": {
@@ -1034,7 +1237,16 @@
                         "smithy.api#documentation": "<p>The name of the log pattern.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeLogPatternResponse": {
@@ -1046,12 +1258,21 @@
                         "smithy.api#documentation": "<p>The name of the resource group.</p>"
                     }
                 },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
+                },
                 "LogPattern": {
                     "target": "com.amazonaws.applicationinsights#LogPattern",
                     "traits": {
                         "smithy.api#documentation": "<p>The successfully created log pattern.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeObservation": {
@@ -1086,7 +1307,16 @@
                         "smithy.api#documentation": "<p>The ID of the observation.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeObservationResponse": {
@@ -1098,6 +1328,9 @@
                         "smithy.api#documentation": "<p>Information about the observation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeProblem": {
@@ -1155,7 +1388,16 @@
                         "smithy.api#documentation": "<p>The ID of the problem.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeProblemObservationsResponse": {
@@ -1167,6 +1409,9 @@
                         "smithy.api#documentation": "<p>Observations related to the problem.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeProblemRequest": {
@@ -1178,7 +1423,16 @@
                         "smithy.api#documentation": "<p>The ID of the problem.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the owner of the resource group affected by the problem.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#DescribeProblemResponse": {
@@ -1190,6 +1444,93 @@
                         "smithy.api#documentation": "<p>Information about the problem. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#DescribeWorkload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationinsights#DescribeWorkloadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationinsights#DescribeWorkloadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationinsights#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a workload and its configuration.</p>"
+            }
+        },
+        "com.amazonaws.applicationinsights#DescribeWorkloadRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceGroupName": {
+                    "target": "com.amazonaws.applicationinsights#ResourceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComponentName": {
+                    "target": "com.amazonaws.applicationinsights#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkloadId": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workload.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the workload owner.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#DescribeWorkloadResponse": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workload.</p>"
+                    }
+                },
+                "WorkloadRemarks": {
+                    "target": "com.amazonaws.applicationinsights#Remarks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If logging is supported for the resource type, shows whether the component has configured logs to be monitored.</p>"
+                    }
+                },
+                "WorkloadConfiguration": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings of the workload. The value is the escaped JSON of the configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#DetectedWorkload": {
@@ -1202,24 +1543,29 @@
             }
         },
         "com.amazonaws.applicationinsights#DiscoveryType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RESOURCE_GROUP_BASED",
-                        "name": "RESOURCE_GROUP_BASED"
-                    },
-                    {
-                        "value": "ACCOUNT_BASED",
-                        "name": "ACCOUNT_BASED"
+            "type": "enum",
+            "members": {
+                "RESOURCE_GROUP_BASED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_GROUP_BASED"
                     }
-                ]
+                },
+                "ACCOUNT_BASED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_BASED"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationinsights#EC2WindowsBarleyService": {
             "type": "service",
             "version": "2018-11-25",
             "operations": [
+                {
+                    "target": "com.amazonaws.applicationinsights#AddWorkload"
+                },
                 {
                     "target": "com.amazonaws.applicationinsights#CreateApplication"
                 },
@@ -1263,6 +1609,9 @@
                     "target": "com.amazonaws.applicationinsights#DescribeProblemObservations"
                 },
                 {
+                    "target": "com.amazonaws.applicationinsights#DescribeWorkload"
+                },
+                {
                     "target": "com.amazonaws.applicationinsights#ListApplications"
                 },
                 {
@@ -1284,6 +1633,12 @@
                     "target": "com.amazonaws.applicationinsights#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.applicationinsights#ListWorkloads"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#RemoveWorkload"
+                },
+                {
                     "target": "com.amazonaws.applicationinsights#TagResource"
                 },
                 {
@@ -1300,6 +1655,12 @@
                 },
                 {
                     "target": "com.amazonaws.applicationinsights#UpdateLogPattern"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#UpdateProblem"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#UpdateWorkload"
                 }
             ],
             "traits": {
@@ -1643,44 +2004,6 @@
                                                     "type": "tree",
                                                     "rules": [
                                                         {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-east-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://applicationinsights.us-gov-east-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-west-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://applicationinsights.us-gov-west-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://applicationinsights.{Region}.{PartitionResult#dnsSuffix}",
@@ -1715,8 +2038,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1728,8 +2051,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1741,8 +2064,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1754,8 +2077,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1767,8 +2090,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1780,8 +2103,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1793,8 +2116,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1806,8 +2129,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1819,8 +2142,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1832,8 +2155,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1845,8 +2168,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1858,8 +2181,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1871,8 +2194,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1884,8 +2207,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1897,8 +2220,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1910,8 +2233,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1923,8 +2246,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1936,8 +2259,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1949,8 +2272,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1962,8 +2285,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1975,8 +2298,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1988,8 +2311,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2001,8 +2324,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2014,8 +2337,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2027,8 +2350,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2040,8 +2363,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2053,8 +2376,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2066,8 +2389,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2079,8 +2402,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2092,8 +2415,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2105,8 +2428,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2118,8 +2441,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2131,8 +2454,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2144,8 +2467,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2157,8 +2491,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2170,8 +2515,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2183,8 +2539,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2196,8 +2563,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2209,8 +2576,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2222,8 +2589,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2234,8 +2601,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2246,9 +2613,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2296,44 +2669,48 @@
             }
         },
         "com.amazonaws.applicationinsights#FeedbackKey": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INSIGHTS_FEEDBACK",
-                        "name": "INSIGHTS_FEEDBACK"
+            "type": "enum",
+            "members": {
+                "INSIGHTS_FEEDBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSIGHTS_FEEDBACK"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.applicationinsights#FeedbackValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NOT_SPECIFIED",
-                        "name": "NOT_SPECIFIED"
-                    },
-                    {
-                        "value": "USEFUL",
-                        "name": "USEFUL"
-                    },
-                    {
-                        "value": "NOT_USEFUL",
-                        "name": "NOT_USEFUL"
+            "type": "enum",
+            "members": {
+                "NOT_SPECIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_SPECIFIED"
                     }
-                ]
+                },
+                "USEFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USEFUL"
+                    }
+                },
+                "NOT_USEFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_USEFUL"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationinsights#GroupingType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCOUNT_BASED",
-                        "name": "ACCOUNT_BASED"
+            "type": "enum",
+            "members": {
+                "ACCOUNT_BASED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_BASED"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.applicationinsights#HealthEventArn": {
@@ -2419,7 +2796,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to request the next page of results.</p>"
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#ListApplicationsResponse": {
@@ -2437,6 +2823,9 @@
                         "smithy.api#documentation": "<p>The token used to retrieve the next page of results. This value is <code>null</code>\n         when there are no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#ListComponents": {
@@ -2488,7 +2877,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to request the next page of results.</p>"
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#ListComponentsResponse": {
@@ -2506,6 +2904,9 @@
                         "smithy.api#documentation": "<p>The token to request the next page of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#ListConfigurationHistory": {
@@ -2574,7 +2975,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>NextToken</code> value returned from a previous paginated\n            <code>ListConfigurationHistory</code> request where <code>MaxResults</code> was used and\n         the results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>NextToken</code> value. This value is\n            <code>null</code> when there are no more results to return.</p>"
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#ListConfigurationHistoryResponse": {
@@ -2592,6 +3002,9 @@
                         "smithy.api#documentation": "<p>The <code>NextToken</code> value to include in a future\n            <code>ListConfigurationHistory</code> request. When the results of a\n            <code>ListConfigurationHistory</code> request exceed <code>MaxResults</code>, this value\n         can be used to retrieve the next page of results. This value is <code>null</code> when\n         there are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#ListLogPatternSets": {
@@ -2643,7 +3056,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to request the next page of results.</p>"
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#ListLogPatternSetsResponse": {
@@ -2653,6 +3075,12 @@
                     "target": "com.amazonaws.applicationinsights#ResourceGroupName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the resource group.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
                     }
                 },
                 "LogPatternSets": {
@@ -2667,6 +3095,9 @@
                         "smithy.api#documentation": "<p>The token used to retrieve the next page of results. This value is <code>null</code>\n         when there are no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#ListLogPatterns": {
@@ -2724,7 +3155,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to request the next page of results.</p>"
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#ListLogPatternsResponse": {
@@ -2734,6 +3174,12 @@
                     "target": "com.amazonaws.applicationinsights#ResourceGroupName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the resource group.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
                     }
                 },
                 "LogPatterns": {
@@ -2748,6 +3194,9 @@
                         "smithy.api#documentation": "<p>The token used to retrieve the next page of results. This value is <code>null</code>\n         when there are no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#ListProblems": {
@@ -2781,6 +3230,12 @@
         "com.amazonaws.applicationinsights#ListProblemsRequest": {
             "type": "structure",
             "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
+                },
                 "ResourceGroupName": {
                     "target": "com.amazonaws.applicationinsights#ResourceGroupName",
                     "traits": {
@@ -2816,7 +3271,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The name of the component. </p>"
                     }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.applicationinsights#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not you can view the problem. If not specified, visible and\n         ignored problems are returned.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#ListProblemsResponse": {
@@ -2839,7 +3303,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The name of the resource group. </p>"
                     }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the resource group owner.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#ListTagsForResource": {
@@ -2872,6 +3345,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#ListTagsForResourceResponse": {
@@ -2883,25 +3359,120 @@
                         "smithy.api#documentation": "<p>An array that lists all the tags that are associated with the application. Each tag\n         consists of a required tag key (<code>Key</code>) and an associated tag value\n            (<code>Value</code>).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#ListWorkloads": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationinsights#ListWorkloadsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationinsights#ListWorkloadsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationinsights#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the workloads that are configured on a given component.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.applicationinsights#ListWorkloadsRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceGroupName": {
+                    "target": "com.amazonaws.applicationinsights#ResourceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComponentName": {
+                    "target": "com.amazonaws.applicationinsights#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.applicationinsights#MaxEntities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n      results, make another call with the returned <code>NextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.applicationinsights#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the owner of the workload.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#ListWorkloadsResponse": {
+            "type": "structure",
+            "members": {
+                "WorkloadList": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of workloads.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.applicationinsights#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#LogFilter": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "WARN",
-                        "name": "WARN"
-                    },
-                    {
-                        "value": "INFO",
-                        "name": "INFO"
+            "type": "enum",
+            "members": {
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
                     }
-                ]
+                },
+                "WARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARN"
+                    }
+                },
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationinsights#LogGroup": {
@@ -3323,18 +3894,20 @@
             }
         },
         "com.amazonaws.applicationinsights#OsType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "WINDOWS",
-                        "name": "WINDOWS"
-                    },
-                    {
-                        "value": "LINUX",
-                        "name": "LINUX"
+            "type": "enum",
+            "members": {
+                "WINDOWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS"
                     }
-                ]
+                },
+                "LINUX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationinsights#PaginationToken": {
@@ -3398,6 +3971,12 @@
                         "smithy.api#documentation": "<p>A measure of the level of impact of the problem.</p>"
                     }
                 },
+                "AccountId": {
+                    "target": "com.amazonaws.applicationinsights#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID for the owner of the resource group affected by the problem.</p>"
+                    }
+                },
                 "ResourceGroupName": {
                     "target": "com.amazonaws.applicationinsights#ResourceGroupName",
                     "traits": {
@@ -3420,6 +3999,18 @@
                     "target": "com.amazonaws.applicationinsights#LastRecurrenceTime",
                     "traits": {
                         "smithy.api#documentation": "<p> The last time that the problem reoccurred after its last resolution. </p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.applicationinsights#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not you can view the problem. Updates to ignored problems do not\n         generate notifications.</p>"
+                    }
+                },
+                "ResolutionMethod": {
+                    "target": "com.amazonaws.applicationinsights#ResolutionMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the problem was resolved. If the value is <code>AUTOMATIC</code>, the\n         system resolved the problem. If the value is <code>MANUAL</code>, the user resolved the\n         problem. If the value is <code>UNRESOLVED</code>, then the problem is not resolved.</p>"
                     }
                 }
             },
@@ -3449,6 +4040,29 @@
         "com.amazonaws.applicationinsights#RdsEventMessage": {
             "type": "string"
         },
+        "com.amazonaws.applicationinsights#RecommendationType": {
+            "type": "enum",
+            "members": {
+                "INFRA_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFRA_ONLY"
+                    }
+                },
+                "WORKLOAD_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORKLOAD_ONLY"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.applicationinsights#RecurringCount": {
             "type": "long"
         },
@@ -3471,6 +4085,88 @@
         },
         "com.amazonaws.applicationinsights#RemoveSNSTopic": {
             "type": "boolean"
+        },
+        "com.amazonaws.applicationinsights#RemoveWorkload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationinsights#RemoveWorkloadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationinsights#RemoveWorkloadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationinsights#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove workload from a component.</p>"
+            }
+        },
+        "com.amazonaws.applicationinsights#RemoveWorkloadRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceGroupName": {
+                    "target": "com.amazonaws.applicationinsights#ResourceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComponentName": {
+                    "target": "com.amazonaws.applicationinsights#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkloadId": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workload.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#RemoveWorkloadResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#ResolutionMethod": {
+            "type": "enum",
+            "members": {
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                },
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
+                    }
+                },
+                "UNRESOLVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNRESOLVED"
+                    }
+                }
+            }
         },
         "com.amazonaws.applicationinsights#ResourceARN": {
             "type": "string",
@@ -3546,26 +4242,32 @@
             "type": "string"
         },
         "com.amazonaws.applicationinsights#SeverityLevel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Informative",
-                        "name": "Informative"
-                    },
-                    {
-                        "value": "Low",
-                        "name": "Low"
-                    },
-                    {
-                        "value": "Medium",
-                        "name": "Medium"
-                    },
-                    {
-                        "value": "High",
-                        "name": "High"
+            "type": "enum",
+            "members": {
+                "Informative": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Informative"
                     }
-                ]
+                },
+                "Low": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
+                    }
+                },
+                "Medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "High": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationinsights#SourceARN": {
@@ -3590,26 +4292,38 @@
             "type": "string"
         },
         "com.amazonaws.applicationinsights#Status": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IGNORE",
-                        "name": "IGNORE"
-                    },
-                    {
-                        "value": "RESOLVED",
-                        "name": "RESOLVED"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "RECURRING",
-                        "name": "RECURRING"
+            "type": "enum",
+            "members": {
+                "IGNORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IGNORE"
                     }
-                ]
+                },
+                "RESOLVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOLVED"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "RECURRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECURRING"
+                    }
+                },
+                "RECOVERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECOVERING"
+                    }
+                }
             }
         },
         "com.amazonaws.applicationinsights#Tag": {
@@ -3708,11 +4422,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationinsights#TagValue": {
             "type": "string",
@@ -3738,82 +4458,136 @@
             }
         },
         "com.amazonaws.applicationinsights#Tier": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
-                    },
-                    {
-                        "value": "DEFAULT",
-                        "name": "DEFAULT"
-                    },
-                    {
-                        "value": "DOT_NET_CORE",
-                        "name": "DOT_NET_CORE"
-                    },
-                    {
-                        "value": "DOT_NET_WORKER",
-                        "name": "DOT_NET_WORKER"
-                    },
-                    {
-                        "value": "DOT_NET_WEB_TIER",
-                        "name": "DOT_NET_WEB_TIER"
-                    },
-                    {
-                        "value": "DOT_NET_WEB",
-                        "name": "DOT_NET_WEB"
-                    },
-                    {
-                        "value": "SQL_SERVER",
-                        "name": "SQL_SERVER"
-                    },
-                    {
-                        "value": "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP",
-                        "name": "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"
-                    },
-                    {
-                        "value": "MYSQL",
-                        "name": "MYSQL"
-                    },
-                    {
-                        "value": "POSTGRESQL",
-                        "name": "POSTGRESQL"
-                    },
-                    {
-                        "value": "JAVA_JMX",
-                        "name": "JAVA_JMX"
-                    },
-                    {
-                        "value": "ORACLE",
-                        "name": "ORACLE"
-                    },
-                    {
-                        "value": "SAP_HANA_MULTI_NODE",
-                        "name": "SAP_HANA_MULTI_NODE"
-                    },
-                    {
-                        "value": "SAP_HANA_SINGLE_NODE",
-                        "name": "SAP_HANA_SINGLE_NODE"
-                    },
-                    {
-                        "value": "SAP_HANA_HIGH_AVAILABILITY",
-                        "name": "SAP_HANA_HIGH_AVAILABILITY"
-                    },
-                    {
-                        "value": "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE",
-                        "name": "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"
-                    },
-                    {
-                        "value": "SHAREPOINT",
-                        "name": "SHAREPOINT"
-                    },
-                    {
-                        "value": "ACTIVE_DIRECTORY",
-                        "name": "ACTIVE_DIRECTORY"
+            "type": "enum",
+            "members": {
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
                     }
-                ],
+                },
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "DOT_NET_CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOT_NET_CORE"
+                    }
+                },
+                "DOT_NET_WORKER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOT_NET_WORKER"
+                    }
+                },
+                "DOT_NET_WEB_TIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOT_NET_WEB_TIER"
+                    }
+                },
+                "DOT_NET_WEB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOT_NET_WEB"
+                    }
+                },
+                "SQL_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL_SERVER"
+                    }
+                },
+                "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"
+                    }
+                },
+                "MYSQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MYSQL"
+                    }
+                },
+                "POSTGRESQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSTGRESQL"
+                    }
+                },
+                "JAVA_JMX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JAVA_JMX"
+                    }
+                },
+                "ORACLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORACLE"
+                    }
+                },
+                "SAP_HANA_MULTI_NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAP_HANA_MULTI_NODE"
+                    }
+                },
+                "SAP_HANA_SINGLE_NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAP_HANA_SINGLE_NODE"
+                    }
+                },
+                "SAP_HANA_HIGH_AVAILABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAP_HANA_HIGH_AVAILABILITY"
+                    }
+                },
+                "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"
+                    }
+                },
+                "SHAREPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHAREPOINT"
+                    }
+                },
+                "ACTIVE_DIRECTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE_DIRECTORY"
+                    }
+                },
+                "SAP_NETWEAVER_STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAP_NETWEAVER_STANDARD"
+                    }
+                },
+                "SAP_NETWEAVER_DISTRIBUTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAP_NETWEAVER_DISTRIBUTED"
+                    }
+                },
+                "SAP_NETWEAVER_HIGH_AVAILABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAP_NETWEAVER_HIGH_AVAILABILITY"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
@@ -3882,11 +4656,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationinsights#UpdateApplication": {
             "type": "operation",
@@ -3951,6 +4731,9 @@
                         "smithy.api#documentation": "<p> Turns auto-configuration on or off. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#UpdateApplicationResponse": {
@@ -3962,6 +4745,9 @@
                         "smithy.api#documentation": "<p>Information about the application. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#UpdateComponent": {
@@ -4054,11 +4840,17 @@
                         "smithy.api#documentation": "<p> Automatically configures the component by applying the recommended configurations.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#UpdateComponentConfigurationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationinsights#UpdateComponentRequest": {
             "type": "structure",
@@ -4089,11 +4881,17 @@
                         "smithy.api#documentation": "<p>The list of resource ARNs that belong to the component.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#UpdateComponentResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.applicationinsights#UpdateLogPattern": {
             "type": "operation",
@@ -4158,6 +4956,9 @@
                         "smithy.api#documentation": "<p>Rank of the log pattern. Must be a value between <code>1</code> and\n            <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set\n         your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will\n         be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be\n         last to get matched. When you configure custom log patterns from the console, a\n            <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A\n            <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a\n            <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank\n         values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for\n         AWS-provided patterns. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.applicationinsights#UpdateLogPatternResponse": {
@@ -4175,6 +4976,155 @@
                         "smithy.api#documentation": "<p>The successfully created log pattern.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#UpdateProblem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationinsights#UpdateProblemRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationinsights#UpdateProblemResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationinsights#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the visibility of the problem or specifies the problem as\n         <code>RESOLVED</code>.</p>"
+            }
+        },
+        "com.amazonaws.applicationinsights#UpdateProblemRequest": {
+            "type": "structure",
+            "members": {
+                "ProblemId": {
+                    "target": "com.amazonaws.applicationinsights#ProblemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the problem.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdateStatus": {
+                    "target": "com.amazonaws.applicationinsights#UpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the problem. Arguments can be passed for only problems that show a status\n         of <code>RECOVERING</code>.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.applicationinsights#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility of a problem. When you pass a value of <code>IGNORED</code>, the problem\n         is removed from the default view, and all notifications for the problem are suspended. When\n         <code>VISIBLE</code> is passed, the <code>IGNORED</code> action is reversed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#UpdateProblemResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#UpdateStatus": {
+            "type": "enum",
+            "members": {
+                "RESOLVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOLVED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationinsights#UpdateWorkload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationinsights#UpdateWorkloadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationinsights#UpdateWorkloadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationinsights#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.applicationinsights#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a workload to a component. Each component can have at most five workloads.</p>"
+            }
+        },
+        "com.amazonaws.applicationinsights#UpdateWorkloadRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceGroupName": {
+                    "target": "com.amazonaws.applicationinsights#ResourceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComponentName": {
+                    "target": "com.amazonaws.applicationinsights#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the component. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkloadId": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workload.</p>"
+                    }
+                },
+                "WorkloadConfiguration": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings of the workload. The value is the escaped JSON of the configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationinsights#UpdateWorkloadResponse": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workload.</p>"
+                    }
+                },
+                "WorkloadConfiguration": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings of the workload. The value is the escaped JSON of the configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.applicationinsights#ValidationException": {
@@ -4197,6 +5147,103 @@
         "com.amazonaws.applicationinsights#Value": {
             "type": "double"
         },
+        "com.amazonaws.applicationinsights#Visibility": {
+            "type": "enum",
+            "members": {
+                "IGNORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IGNORED"
+                    }
+                },
+                "VISIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VISIBLE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationinsights#Workload": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workload.</p>"
+                    }
+                },
+                "ComponentName": {
+                    "target": "com.amazonaws.applicationinsights#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component.</p>"
+                    }
+                },
+                "WorkloadName": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>"
+                    }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.applicationinsights#Tier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier of the workload.</p>"
+                    }
+                },
+                "WorkloadRemarks": {
+                    "target": "com.amazonaws.applicationinsights#Remarks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If logging is supported for the resource type, shows whether the component has configured logs to be monitored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the workloads on a component.</p>"
+            }
+        },
+        "com.amazonaws.applicationinsights#WorkloadConfiguration": {
+            "type": "structure",
+            "members": {
+                "WorkloadName": {
+                    "target": "com.amazonaws.applicationinsights#WorkloadName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workload.</p>"
+                    }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.applicationinsights#Tier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the workload tier.</p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.applicationinsights#ComponentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings of the workload.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the workload.</p>"
+            }
+        },
+        "com.amazonaws.applicationinsights#WorkloadId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 38,
+                    "max": 38
+                },
+                "smithy.api#pattern": "^w-[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.applicationinsights#WorkloadList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationinsights#Workload"
+            }
+        },
         "com.amazonaws.applicationinsights#WorkloadMetaData": {
             "type": "map",
             "key": {
@@ -4204,6 +5251,16 @@
             },
             "value": {
                 "target": "com.amazonaws.applicationinsights#MetaDataValue"
+            }
+        },
+        "com.amazonaws.applicationinsights#WorkloadName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\.\\-_]*$"
             }
         },
         "com.amazonaws.applicationinsights#XRayErrorPercent": {

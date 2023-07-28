@@ -902,6 +902,192 @@
                 "smithy.api#documentation": "<p>State information about the operation step.</p>"
             }
         },
+        "com.amazonaws.kafka#ClusterOperationV2": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the cluster.</p>",
+                        "smithy.api#jsonName": "clusterArn"
+                    }
+                },
+                "ClusterType": {
+                    "target": "com.amazonaws.kafka#ClusterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the backend cluster.</p>",
+                        "smithy.api#jsonName": "clusterType"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which operation was started.</p>",
+                        "smithy.api#jsonName": "startTime"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the operation finished.</p>",
+                        "smithy.api#jsonName": "endTime"
+                    }
+                },
+                "ErrorInfo": {
+                    "target": "com.amazonaws.kafka#ErrorInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If cluster operation failed from an error, it describes the error.</p>",
+                        "smithy.api#jsonName": "errorInfo"
+                    }
+                },
+                "OperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the cluster operation.</p>",
+                        "smithy.api#jsonName": "operationArn"
+                    }
+                },
+                "OperationState": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the cluster operation.</p>",
+                        "smithy.api#jsonName": "operationState"
+                    }
+                },
+                "OperationType": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the cluster operation.</p>",
+                        "smithy.api#jsonName": "operationType"
+                    }
+                },
+                "Provisioned": {
+                    "target": "com.amazonaws.kafka#ClusterOperationV2Provisioned",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties of a provisioned cluster.</p>",
+                        "smithy.api#jsonName": "provisioned"
+                    }
+                },
+                "Serverless": {
+                    "target": "com.amazonaws.kafka#ClusterOperationV2Serverless",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties of a serverless cluster.</p>",
+                        "smithy.api#jsonName": "serverless"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a cluster operation.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ClusterOperationV2Provisioned": {
+            "type": "structure",
+            "members": {
+                "OperationSteps": {
+                    "target": "com.amazonaws.kafka#__listOfClusterOperationStep",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Steps completed during the operation.</p>",
+                        "smithy.api#jsonName": "operationSteps"
+                    }
+                },
+                "SourceClusterInfo": {
+                    "target": "com.amazonaws.kafka#MutableClusterInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about cluster attributes before a cluster is updated.</p>",
+                        "smithy.api#jsonName": "sourceClusterInfo"
+                    }
+                },
+                "TargetClusterInfo": {
+                    "target": "com.amazonaws.kafka#MutableClusterInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about cluster attributes after a cluster is updated.</p>",
+                        "smithy.api#jsonName": "targetClusterInfo"
+                    }
+                },
+                "VpcConnectionInfo": {
+                    "target": "com.amazonaws.kafka#VpcConnectionInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.</p>",
+                        "smithy.api#jsonName": "vpcConnectionInfo"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a provisioned cluster operation.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ClusterOperationV2Serverless": {
+            "type": "structure",
+            "members": {
+                "VpcConnectionInfo": {
+                    "target": "com.amazonaws.kafka#VpcConnectionInfoServerless",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.</p>",
+                        "smithy.api#jsonName": "vpcConnectionInfo"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a serverless cluster operation.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ClusterOperationV2Summary": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the cluster.</p>",
+                        "smithy.api#jsonName": "clusterArn"
+                    }
+                },
+                "ClusterType": {
+                    "target": "com.amazonaws.kafka#ClusterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the backend cluster.</p>",
+                        "smithy.api#jsonName": "clusterType"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which operation was started.</p>",
+                        "smithy.api#jsonName": "startTime"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the operation finished.</p>",
+                        "smithy.api#jsonName": "endTime"
+                    }
+                },
+                "OperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the cluster operation.</p>",
+                        "smithy.api#jsonName": "operationArn"
+                    }
+                },
+                "OperationState": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the cluster operation.</p>",
+                        "smithy.api#jsonName": "operationState"
+                    }
+                },
+                "OperationType": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the cluster operation.</p>",
+                        "smithy.api#jsonName": "operationType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a cluster operation.</p>"
+            }
+        },
         "com.amazonaws.kafka#ClusterState": {
             "type": "enum",
             "members": {
@@ -2112,6 +2298,77 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#DescribeClusterOperationV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DescribeClusterOperationV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DescribeClusterOperationV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a description of the cluster operation specified by the ARN.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/api/v2/operations/{ClusterOperationArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#DescribeClusterOperationV2Request": {
+            "type": "structure",
+            "members": {
+                "ClusterOperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the cluster operation to describe.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DescribeClusterOperationV2Response": {
+            "type": "structure",
+            "members": {
+                "ClusterOperationInfo": {
+                    "target": "com.amazonaws.kafka#ClusterOperationV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Cluster operation information</p>",
+                        "smithy.api#jsonName": "clusterOperationInfo"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#DescribeClusterRequest": {
             "type": "structure",
             "members": {
@@ -3103,6 +3360,9 @@
                     "target": "com.amazonaws.kafka#DescribeClusterOperation"
                 },
                 {
+                    "target": "com.amazonaws.kafka#DescribeClusterOperationV2"
+                },
+                {
                     "target": "com.amazonaws.kafka#DescribeClusterV2"
                 },
                 {
@@ -3128,6 +3388,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#ListClusterOperations"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ListClusterOperationsV2"
                 },
                 {
                     "target": "com.amazonaws.kafka#ListClusters"
@@ -4413,6 +4676,104 @@
                     "target": "com.amazonaws.kafka#__string",
                     "traits": {
                         "smithy.api#documentation": "<p>If the response of ListClusterOperations is truncated, it returns a NextToken in the response. This Nexttoken should be sent in the subsequent request to ListClusterOperations.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#ListClusterOperationsV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#ListClusterOperationsV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#ListClusterOperationsV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all the operations that have been performed on the specified MSK cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/api/v2/clusters/{ClusterArn}/operations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ClusterOperationInfoList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kafka#ListClusterOperationsV2Request": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The arn of the cluster whose operations are being requested.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kafka#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maxResults of the query.",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The nextToken of the query.",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#ListClusterOperationsV2Response": {
+            "type": "structure",
+            "members": {
+                "ClusterOperationInfoList": {
+                    "target": "com.amazonaws.kafka#__listOfClusterOperationV2Summary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of cluster operation information objects.</p>",
+                        "smithy.api#jsonName": "clusterOperationInfoList"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response of ListClusterOperationsV2 is truncated, it returns a NextToken in the response. This NextToken should be sent in the subsequent request to ListClusterOperationsV2.</p>",
                         "smithy.api#jsonName": "nextToken"
                     }
                 }
@@ -7466,6 +7827,42 @@
                 "smithy.api#documentation": "<p>Description of the VPC connection.</p>"
             }
         },
+        "com.amazonaws.kafka#VpcConnectionInfoServerless": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when Amazon MSK creates the VPC Connnection.</p>",
+                        "smithy.api#jsonName": "creationTime"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the VPC Connection.</p>",
+                        "smithy.api#jsonName": "owner"
+                    }
+                },
+                "UserIdentity": {
+                    "target": "com.amazonaws.kafka#UserIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the requester that calls the API operation.</p>",
+                        "smithy.api#jsonName": "userIdentity"
+                    }
+                },
+                "VpcConnectionArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the VPC connection.</p>",
+                        "smithy.api#jsonName": "vpcConnectionArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Description of the VPC connection."
+            }
+        },
         "com.amazonaws.kafka#VpcConnectionState": {
             "type": "enum",
             "members": {
@@ -7733,6 +8130,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kafka#ClusterOperationStep"
+            }
+        },
+        "com.amazonaws.kafka#__listOfClusterOperationV2Summary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#ClusterOperationV2Summary"
             }
         },
         "com.amazonaws.kafka#__listOfCompatibleKafkaVersion": {

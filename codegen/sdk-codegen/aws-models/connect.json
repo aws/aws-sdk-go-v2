@@ -20040,6 +20040,30 @@
                     "traits": {
                         "smithy.api#enumValue": "DID"
                     }
+                },
+                "UIFN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UIFN"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                },
+                "THIRD_PARTY_TF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THIRD_PARTY_TF"
+                    }
+                },
+                "THIRD_PARTY_DID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THIRD_PARTY_DID"
+                    }
                 }
             }
         },
@@ -20051,7 +20075,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 2
+                    "max": 6
                 }
             }
         },
