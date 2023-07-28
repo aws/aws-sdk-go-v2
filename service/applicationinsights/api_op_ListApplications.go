@@ -30,6 +30,9 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 
 type ListApplicationsInput struct {
 
+	// The AWS account ID for the resource group owner.
+	AccountId *string
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32

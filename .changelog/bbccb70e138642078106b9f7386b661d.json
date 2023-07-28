@@ -1,0 +1,8 @@
+{
+    "id": "bbccb70e-1386-4207-8106-b9f7386b661d",
+    "type": "feature",
+    "description": "Add a new JavaScript runtime version for CloudFront Functions.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

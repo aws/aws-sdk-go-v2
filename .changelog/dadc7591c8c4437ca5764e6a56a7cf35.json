@@ -1,0 +1,8 @@
+{
+    "id": "dadc7591-c8c4-437c-a576-4e6a56a7cf35",
+    "type": "feature",
+    "description": "This release enable customer to add/remove/update more than one workload for a component",
+    "modules": [
+        "service/applicationinsights"
+    ]
+}

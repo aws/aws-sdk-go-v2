@@ -21595,6 +21595,68 @@ func awsRestjson1_deserializeDocumentApplicationResponse(v **types.ApplicationRe
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentApplicationSettingsJourneyLimits(v **types.ApplicationSettingsJourneyLimits, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ApplicationSettingsJourneyLimits
+	if *v == nil {
+		sv = &types.ApplicationSettingsJourneyLimits{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DailyCap":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DailyCap = int32(i64)
+			}
+
+		case "TimeframeCap":
+			if err := awsRestjson1_deserializeDocumentJourneyTimeframeCap(&sv.TimeframeCap, value); err != nil {
+				return err
+			}
+
+		case "TotalCap":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalCap = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentApplicationSettingsResource(v **types.ApplicationSettingsResource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21628,6 +21690,11 @@ func awsRestjson1_deserializeDocumentApplicationSettingsResource(v **types.Appli
 
 		case "CampaignHook":
 			if err := awsRestjson1_deserializeDocumentCampaignHook(&sv.CampaignHook, value); err != nil {
+				return err
+			}
+
+		case "JourneyLimits":
+			if err := awsRestjson1_deserializeDocumentApplicationSettingsJourneyLimits(&sv.JourneyLimits, value); err != nil {
 				return err
 			}
 
@@ -25408,6 +25475,15 @@ func awsRestjson1_deserializeDocumentGCMChannelResponse(v **types.GCMChannelResp
 				sv.Credential = ptr.String(jtv)
 			}
 
+		case "DefaultAuthenticationMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.DefaultAuthenticationMethod = ptr.String(jtv)
+			}
+
 		case "Enabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -25424,6 +25500,15 @@ func awsRestjson1_deserializeDocumentGCMChannelResponse(v **types.GCMChannelResp
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
 				sv.HasCredential = jtv
+			}
+
+		case "HasFcmServiceCredentials":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.HasFcmServiceCredentials = jtv
 			}
 
 		case "Id":
@@ -27155,6 +27240,24 @@ func awsRestjson1_deserializeDocumentJourneyLimits(v **types.JourneyLimits, valu
 				sv.MessagesPerSecond = int32(i64)
 			}
 
+		case "TimeframeCap":
+			if err := awsRestjson1_deserializeDocumentJourneyTimeframeCap(&sv.TimeframeCap, value); err != nil {
+				return err
+			}
+
+		case "TotalCap":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalCap = int32(i64)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -27843,6 +27946,63 @@ func awsRestjson1_deserializeDocumentJourneysResponse(v **types.JourneysResponse
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJourneyTimeframeCap(v **types.JourneyTimeframeCap, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JourneyTimeframeCap
+	if *v == nil {
+		sv = &types.JourneyTimeframeCap{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Cap":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Cap = int32(i64)
+			}
+
+		case "Days":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Days = int32(i64)
 			}
 
 		default:
@@ -32445,6 +32605,11 @@ func awsRestjson1_deserializeDocumentTemplateConfiguration(v **types.TemplateCon
 		switch key {
 		case "EmailTemplate":
 			if err := awsRestjson1_deserializeDocumentTemplate(&sv.EmailTemplate, value); err != nil {
+				return err
+			}
+
+		case "InAppTemplate":
+			if err := awsRestjson1_deserializeDocumentTemplate(&sv.InAppTemplate, value); err != nil {
 				return err
 			}
 

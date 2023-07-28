@@ -36,6 +36,9 @@ func (c *Client) ListConfigurationHistory(ctx context.Context, params *ListConfi
 
 type ListConfigurationHistoryInput struct {
 
+	// The AWS account ID for the resource group owner.
+	AccountId *string
+
 	// The end time of the event.
 	EndTime *time.Time
 

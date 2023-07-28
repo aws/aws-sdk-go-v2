@@ -63,6 +63,14 @@ type ExecuteChangeSetInput struct {
 	// Default: True
 	DisableRollback *bool
 
+	// This deletion policy deletes newly created resources, but retains existing
+	// resources, when a stack operation is rolled back. This ensures new, empty, and
+	// unused resources are deleted, while critical resources and their data are
+	// retained. RetainExceptOnCreate can be specified for any resource that supports
+	// the DeletionPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html)
+	// attribute.
+	RetainExceptOnCreate *bool
+
 	// If you specified the name of a change set, specify the stack name or Amazon
 	// Resource Name (ARN) that's associated with the change set you want to execute.
 	StackName *string

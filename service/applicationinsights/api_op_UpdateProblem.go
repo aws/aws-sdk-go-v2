@@ -11,62 +11,54 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a component and lists the resources that are grouped together in a
-// component.
-func (c *Client) DescribeComponent(ctx context.Context, params *DescribeComponentInput, optFns ...func(*Options)) (*DescribeComponentOutput, error) {
+// Updates the visibility of the problem or specifies the problem as RESOLVED .
+func (c *Client) UpdateProblem(ctx context.Context, params *UpdateProblemInput, optFns ...func(*Options)) (*UpdateProblemOutput, error) {
 	if params == nil {
-		params = &DescribeComponentInput{}
+		params = &UpdateProblemInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeComponent", params, optFns, c.addOperationDescribeComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateProblem", params, optFns, c.addOperationUpdateProblemMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeComponentOutput)
+	out := result.(*UpdateProblemOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeComponentInput struct {
+type UpdateProblemInput struct {
 
-	// The name of the component.
+	// The ID of the problem.
 	//
 	// This member is required.
-	ComponentName *string
+	ProblemId *string
 
-	// The name of the resource group.
-	//
-	// This member is required.
-	ResourceGroupName *string
+	// The status of the problem. Arguments can be passed for only problems that show
+	// a status of RECOVERING .
+	UpdateStatus types.UpdateStatus
 
-	// The AWS account ID for the resource group owner.
-	AccountId *string
+	// The visibility of a problem. When you pass a value of IGNORED , the problem is
+	// removed from the default view, and all notifications for the problem are
+	// suspended. When VISIBLE is passed, the IGNORED action is reversed.
+	Visibility types.Visibility
 
 	noSmithyDocumentSerde
 }
 
-type DescribeComponentOutput struct {
-
-	// Describes a standalone resource or similarly grouped resources that the
-	// application is made up of.
-	ApplicationComponent *types.ApplicationComponent
-
-	// The list of resource ARNs that belong to the component.
-	ResourceList []string
-
+type UpdateProblemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComponent{}, middleware.After)
+func (c *Client) addOperationUpdateProblemMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProblem{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeComponent{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateProblem{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -106,10 +98,10 @@ func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeComponentValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateProblemValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComponent(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProblem(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -127,11 +119,11 @@ func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeComponent(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateProblem(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "applicationinsights",
-		OperationName: "DescribeComponent",
+		OperationName: "UpdateProblem",
 	}
 }

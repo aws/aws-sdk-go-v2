@@ -1372,8 +1372,12 @@ type PhoneNumberType string
 
 // Enum values for PhoneNumberType
 const (
-	PhoneNumberTypeTollFree PhoneNumberType = "TOLL_FREE"
-	PhoneNumberTypeDid      PhoneNumberType = "DID"
+	PhoneNumberTypeTollFree      PhoneNumberType = "TOLL_FREE"
+	PhoneNumberTypeDid           PhoneNumberType = "DID"
+	PhoneNumberTypeUifn          PhoneNumberType = "UIFN"
+	PhoneNumberTypeShared        PhoneNumberType = "SHARED"
+	PhoneNumberTypeThirdPartyTf  PhoneNumberType = "THIRD_PARTY_TF"
+	PhoneNumberTypeThirdPartyDid PhoneNumberType = "THIRD_PARTY_DID"
 )
 
 // Values returns all known values for PhoneNumberType. Note that this can be
@@ -1383,6 +1387,10 @@ func (PhoneNumberType) Values() []PhoneNumberType {
 	return []PhoneNumberType{
 		"TOLL_FREE",
 		"DID",
+		"UIFN",
+		"SHARED",
+		"THIRD_PARTY_TF",
+		"THIRD_PARTY_DID",
 	}
 }
 

@@ -11,24 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a component and lists the resources that are grouped together in a
-// component.
-func (c *Client) DescribeComponent(ctx context.Context, params *DescribeComponentInput, optFns ...func(*Options)) (*DescribeComponentOutput, error) {
+// Adds a workload to a component. Each component can have at most five workloads.
+func (c *Client) AddWorkload(ctx context.Context, params *AddWorkloadInput, optFns ...func(*Options)) (*AddWorkloadOutput, error) {
 	if params == nil {
-		params = &DescribeComponentInput{}
+		params = &AddWorkloadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeComponent", params, optFns, c.addOperationDescribeComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddWorkload", params, optFns, c.addOperationAddWorkloadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeComponentOutput)
+	out := result.(*AddWorkloadOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeComponentInput struct {
+type AddWorkloadInput struct {
 
 	// The name of the component.
 	//
@@ -40,20 +39,23 @@ type DescribeComponentInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
-	// The AWS account ID for the resource group owner.
-	AccountId *string
+	// The configuration settings of the workload. The value is the escaped JSON of
+	// the configuration.
+	//
+	// This member is required.
+	WorkloadConfiguration *types.WorkloadConfiguration
 
 	noSmithyDocumentSerde
 }
 
-type DescribeComponentOutput struct {
+type AddWorkloadOutput struct {
 
-	// Describes a standalone resource or similarly grouped resources that the
-	// application is made up of.
-	ApplicationComponent *types.ApplicationComponent
+	// The configuration settings of the workload. The value is the escaped JSON of
+	// the configuration.
+	WorkloadConfiguration *types.WorkloadConfiguration
 
-	// The list of resource ARNs that belong to the component.
-	ResourceList []string
+	// The ID of the workload.
+	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,12 +63,12 @@ type DescribeComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComponent{}, middleware.After)
+func (c *Client) addOperationAddWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddWorkload{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeComponent{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddWorkload{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -106,10 +108,10 @@ func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeComponentValidationMiddleware(stack); err != nil {
+	if err = addOpAddWorkloadValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComponent(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddWorkload(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -127,11 +129,11 @@ func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeComponent(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opAddWorkload(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "applicationinsights",
-		OperationName: "DescribeComponent",
+		OperationName: "AddWorkload",
 	}
 }

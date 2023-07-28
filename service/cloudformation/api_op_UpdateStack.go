@@ -128,6 +128,14 @@ type UpdateStackInput struct {
 	// .
 	ResourceTypes []string
 
+	// This deletion policy deletes newly created resources, but retains existing
+	// resources, when a stack operation is rolled back. This ensures new, empty, and
+	// unused resources are deleted, while critical resources and their data are
+	// retained. RetainExceptOnCreate can be specified for any resource that supports
+	// the DeletionPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html)
+	// attribute.
+	RetainExceptOnCreate *bool
+
 	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
 	// that CloudFormation assumes to update the stack. CloudFormation uses the role's
 	// credentials to make calls on your behalf. CloudFormation always uses this role

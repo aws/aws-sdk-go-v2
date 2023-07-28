@@ -39,6 +39,9 @@ type DescribeComponentConfigurationInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
+	// The AWS account ID for the resource group owner.
+	AccountId *string
+
 	noSmithyDocumentSerde
 }
 

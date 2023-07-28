@@ -5319,6 +5319,11 @@ func awsAwsquery_serializeOpDocumentCreateStackInput(v *CreateStackInput, value 
 		}
 	}
 
+	if v.RetainExceptOnCreate != nil {
+		objectKey := object.Key("RetainExceptOnCreate")
+		objectKey.Boolean(*v.RetainExceptOnCreate)
+	}
+
 	if v.RoleARN != nil {
 		objectKey := object.Key("RoleARN")
 		objectKey.String(*v.RoleARN)
@@ -6116,6 +6121,11 @@ func awsAwsquery_serializeOpDocumentExecuteChangeSetInput(v *ExecuteChangeSetInp
 		objectKey.Boolean(*v.DisableRollback)
 	}
 
+	if v.RetainExceptOnCreate != nil {
+		objectKey := object.Key("RetainExceptOnCreate")
+		objectKey.Boolean(*v.RetainExceptOnCreate)
+	}
+
 	if v.StackName != nil {
 		objectKey := object.Key("StackName")
 		objectKey.String(*v.StackName)
@@ -6770,6 +6780,11 @@ func awsAwsquery_serializeOpDocumentRollbackStackInput(v *RollbackStackInput, va
 		objectKey.String(*v.ClientRequestToken)
 	}
 
+	if v.RetainExceptOnCreate != nil {
+		objectKey := object.Key("RetainExceptOnCreate")
+		objectKey.Boolean(*v.RetainExceptOnCreate)
+	}
+
 	if v.RoleARN != nil {
 		objectKey := object.Key("RoleARN")
 		objectKey.String(*v.RoleARN)
@@ -6985,6 +7000,11 @@ func awsAwsquery_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value 
 		if err := awsAwsquery_serializeDocumentResourceTypes(v.ResourceTypes, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.RetainExceptOnCreate != nil {
+		objectKey := object.Key("RetainExceptOnCreate")
+		objectKey.Boolean(*v.RetainExceptOnCreate)
 	}
 
 	if v.RoleARN != nil {

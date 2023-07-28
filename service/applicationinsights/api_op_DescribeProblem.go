@@ -34,6 +34,9 @@ type DescribeProblemInput struct {
 	// This member is required.
 	ProblemId *string
 
+	// The AWS account ID for the owner of the resource group affected by the problem.
+	AccountId *string
+
 	noSmithyDocumentSerde
 }
 

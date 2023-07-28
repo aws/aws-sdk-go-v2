@@ -47,6 +47,14 @@ type RollbackStackInput struct {
 	// A unique identifier for this RollbackStack request.
 	ClientRequestToken *string
 
+	// This deletion policy deletes newly created resources, but retains existing
+	// resources, when a stack operation is rolled back. This ensures new, empty, and
+	// unused resources are deleted, while critical resources and their data are
+	// retained. RetainExceptOnCreate can be specified for any resource that supports
+	// the DeletionPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html)
+	// attribute.
+	RetainExceptOnCreate *bool
+
 	// The Amazon Resource Name (ARN) of an Identity and Access Management role that
 	// CloudFormation assumes to rollback the stack.
 	RoleARN *string

@@ -250,6 +250,26 @@ func (m *validateOpDescribeClusterOperation) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeClusterOperationV2 struct {
+}
+
+func (*validateOpDescribeClusterOperationV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeClusterOperationV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeClusterOperationV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeClusterOperationV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeClusterV2 struct {
 }
 
@@ -405,6 +425,26 @@ func (m *validateOpListClusterOperations) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListClusterOperationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListClusterOperationsV2 struct {
+}
+
+func (*validateOpListClusterOperationsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListClusterOperationsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListClusterOperationsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListClusterOperationsV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -838,6 +878,10 @@ func addOpDescribeClusterOperationValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDescribeClusterOperation{}, middleware.After)
 }
 
+func addOpDescribeClusterOperationV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeClusterOperationV2{}, middleware.After)
+}
+
 func addOpDescribeClusterV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeClusterV2{}, middleware.After)
 }
@@ -868,6 +912,10 @@ func addOpListClientVpcConnectionsValidationMiddleware(stack *middleware.Stack) 
 
 func addOpListClusterOperationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListClusterOperations{}, middleware.After)
+}
+
+func addOpListClusterOperationsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListClusterOperationsV2{}, middleware.After)
 }
 
 func addOpListConfigurationRevisionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1524,6 +1572,21 @@ func validateOpDescribeClusterOperationInput(v *DescribeClusterOperationInput) e
 	}
 }
 
+func validateOpDescribeClusterOperationV2Input(v *DescribeClusterOperationV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeClusterOperationV2Input"}
+	if v.ClusterOperationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterOperationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeClusterV2Input(v *DescribeClusterV2Input) error {
 	if v == nil {
 		return nil
@@ -1634,6 +1697,21 @@ func validateOpListClusterOperationsInput(v *ListClusterOperationsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListClusterOperationsInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListClusterOperationsV2Input(v *ListClusterOperationsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListClusterOperationsV2Input"}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}

@@ -175,6 +175,46 @@ func (OsType) Values() []OsType {
 	}
 }
 
+type RecommendationType string
+
+// Enum values for RecommendationType
+const (
+	RecommendationTypeInfraOnly    RecommendationType = "INFRA_ONLY"
+	RecommendationTypeWorkloadOnly RecommendationType = "WORKLOAD_ONLY"
+	RecommendationTypeAll          RecommendationType = "ALL"
+)
+
+// Values returns all known values for RecommendationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationType) Values() []RecommendationType {
+	return []RecommendationType{
+		"INFRA_ONLY",
+		"WORKLOAD_ONLY",
+		"ALL",
+	}
+}
+
+type ResolutionMethod string
+
+// Enum values for ResolutionMethod
+const (
+	ResolutionMethodManual     ResolutionMethod = "MANUAL"
+	ResolutionMethodAutomatic  ResolutionMethod = "AUTOMATIC"
+	ResolutionMethodUnresolved ResolutionMethod = "UNRESOLVED"
+)
+
+// Values returns all known values for ResolutionMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResolutionMethod) Values() []ResolutionMethod {
+	return []ResolutionMethod{
+		"MANUAL",
+		"AUTOMATIC",
+		"UNRESOLVED",
+	}
+}
+
 type SeverityLevel string
 
 // Enum values for SeverityLevel
@@ -201,10 +241,11 @@ type Status string
 
 // Enum values for Status
 const (
-	StatusIgnore    Status = "IGNORE"
-	StatusResolved  Status = "RESOLVED"
-	StatusPending   Status = "PENDING"
-	StatusRecurring Status = "RECURRING"
+	StatusIgnore     Status = "IGNORE"
+	StatusResolved   Status = "RESOLVED"
+	StatusPending    Status = "PENDING"
+	StatusRecurring  Status = "RECURRING"
+	StatusRecovering Status = "RECOVERING"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
@@ -216,6 +257,7 @@ func (Status) Values() []Status {
 		"RESOLVED",
 		"PENDING",
 		"RECURRING",
+		"RECOVERING",
 	}
 }
 
@@ -241,6 +283,9 @@ const (
 	TierSqlServerFailoverClusterInstance   Tier = "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"
 	TierSharepoint                         Tier = "SHAREPOINT"
 	TierActiveDirectory                    Tier = "ACTIVE_DIRECTORY"
+	TierSapNetweaverStandard               Tier = "SAP_NETWEAVER_STANDARD"
+	TierSapNetweaverDistributed            Tier = "SAP_NETWEAVER_DISTRIBUTED"
+	TierSapNetweaverHighAvailability       Tier = "SAP_NETWEAVER_HIGH_AVAILABILITY"
 )
 
 // Values returns all known values for Tier. Note that this can be expanded in the
@@ -266,5 +311,42 @@ func (Tier) Values() []Tier {
 		"SQL_SERVER_FAILOVER_CLUSTER_INSTANCE",
 		"SHAREPOINT",
 		"ACTIVE_DIRECTORY",
+		"SAP_NETWEAVER_STANDARD",
+		"SAP_NETWEAVER_DISTRIBUTED",
+		"SAP_NETWEAVER_HIGH_AVAILABILITY",
+	}
+}
+
+type UpdateStatus string
+
+// Enum values for UpdateStatus
+const (
+	UpdateStatusResolved UpdateStatus = "RESOLVED"
+)
+
+// Values returns all known values for UpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateStatus) Values() []UpdateStatus {
+	return []UpdateStatus{
+		"RESOLVED",
+	}
+}
+
+type Visibility string
+
+// Enum values for Visibility
+const (
+	VisibilityIgnored Visibility = "IGNORED"
+	VisibilityVisible Visibility = "VISIBLE"
+)
+
+// Values returns all known values for Visibility. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Visibility) Values() []Visibility {
+	return []Visibility{
+		"IGNORED",
+		"VISIBLE",
 	}
 }

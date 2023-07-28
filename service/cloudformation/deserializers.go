@@ -13494,6 +13494,22 @@ func awsAwsquery_deserializeDocumentStack(v **types.Stack, decoder smithyxml.Nod
 				sv.ParentId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("RetainExceptOnCreate", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected RetainExceptOnCreate to be of type *bool, got %T instead", val)
+				}
+				sv.RetainExceptOnCreate = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("RoleARN", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

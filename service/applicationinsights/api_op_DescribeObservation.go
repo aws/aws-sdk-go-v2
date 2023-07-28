@@ -34,6 +34,9 @@ type DescribeObservationInput struct {
 	// This member is required.
 	ObservationId *string
 
+	// The AWS account ID for the resource group owner.
+	AccountId *string
+
 	noSmithyDocumentSerde
 }
 

@@ -17,7 +17,11 @@ import (
 // workflow. After you create a staging distribution, you can use
 // UpdateDistribution to modify the staging distribution's configuration. Then you
 // can use CreateContinuousDeploymentPolicy to incrementally move traffic to the
-// staging distribution.
+// staging distribution. This API operation requires the following IAM permissions:
+//
+//   - GetDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html)
+//   - CreateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html)
+//   - CopyDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CopyDistribution.html)
 func (c *Client) CopyDistribution(ctx context.Context, params *CopyDistributionInput, optFns ...func(*Options)) (*CopyDistributionOutput, error) {
 	if params == nil {
 		params = &CopyDistributionInput{}
@@ -47,6 +51,12 @@ type CopyDistributionInput struct {
 	//
 	// This member is required.
 	PrimaryDistributionId *string
+
+	// A Boolean flag to specify the state of the staging distribution when it's
+	// created. When you set this value to True , the staging distribution is enabled.
+	// When you set this value to False , the staging distribution is disabled. If you
+	// omit this field, the default value is True .
+	Enabled *bool
 
 	// The version identifier of the primary distribution whose configuration you are
 	// copying. This is the ETag value returned in the response to GetDistribution and

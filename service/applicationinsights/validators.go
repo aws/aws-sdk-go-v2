@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddWorkload struct {
+}
+
+func (*validateOpAddWorkload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddWorkload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddWorkloadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddWorkloadInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateApplication struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpDescribeProblemObservations) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeWorkload struct {
+}
+
+func (*validateOpDescribeWorkload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWorkload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWorkloadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWorkloadInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListComponents struct {
 }
 
@@ -365,6 +405,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWorkloads struct {
+}
+
+func (*validateOpListWorkloads) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWorkloads) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWorkloadsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWorkloadsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveWorkload struct {
+}
+
+func (*validateOpRemoveWorkload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveWorkload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveWorkloadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveWorkloadInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +570,50 @@ func (m *validateOpUpdateLogPattern) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProblem struct {
+}
+
+func (*validateOpUpdateProblem) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProblem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProblemInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProblemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateWorkload struct {
+}
+
+func (*validateOpUpdateWorkload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateWorkload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateWorkloadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateWorkloadInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAddWorkloadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddWorkload{}, middleware.After)
+}
+
 func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApplication{}, middleware.After)
 }
@@ -546,6 +670,10 @@ func addOpDescribeProblemObservationsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDescribeProblemObservations{}, middleware.After)
 }
 
+func addOpDescribeWorkloadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWorkload{}, middleware.After)
+}
+
 func addOpListComponentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListComponents{}, middleware.After)
 }
@@ -560,6 +688,14 @@ func addOpListLogPatternsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListWorkloadsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWorkloads{}, middleware.After)
+}
+
+func addOpRemoveWorkloadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveWorkload{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -584,6 +720,14 @@ func addOpUpdateComponentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateLogPatternValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLogPattern{}, middleware.After)
+}
+
+func addOpUpdateProblemValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProblem{}, middleware.After)
+}
+
+func addOpUpdateWorkloadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateWorkload{}, middleware.After)
 }
 
 func validateTag(v *types.Tag) error {
@@ -613,6 +757,27 @@ func validateTagList(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddWorkloadInput(v *AddWorkloadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddWorkloadInput"}
+	if v.ResourceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
+	}
+	if v.WorkloadConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -875,6 +1040,27 @@ func validateOpDescribeProblemObservationsInput(v *DescribeProblemObservationsIn
 	}
 }
 
+func validateOpDescribeWorkloadInput(v *DescribeWorkloadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkloadInput"}
+	if v.ResourceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
+	}
+	if v.WorkloadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListComponentsInput(v *ListComponentsInput) error {
 	if v == nil {
 		return nil
@@ -927,6 +1113,45 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWorkloadsInput(v *ListWorkloadsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWorkloadsInput"}
+	if v.ResourceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveWorkloadInput(v *RemoveWorkloadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveWorkloadInput"}
+	if v.ResourceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
+	}
+	if v.WorkloadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1039,6 +1264,42 @@ func validateOpUpdateLogPatternInput(v *UpdateLogPatternInput) error {
 	}
 	if v.PatternName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PatternName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProblemInput(v *UpdateProblemInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProblemInput"}
+	if v.ProblemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProblemId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateWorkloadInput(v *UpdateWorkloadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorkloadInput"}
+	if v.ResourceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
+	}
+	if v.WorkloadConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

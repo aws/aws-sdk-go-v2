@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new distribution with tags.
+// Create a new distribution with tags. This API operation requires the following
+// IAM permissions:
+//   - CreateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html)
+//   - TagResource (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_TagResource.html)
 func (c *Client) CreateDistributionWithTags(ctx context.Context, params *CreateDistributionWithTagsInput, optFns ...func(*Options)) (*CreateDistributionWithTagsOutput, error) {
 	if params == nil {
 		params = &CreateDistributionWithTagsInput{}

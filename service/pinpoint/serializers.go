@@ -9415,6 +9415,30 @@ func awsRestjson1_serializeDocumentAPNSVoipSandboxChannelRequest(v *types.APNSVo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentApplicationSettingsJourneyLimits(v *types.ApplicationSettingsJourneyLimits, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DailyCap != 0 {
+		ok := object.Key("DailyCap")
+		ok.Integer(v.DailyCap)
+	}
+
+	if v.TimeframeCap != nil {
+		ok := object.Key("TimeframeCap")
+		if err := awsRestjson1_serializeDocumentJourneyTimeframeCap(v.TimeframeCap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TotalCap != 0 {
+		ok := object.Key("TotalCap")
+		ok.Integer(v.TotalCap)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAttributeDimension(v *types.AttributeDimension, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10882,9 +10906,19 @@ func awsRestjson1_serializeDocumentGCMChannelRequest(v *types.GCMChannelRequest,
 		ok.String(*v.ApiKey)
 	}
 
+	if v.DefaultAuthenticationMethod != nil {
+		ok := object.Key("DefaultAuthenticationMethod")
+		ok.String(*v.DefaultAuthenticationMethod)
+	}
+
 	if v.Enabled {
 		ok := object.Key("Enabled")
 		ok.Boolean(v.Enabled)
+	}
+
+	if v.ServiceJson != nil {
+		ok := object.Key("ServiceJson")
+		ok.String(*v.ServiceJson)
 	}
 
 	return nil
@@ -10929,6 +10963,11 @@ func awsRestjson1_serializeDocumentGCMMessage(v *types.GCMMessage, value smithyj
 	if v.ImageUrl != nil {
 		ok := object.Key("ImageUrl")
 		ok.String(*v.ImageUrl)
+	}
+
+	if v.PreferredAuthenticationMethod != nil {
+		ok := object.Key("PreferredAuthenticationMethod")
+		ok.String(*v.PreferredAuthenticationMethod)
 	}
 
 	if v.Priority != nil {
@@ -11352,6 +11391,18 @@ func awsRestjson1_serializeDocumentJourneyLimits(v *types.JourneyLimits, value s
 		ok.Integer(v.MessagesPerSecond)
 	}
 
+	if v.TimeframeCap != nil {
+		ok := object.Key("TimeframeCap")
+		if err := awsRestjson1_serializeDocumentJourneyTimeframeCap(v.TimeframeCap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TotalCap != 0 {
+		ok := object.Key("TotalCap")
+		ok.Integer(v.TotalCap)
+	}
+
 	return nil
 }
 
@@ -11428,6 +11479,23 @@ func awsRestjson1_serializeDocumentJourneyStateRequest(v *types.JourneyStateRequ
 	if len(v.State) > 0 {
 		ok := object.Key("State")
 		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJourneyTimeframeCap(v *types.JourneyTimeframeCap, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Cap != 0 {
+		ok := object.Key("Cap")
+		ok.Integer(v.Cap)
+	}
+
+	if v.Days != 0 {
+		ok := object.Key("Days")
+		ok.Integer(v.Days)
 	}
 
 	return nil
@@ -13066,6 +13134,13 @@ func awsRestjson1_serializeDocumentTemplateConfiguration(v *types.TemplateConfig
 		}
 	}
 
+	if v.InAppTemplate != nil {
+		ok := object.Key("InAppTemplate")
+		if err := awsRestjson1_serializeDocumentTemplate(v.InAppTemplate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PushTemplate != nil {
 		ok := object.Key("PushTemplate")
 		if err := awsRestjson1_serializeDocumentTemplate(v.PushTemplate, ok); err != nil {
@@ -13320,6 +13395,13 @@ func awsRestjson1_serializeDocumentWriteApplicationSettingsRequest(v *types.Writ
 	if v.EventTaggingEnabled {
 		ok := object.Key("EventTaggingEnabled")
 		ok.Boolean(v.EventTaggingEnabled)
+	}
+
+	if v.JourneyLimits != nil {
+		ok := object.Key("JourneyLimits")
+		if err := awsRestjson1_serializeDocumentApplicationSettingsJourneyLimits(v.JourneyLimits, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Limits != nil {

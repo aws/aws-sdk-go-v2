@@ -1,0 +1,8 @@
+{
+    "id": "d7e500f0-0972-47bb-8645-350533ad120f",
+    "type": "feature",
+    "description": "This SDK release is for the feature launch of AWS CloudFormation RetainExceptOnCreate. It adds a new parameter retainExceptOnCreate in the following APIs: CreateStack, UpdateStack, RollbackStack, ExecuteChangeSet.",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

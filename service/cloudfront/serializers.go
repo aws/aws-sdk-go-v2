@@ -176,6 +176,17 @@ func awsRestxml_serializeOpDocumentCopyDistributionInput(v *CopyDistributionInpu
 		el := value.MemberElement(root)
 		el.String(*v.CallerReference)
 	}
+	if v.Enabled != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Enabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.Enabled)
+	}
 	return nil
 }
 

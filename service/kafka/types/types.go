@@ -341,6 +341,98 @@ type ClusterOperationStepInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Returns information about a cluster operation.
+type ClusterOperationV2 struct {
+
+	// ARN of the cluster.
+	ClusterArn *string
+
+	// Type of the backend cluster.
+	ClusterType ClusterType
+
+	// The time at which the operation finished.
+	EndTime *time.Time
+
+	// If cluster operation failed from an error, it describes the error.
+	ErrorInfo *ErrorInfo
+
+	// ARN of the cluster operation.
+	OperationArn *string
+
+	// State of the cluster operation.
+	OperationState *string
+
+	// Type of the cluster operation.
+	OperationType *string
+
+	// Properties of a provisioned cluster.
+	Provisioned *ClusterOperationV2Provisioned
+
+	// Properties of a serverless cluster.
+	Serverless *ClusterOperationV2Serverless
+
+	// The time at which operation was started.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Returns information about a provisioned cluster operation.
+type ClusterOperationV2Provisioned struct {
+
+	// Steps completed during the operation.
+	OperationSteps []ClusterOperationStep
+
+	// Information about cluster attributes before a cluster is updated.
+	SourceClusterInfo *MutableClusterInfo
+
+	// Information about cluster attributes after a cluster is updated.
+	TargetClusterInfo *MutableClusterInfo
+
+	// Description of the VPC connection for CreateVpcConnection and
+	// DeleteVpcConnection operations.
+	VpcConnectionInfo *VpcConnectionInfo
+
+	noSmithyDocumentSerde
+}
+
+// Returns information about a serverless cluster operation.
+type ClusterOperationV2Serverless struct {
+
+	// Description of the VPC connection for CreateVpcConnection and
+	// DeleteVpcConnection operations.
+	VpcConnectionInfo *VpcConnectionInfoServerless
+
+	noSmithyDocumentSerde
+}
+
+// Returns information about a cluster operation.
+type ClusterOperationV2Summary struct {
+
+	// ARN of the cluster.
+	ClusterArn *string
+
+	// Type of the backend cluster.
+	ClusterType ClusterType
+
+	// The time at which the operation finished.
+	EndTime *time.Time
+
+	// ARN of the cluster operation.
+	OperationArn *string
+
+	// State of the cluster operation.
+	OperationState *string
+
+	// Type of the cluster operation.
+	OperationType *string
+
+	// The time at which operation was started.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains source Apache Kafka versions and compatible target Apache Kafka
 // versions.
 type CompatibleKafkaVersion struct {
@@ -1009,6 +1101,24 @@ type VpcConnection struct {
 
 // Description of the VPC connection.
 type VpcConnectionInfo struct {
+
+	// The time when Amazon MSK creates the VPC Connnection.
+	CreationTime *time.Time
+
+	// The owner of the VPC Connection.
+	Owner *string
+
+	// Description of the requester that calls the API operation.
+	UserIdentity *UserIdentity
+
+	// The Amazon Resource Name (ARN) of the VPC connection.
+	VpcConnectionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Description of the VPC connection.
+type VpcConnectionInfoServerless struct {
 
 	// The time when Amazon MSK creates the VPC Connnection.
 	CreationTime *time.Time

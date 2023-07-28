@@ -183,6 +183,7 @@ type FunctionRuntime string
 // Enum values for FunctionRuntime
 const (
 	FunctionRuntimeCloudfrontJs10 FunctionRuntime = "cloudfront-js-1.0"
+	FunctionRuntimeCloudfrontJs20 FunctionRuntime = "cloudfront-js-2.0"
 )
 
 // Values returns all known values for FunctionRuntime. Note that this can be
@@ -191,6 +192,7 @@ const (
 func (FunctionRuntime) Values() []FunctionRuntime {
 	return []FunctionRuntime{
 		"cloudfront-js-1.0",
+		"cloudfront-js-2.0",
 	}
 }
 

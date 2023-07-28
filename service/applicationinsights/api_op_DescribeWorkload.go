@@ -11,24 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a component and lists the resources that are grouped together in a
-// component.
-func (c *Client) DescribeComponent(ctx context.Context, params *DescribeComponentInput, optFns ...func(*Options)) (*DescribeComponentOutput, error) {
+// Describes a workload and its configuration.
+func (c *Client) DescribeWorkload(ctx context.Context, params *DescribeWorkloadInput, optFns ...func(*Options)) (*DescribeWorkloadOutput, error) {
 	if params == nil {
-		params = &DescribeComponentInput{}
+		params = &DescribeWorkloadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeComponent", params, optFns, c.addOperationDescribeComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkload", params, optFns, c.addOperationDescribeWorkloadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeComponentOutput)
+	out := result.(*DescribeWorkloadOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeComponentInput struct {
+type DescribeWorkloadInput struct {
 
 	// The name of the component.
 	//
@@ -40,20 +39,29 @@ type DescribeComponentInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
-	// The AWS account ID for the resource group owner.
+	// The ID of the workload.
+	//
+	// This member is required.
+	WorkloadId *string
+
+	// The AWS account ID for the workload owner.
 	AccountId *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeComponentOutput struct {
+type DescribeWorkloadOutput struct {
 
-	// Describes a standalone resource or similarly grouped resources that the
-	// application is made up of.
-	ApplicationComponent *types.ApplicationComponent
+	// The configuration settings of the workload. The value is the escaped JSON of
+	// the configuration.
+	WorkloadConfiguration *types.WorkloadConfiguration
 
-	// The list of resource ARNs that belong to the component.
-	ResourceList []string
+	// The ID of the workload.
+	WorkloadId *string
+
+	// If logging is supported for the resource type, shows whether the component has
+	// configured logs to be monitored.
+	WorkloadRemarks *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,12 +69,12 @@ type DescribeComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComponent{}, middleware.After)
+func (c *Client) addOperationDescribeWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkload{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeComponent{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkload{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -106,10 +114,10 @@ func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeComponentValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeWorkloadValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComponent(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkload(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -127,11 +135,11 @@ func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeComponent(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeWorkload(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "applicationinsights",
-		OperationName: "DescribeComponent",
+		OperationName: "DescribeWorkload",
 	}
 }

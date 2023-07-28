@@ -21,7 +21,10 @@ import (
 // the staging distribution and verifying that it works as intended, you can use
 // this operation to copy the staging distribution's configuration to the primary
 // distribution. This action will disable the continuous deployment policy and move
-// your domain's traffic back to the primary distribution.
+// your domain's traffic back to the primary distribution. This API operation
+// requires the following IAM permissions:
+//   - GetDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html)
+//   - UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
 func (c *Client) UpdateDistributionWithStagingConfig(ctx context.Context, params *UpdateDistributionWithStagingConfigInput, optFns ...func(*Options)) (*UpdateDistributionWithStagingConfigOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionWithStagingConfigInput{}

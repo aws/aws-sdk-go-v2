@@ -3281,21 +3281,6 @@ func validateExportJobRequest(v *types.ExportJobRequest) error {
 	}
 }
 
-func validateGCMChannelRequest(v *types.GCMChannelRequest) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GCMChannelRequest"}
-	if v.ApiKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiKey"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateGPSCoordinates(v *types.GPSCoordinates) error {
 	if v == nil {
 		return nil
@@ -6209,10 +6194,6 @@ func validateOpUpdateGcmChannelInput(v *UpdateGcmChannelInput) error {
 	}
 	if v.GCMChannelRequest == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GCMChannelRequest"))
-	} else if v.GCMChannelRequest != nil {
-		if err := validateGCMChannelRequest(v.GCMChannelRequest); err != nil {
-			invalidParams.AddNested("GCMChannelRequest", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

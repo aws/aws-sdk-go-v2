@@ -40,6 +40,9 @@ type ApplicationComponent struct {
 // Describes the status of the application.
 type ApplicationInfo struct {
 
+	// The AWS account ID for the owner of the application.
+	AccountId *string
+
 	// Indicates whether auto-configuration is turned on for this application.
 	AutoConfigEnabled *bool
 
@@ -77,6 +80,10 @@ type ApplicationInfo struct {
 // The event information.
 type ConfigurationEvent struct {
 
+	// The AWS account ID for the owner of the application to which the configuration
+	// event belongs.
+	AccountId *string
+
 	// The details of the event in plain text.
 	EventDetail *string
 
@@ -96,6 +103,10 @@ type ConfigurationEvent struct {
 
 	// The resource monitored by Application Insights.
 	MonitoredResourceARN *string
+
+	// The name of the resource group of the application to which the configuration
+	// event belongs.
+	ResourceGroupName *string
 
 	noSmithyDocumentSerde
 }
@@ -282,6 +293,9 @@ type Observation struct {
 // Describes a problem that is detected by correlating observations.
 type Problem struct {
 
+	// The AWS account ID for the owner of the resource group affected by the problem.
+	AccountId *string
+
 	// The resource affected by the problem.
 	AffectedResource *string
 
@@ -304,6 +318,11 @@ type Problem struct {
 	// was resolved.
 	RecurringCount *int64
 
+	// Specifies how the problem was resolved. If the value is AUTOMATIC , the system
+	// resolved the problem. If the value is MANUAL , the user resolved the problem. If
+	// the value is UNRESOLVED , then the problem is not resolved.
+	ResolutionMethod ResolutionMethod
+
 	// The name of the resource group affected by the problem.
 	ResourceGroupName *string
 
@@ -318,6 +337,10 @@ type Problem struct {
 
 	// The name of the problem.
 	Title *string
+
+	// Specifies whether or not you can view the problem. Updates to ignored problems
+	// do not generate notifications.
+	Visibility Visibility
 
 	noSmithyDocumentSerde
 }
@@ -362,6 +385,43 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the workloads on a component.
+type Workload struct {
+
+	// The name of the component.
+	ComponentName *string
+
+	// The tier of the workload.
+	Tier Tier
+
+	// The ID of the workload.
+	WorkloadId *string
+
+	// The name of the workload.
+	WorkloadName *string
+
+	// If logging is supported for the resource type, shows whether the component has
+	// configured logs to be monitored.
+	WorkloadRemarks *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the workload.
+type WorkloadConfiguration struct {
+
+	// The configuration settings of the workload.
+	Configuration *string
+
+	// The configuration of the workload tier.
+	Tier Tier
+
+	// The name of the workload.
+	WorkloadName *string
 
 	noSmithyDocumentSerde
 }

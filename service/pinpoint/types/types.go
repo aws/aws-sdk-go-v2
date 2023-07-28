@@ -990,6 +990,27 @@ type ApplicationResponse struct {
 	noSmithyDocumentSerde
 }
 
+// The default sending limits for journeys in the application. To override these
+// limits and define custom limits for a specific journey, use the Journey
+// resource.
+type ApplicationSettingsJourneyLimits struct {
+
+	// The daily number of messages that an endpoint can receive from all journeys.
+	// The maximum value is 100. If set to 0, this limit will not apply.
+	DailyCap int32
+
+	// The default maximum number of messages that can be sent to an endpoint during
+	// the specified timeframe for all journeys.
+	TimeframeCap *JourneyTimeframeCap
+
+	// The default maximum number of messages that a single journey can sent to a
+	// single endpoint. The maximum value is 100. If set to 0, this limit will not
+	// apply.
+	TotalCap int32
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about an application, including the default settings for
 // an application.
 type ApplicationSettingsResource struct {
@@ -1004,6 +1025,11 @@ type ApplicationSettingsResource struct {
 	// for campaigns in the application. You can use this hook to customize segments
 	// that are used by campaigns in the application.
 	CampaignHook *CampaignHook
+
+	// The default sending limits for journeys in the application. These limits apply
+	// to each journey for the application but can be overridden, on a per journey
+	// basis, with the JourneyLimits resource.
+	JourneyLimits *ApplicationSettingsJourneyLimits
 
 	// The date and time, in ISO 8601 format, when the application's settings were
 	// last modified.
@@ -3139,12 +3165,20 @@ type GCMChannelRequest struct {
 
 	// The Web API Key, also referred to as an API_KEY or server key, that you
 	// received from Google to communicate with Google services.
-	//
-	// This member is required.
 	ApiKey *string
+
+	// The default authentication method used for GCM. Values are either "TOKEN" or
+	// "KEY". Defaults to "KEY".
+	DefaultAuthenticationMethod *string
 
 	// Specifies whether to enable the GCM channel for the application.
 	Enabled bool
+
+	// The contents of the JSON file provided by Google during registration in order
+	// to generate an access token for authentication. For more information see
+	// Migrate from legacy FCM APIs to HTTP v1 (https://firebase.google.com/docs/cloud-messaging/migrate-v1)
+	// .
+	ServiceJson *string
 
 	noSmithyDocumentSerde
 }
@@ -3154,12 +3188,6 @@ type GCMChannelRequest struct {
 // through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
 // (GCM), service.
 type GCMChannelResponse struct {
-
-	// The Web API Key, also referred to as an API_KEY or server key, that you
-	// received from Google to communicate with Google services.
-	//
-	// This member is required.
-	Credential *string
 
 	// The type of messaging or notification platform for the channel. For the GCM
 	// channel, this value is GCM.
@@ -3173,11 +3201,23 @@ type GCMChannelResponse struct {
 	// The date and time when the GCM channel was enabled.
 	CreationDate *string
 
+	// The Web API Key, also referred to as an API_KEY or server key, that you
+	// received from Google to communicate with Google services.
+	Credential *string
+
+	// The default authentication method used for GCM. Values are either "TOKEN" or
+	// "KEY". Defaults to "KEY".
+	DefaultAuthenticationMethod *string
+
 	// Specifies whether the GCM channel is enabled for the application.
 	Enabled bool
 
 	// (Not used) This property is retained only for backward compatibility.
 	HasCredential bool
+
+	// Returns true if the JSON file provided by Google during registration process
+	// was used in the ServiceJson field of the request.
+	HasFcmServiceCredentials bool
 
 	// (Deprecated) An identifier for the GCM channel. This property is retained only
 	// for backward compatibility.
@@ -3240,9 +3280,13 @@ type GCMMessage struct {
 	// The URL of an image to display in the push notification.
 	ImageUrl *string
 
-	// para>normal - The notification might be delayed. Delivery is optimized for
+	// The preferred authentication method, with valid values "KEY" or "TOKEN". If a
+	// value isn't provided then the DefaultAuthenticationMethod is used.
+	PreferredAuthenticationMethod *string
+
+	// para>normal – The notification might be delayed. Delivery is optimized for
 	// battery usage on the recipient's device. Use this value unless immediate
-	// delivery is required./listitem> high - The notification is sent immediately and
+	// delivery is required./listitem> high – The notification is sent immediately and
 	// might wake a sleeping device. /para> Amazon Pinpoint specifies this value in the
 	// FCM priority parameter when it sends the notification message to FCM. The
 	// equivalent values for Apple Push Notification service (APNs) are 5, for normal,
@@ -3993,6 +4037,14 @@ type JourneyLimits struct {
 	// The maximum number of messages that the journey can send each second.
 	MessagesPerSecond int32
 
+	// The number of messages that an endpoint can receive during the specified
+	// timeframe.
+	TimeframeCap *JourneyTimeframeCap
+
+	// The maximum number of messages a journey can sent to a single endpoint. The
+	// maximum value is 100. If set to 0, this limit will not apply.
+	TotalCap int32
+
 	noSmithyDocumentSerde
 }
 
@@ -4365,6 +4417,22 @@ type JourneyStateRequest struct {
 	// when the journey is paused. Currently, PAUSED only supports journeys with a
 	// segment refresh interval.
 	State State
+
+	noSmithyDocumentSerde
+}
+
+// The number of messages that can be sent to an endpoint during the specified
+// timeframe for all journeys.
+type JourneyTimeframeCap struct {
+
+	// The maximum number of messages that all journeys can send to an endpoint during
+	// the specified timeframe. The maximum value is 100. If set to 0, this limit will
+	// not apply.
+	Cap int32
+
+	// The length of the timeframe in days. The maximum value is 30. If set to 0, this
+	// limit will not apply.
+	Days int32
 
 	noSmithyDocumentSerde
 }
@@ -6053,6 +6121,10 @@ type TemplateConfiguration struct {
 	// The email template to use for the message.
 	EmailTemplate *Template
 
+	// The InApp template to use for the message. The InApp template object is not
+	// supported for SendMessages.
+	InAppTemplate *Template
+
 	// The push notification template to use for the message.
 	PushTemplate *Template
 
@@ -6102,7 +6174,7 @@ type TemplateResponse struct {
 	TemplateName *string
 
 	// The type of channel that the message template is designed for. Possible values
-	// are: EMAIL, PUSH, SMS, and VOICE.
+	// are: EMAIL, PUSH, SMS, INAPP, and VOICE.
 	//
 	// This member is required.
 	TemplateType TemplateType
@@ -6182,7 +6254,7 @@ type TemplateVersionResponse struct {
 	TemplateName *string
 
 	// The type of channel that the message template is designed for. Possible values
-	// are: EMAIL, PUSH, SMS, and VOICE.
+	// are: EMAIL, PUSH, SMS, INAPP, and VOICE.
 	//
 	// This member is required.
 	TemplateType *string
@@ -6639,6 +6711,11 @@ type WriteApplicationSettingsRequest struct {
 	CloudWatchMetricsEnabled bool
 
 	EventTaggingEnabled bool
+
+	// The default sending limits for journeys in the application. These limits apply
+	// to each journey for the application but can be overridden, on a per journey
+	// basis, with the JourneyLimits resource.
+	JourneyLimits *ApplicationSettingsJourneyLimits
 
 	// The default sending limits for campaigns in the application. To override these
 	// limits and define custom limits for a specific campaign or journey, use the

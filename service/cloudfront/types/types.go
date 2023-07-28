@@ -36,9 +36,8 @@ type ActiveTrustedKeyGroups struct {
 // signed cookies.
 type ActiveTrustedSigners struct {
 
-	// This field is true if any of the Amazon Web Services accounts in the list have
-	// active CloudFront key pairs that CloudFront can use to verify the signatures of
-	// signed URLs and signed cookies. If not, this field is false .
+	// This field is true if any of the Amazon Web Services accounts in the list are
+	// configured as trusted signers. If not, this field is false .
 	//
 	// This member is required.
 	Enabled *bool
@@ -2218,7 +2217,7 @@ type FunctionConfig struct {
 	// This member is required.
 	Comment *string
 
-	// The function's runtime environment. The only valid value is cloudfront-js-1.0 .
+	// The function's runtime environment verion.
 	//
 	// This member is required.
 	Runtime FunctionRuntime
@@ -4774,9 +4773,8 @@ type TrustedKeyGroups struct {
 // verify the signatures of signed URLs and signed cookies.
 type TrustedSigners struct {
 
-	// This field is true if any of the Amazon Web Services accounts have public keys
-	// that CloudFront can use to verify the signatures of signed URLs and signed
-	// cookies. If not, this field is false .
+	// This field is true if any of the Amazon Web Services accounts in the list are
+	// configured as trusted signers. If not, this field is false .
 	//
 	// This member is required.
 	Enabled *bool

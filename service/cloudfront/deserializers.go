@@ -336,6 +336,9 @@ func awsRestxml_deserializeOpErrorCopyDistribution(response *smithyhttp.Response
 	case strings.EqualFold("TooManyDistributionsAssociatedToKeyGroup", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToKeyGroup(response, errorBody)
 
+	case strings.EqualFold("TooManyDistributionsAssociatedToOriginAccessControl", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginAccessControl(response, errorBody)
+
 	case strings.EqualFold("TooManyDistributionsAssociatedToOriginRequestPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginRequestPolicy(response, errorBody)
 
@@ -1431,6 +1434,9 @@ func awsRestxml_deserializeOpErrorCreateDistributionWithTags(response *smithyhtt
 	case strings.EqualFold("IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior", errorCode):
 		return awsRestxml_deserializeErrorIllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior(response, errorBody)
 
+	case strings.EqualFold("IllegalOriginAccessConfiguration", errorCode):
+		return awsRestxml_deserializeErrorIllegalOriginAccessConfiguration(response, errorBody)
+
 	case strings.EqualFold("InconsistentQuantities", errorCode):
 		return awsRestxml_deserializeErrorInconsistentQuantities(response, errorBody)
 
@@ -1559,6 +1565,9 @@ func awsRestxml_deserializeOpErrorCreateDistributionWithTags(response *smithyhtt
 
 	case strings.EqualFold("TooManyDistributionsAssociatedToKeyGroup", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToKeyGroup(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionsAssociatedToOriginAccessControl", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginAccessControl(response, errorBody)
 
 	case strings.EqualFold("TooManyDistributionsAssociatedToOriginRequestPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginRequestPolicy(response, errorBody)
@@ -14117,6 +14126,9 @@ func awsRestxml_deserializeOpErrorUpdateDistribution(response *smithyhttp.Respon
 	case strings.EqualFold("TooManyDistributionsAssociatedToKeyGroup", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToKeyGroup(response, errorBody)
 
+	case strings.EqualFold("TooManyDistributionsAssociatedToOriginAccessControl", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginAccessControl(response, errorBody)
+
 	case strings.EqualFold("TooManyDistributionsAssociatedToOriginRequestPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginRequestPolicy(response, errorBody)
 
@@ -14447,6 +14459,9 @@ func awsRestxml_deserializeOpErrorUpdateDistributionWithStagingConfig(response *
 
 	case strings.EqualFold("TooManyDistributionsAssociatedToKeyGroup", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToKeyGroup(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionsAssociatedToOriginAccessControl", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginAccessControl(response, errorBody)
 
 	case strings.EqualFold("TooManyDistributionsAssociatedToOriginRequestPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginRequestPolicy(response, errorBody)

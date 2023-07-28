@@ -44,6 +44,9 @@ type DescribeComponentConfigurationRecommendationInput struct {
 	// This member is required.
 	Tier types.Tier
 
+	// The recommended configuration type.
+	RecommendationType types.RecommendationType
+
 	noSmithyDocumentSerde
 }
 

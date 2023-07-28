@@ -31,6 +31,9 @@ func (c *Client) ListProblems(ctx context.Context, params *ListProblemsInput, op
 
 type ListProblemsInput struct {
 
+	// The AWS account ID for the resource group owner.
+	AccountId *string
+
 	// The name of the component.
 	ComponentName *string
 
@@ -52,10 +55,17 @@ type ListProblemsInput struct {
 	// a time frame for the request, problems within the past seven days are returned.
 	StartTime *time.Time
 
+	// Specifies whether or not you can view the problem. If not specified, visible
+	// and ignored problems are returned.
+	Visibility types.Visibility
+
 	noSmithyDocumentSerde
 }
 
 type ListProblemsOutput struct {
+
+	// The AWS account ID for the resource group owner.
+	AccountId *string
 
 	// The token used to retrieve the next page of results. This value is null when
 	// there are no more results to return.

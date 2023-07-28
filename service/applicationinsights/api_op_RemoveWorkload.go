@@ -6,29 +6,27 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a component and lists the resources that are grouped together in a
-// component.
-func (c *Client) DescribeComponent(ctx context.Context, params *DescribeComponentInput, optFns ...func(*Options)) (*DescribeComponentOutput, error) {
+// Remove workload from a component.
+func (c *Client) RemoveWorkload(ctx context.Context, params *RemoveWorkloadInput, optFns ...func(*Options)) (*RemoveWorkloadOutput, error) {
 	if params == nil {
-		params = &DescribeComponentInput{}
+		params = &RemoveWorkloadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeComponent", params, optFns, c.addOperationDescribeComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveWorkload", params, optFns, c.addOperationRemoveWorkloadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeComponentOutput)
+	out := result.(*RemoveWorkloadOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeComponentInput struct {
+type RemoveWorkloadInput struct {
 
 	// The name of the component.
 	//
@@ -40,33 +38,27 @@ type DescribeComponentInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
-	// The AWS account ID for the resource group owner.
-	AccountId *string
+	// The ID of the workload.
+	//
+	// This member is required.
+	WorkloadId *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeComponentOutput struct {
-
-	// Describes a standalone resource or similarly grouped resources that the
-	// application is made up of.
-	ApplicationComponent *types.ApplicationComponent
-
-	// The list of resource ARNs that belong to the component.
-	ResourceList []string
-
+type RemoveWorkloadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComponent{}, middleware.After)
+func (c *Client) addOperationRemoveWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveWorkload{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeComponent{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveWorkload{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -106,10 +98,10 @@ func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeComponentValidationMiddleware(stack); err != nil {
+	if err = addOpRemoveWorkloadValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComponent(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveWorkload(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -127,11 +119,11 @@ func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeComponent(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opRemoveWorkload(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "applicationinsights",
-		OperationName: "DescribeComponent",
+		OperationName: "RemoveWorkload",
 	}
 }
