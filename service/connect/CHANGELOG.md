@@ -1,3 +1,7 @@
+# v1.61.2 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.1 (2023-07-18)
 
 * **Documentation**: GetMetricDataV2 API: Update to include Contact Lens Conversational Analytics Metrics

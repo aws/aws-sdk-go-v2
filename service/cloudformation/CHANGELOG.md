@@ -1,3 +1,7 @@
+# v1.32.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2023-07-24)
 
 * **Feature**: This release supports filtering by DRIFT_STATUS for existing API ListStackInstances and adds support for a new API ListStackInstanceResourceDrifts. Customers can now view resource drift information from their StackSet management accounts.

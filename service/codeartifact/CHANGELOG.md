@@ -1,3 +1,7 @@
+# v1.18.9 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.8 (2023-07-17)
 
 * **Documentation**: Doc only update for AWS CodeArtifact

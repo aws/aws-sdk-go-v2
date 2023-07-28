@@ -1,3 +1,7 @@
+# v1.26.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-07-24)
 
 * **Feature**: This release introduces the new API 'GetSavingsPlanPurchaseRecommendationDetails', which retrieves the details for a Savings Plan recommendation. It also updates the existing API 'GetSavingsPlansPurchaseRecommendation' to include the recommendation detail ID.

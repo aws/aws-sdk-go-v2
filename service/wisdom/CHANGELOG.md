@@ -1,3 +1,7 @@
+# v1.14.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2023-07-25)
 
 * **Feature**: This release added two new data types: AssistantIntegrationConfiguration, and SessionIntegrationConfiguration to support Wisdom integration with Amazon Connect Chat

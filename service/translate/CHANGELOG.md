@@ -1,3 +1,7 @@
+# v1.18.5 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.4 (2023-07-18)
 
 * **Documentation**: Added DOCX word document support to TranslateDocument API

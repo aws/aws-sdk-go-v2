@@ -1,3 +1,7 @@
+# v1.27.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2023-07-13)
 
 * **Feature**: Enhanced PostgreSQL target endpoint settings for providing Babelfish support.

@@ -1,3 +1,8 @@
+# v1.23.4 (2023-07-28)
+
+* **Documentation**: Documentation changes related to SQS APIs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.3 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

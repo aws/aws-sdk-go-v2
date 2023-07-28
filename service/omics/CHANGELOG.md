@@ -1,3 +1,7 @@
+# v1.5.3 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.2 (2023-07-26)
 
 * **Documentation**: The service is renaming as a part of AWS Health.

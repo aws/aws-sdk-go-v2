@@ -1,3 +1,12 @@
+# Release (2023-07-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.23.4](service/sqs/CHANGELOG.md#v1234-2023-07-28)
+  * **Documentation**: Documentation changes related to SQS APIs.
+
 # Release (2023-07-27)
 
 ## Module Highlights

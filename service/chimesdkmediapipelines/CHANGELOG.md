@@ -1,3 +1,7 @@
+# v1.5.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2023-07-24)
 
 * **Feature**: AWS Media Pipeline compositing enhancement and Media Insights Pipeline auto language identification.

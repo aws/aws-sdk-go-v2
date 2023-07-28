@@ -1,8 +1,0 @@
-{
-    "id": "811f921b-b719-4558-84ce-4929051224fb",
-    "type": "documentation",
-    "description": "Documentation changes related to SQS APIs.",
-    "modules": [
-        "service/sqs"
-    ]
-}

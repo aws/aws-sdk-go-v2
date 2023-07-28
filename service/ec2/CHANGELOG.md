@@ -1,3 +1,7 @@
+# v1.108.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.108.0 (2023-07-27)
 
 * **Feature**: SDK and documentation updates for Amazon Elastic Block Store APIs

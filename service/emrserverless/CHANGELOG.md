@@ -1,3 +1,7 @@
+# v1.9.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2023-07-25)
 
 * **Feature**: This release adds support for publishing application logs to CloudWatch.

@@ -1,3 +1,7 @@
+# v1.23.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-07-13)
 
 * **Feature**: API model updated in Amazon Cognito

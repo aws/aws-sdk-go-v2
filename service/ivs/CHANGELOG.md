@@ -1,3 +1,7 @@
+# v1.24.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-07-17)
 
 * **Feature**: This release provides the flexibility to configure what renditions or thumbnail qualities to record when creating recording configuration.

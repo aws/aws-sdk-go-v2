@@ -1,3 +1,7 @@
+# v1.95.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.95.0 (2023-07-27)
 
 * **Feature**: Expose ProfilerConfig attribute in SageMaker Search API response.

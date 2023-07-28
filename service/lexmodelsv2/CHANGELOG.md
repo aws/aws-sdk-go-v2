@@ -1,3 +1,7 @@
+# v1.31.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2023-07-20.2)
 
 * **Feature**: This release updates type for Channel field in SessionSpecification and UtteranceSpecification

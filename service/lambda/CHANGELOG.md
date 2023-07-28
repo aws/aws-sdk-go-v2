@@ -1,3 +1,7 @@
+# v1.38.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2023-07-25)
 
 * **Feature**: Add Python 3.11 (python3.11) support to AWS Lambda

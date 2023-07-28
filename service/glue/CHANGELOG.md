@@ -1,3 +1,7 @@
+# v1.58.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2023-07-26)
 
 * **Feature**: Release Glue Studio Snowflake Connector Node for SDK/CLI

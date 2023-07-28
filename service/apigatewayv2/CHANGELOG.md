@@ -1,3 +1,7 @@
+# v1.13.16 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.15 (2023-07-24)
 
 * **Documentation**: Documentation updates for Amazon API Gateway.

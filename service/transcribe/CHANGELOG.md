@@ -1,3 +1,7 @@
+# v1.27.1 (2023-07-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2023-07-20.2)
 
 * **Feature**: Added API argument --toxicity-detection to startTranscriptionJob API, which allows users to view toxicity scores of submitted audio.
