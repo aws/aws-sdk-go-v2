@@ -52,6 +52,9 @@ func (c *Client) addOperationPostPlayerActionMiddlewares(stack *middleware.Stack
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -95,6 +98,9 @@ func (c *Client) addOperationPostPlayerActionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

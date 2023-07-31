@@ -58,6 +58,9 @@ func (c *Client) addOperationXmlIntEnumsMiddlewares(stack *middleware.Stack, opt
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -101,6 +104,9 @@ func (c *Client) addOperationXmlIntEnumsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

@@ -94,6 +94,9 @@ func (c *Client) addOperationJsonListsMiddlewares(stack *middleware.Stack, optio
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -137,6 +140,9 @@ func (c *Client) addOperationJsonListsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

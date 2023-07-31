@@ -24,6 +24,7 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
+import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -69,6 +70,17 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                         .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_INTERFACE_NAME)
                                                 .build())
                                         .documentation("The service endpoint resolver.")
+                                        .deprecated(
+                                            """
+                                            Deprecated: EndpointResolver and WithEndpointResolver.
+                                            Providing a value for this field will likely prevent you from using any
+                                            endpoint-related service features released after the introduction of
+                                            EndpointResolverV2 and BaseEndpoint.
+
+                                            To migrate an EndpointResolver implementation that uses a custom endpoint,
+                                            set the client option BaseEndpoint instead.
+                                            """
+                                        )
                                         .withHelper(true)
                                         .build(),
                                 ConfigField.builder()
@@ -79,12 +91,6 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                                        + "to resolve an endpoint.")
                                         .build()
                         ))
-                        .addConfigFieldResolver(ConfigFieldResolver.builder()
-                                .location(ConfigFieldResolver.Location.CLIENT)
-                                .target(ConfigFieldResolver.Target.INITIALIZATION)
-                                .resolver(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.CLIENT_CONFIG_RESOLVER)
-                                        .build())
-                                .build())
                         .addConfigFieldResolver(ConfigFieldResolver.builder()
                                 .location(ConfigFieldResolver.Location.OPERATION)
                                 .target(ConfigFieldResolver.Target.FINALIZATION)

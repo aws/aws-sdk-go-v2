@@ -49,6 +49,9 @@ func (c *Client) addOperationXmlEmptyBlobsMiddlewares(stack *middleware.Stack, o
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -92,6 +95,9 @@ func (c *Client) addOperationXmlEmptyBlobsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

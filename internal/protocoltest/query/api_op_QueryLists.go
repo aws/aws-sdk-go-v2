@@ -58,6 +58,9 @@ func (c *Client) addOperationQueryListsMiddlewares(stack *middleware.Stack, opti
 	if err != nil {
 		return err
 	}
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -101,6 +104,9 @@ func (c *Client) addOperationQueryListsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

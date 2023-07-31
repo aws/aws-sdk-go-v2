@@ -25,7 +25,7 @@ type s3BucketTest struct {
 	err    string
 }
 
-func TestUpdateEndpointBuild(t *testing.T) {
+func Test_UpdateEndpointBuild(t *testing.T) {
 	cases := map[string]map[string]struct {
 		tests          []s3BucketTest
 		useAccelerate  bool
@@ -58,8 +58,8 @@ func TestUpdateEndpointBuild(t *testing.T) {
 				useAccelerate: true,
 				tests: []s3BucketTest{
 					{"abc", "key", "https://abc.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", "not compatible"},
-					{"a$b$c", "key", "https://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
+					{"a.b.c", "key", "https://s3.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", "cannot be used with"},
+					{"a$b$c", "key", "https://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "cannot be used with"},
 				},
 			},
 			"AccelerateNoSSLTests": {
@@ -67,8 +67,7 @@ func TestUpdateEndpointBuild(t *testing.T) {
 				disableHTTPS:  true,
 				tests: []s3BucketTest{
 					{"abc", "key", "http://abc.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "http://a.b.c.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "http://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
+					{"a$b$c", "key", "http://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "cannot be used with"},
 				},
 			},
 			"DualStack": {
@@ -93,8 +92,8 @@ func TestUpdateEndpointBuild(t *testing.T) {
 				useDualstack:  true,
 				tests: []s3BucketTest{
 					{"abc", "key", "https://abc.s3-accelerate.dualstack.amazonaws.com/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a.b.c/key?x-id=GetObject", "not compatible"},
-					{"a$b$c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
+					{"a.b.c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a.b.c/key?x-id=GetObject", "cannot be used with"},
+					{"a$b$c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a%24b%24c/key?x-id=GetObject", "cannot be used with"},
 				},
 			},
 		},
@@ -193,7 +192,7 @@ func TestUpdateEndpointBuild(t *testing.T) {
 									options.APIOptions = append(options.APIOptions,
 										func(stack *middleware.Stack) error {
 											stack.Serialize.Insert(&fm,
-												"OperationSerializer", middleware.Before)
+												"OperationSerializer", middleware.After)
 											return nil
 										})
 								},
@@ -263,7 +262,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "client region does not match provided ARN region",
+			expectedErr: "region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`",
 		},
 		"Object Lambda Pseudo-Region with UseARNRegion flag set": {
 			bucket: "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/myap",
@@ -282,7 +281,7 @@ func TestEndpointWithARN(t *testing.T) {
 				UseDualstack: true,
 				UseARNRegion: true,
 			},
-			expectedErr: "client configured for S3 Dual-stack but is not supported with resource ARN",
+			expectedErr: "S3 Object Lambda does not support Dual-stack",
 		},
 		"Object Lambda Cross-Partition error": {
 			bucket: "arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/myap",
@@ -290,7 +289,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "client partition does not match provided ARN partition",
+			expectedErr: "Client was configured for partition `aws` but ARN (`arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/myap`) has `aws-cn`",
 		},
 		"Object Lambda FIPS": {
 			bucket: "arn:aws-us-gov:s3-object-lambda:us-gov-west-1:123456789012:accesspoint/myap",
@@ -342,7 +341,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:        "us-west-2",
 				UseAccelerate: true,
 			},
-			expectedErr: "client configured for S3 Accelerate but is not supported with resource ARN",
+			expectedErr: "S3 Object Lambda does not support S3 Accelerate",
 		},
 		"Object Lambda with Custom Endpoint Source": {
 			bucket: "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint:myendpoint",
@@ -403,7 +402,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "client region does not match provided ARN region",
+			expectedErr: "region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`",
 		},
 		"Outpost AccessPoint other partition": {
 			bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -411,7 +410,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "ConfigurationError : client partition does not match provided ARN partition",
+			expectedErr: "Client was configured for partition `aws` but ARN (`arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint`) has `aws-cn`",
 		},
 		"Outpost AccessPoint cn partition": {
 			bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -472,7 +471,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3.Options{
 				Region: "fips-us-gov-west-1",
 			},
-			expectedErr: "ConfigurationError : client region does not match provided ARN region",
+			expectedErr: "S3 Outposts does not support FIPS",
 		},
 		"Outpost AccessPoint with FIPS cross-region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -483,7 +482,7 @@ func TestEndpointWithARN(t *testing.T) {
 					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
 				},
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedErr: "S3 Outposts does not support FIPS",
 		},
 		"Outpost AccessPoint with FIPS (ResolvedRegion) cross-region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -491,7 +490,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "fips-us-gov-west-1",
 				UseARNRegion: true,
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedErr: "S3 Outposts does not support FIPS",
 		},
 		"Outpost AccessPoint with FIPS matching region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -502,7 +501,7 @@ func TestEndpointWithARN(t *testing.T) {
 				},
 				UseARNRegion: true,
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedErr: "S3 Outposts does not support FIPS",
 		},
 		"Outpost AccessPoint with FIPS (ResolvedRegion) matching region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -510,7 +509,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "fips-us-gov-west-1",
 				UseARNRegion: true,
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedErr: "S3 Outposts does not support FIPS",
 		},
 		"Outpost AccessPoint with Immutable Endpoint": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -534,7 +533,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseDualstack: true,
 			},
-			expectedErr: "ConfigurationError : client configured for S3 Dual-stack but is not supported with resource ARN",
+			expectedErr: "S3 Outposts does not support Dual-stack",
 		},
 		"Outpost AccessPoint with Accelerate": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -542,7 +541,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:        "us-west-2",
 				UseAccelerate: true,
 			},
-			expectedErr: "ConfigurationError : client configured for S3 Accelerate but is not supported with resource ARN",
+			expectedErr: "S3 Outposts does not support S3 Accelerate",
 		},
 		"AccessPoint": {
 			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -576,7 +575,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "client region does not match provided ARN region",
+			expectedErr: "region from ARN `ap-south-1` does not match client region `us-west-2` and UseArnRegion is `false`",
 		},
 		"AccessPoint Cross-Region Enabled": {
 			bucket: "arn:aws:s3:ap-south-1:123456789012:accesspoint:myendpoint",
@@ -615,7 +614,7 @@ func TestEndpointWithARN(t *testing.T) {
 				UseDualstack: true,
 				UseARNRegion: true,
 			},
-			expectedErr: "client partition does not match provided ARN partition",
+			expectedErr: "Client was configured for partition `aws` but ARN (`arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint`) has `aws-cn`",
 		},
 		"AccessPoint DualStack": {
 			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -734,7 +733,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:        "us-west-2",
 				UseAccelerate: true,
 			},
-			expectedErr: "client configured for S3 Accelerate",
+			expectedErr: "Access Points do not support S3 Accelerate",
 		},
 		"Custom Resolver Without PartitionID in ClientInfo": {
 			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -874,7 +873,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
+			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.fips-us-east-1.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "fips-us-east-1",
 		},
 		"Invalid AccessPoint ARN with FIPS pseudo-region (suffix)": {
 			bucket: "arn:aws:s3:us-east-1-fips:123456789012:accesspoint:myendpoint",
@@ -882,7 +883,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
+			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-east-1-fips.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-east-1-fips",
 		},
 		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (prefix)": {
 			bucket: "arn:aws:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -890,7 +893,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
+			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.fips-us-east-1.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3-outposts",
+			expectedSigningRegion: "fips-us-east-1",
 		},
 		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (suffix)": {
 			bucket: "arn:aws:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -898,7 +903,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
+			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1-fips.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3-outposts",
+			expectedSigningRegion: "us-east-1-fips",
 		},
 		"Invalid Object Lambda ARN with FIPS pseudo-region (prefix)": {
 			bucket: "arn:aws:s3-object-lambda:fips-us-east-1:123456789012:accesspoint/myap",
@@ -906,7 +913,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
+			expectedReqURL:        "https://myap-123456789012.s3-object-lambda.fips-us-east-1.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3-object-lambda",
+			expectedSigningRegion: "fips-us-east-1",
 		},
 		"Invalid Object Lambda ARN with FIPS pseudo-region (suffix)": {
 			bucket: "arn:aws:s3-object-lambda:us-east-1-fips:123456789012:accesspoint/myap",
@@ -914,8 +923,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
-		},
+			expectedReqURL:        "https://myap-123456789012.s3-object-lambda.us-east-1-fips.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3-object-lambda",
+			expectedSigningRegion: "us-east-1-fips"},
 	}
 
 	for name, c := range cases {
@@ -944,6 +954,18 @@ func TestVPC_CustomEndpoint(t *testing.T) {
 				Region: "us-west-2",
 			},
 			expectedReqURL:        "https://bucketname.beta.example.com/",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"custom resolver to v2 fallback": {
+			bucket: "bucketname",
+			options: s3.Options{
+				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
+					return aws.Endpoint{}, &aws.EndpointNotFoundError{}
+				}),
+				Region: "us-west-2",
+			},
+			expectedReqURL:        "https://bucketname.s3.us-west-2.amazonaws.com/",
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "us-west-2",
 		},
@@ -1045,7 +1067,7 @@ func TestVPC_CustomEndpoint(t *testing.T) {
 				Region:       "us-west-2",
 				UseDualstack: true,
 			},
-			expectedErr: "client configured for S3 Dual-stack but is not supported with resource ARN",
+			expectedErr: "client configured for S3 Dual-stack but is not supported with resource",
 		},
 		"Standard custom endpoint url with Immutable Host": {
 			bucket: "bucketname",
@@ -1106,19 +1128,19 @@ func TestWriteGetObjectResponse_UpdateEndpoint(t *testing.T) {
 			expectedSigningRegion: "us-gov-west-1",
 			expectedSigningName:   "s3-object-lambda",
 		},
-		"duakstack endpoint": {
+		"dualstack endpoint": {
 			options: s3.Options{
 				Region:       "us-west-2",
 				UseDualstack: true,
 			},
-			expectedErr: "client configured for dualstack but not supported for operation",
+			expectedErr: "S3 Object Lambda does not support Dual-stack",
 		},
 		"accelerate endpoint": {
 			options: s3.Options{
 				Region:        "us-west-2",
 				UseAccelerate: true,
 			},
-			expectedErr: "client configured for accelerate but not supported for operation",
+			expectedErr: "S3 Object Lambda does not support S3 Accelerate",
 		},
 		"custom endpoint": {
 			options: s3.Options{
@@ -1300,13 +1322,8 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 			options: s3.Options{
 				Region: "ap-north-1",
 			},
-			bucket:         "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com.cn/",
-			expectedHeader: map[string]string{
-				v4a.AmzRegionSetKey: "*",
-			},
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "*",
+			bucket:      "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedErr: "Client was configured for partition `aws` but bucket referred to partition `aws-cn`",
 		},
 		"region as us-west-2 with mrap disabled": {
 			options: s3.Options{
@@ -1314,7 +1331,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				DisableMultiRegionAccessPoints: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "Multi-Region access point ARNs are disabled",
+			expectedErr: "Multi-Region Access Point ARNs are disabled",
 		},
 		"region as aws-global with mrap disabled": {
 			options: s3.Options{
@@ -1322,7 +1339,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				DisableMultiRegionAccessPoints: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "Multi-Region access point ARNs are disabled",
+			expectedErr: "Multi-Region Access Point ARNs are disabled",
 		},
 		"with dualstack": {
 			options: s3.Options{
@@ -1330,7 +1347,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				UseDualstack: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "client configured for S3 Dual-stack but is not supported with resource",
+			expectedErr: "S3 MRAP does not support dual-stack",
 		},
 		"with accelerate": {
 			options: s3.Options{
@@ -1338,7 +1355,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				UseAccelerate: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "client configured for S3 Accelerate but is not supported with resource",
+			expectedErr: "S3 MRAP does not support S3 Accelerate",
 		},
 		"access point with no region and mrap disabled": {
 			options: s3.Options{
@@ -1346,7 +1363,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				DisableMultiRegionAccessPoints: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:myendpoint",
-			expectedErr: "Multi-Region access point ARNs are disabled",
+			expectedErr: "Multi-Region Access Point ARNs are disabled",
 		},
 		"endpoint with no region and disabled mrap": {
 			options: s3.Options{
@@ -1354,7 +1371,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				DisableMultiRegionAccessPoints: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:myendpoint",
-			expectedErr: "Multi-Region access point ARNs are disabled",
+			expectedErr: "Multi-Region Access Point ARNs are disabled",
 		},
 		"endpoint with no region": {
 			options: s3.Options{
@@ -1419,24 +1436,22 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				},
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "client configured for fips but cross-region resource ARN provided",
+			expectedErr: "S3 MRAP does not support FIPS",
 		},
 		"with fips (ResolvedRegion) client": {
 			options: s3.Options{
 				Region: "fips-us-west-2",
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "client configured for fips but cross-region resource ARN provided",
+			expectedErr: "S3 MRAP does not support FIPS",
 		},
 		"Accesspoint ARN with region and MRAP disabled": {
 			options: s3.Options{
 				Region:                         "us-west-2",
 				DisableMultiRegionAccessPoints: false,
 			},
-			bucket:                "arn:aws:s3:us-west-2:123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedReqURL:        "https://mfzwi23gnjvgw.mrap-123456789012.s3-accesspoint.us-west-2.amazonaws.com/",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
+			bucket:      "arn:aws:s3:us-west-2:123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedErr: "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`",
 		},
 	}
 
