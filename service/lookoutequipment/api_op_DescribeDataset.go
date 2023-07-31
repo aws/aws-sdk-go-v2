@@ -94,6 +94,10 @@ type DescribeDatasetOutput struct {
 	// Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
+	// The Amazon Resource Name (ARN) of the source dataset from which the current
+	// data being described was imported from.
+	SourceDatasetArn *string
+
 	// Indicates the status of the dataset.
 	Status types.DatasetStatus
 

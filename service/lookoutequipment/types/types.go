@@ -281,7 +281,7 @@ type InferenceOutputConfiguration struct {
 	// This member is required.
 	S3OutputConfiguration *InferenceS3OutputConfiguration
 
-	// The ID number for the AWS KMS key used to encrypt the inference output.
+	// The ID number for the KMS key key used to encrypt the inference output.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -404,9 +404,13 @@ type IngestionS3InputConfiguration struct {
 	// This member is required.
 	Bucket *string
 
-	// Pattern for matching the Amazon S3 files which will be used for ingestion. If
-	// no KeyPattern is provided, we will use the default hierarchy file structure,
-	// which is same as KeyPattern {prefix}/{component_name}/*
+	// The pattern for matching the Amazon S3 files that will be used for ingestion.
+	// If the schema was created previously without any KeyPattern, then the default
+	// KeyPattern {prefix}/{component_name}/* is used to download files from Amazon S3
+	// according to the schema. This field is required when ingestion is being done for
+	// the first time. Valid Values: {prefix}/{component_name}_* |
+	// {prefix}/{component_name}/* | {prefix}/{component_name}[DELIMITER]* (Allowed
+	// delimiters : space, dot, underscore, hyphen)
 	KeyPattern *string
 
 	// The prefix for the S3 location being used for the input data for the data
@@ -458,7 +462,7 @@ type LabelGroupSummary struct {
 	// The time at which the label group was created.
 	CreatedAt *time.Time
 
-	// The ARN of the label group.
+	// The Amazon Resource Name (ARN) of the label group.
 	LabelGroupArn *string
 
 	// The name of the label group.
@@ -515,7 +519,7 @@ type LabelSummary struct {
 	// your data.
 	FaultCode *string
 
-	// The ARN of the label group.
+	// The Amazon Resource Name (ARN) of the label group.
 	LabelGroupArn *string
 
 	// The name of the label group.
@@ -584,6 +588,15 @@ type MissingSensorData struct {
 // names and ARNs, as well as status.
 type ModelSummary struct {
 
+	// The model version that the inference scheduler uses to run an inference
+	// execution.
+	ActiveModelVersion *int64
+
+	// The Amazon Resource Name (ARN) of the model version that is set as active. The
+	// active model version is the model version that the inference scheduler uses to
+	// run an inference execution.
+	ActiveModelVersionArn *string
+
 	// The time at which the specific model was created.
 	CreatedAt *time.Time
 
@@ -601,6 +614,34 @@ type ModelSummary struct {
 
 	// Indicates the status of the ML model.
 	Status ModelStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the specific model version.
+type ModelVersionSummary struct {
+
+	// The time when this model version was created.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the model that this model version is a
+	// version of.
+	ModelArn *string
+
+	// The name of the model that this model version is a version of.
+	ModelName *string
+
+	// The version of the model.
+	ModelVersion *int64
+
+	// The Amazon Resource Name (ARN) of the model version.
+	ModelVersionArn *string
+
+	// Indicates how this model version was generated.
+	SourceType ModelVersionSourceType
+
+	// The current status of the model version.
+	Status ModelVersionStatus
 
 	noSmithyDocumentSerde
 }
@@ -640,8 +681,8 @@ type S3Object struct {
 	// This member is required.
 	Bucket *string
 
-	// The AWS Key Management Service (AWS KMS) key being used to encrypt the S3
-	// object. Without this key, data in the bucket is not accessible.
+	// The Amazon Web Services Key Management Service (KMS key) key being used to
+	// encrypt the S3 object. Without this key, data in the bucket is not accessible.
 	//
 	// This member is required.
 	Key *string

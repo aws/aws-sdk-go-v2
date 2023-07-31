@@ -55,6 +55,24 @@ func (AnnotationType) Values() []AnnotationType {
 	}
 }
 
+type CreationType string
+
+// Enum values for CreationType
+const (
+	CreationTypeImport CreationType = "IMPORT"
+	CreationTypeUpload CreationType = "UPLOAD"
+)
+
+// Values returns all known values for CreationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CreationType) Values() []CreationType {
+	return []CreationType{
+		"IMPORT",
+		"UPLOAD",
+	}
+}
+
 type EncryptionType string
 
 // Enum values for EncryptionType

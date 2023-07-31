@@ -4222,6 +4222,30 @@ func awsAwsquery_serializeDocumentActivityIds(v []string, value query.Value) err
 	return nil
 }
 
+func awsAwsquery_serializeDocumentAlarmList(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentAlarmSpecification(v *types.AlarmSpecification, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Alarms != nil {
+		objectKey := object.Key("Alarms")
+		if err := awsAwsquery_serializeDocumentAlarmList(v.Alarms, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentAllowedInstanceTypes(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -5474,6 +5498,13 @@ func awsAwsquery_serializeDocumentProcessNames(v []string, value query.Value) er
 func awsAwsquery_serializeDocumentRefreshPreferences(v *types.RefreshPreferences, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.AlarmSpecification != nil {
+		objectKey := object.Key("AlarmSpecification")
+		if err := awsAwsquery_serializeDocumentAlarmSpecification(v.AlarmSpecification, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.AutoRollback != nil {
 		objectKey := object.Key("AutoRollback")

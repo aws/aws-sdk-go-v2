@@ -168,7 +168,7 @@ func (e *ThrottlingException) ErrorCode() string {
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The input fails to satisfy constraints specified by Amazon Lookout for
-// Equipment or a related AWS service that's being utilized.
+// Equipment or a related Amazon Web Services service that's being utilized.
 type ValidationException struct {
 	Message *string
 

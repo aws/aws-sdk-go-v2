@@ -10246,6 +10246,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)
 	}
 
+	if v.EnableLocalWriteForwarding != nil {
+		objectKey := object.Key("EnableLocalWriteForwarding")
+		objectKey.Boolean(*v.EnableLocalWriteForwarding)
+	}
+
 	if v.EnablePerformanceInsights != nil {
 		objectKey := object.Key("EnablePerformanceInsights")
 		objectKey.Boolean(*v.EnablePerformanceInsights)
@@ -13244,6 +13249,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 	if v.EnableIAMDatabaseAuthentication != nil {
 		objectKey := object.Key("EnableIAMDatabaseAuthentication")
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)
+	}
+
+	if v.EnableLocalWriteForwarding != nil {
+		objectKey := object.Key("EnableLocalWriteForwarding")
+		objectKey.Boolean(*v.EnableLocalWriteForwarding)
 	}
 
 	if v.EnablePerformanceInsights != nil {

@@ -51,7 +51,7 @@ type DescribeLabelGroupOutput struct {
 	// group.
 	FaultCodes []string
 
-	// The ARN of the label group.
+	// The Amazon Resource Name (ARN) of the label group.
 	LabelGroupArn *string
 
 	// The name of the label group.

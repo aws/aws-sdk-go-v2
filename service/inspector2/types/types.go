@@ -1044,7 +1044,7 @@ type Destination struct {
 	// This member is required.
 	KmsKeyArn *string
 
-	// The prefix of the Amazon S3 bucket used to export findings.
+	// The prefix that the findings will be written under.
 	KeyPrefix *string
 
 	noSmithyDocumentSerde
@@ -1200,6 +1200,21 @@ type EpssDetails struct {
 
 	// The EPSS score.
 	Score float64
+
+	noSmithyDocumentSerde
+}
+
+// Details of the evidence for a vulnerability identified in a finding.
+type Evidence struct {
+
+	// The evidence details.
+	EvidenceDetail *string
+
+	// The evidence rule.
+	EvidenceRule *string
+
+	// The evidence severity.
+	Severity *string
 
 	noSmithyDocumentSerde
 }
@@ -1428,7 +1443,7 @@ type FilterCriteria struct {
 	// Details on the date and time a finding was last seen used to filter findings.
 	LastObservedAt []DateFilter
 
-	// Details on the ingress source addresses used to filter findings.
+	// Details on network protocol used to filter findings.
 	NetworkProtocol []StringFilter
 
 	// Details on the port ranges used to filter findings.
@@ -1561,6 +1576,66 @@ type Finding struct {
 
 	// The date and time the finding was last updated at.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Details of the vulnerability identified in a finding.
+type FindingDetail struct {
+
+	// The Cybersecurity and Infrastructure Security Agency (CISA) details for a
+	// specific vulnerability.
+	CisaData *CisaData
+
+	// The Common Weakness Enumerations (CWEs) associated with the vulnerability.
+	Cwes []string
+
+	// The Exploit Prediction Scoring System (EPSS) score of the vulnerability.
+	EpssScore *float64
+
+	// Information on the evidence of the vulnerability.
+	Evidences []Evidence
+
+	// Contains information on when this exploit was observed.
+	ExploitObserved *ExploitObserved
+
+	// The finding ARN that the vulnerability details are associated with.
+	FindingArn *string
+
+	// The reference URLs for the vulnerability data.
+	ReferenceUrls []string
+
+	// The risk score of the vulnerability.
+	RiskScore *int32
+
+	// The known malware tools or kits that can exploit the vulnerability.
+	Tools []string
+
+	// The MITRE adversary tactics, techniques, or procedures (TTPs) associated with
+	// the vulnerability.
+	Ttps []string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an error encountered when trying to return vulnerability data for
+// a finding.
+type FindingDetailsError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode FindingDetailsErrorCode
+
+	// The error message.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The finding ARN that returned an error.
+	//
+	// This member is required.
+	FindingArn *string
 
 	noSmithyDocumentSerde
 }

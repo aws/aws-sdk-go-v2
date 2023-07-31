@@ -58,6 +58,22 @@ func (AggregationType) Values() []AggregationType {
 	}
 }
 
+type AnalysisFormat string
+
+// Enum values for AnalysisFormat
+const (
+	AnalysisFormatSql AnalysisFormat = "SQL"
+)
+
+// Values returns all known values for AnalysisFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisFormat) Values() []AnalysisFormat {
+	return []AnalysisFormat{
+		"SQL",
+	}
+}
+
 type AnalysisMethod string
 
 // Enum values for AnalysisMethod
@@ -80,6 +96,7 @@ type AnalysisRuleType string
 const (
 	AnalysisRuleTypeAggregation AnalysisRuleType = "AGGREGATION"
 	AnalysisRuleTypeList        AnalysisRuleType = "LIST"
+	AnalysisRuleTypeCustom      AnalysisRuleType = "CUSTOM"
 )
 
 // Values returns all known values for AnalysisRuleType. Note that this can be
@@ -89,6 +106,7 @@ func (AnalysisRuleType) Values() []AnalysisRuleType {
 	return []AnalysisRuleType{
 		"AGGREGATION",
 		"LIST",
+		"CUSTOM",
 	}
 }
 
@@ -116,6 +134,7 @@ type ConfiguredTableAnalysisRuleType string
 const (
 	ConfiguredTableAnalysisRuleTypeAggregation ConfiguredTableAnalysisRuleType = "AGGREGATION"
 	ConfiguredTableAnalysisRuleTypeList        ConfiguredTableAnalysisRuleType = "LIST"
+	ConfiguredTableAnalysisRuleTypeCustom      ConfiguredTableAnalysisRuleType = "CUSTOM"
 )
 
 // Values returns all known values for ConfiguredTableAnalysisRuleType. Note that
@@ -126,6 +145,7 @@ func (ConfiguredTableAnalysisRuleType) Values() []ConfiguredTableAnalysisRuleTyp
 	return []ConfiguredTableAnalysisRuleType{
 		"AGGREGATION",
 		"LIST",
+		"CUSTOM",
 	}
 }
 
@@ -276,6 +296,50 @@ func (MemberStatus) Values() []MemberStatus {
 		"ACTIVE",
 		"LEFT",
 		"REMOVED",
+	}
+}
+
+type ParameterType string
+
+// Enum values for ParameterType
+const (
+	ParameterTypeSmallint        ParameterType = "SMALLINT"
+	ParameterTypeInteger         ParameterType = "INTEGER"
+	ParameterTypeBigint          ParameterType = "BIGINT"
+	ParameterTypeDecimal         ParameterType = "DECIMAL"
+	ParameterTypeReal            ParameterType = "REAL"
+	ParameterTypeDoublePrecision ParameterType = "DOUBLE_PRECISION"
+	ParameterTypeBoolean         ParameterType = "BOOLEAN"
+	ParameterTypeChar            ParameterType = "CHAR"
+	ParameterTypeVarchar         ParameterType = "VARCHAR"
+	ParameterTypeDate            ParameterType = "DATE"
+	ParameterTypeTimestamp       ParameterType = "TIMESTAMP"
+	ParameterTypeTimestamptz     ParameterType = "TIMESTAMPTZ"
+	ParameterTypeTime            ParameterType = "TIME"
+	ParameterTypeTimetz          ParameterType = "TIMETZ"
+	ParameterTypeVarbyte         ParameterType = "VARBYTE"
+)
+
+// Values returns all known values for ParameterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterType) Values() []ParameterType {
+	return []ParameterType{
+		"SMALLINT",
+		"INTEGER",
+		"BIGINT",
+		"DECIMAL",
+		"REAL",
+		"DOUBLE_PRECISION",
+		"BOOLEAN",
+		"CHAR",
+		"VARCHAR",
+		"DATE",
+		"TIMESTAMP",
+		"TIMESTAMPTZ",
+		"TIME",
+		"TIMETZ",
+		"VARBYTE",
 	}
 }
 
@@ -439,9 +503,10 @@ type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
-	ValidationExceptionReasonInvalidConfiguration  ValidationExceptionReason = "INVALID_CONFIGURATION"
-	ValidationExceptionReasonInvalidQuery          ValidationExceptionReason = "INVALID_QUERY"
+	ValidationExceptionReasonFieldValidationFailed   ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
+	ValidationExceptionReasonInvalidConfiguration    ValidationExceptionReason = "INVALID_CONFIGURATION"
+	ValidationExceptionReasonInvalidQuery            ValidationExceptionReason = "INVALID_QUERY"
+	ValidationExceptionReasonIamSynchronizationDelay ValidationExceptionReason = "IAM_SYNCHRONIZATION_DELAY"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -452,5 +517,6 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"FIELD_VALIDATION_FAILED",
 		"INVALID_CONFIGURATION",
 		"INVALID_QUERY",
+		"IAM_SYNCHRONIZATION_DELAY",
 	}
 }

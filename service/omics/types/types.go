@@ -701,6 +701,9 @@ type ReadSetFilter struct {
 	// The filter's end date.
 	CreatedBefore *time.Time
 
+	// The creation type of the read set.
+	CreationType CreationType
+
 	// Where the source originated.
 	GeneratedFrom *string
 
@@ -754,6 +757,9 @@ type ReadSetListItem struct {
 	//
 	// This member is required.
 	Status ReadSetStatus
+
+	// The creation type of the read set.
+	CreationType CreationType
 
 	// The read set's description.
 	Description *string

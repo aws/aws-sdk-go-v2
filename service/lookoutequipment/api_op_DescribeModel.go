@@ -47,6 +47,14 @@ type DescribeModelInput struct {
 
 type DescribeModelOutput struct {
 
+	// The name of the model version used by the inference schedular when running a
+	// scheduled inference execution.
+	ActiveModelVersion *int64
+
+	// The Amazon Resource Name (ARN) of the model version used by the inference
+	// scheduler when running a scheduled inference execution.
+	ActiveModelVersionArn *string
+
 	// Indicates the time and date at which the ML model was created.
 	CreatedAt *time.Time
 
@@ -79,6 +87,14 @@ type DescribeModelOutput struct {
 	// failure.
 	FailedReason *string
 
+	// The date and time when the import job was completed. This field appears if the
+	// active model version was imported.
+	ImportJobEndTime *time.Time
+
+	// The date and time when the import job was started. This field appears if the
+	// active model version was imported.
+	ImportJobStartTime *time.Time
+
 	// Specifies configuration information about the labels input, including its S3
 	// location.
 	LabelsInputConfiguration *types.LabelsInputConfiguration
@@ -100,10 +116,24 @@ type DescribeModelOutput struct {
 	// The name of the ML model being described.
 	ModelName *string
 
+	// The date the active model version was activated.
+	ModelVersionActivatedAt *time.Time
+
 	// Indicates that the asset associated with this sensor has been shut off. As long
 	// as this condition is met, Lookout for Equipment will not use data from this
 	// asset for training, evaluation, or inference.
 	OffCondition *string
+
+	// The model version that was set as the active model version prior to the current
+	// active model version.
+	PreviousActiveModelVersion *int64
+
+	// The ARN of the model version that was set as the active model version prior to
+	// the current active model version.
+	PreviousActiveModelVersionArn *string
+
+	// The date and time when the previous active model version was activated.
+	PreviousModelVersionActivatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source for the ML model being described.
@@ -118,6 +148,10 @@ type DescribeModelOutput struct {
 	// Provides the identifier of the KMS key used to encrypt model data by Amazon
 	// Lookout for Equipment.
 	ServerSideKmsKeyId *string
+
+	// The Amazon Resource Name (ARN) of the source model version. This field appears
+	// if the active model version was imported.
+	SourceModelVersionArn *string
 
 	// Specifies the current status of the model being described. Status describes the
 	// status of the most recent action of the model.

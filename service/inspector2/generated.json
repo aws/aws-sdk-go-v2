@@ -12,6 +12,7 @@
         "api_op_AssociateMember.go",
         "api_op_BatchGetAccountStatus.go",
         "api_op_BatchGetCodeSnippet.go",
+        "api_op_BatchGetFindingDetails.go",
         "api_op_BatchGetFreeTrialInfo.go",
         "api_op_BatchGetMemberEc2DeepInspectionStatus.go",
         "api_op_BatchUpdateMemberEc2DeepInspectionStatus.go",

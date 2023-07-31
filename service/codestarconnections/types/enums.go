@@ -29,6 +29,7 @@ const (
 	ProviderTypeBitbucket              ProviderType = "Bitbucket"
 	ProviderTypeGithub                 ProviderType = "GitHub"
 	ProviderTypeGithubEnterpriseServer ProviderType = "GitHubEnterpriseServer"
+	ProviderTypeGitlab                 ProviderType = "GitLab"
 )
 
 // Values returns all known values for ProviderType. Note that this can be
@@ -39,5 +40,6 @@ func (ProviderType) Values() []ProviderType {
 		"Bitbucket",
 		"GitHub",
 		"GitHubEnterpriseServer",
+		"GitLab",
 	}
 }

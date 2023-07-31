@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchGetCollaborationAnalysisTemplate struct {
+}
+
+func (*validateOpBatchGetCollaborationAnalysisTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetCollaborationAnalysisTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetCollaborationAnalysisTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetCollaborationAnalysisTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetSchema struct {
 }
 
@@ -25,6 +45,26 @@ func (m *validateOpBatchGetSchema) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchGetSchemaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAnalysisTemplate struct {
+}
+
+func (*validateOpCreateAnalysisTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAnalysisTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAnalysisTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAnalysisTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -125,6 +165,26 @@ func (m *validateOpCreateMembership) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAnalysisTemplate struct {
+}
+
+func (*validateOpDeleteAnalysisTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAnalysisTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAnalysisTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAnalysisTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -245,6 +305,46 @@ func (m *validateOpDeleteMembership) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAnalysisTemplate struct {
+}
+
+func (*validateOpGetAnalysisTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAnalysisTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAnalysisTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAnalysisTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCollaborationAnalysisTemplate struct {
+}
+
+func (*validateOpGetCollaborationAnalysisTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCollaborationAnalysisTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCollaborationAnalysisTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCollaborationAnalysisTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +510,46 @@ func (m *validateOpGetSchema) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAnalysisTemplates struct {
+}
+
+func (*validateOpListAnalysisTemplates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAnalysisTemplates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAnalysisTemplatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAnalysisTemplatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCollaborationAnalysisTemplates struct {
+}
+
+func (*validateOpListCollaborationAnalysisTemplates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCollaborationAnalysisTemplates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCollaborationAnalysisTemplatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCollaborationAnalysisTemplatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListConfiguredTableAssociations struct {
 }
 
@@ -570,6 +710,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAnalysisTemplate struct {
+}
+
+func (*validateOpUpdateAnalysisTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAnalysisTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAnalysisTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAnalysisTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCollaboration struct {
 }
 
@@ -690,8 +850,16 @@ func (m *validateOpUpdateProtectedQuery) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchGetCollaborationAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetCollaborationAnalysisTemplate{}, middleware.After)
+}
+
 func addOpBatchGetSchemaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetSchema{}, middleware.After)
+}
+
+func addOpCreateAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAnalysisTemplate{}, middleware.After)
 }
 
 func addOpCreateCollaborationValidationMiddleware(stack *middleware.Stack) error {
@@ -712,6 +880,10 @@ func addOpCreateConfiguredTableValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMembership{}, middleware.After)
+}
+
+func addOpDeleteAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAnalysisTemplate{}, middleware.After)
 }
 
 func addOpDeleteCollaborationValidationMiddleware(stack *middleware.Stack) error {
@@ -736,6 +908,14 @@ func addOpDeleteMemberValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMembership{}, middleware.After)
+}
+
+func addOpGetAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAnalysisTemplate{}, middleware.After)
+}
+
+func addOpGetCollaborationAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCollaborationAnalysisTemplate{}, middleware.After)
 }
 
 func addOpGetCollaborationValidationMiddleware(stack *middleware.Stack) error {
@@ -770,6 +950,14 @@ func addOpGetSchemaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSchema{}, middleware.After)
 }
 
+func addOpListAnalysisTemplatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAnalysisTemplates{}, middleware.After)
+}
+
+func addOpListCollaborationAnalysisTemplatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCollaborationAnalysisTemplates{}, middleware.After)
+}
+
 func addOpListConfiguredTableAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListConfiguredTableAssociations{}, middleware.After)
 }
@@ -800,6 +988,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAnalysisTemplate{}, middleware.After)
 }
 
 func addOpUpdateCollaborationValidationMiddleware(stack *middleware.Stack) error {
@@ -899,6 +1091,41 @@ func validateAggregationConstraints(v []types.AggregationConstraint) error {
 	}
 }
 
+func validateAnalysisParameter(v *types.AnalysisParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalysisParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalysisParameterList(v []types.AnalysisParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalysisParameterList"}
+	for i := range v {
+		if err := validateAnalysisParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAnalysisRuleAggregation(v *types.AnalysisRuleAggregation) error {
 	if v == nil {
 		return nil
@@ -926,6 +1153,21 @@ func validateAnalysisRuleAggregation(v *types.AnalysisRuleAggregation) error {
 		if err := validateAggregationConstraints(v.OutputConstraints); err != nil {
 			invalidParams.AddNested("OutputConstraints", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalysisRuleCustom(v *types.AnalysisRuleCustom) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalysisRuleCustom"}
+	if v.AllowedAnalyses == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedAnalyses"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -980,6 +1222,11 @@ func validateConfiguredTableAnalysisRulePolicyV1(v types.ConfiguredTableAnalysis
 	case *types.ConfiguredTableAnalysisRulePolicyV1MemberAggregation:
 		if err := validateAnalysisRuleAggregation(&uv.Value); err != nil {
 			invalidParams.AddNested("[aggregation]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConfiguredTableAnalysisRulePolicyV1MemberCustom:
+		if err := validateAnalysisRuleCustom(&uv.Value); err != nil {
+			invalidParams.AddNested("[custom]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ConfiguredTableAnalysisRulePolicyV1MemberList:
@@ -1150,6 +1397,24 @@ func validateTableReference(v types.TableReference) error {
 	}
 }
 
+func validateOpBatchGetCollaborationAnalysisTemplateInput(v *BatchGetCollaborationAnalysisTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetCollaborationAnalysisTemplateInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if v.AnalysisTemplateArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisTemplateArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetSchemaInput(v *BatchGetSchemaInput) error {
 	if v == nil {
 		return nil
@@ -1160,6 +1425,35 @@ func validateOpBatchGetSchemaInput(v *BatchGetSchemaInput) error {
 	}
 	if v.Names == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Names"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAnalysisTemplateInput(v *CreateAnalysisTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAnalysisTemplateInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.AnalysisParameters != nil {
+		if err := validateAnalysisParameterList(v.AnalysisParameters); err != nil {
+			invalidParams.AddNested("AnalysisParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1302,6 +1596,24 @@ func validateOpCreateMembershipInput(v *CreateMembershipInput) error {
 	}
 }
 
+func validateOpDeleteAnalysisTemplateInput(v *DeleteAnalysisTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAnalysisTemplateInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.AnalysisTemplateIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisTemplateIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCollaborationInput(v *DeleteCollaborationInput) error {
 	if v == nil {
 		return nil
@@ -1393,6 +1705,42 @@ func validateOpDeleteMembershipInput(v *DeleteMembershipInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMembershipInput"}
 	if v.MembershipIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAnalysisTemplateInput(v *GetAnalysisTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAnalysisTemplateInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.AnalysisTemplateIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisTemplateIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCollaborationAnalysisTemplateInput(v *GetCollaborationAnalysisTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCollaborationAnalysisTemplateInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if v.AnalysisTemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisTemplateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1539,6 +1887,36 @@ func validateOpGetSchemaInput(v *GetSchemaInput) error {
 	}
 }
 
+func validateOpListAnalysisTemplatesInput(v *ListAnalysisTemplatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAnalysisTemplatesInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCollaborationAnalysisTemplatesInput(v *ListCollaborationAnalysisTemplatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCollaborationAnalysisTemplatesInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListConfiguredTableAssociationsInput(v *ListConfiguredTableAssociationsInput) error {
 	if v == nil {
 		return nil
@@ -1670,6 +2048,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAnalysisTemplateInput(v *UpdateAnalysisTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAnalysisTemplateInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.AnalysisTemplateIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisTemplateIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

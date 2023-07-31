@@ -6506,6 +6506,11 @@ func awsRestjson1_serializeDocumentReadSetFilter(v *types.ReadSetFilter, value s
 		ok.String(smithytime.FormatDateTime(*v.CreatedBefore))
 	}
 
+	if len(v.CreationType) > 0 {
+		ok := object.Key("creationType")
+		ok.String(string(v.CreationType))
+	}
+
 	if v.GeneratedFrom != nil {
 		ok := object.Key("generatedFrom")
 		ok.String(*v.GeneratedFrom)

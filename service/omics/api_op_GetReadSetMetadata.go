@@ -80,6 +80,9 @@ type GetReadSetMetadataOutput struct {
 	// This member is required.
 	Status types.ReadSetStatus
 
+	// The creation type of the read set.
+	CreationType types.CreationType
+
 	// The read set's description.
 	Description *string
 

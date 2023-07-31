@@ -50,6 +50,10 @@ type GetScheduleInput struct {
 
 type GetScheduleOutput struct {
 
+	// Indicates the action that EventBridge Scheduler applies to the schedule after
+	// the schedule completes invoking the target.
+	ActionAfterCompletion types.ActionAfterCompletion
+
 	// The Amazon Resource Name (ARN) of the schedule.
 	Arn *string
 
@@ -85,7 +89,7 @@ type GetScheduleOutput struct {
 	// The expression that defines when the schedule runs. The following formats are
 	// supported.
 	//   - at expression - at(yyyy-mm-ddThh:mm:ss)
-	//   - rate expression - rate(unit value)
+	//   - rate expression - rate(value unit)
 	//   - cron expression - cron(fields)
 	// You can use at expressions to create one-time schedules that invoke a target
 	// once, at the time and in the time zone, that you specify. You can use rate and

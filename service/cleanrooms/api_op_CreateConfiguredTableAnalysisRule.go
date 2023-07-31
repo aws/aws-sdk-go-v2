@@ -40,7 +40,7 @@ type CreateConfiguredTableAnalysisRuleInput struct {
 	// This member is required.
 	AnalysisRulePolicy types.ConfiguredTableAnalysisRulePolicy
 
-	// The type of analysis rule. Valid values are AGGREGATION and LIST.
+	// The type of analysis rule.
 	//
 	// This member is required.
 	AnalysisRuleType types.ConfiguredTableAnalysisRuleType

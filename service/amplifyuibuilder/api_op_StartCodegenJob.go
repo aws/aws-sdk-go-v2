@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a code generation job for for a specified Amplify app and backend
+// Starts a code generation job for a specified Amplify app and backend
 // environment.
 func (c *Client) StartCodegenJob(ctx context.Context, params *StartCodegenJobInput, optFns ...func(*Options)) (*StartCodegenJobOutput, error) {
 	if params == nil {

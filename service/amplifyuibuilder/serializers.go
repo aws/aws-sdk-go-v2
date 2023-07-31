@@ -2326,6 +2326,36 @@ func awsRestjson1_serializeDocumentActionParameters(v *types.ActionParameters, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentApiConfiguration(v types.ApiConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ApiConfigurationMemberDataStoreConfig:
+		av := object.Key("dataStoreConfig")
+		if err := awsRestjson1_serializeDocumentDataStoreRenderConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ApiConfigurationMemberGraphQLConfig:
+		av := object.Key("graphQLConfig")
+		if err := awsRestjson1_serializeDocumentGraphQLRenderConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ApiConfigurationMemberNoApiConfig:
+		av := object.Key("noApiConfig")
+		if err := awsRestjson1_serializeDocumentNoApiRenderConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAssociatedFieldsList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3313,6 +3343,13 @@ func awsRestjson1_serializeDocumentCreateThemeData(v *types.CreateThemeData, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDataStoreRenderConfig(v *types.DataStoreRenderConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentExchangeCodeForTokenRequestBody(v *types.ExchangeCodeForTokenRequestBody, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3865,6 +3902,38 @@ func awsRestjson1_serializeDocumentFormStyleConfig(v types.FormStyleConfig, valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGraphQLRenderConfig(v *types.GraphQLRenderConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FragmentsFilePath != nil {
+		ok := object.Key("fragmentsFilePath")
+		ok.String(*v.FragmentsFilePath)
+	}
+
+	if v.MutationsFilePath != nil {
+		ok := object.Key("mutationsFilePath")
+		ok.String(*v.MutationsFilePath)
+	}
+
+	if v.QueriesFilePath != nil {
+		ok := object.Key("queriesFilePath")
+		ok.String(*v.QueriesFilePath)
+	}
+
+	if v.SubscriptionsFilePath != nil {
+		ok := object.Key("subscriptionsFilePath")
+		ok.String(*v.SubscriptionsFilePath)
+	}
+
+	if v.TypesFilePath != nil {
+		ok := object.Key("typesFilePath")
+		ok.String(*v.TypesFilePath)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIdentifierList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3896,6 +3965,13 @@ func awsRestjson1_serializeDocumentMutationActionSetStateParameter(v *types.Muta
 			return err
 		}
 	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNoApiRenderConfig(v *types.NoApiRenderConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }
@@ -3980,6 +4056,13 @@ func awsRestjson1_serializeDocumentPutMetadataFlagBody(v *types.PutMetadataFlagB
 func awsRestjson1_serializeDocumentReactStartCodegenJobData(v *types.ReactStartCodegenJobData, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ApiConfiguration != nil {
+		ok := object.Key("apiConfiguration")
+		if err := awsRestjson1_serializeDocumentApiConfiguration(v.ApiConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.InlineSourceMap {
 		ok := object.Key("inlineSourceMap")

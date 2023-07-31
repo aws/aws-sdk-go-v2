@@ -9,6 +9,7 @@ const (
 	DatasetStatusCreated             DatasetStatus = "CREATED"
 	DatasetStatusIngestionInProgress DatasetStatus = "INGESTION_IN_PROGRESS"
 	DatasetStatusActive              DatasetStatus = "ACTIVE"
+	DatasetStatusImportInProgress    DatasetStatus = "IMPORT_IN_PROGRESS"
 )
 
 // Values returns all known values for DatasetStatus. Note that this can be
@@ -19,6 +20,7 @@ func (DatasetStatus) Values() []DatasetStatus {
 		"CREATED",
 		"INGESTION_IN_PROGRESS",
 		"ACTIVE",
+		"IMPORT_IN_PROGRESS",
 	}
 }
 
@@ -92,9 +94,10 @@ type IngestionJobStatus string
 
 // Enum values for IngestionJobStatus
 const (
-	IngestionJobStatusInProgress IngestionJobStatus = "IN_PROGRESS"
-	IngestionJobStatusSuccess    IngestionJobStatus = "SUCCESS"
-	IngestionJobStatusFailed     IngestionJobStatus = "FAILED"
+	IngestionJobStatusInProgress       IngestionJobStatus = "IN_PROGRESS"
+	IngestionJobStatusSuccess          IngestionJobStatus = "SUCCESS"
+	IngestionJobStatusFailed           IngestionJobStatus = "FAILED"
+	IngestionJobStatusImportInProgress IngestionJobStatus = "IMPORT_IN_PROGRESS"
 )
 
 // Values returns all known values for IngestionJobStatus. Note that this can be
@@ -105,6 +108,7 @@ func (IngestionJobStatus) Values() []IngestionJobStatus {
 		"IN_PROGRESS",
 		"SUCCESS",
 		"FAILED",
+		"IMPORT_IN_PROGRESS",
 	}
 }
 
@@ -150,9 +154,10 @@ type ModelStatus string
 
 // Enum values for ModelStatus
 const (
-	ModelStatusInProgress ModelStatus = "IN_PROGRESS"
-	ModelStatusSuccess    ModelStatus = "SUCCESS"
-	ModelStatusFailed     ModelStatus = "FAILED"
+	ModelStatusInProgress       ModelStatus = "IN_PROGRESS"
+	ModelStatusSuccess          ModelStatus = "SUCCESS"
+	ModelStatusFailed           ModelStatus = "FAILED"
+	ModelStatusImportInProgress ModelStatus = "IMPORT_IN_PROGRESS"
 )
 
 // Values returns all known values for ModelStatus. Note that this can be expanded
@@ -163,6 +168,51 @@ func (ModelStatus) Values() []ModelStatus {
 		"IN_PROGRESS",
 		"SUCCESS",
 		"FAILED",
+		"IMPORT_IN_PROGRESS",
+	}
+}
+
+type ModelVersionSourceType string
+
+// Enum values for ModelVersionSourceType
+const (
+	ModelVersionSourceTypeTraining   ModelVersionSourceType = "TRAINING"
+	ModelVersionSourceTypeRetraining ModelVersionSourceType = "RETRAINING"
+	ModelVersionSourceTypeImport     ModelVersionSourceType = "IMPORT"
+)
+
+// Values returns all known values for ModelVersionSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelVersionSourceType) Values() []ModelVersionSourceType {
+	return []ModelVersionSourceType{
+		"TRAINING",
+		"RETRAINING",
+		"IMPORT",
+	}
+}
+
+type ModelVersionStatus string
+
+// Enum values for ModelVersionStatus
+const (
+	ModelVersionStatusInProgress       ModelVersionStatus = "IN_PROGRESS"
+	ModelVersionStatusSuccess          ModelVersionStatus = "SUCCESS"
+	ModelVersionStatusFailed           ModelVersionStatus = "FAILED"
+	ModelVersionStatusImportInProgress ModelVersionStatus = "IMPORT_IN_PROGRESS"
+	ModelVersionStatusCanceled         ModelVersionStatus = "CANCELED"
+)
+
+// Values returns all known values for ModelVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelVersionStatus) Values() []ModelVersionStatus {
+	return []ModelVersionStatus{
+		"IN_PROGRESS",
+		"SUCCESS",
+		"FAILED",
+		"IMPORT_IN_PROGRESS",
+		"CANCELED",
 	}
 }
 

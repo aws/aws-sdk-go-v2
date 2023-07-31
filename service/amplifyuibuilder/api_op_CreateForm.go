@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new form for an Amplify.
+// Creates a new form for an Amplify app.
 func (c *Client) CreateForm(ctx context.Context, params *CreateFormInput, optFns ...func(*Options)) (*CreateFormOutput, error) {
 	if params == nil {
 		params = &CreateFormInput{}

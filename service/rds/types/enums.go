@@ -330,6 +330,30 @@ func (IAMAuthMode) Values() []IAMAuthMode {
 	}
 }
 
+type LocalWriteForwardingStatus string
+
+// Enum values for LocalWriteForwardingStatus
+const (
+	LocalWriteForwardingStatusEnabled   LocalWriteForwardingStatus = "enabled"
+	LocalWriteForwardingStatusDisabled  LocalWriteForwardingStatus = "disabled"
+	LocalWriteForwardingStatusEnabling  LocalWriteForwardingStatus = "enabling"
+	LocalWriteForwardingStatusDisabling LocalWriteForwardingStatus = "disabling"
+	LocalWriteForwardingStatusRequested LocalWriteForwardingStatus = "requested"
+)
+
+// Values returns all known values for LocalWriteForwardingStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LocalWriteForwardingStatus) Values() []LocalWriteForwardingStatus {
+	return []LocalWriteForwardingStatus{
+		"enabled",
+		"disabled",
+		"enabling",
+		"disabling",
+		"requested",
+	}
+}
+
 type ReplicaMode string
 
 // Enum values for ReplicaMode

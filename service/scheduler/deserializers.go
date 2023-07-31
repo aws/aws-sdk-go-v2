@@ -680,6 +680,15 @@ func awsRestjson1_deserializeOpDocumentGetScheduleOutput(v **GetScheduleOutput, 
 
 	for key, value := range shape {
 		switch key {
+		case "ActionAfterCompletion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionAfterCompletion to be of type string, got %T instead", value)
+				}
+				sv.ActionAfterCompletion = types.ActionAfterCompletion(jtv)
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)

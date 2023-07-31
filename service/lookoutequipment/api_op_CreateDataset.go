@@ -18,8 +18,8 @@ import (
 
 // Creates a container for a collection of data being ingested for analysis. The
 // dataset contains the metadata describing where the data is and what the data
-// actually looks like. In other words, it contains the location of the data
-// source, the data schema, and other information. A dataset also contains any tags
+// actually looks like. For example, it contains the location of the data source,
+// the data schema, and other information. A dataset also contains any tags
 // associated with the ingested data.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {

@@ -1,0 +1,8 @@
+{
+    "id": "0bf3d173-07ee-4e96-af4b-b22be3ab7776",
+    "type": "feature",
+    "description": "New integration with the Gitlab provider type.",
+    "modules": [
+        "service/codestarconnections"
+    ]
+}

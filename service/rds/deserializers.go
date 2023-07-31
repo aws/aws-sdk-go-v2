@@ -24719,6 +24719,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.LatestRestorableTime = ptr.Time(t)
 			}
 
+		case strings.EqualFold("LocalWriteForwardingStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LocalWriteForwardingStatus = types.LocalWriteForwardingStatus(xtv)
+			}
+
 		case strings.EqualFold("MasterUsername", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -27658,6 +27671,22 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.SupportsGlobalDatabases = xtv
+			}
+
+		case strings.EqualFold("SupportsLocalWriteForwarding", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsLocalWriteForwarding = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsLogExportsToCloudwatchLogs", t.Name.Local):
@@ -45925,6 +45954,22 @@ func awsAwsquery_deserializeDocumentUpgradeTarget(v **types.UpgradeTarget, decod
 				sv.SupportsGlobalDatabases = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("SupportsLocalWriteForwarding", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsLocalWriteForwarding = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("SupportsParallelQuery", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -47617,6 +47662,22 @@ func awsAwsquery_deserializeOpDocumentCreateCustomDBEngineVersionOutput(v **Crea
 				sv.SupportsGlobalDatabases = xtv
 			}
 
+		case strings.EqualFold("SupportsLocalWriteForwarding", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsLocalWriteForwarding = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("SupportsLogExportsToCloudwatchLogs", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -48781,6 +48842,22 @@ func awsAwsquery_deserializeOpDocumentDeleteCustomDBEngineVersionOutput(v **Dele
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.SupportsGlobalDatabases = xtv
+			}
+
+		case strings.EqualFold("SupportsLocalWriteForwarding", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsLocalWriteForwarding = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsLogExportsToCloudwatchLogs", t.Name.Local):
@@ -52261,6 +52338,22 @@ func awsAwsquery_deserializeOpDocumentModifyCustomDBEngineVersionOutput(v **Modi
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.SupportsGlobalDatabases = xtv
+			}
+
+		case strings.EqualFold("SupportsLocalWriteForwarding", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsLocalWriteForwarding = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsLogExportsToCloudwatchLogs", t.Name.Local):

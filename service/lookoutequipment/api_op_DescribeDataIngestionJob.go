@@ -88,6 +88,10 @@ type DescribeDataIngestionJobOutput struct {
 	// data source being ingested.
 	RoleArn *string
 
+	// The Amazon Resource Name (ARN) of the source dataset from which the data used
+	// for the data ingestion job was imported from.
+	SourceDatasetArn *string
+
 	// Indicates the status of the DataIngestionJob operation.
 	Status types.IngestionJobStatus
 

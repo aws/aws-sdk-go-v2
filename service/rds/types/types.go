@@ -620,6 +620,10 @@ type DBCluster struct {
 	// The latest time to which a database can be restored with point-in-time restore.
 	LatestRestorableTime *time.Time
 
+	// Specifies whether an Aurora DB cluster has in-cluster write forwarding enabled,
+	// not enabled, requested, or is in the process of enabling it.
+	LocalWriteForwardingStatus LocalWriteForwardingStatus
+
 	// The secret managed by RDS in Amazon Web Services Secrets Manager for the master
 	// user password. For more information, see Password management with Amazon Web
 	// Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
@@ -1160,6 +1164,12 @@ type DBEngineVersion struct {
 	// A value that indicates whether you can use Aurora global databases with a
 	// specific DB engine version.
 	SupportsGlobalDatabases bool
+
+	// A value that indicates whether the DB engine version supports forwarding write
+	// operations from reader DB instances to the writer DB instance in the DB cluster.
+	// By default, write operations aren't allowed on reader DB instances. Valid for:
+	// Aurora DB clusters only
+	SupportsLocalWriteForwarding *bool
 
 	// A value that indicates whether the engine version supports exporting the log
 	// types specified by ExportableLogTypes to CloudWatch Logs.
@@ -3733,6 +3743,12 @@ type UpgradeTarget struct {
 	// A value that indicates whether you can use Aurora global databases with the
 	// target engine version.
 	SupportsGlobalDatabases *bool
+
+	// A value that indicates whether the target engine version supports forwarding
+	// write operations from reader DB instances to the writer DB instance in the DB
+	// cluster. By default, write operations aren't allowed on reader DB instances.
+	// Valid for: Aurora DB clusters only
+	SupportsLocalWriteForwarding *bool
 
 	// A value that indicates whether you can use Aurora parallel query with the
 	// target engine version.

@@ -184,6 +184,12 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// specific DB engine version.
 	SupportsGlobalDatabases bool
 
+	// A value that indicates whether the DB engine version supports forwarding write
+	// operations from reader DB instances to the writer DB instance in the DB cluster.
+	// By default, write operations aren't allowed on reader DB instances. Valid for:
+	// Aurora DB clusters only
+	SupportsLocalWriteForwarding *bool
+
 	// A value that indicates whether the engine version supports exporting the log
 	// types specified by ExportableLogTypes to CloudWatch Logs.
 	SupportsLogExportsToCloudwatchLogs bool

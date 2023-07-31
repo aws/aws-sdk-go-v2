@@ -1,0 +1,8 @@
+{
+    "id": "51fa85b2-115b-4a26-a73d-5d7600843d41",
+    "type": "feature",
+    "description": "This release introduces automatic deletion of schedules in EventBridge Scheduler. If configured, EventBridge Scheduler automatically deletes a schedule after the schedule has completed its last invocation.",
+    "modules": [
+        "service/scheduler"
+    ]
+}

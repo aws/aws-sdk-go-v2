@@ -1,0 +1,8 @@
+{
+    "id": "bb105be6-94e5-4082-99fc-9052f5dd1b11",
+    "type": "feature",
+    "description": "This release adds support for Aurora MySQL local write forwarding, which allows for forwarding of write operations from reader DB instances to the writer DB instance.",
+    "modules": [
+        "service/rds"
+    ]
+}

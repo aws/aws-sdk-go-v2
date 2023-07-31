@@ -49,6 +49,44 @@ type ActionParameters struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the API configuration for a code generation job.
+//
+// The following types satisfy this interface:
+//
+//	ApiConfigurationMemberDataStoreConfig
+//	ApiConfigurationMemberGraphQLConfig
+//	ApiConfigurationMemberNoApiConfig
+type ApiConfiguration interface {
+	isApiConfiguration()
+}
+
+// The configuration for an application using DataStore APIs.
+type ApiConfigurationMemberDataStoreConfig struct {
+	Value DataStoreRenderConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ApiConfigurationMemberDataStoreConfig) isApiConfiguration() {}
+
+// The configuration for an application using GraphQL APIs.
+type ApiConfigurationMemberGraphQLConfig struct {
+	Value GraphQLRenderConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ApiConfigurationMemberGraphQLConfig) isApiConfiguration() {}
+
+// The configuration for an application with no API being used.
+type ApiConfigurationMemberNoApiConfig struct {
+	Value NoApiRenderConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ApiConfigurationMemberNoApiConfig) isApiConfiguration() {}
+
 // Describes the feature flags that you can specify for a code generation job.
 type CodegenFeatureFlags struct {
 
@@ -212,7 +250,7 @@ type CodegenJob struct {
 	ModifiedAt *time.Time
 
 	// Describes the configuration information for rendering the UI component
-	// associated the code generation job.
+	// associated with the code generation job.
 	RenderConfig CodegenJobRenderConfig
 
 	// The status of the code generation job.
@@ -264,7 +302,7 @@ type CodegenJobGenericDataSchema struct {
 }
 
 // Describes the configuration information for rendering the UI component
-// associated the code generation job.
+// associated with the code generation job.
 //
 // The following types satisfy this interface:
 //
@@ -805,6 +843,11 @@ type CreateThemeData struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the DataStore configuration for an API for a code generation job.
+type DataStoreRenderConfig struct {
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration of a request to exchange an access code for a token.
 type ExchangeCodeForTokenRequestBody struct {
 
@@ -1272,6 +1315,41 @@ type FormSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the GraphQL configuration for an API for a code generation job.
+type GraphQLRenderConfig struct {
+
+	// The path to the GraphQL fragments file, relative to the component output
+	// directory.
+	//
+	// This member is required.
+	FragmentsFilePath *string
+
+	// The path to the GraphQL mutations file, relative to the component output
+	// directory.
+	//
+	// This member is required.
+	MutationsFilePath *string
+
+	// The path to the GraphQL queries file, relative to the component output
+	// directory.
+	//
+	// This member is required.
+	QueriesFilePath *string
+
+	// The path to the GraphQL subscriptions file, relative to the component output
+	// directory.
+	//
+	// This member is required.
+	SubscriptionsFilePath *string
+
+	// The path to the GraphQL types file, relative to the component output directory.
+	//
+	// This member is required.
+	TypesFilePath *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents the state configuration when an action modifies a property of
 // another element within the same component.
 type MutationActionSetStateParameter struct {
@@ -1291,6 +1369,11 @@ type MutationActionSetStateParameter struct {
 	// This member is required.
 	Set *ComponentProperty
 
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for an application with no API being used.
+type NoApiRenderConfig struct {
 	noSmithyDocumentSerde
 }
 
@@ -1332,6 +1415,9 @@ type PutMetadataFlagBody struct {
 
 // Describes the code generation job configuration for a React project.
 type ReactStartCodegenJobData struct {
+
+	// The API configuration for the code generation job.
+	ApiConfiguration ApiConfiguration
 
 	// Specifies whether the code generation job should render inline source maps.
 	InlineSourceMap bool
@@ -1672,6 +1758,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isApiConfiguration()       {}
 func (*UnknownUnionMember) isCodegenJobRenderConfig() {}
 func (*UnknownUnionMember) isFieldPosition()          {}
 func (*UnknownUnionMember) isFormStyleConfig()        {}

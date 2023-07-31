@@ -849,6 +849,7 @@ type TargetInstanceTypeRightSizingMethod string
 const (
 	TargetInstanceTypeRightSizingMethodNone  TargetInstanceTypeRightSizingMethod = "NONE"
 	TargetInstanceTypeRightSizingMethodBasic TargetInstanceTypeRightSizingMethod = "BASIC"
+	TargetInstanceTypeRightSizingMethodInAws TargetInstanceTypeRightSizingMethod = "IN_AWS"
 )
 
 // Values returns all known values for TargetInstanceTypeRightSizingMethod. Note
@@ -859,6 +860,7 @@ func (TargetInstanceTypeRightSizingMethod) Values() []TargetInstanceTypeRightSiz
 	return []TargetInstanceTypeRightSizingMethod{
 		"NONE",
 		"BASIC",
+		"IN_AWS",
 	}
 }
 

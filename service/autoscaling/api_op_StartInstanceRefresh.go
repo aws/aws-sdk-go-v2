@@ -81,6 +81,7 @@ type StartInstanceRefreshInput struct {
 	// can also choose to enable additional features, such as the following:
 	//   - Auto rollback
 	//   - Checkpoints
+	//   - CloudWatch alarms
 	//   - Skip matching
 	Preferences *types.RefreshPreferences
 

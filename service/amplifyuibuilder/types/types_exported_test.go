@@ -7,6 +7,32 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
 )
 
+func ExampleApiConfiguration_outputUsage() {
+	var union types.ApiConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ApiConfigurationMemberDataStoreConfig:
+		_ = v.Value // Value is types.DataStoreRenderConfig
+
+	case *types.ApiConfigurationMemberGraphQLConfig:
+		_ = v.Value // Value is types.GraphQLRenderConfig
+
+	case *types.ApiConfigurationMemberNoApiConfig:
+		_ = v.Value // Value is types.NoApiRenderConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DataStoreRenderConfig
+var _ *types.NoApiRenderConfig
+var _ *types.GraphQLRenderConfig
+
 func ExampleCodegenJobRenderConfig_outputUsage() {
 	var union types.CodegenJobRenderConfig
 	// type switches can be used to check the union value

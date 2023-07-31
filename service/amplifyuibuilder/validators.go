@@ -662,6 +662,25 @@ func validateActionParameters(v *types.ActionParameters) error {
 	}
 }
 
+func validateApiConfiguration(v types.ApiConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApiConfiguration"}
+	switch uv := v.(type) {
+	case *types.ApiConfigurationMemberGraphQLConfig:
+		if err := validateGraphQLRenderConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[graphQLConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCodegenGenericDataEnum(v *types.CodegenGenericDataEnum) error {
 	if v == nil {
 		return nil
@@ -886,6 +905,25 @@ func validateCodegenJobGenericDataSchema(v *types.CodegenJobGenericDataSchema) e
 		if err := validateCodegenGenericDataNonModels(v.NonModels); err != nil {
 			invalidParams.AddNested("NonModels", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenJobRenderConfig(v types.CodegenJobRenderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenJobRenderConfig"}
+	switch uv := v.(type) {
+	case *types.CodegenJobRenderConfigMemberReact:
+		if err := validateReactStartCodegenJobData(&uv.Value); err != nil {
+			invalidParams.AddNested("[react]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1464,6 +1502,33 @@ func validateFormInputValuePropertyList(v []types.FormInputValueProperty) error 
 	}
 }
 
+func validateGraphQLRenderConfig(v *types.GraphQLRenderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GraphQLRenderConfig"}
+	if v.TypesFilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypesFilePath"))
+	}
+	if v.QueriesFilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueriesFilePath"))
+	}
+	if v.MutationsFilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MutationsFilePath"))
+	}
+	if v.SubscriptionsFilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionsFilePath"))
+	}
+	if v.FragmentsFilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FragmentsFilePath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMutationActionSetStateParameter(v *types.MutationActionSetStateParameter) error {
 	if v == nil {
 		return nil
@@ -1496,6 +1561,23 @@ func validatePutMetadataFlagBody(v *types.PutMetadataFlagBody) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PutMetadataFlagBody"}
 	if v.NewValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NewValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReactStartCodegenJobData(v *types.ReactStartCodegenJobData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReactStartCodegenJobData"}
+	if v.ApiConfiguration != nil {
+		if err := validateApiConfiguration(v.ApiConfiguration); err != nil {
+			invalidParams.AddNested("ApiConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1594,6 +1676,10 @@ func validateStartCodegenJobData(v *types.StartCodegenJobData) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartCodegenJobData"}
 	if v.RenderConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RenderConfig"))
+	} else if v.RenderConfig != nil {
+		if err := validateCodegenJobRenderConfig(v.RenderConfig); err != nil {
+			invalidParams.AddNested("RenderConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.GenericDataSchema != nil {
 		if err := validateCodegenJobGenericDataSchema(v.GenericDataSchema); err != nil {

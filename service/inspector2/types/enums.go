@@ -494,6 +494,28 @@ func (FilterAction) Values() []FilterAction {
 	}
 }
 
+type FindingDetailsErrorCode string
+
+// Enum values for FindingDetailsErrorCode
+const (
+	FindingDetailsErrorCodeInternalError          FindingDetailsErrorCode = "INTERNAL_ERROR"
+	FindingDetailsErrorCodeAccessDenied           FindingDetailsErrorCode = "ACCESS_DENIED"
+	FindingDetailsErrorCodeFindingDetailsNotFound FindingDetailsErrorCode = "FINDING_DETAILS_NOT_FOUND"
+	FindingDetailsErrorCodeInvalidInput           FindingDetailsErrorCode = "INVALID_INPUT"
+)
+
+// Values returns all known values for FindingDetailsErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingDetailsErrorCode) Values() []FindingDetailsErrorCode {
+	return []FindingDetailsErrorCode{
+		"INTERNAL_ERROR",
+		"ACCESS_DENIED",
+		"FINDING_DETAILS_NOT_FOUND",
+		"INVALID_INPUT",
+	}
+}
+
 type FindingStatus string
 
 // Enum values for FindingStatus

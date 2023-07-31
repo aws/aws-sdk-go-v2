@@ -7,18 +7,18 @@ import (
 )
 
 // A resource that is used to connect third-party source providers with services
-// like AWS CodePipeline. Note: A connection created through CloudFormation, the
-// CLI, or the SDK is in `PENDING` status by default. You can make its status
+// like CodePipeline. Note: A connection created through CloudFormation, the CLI,
+// or the SDK is in `PENDING` status by default. You can make its status
 // `AVAILABLE` by updating the connection in the console.
 type Connection struct {
 
 	// The Amazon Resource Name (ARN) of the connection. The ARN is used as the
-	// connection reference when the connection is shared between AWS services. The ARN
-	// is never reused if the connection is deleted.
+	// connection reference when the connection is shared between Amazon Web Services.
+	// The ARN is never reused if the connection is deleted.
 	ConnectionArn *string
 
-	// The name of the connection. Connection names must be unique in an AWS user
-	// account.
+	// The name of the connection. Connection names must be unique in an Amazon Web
+	// Services account.
 	ConnectionName *string
 
 	// The current status of the connection.
@@ -75,7 +75,7 @@ type Host struct {
 }
 
 // A tag is a key-value pair that is used to manage the resource. This tag is
-// available for use by AWS services that support tags.
+// available for use by Amazon Web Services services that support tags.
 type Tag struct {
 
 	// The tag's key.

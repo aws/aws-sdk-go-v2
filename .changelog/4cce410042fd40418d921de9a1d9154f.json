@@ -1,0 +1,8 @@
+{
+    "id": "4cce4100-42fd-4041-8d92-1de9a1d9154f",
+    "type": "feature",
+    "description": "Amplify Studio releases GraphQL support for codegen job action.",
+    "modules": [
+        "service/amplifyuibuilder"
+    ]
+}

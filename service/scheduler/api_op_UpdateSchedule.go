@@ -55,7 +55,7 @@ type UpdateScheduleInput struct {
 	// The expression that defines when the schedule runs. The following formats are
 	// supported.
 	//   - at expression - at(yyyy-mm-ddThh:mm:ss)
-	//   - rate expression - rate(unit value)
+	//   - rate expression - rate(value unit)
 	//   - cron expression - cron(fields)
 	// You can use at expressions to create one-time schedules that invoke a target
 	// once, at the time and in the time zone, that you specify. You can use rate and
@@ -78,6 +78,10 @@ type UpdateScheduleInput struct {
 	//
 	// This member is required.
 	Target *types.Target
+
+	// Specifies the action that EventBridge Scheduler applies to the schedule after
+	// the schedule completes invoking the target.
+	ActionAfterCompletion types.ActionAfterCompletion
 
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. If you do not specify a client token, EventBridge Scheduler uses a

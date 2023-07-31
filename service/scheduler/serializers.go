@@ -95,6 +95,11 @@ func awsRestjson1_serializeOpDocumentCreateScheduleInput(v *CreateScheduleInput,
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ActionAfterCompletion) > 0 {
+		ok := object.Key("ActionAfterCompletion")
+		ok.String(string(v.ActionAfterCompletion))
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -977,6 +982,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateScheduleInput(v *UpdateScheduleIn
 func awsRestjson1_serializeOpDocumentUpdateScheduleInput(v *UpdateScheduleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.ActionAfterCompletion) > 0 {
+		ok := object.Key("ActionAfterCompletion")
+		ok.String(string(v.ActionAfterCompletion))
+	}
 
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")

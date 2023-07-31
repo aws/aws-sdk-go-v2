@@ -109,6 +109,15 @@ type Alarm struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the CloudWatch alarm specification to use in an instance refresh.
+type AlarmSpecification struct {
+
+	// The names of one or more CloudWatch alarms to monitor for the instance refresh.
+	Alarms []string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an Auto Scaling group.
 type AutoScalingGroup struct {
 
@@ -2013,15 +2022,22 @@ type ProcessType struct {
 // Describes the preferences for an instance refresh.
 type RefreshPreferences struct {
 
+	// (Optional) The CloudWatch alarm specification. CloudWatch alarms can be used to
+	// identify any issues and fail the operation if an alarm threshold is met.
+	AlarmSpecification *AlarmSpecification
+
 	// (Optional) Indicates whether to roll back the Auto Scaling group to its
-	// previous configuration if the instance refresh fails. The default is false . A
-	// rollback is not supported in the following situations:
+	// previous configuration if the instance refresh fails or a CloudWatch alarm
+	// threshold is met. The default is false . A rollback is not supported in the
+	// following situations:
 	//   - There is no desired configuration specified for the instance refresh.
 	//   - The Auto Scaling group has a launch template that uses an Amazon Web
 	//   Services Systems Manager parameter instead of an AMI ID for the ImageId
 	//   property.
 	//   - The Auto Scaling group uses the launch template's $Latest or $Default
 	//   version.
+	// For more information, see Undo changes with a rollback (https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-refresh-rollback.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	AutoRollback *bool
 
 	// (Optional) The amount of time, in seconds, to wait after a checkpoint before

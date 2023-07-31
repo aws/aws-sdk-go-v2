@@ -4739,6 +4739,15 @@ func awsRestjson1_deserializeOpDocumentGetReadSetMetadataOutput(v **GetReadSetMe
 				sv.CreationTime = ptr.Time(t)
 			}
 
+		case "creationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CreationType to be of type string, got %T instead", value)
+				}
+				sv.CreationType = types.CreationType(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15926,6 +15935,15 @@ func awsRestjson1_deserializeDocumentReadSetListItem(v **types.ReadSetListItem, 
 					return err
 				}
 				sv.CreationTime = ptr.Time(t)
+			}
+
+		case "creationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CreationType to be of type string, got %T instead", value)
+				}
+				sv.CreationType = types.CreationType(jtv)
 			}
 
 		case "description":

@@ -192,6 +192,11 @@ type CreateDBClusterInput struct {
 	// in the Amazon Aurora User Guide. Valid for Cluster Type: Aurora DB clusters only
 	EnableIAMDatabaseAuthentication *bool
 
+	// Specifies whether read replicas can forward write operations to the writer DB
+	// instance in the DB cluster. By default, write operations aren't allowed on
+	// reader DB instances. Valid for: Aurora DB clusters only
+	EnableLocalWriteForwarding *bool
+
 	// Specifies whether to turn on Performance Insights for the DB cluster. For more
 	// information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
 	// in the Amazon RDS User Guide. Valid for Cluster Type: Multi-AZ DB clusters only

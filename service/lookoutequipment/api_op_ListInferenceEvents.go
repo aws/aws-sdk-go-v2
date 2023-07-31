@@ -42,7 +42,7 @@ type ListInferenceEventsInput struct {
 	InferenceSchedulerName *string
 
 	// Returns all the inference events with an end start time equal to or greater
-	// than less than the end time given
+	// than less than the end time given.
 	//
 	// This member is required.
 	IntervalEndTime *time.Time

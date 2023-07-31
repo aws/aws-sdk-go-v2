@@ -32,6 +32,9 @@ func ExampleAnalysisRulePolicyV1_outputUsage() {
 	case *types.AnalysisRulePolicyV1MemberAggregation:
 		_ = v.Value // Value is types.AnalysisRuleAggregation
 
+	case *types.AnalysisRulePolicyV1MemberCustom:
+		_ = v.Value // Value is types.AnalysisRuleCustom
+
 	case *types.AnalysisRulePolicyV1MemberList:
 		_ = v.Value // Value is types.AnalysisRuleList
 
@@ -45,7 +48,26 @@ func ExampleAnalysisRulePolicyV1_outputUsage() {
 }
 
 var _ *types.AnalysisRuleAggregation
+var _ *types.AnalysisRuleCustom
 var _ *types.AnalysisRuleList
+
+func ExampleAnalysisSource_outputUsage() {
+	var union types.AnalysisSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AnalysisSourceMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleConfiguredTableAnalysisRulePolicy_outputUsage() {
 	var union types.ConfiguredTableAnalysisRulePolicy
@@ -72,6 +94,9 @@ func ExampleConfiguredTableAnalysisRulePolicyV1_outputUsage() {
 	case *types.ConfiguredTableAnalysisRulePolicyV1MemberAggregation:
 		_ = v.Value // Value is types.AnalysisRuleAggregation
 
+	case *types.ConfiguredTableAnalysisRulePolicyV1MemberCustom:
+		_ = v.Value // Value is types.AnalysisRuleCustom
+
 	case *types.ConfiguredTableAnalysisRulePolicyV1MemberList:
 		_ = v.Value // Value is types.AnalysisRuleList
 
@@ -85,6 +110,7 @@ func ExampleConfiguredTableAnalysisRulePolicyV1_outputUsage() {
 }
 
 var _ *types.AnalysisRuleAggregation
+var _ *types.AnalysisRuleCustom
 var _ *types.AnalysisRuleList
 
 func ExampleProtectedQueryOutput_outputUsage() {

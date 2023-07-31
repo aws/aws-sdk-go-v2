@@ -49,6 +49,28 @@ type AggregationConstraint struct {
 	noSmithyDocumentSerde
 }
 
+// Optional. The member who can query can provide this placeholder for a literal
+// data value in an analysis template.
+type AnalysisParameter struct {
+
+	// The name of the parameter. The name must use only alphanumeric, underscore (_),
+	// or hyphen (-) characters but cannot start or end with a hyphen.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of parameter.
+	//
+	// This member is required.
+	Type ParameterType
+
+	// Optional. The default value that is applied in the analysis template. The
+	// member who can query can override this value in the query editor.
+	DefaultValue *string
+
+	noSmithyDocumentSerde
+}
+
 // A specification about how data from the configured table can be used in a query.
 type AnalysisRule struct {
 
@@ -72,7 +94,7 @@ type AnalysisRule struct {
 	// This member is required.
 	Policy AnalysisRulePolicy
 
-	// The type of analysis rule. Valid values are `AGGREGATION` and `LIST`.
+	// The type of analysis rule.
 	//
 	// This member is required.
 	Type AnalysisRuleType
@@ -85,7 +107,8 @@ type AnalysisRule struct {
 	noSmithyDocumentSerde
 }
 
-// Enables query structure and specified queries that produce aggregate statistics.
+// A type of analysis rule that enables query structure and specified queries that
+// produce aggregate statistics.
 type AnalysisRuleAggregation struct {
 
 	// The columns that query runners are allowed to use in aggregation queries.
@@ -127,6 +150,22 @@ type AnalysisRuleAggregation struct {
 	noSmithyDocumentSerde
 }
 
+// A type of analysis rule that enables the table owner to approve custom SQL
+// queries on their configured tables.
+type AnalysisRuleCustom struct {
+
+	// The analysis templates that are allowed by the custom analysis rule.
+	//
+	// This member is required.
+	AllowedAnalyses []string
+
+	// The Amazon Web Services accounts that are allowed to query by the custom
+	// analysis rule. Required when allowedAnalyses is ANY_QUERY .
+	AllowedAnalysisProviders []string
+
+	noSmithyDocumentSerde
+}
+
 // A type of analysis rule that enables row-level analysis.
 type AnalysisRuleList struct {
 
@@ -141,14 +180,14 @@ type AnalysisRuleList struct {
 	// This member is required.
 	ListColumns []string
 
-	// Which logical operators (if any) are to be used in an INNER JOIN match
+	// The logical operators (if any) that are to be used in an INNER JOIN match
 	// condition. Default is AND .
 	AllowedJoinOperators []JoinOperator
 
 	noSmithyDocumentSerde
 }
 
-// Controls on the query specifications that can be run on configured table..
+// Controls on the query specifications that can be run on configured table.
 //
 // The following types satisfy this interface:
 //
@@ -157,7 +196,7 @@ type AnalysisRulePolicy interface {
 	isAnalysisRulePolicy()
 }
 
-// Controls on the query specifications that can be run on configured table..
+// Controls on the query specifications that can be run on configured table.
 type AnalysisRulePolicyMemberV1 struct {
 	Value AnalysisRulePolicyV1
 
@@ -166,11 +205,12 @@ type AnalysisRulePolicyMemberV1 struct {
 
 func (*AnalysisRulePolicyMemberV1) isAnalysisRulePolicy() {}
 
-// Controls on the query specifications that can be run on configured table..
+// Controls on the query specifications that can be run on configured table.
 //
 // The following types satisfy this interface:
 //
 //	AnalysisRulePolicyV1MemberAggregation
+//	AnalysisRulePolicyV1MemberCustom
 //	AnalysisRulePolicyV1MemberList
 type AnalysisRulePolicyV1 interface {
 	isAnalysisRulePolicyV1()
@@ -185,6 +225,15 @@ type AnalysisRulePolicyV1MemberAggregation struct {
 
 func (*AnalysisRulePolicyV1MemberAggregation) isAnalysisRulePolicyV1() {}
 
+// Analysis rule type that enables custom SQL queries on a configured table.
+type AnalysisRulePolicyV1MemberCustom struct {
+	Value AnalysisRuleCustom
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalysisRulePolicyV1MemberCustom) isAnalysisRulePolicyV1() {}
+
 // Analysis rule type that enables only list queries on a configured table.
 type AnalysisRulePolicyV1MemberList struct {
 	Value AnalysisRuleList
@@ -193,6 +242,182 @@ type AnalysisRulePolicyV1MemberList struct {
 }
 
 func (*AnalysisRulePolicyV1MemberList) isAnalysisRulePolicyV1() {}
+
+// A relation within an analysis.
+type AnalysisSchema struct {
+
+	// The tables referenced in the analysis schema.
+	ReferencedTables []string
+
+	noSmithyDocumentSerde
+}
+
+// The structure that defines the body of the analysis template.
+//
+// The following types satisfy this interface:
+//
+//	AnalysisSourceMemberText
+type AnalysisSource interface {
+	isAnalysisSource()
+}
+
+// The query text.
+type AnalysisSourceMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalysisSourceMemberText) isAnalysisSource() {}
+
+// The analysis template.
+type AnalysisTemplate struct {
+
+	// The Amazon Resource Name (ARN) of the analysis template.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique ARN for the analysis template’s associated collaboration.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique ID for the associated collaboration of the analysis template.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time that the analysis template was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The format of the analysis template.
+	//
+	// This member is required.
+	Format AnalysisFormat
+
+	// The identifier for the analysis template.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the member who created the analysis template.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The identifier of a member who created the analysis template.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The name of the analysis template.
+	//
+	// This member is required.
+	Name *string
+
+	// The entire schema object.
+	//
+	// This member is required.
+	Schema *AnalysisSchema
+
+	// The source of the analysis template.
+	//
+	// This member is required.
+	Source AnalysisSource
+
+	// The time that the analysis template was last updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The parameters of the analysis template.
+	AnalysisParameters []AnalysisParameter
+
+	// The description of the analysis template.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of the analysis template.
+type AnalysisTemplateSummary struct {
+
+	// The Amazon Resource Name (ARN) of the analysis template.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique ARN for the analysis template summary’s associated collaboration.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// A unique identifier for the collaboration that the analysis template summary
+	// belongs to. Currently accepts collaboration ID.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time that the analysis template summary was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The identifier of the analysis template.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the member who created the analysis template.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The identifier for a membership resource.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The name of the analysis template.
+	//
+	// This member is required.
+	Name *string
+
+	// The time that the analysis template summary was last updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the analysis template.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of errors thrown by the call to retrieve multiple analysis templates
+// within a collaboration by their identifiers.
+type BatchGetCollaborationAnalysisTemplateError struct {
+
+	// The Amazon Resource Name (ARN) of the analysis template.
+	//
+	// This member is required.
+	Arn *string
+
+	// An error code for the error.
+	//
+	// This member is required.
+	Code *string
+
+	// A description of why the call failed.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
 
 // An error describing why a schema could not be fetched.
 type BatchGetSchemaError struct {
@@ -282,6 +507,128 @@ type Collaboration struct {
 	noSmithyDocumentSerde
 }
 
+// The analysis template within a collaboration.
+type CollaborationAnalysisTemplate struct {
+
+	// The Amazon Resource Name (ARN) of the analysis template.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique ARN for the analysis template’s associated collaboration.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// A unique identifier for the collaboration that the analysis templates belong
+	// to. Currently accepts collaboration ID.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time that the analysis template within a collaboration was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The identifier used to reference members of the collaboration. Currently only
+	// supports Amazon Web Services account ID.
+	//
+	// This member is required.
+	CreatorAccountId *string
+
+	// The format of the analysis template in the collaboration.
+	//
+	// This member is required.
+	Format AnalysisFormat
+
+	// The identifier of the analysis template.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the analysis template.
+	//
+	// This member is required.
+	Name *string
+
+	// The entire schema object.
+	//
+	// This member is required.
+	Schema *AnalysisSchema
+
+	// The source of the analysis template within a collaboration.
+	//
+	// This member is required.
+	Source AnalysisSource
+
+	// The time that the analysis template in the collaboration was last updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The analysis parameters that have been specified in the analysis template.
+	AnalysisParameters []AnalysisParameter
+
+	// The description of the analysis template.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of the analysis template within a collaboration.
+type CollaborationAnalysisTemplateSummary struct {
+
+	// The Amazon Resource Name (ARN) of the analysis template.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique ARN for the analysis template’s associated collaboration.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// A unique identifier for the collaboration that the analysis templates belong
+	// to. Currently accepts collaboration ID.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time that the summary of the analysis template in a collaboration was
+	// created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The identifier used to reference members of the collaboration. Currently only
+	// supports Amazon Web Services account ID.
+	//
+	// This member is required.
+	CreatorAccountId *string
+
+	// The identifier of the analysis template.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the analysis template.
+	//
+	// This member is required.
+	Name *string
+
+	// The time that the summary of the analysis template in the collaboration was
+	// last updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the analysis template.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // The metadata of the collaboration.
 type CollaborationSummary struct {
 
@@ -367,9 +714,8 @@ type ConfiguredTable struct {
 	// This member is required.
 	AnalysisMethod AnalysisMethod
 
-	// The types of analysis rules associated with this configured table. Valid values
-	// are `AGGREGATION` and `LIST`. Currently, only one analysis rule may be
-	// associated with a configured table.
+	// The types of analysis rules associated with this configured table. Currently,
+	// only one analysis rule may be associated with a configured table.
 	//
 	// This member is required.
 	AnalysisRuleTypes []ConfiguredTableAnalysisRuleType
@@ -434,8 +780,7 @@ type ConfiguredTableAnalysisRule struct {
 	// This member is required.
 	Policy ConfiguredTableAnalysisRulePolicy
 
-	// The type of configured table analysis rule. Valid values are `AGGREGATION` and
-	// `LIST`.
+	// The type of configured table analysis rule.
 	//
 	// This member is required.
 	Type ConfiguredTableAnalysisRuleType
@@ -471,6 +816,7 @@ func (*ConfiguredTableAnalysisRulePolicyMemberV1) isConfiguredTableAnalysisRuleP
 // The following types satisfy this interface:
 //
 //	ConfiguredTableAnalysisRulePolicyV1MemberAggregation
+//	ConfiguredTableAnalysisRulePolicyV1MemberCustom
 //	ConfiguredTableAnalysisRulePolicyV1MemberList
 type ConfiguredTableAnalysisRulePolicyV1 interface {
 	isConfiguredTableAnalysisRulePolicyV1()
@@ -485,6 +831,16 @@ type ConfiguredTableAnalysisRulePolicyV1MemberAggregation struct {
 
 func (*ConfiguredTableAnalysisRulePolicyV1MemberAggregation) isConfiguredTableAnalysisRulePolicyV1() {
 }
+
+// A type of analysis rule that enables the table owner to approve custom SQL
+// queries on their configured tables.
+type ConfiguredTableAnalysisRulePolicyV1MemberCustom struct {
+	Value AnalysisRuleCustom
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfiguredTableAnalysisRulePolicyV1MemberCustom) isConfiguredTableAnalysisRulePolicyV1() {}
 
 // Analysis rule type that enables only list queries on a configured table.
 type ConfiguredTableAnalysisRulePolicyV1MemberList struct {
@@ -1050,6 +1406,13 @@ type ProtectedQueryS3OutputConfiguration struct {
 // The parameters for the SQL type Protected Query.
 type ProtectedQuerySQLParameters struct {
 
+	// The Amazon Resource Name (ARN) associated with the analysis template within a
+	// collaboration.
+	AnalysisTemplateArn *string
+
+	// The protected query SQL parameters.
+	Parameters map[string]string
+
 	// The query string to be submitted.
 	QueryString *string
 
@@ -1100,8 +1463,8 @@ type ProtectedQuerySummary struct {
 // A schema is a relation within a collaboration.
 type Schema struct {
 
-	// The analysis rule types associated with the schema. Valued values are LIST and
-	// AGGREGATION. Currently, only one entry is present.
+	// The analysis rule types associated with the schema. Currently, only one entry
+	// is present.
 	//
 	// This member is required.
 	AnalysisRuleTypes []AnalysisRuleType
@@ -1262,6 +1625,7 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAnalysisRulePolicy()                  {}
 func (*UnknownUnionMember) isAnalysisRulePolicyV1()                {}
+func (*UnknownUnionMember) isAnalysisSource()                      {}
 func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()   {}
 func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicyV1() {}
 func (*UnknownUnionMember) isProtectedQueryOutput()                {}

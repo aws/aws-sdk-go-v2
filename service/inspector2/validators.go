@@ -50,6 +50,26 @@ func (m *validateOpBatchGetCodeSnippet) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetFindingDetails struct {
+}
+
+func (*validateOpBatchGetFindingDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetFindingDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetFindingDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetFindingDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetFreeTrialInfo struct {
 }
 
@@ -636,6 +656,10 @@ func addOpAssociateMemberValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpBatchGetCodeSnippetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetCodeSnippet{}, middleware.After)
+}
+
+func addOpBatchGetFindingDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetFindingDetails{}, middleware.After)
 }
 
 func addOpBatchGetFreeTrialInfoValidationMiddleware(stack *middleware.Stack) error {
@@ -1755,6 +1779,21 @@ func validateOpBatchGetCodeSnippetInput(v *BatchGetCodeSnippetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetCodeSnippetInput"}
+	if v.FindingArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetFindingDetailsInput(v *BatchGetFindingDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetFindingDetailsInput"}
 	if v.FindingArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingArns"))
 	}

@@ -16,10 +16,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a connection that can then be given to other AWS services like
-// CodePipeline so that it can access third-party code repositories. The connection
-// is in pending status until the third-party connection handshake is completed
-// from the console.
+// Creates a connection that can then be given to other Amazon Web Services
+// services like CodePipeline so that it can access third-party code repositories.
+// The connection is in pending status until the third-party connection handshake
+// is completed from the console.
 func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionInput, optFns ...func(*Options)) (*CreateConnectionOutput, error) {
 	if params == nil {
 		params = &CreateConnectionInput{}
@@ -37,8 +37,7 @@ func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionI
 
 type CreateConnectionInput struct {
 
-	// The name of the connection to be created. The name must be unique in the
-	// calling AWS account.
+	// The name of the connection to be created.
 	//
 	// This member is required.
 	ConnectionName *string
@@ -60,8 +59,8 @@ type CreateConnectionInput struct {
 type CreateConnectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connection to be created. The ARN is used
-	// as the connection reference when the connection is shared between AWS services.
-	// The ARN is never reused if the connection is deleted.
+	// as the connection reference when the connection is shared between Amazon Web
+	// Services services. The ARN is never reused if the connection is deleted.
 	//
 	// This member is required.
 	ConnectionArn *string

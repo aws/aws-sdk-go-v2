@@ -39,8 +39,7 @@ func (c *Client) CreateHost(ctx context.Context, params *CreateHostInput, optFns
 
 type CreateHostInput struct {
 
-	// The name of the host to be created. The name must be unique in the calling AWS
-	// account.
+	// The name of the host to be created.
 	//
 	// This member is required.
 	Name *string

@@ -4028,6 +4028,66 @@ func awsRestjson1_deserializeDocumentActionParameters(v **types.ActionParameters
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentApiConfiguration(v *types.ApiConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ApiConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "dataStoreConfig":
+			var mv types.DataStoreRenderConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDataStoreRenderConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ApiConfigurationMemberDataStoreConfig{Value: mv}
+			break loop
+
+		case "graphQLConfig":
+			var mv types.GraphQLRenderConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentGraphQLRenderConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ApiConfigurationMemberGraphQLConfig{Value: mv}
+			break loop
+
+		case "noApiConfig":
+			var mv types.NoApiRenderConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentNoApiRenderConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ApiConfigurationMemberNoApiConfig{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssociatedFieldsList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6365,6 +6425,37 @@ func awsRestjson1_deserializeDocumentComponentVariantValues(v *map[string]string
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDataStoreRenderConfig(v **types.DataStoreRenderConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataStoreRenderConfig
+	if *v == nil {
+		sv = &types.DataStoreRenderConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFeaturesMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7824,6 +7915,82 @@ func awsRestjson1_deserializeDocumentFormSummaryList(v *[]types.FormSummary, val
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGraphQLRenderConfig(v **types.GraphQLRenderConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GraphQLRenderConfig
+	if *v == nil {
+		sv = &types.GraphQLRenderConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fragmentsFilePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FragmentsFilePath = ptr.String(jtv)
+			}
+
+		case "mutationsFilePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MutationsFilePath = ptr.String(jtv)
+			}
+
+		case "queriesFilePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QueriesFilePath = ptr.String(jtv)
+			}
+
+		case "subscriptionsFilePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SubscriptionsFilePath = ptr.String(jtv)
+			}
+
+		case "typesFilePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TypesFilePath = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdentifierList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7985,6 +8152,37 @@ func awsRestjson1_deserializeDocumentMutationActionSetStateParameter(v **types.M
 				return err
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNoApiRenderConfig(v **types.NoApiRenderConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NoApiRenderConfig
+	if *v == nil {
+		sv = &types.NoApiRenderConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 
@@ -8167,6 +8365,11 @@ func awsRestjson1_deserializeDocumentReactStartCodegenJobData(v **types.ReactSta
 
 	for key, value := range shape {
 		switch key {
+		case "apiConfiguration":
+			if err := awsRestjson1_deserializeDocumentApiConfiguration(&sv.ApiConfiguration, value); err != nil {
+				return err
+			}
+
 		case "inlineSourceMap":
 			if value != nil {
 				jtv, ok := value.(bool)

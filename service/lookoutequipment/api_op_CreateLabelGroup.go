@@ -61,7 +61,7 @@ type CreateLabelGroupInput struct {
 
 type CreateLabelGroupOutput struct {
 
-	// The ARN of the label group that you have created.
+	// The Amazon Resource Name (ARN) of the label group that you have created.
 	LabelGroupArn *string
 
 	// The name of the label group that you have created. Data in this field will be

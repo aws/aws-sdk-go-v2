@@ -48,7 +48,7 @@ type ListInferenceSchedulersInput struct {
 	// inference schedulers.
 	NextToken *string
 
-	// Specifies the current status of the inference schedulers to list.
+	// Specifies the current status of the inference schedulers.
 	Status types.InferenceSchedulerStatus
 
 	noSmithyDocumentSerde

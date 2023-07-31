@@ -200,6 +200,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "internetmonitor.ca-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "internetmonitor-fips.ca-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.eu-central-1.api.aws",
@@ -260,9 +266,21 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "internetmonitor.us-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "internetmonitor-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "internetmonitor-fips.us-east-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-1",
@@ -270,9 +288,21 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "internetmonitor.us-west-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "internetmonitor-fips.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{
 				Hostname: "internetmonitor.us-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "internetmonitor-fips.us-west-2.api.aws",
 			},
 		},
 	},
