@@ -15,18 +15,8 @@ jobs:
         os: [ubuntu-latest]  # other options: macos-latest, windows-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: aws-sdk-go-v2
-
-      - name: Checkout smithy-go
-        uses: actions/checkout@v2
-        with:
-          repository: aws/smithy-go
-          path: smithy-go
-          ref: ep20
-
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v2
         with:
           # Required: the version of golangci-lint is required and must be
           # specified without patch version
@@ -36,6 +26,5 @@ jobs:
           args: --version
           # Show only new issues if it's a pull request. The default value is `false`.
           # only-new-issues: true
-
       - name: run ci linter
-        run: cd aws-sdk-go-v2 && make gen-mod-replace-smithy-. ci-lint
+        run: make ci-lint
