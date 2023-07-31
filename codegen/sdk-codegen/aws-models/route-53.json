@@ -2718,6 +2718,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ap-southeast-4"
                     }
+                },
+                "il_central_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "il-central-1"
+                    }
                 }
             },
             "traits": {
@@ -3480,7 +3486,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates resource record sets in a specified hosted zone based on the settings in a\n\t\t\tspecified traffic policy version. In addition, <code>CreateTrafficPolicyInstance</code>\n\t\t\tassociates the resource record sets with a specified domain name (such as example.com)\n\t\t\tor subdomain name (such as www.example.com). Amazon Route 53 responds to DNS queries for\n\t\t\tthe domain or subdomain name by using the resource record sets that\n\t\t\t\t<code>CreateTrafficPolicyInstance</code> created.</p>\n         <note>\n            <p>After you submit an <code>CreateTrafficPolicyInstance</code> request, there's a\n\t\t\t\tbrief delay while Amazon Route 53 creates the resource record sets that are\n\t\t\t\tspecified in the traffic policy definition. \n\t\t\t\tUse <code>GetTrafficPolicyInstance</code> with the <code>id</code> of new traffic policy instance to confirm that the <code>CreateTrafficPolicyInstance</code>\n\t\t\t\trequest completed successfully. For more information, see the\n\t\t\t\t<code>State</code> response element.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates resource record sets in a specified hosted zone based on the settings in a\n\t\t\tspecified traffic policy version. In addition, <code>CreateTrafficPolicyInstance</code>\n\t\t\tassociates the resource record sets with a specified domain name (such as example.com)\n\t\t\tor subdomain name (such as www.example.com). Amazon Route 53 responds to DNS queries for\n\t\t\tthe domain or subdomain name by using the resource record sets that\n\t\t\t\t<code>CreateTrafficPolicyInstance</code> created.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/trafficpolicyinstance",
@@ -5980,7 +5986,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a specified traffic policy instance.</p>\n         <note>\n            <p>\n\t\t\t\tUse <code>GetTrafficPolicyInstance</code> with the <code>id</code> of new traffic policy instance to confirm that the \n\t\t\t\t<code>CreateTrafficPolicyInstance</code> or an <code>UpdateTrafficPolicyInstance</code> request completed successfully. \n\t\t\t\tFor more information, see the <code>State</code> response\n\t\t\t\telement.</p>\n         </note>\n         <note>\n            <p>In the Route 53 console, traffic policy instances are known as policy\n\t\t\t\trecords.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Gets information about a specified traffic policy instance.</p>\n         <note>\n            <p>After you submit a <code>CreateTrafficPolicyInstance</code> or an\n\t\t\t\t\t<code>UpdateTrafficPolicyInstance</code> request, there's a brief delay while\n\t\t\t\tAmazon Route 53 creates the resource record sets that are specified in the traffic\n\t\t\t\tpolicy definition. For more information, see the <code>State</code> response\n\t\t\t\telement.</p>\n         </note>\n         <note>\n            <p>In the Route 53 console, traffic policy instances are known as policy\n\t\t\t\trecords.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2013-04-01/trafficpolicyinstance/{Id}",
@@ -9950,6 +9956,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ap-southeast-4"
                     }
+                },
+                "il_central_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "il-central-1"
+                    }
                 }
             },
             "traits": {
@@ -11231,7 +11243,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>After you submit a <code>UpdateTrafficPolicyInstance</code> request, there's a brief delay while Route 53 creates the resource record sets \n\t\t\tthat are specified in the traffic policy definition. Use <code>GetTrafficPolicyInstance</code> with the <code>id</code> of updated traffic policy instance confirm \n\t\t\tthat the \n\t\t\t<code>UpdateTrafficPolicyInstance</code> request completed successfully. For more information, see the <code>State</code> response element.</p>\n         </note>\n         <p>Updates the resource record sets in a specified hosted zone that were created based on\n\t\t\tthe settings in a specified traffic policy version.</p>\n         <p>When you update a traffic policy instance, Amazon Route 53 continues to respond to DNS\n\t\t\tqueries for the root resource record set name (such as example.com) while it replaces\n\t\t\tone group of resource record sets with another. Route 53 performs the following\n\t\t\toperations:</p>\n         <ol>\n            <li>\n               <p>Route 53 creates a new group of resource record sets based on the specified\n\t\t\t\t\ttraffic policy. This is true regardless of how significant the differences are\n\t\t\t\t\tbetween the existing resource record sets and the new resource record sets.\n\t\t\t\t</p>\n            </li>\n            <li>\n               <p>When all of the new resource record sets have been created, Route 53 starts to\n\t\t\t\t\trespond to DNS queries for the root resource record set name (such as\n\t\t\t\t\texample.com) by using the new resource record sets.</p>\n            </li>\n            <li>\n               <p>Route 53 deletes the old group of resource record sets that are associated\n\t\t\t\t\twith the root resource record set name.</p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<p>Updates the resource record sets in a specified hosted zone that were created based on\n\t\t\tthe settings in a specified traffic policy version.</p>\n         <p>When you update a traffic policy instance, Amazon Route 53 continues to respond to DNS\n\t\t\tqueries for the root resource record set name (such as example.com) while it replaces\n\t\t\tone group of resource record sets with another. Route 53 performs the following\n\t\t\toperations:</p>\n         <ol>\n            <li>\n               <p>Route 53 creates a new group of resource record sets based on the specified\n\t\t\t\t\ttraffic policy. This is true regardless of how significant the differences are\n\t\t\t\t\tbetween the existing resource record sets and the new resource record sets.\n\t\t\t\t</p>\n            </li>\n            <li>\n               <p>When all of the new resource record sets have been created, Route 53 starts to\n\t\t\t\t\trespond to DNS queries for the root resource record set name (such as\n\t\t\t\t\texample.com) by using the new resource record sets.</p>\n            </li>\n            <li>\n               <p>Route 53 deletes the old group of resource record sets that are associated\n\t\t\t\t\twith the root resource record set name.</p>\n            </li>\n         </ol>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/trafficpolicyinstance/{Id}",
@@ -11560,6 +11572,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ap-southeast-4"
+                    }
+                },
+                "il_central_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "il-central-1"
                     }
                 }
             },

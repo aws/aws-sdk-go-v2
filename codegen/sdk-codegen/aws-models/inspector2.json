@@ -1150,6 +1150,128 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.inspector2#BatchGetFindingDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#BatchGetFindingDetailsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#BatchGetFindingDetailsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets vulnerability details for findings.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample BatchGetFindingDetails Call",
+                        "input": {
+                            "findingArns": [
+                                "arn:aws:inspector2:eu-west-1:123456789012:finding/78b88cc9aa1d78b6e14fde90d774dde7",
+                                "arn:aws:inspector2:eu-west-1:111111111111:finding/78b88cc9aa1d78b6e14fde90d874dde7"
+                            ]
+                        },
+                        "output": {
+                            "findingDetails": [
+                                {
+                                    "findingArn": "arn:aws:inspector2:eu-west-1:123456789012:finding/78b88cc9aa1d78b6e14fde90d774dde7",
+                                    "cisaData": {
+                                        "dateAdded": 1688580990,
+                                        "dateDue": 1688580999,
+                                        "action": "For all affected software assets for which updates exist, the only acceptable remediation actions are: 1) Apply updates; OR 2) remove affected assets from agency networks."
+                                    },
+                                    "riskScore": 66,
+                                    "evidences": [
+                                        {
+                                            "evidenceRule": "Historically Linked to Penetration Testing Tools",
+                                            "evidenceDetail": "2 sightings on 1 source",
+                                            "severity": "Low"
+                                        }
+                                    ],
+                                    "ttps": [
+                                        "TA0001",
+                                        "TA0002"
+                                    ],
+                                    "tools": [
+                                        "Metasploit"
+                                    ],
+                                    "exploitObserved": {
+                                        "lastSeen": 1688580990,
+                                        "firstSeen": 1688580800
+                                    },
+                                    "referenceUrls": [
+                                        "https://nvd.nist.gov/vuln/detail/CVE-2019-20367"
+                                    ],
+                                    "cwes": [
+                                        "cwe-1234"
+                                    ],
+                                    "epssScore": 0.85
+                                }
+                            ],
+                            "errors": [
+                                {
+                                    "findingArn": "arn:aws:inspector2:eu-west-1:111111111111:finding/78b88cc9aa1d78b6e14fde90d874dde7",
+                                    "errorCode": "ACCESS_DENIED",
+                                    "errorMessage": "You don't have permission to access this finding"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/findings/details/batch/get"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#BatchGetFindingDetailsRequest": {
+            "type": "structure",
+            "members": {
+                "findingArns": {
+                    "target": "com.amazonaws.inspector2#FindingArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of finding ARNs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#BatchGetFindingDetailsResponse": {
+            "type": "structure",
+            "members": {
+                "findingDetails": {
+                    "target": "com.amazonaws.inspector2#FindingDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A finding's vulnerability details.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.inspector2#FindingDetailsErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error information for findings that details could not be returned for.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#BatchGetFreeTrialInfo": {
             "type": "operation",
             "input": {
@@ -2829,7 +2951,7 @@
                 "keyPrefix": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prefix of the Amazon S3 bucket used to export findings.</p>"
+                        "smithy.api#documentation": "<p>The prefix that the findings will be written under.</p>"
                     }
                 },
                 "kmsKeyArn": {
@@ -3666,6 +3788,62 @@
         "com.amazonaws.inspector2#ErrorMessage": {
             "type": "string"
         },
+        "com.amazonaws.inspector2#Evidence": {
+            "type": "structure",
+            "members": {
+                "evidenceRule": {
+                    "target": "com.amazonaws.inspector2#EvidenceRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evidence rule.</p>"
+                    }
+                },
+                "evidenceDetail": {
+                    "target": "com.amazonaws.inspector2#EvidenceDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evidence details.</p>"
+                    }
+                },
+                "severity": {
+                    "target": "com.amazonaws.inspector2#EvidenceSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evidence severity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the evidence for a vulnerability identified in a finding.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#EvidenceDetail": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.inspector2#EvidenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#Evidence"
+            }
+        },
+        "com.amazonaws.inspector2#EvidenceRule": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.inspector2#EvidenceSeverity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.inspector2#ExecutionRoleArn": {
             "type": "string",
             "traits": {
@@ -4094,7 +4272,7 @@
                 "networkProtocol": {
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details on the ingress source addresses used to filter findings.</p>"
+                        "smithy.api#documentation": "<p>Details on network protocol used to filter findings.</p>"
                     }
                 },
                 "componentId": {
@@ -4397,6 +4575,18 @@
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:finding/[a-f0-9]{32}$"
             }
         },
+        "com.amazonaws.inspector2#FindingArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#FindingArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.inspector2#FindingArns": {
             "type": "list",
             "member": {
@@ -4410,6 +4600,137 @@
                     "min": 1,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.inspector2#FindingDetail": {
+            "type": "structure",
+            "members": {
+                "findingArn": {
+                    "target": "com.amazonaws.inspector2#FindingArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding ARN that the vulnerability details are associated with.</p>"
+                    }
+                },
+                "cisaData": {
+                    "target": "com.amazonaws.inspector2#CisaData"
+                },
+                "riskScore": {
+                    "target": "com.amazonaws.inspector2#RiskScore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The risk score of the vulnerability.</p>"
+                    }
+                },
+                "evidences": {
+                    "target": "com.amazonaws.inspector2#EvidenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information on the evidence of the vulnerability.</p>"
+                    }
+                },
+                "ttps": {
+                    "target": "com.amazonaws.inspector2#Ttps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MITRE adversary tactics, techniques, or procedures (TTPs) associated with the vulnerability.</p>"
+                    }
+                },
+                "tools": {
+                    "target": "com.amazonaws.inspector2#Tools",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The known malware tools or kits that can exploit the vulnerability.</p>"
+                    }
+                },
+                "exploitObserved": {
+                    "target": "com.amazonaws.inspector2#ExploitObserved"
+                },
+                "referenceUrls": {
+                    "target": "com.amazonaws.inspector2#VulnerabilityReferenceUrls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference URLs for the vulnerability data.</p>"
+                    }
+                },
+                "cwes": {
+                    "target": "com.amazonaws.inspector2#Cwes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Common Weakness Enumerations (CWEs) associated with the vulnerability.</p>"
+                    }
+                },
+                "epssScore": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Exploit Prediction Scoring System (EPSS) score of the vulnerability.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the vulnerability identified in a finding.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#FindingDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#FindingDetail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.inspector2#FindingDetailsError": {
+            "type": "structure",
+            "members": {
+                "findingArn": {
+                    "target": "com.amazonaws.inspector2#FindingArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding ARN that returned an error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.inspector2#FindingDetailsErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an error encountered when trying to return vulnerability data for a finding.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#FindingDetailsErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INTERNAL_ERROR",
+                        "name": "INTERNAL_ERROR"
+                    },
+                    {
+                        "value": "ACCESS_DENIED",
+                        "name": "ACCESS_DENIED"
+                    },
+                    {
+                        "value": "FINDING_DETAILS_NOT_FOUND",
+                        "name": "FINDING_DETAILS_NOT_FOUND"
+                    },
+                    {
+                        "value": "INVALID_INPUT",
+                        "name": "INVALID_INPUT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#FindingDetailsErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#FindingDetailsError"
             }
         },
         "com.amazonaws.inspector2#FindingList": {
@@ -5359,6 +5680,9 @@
                     "target": "com.amazonaws.inspector2#BatchGetCodeSnippet"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#BatchGetFindingDetails"
+                },
+                {
                     "target": "com.amazonaws.inspector2#BatchGetFreeTrialInfo"
                 },
                 {
@@ -5563,9 +5887,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://inspector2-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://inspector2-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -5578,15 +6081,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://inspector2.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://inspector2.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -5598,258 +6136,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://inspector2-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://inspector2-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://inspector2.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://inspector2.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -9171,6 +9459,9 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#RiskScore": {
+            "type": "integer"
+        },
         "com.amazonaws.inspector2#Runtime": {
             "type": "string",
             "traits": {
@@ -10203,6 +10494,20 @@
                         "name": "ALL"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#Tool": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.inspector2#Tools": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#Tool"
             }
         },
         "com.amazonaws.inspector2#Ttp": {

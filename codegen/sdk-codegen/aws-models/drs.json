@@ -7943,6 +7943,10 @@
                     {
                         "name": "BASIC",
                         "value": "BASIC"
+                    },
+                    {
+                        "name": "IN_AWS",
+                        "value": "IN_AWS"
                     }
                 ]
             }

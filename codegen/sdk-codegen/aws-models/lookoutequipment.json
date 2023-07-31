@@ -64,6 +64,9 @@
                     "target": "com.amazonaws.lookoutequipment#DeleteModel"
                 },
                 {
+                    "target": "com.amazonaws.lookoutequipment#DeleteResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.lookoutequipment#DescribeDataIngestionJob"
                 },
                 {
@@ -80,6 +83,18 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#DescribeModel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DescribeModelVersion"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DescribeResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ImportDataset"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ImportModelVersion"
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#ListDataIngestionJobs"
@@ -106,10 +121,16 @@
                     "target": "com.amazonaws.lookoutequipment#ListModels"
                 },
                 {
+                    "target": "com.amazonaws.lookoutequipment#ListModelVersions"
+                },
+                {
                     "target": "com.amazonaws.lookoutequipment#ListSensorStatistics"
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#PutResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#StartDataIngestionJob"
@@ -125,6 +146,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#UpdateActiveModelVersion"
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#UpdateInferenceScheduler"
@@ -207,9 +231,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://lookoutequipment-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://lookoutequipment-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -222,15 +425,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://lookoutequipment.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://lookoutequipment.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -242,258 +480,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://lookoutequipment-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://lookoutequipment-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://lookoutequipment.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://lookoutequipment.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -508,8 +496,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -521,8 +509,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -534,8 +522,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -547,8 +535,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -560,8 +548,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -573,8 +561,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -586,8 +574,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -599,8 +587,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -612,8 +600,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -625,8 +613,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -638,8 +626,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -651,8 +639,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -664,8 +652,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -677,8 +665,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -690,8 +689,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -703,8 +713,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -716,8 +737,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -729,8 +761,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -742,8 +774,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -755,8 +787,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -767,8 +799,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -779,9 +811,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -949,7 +987,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a container for a collection of data being ingested for analysis. The dataset\n         contains the metadata describing where the data is and what the data actually looks like.\n         In other words, it contains the location of the data source, the data schema, and other\n         information. A dataset also contains any tags associated with the ingested data. </p>"
+                "smithy.api#documentation": "<p>Creates a container for a collection of data being ingested for analysis. The dataset\n         contains the metadata describing where the data is and what the data actually looks like.\n         For example, it contains the location of the data source, the data schema, and other\n         information. A dataset also contains any tags associated with the ingested data. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#CreateDatasetRequest": {
@@ -988,6 +1026,9 @@
                         "smithy.api#documentation": "<p>Any tags associated with the ingested data described in the dataset. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#CreateDatasetResponse": {
@@ -1011,6 +1052,9 @@
                         "smithy.api#documentation": "<p>Indicates the status of the <code>CreateDataset</code> operation. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#CreateInferenceScheduler": {
@@ -1119,6 +1163,9 @@
                         "smithy.api#documentation": "<p>Any tags associated with the inference scheduler. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#CreateInferenceSchedulerResponse": {
@@ -1142,6 +1189,9 @@
                         "smithy.api#documentation": "<p>Indicates the status of the <code>CreateInferenceScheduler</code> operation. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#CreateLabel": {
@@ -1176,7 +1226,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nCreates a label for an event.\n</p>"
+                "smithy.api#documentation": "<p>\n         Creates a label for an event.\n      </p>"
             }
         },
         "com.amazonaws.lookoutequipment#CreateLabelGroup": {
@@ -1208,7 +1258,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nCreates a group of labels.\n</p>"
+                "smithy.api#documentation": "<p>\n         Creates a group of labels.\n      </p>"
             }
         },
         "com.amazonaws.lookoutequipment#CreateLabelGroupRequest": {
@@ -1217,20 +1267,20 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nNames a group of labels.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>",
+                        "smithy.api#documentation": "<p>\n         Names a group of labels.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FaultCodes": {
                     "target": "com.amazonaws.lookoutequipment#FaultCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe acceptable fault codes (indicating the type of anomaly associated with the label) that can be used with this label group.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p>\n         The acceptable fault codes (indicating the type of anomaly associated with the label) that can be used with this label group.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nA unique identifier for the request to create a label group. If you do not set the client request token, Lookout for Equipment generates one.\n</p>",
+                        "smithy.api#documentation": "<p>\n         A unique identifier for the request to create a label group. If you do not set the client request token, Lookout for Equipment generates one.\n      </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1238,9 +1288,12 @@
                 "Tags": {
                     "target": "com.amazonaws.lookoutequipment#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nTags that provide metadata about the label group you are creating.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p>\n         Tags that provide metadata about the label group you are creating.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#CreateLabelGroupResponse": {
@@ -1249,15 +1302,18 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the label group that you have created. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The name of the label group that you have created. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n      </p>"
                     }
                 },
                 "LabelGroupArn": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ARN of the label group that you have created.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the label group that you have created.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#CreateLabelRequest": {
@@ -1266,57 +1322,60 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of a group of labels. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>",
+                        "smithy.api#documentation": "<p>\n         The name of a group of labels. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "StartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe start time of the labeled event.\n</p>",
+                        "smithy.api#documentation": "<p>\n         The start time of the labeled event.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe end time of the labeled event.\n</p>",
+                        "smithy.api#documentation": "<p>\n         The end time of the labeled event.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Rating": {
                     "target": "com.amazonaws.lookoutequipment#LabelRating",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nIndicates whether a labeled event represents an anomaly.\n</p>",
+                        "smithy.api#documentation": "<p>\n         Indicates whether a labeled event represents an anomaly.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FaultCode": {
                     "target": "com.amazonaws.lookoutequipment#FaultCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nProvides additional information about the label. The fault code must be defined in the FaultCodes attribute of the label group.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Provides additional information about the label. The fault code must be defined in the FaultCodes attribute of the label group.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n      </p>"
                     }
                 },
                 "Notes": {
                     "target": "com.amazonaws.lookoutequipment#Comments",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nMetadata providing additional information about the label.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p>\n         Metadata providing additional information about the label.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
                     }
                 },
                 "Equipment": {
                     "target": "com.amazonaws.lookoutequipment#Equipment",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nIndicates that a label pertains to a particular piece of equipment.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p>\n         Indicates that a label pertains to a particular piece of equipment.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nA unique identifier for the request to create a label. If you do not set the client request token, Lookout for Equipment generates one.\n</p>",
+                        "smithy.api#documentation": "<p>\n         A unique identifier for the request to create a label. If you do not set the client request token, Lookout for Equipment generates one.\n      </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#CreateLabelResponse": {
@@ -1325,9 +1384,12 @@
                 "LabelId": {
                     "target": "com.amazonaws.lookoutequipment#LabelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ID of the label that you have created.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The ID of the label that you have created.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#CreateModel": {
@@ -1456,6 +1518,9 @@
                         "smithy.api#documentation": "<p>Indicates that the asset associated with this sensor has been shut off. As long as this\n         condition is met, Lookout for Equipment will not use data from this asset for training,\n         evaluation, or inference.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#CreateModelResponse": {
@@ -1473,6 +1538,9 @@
                         "smithy.api#documentation": "<p>Indicates the status of the <code>CreateModel</code> operation. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes": {
@@ -1692,6 +1760,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ACTIVE"
                     }
+                },
+                "IMPORT_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_IN_PROGRESS"
+                    }
                 }
             }
         },
@@ -1775,6 +1849,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DeleteInferenceScheduler": {
@@ -1819,6 +1896,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DeleteLabel": {
@@ -1850,7 +1930,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nDeletes a label.\n</p>"
+                "smithy.api#documentation": "<p>\n         Deletes a label.\n      </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DeleteLabelGroup": {
@@ -1882,7 +1962,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nDeletes a group of labels.\n</p>"
+                "smithy.api#documentation": "<p>\n         Deletes a group of labels.\n      </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DeleteLabelGroupRequest": {
@@ -1891,10 +1971,13 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the label group that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>",
+                        "smithy.api#documentation": "<p>\n         The name of the label group that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n      </p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DeleteLabelRequest": {
@@ -1903,17 +1986,20 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the label group that contains the label that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>",
+                        "smithy.api#documentation": "<p>\n         The name of the label group that contains the label that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LabelId": {
                     "target": "com.amazonaws.lookoutequipment#LabelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ID of the label that you want to delete.\n</p>",
+                        "smithy.api#documentation": "<p>\n         The ID of the label that you want to delete.\n      </p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DeleteModel": {
@@ -1958,6 +2044,56 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the resource policy attached to the resource.</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lookoutequipment#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which the resource policy should be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeDataIngestionJob": {
@@ -1999,6 +2135,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeDataIngestionJobResponse": {
@@ -2078,7 +2217,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Indicates the latest timestamp corresponding to data that was successfully ingested\n         during this specific ingestion job. </p>"
                     }
+                },
+                "SourceDatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source dataset from which the data \n         used for the data ingestion job was imported from.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeDataset": {
@@ -2120,6 +2268,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeDatasetResponse": {
@@ -2202,7 +2353,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Indicates the latest timestamp corresponding to data that was successfully ingested\n         during the most recent ingestion of this particular dataset. </p>"
                     }
+                },
+                "SourceDatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source dataset from which the \n         current data being described was imported from.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeInferenceScheduler": {
@@ -2244,6 +2404,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeInferenceSchedulerResponse": {
@@ -2333,6 +2496,9 @@
                         "smithy.api#documentation": "<p>Indicates whether the latest execution for the inference scheduler was Anomalous\n         (anomalous events found) or Normal (no anomalous events found).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeLabel": {
@@ -2361,7 +2527,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns the name of the label.\n</p>"
+                "smithy.api#documentation": "<p>\n         Returns the name of the label.\n      </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DescribeLabelGroup": {
@@ -2390,7 +2556,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns information about the label group.\n</p>"
+                "smithy.api#documentation": "<p>\n         Returns information about the label group.\n      </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DescribeLabelGroupRequest": {
@@ -2399,10 +2565,13 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nReturns the name of the label group.\n</p>",
+                        "smithy.api#documentation": "<p>\n         Returns the name of the label group.\n      </p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeLabelGroupResponse": {
@@ -2411,33 +2580,36 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the label group.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The name of the label group.\n      </p>"
                     }
                 },
                 "LabelGroupArn": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ARN of the label group.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the label group.\n      </p>"
                     }
                 },
                 "FaultCodes": {
                     "target": "com.amazonaws.lookoutequipment#FaultCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nCodes indicating the type of anomaly associated with the labels in the lagbel group.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Codes indicating the type of anomaly associated with the labels in the lagbel group.\n      </p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe time at which the label group was created.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The time at which the label group was created.\n      </p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe time at which the label group was updated.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The time at which the label group was updated.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeLabelRequest": {
@@ -2446,17 +2618,20 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nReturns the name of the group containing the label.\n</p>",
+                        "smithy.api#documentation": "<p>\n         Returns the name of the group containing the label.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LabelId": {
                     "target": "com.amazonaws.lookoutequipment#LabelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nReturns the ID of the label.\n</p>",
+                        "smithy.api#documentation": "<p>\n         Returns the ID of the label.\n      </p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeLabelResponse": {
@@ -2465,43 +2640,43 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the requested label group.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The name of the requested label group.\n      </p>"
                     }
                 },
                 "LabelGroupArn": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ARN of the requested label group.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the requested label group.\n      </p>"
                     }
                 },
                 "LabelId": {
                     "target": "com.amazonaws.lookoutequipment#LabelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ID of the requested label.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The ID of the requested label.\n      </p>"
                     }
                 },
                 "StartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe start time of the requested label.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The start time of the requested label.\n      </p>"
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe end time of the requested label.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The end time of the requested label.\n      </p>"
                     }
                 },
                 "Rating": {
                     "target": "com.amazonaws.lookoutequipment#LabelRating",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nIndicates whether a labeled event represents an anomaly.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Indicates whether a labeled event represents an anomaly.\n      </p>"
                     }
                 },
                 "FaultCode": {
                     "target": "com.amazonaws.lookoutequipment#FaultCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nIndicates the type of anomaly associated with the label.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p>\n         Indicates the type of anomaly associated with the label.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
                     }
                 },
                 "Notes": {
@@ -2513,15 +2688,18 @@
                 "Equipment": {
                     "target": "com.amazonaws.lookoutequipment#Equipment",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nIndicates that a label pertains to a particular piece of equipment.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Indicates that a label pertains to a particular piece of equipment.\n      </p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe time at which the label was created.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The time at which the label was created.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeModel": {
@@ -2563,6 +2741,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#DescribeModelResponse": {
@@ -2693,7 +2874,361 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates that the asset associated with this sensor has been shut off. As long as this\n         condition is met, Lookout for Equipment will not use data from this asset for training,\n         evaluation, or inference.</p>"
                     }
+                },
+                "SourceModelVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source model version. This field appears if the active model version \n      was imported.</p>"
+                    }
+                },
+                "ImportJobStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the import job was started. \n      This field appears if the active model version was imported.</p>"
+                    }
+                },
+                "ImportJobEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the import job was completed. \n      This field appears if the active model version was imported.</p>"
+                    }
+                },
+                "ActiveModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model version used by the inference schedular when running a\n      scheduled inference execution.</p>"
+                    }
+                },
+                "ActiveModelVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version used by the\n      inference scheduler when running a scheduled inference execution.</p>"
+                    }
+                },
+                "ModelVersionActivatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the active model version was activated.</p>"
+                    }
+                },
+                "PreviousActiveModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model version that was set as the active model version prior to the \n         current active model version.</p>"
+                    }
+                },
+                "PreviousActiveModelVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model version that was set as the active model version prior to the \n         current active model version.</p>"
+                    }
+                },
+                "PreviousModelVersionActivatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the previous active model version was activated.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeModelVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DescribeModelVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#DescribeModelVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a specific machine learning model version.</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeModelVersionRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the machine learning model that this version belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the machine learning model.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeModelVersionResponse": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the machine learning model that this version belongs to.</p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the parent machine learning model that this version belong to.</p>"
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the machine learning model.</p>"
+                    }
+                },
+                "ModelVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the model version.</p>"
+                    }
+                },
+                "SourceType": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this model version was created by training or by importing.</p>"
+                    }
+                },
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset used to train the model version.</p>"
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset used to train the model version.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.lookoutequipment#InlineDataSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema of the data used to train the model version.</p>"
+                    }
+                },
+                "LabelsInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#LabelsInputConfiguration"
+                },
+                "TrainingDataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date on which the training data began being gathered. If you imported\n      the version, this is the date that the training data in the source \n      version began being gathered.</p>"
+                    }
+                },
+                "TrainingDataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date on which the training data finished being gathered. \n      If you imported the version, this is the date that the training data in the\n      source version finished being gathered.</p>"
+                    }
+                },
+                "EvaluationDataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date on which the data in the evaluation set began being gathered. \n      If you imported the version, this is the date that the evaluation set data in \n      the source version began being gathered.</p>"
+                    }
+                },
+                "EvaluationDataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date on which the data in the evaluation set began being gathered. \n      If you imported the version, this is the date that the evaluation set data in the\n      source version finished being gathered.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that was used to train the model version.</p>"
+                    }
+                },
+                "DataPreProcessingConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#DataPreProcessingConfiguration"
+                },
+                "TrainingExecutionStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the training of the version began.</p>"
+                    }
+                },
+                "TrainingExecutionEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the training of the version completed.</p>"
+                    }
+                },
+                "FailedReason": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure message if the training of the model version failed.</p>"
+                    }
+                },
+                "ModelMetrics": {
+                    "target": "com.amazonaws.lookoutequipment#ModelMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows an aggregated summary, in JSON format, of the model's \n      performance within the evaluation time range. These metrics \n      are created when evaluating the model.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the last time the machine learning model version was updated.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time and date at which the machine learning model version was created.</p>"
+                    }
+                },
+                "ServerSideKmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS key key used to encrypt model version data by \n      Amazon Lookout for Equipment.</p>"
+                    }
+                },
+                "OffCondition": {
+                    "target": "com.amazonaws.lookoutequipment#OffCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that the asset associated with this sensor has been \n      shut off. As long as this condition is met, Lookout for Equipment \n      will not use data from this asset for training, evaluation, or inference.</p>"
+                    }
+                },
+                "SourceModelVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If model version was imported, then this field is the arn\n      of the source model version.</p>"
+                    }
+                },
+                "ImportJobStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the import job began. \n      This field appears if the model version was imported.</p>"
+                    }
+                },
+                "ImportJobEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the import job completed. \n      This field appears if the model version was imported.</p>"
+                    }
+                },
+                "ImportedDataSizeInBytes": {
+                    "target": "com.amazonaws.lookoutequipment#DataSizeInBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size in bytes of the imported data. \n      This field appears if the model version was imported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DescribeResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#DescribeResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the details of a resource policy attached to a resource.</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lookoutequipment#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that is associated with the resource policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.lookoutequipment#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for a revision of the resource policy.</p>"
+                    }
+                },
+                "ResourcePolicy": {
+                    "target": "com.amazonaws.lookoutequipment#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource policy in a JSON-formatted string.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the resource policy was created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the resource policy was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#DuplicateTimestamps": {
@@ -2781,6 +3316,244 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^\\p{ASCII}{1,256}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ImportDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ImportDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ImportDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Imports a dataset.</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ImportDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "SourceDatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset to import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the machine learning dataset to be created. If the dataset already exists, Amazon Lookout for Equipment overwrites the existing dataset. If you don't specify this field, it is filled with the name of the source dataset.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the request. \n      If you do not set the client request token, \n      Amazon Lookout for Equipment generates one. </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServerSideKmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#NameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key key used to \n      encrypt model data by Amazon Lookout for Equipment. </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lookoutequipment#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any tags associated with the dataset to be created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#ImportDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the created machine learning dataset.</p>"
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that was imported.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the <code>ImportDataset</code> operation.</p>"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the job of importing the dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#ImportModelVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ImportModelVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ImportModelVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Imports a model that has been trained successfully.</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ImportModelVersionRequest": {
+            "type": "structure",
+            "members": {
+                "SourceModelVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version to import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the machine learning model to be created.\n      If the model already exists, Amazon Lookout for Equipment creates a new version. \n      If you do not specify this field, it is filled with the name of the source model.</p>"
+                    }
+                },
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset for the machine learning model being imported. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LabelsInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#LabelsInputConfiguration"
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you do not set the client request\n      token, Amazon Lookout for Equipment generates one. </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to \n      access the data source being used to create the machine learning model. </p>"
+                    }
+                },
+                "ServerSideKmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#NameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key key used to encrypt \n      model data by Amazon Lookout for Equipment. </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lookoutequipment#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the machine learning model to be created. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#ImportModelVersionResponse": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the machine learning model.</p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model being created. </p>"
+                    }
+                },
+                "ModelVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version being created. </p>"
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model being created.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the <code>ImportModelVersion</code> operation. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#InferenceEventSummaries": {
@@ -3001,7 +3774,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.lookoutequipment#NameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID number for the AWS KMS key used to encrypt the inference output. </p>"
+                        "smithy.api#documentation": "<p>The ID number for the KMS key key used to encrypt the inference output. </p>"
                     }
                 }
             },
@@ -3245,6 +4018,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                },
+                "IMPORT_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_IN_PROGRESS"
+                    }
                 }
             }
         },
@@ -3267,12 +4046,21 @@
                 "KeyPattern": {
                     "target": "com.amazonaws.lookoutequipment#KeyPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p> Pattern for matching the Amazon S3 files which will be used for ingestion. If\n         no KeyPattern is provided, we will use the default hierarchy file structure, which is same\n         as KeyPattern {prefix}/{component_name}/* </p>"
+                        "smithy.api#documentation": "<p> \n\t\t\t  The pattern for matching the Amazon S3 files that will be used for ingestion. If the schema was created previously without any KeyPattern, then the default KeyPattern {prefix}/{component_name}/* is used to download files from Amazon S3 according to the schema. This field is required when ingestion is being done for the first time.</p>\n         <p>Valid Values: {prefix}/{component_name}_* | {prefix}/{component_name}/* | {prefix}/{component_name}[DELIMITER]* (Allowed delimiters : space, dot, underscore, hyphen)</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p> Specifies S3 configuration information for the input data for the data ingestion job.\n      </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InlineDataSchema": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000000
+                }
             }
         },
         "com.amazonaws.lookoutequipment#InsufficientSensorData": {
@@ -3389,30 +4177,30 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the label group.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The name of the label group.\n      </p>"
                     }
                 },
                 "LabelGroupArn": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ARN of the label group.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the label group.\n      </p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe time at which the label group was created.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The time at which the label group was created.\n      </p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe time at which the label group was updated.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The time at which the label group was updated.\n      </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nContains information about the label group.\n</p>"
+                "smithy.api#documentation": "<p>\n         Contains information about the label group.\n      </p>"
             }
         },
         "com.amazonaws.lookoutequipment#LabelId": {
@@ -3460,60 +4248,60 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the label group.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The name of the label group.\n      </p>"
                     }
                 },
                 "LabelId": {
                     "target": "com.amazonaws.lookoutequipment#LabelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ID of the label.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The ID of the label.\n      </p>"
                     }
                 },
                 "LabelGroupArn": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ARN of the label group.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the label group.\n      </p>"
                     }
                 },
                 "StartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe timestamp indicating the start of the label.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The timestamp indicating the start of the label.\n      </p>"
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe timestamp indicating the end of the label.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The timestamp indicating the end of the label.\n      </p>"
                     }
                 },
                 "Rating": {
                     "target": "com.amazonaws.lookoutequipment#LabelRating",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nIndicates whether a labeled event represents an anomaly.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Indicates whether a labeled event represents an anomaly.\n      </p>"
                     }
                 },
                 "FaultCode": {
                     "target": "com.amazonaws.lookoutequipment#FaultCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nIndicates the type of anomaly associated with the label.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p>\n         Indicates the type of anomaly associated with the label.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
                     }
                 },
                 "Equipment": {
                     "target": "com.amazonaws.lookoutequipment#Equipment",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nIndicates that a label pertains to a particular piece of equipment.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Indicates that a label pertains to a particular piece of equipment.\n      </p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe time at which the label was created.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The time at which the label was created.\n      </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nInformation about the label.\n</p>"
+                "smithy.api#documentation": "<p>\n         Information about the label.\n      </p>"
             }
         },
         "com.amazonaws.lookoutequipment#LabelsInputConfiguration": {
@@ -3528,7 +4316,7 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the label group to be used for label data.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The name of the label group to be used for label data.\n      </p>"
                     }
                 }
             },
@@ -3659,6 +4447,9 @@
                         "smithy.api#documentation": "<p>Indicates the status of the data ingestion job. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListDataIngestionJobsResponse": {
@@ -3676,6 +4467,9 @@
                         "smithy.api#documentation": "<p>Specifies information about the specific data ingestion job, including dataset name and\n         status. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListDatasets": {
@@ -3730,6 +4524,9 @@
                         "smithy.api#documentation": "<p>The beginning of the name of the datasets to be listed. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListDatasetsResponse": {
@@ -3747,6 +4544,9 @@
                         "smithy.api#documentation": "<p>Provides information about the specified dataset, including creation time, dataset ARN,\n         and status. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListInferenceEvents": {
@@ -3815,10 +4615,13 @@
                 "IntervalEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns all the inference events with an end start time equal to or greater than less than the end time given</p>",
+                        "smithy.api#documentation": "<p>Returns all the inference events with an end start time equal to or greater than less than the end time given.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListInferenceEventsResponse": {
@@ -3836,6 +4639,9 @@
                         "smithy.api#documentation": "<p>Provides an array of information about the individual inference events returned from the\n            <code>ListInferenceEvents</code> operation, including scheduler used, event start time,\n         event end time, diagnostics, and so on. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListInferenceExecutions": {
@@ -3912,6 +4718,9 @@
                         "smithy.api#documentation": "<p>The status of the inference execution. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListInferenceExecutionsResponse": {
@@ -3929,6 +4738,9 @@
                         "smithy.api#documentation": "<p>Provides an array of information about the individual inference executions returned from\n         the <code>ListInferenceExecutions</code> operation, including model used, inference\n         scheduler, data configuration, and so on. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListInferenceSchedulers": {
@@ -3992,9 +4804,12 @@
                 "Status": {
                     "target": "com.amazonaws.lookoutequipment#InferenceSchedulerStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the current status of the inference schedulers to list.</p>"
+                        "smithy.api#documentation": "<p>Specifies the current status of the inference schedulers.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListInferenceSchedulersResponse": {
@@ -4012,6 +4827,9 @@
                         "smithy.api#documentation": "<p>Provides information about the specified inference scheduler, including data upload\n         frequency, model name and ARN, and status. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListLabelGroups": {
@@ -4037,7 +4855,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns a list of the label groups.\n</p>",
+                "smithy.api#documentation": "<p>\n         Returns a list of the label groups.\n      </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4051,21 +4869,24 @@
                 "LabelGroupNameBeginsWith": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe beginning of the name of the label groups to be listed.\n</p>"
+                        "smithy.api#documentation": "<p>\n         The beginning of the name of the label groups to be listed.\n      </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nAn opaque pagination token indicating where to continue the listing of label groups.\n</p>"
+                        "smithy.api#documentation": "<p>\n         An opaque pagination token indicating where to continue the listing of label groups.\n      </p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.lookoutequipment#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nSpecifies the maximum number of label groups to list.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Specifies the maximum number of label groups to list.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListLabelGroupsResponse": {
@@ -4074,15 +4895,18 @@
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nAn opaque pagination token indicating where to continue the listing of label groups.\n</p>"
+                        "smithy.api#documentation": "<p>\n         An opaque pagination token indicating where to continue the listing of label groups.\n      </p>"
                     }
                 },
                 "LabelGroupSummaries": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nA summary of the label groups.\n</p>"
+                        "smithy.api#documentation": "<p>\n         A summary of the label groups.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListLabels": {
@@ -4108,7 +4932,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nProvides a list of labels.\n</p>",
+                "smithy.api#documentation": "<p>\n         Provides a list of labels.\n      </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4122,46 +4946,49 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nRetruns the name of the label group.\n</p>",
+                        "smithy.api#documentation": "<p>\n         Retruns the name of the label group.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IntervalStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nReturns all the labels with a end time equal to or later than the start time given.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Returns all the labels with a end time equal to or later than the start time given.\n      </p>"
                     }
                 },
                 "IntervalEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nReturns all labels with a start time earlier than the end time given.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Returns all labels with a start time earlier than the end time given.\n      </p>"
                     }
                 },
                 "FaultCode": {
                     "target": "com.amazonaws.lookoutequipment#FaultCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nReturns labels with a particular fault code.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Returns labels with a particular fault code.\n      </p>"
                     }
                 },
                 "Equipment": {
                     "target": "com.amazonaws.lookoutequipment#Equipment",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nLists the labels that pertain to a particular piece of equipment.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Lists the labels that pertain to a particular piece of equipment.\n      </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nAn opaque pagination token indicating where to continue the listing of label groups.\n</p>"
+                        "smithy.api#documentation": "<p>\n         An opaque pagination token indicating where to continue the listing of label groups.\n      </p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.lookoutequipment#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nSpecifies the maximum number of labels to list.\n</p>"
+                        "smithy.api#documentation": "<p>\n         Specifies the maximum number of labels to list.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListLabelsResponse": {
@@ -4170,15 +4997,135 @@
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nAn opaque pagination token indicating where to continue the listing of datasets.\n</p>"
+                        "smithy.api#documentation": "<p>\n         An opaque pagination token indicating where to continue the listing of datasets.\n      </p>"
                     }
                 },
                 "LabelSummaries": {
                     "target": "com.amazonaws.lookoutequipment#LabelSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nA summary of the items in the label group.\n</p>"
+                        "smithy.api#documentation": "<p>\n         A summary of the items in the label group.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListModelVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListModelVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListModelVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a list of all model versions for a given model, \n      including the model version, model version ARN, and status. To list a \n      subset of versions, use the <code>MaxModelVersion</code> and <code>MinModelVersion</code> fields.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListModelVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Then name of the machine learning model for which the \n      model versions are to be listed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results exceeds the limit that the response can \n      display, the response returns an opaque pagination token indicating where to \n      continue the listing of machine learning model versions. Use this token in the <code>NextToken</code> \n      field in the request to list the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutequipment#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of machine learning model versions to list.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the results based on the current status of the model version.</p>"
+                    }
+                },
+                "SourceType": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the results based on the way the model version was generated.</p>"
+                    }
+                },
+                "CreatedAtEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to return all the model versions created before this time.</p>"
+                    }
+                },
+                "CreatedAtStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to return all the model versions created after this time.</p>"
+                    }
+                },
+                "MaxModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the highest version of the model to return in the list.</p>"
+                    }
+                },
+                "MinModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the lowest version of the model to return in the list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListModelVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results exceeds the limit that the response can \n      display, the response returns an opaque pagination token indicating where to \n      continue the listing of machine learning model versions. Use this token in the <code>NextToken</code> \n      field in the request to list the next page of results.</p>"
+                    }
+                },
+                "ModelVersionSummaries": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information on the specified model version, \n      including the created time, model and dataset ARNs, and status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListModels": {
@@ -4245,6 +5192,9 @@
                         "smithy.api#documentation": "<p>The beginning of the name of the dataset of the ML models to be listed. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListModelsResponse": {
@@ -4262,6 +5212,9 @@
                         "smithy.api#documentation": "<p>Provides information on the specified model, including created time, model and dataset\n         ARNs, and status. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListOfDiscardedFiles": {
@@ -4337,6 +5290,9 @@
                         "smithy.api#documentation": "<p>An opaque pagination token indicating where to continue the listing of sensor\n         statistics. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListSensorStatisticsResponse": {
@@ -4354,6 +5310,9 @@
                         "smithy.api#documentation": "<p>An opaque pagination token indicating where to continue the listing of sensor\n         statistics. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListTagsForResource": {
@@ -4395,6 +5354,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListTagsForResourceResponse": {
@@ -4406,6 +5368,9 @@
                         "smithy.api#documentation": "<p> Any tags associated with the resource. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#MaxResults": {
@@ -4503,6 +5468,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                },
+                "IMPORT_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_IN_PROGRESS"
+                    }
                 }
             }
         },
@@ -4550,10 +5521,154 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the specific model was created. </p>"
                     }
+                },
+                "ActiveModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model version that the inference scheduler uses to run an inference\n         execution.</p>"
+                    }
+                },
+                "ActiveModelVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version that is set as active. The active model version \n         is the model version that the inference scheduler uses to run an inference\n         execution.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the specified ML model, including dataset and model names and\n         ARNs, as well as status. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelVersion": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelVersionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:model\\/.+\\/.+\\/model-version\\/[0-9]{1,}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelVersionSourceType": {
+            "type": "enum",
+            "members": {
+                "TRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRAINING"
+                    }
+                },
+                "RETRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETRAINING"
+                    }
+                },
+                "IMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelVersionStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IMPORT_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_IN_PROGRESS"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelVersionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#ModelVersionSummary"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelVersionSummary": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model that this model version is a version of.</p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model that this model version is a version of.</p>"
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model.</p>"
+                    }
+                },
+                "ModelVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when this model version was created.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the model version.</p>"
+                    }
+                },
+                "SourceType": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how this model version was generated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the specific model version.</p>"
             }
         },
         "com.amazonaws.lookoutequipment#MonotonicValues": {
@@ -4644,6 +5759,127 @@
                 }
             }
         },
+        "com.amazonaws.lookoutequipment#Policy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20000
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#PolicyRevisionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[0-9A-Fa-f]+$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#PutResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a resource control policy for a given resource.</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lookoutequipment#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which the \n      policy is being created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourcePolicy": {
+                    "target": "com.amazonaws.lookoutequipment#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON-formatted resource policy to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.lookoutequipment#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for a revision of the resource policy.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the request. \n      If you do not set the client request token, Amazon Lookout for Equipment \n      generates one. </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#PutResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lookoutequipment#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which the \n      policy was created.</p>"
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.lookoutequipment#PolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for a revision of the resource policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:.+$"
+            }
+        },
         "com.amazonaws.lookoutequipment#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -4693,7 +5929,7 @@
                 "Key": {
                     "target": "com.amazonaws.lookoutequipment#S3Key",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key being used to encrypt the S3 object.\n         Without this key, data in the bucket is not accessible. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS key) key being used to encrypt the S3 object.\n         Without this key, data in the bucket is not accessible. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4913,6 +6149,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#StartDataIngestionJobResponse": {
@@ -4930,6 +6169,9 @@
                         "smithy.api#documentation": "<p>Indicates the status of the <code>StartDataIngestionJob</code> operation. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#StartInferenceScheduler": {
@@ -4974,6 +6216,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#StartInferenceSchedulerResponse": {
@@ -5009,6 +6254,9 @@
                         "smithy.api#documentation": "<p>Indicates the status of the inference scheduler. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#StatisticalIssueStatus": {
@@ -5070,6 +6318,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#StopInferenceSchedulerResponse": {
@@ -5105,6 +6356,9 @@
                         "smithy.api#documentation": "<p>Indicates the status of the inference scheduler. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#SynthesizedJsonInlineDataSchema": {
@@ -5232,11 +6486,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.lookoutequipment#TagValue": {
             "type": "string",
@@ -5405,11 +6665,115 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#UpdateActiveModelVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#UpdateActiveModelVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#UpdateActiveModelVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the active model version for a given machine learning model.</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#UpdateActiveModelVersionRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the machine learning model for which the active model version \n      is being set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the machine learning model for which the active model version \n      is being set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#UpdateActiveModelVersionResponse": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the machine learning model for which the active model version was set.</p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model for which \n      the active model version was set.</p>"
+                    }
+                },
+                "CurrentActiveVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version that is currently active of the machine learning model \n      for which the active model version was set.</p>"
+                    }
+                },
+                "PreviousActiveVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous version that was active of the machine learning model \n      for which the active model version was set.</p>"
+                    }
+                },
+                "CurrentActiveVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model version that is the\n      current active model version.</p>"
+                    }
+                },
+                "PreviousActiveVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model version that was the\n      previous active model version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.lookoutequipment#UpdateInferenceScheduler": {
             "type": "operation",
@@ -5483,6 +6847,9 @@
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source for\n         the inference scheduler. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#UpdateLabelGroup": {
@@ -5514,7 +6881,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nUpdates the label group.\n</p>"
+                "smithy.api#documentation": "<p>\n         Updates the label group.\n      </p>"
             }
         },
         "com.amazonaws.lookoutequipment#UpdateLabelGroupRequest": {
@@ -5523,16 +6890,19 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the label group to be updated.\n</p>",
+                        "smithy.api#documentation": "<p>\n         The name of the label group to be updated.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FaultCodes": {
                     "target": "com.amazonaws.lookoutequipment#FaultCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nUpdates the code indicating the type of anomaly associated with the label.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p>\n         Updates the code indicating the type of anomaly associated with the label.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.lookoutequipment#ValidationException": {
@@ -5546,7 +6916,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a\n         related AWS service that's being utilized. </p>",
+                "smithy.api#documentation": "<p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a\n         related Amazon Web Services service that's being utilized. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
