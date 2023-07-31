@@ -72,7 +72,7 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                         .documentation("The service endpoint resolver.")
                                         .deprecated(
                                             """
-                                            EndpointResolver and WithEndpointResolver are deprecated.
+                                            Deprecated: EndpointResolver and WithEndpointResolver.
                                             Providing a value for this field will likely prevent you from using any
                                             endpoint-related service features released after the introduction of
                                             EndpointResolverV2 and BaseEndpoint.

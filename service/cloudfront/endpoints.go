@@ -384,34 +384,36 @@ func (r *resolver) ResolveEndpoint(
 			_PartitionResult := *exprVal
 			_ = _PartitionResult
 			if _PartitionResult.Name == "aws" {
-				if _UseFIPS == true {
-					if _UseDualStack == true {
-						if true == _PartitionResult.SupportsFIPS {
-							if true == _PartitionResult.SupportsDualStack {
-								uriString := func() string {
-									var out strings.Builder
-									out.WriteString("https://cloudfront-fips.")
-									out.WriteString(_Region)
-									out.WriteString(".api.aws")
-									return out.String()
-								}()
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := "https://cloudfront.amazonaws.com"
 
-								uri, err := url.Parse(uriString)
-								if err != nil {
-									return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-								}
-
-								return smithyendpoints.Endpoint{
-									URI:     *uri,
-									Headers: http.Header{},
-								}, nil
-							}
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
 						}
-						return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS and DualStack are enabled, but this partition does not support one or both")
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"name":          "sigv4",
+										"signingName":   "cloudfront",
+										"signingRegion": "us-east-1",
+									},
+								})
+								return out
+							}(),
+						}, nil
 					}
 				}
+			}
+			if _PartitionResult.Name == "aws" {
 				if _UseFIPS == true {
-					if true == _PartitionResult.SupportsFIPS {
+					if _UseDualStack == false {
 						uriString := "https://cloudfront-fips.amazonaws.com"
 
 						uri, err := url.Parse(uriString)
@@ -435,89 +437,12 @@ func (r *resolver) ResolveEndpoint(
 							}(),
 						}, nil
 					}
-					return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
 				}
-				if _UseDualStack == true {
-					if true == _PartitionResult.SupportsDualStack {
-						uriString := func() string {
-							var out strings.Builder
-							out.WriteString("https://cloudfront.")
-							out.WriteString(_Region)
-							out.WriteString(".api.aws")
-							return out.String()
-						}()
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
-					}
-					return endpoint, fmt.Errorf("endpoint rule error, %s", "DualStack is enabled but this partition does not support DualStack")
-				}
-				uriString := "https://cloudfront.amazonaws.com"
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-					Properties: func() smithy.Properties {
-						var out smithy.Properties
-						out.Set("authSchemes", []interface{}{
-							map[string]interface{}{
-								"name":          "sigv4",
-								"signingName":   "cloudfront",
-								"signingRegion": "us-east-1",
-							},
-						})
-						return out
-					}(),
-				}, nil
 			}
 			if _PartitionResult.Name == "aws-cn" {
-				if _UseFIPS == true {
-					if _UseDualStack == true {
-						if true == _PartitionResult.SupportsFIPS {
-							if true == _PartitionResult.SupportsDualStack {
-								uriString := func() string {
-									var out strings.Builder
-									out.WriteString("https://cloudfront-fips.")
-									out.WriteString(_Region)
-									out.WriteString(".api.amazonwebservices.com.cn")
-									return out.String()
-								}()
-
-								uri, err := url.Parse(uriString)
-								if err != nil {
-									return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-								}
-
-								return smithyendpoints.Endpoint{
-									URI:     *uri,
-									Headers: http.Header{},
-								}, nil
-							}
-						}
-						return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS and DualStack are enabled, but this partition does not support one or both")
-					}
-				}
-				if _UseFIPS == true {
-					if true == _PartitionResult.SupportsFIPS {
-						uriString := func() string {
-							var out strings.Builder
-							out.WriteString("https://cloudfront-fips.")
-							out.WriteString(_Region)
-							out.WriteString(".amazonaws.com.cn")
-							return out.String()
-						}()
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := "https://cloudfront.cn-northwest-1.amazonaws.com.cn"
 
 						uri, err := url.Parse(uriString)
 						if err != nil {
@@ -527,54 +452,20 @@ func (r *resolver) ResolveEndpoint(
 						return smithyendpoints.Endpoint{
 							URI:     *uri,
 							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"name":          "sigv4",
+										"signingName":   "cloudfront",
+										"signingRegion": "cn-northwest-1",
+									},
+								})
+								return out
+							}(),
 						}, nil
 					}
-					return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
 				}
-				if _UseDualStack == true {
-					if true == _PartitionResult.SupportsDualStack {
-						uriString := func() string {
-							var out strings.Builder
-							out.WriteString("https://cloudfront.")
-							out.WriteString(_Region)
-							out.WriteString(".api.amazonwebservices.com.cn")
-							return out.String()
-						}()
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
-					}
-					return endpoint, fmt.Errorf("endpoint rule error, %s", "DualStack is enabled but this partition does not support DualStack")
-				}
-				uriString := "https://cloudfront.cn-northwest-1.amazonaws.com.cn"
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-					Properties: func() smithy.Properties {
-						var out smithy.Properties
-						out.Set("authSchemes", []interface{}{
-							map[string]interface{}{
-								"name":          "sigv4",
-								"signingName":   "cloudfront",
-								"signingRegion": "cn-northwest-1",
-							},
-						})
-						return out
-					}(),
-				}, nil
 			}
 			if _UseFIPS == true {
 				if _UseDualStack == true {
@@ -605,30 +496,6 @@ func (r *resolver) ResolveEndpoint(
 			}
 			if _UseFIPS == true {
 				if true == _PartitionResult.SupportsFIPS {
-					if _Region == "aws-global" {
-						uriString := "https://cloudfront-fips.amazonaws.com"
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-							Properties: func() smithy.Properties {
-								var out smithy.Properties
-								out.Set("authSchemes", []interface{}{
-									map[string]interface{}{
-										"name":          "sigv4",
-										"signingName":   "cloudfront",
-										"signingRegion": "us-east-1",
-									},
-								})
-								return out
-							}(),
-						}, nil
-					}
 					uriString := func() string {
 						var out strings.Builder
 						out.WriteString("https://cloudfront-fips.")
@@ -672,54 +539,6 @@ func (r *resolver) ResolveEndpoint(
 					}, nil
 				}
 				return endpoint, fmt.Errorf("endpoint rule error, %s", "DualStack is enabled but this partition does not support DualStack")
-			}
-			if _Region == "aws-global" {
-				uriString := "https://cloudfront.amazonaws.com"
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-					Properties: func() smithy.Properties {
-						var out smithy.Properties
-						out.Set("authSchemes", []interface{}{
-							map[string]interface{}{
-								"name":          "sigv4",
-								"signingName":   "cloudfront",
-								"signingRegion": "us-east-1",
-							},
-						})
-						return out
-					}(),
-				}, nil
-			}
-			if _Region == "aws-cn-global" {
-				uriString := "https://cloudfront.cn-northwest-1.amazonaws.com.cn"
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-					Properties: func() smithy.Properties {
-						var out smithy.Properties
-						out.Set("authSchemes", []interface{}{
-							map[string]interface{}{
-								"name":          "sigv4",
-								"signingName":   "cloudfront",
-								"signingRegion": "cn-northwest-1",
-							},
-						})
-						return out
-					}(),
-				}, nil
 			}
 			uriString := func() string {
 				var out strings.Builder
