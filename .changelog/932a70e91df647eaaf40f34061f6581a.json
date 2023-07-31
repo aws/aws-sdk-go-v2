@@ -1,8 +1,0 @@
-{
-    "id": "932a70e9-1df6-47ea-af40-f34061f6581a",
-    "type": "feature",
-    "description": "Add CreationType filter for ListReadSets",
-    "modules": [
-        "service/omics"
-    ]
-}

@@ -1,3 +1,9 @@
+# v1.12.0 (2023-07-31)
+
+* **Feature**: Adds support for smithy-modeled endpoint resolution. A new rules-based endpoint resolution will be added to the SDK which will supercede and deprecate existing endpoint resolution. Specifically, EndpointResolver will be deprecated while BaseEndpoint and EndpointResolverV2 will take its place. For more information, please see the Endpoints section in our Developer Guide.
+* **Feature**: Amplify Studio releases GraphQL support for codegen job action.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.4 (2023-07-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

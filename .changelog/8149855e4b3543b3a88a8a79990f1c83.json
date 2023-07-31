@@ -1,8 +1,0 @@
-{
-    "id": "8149855e-4b35-43b3-a88a-8a79990f1c83",
-    "type": "feature",
-    "description": "Amazon Route 53 now supports the Israel (Tel Aviv) Region (il-central-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.",
-    "modules": [
-        "service/route53"
-    ]
-}

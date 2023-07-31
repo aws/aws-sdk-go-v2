@@ -3,4 +3,4 @@
 package costandusagereportservice
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.16.4"
+const goModuleVersion = "1.17.0"

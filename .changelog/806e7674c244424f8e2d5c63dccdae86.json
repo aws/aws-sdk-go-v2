@@ -1,8 +1,0 @@
-{
-    "id": "806e7674-c244-424f-8e2d-5c63dccdae86",
-    "type": "feature",
-    "description": "You can now configure an instance refresh to set its status to 'failed' when it detects that a specified CloudWatch alarm has gone into the ALARM state. You can also choose to roll back the instance refresh automatically when the alarm threshold is met.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

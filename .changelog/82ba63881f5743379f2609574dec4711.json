@@ -1,8 +1,0 @@
-{
-    "id": "82ba6388-1f57-4337-9f26-09574dec4711",
-    "type": "feature",
-    "description": "This release includes new import resource, model versioning and resource policy features.",
-    "modules": [
-        "service/lookoutequipment"
-    ]
-}

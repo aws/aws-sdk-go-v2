@@ -3,4 +3,4 @@
 package connectcampaigns
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.2.15"
+const goModuleVersion = "1.3.0"
