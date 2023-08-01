@@ -13,7 +13,6 @@ on:
 env:
   EACHMODULE_CONCURRENCY: 2
   SMITHY_GO_REPOSITORY: ${{ vars.SMITHY_GO_REPOSITORY }}
-  RUNNER_TMPDIR: ${{ runner.temp }}
   CLONE_PAT: ${{ secrets.CI_CHECKOUT_PAT }}
 
 jobs:
@@ -24,6 +23,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         go-version: [1.19, "1.20"]
+    env:
+      RUNNER_TMPDIR: ${{ runner.temp }}
     steps:
     - uses: actions/checkout@v2
 
@@ -54,6 +55,8 @@ jobs:
             go-version: 1.15
           - os: macos-latest
             go-version: 1.16
+    env:
+      RUNNER_TMPDIR: ${{ runner.temp }}
     steps:
     - uses: actions/checkout@v2
 
@@ -77,6 +80,7 @@ jobs:
         go-version: [1.19, "1.20"]
     env:
       EACHMODULE_SKIP: "internal\\repotools\\changes"
+      RUNNER_TMPDIR: ${{ runner.temp }}
     steps:
     - uses: actions/checkout@v2
 
@@ -86,6 +90,7 @@ jobs:
         go-version: ${{ matrix.go-version }}
 
     - name: Find smithy-go
+      shell: bash
       run: ./ci_find_smithy_go.sh
 
     - name: Test
@@ -101,6 +106,7 @@ jobs:
         go-version: [1.15, 1.16, 1.17, 1.18]
     env:
       EACHMODULE_SKIP: "internal\\repotools\\changes"
+      RUNNER_TMPDIR: ${{ runner.temp }}
     steps:
     - uses: actions/checkout@v2
 
@@ -110,6 +116,7 @@ jobs:
         go-version: ${{ matrix.go-version }}
 
     - name: Find smithy-go
+      shell: bash
       run: ./ci_find_smithy_go.sh
 
     - name: Test
