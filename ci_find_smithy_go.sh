@@ -48,6 +48,7 @@ fi
 
 if [ -z "$matched_branch" ]; then
     echo found no matching smithy-go branch, stop
+    exit 0
 fi
 
 git clone -b $matched_branch $repository $RUNNER_TMPDIR/smithy-go
