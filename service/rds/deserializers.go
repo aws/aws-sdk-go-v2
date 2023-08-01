@@ -3904,6 +3904,9 @@ func awsAwsquery_deserializeOpErrorDeleteDBCluster(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("DBClusterAutomatedBackupQuotaExceededFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterAutomatedBackupQuotaExceededFault(response, errorBody)
+
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
@@ -3918,6 +3921,117 @@ func awsAwsquery_deserializeOpErrorDeleteDBCluster(response *smithyhttp.Response
 
 	case strings.EqualFold("SnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotQuotaExceededFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpDeleteDBClusterAutomatedBackup struct {
+}
+
+func (*awsAwsquery_deserializeOpDeleteDBClusterAutomatedBackup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpDeleteDBClusterAutomatedBackup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteDBClusterAutomatedBackup(response, &metadata)
+	}
+	output := &DeleteDBClusterAutomatedBackupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("DeleteDBClusterAutomatedBackupResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentDeleteDBClusterAutomatedBackupOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorDeleteDBClusterAutomatedBackup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBClusterAutomatedBackupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterAutomatedBackupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterAutomatedBackupStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterAutomatedBackupStateFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5753,6 +5867,114 @@ func awsAwsquery_deserializeOpErrorDescribeCertificates(response *smithyhttp.Res
 	switch {
 	case strings.EqualFold("CertificateNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCertificateNotFoundFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpDescribeDBClusterAutomatedBackups struct {
+}
+
+func (*awsAwsquery_deserializeOpDescribeDBClusterAutomatedBackups) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpDescribeDBClusterAutomatedBackups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorDescribeDBClusterAutomatedBackups(response, &metadata)
+	}
+	output := &DescribeDBClusterAutomatedBackupsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("DescribeDBClusterAutomatedBackupsResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentDescribeDBClusterAutomatedBackupsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorDescribeDBClusterAutomatedBackups(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBClusterAutomatedBackupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterAutomatedBackupNotFoundFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -14163,6 +14385,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterToPointInTime(response *smith
 	case strings.EqualFold("DBClusterAlreadyExistsFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterAlreadyExistsFault(response, errorBody)
 
+	case strings.EqualFold("DBClusterAutomatedBackupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterAutomatedBackupNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
@@ -16719,6 +16944,94 @@ func awsAwsquery_deserializeErrorDBClusterAlreadyExistsFault(response *smithyhtt
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentDBClusterAlreadyExistsFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorDBClusterAutomatedBackupNotFoundFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DBClusterAutomatedBackupNotFoundFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentDBClusterAutomatedBackupNotFoundFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorDBClusterAutomatedBackupQuotaExceededFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DBClusterAutomatedBackupQuotaExceededFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentDBClusterAutomatedBackupQuotaExceededFault(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -19447,6 +19760,50 @@ func awsAwsquery_deserializeErrorInvalidCustomDBEngineVersionStateFault(response
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentInvalidCustomDBEngineVersionStateFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorInvalidDBClusterAutomatedBackupStateFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.InvalidDBClusterAutomatedBackupStateFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentInvalidDBClusterAutomatedBackupStateFault(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -25095,6 +25452,519 @@ func awsAwsquery_deserializeDocumentDBClusterAlreadyExistsFault(v **types.DBClus
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentDBClusterAutomatedBackup(v **types.DBClusterAutomatedBackup, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBClusterAutomatedBackup
+	if *v == nil {
+		sv = &types.DBClusterAutomatedBackup{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("AllocatedStorage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = int32(i64)
+			}
+
+		case strings.EqualFold("AvailabilityZones", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentAvailabilityZones(&sv.AvailabilityZones, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("BackupRetentionPeriod", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("ClusterCreateTime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.ClusterCreateTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("DBClusterArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBClusterArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBClusterAutomatedBackupsArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBClusterAutomatedBackupsArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DbClusterResourceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DbClusterResourceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Engine", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Engine = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("EngineMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EngineMode = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("EngineVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EngineVersion = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("IAMDatabaseAuthenticationEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.IAMDatabaseAuthenticationEnabled = xtv
+			}
+
+		case strings.EqualFold("Iops", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Iops = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("KmsKeyId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.KmsKeyId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("LicenseModel", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LicenseModel = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MasterUsername", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MasterUsername = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Port", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Port = int32(i64)
+			}
+
+		case strings.EqualFold("Region", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Region = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("RestoreWindow", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentRestoreWindow(&sv.RestoreWindow, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("StorageEncrypted", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.StorageEncrypted = xtv
+			}
+
+		case strings.EqualFold("StorageType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageType = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("VpcId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VpcId = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBClusterAutomatedBackupList(v *[]types.DBClusterAutomatedBackup, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.DBClusterAutomatedBackup
+	if *v == nil {
+		sv = make([]types.DBClusterAutomatedBackup, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("DBClusterAutomatedBackup", t.Name.Local):
+			var col types.DBClusterAutomatedBackup
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentDBClusterAutomatedBackup(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBClusterAutomatedBackupListUnwrapped(v *[]types.DBClusterAutomatedBackup, decoder smithyxml.NodeDecoder) error {
+	var sv []types.DBClusterAutomatedBackup
+	if *v == nil {
+		sv = make([]types.DBClusterAutomatedBackup, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.DBClusterAutomatedBackup
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentDBClusterAutomatedBackup(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentDBClusterAutomatedBackupNotFoundFault(v **types.DBClusterAutomatedBackupNotFoundFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBClusterAutomatedBackupNotFoundFault
+	if *v == nil {
+		sv = &types.DBClusterAutomatedBackupNotFoundFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBClusterAutomatedBackupQuotaExceededFault(v **types.DBClusterAutomatedBackupQuotaExceededFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBClusterAutomatedBackupQuotaExceededFault
+	if *v == nil {
+		sv = &types.DBClusterAutomatedBackupQuotaExceededFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentDBClusterBacktrack(v **types.DBClusterBacktrack, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26732,6 +27602,19 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 			{
 				xtv := string(val)
 				sv.DBClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DbClusterResourceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DbClusterResourceId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DBClusterSnapshotArn", t.Name.Local):
@@ -36944,6 +37827,55 @@ func awsAwsquery_deserializeDocumentInvalidCustomDBEngineVersionStateFault(v **t
 	var sv *types.InvalidCustomDBEngineVersionStateFault
 	if *v == nil {
 		sv = &types.InvalidCustomDBEngineVersionStateFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentInvalidDBClusterAutomatedBackupStateFault(v **types.InvalidDBClusterAutomatedBackupStateFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InvalidDBClusterAutomatedBackupStateFault
+	if *v == nil {
+		sv = &types.InvalidDBClusterAutomatedBackupStateFault{}
 	} else {
 		sv = *v
 	}
@@ -48934,6 +49866,48 @@ func awsAwsquery_deserializeOpDocumentDeleteCustomDBEngineVersionOutput(v **Dele
 	return nil
 }
 
+func awsAwsquery_deserializeOpDocumentDeleteDBClusterAutomatedBackupOutput(v **DeleteDBClusterAutomatedBackupOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DeleteDBClusterAutomatedBackupOutput
+	if *v == nil {
+		sv = &DeleteDBClusterAutomatedBackupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("DBClusterAutomatedBackup", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDBClusterAutomatedBackup(&sv.DBClusterAutomatedBackup, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeOpDocumentDeleteDBClusterEndpointOutput(v **DeleteDBClusterEndpointOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -49622,6 +50596,61 @@ func awsAwsquery_deserializeOpDocumentDescribeCertificatesOutput(v **DescribeCer
 		case strings.EqualFold("Certificates", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentCertificateList(&sv.Certificates, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Marker", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Marker = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentDescribeDBClusterAutomatedBackupsOutput(v **DescribeDBClusterAutomatedBackupsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DescribeDBClusterAutomatedBackupsOutput
+	if *v == nil {
+		sv = &DescribeDBClusterAutomatedBackupsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("DBClusterAutomatedBackups", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDBClusterAutomatedBackupList(&sv.DBClusterAutomatedBackups, nodeDecoder); err != nil {
 				return err
 			}
 

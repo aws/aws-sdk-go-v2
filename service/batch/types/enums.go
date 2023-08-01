@@ -104,9 +104,10 @@ type CRAllocationStrategy string
 
 // Enum values for CRAllocationStrategy
 const (
-	CRAllocationStrategyBestFit               CRAllocationStrategy = "BEST_FIT"
-	CRAllocationStrategyBestFitProgressive    CRAllocationStrategy = "BEST_FIT_PROGRESSIVE"
-	CRAllocationStrategySpotCapacityOptimized CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+	CRAllocationStrategyBestFit                    CRAllocationStrategy = "BEST_FIT"
+	CRAllocationStrategyBestFitProgressive         CRAllocationStrategy = "BEST_FIT_PROGRESSIVE"
+	CRAllocationStrategySpotCapacityOptimized      CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+	CRAllocationStrategySpotPriceCapacityOptimized CRAllocationStrategy = "SPOT_PRICE_CAPACITY_OPTIMIZED"
 )
 
 // Values returns all known values for CRAllocationStrategy. Note that this can be
@@ -117,6 +118,7 @@ func (CRAllocationStrategy) Values() []CRAllocationStrategy {
 		"BEST_FIT",
 		"BEST_FIT_PROGRESSIVE",
 		"SPOT_CAPACITY_OPTIMIZED",
+		"SPOT_PRICE_CAPACITY_OPTIMIZED",
 	}
 }
 
@@ -146,8 +148,9 @@ type CRUpdateAllocationStrategy string
 
 // Enum values for CRUpdateAllocationStrategy
 const (
-	CRUpdateAllocationStrategyBestFitProgressive    CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE"
-	CRUpdateAllocationStrategySpotCapacityOptimized CRUpdateAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+	CRUpdateAllocationStrategyBestFitProgressive         CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE"
+	CRUpdateAllocationStrategySpotCapacityOptimized      CRUpdateAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+	CRUpdateAllocationStrategySpotPriceCapacityOptimized CRUpdateAllocationStrategy = "SPOT_PRICE_CAPACITY_OPTIMIZED"
 )
 
 // Values returns all known values for CRUpdateAllocationStrategy. Note that this
@@ -157,6 +160,7 @@ func (CRUpdateAllocationStrategy) Values() []CRUpdateAllocationStrategy {
 	return []CRUpdateAllocationStrategy{
 		"BEST_FIT_PROGRESSIVE",
 		"SPOT_CAPACITY_OPTIMIZED",
+		"SPOT_PRICE_CAPACITY_OPTIMIZED",
 	}
 }
 

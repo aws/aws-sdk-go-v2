@@ -39,6 +39,7 @@
         "api_op_DescribeEndpointSettings.go",
         "api_op_DescribeEndpointTypes.go",
         "api_op_DescribeEndpoints.go",
+        "api_op_DescribeEngineVersions.go",
         "api_op_DescribeEventCategories.go",
         "api_op_DescribeEventSubscriptions.go",
         "api_op_DescribeEvents.go",

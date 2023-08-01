@@ -217,13 +217,13 @@ type ComputeEnvironmentOrder struct {
 // in the Batch User Guide.
 type ComputeResource struct {
 
-	// The maximum number of vCPUs that a compute environment can support. With both
-	// BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies using
-	// On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances,
-	// Batch might need to exceed maxvCpus to meet your capacity requirements. In this
-	// event, Batch never exceeds maxvCpus by more than a single instance. For
-	// example, no more than a single instance from among those specified in your
-	// compute environment is allocated.
+	// The maximum number of vCPUs that a compute environment can support. With
+	// BEST_FIT_PROGRESSIVE , SPOT_CAPACITY_OPTIMIZED and SPOT_PRICE_CAPACITY_OPTIMIZED
+	// allocation strategies using On-Demand or Spot Instances, and the BEST_FIT
+	// strategy using Spot Instances, Batch might need to exceed maxvCpus to meet your
+	// capacity requirements. In this event, Batch never exceeds maxvCpus by more than
+	// a single instance. For example, no more than a single instance from among those
+	// specified in your compute environment is allocated.
 	//
 	// This member is required.
 	MaxvCpus *int32
@@ -278,11 +278,15 @@ type ComputeResource struct {
 	// instance types that are large enough to meet the requirements of the jobs in the
 	// queue. Its preference is for instance types that are less likely to be
 	// interrupted. This allocation strategy is only available for Spot Instance
-	// compute resources. With both BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED
-	// strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using
-	// Spot Instances, Batch might need to exceed maxvCpus to meet your capacity
-	// requirements. In this event, Batch never exceeds maxvCpus by more than a single
-	// instance.
+	// compute resources. SPOT_PRICE_CAPACITY_OPTIMIZED The price and capacity
+	// optimized allocation strategy looks at both price and capacity to select the
+	// Spot Instance pools that are the least likely to be interrupted and have the
+	// lowest possible price. This allocation strategy is only available for Spot
+	// Instance compute resources. With BEST_FIT_PROGRESSIVE , SPOT_CAPACITY_OPTIMIZED
+	// and SPOT_PRICE_CAPACITY_OPTIMIZED strategies using On-Demand or Spot Instances,
+	// and the BEST_FIT strategy using Spot Instances, Batch might need to exceed
+	// maxvCpus to meet your capacity requirements. In this event, Batch never exceeds
+	// maxvCpus by more than a single instance.
 	AllocationStrategy CRAllocationStrategy
 
 	// The maximum percentage that a Spot Instance price can be when compared with the
@@ -437,11 +441,15 @@ type ComputeResourceUpdate struct {
 	// instance types that are large enough to meet the requirements of the jobs in the
 	// queue. Its preference is for instance types that are less likely to be
 	// interrupted. This allocation strategy is only available for Spot Instance
-	// compute resources. With both BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED
-	// strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using
-	// Spot Instances, Batch might need to exceed maxvCpus to meet your capacity
-	// requirements. In this event, Batch never exceeds maxvCpus by more than a single
-	// instance.
+	// compute resources. SPOT_PRICE_CAPACITY_OPTIMIZED The price and capacity
+	// optimized allocation strategy looks at both price and capacity to select the
+	// Spot Instance pools that are the least likely to be interrupted and have the
+	// lowest possible price. This allocation strategy is only available for Spot
+	// Instance compute resources. With both BEST_FIT_PROGRESSIVE ,
+	// SPOT_CAPACITY_OPTIMIZED , and SPOT_PRICE_CAPACITY_OPTIMIZED strategies using
+	// On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances,
+	// Batch might need to exceed maxvCpus to meet your capacity requirements. In this
+	// event, Batch never exceeds maxvCpus by more than a single instance.
 	AllocationStrategy CRUpdateAllocationStrategy
 
 	// The maximum percentage that a Spot Instance price can be when compared with the
@@ -551,13 +559,13 @@ type ComputeResourceUpdate struct {
 	// running on Fargate resources. Don't specify it.
 	LaunchTemplate *LaunchTemplateSpecification
 
-	// The maximum number of Amazon EC2 vCPUs that an environment can reach. With both
-	// BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies using
-	// On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances,
-	// Batch might need to exceed maxvCpus to meet your capacity requirements. In this
-	// event, Batch never exceeds maxvCpus by more than a single instance. That is, no
-	// more than a single instance from among those specified in your compute
-	// environment.
+	// The maximum number of Amazon EC2 vCPUs that an environment can reach. With
+	// BEST_FIT_PROGRESSIVE , SPOT_CAPACITY_OPTIMIZED , and
+	// SPOT_PRICE_CAPACITY_OPTIMIZED allocation strategies using On-Demand or Spot
+	// Instances, and the BEST_FIT strategy using Spot Instances, Batch might need to
+	// exceed maxvCpus to meet your capacity requirements. In this event, Batch never
+	// exceeds maxvCpus by more than a single instance. That is, no more than a single
+	// instance from among those specified in your compute environment.
 	MaxvCpus *int32
 
 	// The minimum number of vCPUs that an environment should maintain (even if the

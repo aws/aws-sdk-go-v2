@@ -58,13 +58,6 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
-	// The identifier of the source DB cluster from which to restore. Constraints:
-	//   - Must match the identifier of an existing DBCluster.
-	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
-	//
-	// This member is required.
-	SourceDBClusterIdentifier *string
-
 	// The target backtrack window, in seconds. To disable backtracking, set this
 	// value to 0. Default: 0 Constraints:
 	//   - If specified, this value must be set to a number from 0 to 259,200 (72
@@ -241,6 +234,14 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// more information, see Using Amazon Aurora Serverless v2 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
 	// in the Amazon Aurora User Guide.
 	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
+	// The identifier of the source DB cluster from which to restore. Constraints:
+	//   - Must match the identifier of an existing DBCluster.
+	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
+	SourceDBClusterIdentifier *string
+
+	// The resource ID of the source DB cluster from which to restore.
+	SourceDbClusterResourceId *string
 
 	// Specifies the storage type to be associated with the DB cluster. When specified
 	// for a Multi-AZ DB cluster, a value for the Iops parameter is required. Valid

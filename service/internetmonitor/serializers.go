@@ -852,6 +852,13 @@ func awsRestjson1_serializeDocumentHealthEventsConfig(v *types.HealthEventsConfi
 	object := value.Object()
 	defer object.Close()
 
+	if v.AvailabilityLocalHealthEventsConfig != nil {
+		ok := object.Key("AvailabilityLocalHealthEventsConfig")
+		if err := awsRestjson1_serializeDocumentLocalHealthEventsConfig(v.AvailabilityLocalHealthEventsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AvailabilityScoreThreshold != 0 {
 		ok := object.Key("AvailabilityScoreThreshold")
 		switch {
@@ -867,6 +874,13 @@ func awsRestjson1_serializeDocumentHealthEventsConfig(v *types.HealthEventsConfi
 		default:
 			ok.Double(v.AvailabilityScoreThreshold)
 
+		}
+	}
+
+	if v.PerformanceLocalHealthEventsConfig != nil {
+		ok := object.Key("PerformanceLocalHealthEventsConfig")
+		if err := awsRestjson1_serializeDocumentLocalHealthEventsConfig(v.PerformanceLocalHealthEventsConfig, ok); err != nil {
+			return err
 		}
 	}
 
@@ -900,6 +914,54 @@ func awsRestjson1_serializeDocumentInternetMeasurementsLogDelivery(v *types.Inte
 		if err := awsRestjson1_serializeDocumentS3Config(v.S3Config, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLocalHealthEventsConfig(v *types.LocalHealthEventsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HealthScoreThreshold != 0 {
+		ok := object.Key("HealthScoreThreshold")
+		switch {
+		case math.IsNaN(v.HealthScoreThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(v.HealthScoreThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.HealthScoreThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.HealthScoreThreshold)
+
+		}
+	}
+
+	if v.MinTrafficImpact != 0 {
+		ok := object.Key("MinTrafficImpact")
+		switch {
+		case math.IsNaN(v.MinTrafficImpact):
+			ok.String("NaN")
+
+		case math.IsInf(v.MinTrafficImpact, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MinTrafficImpact, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MinTrafficImpact)
+
+		}
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
 	}
 
 	return nil

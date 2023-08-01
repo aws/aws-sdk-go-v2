@@ -40,6 +40,9 @@ type UpdateInputDeviceInput struct {
 	// This member is required.
 	InputDeviceId *string
 
+	// The Availability Zone you want associated with this input device.
+	AvailabilityZone *string
+
 	// The settings that you want to apply to the HD input device.
 	HdDeviceSettings *types.InputDeviceConfigurableSettings
 
@@ -57,6 +60,9 @@ type UpdateInputDeviceOutput struct {
 
 	// The unique ARN of the input device.
 	Arn *string
+
+	// The Availability Zone associated with this input device.
+	AvailabilityZone *string
 
 	// The state of the connection between the input device and AWS.
 	ConnectionState types.InputDeviceConnectionState

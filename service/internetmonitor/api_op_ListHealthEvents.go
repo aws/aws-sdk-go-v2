@@ -18,11 +18,9 @@ import (
 )
 
 // Lists all health events for a monitor in Amazon CloudWatch Internet Monitor.
-// Returns all information for health events including the client location
-// information the network cause and status, event start and end time, percentage
-// of total traffic impacted, and status. Health events that have start times
-// during the time frame that is requested are not included in the list of health
-// events.
+// Returns information for health events including the event start and end time and
+// the status. Health events that have start times during the time frame that is
+// requested are not included in the list of health events.
 func (c *Client) ListHealthEvents(ctx context.Context, params *ListHealthEventsInput, optFns ...func(*Options)) (*ListHealthEventsOutput, error) {
 	if params == nil {
 		params = &ListHealthEventsInput{}

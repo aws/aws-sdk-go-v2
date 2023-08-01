@@ -7,20 +7,21 @@ import (
 	"time"
 )
 
-// Measurements about the availability for your application on the internet,
-// calculated by Amazon CloudWatch Internet Monitor. Amazon Web Services has
-// substantial historical data about internet performance and availability between
-// Amazon Web Services services and different network providers and geographies. By
-// applying statistical analysis to the data, Internet Monitor can detect when the
-// performance and availability for your application has dropped, compared to an
-// estimated baseline that's already calculated. To make it easier to see those
-// drops, we report that information to you in the form of health scores: a
-// performance score and an availability score. Availability in Internet Monitor
-// represents the estimated percentage of traffic that is not seeing an
-// availability drop. For example, an availability score of 99% for an end user and
-// service location pair is equivalent to 1% of the traffic experiencing an
-// availability drop for that pair. For more information, see How Internet Monitor
-// calculates performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+// Amazon CloudWatch Internet Monitor calculates measurements about the
+// availability for your application's internet traffic between client locations
+// and Amazon Web Services. Amazon Web Services has substantial historical data
+// about internet performance and availability between Amazon Web Services services
+// and different network providers and geographies. By applying statistical
+// analysis to the data, Internet Monitor can detect when the performance and
+// availability for your application has dropped, compared to an estimated baseline
+// that's already calculated. To make it easier to see those drops, we report that
+// information to you in the form of health scores: a performance score and an
+// availability score. Availability in Internet Monitor represents the estimated
+// percentage of traffic that is not seeing an availability drop. For example, an
+// availability score of 99% for an end user and service location pair is
+// equivalent to 1% of the traffic experiencing an availability drop for that pair.
+// For more information, see How Internet Monitor calculates performance and
+// availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 // in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User
 // Guide.
 type AvailabilityMeasurement struct {
@@ -45,9 +46,12 @@ type AvailabilityMeasurement struct {
 	// Guide.
 	PercentOfClientLocationImpacted *float64
 
-	// The percentage of impact caused by a health event for total traffic globally.
-	// For information about how Internet Monitor calculates impact, see Inside
-	// Internet Monitor (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html)
+	// The impact on total traffic that a health event has, in increased latency or
+	// reduced availability. This is the percentage of how much latency has increased
+	// or availability has decreased during the event, compared to what is typical for
+	// traffic from this client location to the Amazon Web Services location using this
+	// client network. For information about how Internet Monitor calculates impact,
+	// see How Internet Monitor works (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html)
 	// in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User
 	// Guide.
 	PercentOfTotalTrafficImpacted *float64
@@ -106,22 +110,44 @@ type HealthEvent struct {
 	// configured when Amazon CloudWatch Internet Monitor created the health event.
 	HealthScoreThreshold float64
 
-	// The impact on global traffic monitored by this monitor for this health event.
+	// The impact on total traffic that a health event has, in increased latency or
+	// reduced availability. This is the percentage of how much latency has increased
+	// or availability has decreased during the event, compared to what is typical for
+	// traffic from this client location to the Amazon Web Services location using this
+	// client network.
 	PercentOfTotalTrafficImpacted *float64
 
 	noSmithyDocumentSerde
 }
 
-// A complex type for the configuration. Defines the health event threshold
-// percentages, for performance score and availability score. Amazon CloudWatch
-// Internet Monitor creates a health event when there's an internet issue that
-// affects your application end users where a health score percentage is at or
-// below a set threshold. If you don't set a health event threshold, the default
-// value is 95%.
+// A complex type with the configuration information that determines the threshold
+// and other conditions for when Internet Monitor creates a health event for an
+// overall performance or availability issue, across an application's geographies.
+// Defines the percentages, for overall performance scores and availability scores
+// for an application, that are the thresholds for when Amazon CloudWatch Internet
+// Monitor creates a health event. You can override the defaults to set a custom
+// threshold for overall performance or availability scores, or both. You can also
+// set thresholds for local health scores,, where Internet Monitor creates a health
+// event when scores cross a threshold for one or more city-networks, in addition
+// to creating an event when an overall score crosses a threshold. If you don't set
+// a health event threshold, the default value is 95%. For local thresholds, you
+// also set a minimum percentage of overall traffic that is impacted by an issue
+// before Internet Monitor creates an event. In addition, you can disable local
+// thresholds, for performance scores, availability scores, or both. For more
+// information, see Change health event thresholds (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview)
+// in the Internet Monitor section of the CloudWatch User Guide.
 type HealthEventsConfig struct {
+
+	// The configuration that determines the threshold and other conditions for when
+	// Internet Monitor creates a health event for a local availability issue.
+	AvailabilityLocalHealthEventsConfig *LocalHealthEventsConfig
 
 	// The health event threshold percentage set for availability scores.
 	AvailabilityScoreThreshold float64
+
+	// The configuration that determines the threshold and other conditions for when
+	// Internet Monitor creates a health event for a local performance issue.
+	PerformanceLocalHealthEventsConfig *LocalHealthEventsConfig
 
 	// The health event threshold percentage set for performance scores.
 	PerformanceScoreThreshold float64
@@ -206,8 +232,9 @@ type ImpactedLocation struct {
 // network providers and geographies. By applying statistical analysis to the data,
 // Internet Monitor can detect when the performance and availability for your
 // application has dropped, compared to an estimated baseline that's already
-// calculated. To make it easier to see those drops, we report that information to
-// you in the form of health scores: a performance score and an availability score.
+// calculated. To make it easier to see those drops, Internet Monitor reports the
+// information to you in the form of health scores: a performance score and an
+// availability score.
 type InternetHealth struct {
 
 	// Availability in Internet Monitor represents the estimated percentage of traffic
@@ -239,6 +266,35 @@ type InternetMeasurementsLogDelivery struct {
 	// delivery status. The delivery status is ENABLED or DISABLED , depending on
 	// whether you choose to deliver internet measurements to S3 logs.
 	S3Config *S3Config
+
+	noSmithyDocumentSerde
+}
+
+// A complex type with the configuration information that determines the threshold
+// and other conditions for when Internet Monitor creates a health event for a
+// local performance or availability issue, when scores cross a threshold for one
+// or more city-networks. Defines the percentages, for performance scores or
+// availability scores, that are the local thresholds for when Amazon CloudWatch
+// Internet Monitor creates a health event. Also defines whether a local threshold
+// is enabled or disabled, and the minimum percentage of overall traffic that must
+// be impacted by an issue before Internet Monitor creates an event when a
+// threshold is crossed for a local health score. For more information, see Change
+// health event thresholds (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview)
+// in the Internet Monitor section of the CloudWatch User Guide.
+type LocalHealthEventsConfig struct {
+
+	// The health event threshold percentage set for a local health score.
+	HealthScoreThreshold float64
+
+	// The minimum percentage of overall traffic for an application that must be
+	// impacted by an issue before Internet Monitor creates an event when a threshold
+	// is crossed for a local health score.
+	MinTrafficImpact float64
+
+	// The status of whether Internet Monitor creates a health event based on a
+	// threshold percentage set for a local health score. The status can be ENABLED or
+	// DISABLED .
+	Status LocalHealthEventsConfigStatus
 
 	noSmithyDocumentSerde
 }
@@ -308,20 +364,20 @@ type NetworkImpairment struct {
 	noSmithyDocumentSerde
 }
 
-// Measurements about the performance for your application on the internet
-// calculated by Amazon CloudWatch Internet Monitor. Amazon Web Services has
-// substantial historical data about internet performance and availability between
-// Amazon Web Services services and different network providers and geographies. By
-// applying statistical analysis to the data, Internet Monitor can detect when the
-// performance and availability for your application has dropped, compared to an
-// estimated baseline that's already calculated. To make it easier to see those
-// drops, we report that information to you in the form of health scores: a
-// performance score and an availability score. Performance in Internet Monitor
-// represents the estimated percentage of traffic that is not seeing a performance
-// drop. For example, a performance score of 99% for an end user and service
-// location pair is equivalent to 1% of the traffic experiencing a performance drop
-// for that pair. For more information, see How Internet Monitor calculates
-// performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
+// Amazon CloudWatch Internet Monitor calculates measurements about the
+// performance for your application's internet traffic between client locations and
+// Amazon Web Services. Amazon Web Services has substantial historical data about
+// internet performance and availability between Amazon Web Services services and
+// different network providers and geographies. By applying statistical analysis to
+// the data, Internet Monitor can detect when the performance and availability for
+// your application has dropped, compared to an estimated baseline that's already
+// calculated. To make it easier to see those drops, we report that information to
+// you in the form of health scores: a performance score and an availability score.
+// Performance in Internet Monitor represents the estimated percentage of traffic
+// that is not seeing a performance drop. For example, a performance score of 99%
+// for an end user and service location pair is equivalent to 1% of the traffic
+// experiencing a performance drop for that pair. For more information, see How
+// Internet Monitor calculates performance and availability scores (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMExperienceScores)
 // in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 type PerformanceMeasurement struct {
 
@@ -346,10 +402,11 @@ type PerformanceMeasurement struct {
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	PercentOfClientLocationImpacted *float64
 
-	// How much performance impact was caused by a health event for total traffic
-	// globally. For performance, this is the percentage of how much latency increased
-	// during the event compared to typical performance for your application traffic
-	// globally. For more information, see When Amazon Web Services creates and
+	// The impact on total traffic that a health event has, in increased latency or
+	// reduced availability. This is the percentage of how much latency has increased
+	// or availability has decreased during the event, compared to what is typical for
+	// traffic from this client location to the Amazon Web Services location using this
+	// client network. For more information, see When Amazon Web Services creates and
 	// resolves health events (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-inside-internet-monitor.html#IMHealthEventStartStop)
 	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
 	PercentOfTotalTrafficImpacted *float64

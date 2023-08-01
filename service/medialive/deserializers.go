@@ -4514,6 +4514,15 @@ func awsRestjson1_deserializeOpDocumentDescribeInputDeviceOutput(v **DescribeInp
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "availabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = ptr.String(jtv)
+			}
+
 		case "connectionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10621,6 +10630,15 @@ func awsRestjson1_deserializeOpDocumentUpdateInputDeviceOutput(v **UpdateInputDe
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "availabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = ptr.String(jtv)
 			}
 
 		case "connectionState":
@@ -21687,6 +21705,15 @@ func awsRestjson1_deserializeDocumentInputDeviceSummary(v **types.InputDeviceSum
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "availabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = ptr.String(jtv)
 			}
 
 		case "connectionState":

@@ -1,0 +1,8 @@
+{
+    "id": "295d4602-09c9-48f3-8607-78ba278c4130",
+    "type": "feature",
+    "description": "Added support for deleted clusters PiTR.",
+    "modules": [
+        "service/rds"
+    ]
+}

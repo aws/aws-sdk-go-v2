@@ -672,6 +672,39 @@ type EndpointSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about a replication instance version.
+type EngineVersion struct {
+
+	// The date when the replication instance will be automatically upgraded. This
+	// setting only applies if the auto-minor-version setting is enabled.
+	AutoUpgradeDate *time.Time
+
+	// The list of valid replication instance versions that you can upgrade to.
+	AvailableUpgrades []string
+
+	// The date when the replication instance version will be deprecated and can no
+	// longer be requested.
+	DeprecationDate *time.Time
+
+	// The date when the replication instance will have a version upgrade forced.
+	ForceUpgradeDate *time.Time
+
+	// The date when the replication instance version became publicly available.
+	LaunchDate *time.Time
+
+	// The lifecycle status of the replication instance version. Valid values are
+	// DEPRECATED , DEFAULT_VERSION , and ACTIVE .
+	Lifecycle *string
+
+	// The release status of the replication instance version.
+	ReleaseStatus ReleaseStatusValues
+
+	// The version number of the replication instance.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an identifiable significant activity that affects a replication
 // instance or task. This object can provide the message, the available event
 // categories, the date and source of the event, and the DMS resource type.
@@ -1857,10 +1890,9 @@ type PostgreSQLSettings struct {
 	// to N , you don't have to create tables or triggers on the source database.
 	CaptureDdls *bool
 
-	// Specifies whether to use default or custom replication behavior for
-	// PostgreSQL-compatible endpoints. You can use this setting to specify replication
-	// behavior for endpoints that require additional configuration, such as Babelfish
-	// endpoints.
+	// Specifies the default behavior of the replication's handling of PostgreSQL-
+	// compatible endpoints that require some additional configuration, such as
+	// Babelfish endpoints.
 	DatabaseMode DatabaseMode
 
 	// Database name for the endpoint.

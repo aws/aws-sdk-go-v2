@@ -753,6 +753,98 @@ type DBCluster struct {
 	noSmithyDocumentSerde
 }
 
+// An automated backup of a DB cluster. It consists of system backups, transaction
+// logs, and the database cluster properties that existed at the time you deleted
+// the source cluster.
+type DBClusterAutomatedBackup struct {
+
+	// For all database engines except Amazon Aurora, AllocatedStorage specifies the
+	// allocated storage size in gibibytes (GiB). For Aurora, AllocatedStorage always
+	// returns 1, because Aurora DB cluster storage size isn't fixed, but instead
+	// automatically adjusts as needed.
+	AllocatedStorage int32
+
+	// The Availability Zones where instances in the DB cluster can be created. For
+	// information on Amazon Web Services Regions and Availability Zones, see Regions
+	// and Availability Zones (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)
+	// .
+	AvailabilityZones []string
+
+	// The retention period for the automated backups.
+	BackupRetentionPeriod *int32
+
+	// The time when the DB cluster was created, in Universal Coordinated Time (UTC).
+	ClusterCreateTime *time.Time
+
+	// The Amazon Resource Name (ARN) for the source DB cluster.
+	DBClusterArn *string
+
+	// The Amazon Resource Name (ARN) for the automated backups.
+	DBClusterAutomatedBackupsArn *string
+
+	// The identifier for the source DB cluster, which can't be changed and which is
+	// unique to an Amazon Web Services Region.
+	DBClusterIdentifier *string
+
+	// The resource ID for the source DB cluster, which can't be changed and which is
+	// unique to an Amazon Web Services Region.
+	DbClusterResourceId *string
+
+	// The name of the database engine for this automated backup.
+	Engine *string
+
+	// The engine mode of the database engine for the automated backup.
+	EngineMode *string
+
+	// The version of the database engine for the automated backup.
+	EngineVersion *string
+
+	// True if mapping of Amazon Web Services Identity and Access Management (IAM)
+	// accounts to database accounts is enabled, and otherwise false.
+	IAMDatabaseAuthenticationEnabled bool
+
+	// The IOPS (I/O operations per second) value for the automated backup. This
+	// setting is only for non-Aurora Multi-AZ DB clusters.
+	Iops *int32
+
+	// The Amazon Web Services KMS key ID for an automated backup. The Amazon Web
+	// Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for
+	// the KMS key.
+	KmsKeyId *string
+
+	// The license model information for this DB cluster automated backup.
+	LicenseModel *string
+
+	// The master user name of the automated backup.
+	MasterUsername *string
+
+	// The port number that the automated backup used for connections. Default:
+	// Inherits from the source DB cluster Valid Values: 1150-65535
+	Port int32
+
+	// The Amazon Web Services Region associated with the automated backup.
+	Region *string
+
+	// Earliest and latest time an instance can be restored to:
+	RestoreWindow *RestoreWindow
+
+	// A list of status information for an automated backup:
+	//   - retained - Automated backups for deleted clusters.
+	Status *string
+
+	// Specifies whether the source DB cluster is encrypted.
+	StorageEncrypted bool
+
+	// The storage type associated with the DB cluster. This setting is only for
+	// non-Aurora Multi-AZ DB clusters.
+	StorageType *string
+
+	// The VPC ID associated with the DB cluster.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
 // This data type is used as a response element in the DescribeDBClusterBacktracks
 // action.
 type DBClusterBacktrack struct {
@@ -941,7 +1033,7 @@ type DBClusterSnapshot struct {
 	// snapshot was created from.
 	DBClusterIdentifier *string
 
-	// The Amazon Resource Name (ARN) for the DB cluster snapshot.
+	// Specifies the Amazon Resource Name (ARN) for the DB cluster snapshot.
 	DBClusterSnapshotArn *string
 
 	// Specifies the identifier for the DB cluster snapshot.
@@ -949,6 +1041,10 @@ type DBClusterSnapshot struct {
 
 	// Reserved for future use.
 	DBSystemId *string
+
+	// Specifies the resource ID of the DB cluster that this DB cluster snapshot was
+	// created from.
+	DbClusterResourceId *string
 
 	// Specifies the name of the database engine for this DB cluster snapshot.
 	Engine *string
@@ -1605,11 +1701,11 @@ type DBInstanceAutomatedBackup struct {
 	// with the automated backup.
 	DBInstanceAutomatedBackupsReplications []DBInstanceAutomatedBackupsReplication
 
-	// The customer id of the instance that is/was associated with the automated
-	// backup.
+	// The identifier for the source DB instance, which can't be changed and which is
+	// unique to an Amazon Web Services Region.
 	DBInstanceIdentifier *string
 
-	// The identifier for the source DB instance, which can't be changed and which is
+	// The resource ID for the source DB instance, which can't be changed and which is
 	// unique to an Amazon Web Services Region.
 	DbiResourceId *string
 
@@ -1640,7 +1736,7 @@ type DBInstanceAutomatedBackup struct {
 	// License model information for the automated backup.
 	LicenseModel *string
 
-	// The license model of an automated backup.
+	// The master user name of an automated backup.
 	MasterUsername *string
 
 	// The option group the automated backup is associated with. If omitted, the
@@ -1658,9 +1754,9 @@ type DBInstanceAutomatedBackup struct {
 	RestoreWindow *RestoreWindow
 
 	// Provides a list of status information for an automated backup:
-	//   - active - automated backups for current instances
-	//   - retained - automated backups for deleted instances
-	//   - creating - automated backups that are waiting for the first automated
+	//   - active - Automated backups for current instances.
+	//   - retained - Automated backups for deleted instances.
+	//   - creating - Automated backups that are waiting for the first automated
 	//   snapshot to be available.
 	Status *string
 

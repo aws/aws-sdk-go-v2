@@ -1845,7 +1845,7 @@ type BatchTransformInput struct {
 	// This member is required.
 	LocalPath *string
 
-	// If specified, monitoring jobs substract this time from the end time. For
+	// If specified, monitoring jobs subtract this time from the end time. For
 	// information about using offsets for scheduling monitoring jobs, see Schedule
 	// Model Quality Monitoring Jobs (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html)
 	// .
@@ -8289,7 +8289,8 @@ type ModelInput struct {
 // The model latency threshold.
 type ModelLatencyThreshold struct {
 
-	// The model latency percentile threshold.
+	// The model latency percentile threshold. For custom load tests, specify the
+	// value as P95 .
 	Percentile *string
 
 	// The model latency percentile value in milliseconds.
@@ -10225,10 +10226,13 @@ type PendingProductionVariantSummary struct {
 // Defines the traffic pattern.
 type Phase struct {
 
-	// Specifies how long traffic phase should be.
+	// Specifies how long a traffic phase should be. For custom load tests, the value
+	// should be between 120 and 3600. This value should not exceed
+	// JobDurationInSeconds .
 	DurationInSeconds *int32
 
-	// Specifies how many concurrent users to start with.
+	// Specifies how many concurrent users to start with. The value should be between
+	// 1 and 3.
 	InitialNumberOfUsers *int32
 
 	// Specified how many new users to spawn in a minute.
@@ -11696,7 +11700,8 @@ type RecommendationJobInputConfig struct {
 	// Existing customer endpoints on which to run an Inference Recommender job.
 	Endpoints []EndpointInfo
 
-	// Specifies the maximum duration of the job, in seconds.>
+	// Specifies the maximum duration of the job, in seconds. The maximum value is
+	// 7200.
 	JobDurationInSeconds *int32
 
 	// The name of the created model.
@@ -11789,6 +11794,12 @@ type RecommendationJobResourceLimit struct {
 // Specifies conditions for stopping a job. When a job reaches a stopping
 // condition limit, SageMaker ends the job.
 type RecommendationJobStoppingConditions struct {
+
+	// Stops a load test when the number of invocations (TPS) peaks and flattens,
+	// which means that the instance has reached capacity. The default value is Stop .
+	// If you want the load test to continue after invocations have flattened, set the
+	// value to Continue .
+	FlatInvocations FlatInvocations
 
 	// The maximum number of requests per minute expected for the endpoint.
 	MaxInvocations int32
@@ -12878,6 +12889,23 @@ type SpaceSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the stairs traffic pattern for an Inference Recommender load test. This
+// pattern type consists of multiple steps where the number of users increases at
+// each step. Specify either the stairs or phases traffic pattern.
+type Stairs struct {
+
+	// Defines how long each traffic step should be.
+	DurationInSeconds *int32
+
+	// Specifies how many steps to perform during traffic.
+	NumberOfSteps *int32
+
+	// Specifies how many new users to spawn in each step.
+	UsersPerStep *int32
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a limit to how long a model training job or model compilation job can
 // run. It also specifies how long a managed spot training job has to complete.
 // When the job reaches the time limit, SageMaker ends the training or compilation
@@ -13328,7 +13356,10 @@ type TrafficPattern struct {
 	// Defines the phases traffic specification.
 	Phases []Phase
 
-	// Defines the traffic patterns.
+	// Defines the stairs traffic pattern.
+	Stairs *Stairs
+
+	// Defines the traffic patterns. Choose either PHASES or STAIRS .
 	TrafficType TrafficType
 
 	noSmithyDocumentSerde

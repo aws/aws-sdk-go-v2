@@ -2977,6 +2977,9 @@ type InputDeviceSummary struct {
 	// The unique ARN of the input device.
 	Arn *string
 
+	// The Availability Zone associated with this input device.
+	AvailabilityZone *string
+
 	// The state of the connection between the input device and AWS.
 	ConnectionState InputDeviceConnectionState
 

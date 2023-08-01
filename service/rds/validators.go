@@ -630,6 +630,26 @@ func (m *validateOpDeleteCustomDBEngineVersion) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDBClusterAutomatedBackup struct {
+}
+
+func (*validateOpDeleteDBClusterAutomatedBackup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDBClusterAutomatedBackup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDBClusterAutomatedBackupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDBClusterAutomatedBackupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDBClusterEndpoint struct {
 }
 
@@ -965,6 +985,26 @@ func (m *validateOpDescribeCertificates) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCertificatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDBClusterAutomatedBackups struct {
+}
+
+func (*validateOpDescribeDBClusterAutomatedBackups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDBClusterAutomatedBackups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDBClusterAutomatedBackupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDBClusterAutomatedBackupsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2814,6 +2854,10 @@ func addOpDeleteCustomDBEngineVersionValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDeleteCustomDBEngineVersion{}, middleware.After)
 }
 
+func addOpDeleteDBClusterAutomatedBackupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDBClusterAutomatedBackup{}, middleware.After)
+}
+
 func addOpDeleteDBClusterEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDBClusterEndpoint{}, middleware.After)
 }
@@ -2880,6 +2924,10 @@ func addOpDescribeBlueGreenDeploymentsValidationMiddleware(stack *middleware.Sta
 
 func addOpDescribeCertificatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCertificates{}, middleware.After)
+}
+
+func addOpDescribeDBClusterAutomatedBackupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDBClusterAutomatedBackups{}, middleware.After)
 }
 
 func addOpDescribeDBClusterBacktracksValidationMiddleware(stack *middleware.Stack) error {
@@ -3887,6 +3935,21 @@ func validateOpDeleteCustomDBEngineVersionInput(v *DeleteCustomDBEngineVersionIn
 	}
 }
 
+func validateOpDeleteDBClusterAutomatedBackupInput(v *DeleteDBClusterAutomatedBackupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDBClusterAutomatedBackupInput"}
+	if v.DbClusterResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbClusterResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDBClusterEndpointInput(v *DeleteDBClusterEndpointInput) error {
 	if v == nil {
 		return nil
@@ -4134,6 +4197,23 @@ func validateOpDescribeCertificatesInput(v *DescribeCertificatesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCertificatesInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDBClusterAutomatedBackupsInput(v *DescribeDBClusterAutomatedBackupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDBClusterAutomatedBackupsInput"}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
@@ -5375,9 +5455,6 @@ func validateOpRestoreDBClusterToPointInTimeInput(v *RestoreDBClusterToPointInTi
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreDBClusterToPointInTimeInput"}
 	if v.DBClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
-	}
-	if v.SourceDBClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceDBClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

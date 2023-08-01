@@ -49,6 +49,11 @@ type DeleteDBClusterInput struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
+	// A value that indicates whether to remove automated backups immediately after
+	// the DB cluster is deleted. This parameter isn't case-sensitive. The default is
+	// to remove automated backups immediately after the DB cluster is deleted.
+	DeleteAutomatedBackups *bool
+
 	// The DB cluster snapshot identifier of the new DB cluster snapshot created when
 	// SkipFinalSnapshot is disabled. Specifying this parameter and also skipping the
 	// creation of a final DB cluster snapshot with the SkipFinalShapshot parameter

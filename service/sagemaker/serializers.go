@@ -24044,6 +24044,11 @@ func awsAwsjson11_serializeDocumentRecommendationJobStoppingConditions(v *types.
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.FlatInvocations) > 0 {
+		ok := object.Key("FlatInvocations")
+		ok.String(string(v.FlatInvocations))
+	}
+
 	if v.MaxInvocations != 0 {
 		ok := object.Key("MaxInvocations")
 		ok.Integer(v.MaxInvocations)
@@ -24887,6 +24892,28 @@ func awsAwsjson11_serializeDocumentSpaceSettings(v *types.SpaceSettings, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentStairs(v *types.Stairs, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationInSeconds != nil {
+		ok := object.Key("DurationInSeconds")
+		ok.Integer(*v.DurationInSeconds)
+	}
+
+	if v.NumberOfSteps != nil {
+		ok := object.Key("NumberOfSteps")
+		ok.Integer(*v.NumberOfSteps)
+	}
+
+	if v.UsersPerStep != nil {
+		ok := object.Key("UsersPerStep")
+		ok.Integer(*v.UsersPerStep)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentStoppingCondition(v *types.StoppingCondition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25233,6 +25260,13 @@ func awsAwsjson11_serializeDocumentTrafficPattern(v *types.TrafficPattern, value
 	if v.Phases != nil {
 		ok := object.Key("Phases")
 		if err := awsAwsjson11_serializeDocumentPhases(v.Phases, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Stairs != nil {
+		ok := object.Key("Stairs")
+		if err := awsAwsjson11_serializeDocumentStairs(v.Stairs, ok); err != nil {
 			return err
 		}
 	}

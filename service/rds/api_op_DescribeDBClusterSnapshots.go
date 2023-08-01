@@ -58,6 +58,9 @@ type DescribeDBClusterSnapshotsInput struct {
 	//   must also be specified.
 	DBClusterSnapshotIdentifier *string
 
+	// A specific DB cluster resource ID to describe.
+	DbClusterResourceId *string
+
 	// A filter that specifies one or more DB cluster snapshots to describe. Supported
 	// filters:
 	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon

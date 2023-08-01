@@ -47,7 +47,7 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 
 	// (Optional) The user-supplied instance identifier. If this parameter is
 	// specified, it must match the identifier of an existing DB instance. It returns
-	// information from the specific DB instance' automated backup. This parameter
+	// information from the specific DB instance's automated backup. This parameter
 	// isn't case-sensitive.
 	DBInstanceIdentifier *string
 
@@ -58,11 +58,11 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 	// A filter that specifies which resources to return based on status. Supported
 	// filters are the following:
 	//   - status
-	//   - active - automated backups for current instances
-	//   - retained - automated backups for deleted instances and after backup
-	//   replication is stopped
-	//   - creating - automated backups that are waiting for the first automated
-	//   snapshot to be available
+	//   - active - Automated backups for current instances.
+	//   - creating - Automated backups that are waiting for the first automated
+	//   snapshot to be available.
+	//   - retained - Automated backups for deleted instances and after backup
+	//   replication is stopped.
 	//   - db-instance-id - Accepts DB instance identifiers and Amazon Resource Names
 	//   (ARNs). The results list includes only information about the DB instance
 	//   automated backups identified by these ARNs.

@@ -64715,6 +64715,15 @@ func awsAwsjson11_deserializeDocumentRecommendationJobStoppingConditions(v **typ
 
 	for key, value := range shape {
 		switch key {
+		case "FlatInvocations":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlatInvocations to be of type string, got %T instead", value)
+				}
+				sv.FlatInvocations = types.FlatInvocations(jtv)
+			}
+
 		case "MaxInvocations":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -67628,6 +67637,76 @@ func awsAwsjson11_deserializeDocumentSpaceSettings(v **types.SpaceSettings, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStairs(v **types.Stairs, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Stairs
+	if *v == nil {
+		sv = &types.Stairs{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DurationInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TrafficDurationInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "NumberOfSteps":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NumberOfSteps to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfSteps = ptr.Int32(int32(i64))
+			}
+
+		case "UsersPerStep":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected UsersPerStep to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UsersPerStep = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStoppingCondition(v **types.StoppingCondition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -68665,6 +68744,11 @@ func awsAwsjson11_deserializeDocumentTrafficPattern(v **types.TrafficPattern, va
 		switch key {
 		case "Phases":
 			if err := awsAwsjson11_deserializeDocumentPhases(&sv.Phases, value); err != nil {
+				return err
+			}
+
+		case "Stairs":
+			if err := awsAwsjson11_deserializeDocumentStairs(&sv.Stairs, value); err != nil {
 				return err
 			}
 

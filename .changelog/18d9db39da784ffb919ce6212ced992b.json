@@ -1,0 +1,8 @@
+{
+    "id": "18d9db39-da78-4ffb-919c-e6212ced992b",
+    "type": "feature",
+    "description": "Add Stairs TrafficPattern and FlatInvocations to RecommendationJobStoppingConditions",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

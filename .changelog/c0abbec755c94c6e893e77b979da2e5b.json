@@ -1,0 +1,8 @@
+{
+    "id": "c0abbec7-55c9-4c6e-893e-77b979da2e5b",
+    "type": "feature",
+    "description": "Adding new API describe-engine-versions which provides information about the lifecycle of a replication instance's version.",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

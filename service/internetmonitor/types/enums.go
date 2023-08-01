@@ -6,8 +6,10 @@ type HealthEventImpactType string
 
 // Enum values for HealthEventImpactType
 const (
-	HealthEventImpactTypeAvailability HealthEventImpactType = "AVAILABILITY"
-	HealthEventImpactTypePerformance  HealthEventImpactType = "PERFORMANCE"
+	HealthEventImpactTypeAvailability      HealthEventImpactType = "AVAILABILITY"
+	HealthEventImpactTypePerformance       HealthEventImpactType = "PERFORMANCE"
+	HealthEventImpactTypeLocalAvailability HealthEventImpactType = "LOCAL_AVAILABILITY"
+	HealthEventImpactTypeLocalPerformance  HealthEventImpactType = "LOCAL_PERFORMANCE"
 )
 
 // Values returns all known values for HealthEventImpactType. Note that this can
@@ -17,6 +19,8 @@ func (HealthEventImpactType) Values() []HealthEventImpactType {
 	return []HealthEventImpactType{
 		"AVAILABILITY",
 		"PERFORMANCE",
+		"LOCAL_AVAILABILITY",
+		"LOCAL_PERFORMANCE",
 	}
 }
 
@@ -35,6 +39,25 @@ func (HealthEventStatus) Values() []HealthEventStatus {
 	return []HealthEventStatus{
 		"ACTIVE",
 		"RESOLVED",
+	}
+}
+
+type LocalHealthEventsConfigStatus string
+
+// Enum values for LocalHealthEventsConfigStatus
+const (
+	LocalHealthEventsConfigStatusEnabled  LocalHealthEventsConfigStatus = "ENABLED"
+	LocalHealthEventsConfigStatusDisabled LocalHealthEventsConfigStatus = "DISABLED"
+)
+
+// Values returns all known values for LocalHealthEventsConfigStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LocalHealthEventsConfigStatus) Values() []LocalHealthEventsConfigStatus {
+	return []LocalHealthEventsConfigStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

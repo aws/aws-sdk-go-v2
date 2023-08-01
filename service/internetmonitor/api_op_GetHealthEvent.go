@@ -19,11 +19,11 @@ import (
 
 // Gets information the Amazon CloudWatch Internet Monitor has created and stored
 // about a health event for a specified monitor. This information includes the
-// impacted locations, and all of the information related to the event by location.
-// The information returned includes the performance, availability, and round-trip
-// time impact, information about the network providers, the event type, and so on.
-// Information rolled up at the global traffic level is also returned, including
-// the impact type and total traffic impact.
+// impacted locations, and all the information related to the event, by location.
+// The information returned includes the impact on performance, availability, and
+// round-trip time, information about the network providers (ASNs), the event type,
+// and so on. Information rolled up at the global traffic level is also returned,
+// including the impact type and total traffic impact.
 func (c *Client) GetHealthEvent(ctx context.Context, params *GetHealthEventInput, optFns ...func(*Options)) (*GetHealthEventOutput, error) {
 	if params == nil {
 		params = &GetHealthEventInput{}
@@ -100,11 +100,16 @@ type GetHealthEventOutput struct {
 	// the end time is not set.
 	EndedAt *time.Time
 
-	// The threshold percentage for health events when Amazon CloudWatch Internet
-	// Monitor creates a health event.
+	// The threshold percentage for a health score that determines, along with other
+	// configuration information, when Internet Monitor creates a health event when
+	// there's an internet issue that affects your application end users.
 	HealthScoreThreshold float64
 
-	// The impact on total traffic that a health event has.
+	// The impact on total traffic that a health event has, in increased latency or
+	// reduced availability. This is the percentage of how much latency has increased
+	// or availability has decreased during the event, compared to what is typical for
+	// traffic from this client location to the Amazon Web Services location using this
+	// client network.
 	PercentOfTotalTrafficImpacted *float64
 
 	// Metadata pertaining to the operation's result.

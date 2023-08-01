@@ -95,6 +95,11 @@ type DescribeEndpointOutput struct {
 	//   FailureReason value returned by DescribeEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html)
 	//   for information about the failure. DeleteEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html)
 	//   is the only operation that can be performed on a failed endpoint.
+	//   - UpdateRollbackFailed : Both the rolling deployment and auto-rollback failed.
+	//   Your endpoint is in service with a mix of the old and new endpoint
+	//   configurations. For information about how to remedy this issue and restore the
+	//   endpoint's status to InService , see Rolling Deployments (https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails-rolling.html)
+	//   .
 	//
 	// This member is required.
 	EndpointStatus types.EndpointStatus

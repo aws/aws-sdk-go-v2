@@ -359,6 +359,64 @@ func (e *DBClusterAlreadyExistsFault) ErrorCode() string {
 }
 func (e *DBClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// No automated backup for this DB cluster was found.
+type DBClusterAutomatedBackupNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DBClusterAutomatedBackupNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBClusterAutomatedBackupNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBClusterAutomatedBackupNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DBClusterAutomatedBackupNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DBClusterAutomatedBackupNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The quota for retained automated backups was exceeded. This prevents you from
+// retaining any additional automated backups. The retained automated backups quota
+// is the same as your DB cluster quota.
+type DBClusterAutomatedBackupQuotaExceededFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DBClusterAutomatedBackupQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBClusterAutomatedBackupQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBClusterAutomatedBackupQuotaExceededFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DBClusterAutomatedBackupQuotaExceededFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DBClusterAutomatedBackupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // BacktrackIdentifier doesn't refer to an existing backtrack.
 type DBClusterBacktrackNotFoundFault struct {
 	Message *string
@@ -740,7 +798,7 @@ func (e *DBInstanceAutomatedBackupNotFoundFault) ErrorFault() smithy.ErrorFault 
 
 // The quota for retained automated backups was exceeded. This prevents you from
 // retaining any additional automated backups. The retained automated backups quota
-// is the same as your DB Instance quota.
+// is the same as your DB instance quota.
 type DBInstanceAutomatedBackupQuotaExceededFault struct {
 	Message *string
 
@@ -2040,6 +2098,35 @@ func (e *InvalidCustomDBEngineVersionStateFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidCustomDBEngineVersionStateFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The automated backup is in an invalid state. For example, this automated backup
+// is associated with an active cluster.
+type InvalidDBClusterAutomatedBackupStateFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidDBClusterAutomatedBackupStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDBClusterAutomatedBackupStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDBClusterAutomatedBackupStateFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidDBClusterAutomatedBackupStateFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidDBClusterAutomatedBackupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 

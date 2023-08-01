@@ -4619,6 +4619,11 @@ func awsRestjson1_serializeOpDocumentUpdateInputDeviceInput(v *UpdateInputDevice
 	object := value.Object()
 	defer object.Close()
 
+	if v.AvailabilityZone != nil {
+		ok := object.Key("availabilityZone")
+		ok.String(*v.AvailabilityZone)
+	}
+
 	if v.HdDeviceSettings != nil {
 		ok := object.Key("hdDeviceSettings")
 		if err := awsRestjson1_serializeDocumentInputDeviceConfigurableSettings(v.HdDeviceSettings, ok); err != nil {

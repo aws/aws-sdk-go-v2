@@ -1924,6 +1924,24 @@ func (FillingType) Values() []FillingType {
 	}
 }
 
+type FlatInvocations string
+
+// Enum values for FlatInvocations
+const (
+	FlatInvocationsContinue FlatInvocations = "Continue"
+	FlatInvocationsStop     FlatInvocations = "Stop"
+)
+
+// Values returns all known values for FlatInvocations. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FlatInvocations) Values() []FlatInvocations {
+	return []FlatInvocations{
+		"Continue",
+		"Stop",
+	}
+}
+
 type FlowDefinitionStatus string
 
 // Enum values for FlowDefinitionStatus
@@ -5607,6 +5625,7 @@ type TrafficType string
 // Enum values for TrafficType
 const (
 	TrafficTypePhases TrafficType = "PHASES"
+	TrafficTypeStairs TrafficType = "STAIRS"
 )
 
 // Values returns all known values for TrafficType. Note that this can be expanded
@@ -5615,6 +5634,7 @@ const (
 func (TrafficType) Values() []TrafficType {
 	return []TrafficType{
 		"PHASES",
+		"STAIRS",
 	}
 }
 

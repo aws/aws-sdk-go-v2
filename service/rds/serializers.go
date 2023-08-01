@@ -2129,6 +2129,70 @@ func (m *awsAwsquery_serializeOpDeleteDBCluster) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDeleteDBClusterAutomatedBackup struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteDBClusterAutomatedBackup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteDBClusterAutomatedBackup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteDBClusterAutomatedBackupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteDBClusterAutomatedBackup")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteDBClusterAutomatedBackupInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDeleteDBClusterEndpoint struct {
 }
 
@@ -3257,6 +3321,70 @@ func (m *awsAwsquery_serializeOpDescribeCertificates) HandleSerialize(ctx contex
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentDescribeCertificatesInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDescribeDBClusterAutomatedBackups struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeDBClusterAutomatedBackups) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeDBClusterAutomatedBackups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeDBClusterAutomatedBackupsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeDBClusterAutomatedBackups")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeDBClusterAutomatedBackupsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -11385,6 +11513,18 @@ func awsAwsquery_serializeOpDocumentDeleteCustomDBEngineVersionInput(v *DeleteCu
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentDeleteDBClusterAutomatedBackupInput(v *DeleteDBClusterAutomatedBackupInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DbClusterResourceId != nil {
+		objectKey := object.Key("DbClusterResourceId")
+		objectKey.String(*v.DbClusterResourceId)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDeleteDBClusterEndpointInput(v *DeleteDBClusterEndpointInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -11404,6 +11544,11 @@ func awsAwsquery_serializeOpDocumentDeleteDBClusterInput(v *DeleteDBClusterInput
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
+	}
+
+	if v.DeleteAutomatedBackups != nil {
+		objectKey := object.Key("DeleteAutomatedBackups")
+		objectKey.Boolean(*v.DeleteAutomatedBackups)
 	}
 
 	if v.FinalDBSnapshotIdentifier != nil {
@@ -11691,6 +11836,40 @@ func awsAwsquery_serializeOpDocumentDescribeCertificatesInput(v *DescribeCertifi
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentDescribeDBClusterAutomatedBackupsInput(v *DescribeDBClusterAutomatedBackupsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DBClusterIdentifier != nil {
+		objectKey := object.Key("DBClusterIdentifier")
+		objectKey.String(*v.DBClusterIdentifier)
+	}
+
+	if v.DbClusterResourceId != nil {
+		objectKey := object.Key("DbClusterResourceId")
+		objectKey.String(*v.DbClusterResourceId)
+	}
+
+	if v.Filters != nil {
+		objectKey := object.Key("Filters")
+		if err := awsAwsquery_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxRecords != nil {
+		objectKey := object.Key("MaxRecords")
+		objectKey.Integer(*v.MaxRecords)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDescribeDBClusterBacktracksInput(v *DescribeDBClusterBacktracksInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -11875,6 +12054,11 @@ func awsAwsquery_serializeOpDocumentDescribeDBClusterSnapshotsInput(v *DescribeD
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
+	}
+
+	if v.DbClusterResourceId != nil {
+		objectKey := object.Key("DbClusterResourceId")
+		objectKey.String(*v.DbClusterResourceId)
 	}
 
 	if v.DBClusterSnapshotIdentifier != nil {
@@ -14776,6 +14960,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.SourceDBClusterIdentifier != nil {
 		objectKey := object.Key("SourceDBClusterIdentifier")
 		objectKey.String(*v.SourceDBClusterIdentifier)
+	}
+
+	if v.SourceDbClusterResourceId != nil {
+		objectKey := object.Key("SourceDbClusterResourceId")
+		objectKey.String(*v.SourceDbClusterResourceId)
 	}
 
 	if v.StorageType != nil {
