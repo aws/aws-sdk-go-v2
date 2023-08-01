@@ -1,3 +1,7 @@
+# v1.15.1 (2023-08-01)
+
+* No change notes available for this release.
+
 # v1.15.0 (2023-07-31)
 
 * **Feature**: Add support for in-aws right sizing

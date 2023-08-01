@@ -1,3 +1,24 @@
+# Release (2023-08-01)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.26.0](service/batch/CHANGELOG.md#v1260-2023-08-01)
+  * **Feature**: This release adds support for price capacity optimized allocation strategy for Spot Instances.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.29.0](service/databasemigrationservice/CHANGELOG.md#v1290-2023-08-01)
+  * **Feature**: Adding new API describe-engine-versions which provides information about the lifecycle of a replication instance's version.
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.5.0](service/internetmonitor/CHANGELOG.md#v150-2023-08-01)
+  * **Feature**: This release adds a new feature for Amazon CloudWatch Internet Monitor that enables customers to set custom thresholds, for performance and availability drops, for impact limited to a single city-network to trigger creation of a health event.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.34.0](service/medialive/CHANGELOG.md#v1340-2023-08-01)
+  * **Feature**: AWS Elemental Link devices now report their Availability Zone. Link devices now support the ability to change their Availability Zone.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.29.0](service/polly/CHANGELOG.md#v1290-2023-08-01)
+  * **Feature**: Amazon Polly adds new French Belgian voice - Isabelle. Isabelle is available as Neural voice only.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.50.0](service/rds/CHANGELOG.md#v1500-2023-08-01)
+  * **Feature**: Added support for deleted clusters PiTR.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.97.0](service/sagemaker/CHANGELOG.md#v1970-2023-08-01)
+  * **Feature**: Add Stairs TrafficPattern and FlatInvocations to RecommendationJobStoppingConditions
+
 # Release (2023-07-31)
 
 ## General Highlights

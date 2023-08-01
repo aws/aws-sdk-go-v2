@@ -1,3 +1,7 @@
+# v1.50.0 (2023-08-01)
+
+* **Feature**: Added support for deleted clusters PiTR.
+
 # v1.49.0 (2023-07-31)
 
 * **Feature**: Adds support for smithy-modeled endpoint resolution. A new rules-based endpoint resolution will be added to the SDK which will supercede and deprecate existing endpoint resolution. Specifically, EndpointResolver will be deprecated while BaseEndpoint and EndpointResolverV2 will take its place. For more information, please see the Endpoints section in our Developer Guide.

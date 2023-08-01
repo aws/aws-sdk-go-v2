@@ -1,3 +1,7 @@
+# v1.6.1 (2023-08-01)
+
+* No change notes available for this release.
+
 # v1.6.0 (2023-07-31)
 
 * **Feature**: Add CreationType filter for ListReadSets

@@ -1,8 +1,0 @@
-{
-    "id": "3605ffdb-d10f-475b-9545-4fa698ce9084",
-    "type": "feature",
-    "description": "Amazon Polly adds new French Belgian voice - Isabelle. Isabelle is available as Neural voice only.",
-    "modules": [
-        "service/polly"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "7cafc363-0b47-4d40-82f8-3a76b885c199",
-    "type": "feature",
-    "description": "This release adds support for price capacity optimized allocation strategy for Spot Instances.",
-    "modules": [
-        "service/batch"
-    ]
-}
