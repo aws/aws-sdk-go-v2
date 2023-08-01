@@ -12,6 +12,9 @@ on:
 
 env:
   EACHMODULE_CONCURRENCY: 2
+  SMITHY_GO_REPOSITORY: ${{ env.SMITHY_GO_REPOSITORY }}
+  RUNNER_TMPDIR: ${{ runner.temp }}
+  CLONE_PAT: ${{ secrets.CI_CHECKOUT_PAT }}
 
 jobs:
   unix-tests:
@@ -28,6 +31,9 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: ${{ matrix.go-version }}
+
+    - name: Find smithy-go
+      run: ./ci_find_smithy_go.sh
 
     - name: Install golint
       run: go install golang.org/x/lint/golint@latest
@@ -56,6 +62,9 @@ jobs:
       with:
         go-version: ${{ matrix.go-version }}
 
+    - name: Find smithy-go
+      run: ./ci_find_smithy_go.sh
+
     - name: Test
       run: make ci-test-no-generate
 
@@ -75,6 +84,9 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: ${{ matrix.go-version }}
+
+    - name: Find smithy-go
+      run: ./ci_find_smithy_go.sh
 
     - name: Test
       run: make vet build unit-test
@@ -96,6 +108,9 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: ${{ matrix.go-version }}
+
+    - name: Find smithy-go
+      run: ./ci_find_smithy_go.sh
 
     - name: Test
       run: make vet build unit-test
