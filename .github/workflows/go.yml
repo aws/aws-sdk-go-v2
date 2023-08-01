@@ -23,8 +23,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         go-version: [1.19, "1.20"]
-    env:
-      RUNNER_TMPDIR: ${{ runner.temp }}
     steps:
     - uses: actions/checkout@v2
 
@@ -34,7 +32,7 @@ jobs:
         go-version: ${{ matrix.go-version }}
 
     - name: Find smithy-go
-      run: ./ci_find_smithy_go.sh
+      run: RUNNER_TMPDIR=${{ runner.temp }} ./ci_find_smithy_go.sh
 
     - name: Install golint
       run: go install golang.org/x/lint/golint@latest
@@ -55,8 +53,6 @@ jobs:
             go-version: 1.15
           - os: macos-latest
             go-version: 1.16
-    env:
-      RUNNER_TMPDIR: ${{ runner.temp }}
     steps:
     - uses: actions/checkout@v2
 
@@ -66,7 +62,7 @@ jobs:
         go-version: ${{ matrix.go-version }}
 
     - name: Find smithy-go
-      run: ./ci_find_smithy_go.sh
+      run: RUNNER_TMPDIR=${{ runner.temp }} ./ci_find_smithy_go.sh
 
     - name: Test
       run: make ci-test-no-generate
@@ -80,7 +76,6 @@ jobs:
         go-version: [1.19, "1.20"]
     env:
       EACHMODULE_SKIP: "internal\\repotools\\changes"
-      RUNNER_TMPDIR: ${{ runner.temp }}
     steps:
     - uses: actions/checkout@v2
 
@@ -91,7 +86,7 @@ jobs:
 
     - name: Find smithy-go
       shell: bash
-      run: ./ci_find_smithy_go.sh
+      run: RUNNER_TMPDIR=${{ runner.temp }} ./ci_find_smithy_go.sh
 
     - name: Test
       run: make vet build unit-test
@@ -117,7 +112,7 @@ jobs:
 
     - name: Find smithy-go
       shell: bash
-      run: ./ci_find_smithy_go.sh
+      run: RUNNER_TMPDIR=${{ runner.temp }} ./ci_find_smithy_go.sh
 
     - name: Test
       run: make vet build unit-test
