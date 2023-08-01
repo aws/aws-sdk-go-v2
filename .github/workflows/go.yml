@@ -13,7 +13,7 @@ on:
 env:
   EACHMODULE_CONCURRENCY: 2
   SMITHY_GO_REPOSITORY: ${{ vars.SMITHY_GO_REPOSITORY }}
-  CLONE_PAT: ${{ secrets.CI_CHECKOUT_PAT }}
+  GIT_PAT: ${{ secrets.CI_GIT_PAT}}
 
 jobs:
   unix-tests:

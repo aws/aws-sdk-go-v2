@@ -24,13 +24,13 @@ if [ "$branch" == main ]; then
     exit 0
 fi
 
-if [ -n "$CLONE_PAT" ]; then
-    repository=https://$CLONE_PAT@github.com/$SMITHY_GO_REPOSITORY
+if [ -n "$GIT_PAT" ]; then
+    repository=https://$GIT_PAT@github.com/$SMITHY_GO_REPOSITORY
 else
     repository=https://github.com/$SMITHY_GO_REPOSITORY
 fi
 
-while [ -n "$branch" ] && [[ "$branch" = *-* ]]; do
+while [ -n "$branch" ] && [[ "$branch" == *-* ]]; do
     echo looking for $branch...
     git ls-remote --exit-code --heads $repository refs/heads/$branch
     if [ "$?" == 0 ]; then
