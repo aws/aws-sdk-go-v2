@@ -2,13 +2,12 @@
 
 # looks for (and modreplaces if existing) a smithy-go branch matching the
 # current branch name
-# e.g. sdk branch 'feat-foo-bar' will match either of the following:
-#  - feat-foo-bar
-#  - feat-foo
-# only one instance of -* will be stripped from the base branch name, so
-# sdk branch 'feat-foo-bar-baz' wll match either:
+#
+# the loop will unfurl -*s off of the branch, e.g. sdk branch
+# 'feat-foo-bar-baz' will match any of the following (in order):
 #  - feat-foo-bar-baz
 #  - feat-foo-bar
+#  - feat-foo
 
 if [ -z "$SMITHY_GO_REPOSITORY" ]; then
     echo env SMITHY_GO_REPOSITORY is required
@@ -31,20 +30,17 @@ else
     repository=https://github.com/$SMITHY_GO_REPOSITORY
 fi
 
-echo looking for smithy-go branch $branch...
-git ls-remote --exit-code --heads $repository refs/heads/$branch
-if [ "$?" == 0 ]; then
-    echo found $branch
-    matched_branch=$branch
-fi
+while [ -n "$branch" ] && [[ "$branch" = *-* ]]; do
+    echo looking for $branch...
+    git ls-remote --exit-code --heads $repository refs/heads/$branch
+    if [ "$?" == 0 ]; then
+        echo found $branch
+        matched_branch=$branch
+        break
+    fi
 
-branch_trimmed=${branch%-*}
-echo looking for smithy-go branch $branch_trimmed...
-git ls-remote --exit-code --heads $repository refs/heads/$branch_trimmed
-if [ "$?" == 0 ]; then
-    echo found $branch_trimmed
-    matched_branch=$branch_trimmed
-fi
+    branch=${branch%-*}
+done
 
 if [ -z "$matched_branch" ]; then
     echo found no matching smithy-go branch, stop

@@ -32,7 +32,9 @@ jobs:
         go-version: ${{ matrix.go-version }}
 
     - name: Find smithy-go
-      run: RUNNER_TMPDIR=${{ runner.temp }} ./ci_find_smithy_go.sh
+      env:
+        RUNNER_TMPDIR: ${{ runner.temp }}
+      run: ./ci-find-smithy-go.sh
 
     - name: Install golint
       run: go install golang.org/x/lint/golint@latest
@@ -62,7 +64,9 @@ jobs:
         go-version: ${{ matrix.go-version }}
 
     - name: Find smithy-go
-      run: RUNNER_TMPDIR=${{ runner.temp }} ./ci_find_smithy_go.sh
+      env:
+        RUNNER_TMPDIR: ${{ runner.temp }}
+      run: ./ci-find-smithy-go.sh
 
     - name: Test
       run: make ci-test-no-generate
@@ -86,7 +90,9 @@ jobs:
 
     - name: Find smithy-go
       shell: bash
-      run: RUNNER_TMPDIR=${{ runner.temp }} ./ci_find_smithy_go.sh
+      env:
+        RUNNER_TMPDIR: ${{ runner.temp }}
+      run: ./ci-find-smithy-go.sh
 
     - name: Test
       run: make vet build unit-test
@@ -111,7 +117,9 @@ jobs:
 
     - name: Find smithy-go
       shell: bash
-      run: RUNNER_TMPDIR=${{ runner.temp }} ./ci_find_smithy_go.sh
+      env:
+        RUNNER_TMPDIR: ${{ runner.temp }}
+      run: ./ci-find-smithy-go.sh
 
     - name: Test
       run: make vet build unit-test
