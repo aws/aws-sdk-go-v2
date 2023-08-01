@@ -13,6 +13,7 @@ if [ -z "$SMITHY_GO_REPOSITORY" ]; then
     echo env SMITHY_GO_REPOSITORY is required
     exit 1
 fi
+
 if [ -z "$RUNNER_TMPDIR" ]; then
     echo env RUNNER_TMPDIR is required
     exit 1
