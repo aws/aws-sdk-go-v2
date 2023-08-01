@@ -220,6 +220,9 @@
                     "target": "com.amazonaws.databasemigrationservice#DescribeEndpointTypes"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeEngineVersions"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#DescribeEventCategories"
                 },
                 {
@@ -1624,6 +1627,12 @@
             }
         },
         "com.amazonaws.databasemigrationservice#AvailabilityZonesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#String"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#AvailableUpgradesList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.databasemigrationservice#String"
@@ -4531,6 +4540,60 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#DescribeEngineVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeEngineVersionsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeEngineVersionsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the replication instance versions used in the project.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeEngineVersionsMessage": {
+            "type": "structure",
+            "members": {
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified \n         <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that \n         the remaining results can be retrieved. </p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n         the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeEngineVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "EngineVersions": {
+                    "target": "com.amazonaws.databasemigrationservice#EngineVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returned <code>EngineVersion</code> objects that describe the replication instance engine versions used in the project.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response \n         includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#DescribeEventCategories": {
             "type": "operation",
             "input": {
@@ -7280,6 +7343,71 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.databasemigrationservice#EndpointSetting"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#EngineVersion": {
+            "type": "structure",
+            "members": {
+                "Version": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the replication instance.</p>"
+                    }
+                },
+                "Lifecycle": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle status of the replication instance version. Valid values are <code>DEPRECATED</code>, \n         <code>DEFAULT_VERSION</code>, and <code>ACTIVE</code>.</p>"
+                    }
+                },
+                "ReleaseStatus": {
+                    "target": "com.amazonaws.databasemigrationservice#ReleaseStatusValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The release status of the replication instance version.</p>"
+                    }
+                },
+                "LaunchDate": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the replication instance version became publicly available.</p>"
+                    }
+                },
+                "AutoUpgradeDate": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the replication instance will be automatically upgraded. This setting only applies \n      if the <code>auto-minor-version</code> setting is enabled.</p>"
+                    }
+                },
+                "DeprecationDate": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the replication instance version will be deprecated and can no longer be requested.</p>"
+                    }
+                },
+                "ForceUpgradeDate": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the replication instance will have a version upgrade forced.</p>"
+                    }
+                },
+                "AvailableUpgrades": {
+                    "target": "com.amazonaws.databasemigrationservice#AvailableUpgradesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of valid replication instance versions that you can upgrade to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a replication instance version.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#EngineVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#EngineVersion",
+                "traits": {
+                    "smithy.api#xmlName": "EngineVersion"
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#Event": {
@@ -10225,7 +10353,7 @@
                 "DatabaseMode": {
                     "target": "com.amazonaws.databasemigrationservice#DatabaseMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to use default or custom replication behavior for \n         PostgreSQL-compatible endpoints. You can use this setting to specify replication \n         behavior for endpoints that require additional configuration, such as Babelfish endpoints.</p>"
+                        "smithy.api#documentation": "<p>Specifies the default behavior of the replication's handling of PostgreSQL- compatible endpoints that require some additional configuration, such as Babelfish endpoints.</p>"
                     }
                 },
                 "BabelfishDatabaseName": {

@@ -689,6 +689,12 @@
                     "traits": {
                         "smithy.api#enumValue": "nl-BE"
                     }
+                },
+                "fr_BE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr-BE"
+                    }
                 }
             }
         },
@@ -3400,6 +3406,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Lisa"
+                    }
+                },
+                "Isabelle": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Isabelle"
                     }
                 }
             }

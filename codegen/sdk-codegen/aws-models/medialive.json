@@ -5637,6 +5637,13 @@
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Availability Zone associated with this input device.",
+                        "smithy.api#jsonName": "availabilityZone"
+                    }
                 }
             },
             "traits": {
@@ -12787,6 +12794,13 @@
                     "traits": {
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Availability Zone associated with this input device.",
+                        "smithy.api#jsonName": "availabilityZone"
                     }
                 }
             },
@@ -23289,6 +23303,13 @@
                         "smithy.api#documentation": "The settings that you want to apply to the UHD input device.",
                         "smithy.api#jsonName": "uhdDeviceSettings"
                     }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Availability Zone you want associated with this input device.",
+                        "smithy.api#jsonName": "availabilityZone"
+                    }
                 }
             },
             "traits": {
@@ -23388,6 +23409,13 @@
                     "traits": {
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Availability Zone associated with this input device.",
+                        "smithy.api#jsonName": "availabilityZone"
                     }
                 }
             },
