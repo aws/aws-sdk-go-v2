@@ -22,7 +22,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.16.1
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.14.1
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.24.1
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.29.0
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.15.1
-	github.com/aws/aws-sdk-go-v2/service/glue v1.59.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.60.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.14.1

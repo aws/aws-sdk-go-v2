@@ -1,3 +1,17 @@
+# Release (2023-08-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.16.0](service/budgets/CHANGELOG.md#v1160-2023-08-02)
+  * **Feature**: As part of CAE tagging integration we need to update our budget names regex filter to prevent customers from using "/action/" in their budget names.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.25.0](service/cognitoidentityprovider/CHANGELOG.md#v1250-2023-08-02)
+  * **Feature**: New feature that logs Cognito user pool error messages to CloudWatch logs.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.60.0](service/glue/CHANGELOG.md#v1600-2023-08-02)
+  * **Feature**: This release includes additional Glue Streaming KAKFA SASL property types.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.13.0](service/resiliencehub/CHANGELOG.md#v1130-2023-08-02)
+  * **Feature**: Drift Detection capability added when applications policy has moved from a meet to breach state. Customers will be able to exclude operational recommendations and receive credit in their resilience score. Customers can now add ARH permissions to an existing or new role.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.98.0](service/sagemaker/CHANGELOG.md#v1980-2023-08-02)
+  * **Feature**: SageMaker Inference Recommender introduces a new API GetScalingConfigurationRecommendation to recommend auto scaling policies based on completed Inference Recommender jobs.
+
 # Release (2023-08-01)
 
 ## General Highlights

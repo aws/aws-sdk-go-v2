@@ -1,3 +1,7 @@
+# v1.25.0 (2023-08-02)
+
+* **Feature**: New feature that logs Cognito user pool error messages to CloudWatch logs.
+
 # v1.24.1 (2023-08-01)
 
 * No change notes available for this release.

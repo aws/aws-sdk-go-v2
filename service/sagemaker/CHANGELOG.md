@@ -1,3 +1,7 @@
+# v1.98.0 (2023-08-02)
+
+* **Feature**: SageMaker Inference Recommender introduces a new API GetScalingConfigurationRecommendation to recommend auto scaling policies based on completed Inference Recommender jobs.
+
 # v1.97.0 (2023-08-01)
 
 * **Feature**: Add Stairs TrafficPattern and FlatInvocations to RecommendationJobStoppingConditions
