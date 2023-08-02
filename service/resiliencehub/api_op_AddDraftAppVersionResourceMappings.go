@@ -35,9 +35,9 @@ func (c *Client) AddDraftAppVersionResourceMappings(ctx context.Context, params 
 
 type AddDraftAppVersionResourceMappingsInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -57,9 +57,9 @@ type AddDraftAppVersionResourceMappingsInput struct {
 
 type AddDraftAppVersionResourceMappingsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -70,11 +70,9 @@ type AddDraftAppVersionResourceMappingsOutput struct {
 	// This member is required.
 	AppVersion *string
 
-	// Mappings used to map logical resources from the template to physical resources.
-	// You can use the mapping type CFN_STACK if the application template uses a
-	// logical stack name. Or you can map individual resources by using the mapping
-	// type RESOURCE . We recommend using the mapping type CFN_STACK if the
-	// application is backed by a CloudFormation stack.
+	// List of sources that are used to map a logical resource from the template to a
+	// physical resource. You can use sources such as CloudFormation, Terraform state
+	// files, AppRegistry applications, or Amazon EKS.
 	//
 	// This member is required.
 	ResourceMappings []types.ResourceMapping

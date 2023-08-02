@@ -42,32 +42,31 @@ func (c *Client) CreateAppVersionResource(ctx context.Context, params *CreateApp
 
 type CreateAppVersionResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// The list of Application Components that this resource belongs to. If an
-	// Application Component is not part of the Resilience Hub application, it will be
-	// added.
+	// List of Application Components that this resource belongs to. If an Application
+	// Component is not part of the Resilience Hub application, it will be added.
 	//
 	// This member is required.
 	AppComponents []string
 
-	// The logical identifier of the resource.
+	// Logical identifier of the resource.
 	//
 	// This member is required.
 	LogicalResourceId *types.LogicalResourceId
 
-	// The physical identifier of the resource.
+	// Physical identifier of the resource.
 	//
 	// This member is required.
 	PhysicalResourceId *string
 
-	// The type of resource.
+	// Type of resource.
 	//
 	// This member is required.
 	ResourceType *string
@@ -75,10 +74,10 @@ type CreateAppVersionResourceInput struct {
 	// Currently, there is no supported additional information for resources.
 	AdditionalInfo map[string][]string
 
-	// The Amazon Web Services account that owns the physical resource.
+	// Amazon Web Services account that owns the physical resource.
 	AwsAccountId *string
 
-	// The Amazon Web Services region that owns the physical resource.
+	// Amazon Web Services region that owns the physical resource.
 	AwsRegion *string
 
 	// Used for an idempotency token. A client token is a unique, case-sensitive
@@ -86,7 +85,7 @@ type CreateAppVersionResourceInput struct {
 	// for other API requests.
 	ClientToken *string
 
-	// The name of the resource.
+	// Name of the resource.
 	ResourceName *string
 
 	noSmithyDocumentSerde
@@ -94,15 +93,15 @@ type CreateAppVersionResourceInput struct {
 
 type CreateAppVersionResourceOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// The Resilience Hub application version.
+	// Resilience Hub application version.
 	//
 	// This member is required.
 	AppVersion *string

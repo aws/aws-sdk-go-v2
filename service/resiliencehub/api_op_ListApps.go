@@ -38,13 +38,13 @@ func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...
 
 type ListAppsInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	AppArn *string
 
-	// The maximum number of results to include in the response. If more results exist
+	// Maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
 	// that the remaining results can be retrieved.
 	MaxResults *int32
@@ -65,7 +65,7 @@ type ListAppsOutput struct {
 	// This member is required.
 	AppSummaries []types.AppSummary
 
-	// The token for the next set of results, or null if there are no more results.
+	// Token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -155,7 +155,7 @@ var _ ListAppsAPIClient = (*Client)(nil)
 
 // ListAppsPaginatorOptions is the paginator options for ListApps
 type ListAppsPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results exist
+	// Maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
 	// that the remaining results can be retrieved.
 	Limit int32

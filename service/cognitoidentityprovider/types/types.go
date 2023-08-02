@@ -94,7 +94,7 @@ type AdminCreateUserConfigType struct {
 }
 
 // The Amazon Pinpoint analytics configuration necessary to collect metrics for a
-// user pool. In Regions where Amazon Pinpointisn't available, user pools only
+// user pool. In Regions where Amazon Pinpoint isn't available, user pools only
 // support sending events to Amazon Pinpoint projects in us-east-1. In Regions
 // where Amazon Pinpoint is available, user pools support sending events to Amazon
 // Pinpoint projects within that same Region.
@@ -182,7 +182,8 @@ type AuthEventType struct {
 	// The challenge responses.
 	ChallengeResponses []ChallengeResponseType
 
-	// The creation date
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was created.
 	CreationDate *time.Time
 
 	// The user context data captured at the time of an event request. This value
@@ -217,6 +218,18 @@ type ChallengeResponseType struct {
 
 	// The challenge response.
 	ChallengeResponse ChallengeResponse
+
+	noSmithyDocumentSerde
+}
+
+// The CloudWatch logging destination of a user pool detailed activity logging
+// configuration.
+type CloudWatchLogsConfigurationType struct {
+
+	// The Amazon Resource Name (arn) of a CloudWatch Logs log group where your user
+	// pool sends logs. The log group must not be encrypted with Key Management Service
+	// and must be in the same Amazon Web Services account as your user pool.
+	LogGroupArn *string
 
 	noSmithyDocumentSerde
 }
@@ -408,7 +421,8 @@ type DeviceType struct {
 	// The date when the device was last authenticated.
 	DeviceLastAuthenticatedDate *time.Time
 
-	// The last modified date of the device.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was modified.
 	DeviceLastModifiedDate *time.Time
 
 	noSmithyDocumentSerde
@@ -420,7 +434,8 @@ type DomainDescriptionType struct {
 	// The Amazon Web Services ID for the user pool owner.
 	AWSAccountId *string
 
-	// The Amazon Resource Name (ARN) of the Amazon CloudFront distribution.
+	// The Amazon CloudFront endpoint that you use as the target of the alias that you
+	// set up with your Domain Name Service (DNS) provider.
 	CloudFrontDistribution *string
 
 	// The configuration for a custom domain that hosts the sign-up and sign-in
@@ -507,9 +522,12 @@ type EmailConfigurationType struct {
 	// The destination to which the receiver of the email should reply.
 	ReplyToEmailAddress *string
 
-	// The ARN of a verified email address in Amazon SES. Amazon Cognito uses this
-	// email address in one of the following ways, depending on the value that you
-	// specify for the EmailSendingAccount parameter:
+	// The ARN of a verified email address or an address from a verified domain in
+	// Amazon SES. You can set a SourceArn email from a verified domain only with an
+	// API request. You can set a verified email address, but not an address in a
+	// verified domain, in the Amazon Cognito console. Amazon Cognito uses the email
+	// address that you provide in one of the following ways, depending on the value
+	// that you specify for the EmailSendingAccount parameter:
 	//   - If you specify COGNITO_DEFAULT , Amazon Cognito uses this address as the
 	//   custom FROM address when it emails your users using its built-in email account.
 	//   - If you specify DEVELOPER , Amazon Cognito emails your users with this
@@ -549,7 +567,11 @@ type EventContextDataType struct {
 // Specifies the event feedback type.
 type EventFeedbackType struct {
 
-	// The event feedback value.
+	// The authentication event feedback value. When you provide a FeedbackValue value
+	// of valid , you tell Amazon Cognito that you trust a user session where Amazon
+	// Cognito has evaluated some level of risk. When you provide a FeedbackValue
+	// value of invalid , you tell Amazon Cognito that you don't trust a user session,
+	// or you don't believe that Amazon Cognito evaluated a high-enough risk level.
 	//
 	// This member is required.
 	FeedbackValue FeedbackValueType
@@ -584,7 +606,8 @@ type EventRiskType struct {
 // The group type.
 type GroupType struct {
 
-	// The date the group was created.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was created.
 	CreationDate *time.Time
 
 	// A string containing the description of the group.
@@ -593,7 +616,8 @@ type GroupType struct {
 	// The name of the group.
 	GroupName *string
 
-	// The date the group was last modified.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was modified.
 	LastModifiedDate *time.Time
 
 	// A non-negative integer value that specifies the precedence of this group
@@ -637,13 +661,15 @@ type IdentityProviderType struct {
 	// A mapping of IdP attributes to standard and custom user pool attributes.
 	AttributeMapping map[string]string
 
-	// The date the IdP was created.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was created.
 	CreationDate *time.Time
 
 	// A list of IdP identifiers.
 	IdpIdentifiers []string
 
-	// The date the IdP was last modified.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was modified.
 	LastModifiedDate *time.Time
 
 	// The IdP details. The following list describes the provider detail keys for each
@@ -739,6 +765,42 @@ type LambdaConfigType struct {
 
 	// Verifies the authentication challenge response.
 	VerifyAuthChallengeResponse *string
+
+	noSmithyDocumentSerde
+}
+
+// The logging parameters of a user pool.
+type LogConfigurationType struct {
+
+	// The source of events that your user pool sends for detailed activity logging.
+	//
+	// This member is required.
+	EventSource EventSourceName
+
+	// The errorlevel selection of logs that a user pool sends for detailed activity
+	// logging.
+	//
+	// This member is required.
+	LogLevel LogLevel
+
+	// The CloudWatch logging destination of a user pool.
+	CloudWatchLogsConfiguration *CloudWatchLogsConfigurationType
+
+	noSmithyDocumentSerde
+}
+
+// The logging parameters of a user pool.
+type LogDeliveryConfigurationType struct {
+
+	// The detailed activity logging destination of a user pool.
+	//
+	// This member is required.
+	LogConfigurations []LogConfigurationType
+
+	// The ID of the user pool where you configured detailed activity logging.
+	//
+	// This member is required.
+	UserPoolId *string
 
 	noSmithyDocumentSerde
 }
@@ -885,7 +947,8 @@ type PasswordPolicyType struct {
 // A container for IdP details.
 type ProviderDescription struct {
 
-	// The date the provider was added to the user pool.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was created.
 	CreationDate *time.Time
 
 	// The date the provider was last modified.
@@ -980,7 +1043,8 @@ type RiskConfigurationType struct {
 	// and the EventAction .
 	CompromisedCredentialsRiskConfiguration *CompromisedCredentialsRiskConfigurationType
 
-	// The last modified date.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was modified.
 	LastModifiedDate *time.Time
 
 	// The configuration to override the risk decision.
@@ -1007,10 +1071,16 @@ type RiskExceptionConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the schema attribute.
+// A list of the user attributes and their properties in your user pool. The
+// attribute schema contains standard attributes, custom attributes with a custom:
+// prefix, and developer attributes with a dev: prefix. For more information, see
+// User pool attributes (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html)
+// . Developer-only attributes are a legacy feature of user pools, are read-only to
+// all app clients. You can create and update developer-only attributes only with
+// IAM-authenticated API operations. Use app client read/write permissions instead.
 type SchemaAttributeType struct {
 
-	// The attribute data type.
+	// The data format of the values for your attribute.
 	AttributeDataType AttributeDataType
 
 	// You should use WriteAttributes (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserPoolClientType.html#CognitoUserPools-Type-UserPoolClientType-WriteAttributes)
@@ -1022,16 +1092,17 @@ type SchemaAttributeType struct {
 	// but can't be updated using UpdateUserAttributes.
 	DeveloperOnlyAttribute *bool
 
-	// Specifies whether the value of the attribute can be changed. For any user pool
-	// attribute that is mapped to an IdP attribute, you must set this parameter to
-	// true . Amazon Cognito updates mapped attributes when users sign in to your
-	// application through an IdP. If an attribute is immutable, Amazon Cognito throws
-	// an error when it attempts to update the attribute. For more information, see
-	// Specifying Identity Provider Attribute Mappings for Your User Pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html)
+	// Specifies whether the value of the attribute can be changed. Any user pool
+	// attribute whose value you map from an IdP attribute must be mutable, with a
+	// parameter value of true . Amazon Cognito updates mapped attributes when users
+	// sign in to your application through an IdP. If an attribute is immutable, Amazon
+	// Cognito throws an error when it attempts to update the attribute. For more
+	// information, see Specifying Identity Provider Attribute Mappings for Your User
+	// Pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html)
 	// .
 	Mutable *bool
 
-	// A schema attribute of the name type.
+	// The name of your user pool attribute, for example username or custom:costcenter .
 	Name *string
 
 	// Specifies the constraints for an attribute of the number type.
@@ -1173,17 +1244,18 @@ type TokenValidityUnitsType struct {
 
 	// A time unit of seconds , minutes , hours , or days for the value that you set
 	// in the AccessTokenValidity parameter. The default AccessTokenValidity time unit
-	// is hours.
+	// is hours. AccessTokenValidity duration can range from five minutes to one day.
 	AccessToken TimeUnitsType
 
 	// A time unit of seconds , minutes , hours , or days for the value that you set
 	// in the IdTokenValidity parameter. The default IdTokenValidity time unit is
-	// hours.
+	// hours. IdTokenValidity duration can range from five minutes to one day.
 	IdToken TimeUnitsType
 
 	// A time unit of seconds , minutes , hours , or days for the value that you set
 	// in the RefreshTokenValidity parameter. The default RefreshTokenValidity time
-	// unit is days.
+	// unit is days. RefreshTokenValidity duration can range from 60 minutes to 10
+	// years.
 	RefreshToken TimeUnitsType
 
 	noSmithyDocumentSerde
@@ -1202,13 +1274,15 @@ type UICustomizationType struct {
 	// The client ID for the client app.
 	ClientId *string
 
-	// The creation date for the UI customization.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was created.
 	CreationDate *time.Time
 
 	// The logo image for the UI customization.
 	ImageUrl *string
 
-	// The last-modified date for the UI customization.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was modified.
 	LastModifiedDate *time.Time
 
 	// The user pool ID for the user pool.
@@ -1232,8 +1306,7 @@ type UserAttributeUpdateSettingsType struct {
 	// doesn’t change the value of the attribute until your user responds to the
 	// verification message and confirms the new value. You can verify an updated email
 	// address or phone number with a VerifyUserAttribute (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifyUserAttribute.html)
-	// API request. You can also call the UpdateUserAttributes (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateUserAttributes.html)
-	// or AdminUpdateUserAttributes (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminUpdateUserAttributes.html)
+	// API request. You can also call the AdminUpdateUserAttributes (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminUpdateUserAttributes.html)
 	// API and set email_verified or phone_number_verified to true. When
 	// AttributesRequireVerificationBeforeUpdate is false, your user pool doesn't
 	// require that your users verify attribute changes before Amazon Cognito updates
@@ -1276,7 +1349,8 @@ type UserImportJobType struct {
 	// The message returned when the user import job is completed.
 	CompletionMessage *string
 
-	// The date the user import job was created.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was created.
 	CreationDate *time.Time
 
 	// The number of users that couldn't be imported.
@@ -1324,14 +1398,17 @@ type UserImportJobType struct {
 type UsernameConfigurationType struct {
 
 	// Specifies whether user name case sensitivity will be applied for all users in
-	// the user pool through Amazon Cognito APIs. Valid values include: True Enables
-	// case sensitivity for all username input. When this option is set to True , users
-	// must sign in using the exact capitalization of their given username, such as
-	// “UserName”. This is the default value. False Enables case insensitivity for all
-	// username input. For example, when this option is set to False , users can sign
-	// in using either "username" or "Username". This option also enables both
-	// preferred_username and email alias to be case insensitive, in addition to the
-	// username attribute.
+	// the user pool through Amazon Cognito APIs. For most use cases, set case
+	// sensitivity to False (case insensitive) as a best practice. When usernames and
+	// email addresses are case insensitive, users can sign in as the same user when
+	// they enter a different capitalization of their user name. Valid values include:
+	// True Enables case sensitivity for all username input. When this option is set to
+	// True , users must sign in using the exact capitalization of their given
+	// username, such as “UserName”. This is the default value. False Enables case
+	// insensitivity for all username input. For example, when this option is set to
+	// False , users can sign in using username , USERNAME , or UserName . This option
+	// also enables both preferred_username and email alias to be case insensitive, in
+	// addition to the username attribute.
 	//
 	// This member is required.
 	CaseSensitive *bool
@@ -1339,10 +1416,14 @@ type UsernameConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
-// The user pool add-ons type.
+// User pool add-ons. Contains settings for activation of advanced security
+// features. To log user security information but take no action, set to AUDIT . To
+// configure automatic security responses to risky traffic to your user pool, set
+// to ENFORCED . For more information, see Adding advanced security to a user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html)
+// .
 type UserPoolAddOnsType struct {
 
-	// The advanced security mode.
+	// The operating mode of advanced security features in your user pool.
 	//
 	// This member is required.
 	AdvancedSecurityMode AdvancedSecurityModeType
@@ -1388,8 +1469,19 @@ type UserPoolClientType struct {
 	// user using a combination of the client ID and client secret.
 	AllowedOAuthFlows []OAuthFlowType
 
-	// Set to true if the client is allowed to follow the OAuth protocol when
-	// interacting with Amazon Cognito user pools.
+	// Set to true to use OAuth 2.0 features in your user pool app client.
+	// AllowedOAuthFlowsUserPoolClient must be true before you can configure the
+	// following features in your app client.
+	//   - CallBackURLs : Callback URLs.
+	//   - LogoutURLs : Sign-out redirect URLs.
+	//   - AllowedOAuthScopes : OAuth 2.0 scopes.
+	//   - AllowedOAuthFlows : Support for authorization code, implicit, and client
+	//   credentials OAuth 2.0 grants.
+	// To use OAuth 2.0 features, configure one of these features in the Amazon
+	// Cognito console or set AllowedOAuthFlowsUserPoolClient to true in a
+	// CreateUserPoolClient or UpdateUserPoolClient API request. If you don't set a
+	// value for AllowedOAuthFlowsUserPoolClient in a request with the CLI or SDKs, it
+	// defaults to false .
 	AllowedOAuthFlowsUserPoolClient *bool
 
 	// The OAuth scopes that your app client supports. Possible values that OAuth
@@ -1429,7 +1521,8 @@ type UserPoolClientType struct {
 	// The client secret from the user pool request of the client type.
 	ClientSecret *string
 
-	// The date the user pool client was created.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was created.
 	CreationDate *time.Time
 
 	// The default redirect URI. Must be in the CallbackURLs list. A redirect URI
@@ -1495,12 +1588,13 @@ type UserPoolClientType struct {
 	// , or days , set a TokenValidityUnits value in your API request. For example,
 	// when you set IdTokenValidity as 10 and TokenValidityUnits as hours , your user
 	// can authenticate their session with their ID token for 10 hours. The default
-	// time unit for AccessTokenValidity in an API request is hours. Valid range is
+	// time unit for IdTokenValidity in an API request is hours. Valid range is
 	// displayed below in seconds. If you don't specify otherwise in the configuration
 	// of your app client, your ID tokens are valid for one hour.
 	IdTokenValidity *int32
 
-	// The date the user pool client was last modified.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was modified.
 	LastModifiedDate *time.Time
 
 	// A list of allowed logout URLs for the IdPs.
@@ -1556,7 +1650,8 @@ type UserPoolClientType struct {
 // A user pool description.
 type UserPoolDescriptionType struct {
 
-	// The date the user pool description was created.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was created.
 	CreationDate *time.Time
 
 	// The ID in a user pool description.
@@ -1565,7 +1660,8 @@ type UserPoolDescriptionType struct {
 	// The Lambda configuration information in a user pool description.
 	LambdaConfig *LambdaConfigType
 
-	// The date the user pool description was last modified.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was modified.
 	LastModifiedDate *time.Time
 
 	// The name in a user pool description.
@@ -1610,7 +1706,8 @@ type UserPoolType struct {
 	// The attributes that are auto-verified in a user pool.
 	AutoVerifiedAttributes []VerifiedAttributeType
 
-	// The date the user pool was created.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was created.
 	CreationDate *time.Time
 
 	// A custom domain name that you provide to Amazon Cognito. This parameter applies
@@ -1640,7 +1737,7 @@ type UserPoolType struct {
 
 	// The email configuration of your user pool. The email configuration type sets
 	// your preferred sending method, Amazon Web Services Region, and sender for
-	// messages tfrom your user pool.
+	// messages from your user pool.
 	EmailConfiguration *EmailConfigurationType
 
 	// Deprecated. Review error codes from API requests with
@@ -1665,7 +1762,8 @@ type UserPoolType struct {
 	// The Lambda triggers associated with the user pool.
 	LambdaConfig *LambdaConfigType
 
-	// The date the user pool was last modified.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was modified.
 	LastModifiedDate *time.Time
 
 	// Can be one of the following values:
@@ -1682,7 +1780,13 @@ type UserPoolType struct {
 	// The policies associated with the user pool.
 	Policies *UserPoolPolicyType
 
-	// A container with the schema attributes of a user pool.
+	// A list of the user attributes and their properties in your user pool. The
+	// attribute schema contains standard attributes, custom attributes with a custom:
+	// prefix, and developer attributes with a dev: prefix. For more information, see
+	// User pool attributes (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html)
+	// . Developer-only attributes are a legacy feature of user pools, are read-only to
+	// all app clients. You can create and update developer-only attributes only with
+	// IAM-authenticated API operations. Use app client read/write permissions instead.
 	SchemaAttributes []SchemaAttributeType
 
 	// The contents of the SMS authentication message.
@@ -1703,9 +1807,9 @@ type UserPoolType struct {
 	// information, see SmsConfigurationType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SmsConfigurationType.html)
 	// . SNSSandbox The Amazon Web Services account is in the SNS SMS Sandbox and
 	// messages will only reach verified end users. This parameter won’t get populated
-	// with SNSSandbox if the IAM user creating the user pool doesn’t have SNS
-	// permissions. To learn how to move your Amazon Web Services account out of the
-	// sandbox, see Moving out of the SMS sandbox (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html)
+	// with SNSSandbox if the user creating the user pool doesn’t have SNS permissions.
+	// To learn how to move your Amazon Web Services account out of the sandbox, see
+	// Moving out of the SMS sandbox (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html)
 	// .
 	SmsConfigurationFailure *string
 
@@ -1724,7 +1828,11 @@ type UserPoolType struct {
 	// .
 	UserAttributeUpdateSettings *UserAttributeUpdateSettingsType
 
-	// The user pool add-ons.
+	// User pool add-ons. Contains settings for activation of advanced security
+	// features. To log user security information but take no action, set to AUDIT . To
+	// configure automatic security responses to risky traffic to your user pool, set
+	// to ENFORCED . For more information, see Adding advanced security to a user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html)
+	// .
 	UserPoolAddOns *UserPoolAddOnsType
 
 	// The tags that are assigned to the user pool. A tag is a label that you can
@@ -1764,14 +1872,14 @@ type UserType struct {
 	// The creation date of the user.
 	UserCreateDate *time.Time
 
-	// The last modified date of the user.
+	// The date and time, in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
+	// format, when the item was modified.
 	UserLastModifiedDate *time.Time
 
 	// The user status. This can be one of the following:
 	//   - UNCONFIRMED - User has been created but not confirmed.
 	//   - CONFIRMED - User has been confirmed.
 	//   - EXTERNAL_PROVIDER - User signed in with a third-party IdP.
-	//   - ARCHIVED - User is no longer active.
 	//   - UNKNOWN - User status isn't known.
 	//   - RESET_REQUIRED - User is confirmed, but the user must request a code and
 	//   reset their password before they can sign in.

@@ -15,11 +15,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows a user to update a specific attribute (one at a time). This action might
-// generate an SMS text message. Starting June 1, 2021, US telecom carriers require
-// you to register an origination phone number before you can send SMS messages to
-// US phone numbers. If you use SMS text messages in Amazon Cognito, you must
-// register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
+// Allows a user to update a specific attribute (one at a time). Amazon Cognito
+// doesn't evaluate Identity and Access Management (IAM) policies in requests for
+// this API operation. For this operation, you can't use IAM credentials to
+// authorize requests, and you can't grant IAM permissions in policies. For more
+// information about authorization models in Amazon Cognito, see Using the Amazon
+// Cognito native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// . This action might generate an SMS text message. Starting June 1, 2021, US
+// telecom carriers require you to register an origination phone number before you
+// can send SMS messages to US phone numbers. If you use SMS text messages in
+// Amazon Cognito, you must register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
 // . Amazon Cognito uses the registered number automatically. Otherwise, Amazon
 // Cognito users who must receive SMS messages might not be able to sign up,
 // activate their accounts, or sign in. If you have never used SMS text messages
@@ -28,7 +33,7 @@ import (
 // , you can send messages only to verified phone numbers. After you test your app
 // while in the sandbox environment, you can move out of the sandbox and into
 // production. For more information, see SMS message settings for Amazon Cognito
-// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) UpdateUserAttributes(ctx context.Context, params *UpdateUserAttributesInput, optFns ...func(*Options)) (*UpdateUserAttributesOutput, error) {
 	if params == nil {

@@ -1,0 +1,8 @@
+{
+    "id": "d8e28e48-69f1-49f2-9420-bd388a2528c2",
+    "type": "feature",
+    "description": "SageMaker Inference Recommender introduces a new API GetScalingConfigurationRecommendation to recommend auto scaling policies based on completed Inference Recommender jobs.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

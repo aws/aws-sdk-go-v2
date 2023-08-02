@@ -16,7 +16,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the users in the Amazon Cognito user pool.
+// Lists users and their basic details in a user pool. Amazon Cognito evaluates
+// Identity and Access Management (IAM) policies in requests for this API
+// operation. For this operation, you must use IAM credentials to authorize
+// requests, and you must grant yourself the corresponding IAM permission in a
+// policy. Learn more
+//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if params == nil {
 		params = &ListUsersInput{}
@@ -40,9 +46,10 @@ type ListUsersInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// An array of strings, where each string is the name of a user attribute to be
-	// returned for each user in the search results. If the array is null, all
-	// attributes are returned.
+	// A JSON array of user attribute names, for example given_name , that you want
+	// Amazon Cognito to include in the response for each user. When you don't provide
+	// an AttributesToGet parameter, Amazon Cognito returns all attributes for each
+	// user.
 	AttributesToGet []string
 
 	// A filter string of the form "AttributeName Filter-Type "AttributeValue"".
@@ -98,7 +105,13 @@ type ListUsersOutput struct {
 	// can be used to return the next set of items in the list.
 	PaginationToken *string
 
-	// The users returned in the request to list users.
+	// A list of the user pool users, and their attributes, that match your query.
+	// Amazon Cognito creates a profile in your user pool for each native user in your
+	// user pool, and each unique user ID from your third-party identity providers
+	// (IdPs). When you link users with the AdminLinkProviderForUser (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminLinkProviderForUser.html)
+	// API operation, the output of ListUsers displays both the IdP user and the
+	// native user that you linked. You can identify IdP users in the Users object of
+	// this API response by the IdP prefix that Amazon Cognito appends to Username .
 	Users []types.UserType
 
 	// Metadata pertaining to the operation's result.

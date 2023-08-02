@@ -300,6 +300,15 @@ const (
 	ConnectionPropertyKeyConnectorUrl                         ConnectionPropertyKey = "CONNECTOR_URL"
 	ConnectionPropertyKeyConnectorType                        ConnectionPropertyKey = "CONNECTOR_TYPE"
 	ConnectionPropertyKeyConnectorClassName                   ConnectionPropertyKey = "CONNECTOR_CLASS_NAME"
+	ConnectionPropertyKeyKafkaSaslMechanism                   ConnectionPropertyKey = "KAFKA_SASL_MECHANISM"
+	ConnectionPropertyKeyKafkaSaslScramUsername               ConnectionPropertyKey = "KAFKA_SASL_SCRAM_USERNAME"
+	ConnectionPropertyKeyKafkaSaslScramPassword               ConnectionPropertyKey = "KAFKA_SASL_SCRAM_PASSWORD"
+	ConnectionPropertyKeyKafkaSaslScramSecretsArn             ConnectionPropertyKey = "KAFKA_SASL_SCRAM_SECRETS_ARN"
+	ConnectionPropertyKeyEncryptedKafkaSaslScramPassword      ConnectionPropertyKey = "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD"
+	ConnectionPropertyKeyKafkaSaslGssapiKeytab                ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_KEYTAB"
+	ConnectionPropertyKeyKafkaSaslGssapiKrb5Conf              ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_KRB5_CONF"
+	ConnectionPropertyKeyKafkaSaslGssapiService               ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_SERVICE"
+	ConnectionPropertyKeyKafkaSaslGssapiPrincipal             ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_PRINCIPAL"
 )
 
 // Values returns all known values for ConnectionPropertyKey. Note that this can
@@ -337,6 +346,15 @@ func (ConnectionPropertyKey) Values() []ConnectionPropertyKey {
 		"CONNECTOR_URL",
 		"CONNECTOR_TYPE",
 		"CONNECTOR_CLASS_NAME",
+		"KAFKA_SASL_MECHANISM",
+		"KAFKA_SASL_SCRAM_USERNAME",
+		"KAFKA_SASL_SCRAM_PASSWORD",
+		"KAFKA_SASL_SCRAM_SECRETS_ARN",
+		"ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD",
+		"KAFKA_SASL_GSSAPI_KEYTAB",
+		"KAFKA_SASL_GSSAPI_KRB5_CONF",
+		"KAFKA_SASL_GSSAPI_SERVICE",
+		"KAFKA_SASL_GSSAPI_PRINCIPAL",
 	}
 }
 

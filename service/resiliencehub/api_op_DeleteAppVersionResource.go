@@ -40,18 +40,18 @@ func (c *Client) DeleteAppVersionResource(ctx context.Context, params *DeleteApp
 
 type DeleteAppVersionResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// The Amazon Web Services account that owns the physical resource.
+	// Amazon Web Services account that owns the physical resource.
 	AwsAccountId *string
 
-	// The Amazon Web Services region that owns the physical resource.
+	// Amazon Web Services region that owns the physical resource.
 	AwsRegion *string
 
 	// Used for an idempotency token. A client token is a unique, case-sensitive
@@ -59,13 +59,13 @@ type DeleteAppVersionResourceInput struct {
 	// for other API requests.
 	ClientToken *string
 
-	// The logical identifier of the resource.
+	// Logical identifier of the resource.
 	LogicalResourceId *types.LogicalResourceId
 
-	// The physical identifier of the resource.
+	// Physical identifier of the resource.
 	PhysicalResourceId *string
 
-	// The name of the resource.
+	// Name of the resource.
 	ResourceName *string
 
 	noSmithyDocumentSerde
@@ -73,15 +73,15 @@ type DeleteAppVersionResourceInput struct {
 
 type DeleteAppVersionResourceOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// The Resilience Hub application version.
+	// Resilience Hub application version.
 	//
 	// This member is required.
 	AppVersion *string

@@ -2851,6 +2851,21 @@ type CustomImage struct {
 	noSmithyDocumentSerde
 }
 
+// A customized metric.
+type CustomizedMetricSpecification struct {
+
+	// The name of the customized metric.
+	MetricName *string
+
+	// The namespace of the customized metric.
+	Namespace *string
+
+	// The statistic of the customized metric.
+	Statistic Statistic
+
+	noSmithyDocumentSerde
+}
+
 // Configuration to control how SageMaker captures inference data.
 type DataCaptureConfig struct {
 
@@ -3634,6 +3649,28 @@ type DriftCheckModelQuality struct {
 
 	// The drift check model quality statistics.
 	Statistics *MetricsSource
+
+	noSmithyDocumentSerde
+}
+
+// An object with the recommended values for you to specify when creating an
+// autoscaling policy.
+type DynamicScalingConfiguration struct {
+
+	// The recommended maximum capacity to specify for your autoscaling policy.
+	MaxCapacity int32
+
+	// The recommended minimum capacity to specify for your autoscaling policy.
+	MinCapacity int32
+
+	// The recommended scale in cooldown time for your autoscaling policy.
+	ScaleInCooldown int32
+
+	// The recommended scale out cooldown time for your autoscaling policy.
+	ScaleOutCooldown int32
+
+	// An object of the scaling policies for each metric.
+	ScalingPolicies []ScalingPolicy
 
 	noSmithyDocumentSerde
 }
@@ -7627,6 +7664,34 @@ type MetricDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// An object containing information about a metric.
+//
+// The following types satisfy this interface:
+//
+//	MetricSpecificationMemberCustomized
+//	MetricSpecificationMemberPredefined
+type MetricSpecification interface {
+	isMetricSpecification()
+}
+
+// Information about a customized metric.
+type MetricSpecificationMemberCustomized struct {
+	Value CustomizedMetricSpecification
+
+	noSmithyDocumentSerde
+}
+
+func (*MetricSpecificationMemberCustomized) isMetricSpecification() {}
+
+// Information about a predefined metric.
+type MetricSpecificationMemberPredefined struct {
+	Value PredefinedMetricSpecification
+
+	noSmithyDocumentSerde
+}
+
+func (*MetricSpecificationMemberPredefined) isMetricSpecification() {}
+
 // Details about the metrics source.
 type MetricsSource struct {
 
@@ -10547,6 +10612,16 @@ type PipelineSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A specification for a predefined metric.
+type PredefinedMetricSpecification struct {
+
+	// The metric type. You can only apply SageMaker metric types to SageMaker
+	// endpoints.
+	PredefinedMetricType *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for the cluster used to run a processing job.
 type ProcessingClusterConfig struct {
 
@@ -12429,6 +12504,55 @@ type S3StorageConfig struct {
 	noSmithyDocumentSerde
 }
 
+// An object containing a recommended scaling policy.
+//
+// The following types satisfy this interface:
+//
+//	ScalingPolicyMemberTargetTracking
+type ScalingPolicy interface {
+	isScalingPolicy()
+}
+
+// A target tracking scaling policy. Includes support for predefined or customized
+// metrics.
+type ScalingPolicyMemberTargetTracking struct {
+	Value TargetTrackingScalingPolicyConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ScalingPolicyMemberTargetTracking) isScalingPolicy() {}
+
+// The metric for a scaling policy.
+type ScalingPolicyMetric struct {
+
+	// The number of invocations sent to a model, normalized by InstanceCount in each
+	// ProductionVariant. 1/numberOfInstances is sent as the value on each request,
+	// where numberOfInstances is the number of active instances for the
+	// ProductionVariant behind the endpoint at the time of the request.
+	InvocationsPerInstance int32
+
+	// The interval of time taken by a model to respond as viewed from SageMaker. This
+	// interval includes the local communication times taken to send the request and to
+	// fetch the response from the container of a model and the time taken to complete
+	// the inference in the container.
+	ModelLatency int32
+
+	noSmithyDocumentSerde
+}
+
+// An object where you specify the anticipated traffic pattern for an endpoint.
+type ScalingPolicyObjective struct {
+
+	// The maximum number of expected requests to your endpoint per minute.
+	MaxInvocationsPerMinute int32
+
+	// The minimum number of expected requests to your endpoint per minute.
+	MinInvocationsPerMinute int32
+
+	noSmithyDocumentSerde
+}
+
 // Configuration details about the monitoring schedule.
 type ScheduleConfig struct {
 
@@ -13152,6 +13276,22 @@ type TargetPlatform struct {
 	//   - MALI : ARM Mali graphics processor
 	//   - INTEL_GRAPHICS : Integrated Intel graphics
 	Accelerator TargetPlatformAccelerator
+
+	noSmithyDocumentSerde
+}
+
+// A target tracking scaling policy. Includes support for predefined or customized
+// metrics. When using the PutScalingPolicy (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html)
+// API, this parameter is required when you are creating a policy with the policy
+// type TargetTrackingScaling .
+type TargetTrackingScalingPolicyConfiguration struct {
+
+	// An object containing information about a metric.
+	MetricSpecification MetricSpecification
+
+	// The recommended target value to specify for the metric when creating a scaling
+	// policy.
+	TargetValue float64
 
 	noSmithyDocumentSerde
 }
@@ -15038,4 +15178,6 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAutoMLProblemTypeConfig()             {}
 func (*UnknownUnionMember) isAutoMLProblemTypeResolvedAttributes() {}
+func (*UnknownUnionMember) isMetricSpecification()                 {}
+func (*UnknownUnionMember) isScalingPolicy()                       {}
 func (*UnknownUnionMember) isTrialComponentParameterValue()        {}

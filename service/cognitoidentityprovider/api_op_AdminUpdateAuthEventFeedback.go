@@ -18,7 +18,13 @@ import (
 
 // Provides feedback for an authentication event indicating if it was from a valid
 // user. This feedback is used for improving the risk evaluation decision for the
-// user pool as part of Amazon Cognito advanced security.
+// user pool as part of Amazon Cognito advanced security. Amazon Cognito evaluates
+// Identity and Access Management (IAM) policies in requests for this API
+// operation. For this operation, you must use IAM credentials to authorize
+// requests, and you must grant yourself the corresponding IAM permission in a
+// policy. Learn more
+//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) AdminUpdateAuthEventFeedback(ctx context.Context, params *AdminUpdateAuthEventFeedbackInput, optFns ...func(*Options)) (*AdminUpdateAuthEventFeedbackOutput, error) {
 	if params == nil {
 		params = &AdminUpdateAuthEventFeedbackInput{}
@@ -41,7 +47,11 @@ type AdminUpdateAuthEventFeedbackInput struct {
 	// This member is required.
 	EventId *string
 
-	// The authentication event feedback value.
+	// The authentication event feedback value. When you provide a FeedbackValue value
+	// of valid , you tell Amazon Cognito that you trust a user session where Amazon
+	// Cognito has evaluated some level of risk. When you provide a FeedbackValue
+	// value of invalid , you tell Amazon Cognito that you don't trust a user session,
+	// or you don't believe that Amazon Cognito evaluated a high-enough risk level.
 	//
 	// This member is required.
 	FeedbackValue types.FeedbackValueType

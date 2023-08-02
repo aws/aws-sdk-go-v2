@@ -38,9 +38,9 @@ func (c *Client) ImportResourcesToDraftAppVersion(ctx context.Context, params *I
 
 type ImportResourcesToDraftAppVersionInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -65,9 +65,9 @@ type ImportResourcesToDraftAppVersionInput struct {
 
 type ImportResourcesToDraftAppVersionOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -78,7 +78,7 @@ type ImportResourcesToDraftAppVersionOutput struct {
 	// This member is required.
 	AppVersion *string
 
-	// The status of the action.
+	// Status of the action.
 	//
 	// This member is required.
 	Status types.ResourceImportStatusType

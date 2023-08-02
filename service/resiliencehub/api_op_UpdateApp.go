@@ -34,9 +34,9 @@ func (c *Client) UpdateApp(ctx context.Context, params *UpdateAppInput, optFns .
 
 type UpdateAppInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -51,9 +51,18 @@ type UpdateAppInput struct {
 	// The optional description for an app.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this
-	// ARN is: arn: partition :resiliencehub: region : account :resiliency-policy/
-	// policy-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// The list of events you would like to subscribe and get notification for.
+	// Currently, Resilience Hub supports notifications only for Drift detected and
+	// Scheduled assessment failure events.
+	EventSubscriptions []types.EventSubscription
+
+	// Defines the roles and credentials that Resilience Hub would use while creating
+	// an application, importing its resources, and running an assessment.
+	PermissionModel *types.PermissionModel
+
+	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
+	// is: arn: partition :resiliencehub: region : account :resiliency-policy/ policy-id
+	// . For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	PolicyArn *string
 

@@ -30,15 +30,19 @@ import (
 // , you can send messages only to verified phone numbers. After you test your app
 // while in the sandbox environment, you can move out of the sandbox and into
 // production. For more information, see SMS message settings for Amazon Cognito
-// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html)
 // in the Amazon Cognito Developer Guide. This message is based on a template that
 // you configured in your call to create or update a user pool. This template
 // includes your custom sign-up instructions and placeholders for user name and
 // temporary password. Alternatively, you can call AdminCreateUser with SUPPRESS
 // for the MessageAction parameter, and Amazon Cognito won't send any email. In
 // either case, the user will be in the FORCE_CHANGE_PASSWORD state until they
-// sign in and change their password. AdminCreateUser requires developer
-// credentials.
+// sign in and change their password. Amazon Cognito evaluates Identity and Access
+// Management (IAM) policies in requests for this API operation. For this
+// operation, you must use IAM credentials to authorize requests, and you must
+// grant yourself the corresponding IAM permission in a policy. Learn more
+//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) AdminCreateUser(ctx context.Context, params *AdminCreateUserInput, optFns ...func(*Options)) (*AdminCreateUserOutput, error) {
 	if params == nil {
 		params = &AdminCreateUserInput{}
@@ -117,9 +121,9 @@ type AdminCreateUserInput struct {
 	// the temporary password in the sign-in page, along with a new password to be used
 	// in all future sign-ins. This parameter isn't required. If you don't specify a
 	// value, Amazon Cognito generates one for you. The temporary password can only be
-	// used until the user account expiration limit that you specified when you created
-	// the user pool. To reset the account after that time limit, you must call
-	// AdminCreateUser again, specifying "RESEND" for the MessageAction parameter.
+	// used until the user account expiration limit that you set for your user pool. To
+	// reset the account after that time limit, you must call AdminCreateUser again
+	// and specify RESEND for the MessageAction parameter.
 	TemporaryPassword *string
 
 	// An array of name-value pairs that contain user attributes and attribute values

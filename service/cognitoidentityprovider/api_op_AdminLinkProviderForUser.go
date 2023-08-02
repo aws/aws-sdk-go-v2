@@ -28,7 +28,12 @@ import (
 // Because this API allows a user with an external federated identity to sign in as
 // an existing user in the user pool, it is critical that it only be used with
 // external IdPs and provider attributes that have been trusted by the application
-// owner. This action is administrative and requires developer credentials.
+// owner. Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy. Learn more
+//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) AdminLinkProviderForUser(ctx context.Context, params *AdminLinkProviderForUserInput, optFns ...func(*Options)) (*AdminLinkProviderForUserOutput, error) {
 	if params == nil {
 		params = &AdminLinkProviderForUserInput{}
@@ -47,9 +52,9 @@ func (c *Client) AdminLinkProviderForUser(ctx context.Context, params *AdminLink
 type AdminLinkProviderForUserInput struct {
 
 	// The existing user in the user pool that you want to assign to the external IdP
-	// user account. This user can be a native (Username + Password) Amazon Cognito
-	// user pools user or a federated user (for example, a SAML or Facebook user). If
-	// the user doesn't exist, Amazon Cognito generates an exception. Amazon Cognito
+	// user account. This user can be a local (Username + Password) Amazon Cognito user
+	// pools user or a federated user (for example, a SAML or Facebook user). If the
+	// user doesn't exist, Amazon Cognito generates an exception. Amazon Cognito
 	// returns this user when the new user (with the linked IdP attribute) signs in.
 	// For a native username + password user, the ProviderAttributeValue for the
 	// DestinationUser should be the username in the user pool. For a federated user,
@@ -70,13 +75,18 @@ type AdminLinkProviderForUserInput struct {
 	// , or LoginWithAmazon , and Amazon Cognito will automatically parse the Facebook,
 	// Google, and Login with Amazon tokens for id , sub , and user_id , respectively.
 	// The ProviderAttributeValue for the user must be the same value as the id , sub ,
-	// or user_id value found in the social IdP token. For SAML, the
-	// ProviderAttributeName can be any value that matches a claim in the SAML
-	// assertion. If you want to link SAML users based on the subject of the SAML
-	// assertion, you should map the subject to a claim through the SAML IdP and submit
-	// that claim name as the ProviderAttributeName . If you set ProviderAttributeName
-	// to Cognito_Subject , Amazon Cognito will automatically parse the default unique
-	// identifier found in the subject from the SAML token.
+	// or user_id value found in the social IdP token. For OIDC, the
+	// ProviderAttributeName can be any value that matches a claim in the ID token, or
+	// that your app retrieves from the userInfo endpoint. You must map the claim to a
+	// user pool attribute in your IdP configuration, and set the user pool attribute
+	// name as the value of ProviderAttributeName in your AdminLinkProviderForUser
+	// request. For SAML, the ProviderAttributeName can be any value that matches a
+	// claim in the SAML assertion. To link SAML users based on the subject of the SAML
+	// assertion, map the subject to a claim through the SAML IdP and set that claim
+	// name as the value of ProviderAttributeName in your AdminLinkProviderForUser
+	// request. For both OIDC and SAML users, when you set ProviderAttributeName to
+	// Cognito_Subject , Amazon Cognito will automatically parse the default unique
+	// identifier found in the subject from the IdP token.
 	//
 	// This member is required.
 	SourceUser *types.ProviderUserIdentifierType

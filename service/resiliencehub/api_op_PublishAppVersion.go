@@ -33,22 +33,25 @@ func (c *Client) PublishAppVersion(ctx context.Context, params *PublishAppVersio
 
 type PublishAppVersionInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
+
+	// Name of the application version.
+	VersionName *string
 
 	noSmithyDocumentSerde
 }
 
 type PublishAppVersionOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -56,6 +59,12 @@ type PublishAppVersionOutput struct {
 
 	// The version of the application.
 	AppVersion *string
+
+	// Identifier of the application version.
+	Identifier *int64
+
+	// Name of the application version.
+	VersionName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

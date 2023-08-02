@@ -34,7 +34,7 @@ func (c *Client) ListResiliencyPolicies(ctx context.Context, params *ListResilie
 
 type ListResiliencyPoliciesInput struct {
 
-	// The maximum number of results to include in the response. If more results exist
+	// Maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
 	// that the remaining results can be retrieved.
 	MaxResults *int32
@@ -55,7 +55,7 @@ type ListResiliencyPoliciesOutput struct {
 	// This member is required.
 	ResiliencyPolicies []types.ResiliencyPolicy
 
-	// The token for the next set of results, or null if there are no more results.
+	// Token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -147,7 +147,7 @@ var _ ListResiliencyPoliciesAPIClient = (*Client)(nil)
 // ListResiliencyPoliciesPaginatorOptions is the paginator options for
 // ListResiliencyPolicies
 type ListResiliencyPoliciesPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results exist
+	// Maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
 	// that the remaining results can be retrieved.
 	Limit int32

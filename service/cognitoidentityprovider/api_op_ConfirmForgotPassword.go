@@ -16,6 +16,12 @@ import (
 )
 
 // Allows a user to enter a confirmation code to reset a forgotten password.
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// Using the Amazon Cognito native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// .
 func (c *Client) ConfirmForgotPassword(ctx context.Context, params *ConfirmForgotPasswordInput, optFns ...func(*Options)) (*ConfirmForgotPasswordOutput, error) {
 	if params == nil {
 		params = &ConfirmForgotPasswordInput{}
@@ -84,7 +90,9 @@ type ConfirmForgotPasswordInput struct {
 	ClientMetadata map[string]string
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
-	// of a user pool client and username plus the client ID in the message.
+	// of a user pool client and username plus the client ID in the message. For more
+	// information about SecretHash , see Computing secret hash values (https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash)
+	// .
 	SecretHash *string
 
 	// Contextual data about your user session, such as the device fingerprint, IP

@@ -15,7 +15,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the user attributes and metadata for a user.
+// Gets the user attributes and metadata for a user. Amazon Cognito doesn't
+// evaluate Identity and Access Management (IAM) policies in requests for this API
+// operation. For this operation, you can't use IAM credentials to authorize
+// requests, and you can't grant IAM permissions in policies. For more information
+// about authorization models in Amazon Cognito, see Using the Amazon Cognito
+// native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// .
 func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...func(*Options)) (*GetUserOutput, error) {
 	if params == nil {
 		params = &GetUserInput{}
@@ -52,7 +58,7 @@ type GetUserOutput struct {
 	// This member is required.
 	UserAttributes []types.AttributeType
 
-	// The user name of the user you want to retrieve from the get user request.
+	// The username of the user that you requested.
 	//
 	// This member is required.
 	Username *string

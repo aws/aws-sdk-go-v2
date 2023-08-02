@@ -34,15 +34,15 @@ func (c *Client) ListAlarmRecommendations(ctx context.Context, params *ListAlarm
 
 type ListAlarmRecommendationsInput struct {
 
-	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
+	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
+	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
 
-	// The maximum number of results to include in the response. If more results exist
+	// Maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
 	// that the remaining results can be retrieved.
 	MaxResults *int32
@@ -63,7 +63,7 @@ type ListAlarmRecommendationsOutput struct {
 	// This member is required.
 	AlarmRecommendations []types.AlarmRecommendation
 
-	// The token for the next set of results, or null if there are no more results.
+	// Token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -158,7 +158,7 @@ var _ ListAlarmRecommendationsAPIClient = (*Client)(nil)
 // ListAlarmRecommendationsPaginatorOptions is the paginator options for
 // ListAlarmRecommendations
 type ListAlarmRecommendationsPaginatorOptions struct {
-	// The maximum number of results to include in the response. If more results exist
+	// Maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
 	// that the remaining results can be retrieved.
 	Limit int32

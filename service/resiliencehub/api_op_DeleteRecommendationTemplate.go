@@ -55,7 +55,7 @@ type DeleteRecommendationTemplateOutput struct {
 	// This member is required.
 	RecommendationTemplateArn *string
 
-	// The status of the action.
+	// Status of the action.
 	//
 	// This member is required.
 	Status types.RecommendationTemplateStatus

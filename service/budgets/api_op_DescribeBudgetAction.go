@@ -44,8 +44,8 @@ type DescribeBudgetActionInput struct {
 	// This member is required.
 	ActionId *string
 
-	// A string that represents the budget name. The ":" and "\" characters aren't
-	// allowed.
+	// A string that represents the budget name. The ":" and "\" characters, and the
+	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.
 	BudgetName *string
@@ -65,8 +65,8 @@ type DescribeBudgetActionOutput struct {
 	// This member is required.
 	Action *types.Action
 
-	// A string that represents the budget name. The ":" and "\" characters aren't
-	// allowed.
+	// A string that represents the budget name. The ":" and "\" characters, and the
+	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.
 	BudgetName *string

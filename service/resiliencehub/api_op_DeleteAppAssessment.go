@@ -35,9 +35,9 @@ func (c *Client) DeleteAppAssessment(ctx context.Context, params *DeleteAppAsses
 
 type DeleteAppAssessmentInput struct {
 
-	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
+	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
+	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -53,9 +53,9 @@ type DeleteAppAssessmentInput struct {
 
 type DeleteAppAssessmentOutput struct {
 
-	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
+	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
+	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.

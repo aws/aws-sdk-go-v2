@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -89,6 +90,88 @@ func awsRestjson1_serializeOpDocumentAddDraftAppVersionResourceMappingsInput(v *
 	if v.ResourceMappings != nil {
 		ok := object.Key("resourceMappings")
 		if err := awsRestjson1_serializeDocumentResourceMappingList(v.ResourceMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpBatchUpdateRecommendationStatus struct {
+}
+
+func (*awsRestjson1_serializeOpBatchUpdateRecommendationStatus) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchUpdateRecommendationStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchUpdateRecommendationStatusInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/batch-update-recommendation-status")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchUpdateRecommendationStatusInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchUpdateRecommendationStatusInput(v *BatchUpdateRecommendationStatusInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchUpdateRecommendationStatusInput(v *BatchUpdateRecommendationStatusInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppArn != nil {
+		ok := object.Key("appArn")
+		ok.String(*v.AppArn)
+	}
+
+	if v.RequestEntries != nil {
+		ok := object.Key("requestEntries")
+		if err := awsRestjson1_serializeDocumentUpdateRecommendationStatusRequestEntries(v.RequestEntries, ok); err != nil {
 			return err
 		}
 	}
@@ -178,9 +261,23 @@ func awsRestjson1_serializeOpDocumentCreateAppInput(v *CreateAppInput, value smi
 		ok.String(*v.Description)
 	}
 
+	if v.EventSubscriptions != nil {
+		ok := object.Key("eventSubscriptions")
+		if err := awsRestjson1_serializeDocumentEventSubscriptionList(v.EventSubscriptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.PermissionModel != nil {
+		ok := object.Key("permissionModel")
+		if err := awsRestjson1_serializeDocumentPermissionModel(v.PermissionModel, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PolicyArn != nil {
@@ -2190,6 +2287,91 @@ func awsRestjson1_serializeOpDocumentListAlarmRecommendationsInput(v *ListAlarmR
 	return nil
 }
 
+type awsRestjson1_serializeOpListAppAssessmentComplianceDrifts struct {
+}
+
+func (*awsRestjson1_serializeOpListAppAssessmentComplianceDrifts) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAppAssessmentComplianceDrifts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAppAssessmentComplianceDriftsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/list-app-assessment-compliance-drifts")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListAppAssessmentComplianceDriftsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAppAssessmentComplianceDriftsInput(v *ListAppAssessmentComplianceDriftsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListAppAssessmentComplianceDriftsInput(v *ListAppAssessmentComplianceDriftsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssessmentArn != nil {
+		ok := object.Key("assessmentArn")
+		ok.String(*v.AssessmentArn)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListAppAssessments struct {
 }
 
@@ -2959,6 +3141,11 @@ func awsRestjson1_serializeOpDocumentListAppVersionsInput(v *ListAppVersionsInpu
 		ok.String(*v.AppArn)
 	}
 
+	if v.EndTime != nil {
+		ok := object.Key("endTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -2967,6 +3154,11 @@ func awsRestjson1_serializeOpDocumentListAppVersionsInput(v *ListAppVersionsInpu
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("startTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
 	}
 
 	return nil
@@ -3590,6 +3782,11 @@ func awsRestjson1_serializeOpDocumentPublishAppVersionInput(v *PublishAppVersion
 	if v.AppArn != nil {
 		ok := object.Key("appArn")
 		ok.String(*v.AppArn)
+	}
+
+	if v.VersionName != nil {
+		ok := object.Key("versionName")
+		ok.String(*v.VersionName)
 	}
 
 	return nil
@@ -4217,6 +4414,20 @@ func awsRestjson1_serializeOpDocumentUpdateAppInput(v *UpdateAppInput, value smi
 		ok.String(*v.Description)
 	}
 
+	if v.EventSubscriptions != nil {
+		ok := object.Key("eventSubscriptions")
+		if err := awsRestjson1_serializeDocumentEventSubscriptionList(v.EventSubscriptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PermissionModel != nil {
+		ok := object.Key("permissionModel")
+		if err := awsRestjson1_serializeDocumentPermissionModel(v.PermissionModel, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PolicyArn != nil {
 		ok := object.Key("policyArn")
 		ok.String(*v.PolicyArn)
@@ -4766,6 +4977,41 @@ func awsRestjson1_serializeDocumentEntityNameList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEventSubscription(v *types.EventSubscription, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EventType) > 0 {
+		ok := object.Key("eventType")
+		ok.String(string(v.EventType))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.SnsTopicArn != nil {
+		ok := object.Key("snsTopicArn")
+		ok.String(*v.SnsTopicArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventSubscriptionList(v []types.EventSubscription, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEventSubscription(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFailurePolicy(v *types.FailurePolicy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4780,6 +5026,17 @@ func awsRestjson1_serializeDocumentFailurePolicy(v *types.FailurePolicy, value s
 		ok.Integer(v.RtoInSecs)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIamRoleArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -4810,6 +5067,30 @@ func awsRestjson1_serializeDocumentLogicalResourceId(v *types.LogicalResourceId,
 	if v.TerraformSourceName != nil {
 		ok := object.Key("terraformSourceName")
 		ok.String(*v.TerraformSourceName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPermissionModel(v *types.PermissionModel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CrossAccountRoleArns != nil {
+		ok := object.Key("crossAccountRoleArns")
+		if err := awsRestjson1_serializeDocumentIamRoleArnList(v.CrossAccountRoleArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InvokerRoleName != nil {
+		ok := object.Key("invokerRoleName")
+		ok.String(*v.InvokerRoleName)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
@@ -4970,5 +5251,74 @@ func awsRestjson1_serializeDocumentTerraformSourceList(v []types.TerraformSource
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateRecommendationStatusItem(v *types.UpdateRecommendationStatusItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResourceId != nil {
+		ok := object.Key("resourceId")
+		ok.String(*v.ResourceId)
+	}
+
+	if v.TargetAccountId != nil {
+		ok := object.Key("targetAccountId")
+		ok.String(*v.TargetAccountId)
+	}
+
+	if v.TargetRegion != nil {
+		ok := object.Key("targetRegion")
+		ok.String(*v.TargetRegion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateRecommendationStatusRequestEntries(v []types.UpdateRecommendationStatusRequestEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentUpdateRecommendationStatusRequestEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateRecommendationStatusRequestEntry(v *types.UpdateRecommendationStatusRequestEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EntryId != nil {
+		ok := object.Key("entryId")
+		ok.String(*v.EntryId)
+	}
+
+	if v.Excluded != nil {
+		ok := object.Key("excluded")
+		ok.Boolean(*v.Excluded)
+	}
+
+	if len(v.ExcludeReason) > 0 {
+		ok := object.Key("excludeReason")
+		ok.String(string(v.ExcludeReason))
+	}
+
+	if v.Item != nil {
+		ok := object.Key("item")
+		if err := awsRestjson1_serializeDocumentUpdateRecommendationStatusItem(v.Item, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReferenceId != nil {
+		ok := object.Key("referenceId")
+		ok.String(*v.ReferenceId)
+	}
+
 	return nil
 }

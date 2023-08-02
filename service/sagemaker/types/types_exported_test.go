@@ -55,6 +55,46 @@ func ExampleAutoMLProblemTypeResolvedAttributes_outputUsage() {
 
 var _ *types.TabularResolvedAttributes
 
+func ExampleMetricSpecification_outputUsage() {
+	var union types.MetricSpecification
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MetricSpecificationMemberCustomized:
+		_ = v.Value // Value is types.CustomizedMetricSpecification
+
+	case *types.MetricSpecificationMemberPredefined:
+		_ = v.Value // Value is types.PredefinedMetricSpecification
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PredefinedMetricSpecification
+var _ *types.CustomizedMetricSpecification
+
+func ExampleScalingPolicy_outputUsage() {
+	var union types.ScalingPolicy
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ScalingPolicyMemberTargetTracking:
+		_ = v.Value // Value is types.TargetTrackingScalingPolicyConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TargetTrackingScalingPolicyConfiguration
+
 func ExampleTrialComponentParameterValue_outputUsage() {
 	var union types.TrialComponentParameterValue
 	// type switches can be used to check the union value

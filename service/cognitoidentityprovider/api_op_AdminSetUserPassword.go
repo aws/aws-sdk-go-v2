@@ -22,7 +22,22 @@ import (
 // NEW_PASSWORD_REQUIRED challenge. If the user doesn't sign in before it expires,
 // the user won't be able to sign in, and an administrator must reset their
 // password. Once the user has set a new password, or the password is permanent,
-// the user status is set to Confirmed .
+// the user status is set to Confirmed . AdminSetUserPassword can set a password
+// for the user profile that Amazon Cognito creates for third-party federated
+// users. When you set a password, the federated user's status changes from
+// EXTERNAL_PROVIDER to CONFIRMED . A user in this state can sign in as a federated
+// user, and initiate authentication flows in the API like a linked native user.
+// They can also modify their password and attributes in token-authenticated API
+// requests like ChangePassword and UpdateUserAttributes . As a best security
+// practice and to keep users in sync with your external IdP, don't set passwords
+// on federated user profiles. To set up a federated user for native sign-in with a
+// linked native user, refer to Linking federated users to an existing user profile (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation-consolidate-users.html)
+// . Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy. Learn more
+//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) AdminSetUserPassword(ctx context.Context, params *AdminSetUserPasswordInput, optFns ...func(*Options)) (*AdminSetUserPasswordOutput, error) {
 	if params == nil {
 		params = &AdminSetUserPasswordInput{}

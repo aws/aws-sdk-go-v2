@@ -1,0 +1,8 @@
+{
+    "id": "6923f497-67f4-4ec1-b4d3-8af19c451009",
+    "type": "feature",
+    "description": "This release includes additional Glue Streaming KAKFA SASL property types.",
+    "modules": [
+        "service/glue"
+    ]
+}

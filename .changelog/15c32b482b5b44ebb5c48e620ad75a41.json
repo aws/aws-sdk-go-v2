@@ -1,0 +1,8 @@
+{
+    "id": "15c32b48-2b5b-44eb-b5c4-8e620ad75a41",
+    "type": "feature",
+    "description": "Drift Detection capability added when applications policy has moved from a meet to breach state. Customers will be able to exclude operational recommendations and receive credit in their resilience score. Customers can now add ARH permissions to an existing or new role.",
+    "modules": [
+        "service/resiliencehub"
+    ]
+}

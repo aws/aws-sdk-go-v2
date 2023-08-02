@@ -31,8 +31,8 @@ type Action struct {
 	// This member is required.
 	ApprovalModel ApprovalModel
 
-	// A string that represents the budget name. The ":" and "\" characters aren't
-	// allowed.
+	// A string that represents the budget name. The ":" and "\" characters, and the
+	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.
 	BudgetName *string
@@ -151,7 +151,7 @@ type AutoAdjustData struct {
 type Budget struct {
 
 	// The name of a budget. The name must be unique within an account. The : and \
-	// characters aren't allowed in BudgetName .
+	// characters, and the "/action/" substring, aren't allowed in BudgetName .
 	//
 	// This member is required.
 	BudgetName *string
@@ -259,8 +259,8 @@ type BudgetedAndActualAmounts struct {
 // The budget name and associated notifications for an account.
 type BudgetNotificationsForAccount struct {
 
-	// A string that represents the budget name. The ":" and "\" characters aren't
-	// allowed.
+	// A string that represents the budget name. The ":" and "\" characters, and the
+	// "/action/" substring, aren't allowed.
 	BudgetName *string
 
 	// A list of notifications.
@@ -273,8 +273,8 @@ type BudgetNotificationsForAccount struct {
 // period.
 type BudgetPerformanceHistory struct {
 
-	// A string that represents the budget name. The ":" and "\" characters aren't
-	// allowed.
+	// A string that represents the budget name. The ":" and "\" characters, and the
+	// "/action/" substring, aren't allowed.
 	BudgetName *string
 
 	// The type of a budget. It must be one of the following types: COST , USAGE ,

@@ -1,0 +1,8 @@
+{
+    "id": "f759e60d-158b-42eb-91a7-df5b8a59d0d4",
+    "type": "feature",
+    "description": "New feature that logs Cognito user pool error messages to CloudWatch logs.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

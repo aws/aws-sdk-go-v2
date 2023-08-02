@@ -16,8 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon Cognito user pool and sets the password policy for the
-// pool. This action might generate an SMS text message. Starting June 1, 2021, US
+// This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
 // can send SMS messages to US phone numbers. If you use SMS text messages in
 // Amazon Cognito, you must register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
@@ -29,8 +28,16 @@ import (
 // , you can send messages only to verified phone numbers. After you test your app
 // while in the sandbox environment, you can move out of the sandbox and into
 // production. For more information, see SMS message settings for Amazon Cognito
-// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
-// in the Amazon Cognito Developer Guide.
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html)
+// in the Amazon Cognito Developer Guide. Creates a new Amazon Cognito user pool
+// and sets the password policy for the pool. If you don't provide a value for an
+// attribute, Amazon Cognito sets it to its default value. Amazon Cognito evaluates
+// Identity and Access Management (IAM) policies in requests for this API
+// operation. For this operation, you must use IAM credentials to authorize
+// requests, and you must grant yourself the corresponding IAM permission in a
+// policy. Learn more
+//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) CreateUserPool(ctx context.Context, params *CreateUserPoolInput, optFns ...func(*Options)) (*CreateUserPoolOutput, error) {
 	if params == nil {
 		params = &CreateUserPoolInput{}
@@ -141,8 +148,11 @@ type CreateUserPoolInput struct {
 	// .
 	UserAttributeUpdateSettings *types.UserAttributeUpdateSettingsType
 
-	// Enables advanced security risk detection. Set the key AdvancedSecurityMode to
-	// the value "AUDIT".
+	// User pool add-ons. Contains settings for activation of advanced security
+	// features. To log user security information but take no action, set to AUDIT . To
+	// configure automatic security responses to risky traffic to your user pool, set
+	// to ENFORCED . For more information, see Adding advanced security to a user pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html)
+	// .
 	UserPoolAddOns *types.UserPoolAddOnsType
 
 	// The tag keys and values to assign to the user pool. A tag is a label that you
@@ -154,10 +164,15 @@ type CreateUserPoolInput struct {
 	// when they sign up.
 	UsernameAttributes []types.UsernameAttributeType
 
-	// Case sensitivity on the username input for the selected sign-in option. For
-	// example, when case sensitivity is set to False , users can sign in using either
-	// "username" or "Username". This configuration is immutable once it has been set.
-	// For more information, see UsernameConfigurationType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html)
+	// Case sensitivity on the username input for the selected sign-in option. When
+	// case sensitivity is set to False (case insensitive), users can sign in with any
+	// combination of capital and lowercase letters. For example, username , USERNAME ,
+	// or UserName , or for email, email@example.com or EMaiL@eXamplE.Com . For most
+	// use cases, set case sensitivity to False (case insensitive) as a best practice.
+	// When usernames and email addresses are case insensitive, Amazon Cognito treats
+	// any variation in case as the same user, and prevents a case variation from being
+	// assigned to the same attribute for a different user. This configuration is
+	// immutable after you set it. For more information, see UsernameConfigurationType (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html)
 	// .
 	UsernameConfiguration *types.UsernameConfigurationType
 

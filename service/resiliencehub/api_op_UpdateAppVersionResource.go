@@ -40,9 +40,9 @@ func (c *Client) UpdateAppVersionResource(ctx context.Context, params *UpdateApp
 
 type UpdateAppVersionResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -51,31 +51,30 @@ type UpdateAppVersionResourceInput struct {
 	// Currently, there is no supported additional information for resources.
 	AdditionalInfo map[string][]string
 
-	// The list of Application Components that this resource belongs to. If an
-	// Application Component is not part of the Resilience Hub application, it will be
-	// added.
+	// List of Application Components that this resource belongs to. If an Application
+	// Component is not part of the Resilience Hub application, it will be added.
 	AppComponents []string
 
-	// The Amazon Web Services account that owns the physical resource.
+	// Amazon Web Services account that owns the physical resource.
 	AwsAccountId *string
 
-	// The Amazon Web Services region that owns the physical resource.
+	// Amazon Web Services region that owns the physical resource.
 	AwsRegion *string
 
 	// Indicates if a resource is excluded from an Resilience Hub application. You can
 	// exclude only imported resources from an Resilience Hub application.
 	Excluded *bool
 
-	// The logical identifier of the resource.
+	// Logical identifier of the resource.
 	LogicalResourceId *types.LogicalResourceId
 
-	// The physical identifier of the resource.
+	// Physical identifier of the resource.
 	PhysicalResourceId *string
 
-	// The name of the resource.
+	// Name of the resource.
 	ResourceName *string
 
-	// The type of resource.
+	// Type of resource.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -83,15 +82,15 @@ type UpdateAppVersionResourceInput struct {
 
 type UpdateAppVersionResourceOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// The Resilience Hub application version.
+	// Resilience Hub application version.
 	//
 	// This member is required.
 	AppVersion *string

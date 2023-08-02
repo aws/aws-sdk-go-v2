@@ -1362,6 +1362,8 @@ type Connection struct {
 	//   - ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD - The encrypted version of the Kafka
 	//   SASL SCRAM password (if the user has the Glue encrypt passwords setting
 	//   selected).
+	//   - KAFKA_SASL_SCRAM_SECRETS_ARN - The Amazon Resource Name of a secret in
+	//   Amazon Web Services Secrets Manager.
 	//   - KAFKA_SASL_GSSAPI_KEYTAB - The S3 location of a Kerberos keytab file. A
 	//   keytab stores long-term keys for one or more principals. For more information,
 	//   see MIT Kerberos Documentation: Keytab (https://web.mit.edu/kerberos/krb5-latest/doc/basic/keytab_def.html)

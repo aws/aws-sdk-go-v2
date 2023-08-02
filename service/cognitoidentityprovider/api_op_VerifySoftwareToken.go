@@ -18,7 +18,13 @@ import (
 
 // Use this API to register a user's entered time-based one-time password (TOTP)
 // code and mark the user's software token MFA status as "verified" if successful.
-// The request takes an access token or a session string, but not both.
+// The request takes an access token or a session string, but not both. Amazon
+// Cognito doesn't evaluate Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// Using the Amazon Cognito native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// .
 func (c *Client) VerifySoftwareToken(ctx context.Context, params *VerifySoftwareTokenInput, optFns ...func(*Options)) (*VerifySoftwareTokenOutput, error) {
 	if params == nil {
 		params = &VerifySoftwareTokenInput{}

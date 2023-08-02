@@ -1,0 +1,8 @@
+{
+    "id": "55d523fc-e727-4d11-8e9a-0a702649eb01",
+    "type": "feature",
+    "description": "As part of CAE tagging integration we need to update our budget names regex filter to prevent customers from using \"/action/\" in their budget names.",
+    "modules": [
+        "service/budgets"
+    ]
+}

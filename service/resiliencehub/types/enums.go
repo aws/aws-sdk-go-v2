@@ -66,6 +66,26 @@ func (AppComplianceStatusType) Values() []AppComplianceStatusType {
 	}
 }
 
+type AppDriftStatusType string
+
+// Enum values for AppDriftStatusType
+const (
+	AppDriftStatusTypeNotChecked  AppDriftStatusType = "NotChecked"
+	AppDriftStatusTypeNotDetected AppDriftStatusType = "NotDetected"
+	AppDriftStatusTypeDetected    AppDriftStatusType = "Detected"
+)
+
+// Values returns all known values for AppDriftStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AppDriftStatusType) Values() []AppDriftStatusType {
+	return []AppDriftStatusType{
+		"NotChecked",
+		"NotDetected",
+		"Detected",
+	}
+}
+
 type AppStatusType string
 
 // Enum values for AppStatusType
@@ -211,6 +231,22 @@ func (DataLocationConstraint) Values() []DataLocationConstraint {
 	}
 }
 
+type DifferenceType string
+
+// Enum values for DifferenceType
+const (
+	DifferenceTypeNotEqual DifferenceType = "NotEqual"
+)
+
+// Values returns all known values for DifferenceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DifferenceType) Values() []DifferenceType {
+	return []DifferenceType{
+		"NotEqual",
+	}
+}
+
 type DisruptionType string
 
 // Enum values for DisruptionType
@@ -230,6 +266,42 @@ func (DisruptionType) Values() []DisruptionType {
 		"Hardware",
 		"AZ",
 		"Region",
+	}
+}
+
+type DriftStatus string
+
+// Enum values for DriftStatus
+const (
+	DriftStatusNotChecked  DriftStatus = "NotChecked"
+	DriftStatusNotDetected DriftStatus = "NotDetected"
+	DriftStatusDetected    DriftStatus = "Detected"
+)
+
+// Values returns all known values for DriftStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DriftStatus) Values() []DriftStatus {
+	return []DriftStatus{
+		"NotChecked",
+		"NotDetected",
+		"Detected",
+	}
+}
+
+type DriftType string
+
+// Enum values for DriftType
+const (
+	DriftTypeApplicationCompliance DriftType = "ApplicationCompliance"
+)
+
+// Values returns all known values for DriftType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DriftType) Values() []DriftType {
+	return []DriftType{
+		"ApplicationCompliance",
 	}
 }
 
@@ -255,6 +327,44 @@ func (EstimatedCostTier) Values() []EstimatedCostTier {
 	}
 }
 
+type EventType string
+
+// Enum values for EventType
+const (
+	EventTypeScheduledAssessmentFailure EventType = "ScheduledAssessmentFailure"
+	EventTypeDriftDetected              EventType = "DriftDetected"
+)
+
+// Values returns all known values for EventType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"ScheduledAssessmentFailure",
+		"DriftDetected",
+	}
+}
+
+type ExcludeRecommendationReason string
+
+// Enum values for ExcludeRecommendationReason
+const (
+	ExcludeRecommendationReasonAlreadyImplemented         ExcludeRecommendationReason = "AlreadyImplemented"
+	ExcludeRecommendationReasonNotRelevant                ExcludeRecommendationReason = "NotRelevant"
+	ExcludeRecommendationReasonComplexityOfImplementation ExcludeRecommendationReason = "ComplexityOfImplementation"
+)
+
+// Values returns all known values for ExcludeRecommendationReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExcludeRecommendationReason) Values() []ExcludeRecommendationReason {
+	return []ExcludeRecommendationReason{
+		"AlreadyImplemented",
+		"NotRelevant",
+		"ComplexityOfImplementation",
+	}
+}
+
 type HaArchitecture string
 
 // Enum values for HaArchitecture
@@ -276,6 +386,24 @@ func (HaArchitecture) Values() []HaArchitecture {
 		"PilotLight",
 		"BackupAndRestore",
 		"NoRecoveryPlan",
+	}
+}
+
+type PermissionModelType string
+
+// Enum values for PermissionModelType
+const (
+	PermissionModelTypeLegacyIamUser PermissionModelType = "LegacyIAMUser"
+	PermissionModelTypeRoleBased     PermissionModelType = "RoleBased"
+)
+
+// Values returns all known values for PermissionModelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionModelType) Values() []PermissionModelType {
+	return []PermissionModelType{
+		"LegacyIAMUser",
+		"RoleBased",
 	}
 }
 
@@ -370,6 +498,7 @@ const (
 	ResiliencyPolicyTierImportant       ResiliencyPolicyTier = "Important"
 	ResiliencyPolicyTierCoreServices    ResiliencyPolicyTier = "CoreServices"
 	ResiliencyPolicyTierNonCritical     ResiliencyPolicyTier = "NonCritical"
+	ResiliencyPolicyTierNotApplicable   ResiliencyPolicyTier = "NotApplicable"
 )
 
 // Values returns all known values for ResiliencyPolicyTier. Note that this can be
@@ -382,6 +511,7 @@ func (ResiliencyPolicyTier) Values() []ResiliencyPolicyTier {
 		"Important",
 		"CoreServices",
 		"NonCritical",
+		"NotApplicable",
 	}
 }
 

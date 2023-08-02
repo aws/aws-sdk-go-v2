@@ -15,9 +15,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Signs out users from all devices. It also invalidates all refresh tokens that
-// Amazon Cognito has issued to a user. A user can still use a hosted UI cookie to
-// retrieve new tokens for the duration of the 1-hour cookie validity period.
+// Signs out a user from all devices. GlobalSignOut invalidates all identity,
+// access and refresh tokens that Amazon Cognito has issued to a user. A user can
+// still use a hosted UI cookie to retrieve new tokens for the duration of the
+// 1-hour cookie validity period. Your app isn't aware that a user's access token
+// is revoked unless it attempts to authorize a user pools API request with an
+// access token that contains the scope aws.cognito.signin.user.admin . Your app
+// might otherwise accept access tokens until they expire. Amazon Cognito doesn't
+// evaluate Identity and Access Management (IAM) policies in requests for this API
+// operation. For this operation, you can't use IAM credentials to authorize
+// requests, and you can't grant IAM permissions in policies. For more information
+// about authorization models in Amazon Cognito, see Using the Amazon Cognito
+// native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// .
 func (c *Client) GlobalSignOut(ctx context.Context, params *GlobalSignOutInput, optFns ...func(*Options)) (*GlobalSignOutOutput, error) {
 	if params == nil {
 		params = &GlobalSignOutInput{}

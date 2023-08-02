@@ -20,9 +20,16 @@ import (
 // Username parameter, you can use the username or user alias. The method used to
 // send the confirmation code is sent according to the specified
 // AccountRecoverySetting. For more information, see Recovering User Accounts (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html)
-// in the Amazon Cognito Developer Guide. If neither a verified phone number nor a
-// verified email exists, an InvalidParameterException is thrown. To use the
-// confirmation code for resetting the password, call ConfirmForgotPassword (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html)
+// in the Amazon Cognito Developer Guide. To use the confirmation code for
+// resetting the password, call ConfirmForgotPassword (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html)
+// . If neither a verified phone number nor a verified email exists, this API
+// returns InvalidParameterException . If your app client has a client secret and
+// you don't provide a SECRET_HASH parameter, this API returns
+// NotAuthorizedException . Amazon Cognito doesn't evaluate Identity and Access
+// Management (IAM) policies in requests for this API operation. For this
+// operation, you can't use IAM credentials to authorize requests, and you can't
+// grant IAM permissions in policies. For more information about authorization
+// models in Amazon Cognito, see Using the Amazon Cognito native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 // . This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
 // can send SMS messages to US phone numbers. If you use SMS text messages in
@@ -35,7 +42,7 @@ import (
 // , you can send messages only to verified phone numbers. After you test your app
 // while in the sandbox environment, you can move out of the sandbox and into
 // production. For more information, see SMS message settings for Amazon Cognito
-// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) ForgotPassword(ctx context.Context, params *ForgotPasswordInput, optFns ...func(*Options)) (*ForgotPasswordOutput, error) {
 	if params == nil {

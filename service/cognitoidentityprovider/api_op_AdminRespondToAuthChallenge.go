@@ -29,9 +29,13 @@ import (
 // , you can send messages only to verified phone numbers. After you test your app
 // while in the sandbox environment, you can move out of the sandbox and into
 // production. For more information, see SMS message settings for Amazon Cognito
-// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
-// in the Amazon Cognito Developer Guide. Calling this action requires developer
-// credentials.
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html)
+// in the Amazon Cognito Developer Guide. Amazon Cognito evaluates Identity and
+// Access Management (IAM) policies in requests for this API operation. For this
+// operation, you must use IAM credentials to authorize requests, and you must
+// grant yourself the corresponding IAM permission in a policy. Learn more
+//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) AdminRespondToAuthChallenge(ctx context.Context, params *AdminRespondToAuthChallengeInput, optFns ...func(*Options)) (*AdminRespondToAuthChallengeOutput, error) {
 	if params == nil {
 		params = &AdminRespondToAuthChallengeInput{}
@@ -96,7 +100,11 @@ type AdminRespondToAuthChallengeInput struct {
 	// alias (such as an email address or phone number). To make this simpler, the
 	// AdminInitiateAuth response includes the actual username value in the
 	// USERNAMEUSER_ID_FOR_SRP attribute. This happens even if you specified an alias
-	// in your call to AdminInitiateAuth .
+	// in your call to AdminInitiateAuth . For more information about SECRET_HASH , see
+	// Computing secret hash values (https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash)
+	// . For information about DEVICE_KEY , see Working with user devices in your user
+	// pool (https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html)
+	// .
 	ChallengeResponses map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for any custom

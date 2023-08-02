@@ -3330,6 +3330,26 @@ func (m *validateOpGetModelPackageGroupPolicy) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetScalingConfigurationRecommendation struct {
+}
+
+func (*validateOpGetScalingConfigurationRecommendation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetScalingConfigurationRecommendation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetScalingConfigurationRecommendationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetScalingConfigurationRecommendationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSearchSuggestions struct {
 }
 
@@ -5532,6 +5552,10 @@ func addOpGetLineageGroupPolicyValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetModelPackageGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetModelPackageGroupPolicy{}, middleware.After)
+}
+
+func addOpGetScalingConfigurationRecommendationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetScalingConfigurationRecommendation{}, middleware.After)
 }
 
 func addOpGetSearchSuggestionsValidationMiddleware(stack *middleware.Stack) error {
@@ -14980,6 +15004,21 @@ func validateOpGetModelPackageGroupPolicyInput(v *GetModelPackageGroupPolicyInpu
 	invalidParams := smithy.InvalidParamsError{Context: "GetModelPackageGroupPolicyInput"}
 	if v.ModelPackageGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetScalingConfigurationRecommendationInput(v *GetScalingConfigurationRecommendationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetScalingConfigurationRecommendationInput"}
+	if v.InferenceRecommendationsJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InferenceRecommendationsJobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

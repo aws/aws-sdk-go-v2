@@ -1190,6 +1190,26 @@ func (m *validateOpGetIdentityProviderByIdentifier) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetLogDeliveryConfiguration struct {
+}
+
+func (*validateOpGetLogDeliveryConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLogDeliveryConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLogDeliveryConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLogDeliveryConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSigningCertificate struct {
 }
 
@@ -1585,6 +1605,26 @@ func (m *validateOpRevokeToken) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRevokeTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSetLogDeliveryConfiguration struct {
+}
+
+func (*validateOpSetLogDeliveryConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetLogDeliveryConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetLogDeliveryConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetLogDeliveryConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2246,6 +2286,10 @@ func addOpGetIdentityProviderByIdentifierValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpGetIdentityProviderByIdentifier{}, middleware.After)
 }
 
+func addOpGetLogDeliveryConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLogDeliveryConfiguration{}, middleware.After)
+}
+
 func addOpGetSigningCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSigningCertificate{}, middleware.After)
 }
@@ -2324,6 +2368,10 @@ func addOpRespondToAuthChallengeValidationMiddleware(stack *middleware.Stack) er
 
 func addOpRevokeTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeToken{}, middleware.After)
+}
+
+func addOpSetLogDeliveryConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetLogDeliveryConfiguration{}, middleware.After)
 }
 
 func addOpSetRiskConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2648,6 +2696,41 @@ func validateLambdaConfigType(v *types.LambdaConfigType) error {
 		if err := validateCustomEmailLambdaVersionConfigType(v.CustomEmailSender); err != nil {
 			invalidParams.AddNested("CustomEmailSender", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogConfigurationListType(v []types.LogConfigurationType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogConfigurationListType"}
+	for i := range v {
+		if err := validateLogConfigurationType(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogConfigurationType(v *types.LogConfigurationType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogConfigurationType"}
+	if len(v.LogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if len(v.EventSource) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EventSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3990,6 +4073,21 @@ func validateOpGetIdentityProviderByIdentifierInput(v *GetIdentityProviderByIden
 	}
 }
 
+func validateOpGetLogDeliveryConfigurationInput(v *GetLogDeliveryConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLogDeliveryConfigurationInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSigningCertificateInput(v *GetSigningCertificateInput) error {
 	if v == nil {
 		return nil
@@ -4297,6 +4395,28 @@ func validateOpRevokeTokenInput(v *RevokeTokenInput) error {
 	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetLogDeliveryConfigurationInput(v *SetLogDeliveryConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetLogDeliveryConfigurationInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.LogConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogConfigurations"))
+	} else if v.LogConfigurations != nil {
+		if err := validateLogConfigurationListType(v.LogConfigurations); err != nil {
+			invalidParams.AddNested("LogConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

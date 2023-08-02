@@ -18,6 +18,11 @@ import (
 // Initiates sign-in for a user in the Amazon Cognito user directory. You can't
 // sign in a user with a federated IdP with InitiateAuth . For more information,
 // see Adding user pool sign-in through a third party (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html)
+// . Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// Using the Amazon Cognito native and OIDC APIs (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 // . This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
 // can send SMS messages to US phone numbers. If you use SMS text messages in
@@ -30,7 +35,7 @@ import (
 // , you can send messages only to verified phone numbers. After you test your app
 // while in the sandbox environment, you can move out of the sandbox and into
 // production. For more information, see SMS message settings for Amazon Cognito
-// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html)
 // in the Amazon Cognito Developer Guide.
 func (c *Client) InitiateAuth(ctx context.Context, params *InitiateAuthInput, optFns ...func(*Options)) (*InitiateAuthOutput, error) {
 	if params == nil {
@@ -85,12 +90,19 @@ type InitiateAuthInput struct {
 	// that you're invoking. The required values depend on the value of AuthFlow :
 	//   - For USER_SRP_AUTH : USERNAME (required), SRP_A (required), SECRET_HASH
 	//   (required if the app client is configured with a client secret), DEVICE_KEY .
+	//   - For USER_PASSWORD_AUTH : USERNAME (required), PASSWORD (required),
+	//   SECRET_HASH (required if the app client is configured with a client secret),
+	//   DEVICE_KEY .
 	//   - For REFRESH_TOKEN_AUTH/REFRESH_TOKEN : REFRESH_TOKEN (required), SECRET_HASH
 	//   (required if the app client is configured with a client secret), DEVICE_KEY .
 	//   - For CUSTOM_AUTH : USERNAME (required), SECRET_HASH (if app client is
 	//   configured with client secret), DEVICE_KEY . To start the authentication flow
 	//   with password verification, include ChallengeName: SRP_A and SRP_A: (The
 	//   SRP_A Value) .
+	// For more information about SECRET_HASH , see Computing secret hash values (https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash)
+	// . For information about DEVICE_KEY , see Working with user devices in your user
+	// pool (https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html)
+	// .
 	AuthParameters map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for certain

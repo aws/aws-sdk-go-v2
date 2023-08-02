@@ -5370,6 +5370,30 @@ func (StageStatus) Values() []StageStatus {
 	}
 }
 
+type Statistic string
+
+// Enum values for Statistic
+const (
+	StatisticAverage     Statistic = "Average"
+	StatisticMinimum     Statistic = "Minimum"
+	StatisticMaximum     Statistic = "Maximum"
+	StatisticSampleCount Statistic = "SampleCount"
+	StatisticSum         Statistic = "Sum"
+)
+
+// Values returns all known values for Statistic. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Statistic) Values() []Statistic {
+	return []Statistic{
+		"Average",
+		"Minimum",
+		"Maximum",
+		"SampleCount",
+		"Sum",
+	}
+}
+
 type StepStatus string
 
 // Enum values for StepStatus

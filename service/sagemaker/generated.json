@@ -179,6 +179,7 @@
         "api_op_GetLineageGroupPolicy.go",
         "api_op_GetModelPackageGroupPolicy.go",
         "api_op_GetSagemakerServicecatalogPortfolioStatus.go",
+        "api_op_GetScalingConfigurationRecommendation.go",
         "api_op_GetSearchSuggestions.go",
         "api_op_ImportHubContent.go",
         "api_op_ListActions.go",

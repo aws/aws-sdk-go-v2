@@ -63,8 +63,8 @@ type CreateResiliencyPolicyInput struct {
 	// The description for the policy.
 	PolicyDescription *string
 
-	// The tags assigned to the resource. A tag is a label that you assign to an
-	// Amazon Web Services resource. Each tag consists of a key/value pair.
+	// Tags assigned to the resource. A tag is a label that you assign to an Amazon
+	// Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

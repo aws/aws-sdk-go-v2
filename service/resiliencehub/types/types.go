@@ -10,33 +10,41 @@ import (
 // Defines a recommendation for a CloudWatch alarm.
 type AlarmRecommendation struct {
 
-	// The name of the alarm recommendation.
+	// Name of the alarm recommendation.
 	//
 	// This member is required.
 	Name *string
 
-	// The identifier of the alarm recommendation.
+	// Identifier of the alarm recommendation.
 	//
 	// This member is required.
 	RecommendationId *string
 
-	// The reference identifier of the alarm recommendation.
+	// Reference identifier of the alarm recommendation.
 	//
 	// This member is required.
 	ReferenceId *string
 
-	// The type of alarm recommendation.
+	// Type of alarm recommendation.
 	//
 	// This member is required.
 	Type AlarmType
 
-	// The Application Component for the CloudWatch alarm recommendation.
+	// Application Component name for the CloudWatch alarm recommendation. This name
+	// is saved as the first item in the appComponentNames list.
+	//
+	// Deprecated: An alarm recommendation can be attached to multiple Application
+	// Components, hence this property will be replaced by the new property
+	// 'appComponentNames'.
 	AppComponentName *string
 
-	// The description of the recommendation.
+	// List of Application Component names for the CloudWatch alarm recommendation.
+	AppComponentNames []string
+
+	// Description of the alarm recommendation.
 	Description *string
 
-	// The list of CloudWatch alarm recommendations.
+	// List of CloudWatch alarm recommendations.
 	Items []RecommendationItem
 
 	// The prerequisite for the alarm recommendation.
@@ -48,20 +56,20 @@ type AlarmRecommendation struct {
 // Defines an Resilience Hub application.
 type App struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AppArn *string
 
-	// The timestamp for when the app was created.
+	// Timestamp for when the app was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The name for the application.
+	// Name for the application.
 	//
 	// This member is required.
 	Name *string
@@ -69,32 +77,48 @@ type App struct {
 	// Assessment execution schedule with 'Daily' or 'Disabled' values.
 	AssessmentSchedule AppAssessmentScheduleType
 
-	// The current status of compliance for the resiliency policy.
+	// Current status of compliance for the resiliency policy.
 	ComplianceStatus AppComplianceStatusType
 
-	// The optional description for an app.
+	// Optional description for an application.
 	Description *string
 
-	// The timestamp for the most recent compliance evaluation.
+	// Indicates if compliance drifts (deviations) were detected while running an
+	// assessment for your application.
+	DriftStatus AppDriftStatusType
+
+	// The list of events you would like to subscribe and get notification for.
+	// Currently, Resilience Hub supports notifications only for Drift detected and
+	// Scheduled assessment failure events.
+	EventSubscriptions []EventSubscription
+
+	// Timestamp for the most recent compliance evaluation.
 	LastAppComplianceEvaluationTime *time.Time
 
-	// The timestamp for the most recent resiliency score evaluation.
+	// Indicates the last time that a drift was evaluated.
+	LastDriftEvaluationTime *time.Time
+
+	// Timestamp for the most recent resiliency score evaluation.
 	LastResiliencyScoreEvaluationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this
-	// ARN is: arn: partition :resiliencehub: region : account :resiliency-policy/
-	// policy-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Defines the roles and credentials that Resilience Hub would use while creating
+	// the application, importing its resources, and running an assessment.
+	PermissionModel *PermissionModel
+
+	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
+	// is: arn: partition :resiliencehub: region : account :resiliency-policy/ policy-id
+	// . For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	PolicyArn *string
 
-	// The current resiliency score for the application.
+	// Current resiliency score for the application.
 	ResiliencyScore float64
 
-	// The status of the application.
+	// Status of the application.
 	Status AppStatusType
 
-	// The tags assigned to the resource. A tag is a label that you assign to an
-	// Amazon Web Services resource. Each tag consists of a key/value pair.
+	// Tags assigned to the resource. A tag is a label that you assign to an Amazon
+	// Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -103,15 +127,15 @@ type App struct {
 // Defines an application assessment.
 type AppAssessment struct {
 
-	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
+	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
+	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
 
-	// The current status of the assessment for the resiliency policy.
+	// Current status of the assessment for the resiliency policy.
 	//
 	// This member is required.
 	AssessmentStatus AssessmentStatus
@@ -121,49 +145,56 @@ type AppAssessment struct {
 	// This member is required.
 	Invoker AssessmentInvoker
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	AppArn *string
 
-	// The version of the application.
+	// Version of an application.
 	AppVersion *string
 
-	// The name of the assessment.
+	// Name of the assessment.
 	AssessmentName *string
 
-	// The application compliance against the resiliency policy.
+	// Application compliance against the resiliency policy.
 	Compliance map[string]DisruptionCompliance
 
-	// The current status of the compliance for the resiliency policy.
+	// Current status of the compliance for the resiliency policy.
 	ComplianceStatus ComplianceStatus
 
-	// The cost for the application.
+	// Cost for the application.
 	Cost *Cost
 
-	// The end time for the action.
+	// Indicates if compliance drifts (deviations) were detected while running an
+	// assessment for your application.
+	DriftStatus DriftStatus
+
+	// End time for the action.
 	EndTime *time.Time
 
 	// Error or warning message from the assessment execution
 	Message *string
 
-	// The resiliency policy.
+	// Resiliency policy of an application.
 	Policy *ResiliencyPolicy
 
-	// The current resiliency score for the application.
+	// Current resiliency score for an application.
 	ResiliencyScore *ResiliencyScore
 
 	// A resource error object containing a list of errors retrieving an application's
 	// resources.
 	ResourceErrorsDetails *ResourceErrorsDetails
 
-	// The starting time for the action.
+	// Starting time for the action.
 	StartTime *time.Time
 
-	// The tags assigned to the resource. A tag is a label that you assign to an
-	// Amazon Web Services resource. Each tag consists of a key/value pair.
+	// Tags assigned to the resource. A tag is a label that you assign to an Amazon
+	// Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
+
+	// Version name of the published application.
+	VersionName *string
 
 	noSmithyDocumentSerde
 }
@@ -171,51 +202,58 @@ type AppAssessment struct {
 // Defines an application assessment summary.
 type AppAssessmentSummary struct {
 
-	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
+	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
+	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
 
-	// The current status of the assessment for the resiliency policy.
+	// Current status of the assessment for the resiliency policy.
 	//
 	// This member is required.
 	AssessmentStatus AssessmentStatus
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	AppArn *string
 
-	// The version of the application.
+	// Version of an application.
 	AppVersion *string
 
-	// The name of the assessment.
+	// Name of the assessment.
 	AssessmentName *string
 
-	// The current status of compliance for the resiliency policy.
+	// TCurrent status of compliance for the resiliency policy.
 	ComplianceStatus ComplianceStatus
 
-	// The cost for the application.
+	// Cost for an application.
 	Cost *Cost
 
-	// The end time for the action.
+	// Indicates if compliance drifts (deviations) were detected while running an
+	// assessment for your application.
+	DriftStatus DriftStatus
+
+	// End time for the action.
 	EndTime *time.Time
 
-	// The entity that invoked the assessment.
+	// Entity that invoked the assessment.
 	Invoker AssessmentInvoker
 
-	// The message from the assessment run.
+	// Message from the assessment run.
 	Message *string
 
-	// The current resiliency score for the application.
+	// Current resiliency score for the application.
 	ResiliencyScore float64
 
-	// The starting time for the action.
+	// Starting time for the action.
 	StartTime *time.Time
+
+	// Name of an application version.
+	VersionName *string
 
 	noSmithyDocumentSerde
 }
@@ -223,7 +261,7 @@ type AppAssessmentSummary struct {
 // Defines an Application Component.
 type AppComponent struct {
 
-	// The name of the Application Component.
+	// Name of the Application Component.
 	//
 	// This member is required.
 	Name *string
@@ -241,7 +279,7 @@ type AppComponent struct {
 	// Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
 	AdditionalInfo map[string][]string
 
-	// Unique identifier of the Application Component.
+	// Identifier of the Application Component.
 	Id *string
 
 	noSmithyDocumentSerde
@@ -251,7 +289,7 @@ type AppComponent struct {
 // policy.
 type AppComponentCompliance struct {
 
-	// The name of the Application Component.
+	// Name of the Application Component.
 	AppComponentName *string
 
 	// The compliance of the Application Component against the resiliency policy.
@@ -266,7 +304,7 @@ type AppComponentCompliance struct {
 	// The current resiliency score for the application.
 	ResiliencyScore *ResiliencyScore
 
-	// The status of the action.
+	// Status of the action.
 	Status ComplianceStatus
 
 	noSmithyDocumentSerde
@@ -303,9 +341,9 @@ type AppInputSource struct {
 // Defines an application summary.
 type AppSummary struct {
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -330,22 +368,128 @@ type AppSummary struct {
 	// The optional description for an app.
 	Description *string
 
+	// Indicates if compliance drifts (deviations) were detected while running an
+	// assessment for your application.
+	DriftStatus AppDriftStatusType
+
 	// The current resiliency score for the application.
 	ResiliencyScore float64
 
-	// The status of the application.
+	// Status of the application.
 	Status AppStatusType
 
 	noSmithyDocumentSerde
 }
 
-// The version of the application.
+// Version of an application.
 type AppVersionSummary struct {
 
-	// The version of the application.
+	// Version of an application.
 	//
 	// This member is required.
 	AppVersion *string
+
+	// Creation time of the application version.
+	CreationTime *time.Time
+
+	// Identifier of the application version.
+	Identifier *int64
+
+	// Name of the application version.
+	VersionName *string
+
+	noSmithyDocumentSerde
+}
+
+// List of operational recommendations that did not get included or excluded.
+type BatchUpdateRecommendationStatusFailedEntry struct {
+
+	// An identifier of an entry in this batch that is used to communicate the result.
+	// The entryId s of a batch request need to be unique within a request.
+	//
+	// This member is required.
+	EntryId *string
+
+	// Indicates the error that occurred while excluding an operational recommendation.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// List of operational recommendations that were successfully included or excluded.
+type BatchUpdateRecommendationStatusSuccessfulEntry struct {
+
+	// An identifier for an entry in this batch that is used to communicate the
+	// result. The entryId s of a batch request need to be unique within a request.
+	//
+	// This member is required.
+	EntryId *string
+
+	// Indicates if the operational recommendation was successfully excluded.
+	//
+	// This member is required.
+	Excluded *bool
+
+	// The operational recommendation item.
+	//
+	// This member is required.
+	Item *UpdateRecommendationStatusItem
+
+	// Reference identifier of the operational recommendation.
+	//
+	// This member is required.
+	ReferenceId *string
+
+	// Indicates the reason for excluding an operational recommendation.
+	ExcludeReason ExcludeRecommendationReason
+
+	noSmithyDocumentSerde
+}
+
+// Indicates the compliance drifts (recovery time objective (RTO) and recovery
+// point objective (RPO)) that were detected for an assessed entity.
+type ComplianceDrift struct {
+
+	// Assessment identifier that is associated with this drift item.
+	ActualReferenceId *string
+
+	// Actual compliance value of the entity.
+	ActualValue map[string]DisruptionCompliance
+
+	// Identifier of your application.
+	AppId *string
+
+	// Published version of your application on which drift was detected.
+	AppVersion *string
+
+	// Difference type between actual and expected recovery point objective (RPO) and
+	// recovery time objective (RTO) values. Currently, Resilience Hub supports only
+	// NotEqual difference type.
+	DiffType DifferenceType
+
+	// The type of drift detected. Currently, Resilience Hub supports only
+	// ApplicationCompliance drift type.
+	DriftType DriftType
+
+	// Identifier of an entity in which drift was detected. For compliance drift, the
+	// entity ID can be either application ID or the AppComponent ID.
+	EntityId *string
+
+	// The type of entity in which drift was detected. For compliance drifts,
+	// Resilience Hub supports AWS::ResilienceHub::AppComponent and
+	// AWS::ResilienceHub::Application .
+	EntityType *string
+
+	// Assessment identifier of a previous assessment of the same application version.
+	// Resilience Hub uses the previous assessment (associated with the reference
+	// identifier) to compare the compliance with the current assessment to identify
+	// drifts.
+	ExpectedReferenceId *string
+
+	// The expected compliance value of an entity.
+	ExpectedValue map[string]DisruptionCompliance
 
 	noSmithyDocumentSerde
 }
@@ -355,17 +499,17 @@ type AppVersionSummary struct {
 // recommendations, and recommendation statuses.
 type ComponentRecommendation struct {
 
-	// The name of the Application Component.
+	// Name of the Application Component.
 	//
 	// This member is required.
 	AppComponentName *string
 
-	// The list of recommendations.
+	// List of recommendations.
 	//
 	// This member is required.
 	ConfigRecommendations []ConfigRecommendation
 
-	// The recommendation status.
+	// Status of the recommendation.
 	//
 	// This member is required.
 	RecommendationStatus RecommendationComplianceStatus
@@ -373,7 +517,7 @@ type ComponentRecommendation struct {
 	noSmithyDocumentSerde
 }
 
-// Defines a configuration recommendation.
+// Defines a recommendation configuration.
 type ConfigRecommendation struct {
 
 	// The name of the recommendation configuration.
@@ -386,12 +530,12 @@ type ConfigRecommendation struct {
 	// This member is required.
 	OptimizationType ConfigRecommendationOptimizationType
 
-	// The reference identifier for the recommendation configuration.
+	// Reference identifier for the recommendation configuration.
 	//
 	// This member is required.
 	ReferenceId *string
 
-	// The name of the Application Component.
+	// Name of the Application Component.
 	AppComponentName *string
 
 	// The current compliance against the resiliency policy before applying the
@@ -464,13 +608,13 @@ type DisruptionCompliance struct {
 	// The RPO description.
 	RpoDescription *string
 
-	// The RPO reference identifier.
+	// Reference identifier of the RPO .
 	RpoReferenceId *string
 
 	// The RTO description.
 	RtoDescription *string
 
-	// The RTO reference identifier.
+	// Reference identifier of the RTO.
 	RtoReferenceId *string
 
 	noSmithyDocumentSerde
@@ -479,8 +623,8 @@ type DisruptionCompliance struct {
 // The input source of the Amazon Elastic Kubernetes Service cluster.
 type EksSource struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service
-	// cluster. The format for this ARN is: arn: aws :eks: region : account-id :cluster/
+	// Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster.
+	// The format for this ARN is: arn: aws :eks: region : account-id :cluster/
 	// cluster-name . For more information about ARNs, see  Amazon Resource Names
 	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
@@ -501,8 +645,8 @@ type EksSource struct {
 // Kubernetes Service cluster.
 type EksSourceClusterNamespace struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service
-	// cluster. The format for this ARN is: arn: aws :eks: region : account-id :cluster/
+	// Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster.
+	// The format for this ARN is: arn: aws :eks: region : account-id :cluster/
 	// cluster-name . For more information about ARNs, see  Amazon Resource Names
 	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
@@ -515,6 +659,33 @@ type EksSourceClusterNamespace struct {
 	//
 	// This member is required.
 	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates an event you would like to subscribe and get notification for.
+// Currently, Resilience Hub supports notifications only for Drift detected and
+// Scheduled assessment failure events.
+type EventSubscription struct {
+
+	// The type of event you would like to subscribe and get notification for.
+	// Currently, Resilience Hub supports notifications only for Drift detected (
+	// DriftDetected ) and Scheduled assessment failure ( ScheduledAssessmentFailure )
+	// events.
+	//
+	// This member is required.
+	EventType EventType
+
+	// Unique name to identify an event subscription.
+	//
+	// This member is required.
+	Name *string
+
+	// Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account :app/
+	// app-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference guide.
+	SnsTopicArn *string
 
 	noSmithyDocumentSerde
 }
@@ -538,12 +709,12 @@ type FailurePolicy struct {
 // Defines a logical resource identifier.
 type LogicalResourceId struct {
 
-	// The identifier of the resource.
+	// Identifier of the resource.
 	//
 	// This member is required.
 	Identifier *string
 
-	// The name of the Amazon Elastic Kubernetes Service cluster and namespace this
+	// Name of the Amazon Elastic Kubernetes Service cluster and namespace this
 	// resource belongs to. This parameter accepts values in "eks-cluster/namespace"
 	// format.
 	EksSourceName *string
@@ -560,17 +731,48 @@ type LogicalResourceId struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the roles and credentials that Resilience Hub would use while creating
+// the application, importing its resources, and running an assessment.
+type PermissionModel struct {
+
+	// Defines how Resilience Hub scans your resources. It can scan for the resources
+	// by using a pre-existing role in your Amazon Web Services account, or by using
+	// the credentials of the current IAM user.
+	//
+	// This member is required.
+	Type PermissionModelType
+
+	// Defines a list of role Amazon Resource Names (ARNs) to be used in other
+	// accounts. These ARNs are used for querying purposes while importing resources
+	// and assessing your application.
+	//   - These ARNs are required only when your resources are in other accounts and
+	//   you have different role name in these accounts. Else, the invoker role name will
+	//   be used in the other accounts.
+	//   - These roles must have a trust policy with iam:AssumeRole permission to the
+	//   invoker role in the primary account.
+	CrossAccountRoleArns []string
+
+	// Existing Amazon Web Services IAM role name in the primary Amazon Web Services
+	// account that will be assumed by Resilience Hub Service Principle to obtain a
+	// read-only access to your application resources while running an assessment. You
+	// must have iam:passRole permission for this role while creating or updating the
+	// application.
+	InvokerRoleName *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a physical resource. A physical resource is a resource that exists in
 // your account. It can be identified using an Amazon Resource Name (ARN) or an
 // Resilience Hub-native identifier.
 type PhysicalResource struct {
 
-	// The logical identifier of the resource.
+	// Logical identifier of the resource.
 	//
 	// This member is required.
 	LogicalResourceId *LogicalResourceId
 
-	// The physical identifier of the resource.
+	// Identifier of the physical resource.
 	//
 	// This member is required.
 	PhysicalResourceId *PhysicalResourceId
@@ -594,13 +796,13 @@ type PhysicalResource struct {
 	// Indicates if a resource is included or excluded from the assessment.
 	Excluded *bool
 
-	// The name of the parent resource.
+	// Name of the parent resource.
 	ParentResourceName *string
 
 	// The name of the resource.
 	ResourceName *string
 
-	// The type of input source.
+	// Type of input source.
 	SourceType ResourceSourceType
 
 	noSmithyDocumentSerde
@@ -609,14 +811,40 @@ type PhysicalResource struct {
 // Defines a physical resource identifier.
 type PhysicalResourceId struct {
 
-	// The identifier of the physical resource.
+	// Identifier of the physical resource.
 	//
 	// This member is required.
 	Identifier *string
 
 	// Specifies the type of physical resource identifier. Arn The resource identifier
-	// is an Amazon Resource Name (ARN) . Native The resource identifier is an
-	// Resilience Hub-native identifier.
+	// is an Amazon Resource Name (ARN) and it can identify the following list of
+	// resources:
+	//   - AWS::ECS::Service
+	//   - AWS::EFS::FileSystem
+	//   - AWS::ElasticLoadBalancingV2::LoadBalancer
+	//   - AWS::Lambda::Function
+	//   - AWS::SNS::Topic
+	// Native The resource identifier is an Resilience Hub-native identifier and it
+	// can identify the following list of resources:
+	//   - AWS::ApiGateway::RestApi
+	//   - AWS::ApiGatewayV2::Api
+	//   - AWS::AutoScaling::AutoScalingGroup
+	//   - AWS::DocDB::DBCluster
+	//   - AWS::DocDB::DBGlobalCluster
+	//   - AWS::DocDB::DBInstance
+	//   - AWS::DynamoDB::GlobalTable
+	//   - AWS::DynamoDB::Table
+	//   - AWS::EC2::EC2Fleet
+	//   - AWS::EC2::Instance
+	//   - AWS::EC2::NatGateway
+	//   - AWS::EC2::Volume
+	//   - AWS::ElasticLoadBalancing::LoadBalancer
+	//   - AWS::RDS::DBCluster
+	//   - AWS::RDS::DBInstance
+	//   - AWS::RDS::GlobalCluster
+	//   - AWS::Route53::RecordSet
+	//   - AWS::S3::Bucket
+	//   - AWS::SQS::Queue
 	//
 	// This member is required.
 	Type PhysicalIdentifierType
@@ -662,10 +890,16 @@ type RecommendationItem struct {
 	// Specifies if the recommendation has already been implemented.
 	AlreadyImplemented *bool
 
-	// The resource identifier.
+	// Indicates the reason for excluding an operational recommendation.
+	ExcludeReason ExcludeRecommendationReason
+
+	// Indicates if an operational recommendation item is excluded.
+	Excluded *bool
+
+	// Identifier of the resource.
 	ResourceId *string
 
-	// The target account identifier.
+	// Identifier of the target account.
 	TargetAccountId *string
 
 	// The target region.
@@ -678,26 +912,26 @@ type RecommendationItem struct {
 // action.
 type RecommendationTemplate struct {
 
-	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn: partition :resiliencehub: region : account :app-assessment/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:
+	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
+	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
 	AssessmentArn *string
 
-	// The format of the recommendation template. CfnJson The template is
-	// CloudFormation JSON. CfnYaml The template is CloudFormation YAML.
+	// Format of the recommendation template. CfnJson The template is CloudFormation
+	// JSON. CfnYaml The template is CloudFormation YAML.
 	//
 	// This member is required.
 	Format TemplateFormat
 
-	// The name for the recommendation template.
+	// Name for the recommendation template.
 	//
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) for the recommendation template.
+	// Amazon Resource Name (ARN) for the recommendation template.
 	//
 	// This member is required.
 	RecommendationTemplateArn *string
@@ -709,21 +943,21 @@ type RecommendationTemplate struct {
 	// This member is required.
 	RecommendationTypes []RenderRecommendationType
 
-	// The status of the action.
+	// Status of the action.
 	//
 	// This member is required.
 	Status RecommendationTemplateStatus
 
-	// The Amazon Resource Name (ARN) of the Resilience Hub application. The format
-	// for this ARN is: arn: partition :resiliencehub: region : account :app/ app-id .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
+	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
+	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	AppArn *string
 
 	// The end time for the action.
 	EndTime *time.Time
 
-	// The message for the recommendation template.
+	// Message for the recommendation template.
 	Message *string
 
 	// Indicates if replacements are needed.
@@ -735,8 +969,8 @@ type RecommendationTemplate struct {
 	// The start time for the action.
 	StartTime *time.Time
 
-	// The tags assigned to the resource. A tag is a label that you assign to an
-	// Amazon Web Services resource. Each tag consists of a key/value pair.
+	// Tags assigned to the resource. A tag is a label that you assign to an Amazon
+	// Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
 	// The file location of the template.
@@ -761,9 +995,9 @@ type ResiliencyPolicy struct {
 	// The resiliency policy.
 	Policy map[string]FailurePolicy
 
-	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this
-	// ARN is: arn: partition :resiliencehub: region : account :resiliency-policy/
-	// policy-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
+	// is: arn: partition :resiliencehub: region : account :resiliency-policy/ policy-id
+	// . For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	PolicyArn *string
 
@@ -773,8 +1007,8 @@ type ResiliencyPolicy struct {
 	// The name of the policy
 	PolicyName *string
 
-	// The tags assigned to the resource. A tag is a label that you assign to an
-	// Amazon Web Services resource. Each tag consists of a key/value pair.
+	// Tags assigned to the resource. A tag is a label that you assign to an Amazon
+	// Web Services resource. Each tag consists of a key/value pair.
 	Tags map[string]string
 
 	// The tier for this resiliency policy, ranging from the highest severity (
@@ -804,10 +1038,10 @@ type ResiliencyScore struct {
 // Defines application resource errors.
 type ResourceError struct {
 
-	// This is the identifier of the resource.
+	// Identifier of the logical resource.
 	LogicalResourceId *string
 
-	// This is the identifier of the physical resource.
+	// Identifier of the physical resource.
 	PhysicalResourceId *string
 
 	// This is the error message.
@@ -843,7 +1077,7 @@ type ResourceMapping struct {
 	// This member is required.
 	MappingType ResourceMappingType
 
-	// The identifier of this resource.
+	// Identifier of the physical resource.
 	//
 	// This member is required.
 	PhysicalResourceId *PhysicalResourceId
@@ -851,7 +1085,7 @@ type ResourceMapping struct {
 	// The name of the application this resource is mapped to.
 	AppRegistryAppName *string
 
-	// The name of the Amazon Elastic Kubernetes Service cluster and namespace this
+	// Name of the Amazon Elastic Kubernetes Service cluster and namespace this
 	// resource belongs to. This parameter accepts values in "eks-cluster/namespace"
 	// format.
 	EksSourceName *string
@@ -859,10 +1093,10 @@ type ResourceMapping struct {
 	// The name of the CloudFormation stack this resource is mapped to.
 	LogicalStackName *string
 
-	// The name of the resource group this resource is mapped to.
+	// Name of the resource group that the resource is mapped to.
 	ResourceGroupName *string
 
-	// The name of the resource this resource is mapped to.
+	// Name of the resource that the resource is mapped to.
 	ResourceName *string
 
 	// The short name of the Terraform source.
@@ -891,7 +1125,7 @@ type SopRecommendation struct {
 	// This member is required.
 	RecommendationId *string
 
-	// The reference identifier for the SOP recommendation.
+	// Reference identifier for the SOP recommendation.
 	//
 	// This member is required.
 	ReferenceId *string
@@ -901,19 +1135,19 @@ type SopRecommendation struct {
 	// This member is required.
 	ServiceType SopServiceType
 
-	// The name of the Application Component.
+	// Name of the Application Component.
 	AppComponentName *string
 
-	// The description of the SOP recommendation.
+	// Description of the SOP recommendation.
 	Description *string
 
 	// The recommendation items.
 	Items []RecommendationItem
 
-	// The name of the SOP recommendation.
+	// Name of the SOP recommendation.
 	Name *string
 
-	// The prerequisite for the SOP recommendation.
+	// Prerequisite for the SOP recommendation.
 	Prerequisite *string
 
 	noSmithyDocumentSerde
@@ -933,40 +1167,40 @@ type TerraformSource struct {
 // Defines a test recommendation.
 type TestRecommendation struct {
 
-	// The reference identifier for the test recommendation.
+	// Reference identifier for the test recommendation.
 	//
 	// This member is required.
 	ReferenceId *string
 
-	// The name of the Application Component.
+	// Name of the Application Component.
 	AppComponentName *string
 
 	// A list of recommended alarms that are used in the test and must be exported
 	// before or with the test.
 	DependsOnAlarms []string
 
-	// The description for the test recommendation.
+	// Description for the test recommendation.
 	Description *string
 
-	// The intent of the test recommendation.
+	// Intent of the test recommendation.
 	Intent *string
 
 	// The test recommendation items.
 	Items []RecommendationItem
 
-	// The name of the test recommendation.
+	// Name of the test recommendation.
 	Name *string
 
-	// The prerequisite of the test recommendation.
+	// Prerequisite of the test recommendation.
 	Prerequisite *string
 
 	// Identifier for the test recommendation.
 	RecommendationId *string
 
-	// The level of risk for this test recommendation.
+	// Level of risk for this test recommendation.
 	Risk TestRisk
 
-	// The type of test recommendation.
+	// Type of test recommendation.
 	Type TestType
 
 	noSmithyDocumentSerde
@@ -975,12 +1209,12 @@ type TestRecommendation struct {
 // Defines a resource that is not supported by Resilience Hub.
 type UnsupportedResource struct {
 
-	// The logical resource identifier for the unsupported resource.
+	// Logical resource identifier for the unsupported resource.
 	//
 	// This member is required.
 	LogicalResourceId *LogicalResourceId
 
-	// The physical resource identifier for the unsupported resource.
+	// Physical resource identifier for the unsupported resource.
 	//
 	// This member is required.
 	PhysicalResourceId *PhysicalResourceId
@@ -992,6 +1226,52 @@ type UnsupportedResource struct {
 
 	// The status of the unsupported resource.
 	UnsupportedResourceStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the operational recommendation item that needs a status update.
+type UpdateRecommendationStatusItem struct {
+
+	// Resource identifier of the operational recommendation item.
+	ResourceId *string
+
+	// Identifier of the target Amazon Web Services account.
+	TargetAccountId *string
+
+	// Identifier of the target Amazon Web Services Region.
+	TargetRegion *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the operational recommendation item that is to be included or excluded.
+type UpdateRecommendationStatusRequestEntry struct {
+
+	// An identifier for an entry in this batch that is used to communicate the
+	// result. The entryId s of a batch request need to be unique within a request.
+	//
+	// This member is required.
+	EntryId *string
+
+	// Indicates if the operational recommendation needs to be excluded. If set to
+	// True, the operational recommendation will be excluded.
+	//
+	// This member is required.
+	Excluded *bool
+
+	// The operational recommendation item.
+	//
+	// This member is required.
+	Item *UpdateRecommendationStatusItem
+
+	// Reference identifier of the operational recommendation item.
+	//
+	// This member is required.
+	ReferenceId *string
+
+	// Indicates the reason for excluding an operational recommendation.
+	ExcludeReason ExcludeRecommendationReason
 
 	noSmithyDocumentSerde
 }

@@ -33,9 +33,9 @@ func (c *Client) DeleteResiliencyPolicy(ctx context.Context, params *DeleteResil
 
 type DeleteResiliencyPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this
-	// ARN is: arn: partition :resiliencehub: region : account :resiliency-policy/
-	// policy-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
+	// is: arn: partition :resiliencehub: region : account :resiliency-policy/ policy-id
+	// . For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.
@@ -51,9 +51,9 @@ type DeleteResiliencyPolicyInput struct {
 
 type DeleteResiliencyPolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this
-	// ARN is: arn: partition :resiliencehub: region : account :resiliency-policy/
-	// policy-id . For more information about ARNs, see  Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
+	// is: arn: partition :resiliencehub: region : account :resiliency-policy/ policy-id
+	// . For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference guide.
 	//
 	// This member is required.

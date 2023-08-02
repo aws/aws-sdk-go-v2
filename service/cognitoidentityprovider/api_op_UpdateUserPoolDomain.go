@@ -34,7 +34,12 @@ import (
 // your request, Amazon Cognito requires up to 1 hour to distribute your new
 // certificate to your custom domain. For more information about adding a custom
 // domain to your user pool, see Using Your Own Domain for the Hosted UI (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html)
-// .
+// . Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy. Learn more
+//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) UpdateUserPoolDomain(ctx context.Context, params *UpdateUserPoolDomainInput, optFns ...func(*Options)) (*UpdateUserPoolDomainOutput, error) {
 	if params == nil {
 		params = &UpdateUserPoolDomainInput{}
