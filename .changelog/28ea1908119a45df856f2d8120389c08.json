@@ -1,8 +1,0 @@
-{
-    "id": "28ea1908-119a-45df-856f-2d8120389c08",
-    "type": "documentation",
-    "description": "Documentation changes related to Amazon EC2 Auto Scaling APIs.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

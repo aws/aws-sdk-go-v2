@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/athena v1.31.1
-	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.30.1
+	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/batch v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.28.1
@@ -25,13 +25,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.17.1
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.29.0
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.16.1
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.21.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.109.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.110.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.1

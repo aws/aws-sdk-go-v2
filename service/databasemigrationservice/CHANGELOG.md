@@ -1,3 +1,7 @@
+# v1.30.0 (2023-08-03)
+
+* **Feature**: The release makes public API for DMS Schema Conversion feature.
+
 # v1.29.0 (2023-08-01)
 
 * **Feature**: Adding new API describe-engine-versions which provides information about the lifecycle of a replication instance's version.

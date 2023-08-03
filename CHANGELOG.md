@@ -1,3 +1,17 @@
+# Release (2023-08-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.30.2](service/autoscaling/CHANGELOG.md#v1302-2023-08-03)
+  * **Documentation**: Documentation changes related to Amazon EC2 Auto Scaling APIs.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.18.2](service/cloud9/CHANGELOG.md#v1182-2023-08-03)
+  * **Documentation**: Updated the deprecation date for Amazon Linux. Doc only update.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.30.0](service/databasemigrationservice/CHANGELOG.md#v1300-2023-08-03)
+  * **Feature**: The release makes public API for DMS Schema Conversion feature.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.110.0](service/ec2/CHANGELOG.md#v11100-2023-08-03)
+  * **Feature**: This release adds new parameter isPrimaryIPv6 to  allow assigning an IPv6 address as a primary IPv6 address to a network interface which cannot be changed to give equivalent functionality available for network interfaces with primary IPv4 address.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.99.0](service/sagemaker/CHANGELOG.md#v1990-2023-08-03)
+  * **Feature**: Amazon SageMaker now supports running training jobs on p5.48xlarge instance types.
+
 # Release (2023-08-02)
 
 ## Module Highlights

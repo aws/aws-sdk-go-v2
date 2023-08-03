@@ -1,8 +1,0 @@
-{
-    "id": "7e7da782-2e7e-46fd-a833-505fab970056",
-    "type": "feature",
-    "description": "The release makes public API for DMS Schema Conversion feature.",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

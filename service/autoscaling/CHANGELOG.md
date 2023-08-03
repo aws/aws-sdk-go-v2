@@ -1,3 +1,7 @@
+# v1.30.2 (2023-08-03)
+
+* **Documentation**: Documentation changes related to Amazon EC2 Auto Scaling APIs.
+
 # v1.30.1 (2023-08-01)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.99.0 (2023-08-03)
+
+* **Feature**: Amazon SageMaker now supports running training jobs on p5.48xlarge instance types.
+
 # v1.98.0 (2023-08-02)
 
 * **Feature**: SageMaker Inference Recommender introduces a new API GetScalingConfigurationRecommendation to recommend auto scaling policies based on completed Inference Recommender jobs.

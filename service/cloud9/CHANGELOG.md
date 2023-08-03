@@ -1,3 +1,7 @@
+# v1.18.2 (2023-08-03)
+
+* **Documentation**: Updated the deprecation date for Amazon Linux. Doc only update.
+
 # v1.18.1 (2023-08-01)
 
 * No change notes available for this release.
