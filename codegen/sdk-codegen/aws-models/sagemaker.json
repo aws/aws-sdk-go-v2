@@ -54933,6 +54933,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.trn1n.32xlarge"
                     }
+                },
+                "ML_P5_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5.48xlarge"
+                    }
                 }
             }
         },
