@@ -80560,6 +80560,22 @@ func awsEc2query_deserializeDocumentInstanceIpv6Address(v **types.InstanceIpv6Ad
 				sv.Ipv6Address = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("isPrimaryIpv6", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.IsPrimaryIpv6 = ptr.Bool(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -81855,6 +81871,22 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecification(v **ty
 			{
 				xtv := string(val)
 				sv.NetworkInterfaceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("PrimaryIpv6", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.PrimaryIpv6 = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("privateIpAddress", t.Name.Local):
@@ -91544,6 +91576,22 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 				sv.NetworkInterfaceId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("primaryIpv6", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.PrimaryIpv6 = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("privateIpAddress", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -98779,6 +98827,22 @@ func awsEc2query_deserializeDocumentNetworkInterfaceIpv6Address(v **types.Networ
 			{
 				xtv := string(val)
 				sv.Ipv6Address = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("isPrimaryIpv6", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.IsPrimaryIpv6 = ptr.Bool(xtv)
 			}
 
 		default:

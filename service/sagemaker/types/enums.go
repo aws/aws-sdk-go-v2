@@ -5736,6 +5736,7 @@ const (
 	TrainingInstanceTypeMlTrn12xlarge   TrainingInstanceType = "ml.trn1.2xlarge"
 	TrainingInstanceTypeMlTrn132xlarge  TrainingInstanceType = "ml.trn1.32xlarge"
 	TrainingInstanceTypeMlTrn1n32xlarge TrainingInstanceType = "ml.trn1n.32xlarge"
+	TrainingInstanceTypeMlP548xlarge    TrainingInstanceType = "ml.p5.48xlarge"
 )
 
 // Values returns all known values for TrainingInstanceType. Note that this can be
@@ -5793,6 +5794,7 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.trn1.2xlarge",
 		"ml.trn1.32xlarge",
 		"ml.trn1n.32xlarge",
+		"ml.p5.48xlarge",
 	}
 }
 

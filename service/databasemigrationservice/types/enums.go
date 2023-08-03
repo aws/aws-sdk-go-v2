@@ -2,6 +2,24 @@
 
 package types
 
+type AssessmentReportType string
+
+// Enum values for AssessmentReportType
+const (
+	AssessmentReportTypePdf AssessmentReportType = "pdf"
+	AssessmentReportTypeCsv AssessmentReportType = "csv"
+)
+
+// Values returns all known values for AssessmentReportType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssessmentReportType) Values() []AssessmentReportType {
+	return []AssessmentReportType{
+		"pdf",
+		"csv",
+	}
+}
+
 type AuthMechanismValue string
 
 // Enum values for AuthMechanismValue
@@ -422,6 +440,24 @@ func (NestingLevelValue) Values() []NestingLevelValue {
 	return []NestingLevelValue{
 		"none",
 		"one",
+	}
+}
+
+type OriginTypeValue string
+
+// Enum values for OriginTypeValue
+const (
+	OriginTypeValueSource OriginTypeValue = "SOURCE"
+	OriginTypeValueTarget OriginTypeValue = "TARGET"
+)
+
+// Values returns all known values for OriginTypeValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OriginTypeValue) Values() []OriginTypeValue {
+	return []OriginTypeValue{
+		"SOURCE",
+		"TARGET",
 	}
 }
 

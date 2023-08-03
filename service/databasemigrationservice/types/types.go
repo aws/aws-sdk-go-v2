@@ -355,6 +355,130 @@ type DatabaseShortInfoResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information that defines a data provider.
+type DataProvider struct {
+
+	// The Amazon Resource Name (ARN) string that uniquely identifies the data
+	// provider.
+	DataProviderArn *string
+
+	// The time the data provider was created.
+	DataProviderCreationTime *time.Time
+
+	// The name of the data provider.
+	DataProviderName *string
+
+	// A description of the data provider. Descriptions can have up to 31 characters.
+	// A description can contain only ASCII letters, digits, and hyphens ('-'). Also,
+	// it can't end with a hyphen or contain two consecutive hyphens, and can only
+	// begin with a letter.
+	Description *string
+
+	// The type of database engine for the data provider. Valid values include "aurora"
+	// , "aurora_postgresql" , "mysql" , "oracle" , "postgres" , and "sqlserver" . A
+	// value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+	Engine *string
+
+	// The settings in JSON format for a data provider.
+	Settings DataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+// Information about a data provider.
+type DataProviderDescriptor struct {
+
+	// The Amazon Resource Name (ARN) of the data provider.
+	DataProviderArn *string
+
+	// The user-friendly name of the data provider.
+	DataProviderName *string
+
+	// The ARN of the role used to access Amazon Web Services Secrets Manager.
+	SecretsManagerAccessRoleArn *string
+
+	// The identifier of the Amazon Web Services Secrets Manager Secret used to store
+	// access credentials for the data provider.
+	SecretsManagerSecretId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a data provider.
+type DataProviderDescriptorDefinition struct {
+
+	// The name or Amazon Resource Name (ARN) of the data provider.
+	//
+	// This member is required.
+	DataProviderIdentifier *string
+
+	// The ARN of the role used to access Amazon Web Services Secrets Manager.
+	SecretsManagerAccessRoleArn *string
+
+	// The identifier of the Amazon Web Services Secrets Manager Secret used to store
+	// access credentials for the data provider.
+	SecretsManagerSecretId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines a data provider.
+//
+// The following types satisfy this interface:
+//
+//	DataProviderSettingsMemberMicrosoftSqlServerSettings
+//	DataProviderSettingsMemberMySqlSettings
+//	DataProviderSettingsMemberOracleSettings
+//	DataProviderSettingsMemberPostgreSqlSettings
+type DataProviderSettings interface {
+	isDataProviderSettings()
+}
+
+// Provides information that defines a Microsoft SQL Server data provider.
+type DataProviderSettingsMemberMicrosoftSqlServerSettings struct {
+	Value MicrosoftSqlServerDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberMicrosoftSqlServerSettings) isDataProviderSettings() {}
+
+// Provides information that defines a MySQL data provider.
+type DataProviderSettingsMemberMySqlSettings struct {
+	Value MySqlDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberMySqlSettings) isDataProviderSettings() {}
+
+// Provides information that defines an Oracle data provider.
+type DataProviderSettingsMemberOracleSettings struct {
+	Value OracleDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberOracleSettings) isDataProviderSettings() {}
+
+// Provides information that defines a PostgreSQL data provider.
+type DataProviderSettingsMemberPostgreSqlSettings struct {
+	Value PostgreSqlDataProviderSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*DataProviderSettingsMemberPostgreSqlSettings) isDataProviderSettings() {}
+
+// Provides error information about a schema conversion operation.
+type DefaultErrorDetails struct {
+
+	// The error message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The settings in JSON format for the DMS Transfer type source endpoint.
 type DmsTransferSettings struct {
 
@@ -705,6 +829,24 @@ type EngineVersion struct {
 	noSmithyDocumentSerde
 }
 
+// Provides error information about a project.
+//
+// The following types satisfy this interface:
+//
+//	ErrorDetailsMemberDefaultErrorDetails
+type ErrorDetails interface {
+	isErrorDetails()
+}
+
+// Error information about a project.
+type ErrorDetailsMemberDefaultErrorDetails struct {
+	Value DefaultErrorDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ErrorDetailsMemberDefaultErrorDetails) isErrorDetails() {}
+
 // Describes an identifiable significant activity that affects a replication
 // instance or task. This object can provide the message, the available event
 // categories, the date and source of the event, and the DMS resource type.
@@ -780,6 +922,31 @@ type EventSubscription struct {
 
 	// The time the DMS event notification subscription was created.
 	SubscriptionCreationTime *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an exported metadata model assessment.
+type ExportMetadataModelAssessmentResultEntry struct {
+
+	// The URL for the object containing the exported metadata model assessment.
+	ObjectURL *string
+
+	// The object key for the object containing the exported metadata model assessment.
+	S3ObjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a metadata model assessment exported to SQL.
+type ExportSqlDetails struct {
+
+	// The URL for the object containing the exported metadata model assessment.
+	ObjectURL *string
+
+	// The Amazon S3 object key for the object containing the exported metadata model
+	// assessment.
+	S3ObjectKey *string
 
 	noSmithyDocumentSerde
 }
@@ -970,6 +1137,59 @@ type IBMDb2Settings struct {
 
 	// Endpoint connection user name.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines an instance profile.
+type InstanceProfile struct {
+
+	// The Availability Zone where the instance profile runs.
+	AvailabilityZone *string
+
+	// A description of the instance profile. Descriptions can have up to 31
+	// characters. A description can contain only ASCII letters, digits, and hyphens
+	// ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and
+	// can only begin with a letter.
+	Description *string
+
+	// The Amazon Resource Name (ARN) string that uniquely identifies the instance
+	// profile.
+	InstanceProfileArn *string
+
+	// The time the instance profile was created.
+	InstanceProfileCreationTime *time.Time
+
+	// The user-friendly name for the instance profile.
+	InstanceProfileName *string
+
+	// The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the
+	// connection parameters for the instance profile. If you don't specify a value for
+	// the KmsKeyArn parameter, then DMS uses your default encryption key. KMS creates
+	// the default encryption key for your Amazon Web Services account. Your Amazon Web
+	// Services account has a different default encryption key for each Amazon Web
+	// Services Region.
+	KmsKeyArn *string
+
+	// Specifies the network type for the instance profile. A value of IPV4 represents
+	// an instance profile with IPv4 network type and only supports IPv4 addressing. A
+	// value of IPV6 represents an instance profile with IPv6 network type and only
+	// supports IPv6 addressing. A value of DUAL represents an instance profile with
+	// dual network type that supports IPv4 and IPv6 addressing.
+	NetworkType *string
+
+	// Specifies the accessibility options for the instance profile. A value of true
+	// represents an instance profile with a public IP address. A value of false
+	// represents an instance profile with a private IP address. The default value is
+	// true .
+	PubliclyAccessible *bool
+
+	// The identifier of the subnet group that is associated with the instance profile.
+	SubnetGroupIdentifier *string
+
+	// The VPC security groups that are used with the instance profile. The VPC
+	// security group must work with the VPC containing the instance profile.
+	VpcSecurityGroups []string
 
 	noSmithyDocumentSerde
 }
@@ -1188,6 +1408,28 @@ type Limitation struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information that defines a Microsoft SQL Server data provider.
+type MicrosoftSqlServerDataProviderSettings struct {
+
+	// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+	CertificateArn *string
+
+	// The database name on the Microsoft SQL Server data provider.
+	DatabaseName *string
+
+	// The port value for the Microsoft SQL Server data provider.
+	Port *int32
+
+	// The name of the Microsoft SQL Server server.
+	ServerName *string
+
+	// The SSL mode used to connect to the Microsoft SQL Server data provider. The
+	// default value is none .
+	SslMode DmsSslModeValue
+
+	noSmithyDocumentSerde
+}
+
 // Provides information that defines a Microsoft SQL Server endpoint.
 type MicrosoftSQLServerSettings struct {
 
@@ -1285,6 +1527,49 @@ type MicrosoftSQLServerSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information that defines a migration project.
+type MigrationProject struct {
+
+	// A user-friendly description of the migration project.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the instance profile for your migration
+	// project.
+	InstanceProfileArn *string
+
+	// The name of the associated instance profile.
+	InstanceProfileName *string
+
+	// The ARN string that uniquely identifies the migration project.
+	MigrationProjectArn *string
+
+	// The time when the migration project was created.
+	MigrationProjectCreationTime *time.Time
+
+	// The name of the migration project.
+	MigrationProjectName *string
+
+	// The schema conversion application attributes, including the Amazon S3 bucket
+	// name and Amazon S3 role ARN.
+	SchemaConversionApplicationAttributes *SCApplicationAttributes
+
+	// Information about the source data provider, including the name or ARN, and
+	// Secrets Manager parameters.
+	SourceDataProviderDescriptors []DataProviderDescriptor
+
+	// Information about the target data provider, including the name or ARN, and
+	// Secrets Manager parameters.
+	TargetDataProviderDescriptors []DataProviderDescriptor
+
+	// The settings in JSON format for migration rules. Migration rules make it
+	// possible for you to change the object names according to the rules that you
+	// specify. For example, you can change an object name to lowercase or uppercase,
+	// add or remove a prefix or suffix, or rename objects.
+	TransformationRules *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information that defines a MongoDB endpoint.
 type MongoDbSettings struct {
 
@@ -1368,6 +1653,25 @@ type MongoDbSettings struct {
 
 	// The user name you use to access the MongoDB source endpoint.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines a MySQL data provider.
+type MySqlDataProviderSettings struct {
+
+	// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+	CertificateArn *string
+
+	// The port value for the MySQL data provider.
+	Port *int32
+
+	// The name of the MySQL server.
+	ServerName *string
+
+	// The SSL mode used to connect to the MySQL data provider. The default value is
+	// none .
+	SslMode DmsSslModeValue
 
 	noSmithyDocumentSerde
 }
@@ -1502,6 +1806,54 @@ type NeptuneSettings struct {
 	// Target (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole)
 	// in the Database Migration Service User Guide.
 	ServiceAccessRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines an Oracle data provider.
+type OracleDataProviderSettings struct {
+
+	// The address of your Oracle Automatic Storage Management (ASM) server. You can
+	// set this value from the asm_server value. You set asm_server as part of the
+	// extra connection attribute string to access an Oracle server with Binary Reader
+	// that uses ASM. For more information, see Configuration for change data capture
+	// (CDC) on an Oracle source database (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration)
+	// .
+	AsmServer *string
+
+	// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+	CertificateArn *string
+
+	// The database name on the Oracle data provider.
+	DatabaseName *string
+
+	// The port value for the Oracle data provider.
+	Port *int32
+
+	// The ARN of the IAM role that provides access to the secret in Secrets Manager
+	// that contains the Oracle ASM connection details.
+	SecretsManagerOracleAsmAccessRoleArn *string
+
+	// The identifier of the secret in Secrets Manager that contains the Oracle ASM
+	// connection details. Required only if your data provider uses the Oracle ASM
+	// server.
+	SecretsManagerOracleAsmSecretId *string
+
+	// The ARN of the IAM role that provides access to the secret in Secrets Manager
+	// that contains the TDE password.
+	SecretsManagerSecurityDbEncryptionAccessRoleArn *string
+
+	// The identifier of the secret in Secrets Manager that contains the transparent
+	// data encryption (TDE) password. DMS requires this password to access Oracle redo
+	// logs encrypted by TDE using Binary Reader.
+	SecretsManagerSecurityDbEncryptionSecretId *string
+
+	// The name of the Oracle server.
+	ServerName *string
+
+	// The SSL mode used to connect to the Oracle data provider. The default value is
+	// none .
+	SslMode DmsSslModeValue
 
 	noSmithyDocumentSerde
 }
@@ -1870,6 +2222,28 @@ type PendingMaintenanceAction struct {
 
 	// The type of opt-in request that has been received for the resource.
 	OptInStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines a PostgreSQL data provider.
+type PostgreSqlDataProviderSettings struct {
+
+	// The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+	CertificateArn *string
+
+	// The database name on the PostgreSQL data provider.
+	DatabaseName *string
+
+	// The port value for the PostgreSQL data provider.
+	Port *int32
+
+	// The name of the PostgreSQL server.
+	ServerName *string
+
+	// The SSL mode used to connect to the PostgreSQL data provider. The default value
+	// is none .
+	SslMode DmsSslModeValue
 
 	noSmithyDocumentSerde
 }
@@ -3502,6 +3876,40 @@ type S3Settings struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information that defines a schema conversion application.
+type SCApplicationAttributes struct {
+
+	// The path for the Amazon S3 bucket that the application uses for exporting
+	// assessment reports.
+	S3BucketPath *string
+
+	// The ARN for the role the application uses to access its Amazon S3 bucket.
+	S3BucketRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a schema conversion action.
+type SchemaConversionRequest struct {
+
+	// Provides error information about a project.
+	Error ErrorDetails
+
+	// Provides information about a metadata model assessment exported to SQL.
+	ExportSqlDetails *ExportSqlDetails
+
+	// The migration project ARN.
+	MigrationProjectArn *string
+
+	// The identifier for the schema conversion action.
+	RequestIdentifier *string
+
+	// The schema conversion action status.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a schema in a Fleet Advisor collector inventory.
 type SchemaResponse struct {
 
@@ -3878,3 +4286,15 @@ type VpcSecurityGroupMembership struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isDataProviderSettings() {}
+func (*UnknownUnionMember) isErrorDetails()         {}

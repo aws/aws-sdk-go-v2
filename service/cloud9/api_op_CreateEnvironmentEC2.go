@@ -76,10 +76,12 @@ type CreateEnvironmentEC2Input struct {
 	// instance. To choose an AMI for the instance, you must specify a valid AMI alias
 	// or a valid Amazon EC2 Systems Manager (SSM) path. The default Amazon Linux AMI
 	// is currently used if the parameter isn't explicitly assigned a value in the
-	// request. In the future the parameter for Amazon Linux will no longer be
-	// available when you specify an AMI for your instance. Amazon Linux 2 will then
-	// become the default AMI, which is used to launch your instance if no parameter is
-	// explicitly defined. AMI aliases
+	// request. Because Amazon Linux AMI has ended standard support as of December 31,
+	// 2020, we recommend you choose Amazon Linux 2, which includes long term support
+	// through 2023. From December 31, 2023, the parameter for Amazon Linux will no
+	// longer be available when you specify an AMI for your instance. Amazon Linux 2
+	// will then become the default AMI, which is used to launch your instance if no
+	// parameter is explicitly defined. AMI aliases
 	//   - Amazon Linux (default): amazonlinux-1-x86_64
 	//   - Amazon Linux 2: amazonlinux-2-x86_64
 	//   - Ubuntu 18.04: ubuntu-18.04-x86_64

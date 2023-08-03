@@ -113,6 +113,7 @@ type Alarm struct {
 type AlarmSpecification struct {
 
 	// The names of one or more CloudWatch alarms to monitor for the instance refresh.
+	// You can specify up to 10 alarms.
 	Alarms []string
 
 	noSmithyDocumentSerde

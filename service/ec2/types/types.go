@@ -2958,8 +2958,8 @@ type EbsBlockDevice struct {
 	// .
 	KmsKeyId *string
 
-	// The ARN of the Outpost on which the snapshot is stored. This parameter is only
-	// supported on BlockDeviceMapping objects called by  CreateImage (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html)
+	// The ARN of the Outpost on which the snapshot is stored. This parameter is not
+	// supported when using CreateImage (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html)
 	// .
 	OutpostArn *string
 
@@ -5862,6 +5862,14 @@ type InstanceIpv6Address struct {
 	// The IPv6 address.
 	Ipv6Address *string
 
+	// Determines if an IPv6 address associated with a network interface is the
+	// primary IPv6 address. When you enable an IPv6 GUA address to be a primary IPv6,
+	// the first IPv6 GUA will be made the primary IPv6 address until the instance is
+	// terminated or the network interface is detached. For more information, see
+	// RunInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
+	// .
+	IsPrimaryIpv6 *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -6201,6 +6209,13 @@ type InstanceNetworkInterfaceSpecification struct {
 	// parameter because you can’t specify a network interface ID in a launch
 	// specification.
 	NetworkInterfaceId *string
+
+	// The primary IPv6 address of the network interface. When you enable an IPv6 GUA
+	// address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6
+	// address until the instance is terminated or the network interface is detached.
+	// For more information about primary IPv6 addresses, see RunInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
+	// .
+	PrimaryIpv6 *bool
 
 	// The private IPv4 address of the network interface. Applies only if creating a
 	// network interface when launching an instance. You cannot specify this option if
@@ -8563,6 +8578,13 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
+	// The primary IPv6 address of the network interface. When you enable an IPv6 GUA
+	// address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6
+	// address until the instance is terminated or the network interface is detached.
+	// For more information about primary IPv6 addresses, see RunInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
+	// .
+	PrimaryIpv6 *bool
+
 	// The primary private IPv4 address of the network interface.
 	PrivateIpAddress *string
 
@@ -8643,6 +8665,13 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string
+
+	// The primary IPv6 address of the network interface. When you enable an IPv6 GUA
+	// address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6
+	// address until the instance is terminated or the network interface is detached.
+	// For more information about primary IPv6 addresses, see RunInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
+	// .
+	PrimaryIpv6 *bool
 
 	// The primary private IPv4 address of the network interface.
 	PrivateIpAddress *string
@@ -10337,6 +10366,14 @@ type NetworkInterfaceIpv6Address struct {
 
 	// The IPv6 address.
 	Ipv6Address *string
+
+	// Determines if an IPv6 address associated with a network interface is the
+	// primary IPv6 address. When you enable an IPv6 GUA address to be a primary IPv6,
+	// the first IPv6 GUA will be made the primary IPv6 address until the instance is
+	// terminated or the network interface is detached. For more information, see
+	// ModifyNetworkInterfaceAttribute (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyNetworkInterfaceAttribute.html)
+	// .
+	IsPrimaryIpv6 *bool
 
 	noSmithyDocumentSerde
 }
