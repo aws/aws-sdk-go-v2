@@ -389,6 +389,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of space that's being used in a storage system resource without accounting for\n      compression or deduplication.</p>"
                     }
+                },
+                "ClusterCloudStorageUsed": {
+                    "target": "com.amazonaws.datasync#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of space in the cluster that's in cloud storage (for example, if you're using data tiering).</p>"
+                    }
                 }
             },
             "traits": {
@@ -1111,7 +1117,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint for an Network File System (NFS) file server that DataSync can use for a\n      data transfer.</p>"
+                "smithy.api#documentation": "<p>Creates an endpoint for a Network File System (NFS) file server that DataSync can use for a data transfer.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html\">Configuring transfers to or from an NFS file\n        server</a>.</p>\n         <note>\n            <p>If you're copying data to or from an Snowcone device, you can also use\n          <code>CreateLocationNfs</code> to create your transfer location. For more information, see\n          <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/nfs-on-snowcone.html\">Configuring transfers with Snowcone</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#CreateLocationNfsRequest": {
@@ -1120,28 +1126,28 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#NfsSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the subdirectory in the NFS file server that DataSync transfers to\n      or from. The NFS path should be a path that's exported by the NFS server, or a\n      subdirectory of that path. The path should be such that it can be mounted by other NFS clients\n      in your network. </p>\n         <p>To see all the paths exported by your NFS server, run \"<code>showmount -e\n        nfs-server-name</code>\" from an NFS client that has access to your server. You can specify\n      any directory that appears in the results, and any subdirectory of that directory. Ensure that\n      the NFS export is accessible without Kerberos authentication. </p>\n         <p>To transfer all the data in the folder you specified, DataSync needs to have\n      permissions to read all the data. To ensure this, either configure the NFS export with\n        <code>no_root_squash,</code> or ensure that the permissions for all of the files that you\n      want DataSync allow read access for all users. Doing either enables the agent to\n      read the files. For the agent to access directories, you must additionally enable all execute\n      access.</p>\n         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on\n          Snowcone</a> for more information.</p>",
+                        "smithy.api#documentation": "<p>Specifies the export path in your NFS file server that you want DataSync to\n      mount.</p>\n         <p>This path (or a subdirectory of the path) is where DataSync transfers data to\n      or from. For information on configuring an export for DataSync, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs\">Accessing NFS file servers</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServerHostname": {
                     "target": "com.amazonaws.datasync#ServerHostname",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the IP address or domain name of your NFS file server. An agent that is\n      installed on-premises uses this hostname to mount the NFS server in a network. </p>\n         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on\n          Snowcone</a> for more information.</p>\n         <note>\n            <p>You must specify be an IP version 4 address or Domain Name System (DNS)-compliant\n        name.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Specifies the Domain Name System (DNS) name or IP version 4 address of the NFS file\n      server that your DataSync agent connects to.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OnPremConfig": {
                     "target": "com.amazonaws.datasync#OnPremConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Names (ARNs) of agents that DataSync uses to\n      connect to your NFS file server. </p>\n         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on\n          Snowcone</a> for more information.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the DataSync agent that want to\n      connect to your NFS file server.</p>\n         <p>You can specify more than one agent. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html\">Using multiple\n        agents for transfers</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MountOptions": {
                     "target": "com.amazonaws.datasync#NfsMountOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mount options that DataSync can use to mount your NFS\n      share.</p>"
+                        "smithy.api#documentation": "<p>Specifies the options that DataSync can use to mount your NFS file\n      server.</p>"
                     }
                 },
                 "Tags": {
@@ -2478,7 +2484,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata, such as the path information, about an NFS location.</p>"
+                "smithy.api#documentation": "<p>Provides details about how an DataSync transfer location for a Network\n      File System (NFS) file server is configured.</p>"
             }
         },
         "com.amazonaws.datasync#DescribeLocationNfsRequest": {
@@ -2487,7 +2493,7 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the NFS location to describe.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the NFS location that you want information\n      about.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2503,13 +2509,13 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the NFS location that was described.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the NFS location.</p>"
                     }
                 },
                 "LocationUri": {
                     "target": "com.amazonaws.datasync#LocationUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the source NFS location that was described.</p>"
+                        "smithy.api#documentation": "<p>The URL of the NFS location.</p>"
                     }
                 },
                 "OnPremConfig": {
@@ -2518,13 +2524,13 @@
                 "MountOptions": {
                     "target": "com.amazonaws.datasync#NfsMountOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mount options that DataSync uses to mount your NFS share.</p>"
+                        "smithy.api#documentation": "<p>The mount options that DataSync uses to mount your NFS file server.</p>"
                     }
                 },
                 "CreationTime": {
                     "target": "com.amazonaws.datasync#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time that the NFS location was created.</p>"
+                        "smithy.api#documentation": "<p>The time when the NFS location was created.</p>"
                     }
                 }
             },
@@ -4067,9 +4073,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://datasync-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://datasync-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -4082,15 +4267,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://datasync.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://datasync.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -4102,258 +4322,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://datasync-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://datasync-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://datasync.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://datasync.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -6370,6 +6340,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of LUNs (logical unit numbers) in the cluster.</p>"
                     }
+                },
+                "ClusterCloudStorageUsed": {
+                    "target": "com.amazonaws.datasync#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of space in the cluster that's in cloud storage (for example, if you're using data tiering).</p>"
+                    }
                 }
             },
             "traits": {
@@ -6763,13 +6739,13 @@
                 "AgentArns": {
                     "target": "com.amazonaws.datasync#AgentArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARNs of the agents to use for an NFS location.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the agents connecting to a transfer\n      location.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of Amazon Resource Names (ARNs) of agents to use for a Network File System (NFS)\n      location.</p>"
+                "smithy.api#documentation": "<p>The DataSync agents that are connecting to a Network File System (NFS)\n      location.</p>"
             }
         },
         "com.amazonaws.datasync#Operator": {
@@ -8749,7 +8725,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for Network File System\n      (NFS) access. For information about creating an NFS location, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html\">Creating a location for\n      NFS</a>.</p>"
+                "smithy.api#documentation": "<p>Modifies some configurations of the Network File System (NFS) transfer location that\n      you're using with DataSync.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html\">Configuring transfers to or from an\n        NFS file server</a>.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationNfsRequest": {
@@ -8758,14 +8734,14 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the NFS location that you want to\n      update.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the NFS transfer location that you want to\n      update.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#NfsSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the subdirectory in your NFS file system that DataSync uses to read\n      from or write to during a transfer. The NFS path should be exported by the NFS server, or a\n      subdirectory of that path. The path should be such that it can be mounted by other NFS clients\n      in your network.</p>\n         <p>To see all the paths exported by your NFS server, run \"<code>showmount -e\n        nfs-server-name</code>\" from an NFS client that has access to your server. You can specify\n      any directory that appears in the results, and any subdirectory of that directory. Ensure that\n      the NFS export is accessible without Kerberos authentication. </p>\n         <p>To transfer all the data in the folder that you specified, DataSync must have\n      permissions to read all the data. To ensure this, either configure the NFS export with\n        <code>no_root_squash</code>, or ensure that the files you want DataSync to access\n      have permissions that allow read access for all users. Doing either option enables the agent\n      to read the files. For the agent to access directories, you must additionally enable all\n      execute access.</p>\n         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on\n          Snowcone</a> for more information.</p>"
+                        "smithy.api#documentation": "<p>Specifies the export path in your NFS file server that you want DataSync to\n      mount.</p>\n         <p>This path (or a subdirectory of the path) is where DataSync transfers data to\n      or from. For information on configuring an export for DataSync, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs\">Accessing NFS file servers</a>.</p>"
                     }
                 },
                 "OnPremConfig": {

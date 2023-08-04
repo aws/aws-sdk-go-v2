@@ -332,9 +332,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ecs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ecs-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -347,15 +526,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ecs.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://ecs.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -367,258 +581,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ecs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ecs-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ecs.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://ecs.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1471,14 +1435,14 @@
                 "autoScalingGroupArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the Auto Scaling group.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the Auto Scaling group, or the Auto Scaling group name.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "managedScaling": {
                     "target": "com.amazonaws.ecs#ManagedScaling",
                     "traits": {
-                        "smithy.api#documentation": "<p>The managed scaling settings for the Auto Scaling group capacity provider.</p>"
+                        "smithy.api#documentation": "<p>he managed scaling settings for the Auto Scaling group capacity provider.</p>"
                     }
                 },
                 "managedTerminationProtection": {
@@ -2361,13 +2325,13 @@
                 "startTimeout": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time duration (in seconds) to wait before giving up on resolving dependencies for a\n\t\t\tcontainer. For example, you specify two containers in a task definition with containerA\n\t\t\thaving a dependency on containerB reaching a <code>COMPLETE</code>,\n\t\t\t<code>SUCCESS</code>, or <code>HEALTHY</code> status. If a <code>startTimeout</code>\n\t\t\tvalue is specified for containerB and it doesn't reach the desired status within that\n\t\t\ttime then containerA gives up and not start. This results in the task transitioning to a\n\t\t\t\t<code>STOPPED</code> state.</p>\n         <note>\n            <p>When the <code>ECS_CONTAINER_START_TIMEOUT</code> container agent configuration\n\t\t\t\tvariable is used, it's enforced independently from this start timeout value.</p>\n         </note>\n         <p>For tasks using the Fargate launch type, the task or service requires\n\t\t\tthe following platforms:</p>\n         <ul>\n            <li>\n               <p>Linux platform version <code>1.3.0</code> or later.</p>\n            </li>\n            <li>\n               <p>Windows platform version <code>1.0.0</code> or later.</p>\n            </li>\n         </ul>\n         <p>For tasks using the EC2 launch type, your container instances require at\n\t\t\tleast version <code>1.26.0</code> of the container agent to use a container start\n\t\t\ttimeout value. However, we recommend using the latest container agent version. For\n\t\t\tinformation about checking your agent version and updating to the latest version, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using an Amazon ECS-optimized Linux AMI,\n\t\t\tyour instance needs at least version <code>1.26.0-1</code> of the <code>ecs-init</code>\n\t\t\tpackage. If your container instances are launched from version <code>20190301</code> or\n\t\t\tlater, then they contain the required versions of the container agent and\n\t\t\t\t<code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Time duration (in seconds) to wait before giving up on resolving dependencies for a\n\t\t\tcontainer. For example, you specify two containers in a task definition with containerA\n\t\t\thaving a dependency on containerB reaching a <code>COMPLETE</code>,\n\t\t\t<code>SUCCESS</code>, or <code>HEALTHY</code> status. If a <code>startTimeout</code>\n\t\t\tvalue is specified for containerB and it doesn't reach the desired status within that\n\t\t\ttime then containerA gives up and not start. This results in the task transitioning to a\n\t\t\t\t<code>STOPPED</code> state.</p>\n         <note>\n            <p>When the <code>ECS_CONTAINER_START_TIMEOUT</code> container agent configuration\n\t\t\t\tvariable is used, it's enforced independently from this start timeout value.</p>\n         </note>\n         <p>For tasks using the Fargate launch type, the task or service requires\n\t\t\tthe following platforms:</p>\n         <ul>\n            <li>\n               <p>Linux platform version <code>1.3.0</code> or later.</p>\n            </li>\n            <li>\n               <p>Windows platform version <code>1.0.0</code> or later.</p>\n            </li>\n         </ul>\n         <p>For tasks using the EC2 launch type, your container instances require at\n\t\t\tleast version <code>1.26.0</code> of the container agent to use a container start\n\t\t\ttimeout value. However, we recommend using the latest container agent version. For\n\t\t\tinformation about checking your agent version and updating to the latest version, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using an Amazon ECS-optimized Linux AMI,\n\t\t\tyour instance needs at least version <code>1.26.0-1</code> of the <code>ecs-init</code>\n\t\t\tpackage. If your container instances are launched from version <code>20190301</code> or\n\t\t\tlater, then they contain the required versions of the container agent and\n\t\t\t\t<code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>The valid values are 2-120 seconds.</p>"
                     }
                 },
                 "stopTimeout": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time duration (in seconds) to wait before the container is forcefully killed if it\n\t\t\tdoesn't exit normally on its own.</p>\n         <p>For tasks using the Fargate launch type, the task or service requires\n\t\t\tthe following platforms:</p>\n         <ul>\n            <li>\n               <p>Linux platform version <code>1.3.0</code> or later.</p>\n            </li>\n            <li>\n               <p>Windows platform version <code>1.0.0</code> or later.</p>\n            </li>\n         </ul>\n         <p>The max stop timeout value is 120 seconds and if the parameter is not specified, the\n\t\t\tdefault value of 30 seconds is used.</p>\n         <p>For tasks that use the EC2 launch type, if the <code>stopTimeout</code>\n\t\t\tparameter isn't specified, the value set for the Amazon ECS container agent configuration\n\t\t\tvariable <code>ECS_CONTAINER_STOP_TIMEOUT</code> is used. If neither the\n\t\t\t\t<code>stopTimeout</code> parameter or the <code>ECS_CONTAINER_STOP_TIMEOUT</code>\n\t\t\tagent configuration variable are set, then the default values of 30 seconds for Linux\n\t\t\tcontainers and 30 seconds on Windows containers are used. Your container instances\n\t\t\trequire at least version 1.26.0 of the container agent to use a container stop timeout\n\t\t\tvalue. However, we recommend using the latest container agent version. For information\n\t\t\tabout checking your agent version and updating to the latest version, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using\n\t\t\tan Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the\n\t\t\t\t<code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Time duration (in seconds) to wait before the container is forcefully killed if it\n\t\t\tdoesn't exit normally on its own.</p>\n         <p>For tasks using the Fargate launch type, the task or service requires\n\t\t\tthe following platforms:</p>\n         <ul>\n            <li>\n               <p>Linux platform version <code>1.3.0</code> or later.</p>\n            </li>\n            <li>\n               <p>Windows platform version <code>1.0.0</code> or later.</p>\n            </li>\n         </ul>\n         <p>The max stop timeout value is 120 seconds and if the parameter is not specified, the\n\t\t\tdefault value of 30 seconds is used.</p>\n         <p>For tasks that use the EC2 launch type, if the <code>stopTimeout</code>\n\t\t\tparameter isn't specified, the value set for the Amazon ECS container agent configuration\n\t\t\tvariable <code>ECS_CONTAINER_STOP_TIMEOUT</code> is used. If neither the\n\t\t\t\t<code>stopTimeout</code> parameter or the <code>ECS_CONTAINER_STOP_TIMEOUT</code>\n\t\t\tagent configuration variable are set, then the default values of 30 seconds for Linux\n\t\t\tcontainers and 30 seconds on Windows containers are used. Your container instances\n\t\t\trequire at least version 1.26.0 of the container agent to use a container stop timeout\n\t\t\tvalue. However, we recommend using the latest container agent version. For information\n\t\t\tabout checking your agent version and updating to the latest version, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using\n\t\t\tan Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the\n\t\t\t\t<code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>The valid values are 2-120 seconds.</p>"
                     }
                 },
                 "hostname": {
@@ -2487,7 +2451,7 @@
                 "credentialSpecs": {
                     "target": "com.amazonaws.ecs#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of ARNs in SSM or Amazon S3 to a credential spec\n\t\t\t(<code>credspec</code>code>) file that configures a container for Active Directory\n\t\t\tauthentication. This parameter is only used with domainless authentication.</p>\n         <p>The format for each ARN is\n\t\t\t\t\t<code>credentialspecdomainless:MyARN</code>. Replace\n\t\t\t\t<code>MyARN</code> with the ARN in SSM or Amazon S3.</p>\n         <p>The <code>credspec</code> must provide a ARN in Secrets Manager for a secret\n\t\t\tcontaining the username, password, and the domain to connect to. For better security,\n\t\t\tthe instance isn't joined to the domain for domainless authentication. Other\n\t\t\tapplications on the instance can't use the domainless credentials. You can use this\n\t\t\tparameter to run tasks on the same instance, even it the tasks need to join different\n\t\t\tdomains. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html\">Using gMSAs for Windows\n\t\t\t\tContainers</a> and <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html\">Using gMSAs for Linux\n\t\t\t\tContainers</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of ARNs in SSM or Amazon S3 to a credential spec\n\t\t\t\t(<code>CredSpec</code>) file that configures the container for Active Directory\n\t\t\tauthentication. We recommend that you use this parameter instead of the\n\t\t\t\t<code>dockerSecurityOptions</code>. The maximum number of ARNs is\n\t\t\t1.</p>\n         <p>There are two formats for each ARN.</p>\n         <dl>\n            <dt>credentialspecdomainless:MyARN</dt>\n            <dd>\n               <p>You use <code>credentialspecdomainless:MyARN</code> to provide a\n\t\t\t\t\t\t\t<code>CredSpec</code> with an additional section for a secret in Secrets Manager.\n\t\t\t\t\t\tYou provide the login credentials to the domain in the secret.</p>\n               <p>Each task that runs on any container instance can join different\n\t\t\t\t\t\tdomains.</p>\n               <p>You can use this format without joining the container instance to a\n\t\t\t\t\t\tdomain.</p>\n            </dd>\n            <dt>credentialspec:MyARN</dt>\n            <dd>\n               <p>You use <code>credentialspec:MyARN</code> to provide a\n\t\t\t\t\t\t\t<code>CredSpec</code> for a single domain.</p>\n               <p>You must join the container instance to the domain before you start any\n\t\t\t\t\t\ttasks that use this task definition.</p>\n            </dd>\n         </dl>\n         <p>In both formats, replace <code>MyARN</code> with the ARN in\n\t\t\tSSM or Amazon S3.</p>\n         <p>If you provide a <code>credentialspecdomainless:MyARN</code>, the\n\t\t\t\t<code>credspec</code> must provide a ARN in Secrets Manager for a secret containing the\n\t\t\tusername, password, and the domain to connect to. For better security, the instance\n\t\t\tisn't joined to the domain for domainless authentication. Other applications on the\n\t\t\tinstance can't use the domainless credentials. You can use this parameter to run tasks\n\t\t\ton the same instance, even it the tasks need to join different domains. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html\">Using gMSAs for Windows\n\t\t\t\tContainers</a> and <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html\">Using gMSAs for Linux\n\t\t\t\tContainers</a>.</p>"
                     }
                 }
             },
@@ -2786,7 +2750,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The overrides that are sent to a container. An empty container override can be passed\n\t\t\tin. An example of an empty container override is <code>{\"containerOverrides\": [ ]\n\t\t\t\t}</code>. If a non-empty container override is specified, the <code>name</code>\n\t\t\tparameter must be included.</p>"
+                "smithy.api#documentation": "<p>The overrides that are sent to a container. An empty container override can be passed\n\t\t\tin. An example of an empty container override is <code>{\"containerOverrides\": [ ]\n\t\t\t\t}</code>. If a non-empty container override is specified, the <code>name</code>\n\t\t\tparameter must be included.</p>\n         <p>You can use Secrets Manager or Amazon Web Services Systems Manager Parameter Store to store the sensitive\n\t\t\tdata. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/secrets-envvar.html\">Retrieve secrets through environment variables</a> in the Amazon ECS Developer Guide.</p>"
             }
         },
         "com.amazonaws.ecs#ContainerOverrides": {
@@ -2951,7 +2915,27 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon ECS cluster. By default, your account receives a <code>default</code>\n\t\t\tcluster when you launch your first container instance. However, you can create your own\n\t\t\tcluster with a unique name with the <code>CreateCluster</code> action.</p>\n         <note>\n            <p>When you call the <a>CreateCluster</a> API operation, Amazon ECS attempts to\n\t\t\t\tcreate the Amazon ECS service-linked role for your account. This is so that it can manage\n\t\t\t\trequired resources in other Amazon Web Services services on your behalf. However, if the user\n\t\t\t\tthat makes the call doesn't have permissions to create the service-linked role, it\n\t\t\t\tisn't created. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Using\n\t\t\t\t\tservice-linked roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a new Amazon ECS cluster. By default, your account receives a <code>default</code>\n\t\t\tcluster when you launch your first container instance. However, you can create your own\n\t\t\tcluster with a unique name with the <code>CreateCluster</code> action.</p>\n         <note>\n            <p>When you call the <a>CreateCluster</a> API operation, Amazon ECS attempts to\n\t\t\t\tcreate the Amazon ECS service-linked role for your account. This is so that it can manage\n\t\t\t\trequired resources in other Amazon Web Services services on your behalf. However, if the user\n\t\t\t\tthat makes the call doesn't have permissions to create the service-linked role, it\n\t\t\t\tisn't created. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Using\n\t\t\t\t\tservice-linked roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a new cluster",
+                        "documentation": "This example creates a cluster in your default region.",
+                        "input": {
+                            "clusterName": "my_cluster"
+                        },
+                        "output": {
+                            "cluster": {
+                                "status": "ACTIVE",
+                                "clusterName": "my_cluster",
+                                "registeredContainerInstancesCount": 0,
+                                "pendingTasksCount": 0,
+                                "runningTasksCount": 0,
+                                "activeServicesCount": 0,
+                                "clusterArn": "arn:aws:ecs:us-east-1:012345678910:cluster/my_cluster"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#CreateClusterRequest": {
@@ -3056,7 +3040,59 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, see the <a>UpdateService</a> action.</p>\n         <note>\n            <p>Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>\n         </note>\n         <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n         <p>There are two service scheduler strategies available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. This is done with an <a>UpdateService</a> operation. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n         <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n         <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a>CreateTaskSet</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement. For\n\t\t\tinformation about task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS\n\t\t\t\ttask placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, see the <a>UpdateService</a> action.</p>\n         <note>\n            <p>Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>\n         </note>\n         <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n         <p>There are two service scheduler strategies available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. This is done with an <a>UpdateService</a> operation. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n         <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n         <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a>CreateTaskSet</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement. For\n\t\t\tinformation about task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS\n\t\t\t\ttask placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a new service",
+                        "documentation": "This example creates a service in your default region called ``ecs-simple-service``. The service uses the ``hello_world`` task definition and it maintains 10 copies of that task.",
+                        "input": {
+                            "serviceName": "ecs-simple-service",
+                            "taskDefinition": "hello_world",
+                            "desiredCount": 10
+                        },
+                        "output": {
+                            "service": {
+                                "clusterArn": "arn:aws:ecs:us-east-1:012345678910:cluster/default",
+                                "createdAt": "2016-08-29T16:13:47.298Z",
+                                "deploymentConfiguration": {
+                                    "maximumPercent": 200,
+                                    "minimumHealthyPercent": 100
+                                },
+                                "deployments": [
+                                    {
+                                        "createdAt": "2016-08-29T16:13:47.298Z",
+                                        "desiredCount": 10,
+                                        "id": "ecs-svc/9223370564342348388",
+                                        "pendingCount": 0,
+                                        "runningCount": 0,
+                                        "status": "PRIMARY",
+                                        "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6",
+                                        "updatedAt": "2016-08-29T16:13:47.298Z"
+                                    },
+                                    {
+                                        "createdAt": "2016-08-29T15:52:44.481Z",
+                                        "desiredCount": 0,
+                                        "id": "ecs-svc/9223370564343611322",
+                                        "pendingCount": 0,
+                                        "runningCount": 0,
+                                        "status": "ACTIVE",
+                                        "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6",
+                                        "updatedAt": "2016-08-29T16:11:38.941Z"
+                                    }
+                                ],
+                                "desiredCount": 10,
+                                "events": [],
+                                "loadBalancers": [],
+                                "pendingCount": 0,
+                                "runningCount": 0,
+                                "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service",
+                                "serviceName": "ecs-simple-service",
+                                "status": "ACTIVE",
+                                "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#CreateServiceRequest": {
@@ -3295,7 +3331,7 @@
                 "taskDefinition": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task definition for the tasks in the task set to use.</p>",
+                        "smithy.api#documentation": "<p>The task definition for the tasks in the task set to use. If a revision isn't specified, the\n\t\t\tlatest <code>ACTIVE</code> revision is used.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3392,7 +3428,23 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables an account setting for a specified  user, role, or the root user for\n\t\t\tan account.</p>"
+                "smithy.api#documentation": "<p>Disables an account setting for a specified  user, role, or the root user for\n\t\t\tan account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete your account setting",
+                        "documentation": "This example deletes the account setting for your user for the specified resource type.",
+                        "input": {
+                            "name": "serviceLongArnFormat"
+                        },
+                        "output": {
+                            "setting": {
+                                "name": "serviceLongArnFormat",
+                                "value": "enabled",
+                                "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#DeleteAccountSettingRequest": {
@@ -3575,7 +3627,27 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified cluster. The cluster transitions to the <code>INACTIVE</code>\n\t\t\tstate. Clusters with an <code>INACTIVE</code> status might remain discoverable in your\n\t\t\taccount for a period of time. However, this behavior is subject to change in the future.\n\t\t\tWe don't recommend that you rely on <code>INACTIVE</code> clusters persisting.</p>\n         <p>You must deregister all container instances from this cluster before you may delete\n\t\t\tit. You can list the container instances in a cluster with <a>ListContainerInstances</a> and deregister them with <a>DeregisterContainerInstance</a>.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified cluster. The cluster transitions to the <code>INACTIVE</code>\n\t\t\tstate. Clusters with an <code>INACTIVE</code> status might remain discoverable in your\n\t\t\taccount for a period of time. However, this behavior is subject to change in the future.\n\t\t\tWe don't recommend that you rely on <code>INACTIVE</code> clusters persisting.</p>\n         <p>You must deregister all container instances from this cluster before you may delete\n\t\t\tit. You can list the container instances in a cluster with <a>ListContainerInstances</a> and deregister them with <a>DeregisterContainerInstance</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete an empty cluster",
+                        "documentation": "This example deletes an empty cluster in your default region.",
+                        "input": {
+                            "cluster": "my_cluster"
+                        },
+                        "output": {
+                            "cluster": {
+                                "activeServicesCount": 0,
+                                "clusterArn": "arn:aws:ecs:us-east-1:012345678910:cluster/my_cluster",
+                                "clusterName": "my_cluster",
+                                "pendingTasksCount": 0,
+                                "registeredContainerInstancesCount": 0,
+                                "runningTasksCount": 0,
+                                "status": "INACTIVE"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#DeleteClusterRequest": {
@@ -3633,7 +3705,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a specified service within a cluster. You can delete a service if you have no\n\t\t\trunning tasks in it and the desired task count is zero. If the service is actively\n\t\t\tmaintaining tasks, you can't delete it, and you must update the service to a desired\n\t\t\ttask count of zero. For more information, see <a>UpdateService</a>.</p>\n         <note>\n            <p>When you delete a service, if there are still running tasks that require cleanup,\n\t\t\t\tthe service status moves from <code>ACTIVE</code> to <code>DRAINING</code>, and the\n\t\t\t\tservice is no longer visible in the console or in the <a>ListServices</a>\n\t\t\t\tAPI operation. After all tasks have transitioned to either <code>STOPPING</code> or\n\t\t\t\t\t<code>STOPPED</code> status, the service status moves from <code>DRAINING</code>\n\t\t\t\tto <code>INACTIVE</code>. Services in the <code>DRAINING</code> or\n\t\t\t\t\t<code>INACTIVE</code> status can still be viewed with the <a>DescribeServices</a> API operation. However, in the future,\n\t\t\t\t\t<code>INACTIVE</code> services may be cleaned up and purged from Amazon ECS record\n\t\t\t\tkeeping, and <a>DescribeServices</a> calls on those services return a\n\t\t\t\t\t<code>ServiceNotFoundException</code> error.</p>\n         </note>\n         <important>\n            <p>If you attempt to create a new service with the same name as an existing service\n\t\t\t\tin either <code>ACTIVE</code> or <code>DRAINING</code> status, you receive an\n\t\t\t\terror.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Deletes a specified service within a cluster. You can delete a service if you have no\n\t\t\trunning tasks in it and the desired task count is zero. If the service is actively\n\t\t\tmaintaining tasks, you can't delete it, and you must update the service to a desired\n\t\t\ttask count of zero. For more information, see <a>UpdateService</a>.</p>\n         <note>\n            <p>When you delete a service, if there are still running tasks that require cleanup,\n\t\t\t\tthe service status moves from <code>ACTIVE</code> to <code>DRAINING</code>, and the\n\t\t\t\tservice is no longer visible in the console or in the <a>ListServices</a>\n\t\t\t\tAPI operation. After all tasks have transitioned to either <code>STOPPING</code> or\n\t\t\t\t\t<code>STOPPED</code> status, the service status moves from <code>DRAINING</code>\n\t\t\t\tto <code>INACTIVE</code>. Services in the <code>DRAINING</code> or\n\t\t\t\t\t<code>INACTIVE</code> status can still be viewed with the <a>DescribeServices</a> API operation. However, in the future,\n\t\t\t\t\t<code>INACTIVE</code> services may be cleaned up and purged from Amazon ECS record\n\t\t\t\tkeeping, and <a>DescribeServices</a> calls on those services return a\n\t\t\t\t\t<code>ServiceNotFoundException</code> error.</p>\n         </note>\n         <important>\n            <p>If you attempt to create a new service with the same name as an existing service\n\t\t\t\tin either <code>ACTIVE</code> or <code>DRAINING</code> status, you receive an\n\t\t\t\terror.</p>\n         </important>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a service",
+                        "documentation": "This example deletes the my-http-service service. The service must have a desired count and running count of 0 before you can delete it.",
+                        "input": {
+                            "service": "my-http-service"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#DeleteServiceRequest": {
@@ -4000,7 +4082,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The deployment circuit breaker can only be used for services using the rolling\n\t\t\t\tupdate (<code>ECS</code>) deployment type.</p>\n         </note>\n         <p>The <b>deployment circuit breaker</b> determines whether a\n\t\t\tservice deployment will fail if the service can't reach a steady state. If it is turned on, a\n\t\t\tservice deployment will transition to a failed state and stop launching new tasks. You\n\t\t\tcan also configure Amazon ECS to roll back your service to the last completed deployment\n\t\t\tafter a failure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html\">Rolling\n\t\t\t\tupdate</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<note>\n            <p>The deployment circuit breaker can only be used for services using the rolling\n\t\t\t\tupdate (<code>ECS</code>) deployment type.</p>\n         </note>\n         <p>The <b>deployment circuit breaker</b> determines whether a\n\t\t\tservice deployment will fail if the service can't reach a steady state. If it is turned on, a\n\t\t\tservice deployment will transition to a failed state and stop launching new tasks. You\n\t\t\tcan also configure Amazon ECS to roll back your service to the last completed deployment\n\t\t\tafter a failure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html\">Rolling\n\t\t\t\tupdate</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>For more information about API failure reasons, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html\">API failure reasons</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#DeploymentConfiguration": {
@@ -4125,7 +4207,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deregisters an Amazon ECS container instance from the specified cluster. This instance is\n\t\t\tno longer available to run tasks.</p>\n         <p>If you intend to use the container instance for some other purpose after\n\t\t\tderegistration, we recommend that you stop all of the tasks running on the container\n\t\t\tinstance before deregistration. That prevents any orphaned tasks from consuming\n\t\t\tresources.</p>\n         <p>Deregistering a container instance removes the instance from a cluster, but it doesn't\n\t\t\tterminate the EC2 instance. If you are finished using the instance, be sure to terminate\n\t\t\tit in the Amazon EC2 console to stop billing.</p>\n         <note>\n            <p>If you terminate a running container instance, Amazon ECS automatically deregisters the\n\t\t\t\tinstance from your cluster (stopped container instances or instances with\n\t\t\t\tdisconnected agents aren't automatically deregistered when terminated).</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deregisters an Amazon ECS container instance from the specified cluster. This instance is\n\t\t\tno longer available to run tasks.</p>\n         <p>If you intend to use the container instance for some other purpose after\n\t\t\tderegistration, we recommend that you stop all of the tasks running on the container\n\t\t\tinstance before deregistration. That prevents any orphaned tasks from consuming\n\t\t\tresources.</p>\n         <p>Deregistering a container instance removes the instance from a cluster, but it doesn't\n\t\t\tterminate the EC2 instance. If you are finished using the instance, be sure to terminate\n\t\t\tit in the Amazon EC2 console to stop billing.</p>\n         <note>\n            <p>If you terminate a running container instance, Amazon ECS automatically deregisters the\n\t\t\t\tinstance from your cluster (stopped container instances or instances with\n\t\t\t\tdisconnected agents aren't automatically deregistered when terminated).</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To deregister a container instance from a cluster",
+                        "documentation": "This example deregisters a container instance from the specified cluster in your default region. If there are still tasks running on the container instance, you must either stop those tasks before deregistering, or use the force option.",
+                        "input": {
+                            "cluster": "default",
+                            "force": true,
+                            "containerInstance": "container_instance_UUID"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#DeregisterContainerInstanceRequest": {
@@ -4322,7 +4416,28 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more of your clusters.</p>"
+                "smithy.api#documentation": "<p>Describes one or more of your clusters.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a cluster",
+                        "documentation": "This example provides a description of the specified cluster in your default region.",
+                        "input": {
+                            "clusters": [
+                                "default"
+                            ]
+                        },
+                        "output": {
+                            "clusters": [
+                                {
+                                    "clusterName": "default",
+                                    "status": "ACTIVE",
+                                    "clusterArn": "arn:aws:ecs:us-east-1:aws_account_id:cluster/default"
+                                }
+                            ],
+                            "failures": []
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#DescribeClustersRequest": {
@@ -4388,7 +4503,91 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more container instances. Returns metadata about each container\n\t\t\tinstance requested.</p>"
+                "smithy.api#documentation": "<p>Describes one or more container instances. Returns metadata about each container\n\t\t\tinstance requested.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe container instance",
+                        "documentation": "This example provides a description of the specified container instance in your default region, using the container instance UUID as an identifier.",
+                        "input": {
+                            "cluster": "default",
+                            "containerInstances": [
+                                "f2756532-8f13-4d53-87c9-aed50dc94cd7"
+                            ]
+                        },
+                        "output": {
+                            "failures": [],
+                            "containerInstances": [
+                                {
+                                    "status": "ACTIVE",
+                                    "registeredResources": [
+                                        {
+                                            "doubleValue": 0.0,
+                                            "type": "INTEGER",
+                                            "longValue": 0,
+                                            "integerValue": 2048,
+                                            "name": "CPU"
+                                        },
+                                        {
+                                            "doubleValue": 0.0,
+                                            "type": "INTEGER",
+                                            "longValue": 0,
+                                            "integerValue": 3768,
+                                            "name": "MEMORY"
+                                        },
+                                        {
+                                            "name": "PORTS",
+                                            "longValue": 0,
+                                            "doubleValue": 0.0,
+                                            "stringSetValue": [
+                                                "2376",
+                                                "22",
+                                                "51678",
+                                                "2375"
+                                            ],
+                                            "type": "STRINGSET",
+                                            "integerValue": 0
+                                        }
+                                    ],
+                                    "ec2InstanceId": "i-807f3249",
+                                    "agentConnected": true,
+                                    "containerInstanceArn": "arn:aws:ecs:us-east-1:012345678910:container-instance/f2756532-8f13-4d53-87c9-aed50dc94cd7",
+                                    "pendingTasksCount": 0,
+                                    "remainingResources": [
+                                        {
+                                            "doubleValue": 0.0,
+                                            "type": "INTEGER",
+                                            "longValue": 0,
+                                            "integerValue": 1948,
+                                            "name": "CPU"
+                                        },
+                                        {
+                                            "doubleValue": 0.0,
+                                            "type": "INTEGER",
+                                            "longValue": 0,
+                                            "integerValue": 3668,
+                                            "name": "MEMORY"
+                                        },
+                                        {
+                                            "name": "PORTS",
+                                            "longValue": 0,
+                                            "doubleValue": 0.0,
+                                            "stringSetValue": [
+                                                "2376",
+                                                "22",
+                                                "80",
+                                                "51678",
+                                                "2375"
+                                            ],
+                                            "type": "STRINGSET",
+                                            "integerValue": 0
+                                        }
+                                    ],
+                                    "runningTasksCount": 1
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#DescribeContainerInstancesRequest": {
@@ -4462,6 +4661,57 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Describes the specified services running in your cluster.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a service",
+                        "documentation": "This example provides descriptive information about the service named ``ecs-simple-service``.",
+                        "input": {
+                            "services": [
+                                "ecs-simple-service"
+                            ]
+                        },
+                        "output": {
+                            "failures": [],
+                            "services": [
+                                {
+                                    "clusterArn": "arn:aws:ecs:us-east-1:012345678910:cluster/default",
+                                    "createdAt": "2016-08-29T16:25:52.130Z",
+                                    "deploymentConfiguration": {
+                                        "maximumPercent": 200,
+                                        "minimumHealthyPercent": 100
+                                    },
+                                    "deployments": [
+                                        {
+                                            "createdAt": "2016-08-29T16:25:52.130Z",
+                                            "desiredCount": 1,
+                                            "id": "ecs-svc/9223370564341623665",
+                                            "pendingCount": 0,
+                                            "runningCount": 0,
+                                            "status": "PRIMARY",
+                                            "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6",
+                                            "updatedAt": "2016-08-29T16:25:52.130Z"
+                                        }
+                                    ],
+                                    "desiredCount": 1,
+                                    "events": [
+                                        {
+                                            "createdAt": "2016-08-29T16:25:58.520Z",
+                                            "id": "38c285e5-d335-4b68-8b15-e46dedc8e88d",
+                                            "message": "(service ecs-simple-service) was unable to place a task because no container instance met all of its requirements. The closest matching (container-instance 3f4de1c5-ffdd-4954-af7e-75b4be0c8841) is already using a port required by your task. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                                        }
+                                    ],
+                                    "loadBalancers": [],
+                                    "pendingCount": 0,
+                                    "runningCount": 0,
+                                    "serviceArn": "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service",
+                                    "serviceName": "ecs-simple-service",
+                                    "status": "ACTIVE",
+                                    "taskDefinition": "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.waiters#waitable": {
                     "ServicesInactive": {
                         "acceptors": [
@@ -4603,7 +4853,61 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a task definition. You can specify a <code>family</code> and\n\t\t\t\t<code>revision</code> to find information about a specific task definition, or you\n\t\t\tcan simply specify the family to find the latest <code>ACTIVE</code> revision in that\n\t\t\tfamily.</p>\n         <note>\n            <p>You can only describe <code>INACTIVE</code> task definitions while an active task\n\t\t\t\tor service references them.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes a task definition. You can specify a <code>family</code> and\n\t\t\t\t<code>revision</code> to find information about a specific task definition, or you\n\t\t\tcan simply specify the family to find the latest <code>ACTIVE</code> revision in that\n\t\t\tfamily.</p>\n         <note>\n            <p>You can only describe <code>INACTIVE</code> task definitions while an active task\n\t\t\t\tor service references them.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a task definition",
+                        "documentation": "This example provides a description of the specified task definition.",
+                        "input": {
+                            "taskDefinition": "hello_world:8"
+                        },
+                        "output": {
+                            "taskDefinition": {
+                                "family": "hello_world",
+                                "taskDefinitionArn": "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/hello_world:8",
+                                "containerDefinitions": [
+                                    {
+                                        "mountPoints": [],
+                                        "name": "wordpress",
+                                        "links": [
+                                            "mysql"
+                                        ],
+                                        "image": "wordpress",
+                                        "cpu": 10,
+                                        "environment": [],
+                                        "memory": 500,
+                                        "portMappings": [
+                                            {
+                                                "containerPort": 80,
+                                                "hostPort": 80
+                                            }
+                                        ],
+                                        "essential": true,
+                                        "volumesFrom": []
+                                    },
+                                    {
+                                        "mountPoints": [],
+                                        "name": "mysql",
+                                        "image": "mysql",
+                                        "cpu": 10,
+                                        "environment": [
+                                            {
+                                                "name": "MYSQL_ROOT_PASSWORD",
+                                                "value": "password"
+                                            }
+                                        ],
+                                        "memory": 500,
+                                        "portMappings": [],
+                                        "volumesFrom": [],
+                                        "essential": true
+                                    }
+                                ],
+                                "volumes": [],
+                                "revision": 8
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#DescribeTaskDefinitionRequest": {
@@ -4762,7 +5066,54 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a specified task or tasks.</p>\n         <p>Currently, stopped tasks appear in the returned results for at least one hour.</p>",
+                "smithy.api#documentation": "<p>Describes a specified task or tasks.</p>\n         <p>Currently, stopped tasks appear in the returned results for at least one hour.</p>\n         <p>If you have tasks with tags, and then delete the cluster, the tagged tasks are\n\t\t\treturned in the response. If you create a new cluster with the same name as the deleted\n\t\t\tcluster, the tagged tasks are not included in the response.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a task",
+                        "documentation": "This example provides a description of the specified task, using the task UUID as an identifier.",
+                        "input": {
+                            "tasks": [
+                                "c5cba4eb-5dad-405e-96db-71ef8eefe6a8"
+                            ]
+                        },
+                        "output": {
+                            "failures": [],
+                            "tasks": [
+                                {
+                                    "taskArn": "arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8",
+                                    "overrides": {
+                                        "containerOverrides": [
+                                            {
+                                                "name": "ecs-demo"
+                                            }
+                                        ]
+                                    },
+                                    "lastStatus": "RUNNING",
+                                    "containerInstanceArn": "arn:aws:ecs:<region>:<aws_account_id>:container-instance/18f9eda5-27d7-4c19-b133-45adc516e8fb",
+                                    "clusterArn": "arn:aws:ecs:<region>:<aws_account_id>:cluster/default",
+                                    "desiredStatus": "RUNNING",
+                                    "taskDefinitionArn": "arn:aws:ecs:<region>:<aws_account_id>:task-definition/amazon-ecs-sample:1",
+                                    "startedBy": "ecs-svc/9223370608528463088",
+                                    "containers": [
+                                        {
+                                            "containerArn": "arn:aws:ecs:<region>:<aws_account_id>:container/7c01765b-c588-45b3-8290-4ba38bd6c5a6",
+                                            "taskArn": "arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8",
+                                            "lastStatus": "RUNNING",
+                                            "name": "ecs-demo",
+                                            "networkBindings": [
+                                                {
+                                                    "bindIP": "0.0.0.0",
+                                                    "containerPort": 80,
+                                                    "hostPort": 80
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.waiters#waitable": {
                     "TasksRunning": {
                         "acceptors": [
@@ -5180,7 +5531,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of files containing the environment variables to pass to a container. You can\n\t\t\tspecify up to ten environment files. The file must have a <code>.env</code> file\n\t\t\textension. Each line in an environment file should contain an environment variable in\n\t\t\t\t<code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated\n\t\t\tas comments and are ignored. For more information about the environment variable file\n\t\t\tsyntax, see <a href=\"https://docs.docker.com/compose/env-file/\">Declare default\n\t\t\t\tenvironment variables in file</a>.</p>\n         <p>If there are environment variables specified using the <code>environment</code>\n\t\t\tparameter in a container definition, they take precedence over the variables contained\n\t\t\twithin an environment file. If multiple environment files are specified that contain the\n\t\t\tsame variable, they're processed from the top down. We recommend that you use unique\n\t\t\tvariable names. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html\">Specifying environment\n\t\t\t\tvariables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>This parameter is only supported for tasks hosted on Fargate using the\n\t\t\tfollowing platform versions:</p>\n         <ul>\n            <li>\n               <p>Linux platform version <code>1.4.0</code> or later.</p>\n            </li>\n            <li>\n               <p>Windows platform version <code>1.0.0</code> or later.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A list of files containing the environment variables to pass to a container. You can\n\t\t\tspecify up to ten environment files. The file must have a <code>.env</code> file\n\t\t\textension. Each line in an environment file should contain an environment variable in\n\t\t\t\t<code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated\n\t\t\tas comments and are ignored. For more information about the environment variable file\n\t\t\tsyntax, see <a href=\"https://docs.docker.com/compose/env-file/\">Declare default\n\t\t\t\tenvironment variables in file</a>.</p>\n         <p>If there are environment variables specified using the <code>environment</code>\n\t\t\tparameter in a container definition, they take precedence over the variables contained\n\t\t\twithin an environment file. If multiple environment files are specified that contain the\n\t\t\tsame variable, they're processed from the top down. We recommend that you use unique\n\t\t\tvariable names. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html\">Specifying environment\n\t\t\t\tvariables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You must use the following platforms for the Fargate launch type:</p>\n         <ul>\n            <li>\n               <p>Linux platform version <code>1.4.0</code> or later.</p>\n            </li>\n            <li>\n               <p>Windows platform version <code>1.0.0</code> or later.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ecs#EnvironmentFileType": {
@@ -5592,7 +5943,29 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the protection status of tasks in an Amazon ECS service.</p>"
+                "smithy.api#documentation": "<p>Retrieves the protection status of tasks in an Amazon ECS service.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get the protection status of a task",
+                        "documentation": "In this example, we get the protection status for a single task.",
+                        "input": {
+                            "cluster": "test-task-protection",
+                            "tasks": [
+                                "b8b1cf532d0e46ba8d44a40d1de16772"
+                            ]
+                        },
+                        "output": {
+                            "protectedTasks": [
+                                {
+                                    "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772",
+                                    "protectionEnabled": true,
+                                    "expirationDate": "2022-11-02T06:56:32.553Z"
+                                }
+                            ],
+                            "failures": []
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#GetTaskProtectionRequest": {
@@ -6065,6 +6438,34 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the account settings for a specified principal.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view your effective account settings",
+                        "documentation": "This example displays the effective account settings for your account.",
+                        "input": {
+                            "effectiveSettings": true
+                        },
+                        "output": {
+                            "settings": [
+                                {
+                                    "name": "containerInstanceLongArnFormat",
+                                    "value": "disabled",
+                                    "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                                },
+                                {
+                                    "name": "serviceLongArnFormat",
+                                    "value": "enabled",
+                                    "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                                },
+                                {
+                                    "name": "taskLongArnFormat",
+                                    "value": "disabled",
+                                    "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6251,6 +6652,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of existing clusters.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list your available clusters",
+                        "documentation": "This example lists all of your available clusters in your default region.",
+                        "output": {
+                            "clusterArns": [
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:cluster/test",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:cluster/default"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6323,6 +6736,21 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of container instances in a specified cluster. You can filter the\n\t\t\tresults of a <code>ListContainerInstances</code> operation with cluster query language\n\t\t\tstatements inside the <code>filter</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html\">Cluster Query Language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list your available container instances in a cluster",
+                        "documentation": "This example lists all of your available container instances in the specified cluster in your default region.",
+                        "input": {
+                            "cluster": "default"
+                        },
+                        "output": {
+                            "containerInstanceArns": [
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/f6bbb147-5370-4ace-8c73-c7181ded911f",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6413,6 +6841,17 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of services. You can filter the results by cluster, launch type, and\n\t\t\tscheduling strategy.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list the services in a cluster",
+                        "documentation": "This example lists the services running in the default cluster for an account.",
+                        "output": {
+                            "serviceArns": [
+                                "arn:aws:ecs:us-east-1:012345678910:service/my-http-service"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6581,7 +7020,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the tags for an Amazon ECS resource.</p>"
+                "smithy.api#documentation": "<p>List the tags for an Amazon ECS resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list the tags for a cluster.",
+                        "documentation": "This example lists the tags for the 'dev' cluster.",
+                        "input": {
+                            "resourceArn": "arn:aws:ecs:region:aws_account_id:cluster/dev"
+                        },
+                        "output": {
+                            "tags": [
+                                {
+                                    "key": "team",
+                                    "value": "dev"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#ListTagsForResourceRequest": {
@@ -6634,6 +7090,20 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of task definition families that are registered to your account. This\n\t\t\tlist includes task definition families that no longer have any <code>ACTIVE</code> task\n\t\t\tdefinition revisions.</p>\n         <p>You can filter out task definition families that don't contain any <code>ACTIVE</code>\n\t\t\ttask definition revisions by setting the <code>status</code> parameter to\n\t\t\t\t<code>ACTIVE</code>. You can also filter the results with the\n\t\t\t\t<code>familyPrefix</code> parameter.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list your registered task definition families",
+                        "documentation": "This example lists all of your registered task definition families.",
+                        "output": {
+                            "families": [
+                                "node-js-app",
+                                "web-timer",
+                                "hpcc",
+                                "hpcc-c4-8xlarge"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6715,6 +7185,22 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of task definitions that are registered to your account. You can filter\n\t\t\tthe results by family name with the <code>familyPrefix</code> parameter or by status\n\t\t\twith the <code>status</code> parameter.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list your registered task definitions",
+                        "documentation": "This example lists all of your registered task definitions.",
+                        "output": {
+                            "taskDefinitionArns": [
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep300:2",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:3",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:4",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:5",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:6"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6807,7 +7293,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of tasks. You can filter the results by cluster, task definition\n\t\t\tfamily, container instance, launch type, what IAM principal started the task, or by the\n\t\t\tdesired status of the task.</p>\n         <p>Recently stopped tasks might appear in the returned results. Currently, stopped tasks\n\t\t\tappear in the returned results for at least one hour.</p>",
+                "smithy.api#documentation": "<p>Returns a list of tasks. You can filter the results by cluster, task definition\n\t\t\tfamily, container instance, launch type, what IAM principal started the task, or by the\n\t\t\tdesired status of the task.</p>\n         <p>Recently stopped tasks might appear in the returned results. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list the tasks in a cluster",
+                        "documentation": "This example lists all of the tasks in a cluster.",
+                        "input": {
+                            "cluster": "default"
+                        },
+                        "output": {
+                            "taskArns": [
+                                "arn:aws:ecs:us-east-1:012345678910:task/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84",
+                                "arn:aws:ecs:us-east-1:012345678910:task/6b809ef6-c67e-4467-921f-ee261c15a0a1"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6904,13 +7405,13 @@
                 "targetGroupArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or\n\t\t\ttask set.</p>\n         <p>A target group ARN is only specified when using an Application Load Balancer or Network Load Balancer. If you're using a\n\t\t\tClassic Load Balancer, omit the target group ARN.</p>\n         <p>For services using the <code>ECS</code> deployment controller, you can specify one or\n\t\t\tmultiple target groups. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html\">Registering multiple target groups with a service</a> in\n\t\t\tthe <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>For services using the <code>CODE_DEPLOY</code> deployment controller, you're required\n\t\t\tto define two target groups for the load balancer. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html\">Blue/green deployment with CodeDeploy</a> in the\n\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <important>\n            <p>If your service's task definition uses the <code>awsvpc</code> network mode, you\n\t\t\t\tmust choose <code>ip</code> as the target type, not <code>instance</code>. Do this\n\t\t\t\twhen creating your target groups because tasks that use the <code>awsvpc</code>\n\t\t\t\tnetwork mode are associated with an elastic network interface, not an Amazon EC2\n\t\t\t\tinstance. This network mode is required for the Fargate launch\n\t\t\t\ttype.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or\n\t\t\ttask set.</p>\n         <p>A target group ARN is only specified when using an Application Load Balancer or Network Load Balancer. </p>\n         <p>For services using the <code>ECS</code> deployment controller, you can specify one or\n\t\t\tmultiple target groups. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html\">Registering multiple target groups with a service</a> in\n\t\t\tthe <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>For services using the <code>CODE_DEPLOY</code> deployment controller, you're required\n\t\t\tto define two target groups for the load balancer. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html\">Blue/green deployment with CodeDeploy</a> in the\n\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <important>\n            <p>If your service's task definition uses the <code>awsvpc</code> network mode, you\n\t\t\t\tmust choose <code>ip</code> as the target type, not <code>instance</code>. Do this\n\t\t\t\twhen creating your target groups because tasks that use the <code>awsvpc</code>\n\t\t\t\tnetwork mode are associated with an elastic network interface, not an Amazon EC2\n\t\t\t\tinstance. This network mode is required for the Fargate launch\n\t\t\t\ttype.</p>\n         </important>"
                     }
                 },
                 "loadBalancerName": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the load balancer to associate with the Amazon ECS service or task set.</p>\n         <p>A load balancer name is only specified when using a Classic Load Balancer. If you are using an Application Load Balancer\n\t\t\tor a Network Load Balancer the load balancer name parameter should be omitted.</p>"
+                        "smithy.api#documentation": "<p>The name of the load balancer to associate with the Amazon ECS service or task set.</p>\n         <p>If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be\n\t\t\tomitted.</p>"
                     }
                 },
                 "containerName": {
@@ -6960,7 +7461,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The log configuration for the container. This parameter maps to <code>LogConfig</code>\n\t\t\tin the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the\n\t\t\t\t<code>--log-driver</code> option to <a href=\"https://docs.docker.com/engine/reference/commandline/run/\">\n               <code>docker\n\t\t\t\t\trun</code>\n            </a>.</p>\n         <p>By default, containers use the same logging driver that the Docker daemon uses.\n\t\t\tHowever, the container might use a different logging driver than the Docker daemon by\n\t\t\tspecifying a log driver configuration in the container definition. For more information\n\t\t\tabout the options for different supported log drivers, see <a href=\"https://docs.docker.com/engine/admin/logging/overview/\">Configure logging\n\t\t\t\tdrivers</a> in the Docker documentation.</p>\n         <p>Understand the following when specifying a log configuration for your\n\t\t\tcontainers.</p>\n         <ul>\n            <li>\n               <p>Amazon ECS currently supports a subset of the logging drivers available to the\n\t\t\t\t\tDocker daemon (shown in the valid values below). Additional log drivers may be\n\t\t\t\t\tavailable in future releases of the Amazon ECS container agent.</p>\n            </li>\n            <li>\n               <p>This parameter requires version 1.18 of the Docker Remote API or greater on\n\t\t\t\t\tyour container instance.</p>\n            </li>\n            <li>\n               <p>For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must\n\t\t\t\t\tregister the available logging drivers with the\n\t\t\t\t\t\t<code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before\n\t\t\t\t\tcontainers placed on that instance can use these log configuration options. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html\">Amazon ECS container agent configuration</a> in the\n\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>For tasks that are on Fargate, because you don't have access to the\n\t\t\t\t\tunderlying infrastructure your tasks are hosted on, any additional software\n\t\t\t\t\tneeded must be installed outside of the task. For example, the Fluentd output\n\t\t\t\t\taggregators or a remote host running Logstash to send Gelf logs to.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The log configuration for the container. This parameter maps to <code>LogConfig</code>\n\t\t\tin the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the\n\t\t\t\t<code>--log-driver</code> option to <a href=\"https://docs.docker.com/engine/reference/commandline/run/\">\n               <code>docker\n\t\t\t\t\trun</code>\n            </a>.</p>\n         <p>By default, containers use the same logging driver that the Docker daemon uses.\n\t\t\tHowever, the container might use a different logging driver than the Docker daemon by\n\t\t\tspecifying a log driver configuration in the container definition. For more information\n\t\t\tabout the options for different supported log drivers, see <a href=\"https://docs.docker.com/engine/admin/logging/overview/\">Configure logging\n\t\t\t\tdrivers</a> in the Docker documentation.</p>\n         <p>Understand the following when specifying a log configuration for your\n\t\t\tcontainers.</p>\n         <ul>\n            <li>\n               <p>Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon.\n\t\t\t\t\tAdditional log drivers may be available in future releases of the Amazon ECS\n\t\t\t\t\tcontainer agent.</p>\n               <p>For tasks on Fargate, the supported log drivers are <code>awslogs</code>,\n\t\t\t\t\t\t<code>splunk</code>, and <code>awsfirelens</code>.</p>\n               <p>For tasks hosted on Amazon EC2 instances, the supported log drivers are\n\t\t\t\t\t\t<code>awslogs</code>, <code>fluentd</code>, <code>gelf</code>,\n\t\t\t\t\t\t<code>json-file</code>, <code>journald</code>,\n\t\t\t\t\t\t<code>logentries</code>,<code>syslog</code>, <code>splunk</code>, and\n\t\t\t\t\t\t<code>awsfirelens</code>.</p>\n            </li>\n            <li>\n               <p>This parameter requires version 1.18 of the Docker Remote API or greater on\n\t\t\t\t\tyour container instance.</p>\n            </li>\n            <li>\n               <p>For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must\n\t\t\t\t\tregister the available logging drivers with the\n\t\t\t\t\t\t<code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before\n\t\t\t\t\tcontainers placed on that instance can use these log configuration options. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html\">Amazon ECS container agent configuration</a> in the\n\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>For tasks that are on Fargate, because you don't have access to the\n\t\t\t\t\tunderlying infrastructure your tasks are hosted on, any additional software\n\t\t\t\t\tneeded must be installed outside of the task. For example, the Fluentd output\n\t\t\t\t\taggregators or a remote host running Logstash to send Gelf logs to.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ecs#LogConfigurationOptionsMap": {
@@ -7145,7 +7646,7 @@
                 "maximumScalingStepSize": {
                     "target": "com.amazonaws.ecs#ManagedScalingStepSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale\n\t\t\tin process is not affected by this parameter. If this parameter is omitted, the default\n\t\t\tvalue of <code>1</code> is used.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale in\n\t\t\tprocess is not affected by this parameter. If this parameter is omitted, the default\n\t\t\tvalue of <code>10000</code> is used.</p>"
                     }
                 },
                 "instanceWarmupPeriod": {
@@ -7650,7 +8151,7 @@
                 "hostPort": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on the container instance to reserve for your container.</p>\n         <p>If you specify a <code>containerPortRange</code>, leave this field empty and the value of\n\t\t\tthe <code>hostPort</code> is set as follows:</p>\n         <ul>\n            <li>\n               <p>For containers in a task with the <code>awsvpc</code> network mode, the\n\t\t\t\t\t\t<code>hostPort</code> is set to the same value as the\n\t\t\t\t\t\t<code>containerPort</code>. This is a static mapping strategy.</p>\n            </li>\n            <li>\n               <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS agent finds\n\t\t\t\t\topen ports on the host and automatically binds them to the container ports. This\n\t\t\t\t\tis a dynamic mapping strategy.</p>\n            </li>\n         </ul>\n         <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>\n\t\t\tnetwork mode, the <code>hostPort</code> can either be left blank or set to the same\n\t\t\tvalue as the <code>containerPort</code>.</p>\n         <p>If you use containers in a task with the <code>bridge</code> network mode, you can\n\t\t\tspecify a non-reserved host port for your container port mapping, or you can omit the\n\t\t\t\t<code>hostPort</code> (or set it to <code>0</code>) while specifying a\n\t\t\t\t<code>containerPort</code> and your container automatically receives a port in the\n\t\t\tephemeral port range for your container instance operating system and Docker\n\t\t\tversion.</p>\n         <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the\n\t\t\tinstance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel\n\t\t\tparameter is unavailable, the default ephemeral port range from 49153 through 65535 is\n\t\t\tused. Do not attempt to specify a host port in the ephemeral port range as these are\n\t\t\treserved for automatic assignment. In general, ports below 32768 are outside of the\n\t\t\tephemeral port range.</p>\n         <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the\n\t\t\tAmazon ECS container agent ports 51678-51680. Any host port that was previously specified in\n\t\t\ta running task is also reserved while the task is running. That is, after a task stops,\n\t\t\tthe host port is released. The current reserved ports are displayed in the\n\t\t\t<code>remainingResources</code> of <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeContainerInstances.html\">DescribeContainerInstances</a>\n\t\t\toutput. A container instance can have up to 100 reserved ports at a time. This number\n\t\t\tincludes the default reserved ports. Automatically assigned ports aren't included in the\n\t\t\t100 reserved ports quota.</p>"
+                        "smithy.api#documentation": "<p>The port number on the container instance to reserve for your container.</p>\n         <p>If you specify a <code>containerPortRange</code>, leave this field empty and the value of\n\t\t\tthe <code>hostPort</code> is set as follows:</p>\n         <ul>\n            <li>\n               <p>For containers in a task with the <code>awsvpc</code> network mode, the\n\t\t\t\t\t\t<code>hostPort</code> is set to the same value as the\n\t\t\t\t\t\t<code>containerPort</code>. This is a static mapping strategy.</p>\n            </li>\n            <li>\n               <p>For containers in a task with the <code>bridge</code> network mode, the Amazon ECS agent finds\n\t\t\t\t\topen ports on the host and automatically binds them to the container ports. This\n\t\t\t\t\tis a dynamic mapping strategy.</p>\n            </li>\n         </ul>\n         <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>\n\t\t\tnetwork mode, the <code>hostPort</code> can either be left blank or set to the same\n\t\t\tvalue as the <code>containerPort</code>.</p>\n         <p>If you use containers in a task with the <code>bridge</code> network mode, you can\n\t\t\tspecify a non-reserved host port for your container port mapping, or you can omit the\n\t\t\t\t<code>hostPort</code> (or set it to <code>0</code>) while specifying a\n\t\t\t\t<code>containerPort</code> and your container automatically receives a port in the\n\t\t\tephemeral port range for your container instance operating system and Docker\n\t\t\tversion.</p>\n         <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the\n\t\t\tinstance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel\n\t\t\tparameter is unavailable, the default ephemeral port range from 49153 through 65535\n\t\t\t(Linux) or 49152 through 65535 (Windows)  is used. Do not attempt to specify a host port\n\t\t\tin the ephemeral port range as these are reserved for automatic assignment. In general,\n\t\t\tports below 32768 are outside of the ephemeral port range.</p>\n         <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the\n\t\t\tAmazon ECS container agent ports 51678-51680. Any host port that was previously specified in\n\t\t\ta running task is also reserved while the task is running. That is, after a task stops,\n\t\t\tthe host port is released. The current reserved ports are displayed in the\n\t\t\t<code>remainingResources</code> of <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeContainerInstances.html\">DescribeContainerInstances</a>\n\t\t\toutput. A container instance can have up to 100 reserved ports at a time. This number\n\t\t\tincludes the default reserved ports. Automatically assigned ports aren't included in the\n\t\t\t100 reserved ports quota.</p>"
                     }
                 },
                 "protocol": {
@@ -7817,7 +8318,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies an account setting. Account settings are set on a per-Region basis.</p>\n         <p>If you change the root user account setting, the default settings are reset for  users\n\t\t\tand roles that do not have specified individual account settings. For more information,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html\">Account\n\t\t\t\tSettings</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When <code>serviceLongArnFormat</code>, <code>taskLongArnFormat</code>, or\n\t\t\t\t<code>containerInstanceLongArnFormat</code> are specified, the Amazon Resource Name\n\t\t\t(ARN) and resource ID format of the resource type for a specified user, role, or\n\t\t\tthe root user for an account is affected. The opt-in and opt-out account setting must be\n\t\t\tset for each Amazon ECS resource separately. The ARN and resource ID format of a resource\n\t\t\tis defined by the opt-in status of the user or role that created the resource. You\n\t\t\tmust turn on this setting to use Amazon ECS features such as resource tagging.</p>\n         <p>When <code>awsvpcTrunking</code> is specified, the elastic network interface (ENI)\n\t\t\tlimit for any new container instances that support the feature is changed. If\n\t\t\t\t<code>awsvpcTrunking</code> is turned on, any new container instances that support the\n\t\t\tfeature are launched have the increased ENI limits available to them. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html\">Elastic Network\n\t\t\t\tInterface Trunking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When <code>containerInsights</code> is specified, the default setting indicating whether\n\t\t\tAmazon Web Services CloudWatch Container Insights is turned on for your clusters is changed. If\n\t\t\t\t<code>containerInsights</code> is turned on, any new clusters that are created will\n\t\t\thave Container Insights turned on unless you disable it during cluster creation. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html\">CloudWatch\n\t\t\t\tContainer Insights</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Amazon ECS is introducing tagging authorization for resource creation. Users must have\n\t\t\tpermissions for actions that create the resource, such as <code>ecsCreateCluster</code>.\n\t\t\tIf tags are specified when you create a resource, Amazon Web Services performs additional\n\t\t\tauthorization to verify if users or roles have permissions to create tags. Therefore,\n\t\t\tyou must grant explicit permissions to use the <code>ecs:TagResource</code> action. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html\">Grant\n\t\t\t\tpermission to tag resources on creation</a> in the <i>Amazon ECS Developer\n\t\t\t\t\tGuide</i>.</p>"
+                "smithy.api#documentation": "<p>Modifies an account setting. Account settings are set on a per-Region basis.</p>\n         <p>If you change the root user account setting, the default settings are reset for  users\n\t\t\tand roles that do not have specified individual account settings. For more information,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html\">Account\n\t\t\t\tSettings</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When <code>serviceLongArnFormat</code>, <code>taskLongArnFormat</code>, or\n\t\t\t\t<code>containerInstanceLongArnFormat</code> are specified, the Amazon Resource Name\n\t\t\t(ARN) and resource ID format of the resource type for a specified user, role, or\n\t\t\tthe root user for an account is affected. The opt-in and opt-out account setting must be\n\t\t\tset for each Amazon ECS resource separately. The ARN and resource ID format of a resource\n\t\t\tis defined by the opt-in status of the user or role that created the resource. You\n\t\t\tmust turn on this setting to use Amazon ECS features such as resource tagging.</p>\n         <p>When <code>awsvpcTrunking</code> is specified, the elastic network interface (ENI)\n\t\t\tlimit for any new container instances that support the feature is changed. If\n\t\t\t\t<code>awsvpcTrunking</code> is turned on, any new container instances that support the\n\t\t\tfeature are launched have the increased ENI limits available to them. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html\">Elastic Network\n\t\t\t\tInterface Trunking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When <code>containerInsights</code> is specified, the default setting indicating whether\n\t\t\tAmazon Web Services CloudWatch Container Insights is turned on for your clusters is changed. If\n\t\t\t\t<code>containerInsights</code> is turned on, any new clusters that are created will\n\t\t\thave Container Insights turned on unless you disable it during cluster creation. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html\">CloudWatch\n\t\t\t\tContainer Insights</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Amazon ECS is introducing tagging authorization for resource creation. Users must have\n\t\t\tpermissions for actions that create the resource, such as <code>ecsCreateCluster</code>.\n\t\t\tIf tags are specified when you create a resource, Amazon Web Services performs additional\n\t\t\tauthorization to verify if users or roles have permissions to create tags. Therefore,\n\t\t\tyou must grant explicit permissions to use the <code>ecs:TagResource</code> action. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html\">Grant\n\t\t\t\tpermission to tag resources on creation</a> in the <i>Amazon ECS Developer\n\t\t\t\t\tGuide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To modify your account settings",
+                        "documentation": "This example modifies your account settings to opt in to the new ARN and resource ID format for Amazon ECS services. If you’re using this command as the root user, then changes apply to the entire AWS account, unless an IAM user or role explicitly overrides these settings for themselves.",
+                        "input": {
+                            "name": "serviceLongArnFormat",
+                            "value": "enabled"
+                        },
+                        "output": {
+                            "setting": {
+                                "name": "serviceLongArnFormat",
+                                "value": "enabled",
+                                "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#PutAccountSettingDefault": {
@@ -7840,7 +8358,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies an account setting for all users on an account for whom no individual\n\t\t\taccount setting has been specified. Account settings are set on a per-Region\n\t\t\tbasis.</p>"
+                "smithy.api#documentation": "<p>Modifies an account setting for all users on an account for whom no individual\n\t\t\taccount setting has been specified. Account settings are set on a per-Region\n\t\t\tbasis.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To modify the default account settings for all IAM users or roles on an account",
+                        "documentation": "This example modifies the default account setting for the specified resource for all IAM users or roles on an account. These changes apply to the entire AWS account, unless an IAM user or role explicitly overrides these settings for themselves.",
+                        "input": {
+                            "name": "serviceLongArnFormat",
+                            "value": "enabled"
+                        },
+                        "output": {
+                            "setting": {
+                                "name": "serviceLongArnFormat",
+                                "value": "enabled",
+                                "principalArn": "arn:aws:iam::<aws_account_id>:root"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#PutAccountSettingDefaultRequest": {
@@ -8176,7 +8711,56 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers a new task definition from the supplied <code>family</code> and\n\t\t\t\t<code>containerDefinitions</code>. Optionally, you can add data volumes to your\n\t\t\tcontainers with the <code>volumes</code> parameter. For more information about task\n\t\t\tdefinition parameters and defaults, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task\n\t\t\t\tDefinitions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You can specify a role for your task with the <code>taskRoleArn</code> parameter.\n\t\t\tWhen you specify a role for a task, its containers can then use the latest versions\n\t\t\tof the CLI or SDKs to make API requests to the Amazon Web Services services that are specified in\n\t\t\tthe policy that's associated with the role. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html\">IAM\n\t\t\t\tRoles for Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You can specify a Docker networking mode for the containers in your task definition\n\t\t\twith the <code>networkMode</code> parameter. The available network modes correspond to\n\t\t\tthose described in <a href=\"https://docs.docker.com/engine/reference/run/#/network-settings\">Network\n\t\t\t\tsettings</a> in the Docker run reference. If you specify the <code>awsvpc</code>\n\t\t\tnetwork mode, the task is allocated an elastic network interface, and you must specify a\n\t\t\t\t<a>NetworkConfiguration</a> when you create a service or run a task with\n\t\t\tthe task definition. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Registers a new task definition from the supplied <code>family</code> and\n\t\t\t\t<code>containerDefinitions</code>. Optionally, you can add data volumes to your\n\t\t\tcontainers with the <code>volumes</code> parameter. For more information about task\n\t\t\tdefinition parameters and defaults, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task\n\t\t\t\tDefinitions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You can specify a role for your task with the <code>taskRoleArn</code> parameter.\n\t\t\tWhen you specify a role for a task, its containers can then use the latest versions\n\t\t\tof the CLI or SDKs to make API requests to the Amazon Web Services services that are specified in\n\t\t\tthe policy that's associated with the role. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html\">IAM\n\t\t\t\tRoles for Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You can specify a Docker networking mode for the containers in your task definition\n\t\t\twith the <code>networkMode</code> parameter. The available network modes correspond to\n\t\t\tthose described in <a href=\"https://docs.docker.com/engine/reference/run/#/network-settings\">Network\n\t\t\t\tsettings</a> in the Docker run reference. If you specify the <code>awsvpc</code>\n\t\t\tnetwork mode, the task is allocated an elastic network interface, and you must specify a\n\t\t\t\t<a>NetworkConfiguration</a> when you create a service or run a task with\n\t\t\tthe task definition. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To register a task definition",
+                        "documentation": "This example registers a task definition to the specified family.",
+                        "input": {
+                            "family": "sleep360",
+                            "taskRoleArn": "",
+                            "containerDefinitions": [
+                                {
+                                    "name": "sleep",
+                                    "image": "busybox",
+                                    "cpu": 10,
+                                    "command": [
+                                        "sleep",
+                                        "360"
+                                    ],
+                                    "memory": 10,
+                                    "essential": true
+                                }
+                            ],
+                            "volumes": []
+                        },
+                        "output": {
+                            "taskDefinition": {
+                                "volumes": [],
+                                "taskDefinitionArn": "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:19",
+                                "containerDefinitions": [
+                                    {
+                                        "environment": [],
+                                        "name": "sleep",
+                                        "mountPoints": [],
+                                        "image": "busybox",
+                                        "cpu": 10,
+                                        "portMappings": [],
+                                        "command": [
+                                            "sleep",
+                                            "360"
+                                        ],
+                                        "memory": 10,
+                                        "essential": true,
+                                        "volumesFrom": []
+                                    }
+                                ],
+                                "family": "sleep360",
+                                "revision": 1
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#RegisterTaskDefinitionRequest": {
@@ -8492,7 +9076,43 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a new task using the specified task definition.</p>\n         <p>You can allow Amazon ECS to place tasks for you, or you can customize how Amazon ECS places\n\t\t\ttasks using placement constraints and placement strategies. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html\">Scheduling Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Alternatively, you can use <a>StartTask</a> to use your own scheduler or\n\t\t\tplace tasks manually on specific container instances.</p>\n         <note>\n            <p>Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>\n         </note>\n         <p>The Amazon ECS API follows an eventual consistency model. This is because of the\n\t\t\tdistributed nature of the system supporting the API. This means that the result of an\n\t\t\tAPI command you run that affects your Amazon ECS resources might not be immediately visible\n\t\t\tto all subsequent commands you run. Keep this in mind when you carry out an API command\n\t\t\tthat immediately follows a previous API command.</p>\n         <p>To manage eventual consistency, you can do the following:</p>\n         <ul>\n            <li>\n               <p>Confirm the state of the resource before you run a command to modify it. Run\n\t\t\t\t\tthe DescribeTasks command using an exponential backoff algorithm to ensure that\n\t\t\t\t\tyou allow enough time for the previous command to propagate through the system.\n\t\t\t\t\tTo do this, run the DescribeTasks command repeatedly, starting with a couple of\n\t\t\t\t\tseconds of wait time and increasing gradually up to five minutes of wait\n\t\t\t\t\ttime.</p>\n            </li>\n            <li>\n               <p>Add wait time between subsequent commands, even if the DescribeTasks command\n\t\t\t\t\treturns an accurate response. Apply an exponential backoff algorithm starting\n\t\t\t\t\twith a couple of seconds of wait time, and increase gradually up to about five\n\t\t\t\t\tminutes of wait time.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Starts a new task using the specified task definition.</p>\n         <p>You can allow Amazon ECS to place tasks for you, or you can customize how Amazon ECS places\n\t\t\ttasks using placement constraints and placement strategies. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html\">Scheduling Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Alternatively, you can use <a>StartTask</a> to use your own scheduler or\n\t\t\tplace tasks manually on specific container instances.</p>\n         <note>\n            <p>Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>\n         </note>\n         <p>The Amazon ECS API follows an eventual consistency model. This is because of the\n\t\t\tdistributed nature of the system supporting the API. This means that the result of an\n\t\t\tAPI command you run that affects your Amazon ECS resources might not be immediately visible\n\t\t\tto all subsequent commands you run. Keep this in mind when you carry out an API command\n\t\t\tthat immediately follows a previous API command.</p>\n         <p>To manage eventual consistency, you can do the following:</p>\n         <ul>\n            <li>\n               <p>Confirm the state of the resource before you run a command to modify it. Run\n\t\t\t\t\tthe DescribeTasks command using an exponential backoff algorithm to ensure that\n\t\t\t\t\tyou allow enough time for the previous command to propagate through the system.\n\t\t\t\t\tTo do this, run the DescribeTasks command repeatedly, starting with a couple of\n\t\t\t\t\tseconds of wait time and increasing gradually up to five minutes of wait\n\t\t\t\t\ttime.</p>\n            </li>\n            <li>\n               <p>Add wait time between subsequent commands, even if the DescribeTasks command\n\t\t\t\t\treturns an accurate response. Apply an exponential backoff algorithm starting\n\t\t\t\t\twith a couple of seconds of wait time, and increase gradually up to about five\n\t\t\t\t\tminutes of wait time.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To run a task on your default cluster",
+                        "documentation": "This example runs the specified task definition on your default cluster.",
+                        "input": {
+                            "cluster": "default",
+                            "taskDefinition": "sleep360:1"
+                        },
+                        "output": {
+                            "tasks": [
+                                {
+                                    "taskArn": "arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0",
+                                    "overrides": {
+                                        "containerOverrides": [
+                                            {
+                                                "name": "sleep"
+                                            }
+                                        ]
+                                    },
+                                    "lastStatus": "PENDING",
+                                    "containerInstanceArn": "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb",
+                                    "desiredStatus": "RUNNING",
+                                    "taskDefinitionArn": "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1",
+                                    "containers": [
+                                        {
+                                            "containerArn": "arn:aws:ecs:us-east-1:<aws_account_id>:container/58591c8e-be29-4ddf-95aa-ee459d4c59fd",
+                                            "taskArn": "arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0",
+                                            "lastStatus": "PENDING",
+                                            "name": "sleep"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#RunTaskRequest": {
@@ -9909,7 +10529,23 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified\n\t\t\t\t<code>resourceArn</code>. If existing tags on a resource aren't specified in the\n\t\t\trequest parameters, they aren't changed. When a resource is deleted, the tags that are\n\t\t\tassociated with that resource are deleted as well.</p>"
+                "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified\n\t\t\t\t<code>resourceArn</code>. If existing tags on a resource aren't specified in the\n\t\t\trequest parameters, they aren't changed. When a resource is deleted, the tags that are\n\t\t\tassociated with that resource are deleted as well.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To tag a cluster.",
+                        "documentation": "This example tags the 'dev' cluster with key 'team' and value 'dev'.",
+                        "input": {
+                            "resourceArn": "arn:aws:ecs:region:aws_account_id:cluster/dev",
+                            "tags": [
+                                {
+                                    "key": "team",
+                                    "value": "dev"
+                                }
+                            ]
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#TagResourceRequest": {
@@ -10167,7 +10803,7 @@
                 "stopCode": {
                     "target": "com.amazonaws.ecs#TaskStopCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The stop code indicating why a task was stopped. The <code>stoppedReason</code> might\n\t\t\tcontain additional details.</p>\n         <p>The following are valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TaskFailedToStart</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EssentialContainerExited</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UserInitiated</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TerminationNotice</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ServiceSchedulerInitiated</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SpotInterruption</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The stop code indicating why a task was stopped. The <code>stoppedReason</code> might\n\t\t\tcontain additional details. </p>\n         <p>For more information about stop code, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/stopped-task-error-codes.html\">Stopped tasks error codes</a> in the <i>Amazon ECS User Guide</i>.</p>\n         <p>The following are valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TaskFailedToStart</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EssentialContainerExited</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UserInitiated</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TerminationNotice</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ServiceSchedulerInitiated</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SpotInterruption</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "stoppedAt": {
@@ -10185,7 +10821,7 @@
                 "stoppingAt": {
                     "target": "com.amazonaws.ecs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the task stops. More specifically, it's for the\n\t\t\ttime when the task transitions from the <code>RUNNING</code> state to\n\t\t\t\t<code>STOPPED</code>.</p>"
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the task stops. More specifically, it's for the\n\t\t\ttime when the task transitions from the <code>RUNNING</code> state to\n\t\t\t\t<code>STOPPING</code>.</p>"
                     }
                 },
                 "tags": {
@@ -10309,7 +10945,7 @@
                 "requiresCompatibilities": {
                     "target": "com.amazonaws.ecs#CompatibilityList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task launch types the task definition was validated against.  For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS launch types</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The task launch types the task definition was validated against. The valid values are\n\t\t\t\t<code>EC2</code>, <code>FARGATE</code>, and <code>EXTERNAL</code>. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS launch types</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "cpu": {
@@ -11012,7 +11648,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>"
+                "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To untag a cluster.",
+                        "documentation": "This example deletes the 'team' tag from the 'dev' cluster.",
+                        "input": {
+                            "resourceArn": "arn:aws:ecs:region:aws_account_id:cluster/dev",
+                            "tagKeys": [
+                                "team"
+                            ]
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#UntagResourceRequest": {
@@ -11438,7 +12087,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the parameters of a service.</p>\n         <p>For services using the rolling update (<code>ECS</code>) you can update the desired\n\t\t\tcount, deployment configuration, network configuration, load balancers, service\n\t\t\tregistries, enable ECS managed tags option, propagate tags option, task placement\n\t\t\tconstraints and strategies, and task definition. When you update any of these\n\t\t\tparameters, Amazon ECS starts new tasks with the new configuration. </p>\n         <p>For services using the blue/green (<code>CODE_DEPLOY</code>) deployment controller,\n\t\t\tonly the desired count, deployment configuration, health check grace period, task\n\t\t\tplacement constraints and strategies, enable ECS managed tags option, and propagate tags\n\t\t\tcan be updated using this API. If the network configuration, platform version, task\n\t\t\tdefinition, or load balancer need to be updated, create a new CodeDeploy deployment. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html\">CreateDeployment</a> in the <i>CodeDeploy API Reference</i>.</p>\n         <p>For services using an external deployment controller, you can update only the desired\n\t\t\tcount, task placement constraints and strategies, health check grace period, enable ECS\n\t\t\tmanaged tags option, and propagate tags option, using this API. If the launch type, load\n\t\t\tbalancer, network configuration, platform version, or task definition need to be\n\t\t\tupdated, create a new task set For more information, see <a>CreateTaskSet</a>.</p>\n         <p>You can add to or subtract from the number of instantiations of a task definition in a\n\t\t\tservice by specifying the cluster that the service is running in and a new\n\t\t\t\t<code>desiredCount</code> parameter.</p>\n         <p>If you have updated the Docker image of your application, you can create a new task\n\t\t\tdefinition with that image and deploy it to your service. The service scheduler uses the\n\t\t\tminimum healthy percent and maximum percent parameters (in the service's deployment\n\t\t\tconfiguration) to determine the deployment strategy.</p>\n         <note>\n            <p>If your updated Docker image uses the same tag as what is in the existing task\n\t\t\t\tdefinition for your service (for example, <code>my_image:latest</code>), you don't\n\t\t\t\tneed to create a new revision of your task definition. You can update the service\n\t\t\t\tusing the <code>forceNewDeployment</code> option. The new tasks launched by the\n\t\t\t\tdeployment pull the current image/tag combination from your repository when they\n\t\t\t\tstart.</p>\n         </note>\n         <p>You can also update the deployment configuration of a service. When a deployment is\n\t\t\ttriggered by updating the task definition of a service, the service scheduler uses the\n\t\t\tdeployment configuration parameters, <code>minimumHealthyPercent</code> and\n\t\t\t\t<code>maximumPercent</code>, to determine the deployment strategy.</p>\n         <ul>\n            <li>\n               <p>If <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore\n\t\t\t\t\t\t<code>desiredCount</code> temporarily during a deployment. For example, if\n\t\t\t\t\t\t<code>desiredCount</code> is four tasks, a minimum of 50% allows the\n\t\t\t\t\tscheduler to stop two existing tasks before starting two new tasks. Tasks for\n\t\t\t\t\tservices that don't use a load balancer are considered healthy if they're in the\n\t\t\t\t\t\t<code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported\n\t\t\t\t\tas healthy by the load balancer.</p>\n            </li>\n            <li>\n               <p>The <code>maximumPercent</code> parameter represents an upper limit on the\n\t\t\t\t\tnumber of running tasks during a deployment. You can use it to define the\n\t\t\t\t\tdeployment batch size. For example, if <code>desiredCount</code> is four tasks,\n\t\t\t\t\ta maximum of 200% starts four new tasks before stopping the four older tasks\n\t\t\t\t\t(provided that the cluster resources required to do this are available).</p>\n            </li>\n         </ul>\n         <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent\n\t\t\tof <code>docker stop</code> is issued to the containers running in the task. This\n\t\t\tresults in a <code>SIGTERM</code> and a 30-second timeout. After this,\n\t\t\t\t<code>SIGKILL</code> is sent and the containers are forcibly stopped. If the\n\t\t\tcontainer handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from\n\t\t\treceiving it, no <code>SIGKILL</code> is sent.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement in your\n\t\t\tcluster with the following logic.</p>\n         <ul>\n            <li>\n               <p>Determine which of the container instances in your cluster can support your\n\t\t\t\t\tservice's task definition. For example, they have the required CPU, memory,\n\t\t\t\t\tports, and container instance attributes.</p>\n            </li>\n            <li>\n               <p>By default, the service scheduler attempts to balance tasks across\n\t\t\t\t\tAvailability Zones in this manner even though you can choose a different\n\t\t\t\t\tplacement strategy.</p>\n               <ul>\n                  <li>\n                     <p>Sort the valid container instances by the fewest number of running\n\t\t\t\t\t\t\ttasks for this service in the same Availability Zone as the instance.\n\t\t\t\t\t\t\tFor example, if zone A has one running service task and zones B and C\n\t\t\t\t\t\t\teach have zero, valid container instances in either zone B or C are\n\t\t\t\t\t\t\tconsidered optimal for placement.</p>\n                  </li>\n                  <li>\n                     <p>Place the new service task on a valid container instance in an optimal\n\t\t\t\t\t\t\tAvailability Zone (based on the previous steps), favoring container\n\t\t\t\t\t\t\tinstances with the fewest number of running tasks for this\n\t\t\t\t\t\t\tservice.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>When the service scheduler stops running tasks, it attempts to maintain balance across\n\t\t\tthe Availability Zones in your cluster using the following logic: </p>\n         <ul>\n            <li>\n               <p>Sort the container instances by the largest number of running tasks for this\n\t\t\t\t\tservice in the same Availability Zone as the instance. For example, if zone A\n\t\t\t\t\thas one running service task and zones B and C each have two, container\n\t\t\t\t\tinstances in either zone B or C are considered optimal for termination.</p>\n            </li>\n            <li>\n               <p>Stop the task on a container instance in an optimal Availability Zone (based\n\t\t\t\t\ton the previous steps), favoring container instances with the largest number of\n\t\t\t\t\trunning tasks for this service.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You must have a service-linked role when you update any of the following service\n\t\t\t\tproperties. If you specified a custom role when you created the service, Amazon ECS\n\t\t\t\tautomatically replaces the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Service.html#ECS-Type-Service-roleArn\">roleARN</a> associated with the service with the ARN of your\n\t\t\t\tservice-linked role. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Service-linked roles</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>loadBalancers,</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>serviceRegistries</code>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Modifies the parameters of a service.</p>\n         <p>For services using the rolling update (<code>ECS</code>) you can update the desired\n\t\t\tcount, deployment configuration, network configuration, load balancers, service\n\t\t\tregistries, enable ECS managed tags option, propagate tags option, task placement\n\t\t\tconstraints and strategies, and task definition. When you update any of these\n\t\t\tparameters, Amazon ECS starts new tasks with the new configuration. </p>\n         <p>For services using the blue/green (<code>CODE_DEPLOY</code>) deployment controller,\n\t\t\tonly the desired count, deployment configuration, health check grace period, task\n\t\t\tplacement constraints and strategies, enable ECS managed tags option, and propagate tags\n\t\t\tcan be updated using this API. If the network configuration, platform version, task\n\t\t\tdefinition, or load balancer need to be updated, create a new CodeDeploy deployment. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html\">CreateDeployment</a> in the <i>CodeDeploy API Reference</i>.</p>\n         <p>For services using an external deployment controller, you can update only the desired\n\t\t\tcount, task placement constraints and strategies, health check grace period, enable ECS\n\t\t\tmanaged tags option, and propagate tags option, using this API. If the launch type, load\n\t\t\tbalancer, network configuration, platform version, or task definition need to be\n\t\t\tupdated, create a new task set For more information, see <a>CreateTaskSet</a>.</p>\n         <p>You can add to or subtract from the number of instantiations of a task definition in a\n\t\t\tservice by specifying the cluster that the service is running in and a new\n\t\t\t\t<code>desiredCount</code> parameter.</p>\n         <p>If you have updated the Docker image of your application, you can create a new task\n\t\t\tdefinition with that image and deploy it to your service. The service scheduler uses the\n\t\t\tminimum healthy percent and maximum percent parameters (in the service's deployment\n\t\t\tconfiguration) to determine the deployment strategy.</p>\n         <note>\n            <p>If your updated Docker image uses the same tag as what is in the existing task\n\t\t\t\tdefinition for your service (for example, <code>my_image:latest</code>), you don't\n\t\t\t\tneed to create a new revision of your task definition. You can update the service\n\t\t\t\tusing the <code>forceNewDeployment</code> option. The new tasks launched by the\n\t\t\t\tdeployment pull the current image/tag combination from your repository when they\n\t\t\t\tstart.</p>\n         </note>\n         <p>You can also update the deployment configuration of a service. When a deployment is\n\t\t\ttriggered by updating the task definition of a service, the service scheduler uses the\n\t\t\tdeployment configuration parameters, <code>minimumHealthyPercent</code> and\n\t\t\t\t<code>maximumPercent</code>, to determine the deployment strategy.</p>\n         <ul>\n            <li>\n               <p>If <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore\n\t\t\t\t\t\t<code>desiredCount</code> temporarily during a deployment. For example, if\n\t\t\t\t\t\t<code>desiredCount</code> is four tasks, a minimum of 50% allows the\n\t\t\t\t\tscheduler to stop two existing tasks before starting two new tasks. Tasks for\n\t\t\t\t\tservices that don't use a load balancer are considered healthy if they're in the\n\t\t\t\t\t\t<code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported\n\t\t\t\t\tas healthy by the load balancer.</p>\n            </li>\n            <li>\n               <p>The <code>maximumPercent</code> parameter represents an upper limit on the\n\t\t\t\t\tnumber of running tasks during a deployment. You can use it to define the\n\t\t\t\t\tdeployment batch size. For example, if <code>desiredCount</code> is four tasks,\n\t\t\t\t\ta maximum of 200% starts four new tasks before stopping the four older tasks\n\t\t\t\t\t(provided that the cluster resources required to do this are available).</p>\n            </li>\n         </ul>\n         <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent\n\t\t\tof <code>docker stop</code> is issued to the containers running in the task. This\n\t\t\tresults in a <code>SIGTERM</code> and a 30-second timeout. After this,\n\t\t\t\t<code>SIGKILL</code> is sent and the containers are forcibly stopped. If the\n\t\t\tcontainer handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from\n\t\t\treceiving it, no <code>SIGKILL</code> is sent.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement in your\n\t\t\tcluster with the following logic.</p>\n         <ul>\n            <li>\n               <p>Determine which of the container instances in your cluster can support your\n\t\t\t\t\tservice's task definition. For example, they have the required CPU, memory,\n\t\t\t\t\tports, and container instance attributes.</p>\n            </li>\n            <li>\n               <p>By default, the service scheduler attempts to balance tasks across\n\t\t\t\t\tAvailability Zones in this manner even though you can choose a different\n\t\t\t\t\tplacement strategy.</p>\n               <ul>\n                  <li>\n                     <p>Sort the valid container instances by the fewest number of running\n\t\t\t\t\t\t\ttasks for this service in the same Availability Zone as the instance.\n\t\t\t\t\t\t\tFor example, if zone A has one running service task and zones B and C\n\t\t\t\t\t\t\teach have zero, valid container instances in either zone B or C are\n\t\t\t\t\t\t\tconsidered optimal for placement.</p>\n                  </li>\n                  <li>\n                     <p>Place the new service task on a valid container instance in an optimal\n\t\t\t\t\t\t\tAvailability Zone (based on the previous steps), favoring container\n\t\t\t\t\t\t\tinstances with the fewest number of running tasks for this\n\t\t\t\t\t\t\tservice.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>When the service scheduler stops running tasks, it attempts to maintain balance across\n\t\t\tthe Availability Zones in your cluster using the following logic: </p>\n         <ul>\n            <li>\n               <p>Sort the container instances by the largest number of running tasks for this\n\t\t\t\t\tservice in the same Availability Zone as the instance. For example, if zone A\n\t\t\t\t\thas one running service task and zones B and C each have two, container\n\t\t\t\t\tinstances in either zone B or C are considered optimal for termination.</p>\n            </li>\n            <li>\n               <p>Stop the task on a container instance in an optimal Availability Zone (based\n\t\t\t\t\ton the previous steps), favoring container instances with the largest number of\n\t\t\t\t\trunning tasks for this service.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You must have a service-linked role when you update any of the following service\n\t\t\t\tproperties:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>loadBalancers</code>,</p>\n               </li>\n               <li>\n                  <p>\n                     <code>serviceRegistries</code>\n                  </p>\n               </li>\n            </ul>\n            <p>For more information about the role see the <code>CreateService</code> request parameter\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role\">\n                  <code>role</code>\n               </a>. </p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To change the task definition used in a service",
+                        "documentation": "This example updates the my-http-service service to use the amazon-ecs-sample task definition.",
+                        "input": {
+                            "service": "my-http-service",
+                            "taskDefinition": "amazon-ecs-sample"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#UpdateServicePrimaryTaskSet": {
@@ -11689,7 +12349,31 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the protection status of a task. You can set <code>protectionEnabled</code> to\n\t\t\t\t<code>true</code> to protect your task from termination during scale-in events from\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html\">Service\n\t\t\t\tAutoscaling</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">deployments</a>.</p>\n         <p>Task-protection, by default, expires after 2 hours at which point Amazon ECS clears the\n\t\t\t\t<code>protectionEnabled</code> property making the task eligible for termination by\n\t\t\ta subsequent scale-in event.</p>\n         <p>You can specify a custom expiration period for task protection from 1 minute to up to\n\t\t\t2,880 minutes (48 hours). To specify the custom expiration period, set the\n\t\t\t\t<code>expiresInMinutes</code> property. The <code>expiresInMinutes</code> property\n\t\t\tis always reset when you invoke this operation for a task that already has\n\t\t\t\t<code>protectionEnabled</code> set to <code>true</code>. You can keep extending the\n\t\t\tprotection expiration period of a task by invoking this operation repeatedly.</p>\n         <p>To learn more about Amazon ECS task protection, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html\">Task scale-in\n\t\t\t\tprotection</a> in the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>.</p>\n         <note>\n            <p>This operation is only supported for tasks belonging to an Amazon ECS service. Invoking\n\t\t\t\tthis operation for a standalone task will result in an <code>TASK_NOT_VALID</code>\n\t\t\t\tfailure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html\">API failure\n\t\t\t\t\treasons</a>.</p>\n         </note>\n         <important>\n            <p>If you prefer to set task protection from within the container, we recommend using\n\t\t\t\tthe <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html\">Task scale-in protection endpoint</a>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Updates the protection status of a task. You can set <code>protectionEnabled</code> to\n\t\t\t\t<code>true</code> to protect your task from termination during scale-in events from\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html\">Service\n\t\t\t\tAutoscaling</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">deployments</a>.</p>\n         <p>Task-protection, by default, expires after 2 hours at which point Amazon ECS clears the\n\t\t\t\t<code>protectionEnabled</code> property making the task eligible for termination by\n\t\t\ta subsequent scale-in event.</p>\n         <p>You can specify a custom expiration period for task protection from 1 minute to up to\n\t\t\t2,880 minutes (48 hours). To specify the custom expiration period, set the\n\t\t\t\t<code>expiresInMinutes</code> property. The <code>expiresInMinutes</code> property\n\t\t\tis always reset when you invoke this operation for a task that already has\n\t\t\t\t<code>protectionEnabled</code> set to <code>true</code>. You can keep extending the\n\t\t\tprotection expiration period of a task by invoking this operation repeatedly.</p>\n         <p>To learn more about Amazon ECS task protection, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html\">Task scale-in\n\t\t\t\tprotection</a> in the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>.</p>\n         <note>\n            <p>This operation is only supported for tasks belonging to an Amazon ECS service. Invoking\n\t\t\t\tthis operation for a standalone task will result in an <code>TASK_NOT_VALID</code>\n\t\t\t\tfailure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html\">API failure\n\t\t\t\t\treasons</a>.</p>\n         </note>\n         <important>\n            <p>If you prefer to set task protection from within the container, we recommend using\n\t\t\t\tthe <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html\">Task scale-in protection endpoint</a>.</p>\n         </important>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To set task scale-in protection for a task for 60 minutes",
+                        "documentation": "This example enables scale-in protection for a task for 60 minutes.",
+                        "input": {
+                            "cluster": "test-task-protection",
+                            "tasks": [
+                                "b8b1cf532d0e46ba8d44a40d1de16772"
+                            ],
+                            "protectionEnabled": true,
+                            "expiresInMinutes": 60
+                        },
+                        "output": {
+                            "protectedTasks": [
+                                {
+                                    "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772",
+                                    "protectionEnabled": true,
+                                    "expirationDate": "2022-11-02T06:56:32.553Z"
+                                }
+                            ],
+                            "failures": []
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#UpdateTaskProtectionRequest": {
@@ -11871,7 +12555,7 @@
                 "name": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This name is referenced in the\n\t\t\t\t<code>sourceVolume</code> parameter of container definition\n\t\t\t<code>mountPoints</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This name is referenced in the\n\t\t\t\t<code>sourceVolume</code> parameter of container definition\n\t\t\t<code>mountPoints</code>.</p>\n         <p>This is required wwhen you use an Amazon EFS volume.</p>"
                     }
                 },
                 "host": {
