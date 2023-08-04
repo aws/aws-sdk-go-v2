@@ -49,7 +49,8 @@ type CreateTaskSetInput struct {
 	// This member is required.
 	Service *string
 
-	// The task definition for the tasks in the task set to use.
+	// The task definition for the tasks in the task set to use. If a revision isn't
+	// specified, the latest ACTIVE revision is used.
 	//
 	// This member is required.
 	TaskDefinition *string

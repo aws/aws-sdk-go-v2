@@ -2791,6 +2791,10 @@ type ResourceTagsSearchCriteria struct {
 // Contains information about a routing profile.
 type RoutingProfile struct {
 
+	// Whether agents with this routing profile will have their routing order
+	// calculated based on time since their last inbound contact or longest idle time.
+	AgentAvailabilityTimer AgentAvailabilityTimer
+
 	// The identifier of the default outbound queue for this routing profile.
 	DefaultOutboundQueueId *string
 

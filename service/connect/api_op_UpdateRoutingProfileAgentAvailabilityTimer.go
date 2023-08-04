@@ -16,33 +16,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new routing profile.
-func (c *Client) CreateRoutingProfile(ctx context.Context, params *CreateRoutingProfileInput, optFns ...func(*Options)) (*CreateRoutingProfileOutput, error) {
+// Whether agents with this routing profile will have their routing order
+// calculated based on time since their last inbound contact or longest idle time.
+func (c *Client) UpdateRoutingProfileAgentAvailabilityTimer(ctx context.Context, params *UpdateRoutingProfileAgentAvailabilityTimerInput, optFns ...func(*Options)) (*UpdateRoutingProfileAgentAvailabilityTimerOutput, error) {
 	if params == nil {
-		params = &CreateRoutingProfileInput{}
+		params = &UpdateRoutingProfileAgentAvailabilityTimerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRoutingProfile", params, optFns, c.addOperationCreateRoutingProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRoutingProfileAgentAvailabilityTimer", params, optFns, c.addOperationUpdateRoutingProfileAgentAvailabilityTimerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateRoutingProfileOutput)
+	out := result.(*UpdateRoutingProfileAgentAvailabilityTimerOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateRoutingProfileInput struct {
+type UpdateRoutingProfileAgentAvailabilityTimerInput struct {
 
-	// The default outbound queue for the routing profile.
+	// Whether agents with this routing profile will have their routing order
+	// calculated based on time since their last inbound contact or longest idle time.
 	//
 	// This member is required.
-	DefaultOutboundQueueId *string
-
-	// Description of the routing profile. Must not be more than 250 characters.
-	//
-	// This member is required.
-	Description *string
+	AgentAvailabilityTimer types.AgentAvailabilityTimer
 
 	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
@@ -50,57 +47,27 @@ type CreateRoutingProfileInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The channels that agents can handle in the Contact Control Panel (CCP) for this
-	// routing profile.
+	// The identifier of the routing profile.
 	//
 	// This member is required.
-	MediaConcurrencies []types.MediaConcurrency
-
-	// The name of the routing profile. Must not be more than 127 characters.
-	//
-	// This member is required.
-	Name *string
-
-	// Whether agents with this routing profile will have their routing order
-	// calculated based on time since their last inbound contact or longest idle time.
-	AgentAvailabilityTimer types.AgentAvailabilityTimer
-
-	// The inbound queues associated with the routing profile. If no queue is added,
-	// the agent can make only outbound calls. The limit of 10 array members applies to
-	// the maximum number of RoutingProfileQueueConfig objects that can be passed
-	// during a CreateRoutingProfile API request. It is different from the quota of 50
-	// queues per routing profile per instance that is listed in Amazon Connect
-	// service quotas (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
-	// .
-	QueueConfigs []types.RoutingProfileQueueConfig
-
-	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
-	Tags map[string]string
+	RoutingProfileId *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateRoutingProfileOutput struct {
-
-	// The Amazon Resource Name (ARN) of the routing profile.
-	RoutingProfileArn *string
-
-	// The identifier of the routing profile.
-	RoutingProfileId *string
-
+type UpdateRoutingProfileAgentAvailabilityTimerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoutingProfile{}, middleware.After)
+func (c *Client) addOperationUpdateRoutingProfileAgentAvailabilityTimerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoutingProfileAgentAvailabilityTimer{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoutingProfile{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRoutingProfileAgentAvailabilityTimer{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -143,13 +110,13 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addCreateRoutingProfileResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addUpdateRoutingProfileAgentAvailabilityTimerResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateRoutingProfileValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateRoutingProfileAgentAvailabilityTimerValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRoutingProfile(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRoutingProfileAgentAvailabilityTimer(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -170,25 +137,25 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateRoutingProfile(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateRoutingProfileAgentAvailabilityTimer(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "connect",
-		OperationName: "CreateRoutingProfile",
+		OperationName: "UpdateRoutingProfileAgentAvailabilityTimer",
 	}
 }
 
-type opCreateRoutingProfileResolveEndpointMiddleware struct {
+type opUpdateRoutingProfileAgentAvailabilityTimerResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opCreateRoutingProfileResolveEndpointMiddleware) ID() string {
+func (*opUpdateRoutingProfileAgentAvailabilityTimerResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opCreateRoutingProfileResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opUpdateRoutingProfileAgentAvailabilityTimerResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -290,8 +257,8 @@ func (m *opCreateRoutingProfileResolveEndpointMiddleware) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
-func addCreateRoutingProfileResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opCreateRoutingProfileResolveEndpointMiddleware{
+func addUpdateRoutingProfileAgentAvailabilityTimerResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opUpdateRoutingProfileAgentAvailabilityTimerResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

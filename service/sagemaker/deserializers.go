@@ -70650,6 +70650,11 @@ func awsAwsjson11_deserializeDocumentTransformJob(v **types.TransformJob, value 
 				}
 			}
 
+		case "DataCaptureConfig":
+			if err := awsAwsjson11_deserializeDocumentBatchDataCaptureConfig(&sv.DataCaptureConfig, value); err != nil {
+				return err
+			}
+
 		case "DataProcessing":
 			if err := awsAwsjson11_deserializeDocumentDataProcessing(&sv.DataProcessing, value); err != nil {
 				return err

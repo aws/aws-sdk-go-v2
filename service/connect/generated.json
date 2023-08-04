@@ -190,6 +190,7 @@
         "api_op_UpdateQueueStatus.go",
         "api_op_UpdateQuickConnectConfig.go",
         "api_op_UpdateQuickConnectName.go",
+        "api_op_UpdateRoutingProfileAgentAvailabilityTimer.go",
         "api_op_UpdateRoutingProfileConcurrency.go",
         "api_op_UpdateRoutingProfileDefaultOutboundQueue.go",
         "api_op_UpdateRoutingProfileName.go",

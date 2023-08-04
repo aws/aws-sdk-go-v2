@@ -24,6 +24,24 @@ func (ActionType) Values() []ActionType {
 	}
 }
 
+type AgentAvailabilityTimer string
+
+// Enum values for AgentAvailabilityTimer
+const (
+	AgentAvailabilityTimerTimeSinceLastActivity AgentAvailabilityTimer = "TIME_SINCE_LAST_ACTIVITY"
+	AgentAvailabilityTimerTimeSinceLastInbound  AgentAvailabilityTimer = "TIME_SINCE_LAST_INBOUND"
+)
+
+// Values returns all known values for AgentAvailabilityTimer. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AgentAvailabilityTimer) Values() []AgentAvailabilityTimer {
+	return []AgentAvailabilityTimer{
+		"TIME_SINCE_LAST_ACTIVITY",
+		"TIME_SINCE_LAST_INBOUND",
+	}
+}
+
 type AgentStatusState string
 
 // Enum values for AgentStatusState

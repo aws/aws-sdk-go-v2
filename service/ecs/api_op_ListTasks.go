@@ -19,8 +19,7 @@ import (
 // Returns a list of tasks. You can filter the results by cluster, task definition
 // family, container instance, launch type, what IAM principal started the task, or
 // by the desired status of the task. Recently stopped tasks might appear in the
-// returned results. Currently, stopped tasks appear in the returned results for at
-// least one hour.
+// returned results.
 func (c *Client) ListTasks(ctx context.Context, params *ListTasksInput, optFns ...func(*Options)) (*ListTasksOutput, error) {
 	if params == nil {
 		params = &ListTasksInput{}

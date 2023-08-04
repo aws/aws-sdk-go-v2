@@ -3550,6 +3550,26 @@ func (m *validateOpUpdateQuickConnectName) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRoutingProfileAgentAvailabilityTimer struct {
+}
+
+func (*validateOpUpdateRoutingProfileAgentAvailabilityTimer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRoutingProfileAgentAvailabilityTimer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRoutingProfileAgentAvailabilityTimerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRoutingProfileAgentAvailabilityTimerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRoutingProfileConcurrency struct {
 }
 
@@ -4556,6 +4576,10 @@ func addOpUpdateQuickConnectConfigValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateQuickConnectNameValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateQuickConnectName{}, middleware.After)
+}
+
+func addOpUpdateRoutingProfileAgentAvailabilityTimerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRoutingProfileAgentAvailabilityTimer{}, middleware.After)
 }
 
 func addOpUpdateRoutingProfileConcurrencyValidationMiddleware(stack *middleware.Stack) error {
@@ -9232,6 +9256,27 @@ func validateOpUpdateQuickConnectNameInput(v *UpdateQuickConnectNameInput) error
 	}
 	if v.QuickConnectId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRoutingProfileAgentAvailabilityTimerInput(v *UpdateRoutingProfileAgentAvailabilityTimerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRoutingProfileAgentAvailabilityTimerInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
+	if len(v.AgentAvailabilityTimer) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentAvailabilityTimer"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

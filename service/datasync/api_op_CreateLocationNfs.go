@@ -16,8 +16,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Network File System (NFS) file server that DataSync
-// can use for a data transfer.
+// Creates an endpoint for a Network File System (NFS) file server that DataSync
+// can use for a data transfer. For more information, see Configuring transfers to
+// or from an NFS file server (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html)
+// . If you're copying data to or from an Snowcone device, you can also use
+// CreateLocationNfs to create your transfer location. For more information, see
+// Configuring transfers with Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/nfs-on-snowcone.html)
+// .
 func (c *Client) CreateLocationNfs(ctx context.Context, params *CreateLocationNfsInput, optFns ...func(*Options)) (*CreateLocationNfsOutput, error) {
 	if params == nil {
 		params = &CreateLocationNfsInput{}
@@ -36,44 +41,30 @@ func (c *Client) CreateLocationNfs(ctx context.Context, params *CreateLocationNf
 // CreateLocationNfsRequest
 type CreateLocationNfsInput struct {
 
-	// Specifies the Amazon Resource Names (ARNs) of agents that DataSync uses to
-	// connect to your NFS file server. If you are copying data to or from your
-	// Snowcone device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
-	// for more information.
+	// Specifies the Amazon Resource Name (ARN) of the DataSync agent that want to
+	// connect to your NFS file server. You can specify more than one agent. For more
+	// information, see Using multiple agents for transfers (https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html)
+	// .
 	//
 	// This member is required.
 	OnPremConfig *types.OnPremConfig
 
-	// Specifies the IP address or domain name of your NFS file server. An agent that
-	// is installed on-premises uses this hostname to mount the NFS server in a
-	// network. If you are copying data to or from your Snowcone device, see NFS
-	// Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
-	// for more information. You must specify be an IP version 4 address or Domain Name
-	// System (DNS)-compliant name.
+	// Specifies the Domain Name System (DNS) name or IP version 4 address of the NFS
+	// file server that your DataSync agent connects to.
 	//
 	// This member is required.
 	ServerHostname *string
 
-	// Specifies the subdirectory in the NFS file server that DataSync transfers to or
-	// from. The NFS path should be a path that's exported by the NFS server, or a
-	// subdirectory of that path. The path should be such that it can be mounted by
-	// other NFS clients in your network. To see all the paths exported by your NFS
-	// server, run " showmount -e nfs-server-name " from an NFS client that has access
-	// to your server. You can specify any directory that appears in the results, and
-	// any subdirectory of that directory. Ensure that the NFS export is accessible
-	// without Kerberos authentication. To transfer all the data in the folder you
-	// specified, DataSync needs to have permissions to read all the data. To ensure
-	// this, either configure the NFS export with no_root_squash, or ensure that the
-	// permissions for all of the files that you want DataSync allow read access for
-	// all users. Doing either enables the agent to read the files. For the agent to
-	// access directories, you must additionally enable all execute access. If you are
-	// copying data to or from your Snowcone device, see NFS Server on Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
-	// for more information.
+	// Specifies the export path in your NFS file server that you want DataSync to
+	// mount. This path (or a subdirectory of the path) is where DataSync transfers
+	// data to or from. For information on configuring an export for DataSync, see
+	// Accessing NFS file servers (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs)
+	// .
 	//
 	// This member is required.
 	Subdirectory *string
 
-	// Specifies the mount options that DataSync can use to mount your NFS share.
+	// Specifies the options that DataSync can use to mount your NFS file server.
 	MountOptions *types.NfsMountOptions
 
 	// Specifies labels that help you categorize, filter, and search for your Amazon

@@ -17,7 +17,8 @@ import (
 	"time"
 )
 
-// Returns metadata, such as the path information, about an NFS location.
+// Provides details about how an DataSync transfer location for a Network File
+// System (NFS) file server is configured.
 func (c *Client) DescribeLocationNfs(ctx context.Context, params *DescribeLocationNfsInput, optFns ...func(*Options)) (*DescribeLocationNfsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationNfsInput{}
@@ -36,7 +37,8 @@ func (c *Client) DescribeLocationNfs(ctx context.Context, params *DescribeLocati
 // DescribeLocationNfsRequest
 type DescribeLocationNfsInput struct {
 
-	// The Amazon Resource Name (ARN) of the NFS location to describe.
+	// Specifies the Amazon Resource Name (ARN) of the NFS location that you want
+	// information about.
 	//
 	// This member is required.
 	LocationArn *string
@@ -47,20 +49,19 @@ type DescribeLocationNfsInput struct {
 // DescribeLocationNfsResponse
 type DescribeLocationNfsOutput struct {
 
-	// The time that the NFS location was created.
+	// The time when the NFS location was created.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the NFS location that was described.
+	// The ARN of the NFS location.
 	LocationArn *string
 
-	// The URL of the source NFS location that was described.
+	// The URL of the NFS location.
 	LocationUri *string
 
-	// The mount options that DataSync uses to mount your NFS share.
+	// The mount options that DataSync uses to mount your NFS file server.
 	MountOptions *types.NfsMountOptions
 
-	// A list of Amazon Resource Names (ARNs) of agents to use for a Network File
-	// System (NFS) location.
+	// The DataSync agents that are connecting to a Network File System (NFS) location.
 	OnPremConfig *types.OnPremConfig
 
 	// Metadata pertaining to the operation's result.

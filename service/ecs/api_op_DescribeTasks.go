@@ -21,7 +21,10 @@ import (
 )
 
 // Describes a specified task or tasks. Currently, stopped tasks appear in the
-// returned results for at least one hour.
+// returned results for at least one hour. If you have tasks with tags, and then
+// delete the cluster, the tagged tasks are returned in the response. If you create
+// a new cluster with the same name as the deleted cluster, the tagged tasks are
+// not included in the response.
 func (c *Client) DescribeTasks(ctx context.Context, params *DescribeTasksInput, optFns ...func(*Options)) (*DescribeTasksOutput, error) {
 	if params == nil {
 		params = &DescribeTasksInput{}

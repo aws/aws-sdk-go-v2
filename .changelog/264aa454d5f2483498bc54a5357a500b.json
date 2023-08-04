@@ -1,0 +1,8 @@
+{
+    "id": "264aa454-d5f2-4834-98bc-54a5357a500b",
+    "type": "feature",
+    "description": "Added a new API UpdateRoutingProfileAgentAvailabilityTimer to update agent availability timer of a routing profile.",
+    "modules": [
+        "service/connect"
+    ]
+}

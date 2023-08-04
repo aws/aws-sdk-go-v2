@@ -7081,6 +7081,19 @@ func awsAwsjson11_deserializeDocumentCapacity(v **types.Capacity, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "ClusterCloudStorageUsed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ClusterCloudStorageUsed = ptr.Int64(i64)
+			}
+
 		case "LogicalUsed":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8765,6 +8778,19 @@ func awsAwsjson11_deserializeDocumentNetAppONTAPCluster(v **types.NetAppONTAPClu
 					return err
 				}
 				sv.ClusterBlockStorageUsed = ptr.Int64(i64)
+			}
+
+		case "ClusterCloudStorageUsed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ClusterCloudStorageUsed = ptr.Int64(i64)
 			}
 
 		case "ClusterName":

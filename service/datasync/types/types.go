@@ -46,6 +46,10 @@ type AzureBlobSasConfiguration struct {
 // volume).
 type Capacity struct {
 
+	// The amount of space in the cluster that's in cloud storage (for example, if
+	// you're using data tiering).
+	ClusterCloudStorageUsed *int64
+
 	// The amount of space that's being used in a storage system resource without
 	// accounting for compression or deduplication.
 	LogicalUsed *int64
@@ -382,6 +386,10 @@ type NetAppONTAPCluster struct {
 	// The storage space that's being used in a cluster.
 	ClusterBlockStorageUsed *int64
 
+	// The amount of space in the cluster that's in cloud storage (for example, if
+	// you're using data tiering).
+	ClusterCloudStorageUsed *int64
+
 	// The name of the cluster.
 	ClusterName *string
 
@@ -548,11 +556,11 @@ type NfsMountOptions struct {
 	noSmithyDocumentSerde
 }
 
-// A list of Amazon Resource Names (ARNs) of agents to use for a Network File
-// System (NFS) location.
+// The DataSync agents that are connecting to a Network File System (NFS) location.
 type OnPremConfig struct {
 
-	// ARNs of the agents to use for an NFS location.
+	// The Amazon Resource Names (ARNs) of the agents connecting to a transfer
+	// location.
 	//
 	// This member is required.
 	AgentArns []string
