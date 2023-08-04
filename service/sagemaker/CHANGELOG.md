@@ -1,3 +1,7 @@
+# v1.100.0 (2023-08-04)
+
+* **Feature**: Including DataCaptureConfig key in the Amazon Sagemaker Search's transform job object
+
 # v1.99.0 (2023-08-03)
 
 * **Feature**: Amazon SageMaker now supports running training jobs on p5.48xlarge instance types.

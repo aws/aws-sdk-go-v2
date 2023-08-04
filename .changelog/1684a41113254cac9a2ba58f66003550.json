@@ -1,8 +1,0 @@
-{
-    "id": "1684a411-1325-4cac-9a2b-a58f66003550",
-    "type": "documentation",
-    "description": "This is a documentation update to address various tickets.",
-    "modules": [
-        "service/ecs"
-    ]
-}

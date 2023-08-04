@@ -1,3 +1,7 @@
+# v1.28.0 (2023-08-04)
+
+* **Feature**: Display cloud storage used capacity at a cluster level.
+
 # v1.27.1 (2023-08-01)
 
 * No change notes available for this release.

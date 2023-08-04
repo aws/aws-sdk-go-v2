@@ -1,3 +1,7 @@
+# v1.29.2 (2023-08-04)
+
+* **Documentation**: This is a documentation update to address various tickets.
+
 # v1.29.1 (2023-08-01)
 
 * No change notes available for this release.

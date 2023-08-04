@@ -1,8 +1,0 @@
-{
-    "id": "7a12b902-1927-40a7-9eea-d62ef4bf7849",
-    "type": "feature",
-    "description": "Display cloud storage used capacity at a cluster level.",
-    "modules": [
-        "service/datasync"
-    ]
-}

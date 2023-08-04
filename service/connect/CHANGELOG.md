@@ -1,3 +1,7 @@
+# v1.64.0 (2023-08-04)
+
+* **Feature**: Added a new API UpdateRoutingProfileAgentAvailabilityTimer to update agent availability timer of a routing profile.
+
 # v1.63.1 (2023-08-01)
 
 * No change notes available for this release.

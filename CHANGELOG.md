@@ -1,3 +1,17 @@
+# Release (2023-08-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.22.2](service/acmpca/CHANGELOG.md#v1222-2023-08-04)
+  * **Documentation**: Documentation correction for AWS Private CA
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.64.0](service/connect/CHANGELOG.md#v1640-2023-08-04)
+  * **Feature**: Added a new API UpdateRoutingProfileAgentAvailabilityTimer to update agent availability timer of a routing profile.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.28.0](service/datasync/CHANGELOG.md#v1280-2023-08-04)
+  * **Feature**: Display cloud storage used capacity at a cluster level.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.29.2](service/ecs/CHANGELOG.md#v1292-2023-08-04)
+  * **Documentation**: This is a documentation update to address various tickets.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.100.0](service/sagemaker/CHANGELOG.md#v11000-2023-08-04)
+  * **Feature**: Including DataCaptureConfig key in the Amazon Sagemaker Search's transform job object
+
 # Release (2023-08-03)
 
 ## Module Highlights

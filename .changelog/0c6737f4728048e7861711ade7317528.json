@@ -1,8 +1,0 @@
-{
-    "id": "0c6737f4-7280-48e7-8617-11ade7317528",
-    "type": "documentation",
-    "description": "Documentation correction for AWS Private CA",
-    "modules": [
-        "service/acmpca"
-    ]
-}

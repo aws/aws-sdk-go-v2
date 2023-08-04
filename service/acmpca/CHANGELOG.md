@@ -1,3 +1,7 @@
+# v1.22.2 (2023-08-04)
+
+* **Documentation**: Documentation correction for AWS Private CA
+
 # v1.22.1 (2023-08-01)
 
 * No change notes available for this release.

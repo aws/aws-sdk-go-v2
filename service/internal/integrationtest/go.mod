@@ -33,7 +33,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.110.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.19.1
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.29.1
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.29.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.16.1
@@ -65,7 +65,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.16.1
-	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.19.1
+	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.38.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.32.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.20.1
