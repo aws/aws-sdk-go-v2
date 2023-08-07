@@ -197,12 +197,12 @@ func (e *NotAuthorizedException) ErrorCode() string {
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// GetMedia throws this error when Kinesis Video Streams can't find the stream
-// that you specified. GetHLSStreamingSessionURL and GetDASHStreamingSessionURL
-// throw this error if a session with a PlaybackMode of ON_DEMAND or LIVE_REPLAY is
-// requested for a stream that has no fragments within the requested time range, or
-// if a session with a PlaybackMode of LIVE is requested for a stream that has no
-// fragments within the last 30 seconds.
+// GetImages will throw this error when Kinesis Video Streams can't find the
+// stream that you specified. GetHLSStreamingSessionURL and
+// GetDASHStreamingSessionURL throw this error if a session with a PlaybackMode of
+// ON_DEMAND or LIVE_REPLAY is requested for a stream that has no fragments within
+// the requested time range, or if a session with a PlaybackMode of LIVE is
+// requested for a stream that has no fragments within the last 30 seconds.
 type ResourceNotFoundException struct {
 	Message *string
 

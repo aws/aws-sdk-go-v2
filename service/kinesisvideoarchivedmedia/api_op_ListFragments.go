@@ -29,8 +29,9 @@ import (
 // information:
 //   - x-amz-ErrorType HTTP header – contains a more specific error type in
 //     addition to what the HTTP status code provides.
-//   - x-amz-RequestId HTTP header – if you want to report an issue to AWS, the
-//     support team can better diagnose the problem if given the Request Id.
+//   - x-amz-RequestId HTTP header – if you want to report an issue to Amazon Web
+//     Services, the support team can better diagnose the problem if given the Request
+//     Id.
 //
 // Both the HTTP status code and the ErrorType header can be utilized to make
 // programmatic decisions about whether errors are retry-able and under what

@@ -15,7 +15,11 @@ type Event struct {
 	// is null. INSUFFICIENT_CAPABILITIES indicates that the participant tried to take
 	// an action that the participant’s token is not allowed to do. For more
 	// information about participant capabilities, see the capabilities field in
-	// CreateParticipantToken .
+	// CreateParticipantToken . QUOTA_EXCEEDED indicates that the number of
+	// participants who want to publish/subscribe to a stage exceeds the quota; for
+	// more information, see Service Quotas (https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html)
+	// . PUBLISHER_NOT_FOUND indicates that the participant tried to subscribe to a
+	// publisher that doesn’t exist.
 	ErrorCode EventErrorCode
 
 	// ISO 8601 timestamp (returned as a string) for when the event occurred.

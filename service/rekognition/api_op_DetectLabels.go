@@ -34,12 +34,13 @@ import (
 // specify inclusive filters, exclusive filters, or a combination of inclusive and
 // exclusive filters. For more information on filtering see Detecting Labels in an
 // Image (https://docs.aws.amazon.com/rekognition/latest/dg/labels-detect-labels-image.html)
-// . You can specify MinConfidence to control the confidence threshold for the
-// labels returned. The default is 55%. You can also add the MaxLabels parameter
-// to limit the number of labels returned. The default and upper limit is 1000
-// labels. Response Elements For each object, scene, and concept the API returns
-// one or more labels. The API returns the following types of information about
-// labels:
+// . When getting labels, you can specify MinConfidence to control the confidence
+// threshold for the labels returned. The default is 55%. You can also add the
+// MaxLabels parameter to limit the number of labels returned. The default and
+// upper limit is 1000 labels. These arguments are only valid when supplying
+// GENERAL_LABELS as a feature type. Response Elements For each object, scene, and
+// concept the API returns one or more labels. The API returns the following types
+// of information about labels:
 //   - Name - The name of the detected label.
 //   - Confidence - The level of confidence in the label assigned to a detected
 //     object.
@@ -124,13 +125,16 @@ type DetectLabelsInput struct {
 	Features []types.DetectLabelsFeatureName
 
 	// Maximum number of labels you want the service to return in the response. The
-	// service returns the specified number of highest confidence labels.
+	// service returns the specified number of highest confidence labels. Only valid
+	// when GENERAL_LABELS is specified as a feature type in the Feature input
+	// parameter.
 	MaxLabels *int32
 
 	// Specifies the minimum confidence level for the labels to return. Amazon
 	// Rekognition doesn't return any labels with confidence lower than this specified
 	// value. If MinConfidence is not specified, the operation returns labels with a
-	// confidence values greater than or equal to 55 percent.
+	// confidence values greater than or equal to 55 percent. Only valid when
+	// GENERAL_LABELS is specified as a feature type in the Feature input parameter.
 	MinConfidence *float32
 
 	// A list of the filters to be applied to returned detected labels and image

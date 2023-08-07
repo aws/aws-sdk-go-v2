@@ -32,7 +32,8 @@ import (
 // contains a pagination token for getting the next set of results. To get the next
 // page of results, call GetFaceDetection and populate the NextToken request
 // parameter with the token value returned from the previous call to
-// GetFaceDetection .
+// GetFaceDetection . Note that for the GetFaceDetection operation, the returned
+// values for FaceOccluded and EyeDirection will always be "null".
 func (c *Client) GetFaceDetection(ctx context.Context, params *GetFaceDetectionInput, optFns ...func(*Options)) (*GetFaceDetectionOutput, error) {
 	if params == nil {
 		params = &GetFaceDetectionInput{}

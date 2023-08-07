@@ -45,8 +45,8 @@ import (
 // CloudWatch to monitor Kinesis Video Streams, see Monitoring Kinesis Video
 // Streams (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/monitoring.html)
 // . For pricing information, see Amazon Kinesis Video Streams Pricing (https://aws.amazon.com/kinesis/video-streams/pricing/)
-// and AWS Pricing (https://aws.amazon.com/pricing/) . Charges for outgoing AWS
-// data apply.
+// and Amazon Web Services Pricing (https://aws.amazon.com/pricing/) . Charges for
+// outgoing Amazon Web Services data apply.
 func (c *Client) GetClip(ctx context.Context, params *GetClipInput, optFns ...func(*Options)) (*GetClipOutput, error) {
 	if params == nil {
 		params = &GetClipInput{}

@@ -19,8 +19,8 @@ import (
 // Creates a new Amazon Rekognition Custom Labels dataset. You can create a
 // dataset by using an Amazon Sagemaker format manifest file or by copying an
 // existing Amazon Rekognition Custom Labels dataset. To create a training dataset
-// for a project, specify train for the value of DatasetType . To create the test
-// dataset for a project, specify test for the value of DatasetType . The response
+// for a project, specify TRAIN for the value of DatasetType . To create the test
+// dataset for a project, specify TEST for the value of DatasetType . The response
 // from CreateDataset is the Amazon Resource Name (ARN) for the dataset. Creating
 // a dataset takes a while to complete. Use DescribeDataset to check the current
 // status. The dataset created successfully if the value of Status is
@@ -49,8 +49,8 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 
 type CreateDatasetInput struct {
 
-	// The type of the dataset. Specify train to create a training dataset. Specify
-	// test to create a test dataset.
+	// The type of the dataset. Specify TRAIN to create a training dataset. Specify
+	// TEST to create a test dataset.
 	//
 	// This member is required.
 	DatasetType types.DatasetType

@@ -43,7 +43,7 @@ type ListFacesInput struct {
 	// This member is required.
 	CollectionId *string
 
-	// An array of face IDs to match when listing faces in a collection.
+	// An array of face IDs to filter results with when listing faces in a collection.
 	FaceIds []string
 
 	// Maximum number of faces to return.
@@ -54,7 +54,7 @@ type ListFacesInput struct {
 	// can use this pagination token to retrieve the next set of faces.
 	NextToken *string
 
-	// An array of user IDs to match when listing faces in a collection.
+	// An array of user IDs to filter results with when listing faces in a collection.
 	UserId *string
 
 	noSmithyDocumentSerde

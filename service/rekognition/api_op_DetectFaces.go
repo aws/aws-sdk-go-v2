@@ -63,7 +63,10 @@ type DetectFacesInput struct {
 	// "FACE_OCCLUDED" ]. You can request for all facial attributes by using [ "ALL"] .
 	// Requesting more attributes may increase response time. If you provide both,
 	// ["ALL", "DEFAULT"] , the service uses a logical "AND" operator to determine
-	// which attributes to return (in this case, all attributes).
+	// which attributes to return (in this case, all attributes). Note that while the
+	// FaceOccluded and EyeDirection attributes are supported when using DetectFaces ,
+	// they aren't supported when analyzing videos with StartFaceDetection and
+	// GetFaceDetection .
 	Attributes []types.Attribute
 
 	noSmithyDocumentSerde

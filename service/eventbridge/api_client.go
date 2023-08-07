@@ -54,11 +54,11 @@ func New(options Options, optFns ...func(*Options)) *Client {
 		fn(&options)
 	}
 
-	resolveCredentialProvider(&options)
-
 	client := &Client{
 		options: options,
 	}
+
+	resolveCredentialProvider(&options)
 
 	return client
 }

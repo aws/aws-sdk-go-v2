@@ -26,7 +26,7 @@ import (
 // status value published to the Amazon SNS topic is SUCCEEDED . if so, call
 // GetTextDetection and pass the job identifier ( JobId ) from the initial call of
 // StartLabelDetection . GetTextDetection returns an array of detected text (
-// TextDetections ) sorted by the time the text was detected, up to 50 words per
+// TextDetections ) sorted by the time the text was detected, up to 100 words per
 // frame of video. Each element of the array includes the detected text, the
 // precentage confidence in the acuracy of the detected text, the time the text was
 // detected, bounding box information for where the text was located, and unique

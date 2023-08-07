@@ -22,6 +22,11 @@ import (
 //     parameter will not be needed.
 //   - If the StorageStatus is enabled, the data will be stored in the StreamARN
 //     provided.
+//
+// If StorageStatus is enabled, direct peer-to-peer (master-viewer) connections no
+// longer occur. Peers connect directly to the storage session. You must call the
+// JoinStorageSession API to trigger an SDP offer send and establish a connection
+// between a peer and the storage session.
 func (c *Client) UpdateMediaStorageConfiguration(ctx context.Context, params *UpdateMediaStorageConfigurationInput, optFns ...func(*Options)) (*UpdateMediaStorageConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateMediaStorageConfigurationInput{}

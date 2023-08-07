@@ -219,9 +219,6 @@ func validateOpGetImagesInput(v *GetImagesInput) error {
 	if v.EndTimestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTimestamp"))
 	}
-	if v.SamplingInterval == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SamplingInterval"))
-	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}

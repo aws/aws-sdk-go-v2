@@ -7,6 +7,8 @@ type EventErrorCode string
 // Enum values for EventErrorCode
 const (
 	EventErrorCodeInsufficientCapabilities EventErrorCode = "INSUFFICIENT_CAPABILITIES"
+	EventErrorCodeQuotaExceeded            EventErrorCode = "QUOTA_EXCEEDED"
+	EventErrorCodePublisherNotFound        EventErrorCode = "PUBLISHER_NOT_FOUND"
 )
 
 // Values returns all known values for EventErrorCode. Note that this can be
@@ -15,6 +17,8 @@ const (
 func (EventErrorCode) Values() []EventErrorCode {
 	return []EventErrorCode{
 		"INSUFFICIENT_CAPABILITIES",
+		"QUOTA_EXCEEDED",
+		"PUBLISHER_NOT_FOUND",
 	}
 }
 

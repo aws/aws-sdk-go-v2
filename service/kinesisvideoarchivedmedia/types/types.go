@@ -135,7 +135,7 @@ type Fragment struct {
 	// The timestamp from the producer corresponding to the fragment.
 	ProducerTimestamp *time.Time
 
-	// The timestamp from the AWS server corresponding to the fragment.
+	// The timestamp from the Amazon Web Services server corresponding to the fragment.
 	ServerTimestamp *time.Time
 
 	noSmithyDocumentSerde

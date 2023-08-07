@@ -36,7 +36,9 @@ func (c *Client) GetImages(ctx context.Context, params *GetImagesInput, optFns .
 
 type GetImagesInput struct {
 
-	// The end timestamp for the range of images to be generated.
+	// The end timestamp for the range of images to be generated. If the time range
+	// between StartTimestamp and EndTimestamp is more than 300 seconds above
+	// StartTimestamp , you will receive an IllegalArgumentException .
 	//
 	// This member is required.
 	EndTimestamp *time.Time
@@ -50,15 +52,6 @@ type GetImagesInput struct {
 	//
 	// This member is required.
 	ImageSelectorType types.ImageSelectorType
-
-	// The time interval in milliseconds (ms) at which the images need to be generated
-	// from the stream. The minimum value that can be provided is 3000 ms. If the
-	// timestamp range is less than the sampling interval, the Image from the
-	// startTimestamp will be returned if available. The minimum value of 3000 ms is a
-	// soft limit. If needed, a lower sampling frequency can be requested.
-	//
-	// This member is required.
-	SamplingInterval *int32
 
 	// The starting point from which the images should be generated. This
 	// StartTimestamp must be within an inclusive range of timestamps for an image to
@@ -84,13 +77,21 @@ type GetImagesInput struct {
 	// image size will be returned.
 	HeightPixels *int32
 
-	// The maximum number of images to be returned by the API. The default limit is
-	// 100 images per API response. The additional results will be paginated.
+	// The maximum number of images to be returned by the API. The default limit is 25
+	// images per API response. Providing a MaxResults greater than this value will
+	// result in a page size of 25. Any additional results will be paginated.
 	MaxResults *int64
 
 	// A token that specifies where to start paginating the next set of Images. This
 	// is the GetImages:NextToken from a previously truncated response.
 	NextToken *string
+
+	// The time interval in milliseconds (ms) at which the images need to be generated
+	// from the stream, with a default of 3000 ms. The minimum value that can be
+	// provided is 200 ms. If the timestamp range is less than the sampling interval,
+	// the Image from the startTimestamp will be returned if available. The minimum
+	// value of 200 ms is a hard limit.
+	SamplingInterval *int32
 
 	// The Amazon Resource Name (ARN) of the stream from which to retrieve the images.
 	// You must specify either the StreamName or the StreamARN .

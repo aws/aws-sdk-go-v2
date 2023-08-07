@@ -1,0 +1,8 @@
+{
+    "id": "3f9d42ce-cfcb-4821-a143-05fa39ca84ec",
+    "type": "feature",
+    "description": "This release enables minimum of Images SamplingInterval to be as low as 200 milliseconds in Kinesis Video Stream Image feature.",
+    "modules": [
+        "service/kinesisvideo"
+    ]
+}
