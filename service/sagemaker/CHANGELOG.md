@@ -1,3 +1,7 @@
+# v1.100.1 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.100.0 (2023-08-04)
 
 * **Feature**: Including DataCaptureConfig key in the Amazon Sagemaker Search's transform job object

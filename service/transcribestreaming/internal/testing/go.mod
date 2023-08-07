@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/service/transcribestreaming/internal/testing
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.20.0
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.11
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.0.70
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.10.1
+	github.com/aws/aws-sdk-go-v2 v1.20.1
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.12
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.0.71
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.10.2
 	github.com/aws/smithy-go v1.14.1
 	github.com/google/go-cmp v0.5.8
 )

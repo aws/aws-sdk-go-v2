@@ -1,3 +1,7 @@
+# v1.18.3 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.2 (2023-08-03)
 
 * **Documentation**: Updated the deprecation date for Amazon Linux. Doc only update.

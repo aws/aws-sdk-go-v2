@@ -1,3 +1,8 @@
+# v1.4.0 (2023-08-07)
+
+* **Feature**: Add QUOTA_EXCEEDED and PUBLISHER_NOT_FOUND to EventErrorCode for stage health events.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.1 (2023-08-01)
 
 * No change notes available for this release.

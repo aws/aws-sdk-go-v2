@@ -1,3 +1,7 @@
+# v1.60.1 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2023-08-02)
 
 * **Feature**: This release includes additional Glue Streaming KAKFA SASL property types.

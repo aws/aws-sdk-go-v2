@@ -1,3 +1,7 @@
+# v1.64.1 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.0 (2023-08-04)
 
 * **Feature**: Added a new API UpdateRoutingProfileAgentAvailabilityTimer to update agent availability timer of a routing profile.

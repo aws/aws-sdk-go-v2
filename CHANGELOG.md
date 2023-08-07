@@ -1,3 +1,20 @@
+# Release (2023-08-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.21.0](service/detective/CHANGELOG.md#v1210-2023-08-07)
+  * **Feature**: Updated the email validation regex to be in line with the TLD name specifications.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.4.0](service/ivsrealtime/CHANGELOG.md#v140-2023-08-07)
+  * **Feature**: Add QUOTA_EXCEEDED and PUBLISHER_NOT_FOUND to EventErrorCode for stage health events.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.18.0](service/kinesisvideo/CHANGELOG.md#v1180-2023-08-07)
+  * **Feature**: This release enables minimum of Images SamplingInterval to be as low as 200 milliseconds in Kinesis Video Stream Image feature.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.16.0](service/kinesisvideoarchivedmedia/CHANGELOG.md#v1160-2023-08-07)
+  * **Feature**: This release enables minimum of Images SamplingInterval to be as low as 200 milliseconds in Kinesis Video Stream Image feature.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.30.2](service/rekognition/CHANGELOG.md#v1302-2023-08-07)
+  * **Documentation**: This release adds code snippets for Amazon Rekognition Custom Labels.
+
 # Release (2023-08-04)
 
 ## Module Highlights

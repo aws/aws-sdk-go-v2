@@ -1,3 +1,7 @@
+# v1.29.1 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2023-08-01)
 
 * **Feature**: Amazon Polly adds new French Belgian voice - Isabelle. Isabelle is available as Neural voice only.

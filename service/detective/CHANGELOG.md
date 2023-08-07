@@ -1,3 +1,8 @@
+# v1.21.0 (2023-08-07)
+
+* **Feature**: Updated the email validation regex to be in line with the TLD name specifications.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.1 (2023-08-01)
 
 * No change notes available for this release.

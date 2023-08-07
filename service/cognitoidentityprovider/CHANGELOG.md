@@ -1,3 +1,7 @@
+# v1.25.1 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2023-08-02)
 
 * **Feature**: New feature that logs Cognito user pool error messages to CloudWatch logs.

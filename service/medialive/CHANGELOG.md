@@ -1,3 +1,7 @@
+# v1.34.1 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2023-08-01)
 
 * **Feature**: AWS Elemental Link devices now report their Availability Zone. Link devices now support the ability to change their Availability Zone.

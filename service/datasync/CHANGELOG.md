@@ -1,3 +1,7 @@
+# v1.28.1 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2023-08-04)
 
 * **Feature**: Display cloud storage used capacity at a cluster level.

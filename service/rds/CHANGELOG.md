@@ -1,3 +1,7 @@
+# v1.50.1 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2023-08-01)
 
 * **Feature**: Added support for deleted clusters PiTR.

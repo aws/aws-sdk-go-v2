@@ -1,3 +1,7 @@
+# v1.30.1 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2023-08-03)
 
 * **Feature**: The release makes public API for DMS Schema Conversion feature.

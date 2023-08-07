@@ -1,3 +1,7 @@
+# v1.26.1 (2023-08-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-08-01)
 
 * **Feature**: This release adds support for price capacity optimized allocation strategy for Spot Instances.

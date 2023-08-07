@@ -1,8 +1,0 @@
-{
-    "id": "c5fe7aae-a89a-4625-97d6-2988a50e40cc",
-    "type": "feature",
-    "description": "Updated the email validation regex to be in line with the TLD name specifications.",
-    "modules": [
-        "service/detective"
-    ]
-}
