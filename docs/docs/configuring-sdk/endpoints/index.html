@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.111.3">
+<meta name="generator" content="Hugo 0.115.4">
 <meta name="robots" content="index, follow">
 
 
@@ -25,11 +25,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-01-05T22:39:39+01:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta property="article:modified_time" content="2023-07-31T13:48:53-04:00" />
 <meta itemprop="name" content="Configuring Client Endpoints">
 <meta itemprop="description" content="Customizing service client endpoints."><meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-01-05T22:39:39+01:00" />
-<meta itemprop="wordCount" content="535">
+<meta itemprop="dateModified" content="2023-07-31T13:48:53-04:00" />
+<meta itemprop="wordCount" content="1630">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Configuring Client Endpoints"/>
 <meta name="twitter:description" content="Customizing service client endpoints."/>
@@ -104,7 +104,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.41c2f01720eebc298a2a03222eeaa6f2.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.810a5299d837b395cdd69648bfec2e99.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.41c2f01720eebc298a2a03222eeaa6f2.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.810a5299d837b395cdd69648bfec2e99.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -421,11 +421,23 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#examples">Examples</a>
+        <li><a href="#customization">Customization</a></li>
+        <li><a href="#v2-endpointresolverv2--baseendpoint">V2: <code>EndpointResolverV2</code> + <code>BaseEndpoint</code></a>
           <ul>
-            <li><a href="#overriding-endpoint-with-fallback">Overriding Endpoint with Fallback</a></li>
-            <li><a href="#overriding-endpoint-without-fallback">Overriding Endpoint Without Fallback</a></li>
-            <li><a href="#immutable-endpoints">Immutable Endpoints</a></li>
+            <li><a href="#endpointresolverv2-parameters"><code>EndpointResolverV2</code> parameters</a></li>
+            <li><a href="#a-note-about-amazon-s3">A note about Amazon S3</a></li>
+            <li><a href="#examples">Examples</a></li>
+          </ul>
+        </li>
+        <li><a href="#v1-endpointresolver">V1: <code>EndpointResolver</code></a>
+          <ul>
+            <li><a href="#examples-1">Examples</a></li>
+            <li><a href="#immutable-endpoints">Immutable endpoints</a></li>
+          </ul>
+        </li>
+        <li><a href="#migration">Migration</a>
+          <ul>
+            <li><a href="#examples-2">Examples</a></li>
           </ul>
         </li>
       </ul>
@@ -492,31 +504,239 @@
 
 		
 	</header>    
-	<p>The AWS SDK for Go V2 provides the ability to configure a custom endpoint to be used for a service. In most cases you use a pre-configured
-endpoint for a service. Configuring custom endpoints, lets you do more, such as working with pre-release versions
-of a service.</p>
-<p>A <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointResolver">EndpointResolver</a> can be configured to provide custom endpoint resolution
-logic for service clients. You can use a custom endpoint resolver to override a service&rsquo;s endpoint resolution logic
-for all endpoints, or a just specific regional endpoint. Custom endpoint resolver can trigger the service&rsquo;s endpoint
-resolution logic to fallback if a custom resolver does not wish to resolve a requested endpoint.
-<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointResolverWithOptionsFunc">EndpointResolverWithOptionsFunc</a> can be used to easily wrap functions to satisfy the
-<code>EndpointResolverWithOptions</code> interface.</p>
-<p>A <code>EndpointResolver</code> can be easily configured by passing the resolver wrapped with
-<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#WithEndpointResolverWithOptions">WithEndpointResolverWithOptions</a> to
-<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#LoadDefaultConfig">LoadDefaultConfig</a>, allowing for the ability to override endpoints when
-loading credentials, as well as configuring the resulting <code>aws.Config</code> with your custom endpoint resolver.</p>
-<p>The endpoint resolver is given the service and region as a string, allowing for the resolver to dynamically drive its
-behavior. Each service client package has an exported <code>ServiceID</code> constant which can be used to determine which service
+	
+
+<div class="pageinfo pageinfo-warning">
+<p>Endpoint resolution is an advanced SDK topic. By changing these settings
+you risk breaking your code. The default settings should be applicable to
+most users in production environments.</p>
+
+</div>
+
+<p>The AWS SDK for Go V2 provides the ability to configure a custom
+endpoint to be used for a service. In most cases, the default
+configuration will suffice. Configuring custom endpoints allows for
+additional behavior, such as working with pre-release versions of a
+service.</p>
+<h2 id="customization">Customization</h2>
+<p>There are two &ldquo;versions&rdquo; of endpoint resolution config within the SDK.</p>
+<ul>
+<li>v2, released in Q3 of 2023, configured via:
+<ul>
+<li><code>EndpointResolverV2</code></li>
+<li><code>BaseEndpoint</code></li>
+</ul>
+</li>
+<li>v1, released alongside the SDK, configured via:
+<ul>
+<li><code>EndpointResolver</code></li>
+</ul>
+</li>
+</ul>
+<p>We recommend users of v1 endpoint resolution migrate to v2 to obtain access to
+newer endpoint-related service features.</p>
+<h2 id="v2-endpointresolverv2--baseendpoint">V2: <code>EndpointResolverV2</code> + <code>BaseEndpoint</code></h2>
+<p>In resolution v2, <code>EndpointResolverV2</code> is the definitive mechanism through
+which endpoint resolution occurs. The resolver&rsquo;s <code>ResolveEndpoint</code> method is
+invoked as part of the workflow for every request you make in the SDK. The
+hostname of the <code>Endpoint</code> returned by the resolver is used <strong>as-is</strong> when
+making the request (operation serializers can still append to the HTTP path,
+however).</p>
+<p>Resolution v2 includes an additional client-level config, <code>BaseEndpoint</code>, which
+is used to specify a &ldquo;base&rdquo; hostname for the instance of your service. The
+value set here is not definitive&ndash; it is ultimately passed as a parameter to
+the client&rsquo;s <code>EndpointResolverV2</code> when final resolution occurs (read on for
+more information about <code>EndpointResolverV2</code> parameters). The resolver
+implementation then has the opportunity to inspect and potentially modify that
+value to determine the final endpoint.</p>
+<p>For example, if you perform an S3 <code>GetObject</code> request against a given bucket
+with a client where you&rsquo;ve specified a <code>BaseEndpoint</code>, the default resolver
+will inject the bucket into the hostname if it is virtual-host compatible
+(assuming you haven&rsquo;t disabled virtual-hosting in client config).</p>
+<p>In practice, <code>BaseEndpoint</code> will most likely be used to point your client at a
+development or preview instance of a service.</p>
+<h3 id="endpointresolverv2-parameters"><code>EndpointResolverV2</code> parameters</h3>
+<p>Each service takes a specific set of inputs which are passed to its resolution
+function, defined in each service package as <code>EndpointParameters</code>.</p>
+<p>Every service includes the following base parameters, which are used to
+facilitate general endpoint resolution within AWS:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Region</code></td>
+<td><code>string</code></td>
+<td>The client&rsquo;s AWS region</td>
+</tr>
+<tr>
+<td><code>Endpoint</code></td>
+<td><code>string</code></td>
+<td>The value set for <code>BaseEndpoint</code> in client config</td>
+</tr>
+<tr>
+<td><code>UseFips</code></td>
+<td><code>bool</code></td>
+<td>Whether FIPS endpoints are enabled in client config</td>
+</tr>
+<tr>
+<td><code>UseDualStack</code></td>
+<td><code>bool</code></td>
+<td>Whether dual-stack endpoints are enabled in client config</td>
+</tr>
+</tbody>
+</table>
+<p>Services can specify additional parameters required for resolution. For
+example, S3&rsquo;s <code>EndpointParameters</code> include the bucket name, as well as several
+S3-specific feature settings such as whether virtual host addressing is
+enabled.</p>
+<p>If you are implementing your own <code>EndpointResolverV2</code>, you should never need to
+construct your own instance of <code>EndpointParameters</code>.  The SDK will source the
+values per-request and pass them to your implementation.</p>
+<h3 id="a-note-about-amazon-s3">A note about Amazon S3</h3>
+<p>Amazon S3 is a complex service with many of its features modeled through
+complex endpoint customizations, such as bucket virtual hosting, S3 MRAP, and
+more.</p>
+<p>Because of this, we recommend that you don&rsquo;t replace the <code>EndpointResolverV2</code>
+implementation in your S3 client. If you need to extend its resolution
+behavior, perhaps by sending requests to a local development stack with
+additional endpoint considerations, we recommend wrapping the default
+implementation such that it delegates back to the default as a fallback (shown
+in examples below).</p>
+<h3 id="examples">Examples</h3>
+<h4 id="with-baseendpoint">With <code>BaseEndpoint</code></h4>
+<p>The following code snippet shows how to point your S3 client at a local
+instance of a service, which in this example is hosted on the loopback device
+at port 8080.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BaseEndpoint</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://localhost:8080/&#34;</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">})</span>
+</span></span></code></pre></div><h4 id="with-endpointresolverv2">With <code>EndpointResolverV2</code></h4>
+<p>The following code snippet shows how to inject custom behavior into S3&rsquo;s
+endpoint resolution using <code>EndpointResolverV2</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;net/url&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">smithyendpoints</span> <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/endpoints&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">resolverV2</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// you could inject additional application context here as well
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">resolverV2</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ResolveEndpoint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointParameters</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#8f5902;font-style:italic">/* input params or caller context indicate we must route somewhere */</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">smithyEndpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">URI</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">url</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://custom.service.endpoint/&#34;</span><span style="color:#000;font-weight:bold">),</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// delegate back to the default v2 resolver otherwise
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewDefaultEndpointResolverV2</span><span style="color:#000;font-weight:bold">().</span><span style="color:#000">ResolveEndpoint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// load config...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverV2</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">resolverV2</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#8f5902;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><h4 id="with-both">With both</h4>
+<p>The following sample program demonstrates the interaction between
+<code>BaseEndpoint</code> and <code>EndpointResolverV2</code>. <strong>This is an advanced use case:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;net/url&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">smithyendpoints</span> <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/endpoints&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">type</span> <span style="color:#000">resolverV2</span> <span style="color:#000">struct</span> <span style="color:#000;font-weight:bold">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">func</span> <span style="color:#000;font-weight:bold">(*</span><span style="color:#000">resolverV2</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ResolveEndpoint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointParameters</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// s3.Options.BaseEndpoint is accessible here:
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;The endpoint provided in config is %s</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000;font-weight:bold">*</span><span style="color:#000">params</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// fallback to default
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewDefaultEndpointResolverV2</span><span style="color:#000;font-weight:bold">().</span><span style="color:#000">ResolveEndpoint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#000">nil</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatal</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">client</span> <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#000;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BaseEndpoint</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://endpoint.dev/&#34;</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverV2</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">&amp;</span><span style="color:#000">resolverV2</span><span style="color:#000;font-weight:bold">{}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// ignore the output, this is just for demonstration
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ListBuckets</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">nil</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><p>When run, the above program outputs the following:</p>
+<pre tabindex="0"><code>The endpoint provided in config is https://endpoint.dev/
+</code></pre><h2 id="v1-endpointresolver">V1: <code>EndpointResolver</code></h2>
+
+
+<div class="pageinfo pageinfo-warning">
+<p>Endpoint resolution v1 is retained for backwards compatibility and is isolated
+from the modern behavior in endpoint resolution v2. It will only be used if the
+<code>EndpointResolver</code> field is set by the caller.</p>
+<p>Use of v1 will most likely prevent you from accessing endpoint-related service
+features introduced with or after the release of v2 resolution. See &ldquo;Migration&rdquo;
+for instructions on how to upgrade.</p>
+
+</div>
+
+<p>A <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointResolver">EndpointResolver</a> can be configured
+to provide custom endpoint resolution logic for service clients. You can use a
+custom endpoint resolver to override a service&rsquo;s endpoint resolution logic for
+all endpoints, or a just specific regional endpoint. Custom endpoint resolver
+can trigger the service&rsquo;s endpoint resolution logic to fallback if a custom
+resolver does not wish to resolve a requested endpoint.
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointResolverWithOptionsFunc">EndpointResolverWithOptionsFunc</a> can be used to easily wrap functions
+to satisfy the <code>EndpointResolverWithOptions</code> interface.</p>
+<p>A <code>EndpointResolver</code> can be easily configured by passing the resolver wrapped
+with <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#WithEndpointResolverWithOptions">WithEndpointResolverWithOptions</a> to <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#LoadDefaultConfig">LoadDefaultConfig</a>, allowing for the ability to override endpoints
+when loading credentials, as well as configuring the resulting <code>aws.Config</code>
+with your custom endpoint resolver.</p>
+<p>The endpoint resolver is given the service and region as a string, allowing for
+the resolver to dynamically drive its behavior. Each service client package has
+an exported <code>ServiceID</code> constant which can be used to determine which service
 client is invoking your endpoint resolver.</p>
-<p>An endpoint resolver can use the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointNotFoundError">EndpointNotFoundError</a> sentinel error
-value to trigger fallback resolution to the service clients default resolution logic. This allows you to selectively
-override one or more endpoints seamlessly without having to handle fallback logic.</p>
-<p>If your endpoint resolver implementation returns an error other than <code>EndpointNotFoundError</code>, endpoint resolution will
-stop and the service operation returns an error to your application.</p>
-<h2 id="examples">Examples</h2>
-<h3 id="overriding-endpoint-with-fallback">Overriding Endpoint with Fallback</h3>
-<p>The following code snippet shows how a single service endpoint can be overridden for DynamoDB with
-fallback behavior for other endpoints:</p>
+<p>An endpoint resolver can use the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#EndpointNotFoundError">EndpointNotFoundError</a> sentinel error value to trigger fallback
+resolution to the service clients default resolution logic. This allows you to
+selectively override one or more endpoints seamlessly without having to handle
+fallback logic.</p>
+<p>If your endpoint resolver implementation returns an error other than
+<code>EndpointNotFoundError</code>, endpoint resolution will stop and the service
+operation returns an error to your application.</p>
+<h3 id="examples-1">Examples</h3>
+<h4 id="with-fallback">With fallback</h4>
+<p>The following code snippet shows how a single service endpoint can be
+overridden for DynamoDB with fallback behavior for other
+endpoints:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">customResolver</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverWithOptionsFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">region</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">options</span> <span style="color:#ce5c00;font-weight:bold">...</span><span style="color:#204a87;font-weight:bold">interface</span><span style="color:#000;font-weight:bold">{})</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">service</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ServiceID</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">region</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">&#34;us-west-2&#34;</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
@@ -530,9 +750,10 @@ fallback behavior for other endpoints:</p>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">})</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithEndpointResolverWithOptions</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">customResolver</span><span style="color:#000;font-weight:bold">))</span>
-</span></span></code></pre></div><h3 id="overriding-endpoint-without-fallback">Overriding Endpoint Without Fallback</h3>
-<p>The following code snippet shows how a single service endpoint can be overridden for DynamoDB without
-fallback behavior for other endpoints:</p>
+</span></span></code></pre></div><h4 id="without-fallback">Without fallback</h4>
+<p>The following code snippet shows how a single service endpoint can be
+overridden for DynamoDB without fallback behavior for other
+endpoints:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">customResolver</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverWithOptionsFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">region</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">options</span> <span style="color:#ce5c00;font-weight:bold">...</span><span style="color:#204a87;font-weight:bold">interface</span><span style="color:#000;font-weight:bold">{})</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">service</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ServiceID</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">region</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">&#34;us-west-2&#34;</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
@@ -545,20 +766,21 @@ fallback behavior for other endpoints:</p>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">})</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithEndpointResolverWithOptions</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">customResolver</span><span style="color:#000;font-weight:bold">))</span>
-</span></span></code></pre></div><h3 id="immutable-endpoints">Immutable Endpoints</h3>
+</span></span></code></pre></div><h3 id="immutable-endpoints">Immutable endpoints</h3>
 
 
 <div class="pageinfo pageinfo-warning">
-<p>Setting an endpoint as immutable may prevent some service client features from functioning correctly, and could result
-in undefined behavior. Caution should be taken when defining an endpoint as immutable.</p>
+<p>Setting an endpoint as immutable may prevent some service client features from
+functioning correctly, and could result in undefined behavior. Caution should
+be taken when defining an endpoint as immutable.</p>
 
 </div>
 
-<p>Some service clients, such as Amazon S3, may modify the endpoint returned by the resolver for certain
-service operations. For example, the Amazon S3 will automatically handle
-<a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html">Virtual Bucket Addressing</a> by mutating the
-resolved endpoint. You can prevent the SDK from mutating your custom endpoints by setting
-<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Endpoint.HostnameImmutable">HostnameImmutable</a> to<code>true</code>. For example:</p>
+<p>Some service clients, such as Amazon S3, may modify the endpoint
+returned by the resolver for certain service operations. For example, Amazon S3 will automatically handle <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html">Virtual Bucket
+Addressing</a>
+by mutating the resolved endpoint. You can prevent the SDK from mutating your
+custom endpoints by setting <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Endpoint.HostnameImmutable">HostnameImmutable</a> to <code>true</code>. For example:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">customResolver</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverWithOptionsFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">region</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">options</span> <span style="color:#ce5c00;font-weight:bold">...</span><span style="color:#204a87;font-weight:bold">interface</span><span style="color:#000;font-weight:bold">{})</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">service</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ServiceID</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">region</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#4e9a06">&#34;us-west-2&#34;</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
@@ -572,11 +794,75 @@ resolved endpoint. You can prevent the SDK from mutating your custom endpoints b
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">})</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithEndpointResolverWithOptions</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">customResolver</span><span style="color:#000;font-weight:bold">))</span>
+</span></span></code></pre></div><h2 id="migration">Migration</h2>
+<p>When migrating from v1 to v2 of endpoint resolution, the following general principles apply:</p>
+<ul>
+<li>Returning an <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Endpoint">Endpoint</a> with <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Endpoint.HostnameImmutable">HostnameImmutable</a> set to <code>false</code> is roughly
+equivalent to setting <code>BaseEndpoint</code> to the originally returned URL from v1 and
+leaving <code>EndpointResolverV2</code> as the default.</li>
+<li>Returning an Endpoint with HostnameImmutable set to <code>true</code> is roughly
+equivalent to implementing an <code>EndpointResolverV2</code> which returns the
+originally returned URL from v1.</li>
+</ul>
+<p>Examples for these cases are provided below.</p>
+
+
+<div class="pageinfo pageinfo-warning">
+<p>V1 immutable endpoints and V2 resolution are not equivalent in behavior. For
+example, signing overrides for custom features like S3 Object Lambda would
+still be set for immutable endpoints returned via v1 code, but the same will
+not be done for v2.</p>
+
+</div>
+
+<h3 id="examples-2">Examples</h3>
+<h4 id="mutable-endpoint">Mutable endpoint</h4>
+<p>The following code sample demonstrates how to migrate a basic v1 endpoint
+resolver that returns a modifiable endpoint:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// v1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolver</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverFromURL</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://custom.endpoint.api/&#34;</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// v2
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// the value of BaseEndpoint is passed to the default EndpointResolverV2
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#8f5902;font-style:italic">// implementation, which will handle routing for features such as S3 accelerate,
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#8f5902;font-style:italic">// MRAP, etc.
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">BaseEndpoint</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://custom.endpoint.api/&#34;</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">})</span>
+</span></span></code></pre></div><h4 id="immutable-endpoint">Immutable endpoint</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// v1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolver</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverFromURL</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://custom.endpoint.api/&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">e</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">e</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HostnameImmutable</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// v2
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">smithyendpoints</span> <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/endpoints&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">staticResolver</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000;font-weight:bold">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">staticResolver</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ResolveEndpoint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointParameters</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// This value will be used as-is when making the request.
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">smithyEndpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">URI</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">url</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://custom.endpoint.api/&#34;</span><span style="color:#000;font-weight:bold">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverV2</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">staticResolver</span><span style="color:#000;font-weight:bold">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">})</span>
 </span></span></code></pre></div>
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified January 5, 2022: <a href="https://github.com/aws/aws-sdk-go-v2/commit/2d247927524c97bf2e2890c7581350893e15f631">Replace deprecated functions and interfaces in endpoints documentation (#1542) (2d24792)</a>
+  Last modified July 31, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/99a28aa065f3069d07a2d9445c0c63a7ff559c2f">update devguide for endpointsv2 (#2205) (99a28aa065)</a>
 </div>
 
 </div>
