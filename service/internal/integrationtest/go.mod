@@ -34,8 +34,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.110.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.29.3
-	github.com/aws/aws-sdk-go-v2/service/efs v1.21.2
-	github.com/aws/aws-sdk-go-v2/service/elasticache v1.28.2
+	github.com/aws/aws-sdk-go-v2/service/efs v1.21.3
+	github.com/aws/aws-sdk-go-v2/service/elasticache v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.20.2
@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.38.2
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.32.2
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.20.2
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.20.2
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/shield v1.19.2

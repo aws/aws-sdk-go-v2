@@ -1,3 +1,7 @@
+# v1.24.0 (2023-08-08)
+
+* **Feature**: This release introduces a new logically air-gapped vault (Preview) in AWS Backup that stores immutable backup copies, which are locked by default and isolated with encryption using AWS owned keys. Logically air-gapped vault (Preview) allows secure recovery of application data across accounts.
+
 # v1.23.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

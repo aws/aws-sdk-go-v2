@@ -1,3 +1,13 @@
+# Release (2023-08-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.24.0](service/backup/CHANGELOG.md#v1240-2023-08-08)
+  * **Feature**: This release introduces a new logically air-gapped vault (Preview) in AWS Backup that stores immutable backup copies, which are locked by default and isolated with encryption using AWS owned keys. Logically air-gapped vault (Preview) allows secure recovery of application data across accounts.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.29.0](service/elasticache/CHANGELOG.md#v1290-2023-08-08)
+  * **Feature**: Added support for cluster mode in online migration and test migration API
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.21.0](service/servicecatalog/CHANGELOG.md#v1210-2023-08-08)
+  * **Feature**: Introduce support for HashiCorp Terraform Cloud in Service Catalog by addying TERRAFORM_CLOUD product type in CreateProduct and CreateProvisioningArtifact API.
+
 # Release (2023-08-07)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.21.0 (2023-08-08)
+
+* **Feature**: Introduce support for HashiCorp Terraform Cloud in Service Catalog by addying TERRAFORM_CLOUD product type in CreateProduct and CreateProvisioningArtifact API.
+
 # v1.20.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions
