@@ -45,7 +45,7 @@ type SearchProvisionedProductsInput struct {
 
 	// The search filters. When the key is SearchQuery , the searchable fields are arn
 	// , createdTime , id , lastRecordId , idempotencyToken , name , physicalId ,
-	// productId , provisioningArtifact , type , status , tags , userArn ,
+	// productId , provisioningArtifactId , type , status , tags , userArn ,
 	// userArnSession , lastProvisioningRecordId , lastSuccessfulProvisioningRecordId ,
 	// productName , and provisioningArtifactName . Example:
 	// "SearchQuery":["status:AVAILABLE"]

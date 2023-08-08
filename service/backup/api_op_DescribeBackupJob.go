@@ -147,7 +147,7 @@ type DescribeBackupJobOutput struct {
 	// 12:11:30.087 AM.
 	StartBy *time.Time
 
-	// The current state of a resource recovery point.
+	// The current state of a backup job.
 	State types.BackupJobState
 
 	// A detailed message explaining the status of the job to back up a resource.

@@ -10,6 +10,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,6 +42,9 @@ type DescribeBackupVaultInput struct {
 	//
 	// This member is required.
 	BackupVaultName *string
+
+	// This is the account ID of the specified backup vault.
+	BackupVaultAccountId *string
 
 	noSmithyDocumentSerde
 }
@@ -110,6 +114,9 @@ type DescribeBackupVaultOutput struct {
 
 	// The number of recovery points that are stored in a backup vault.
 	NumberOfRecoveryPoints int64
+
+	// This is the type of vault described.
+	VaultType types.VaultType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

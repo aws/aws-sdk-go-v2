@@ -16,7 +16,7 @@ type AccessLevelFilter struct {
 	//   - User - Filter results based on the specified user.
 	Key AccessLevelFilterKey
 
-	// The user to which the access level applies. The only supported value is Self .
+	// The user to which the access level applies. The only supported value is self .
 	Value *string
 
 	noSmithyDocumentSerde
@@ -478,7 +478,7 @@ type ProvisionedProductAttribute struct {
 
 	// The record identifier of the last request performed on this provisioned product
 	// of the following types:
-	//   - ProvisionedProduct
+	//   - ProvisionProduct
 	//   - UpdateProvisionedProduct
 	//   - ExecuteProvisionedProductPlan
 	//   - TerminateProvisionedProduct
@@ -489,7 +489,7 @@ type ProvisionedProductAttribute struct {
 
 	// The record identifier of the last successful request performed on this
 	// provisioned product of the following types:
-	//   - ProvisionedProduct
+	//   - ProvisionProduct
 	//   - UpdateProvisionedProduct
 	//   - ExecuteProvisionedProductPlan
 	//   - TerminateProvisionedProduct
@@ -570,7 +570,7 @@ type ProvisionedProductDetail struct {
 
 	// The record identifier of the last request performed on this provisioned product
 	// of the following types:
-	//   - ProvisionedProduct
+	//   - ProvisionProduct
 	//   - UpdateProvisionedProduct
 	//   - ExecuteProvisionedProductPlan
 	//   - TerminateProvisionedProduct
@@ -581,7 +581,7 @@ type ProvisionedProductDetail struct {
 
 	// The record identifier of the last successful request performed on this
 	// provisioned product of the following types:
-	//   - ProvisionedProduct
+	//   - ProvisionProduct
 	//   - UpdateProvisionedProduct
 	//   - ExecuteProvisionedProductPlan
 	//   - TerminateProvisionedProduct
@@ -761,11 +761,8 @@ type ProvisioningArtifactDetail struct {
 	// UpdateProvisioningArticat APIs. This field only exists for Repo-Synced products.
 	SourceRevision *string
 
-	// The type of provisioning artifact.
-	//   - CLOUD_FORMATION_TEMPLATE - CloudFormation template
-	//   - MARKETPLACE_AMI - Amazon Web Services Marketplace AMI
-	//   - MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web
-	//   Services Resources
+	// The type of provisioning artifact. CLOUD_FORMATION_TEMPLATE - CloudFormation
+	// template
 	Type ProvisioningArtifactType
 
 	noSmithyDocumentSerde
@@ -842,7 +839,8 @@ type ProvisioningArtifactProperties struct {
 	Description *string
 
 	// If set to true, Service Catalog stops validating the specified provisioning
-	// artifact even if it is invalid.
+	// artifact even if it is invalid. Service Catalog does not support template
+	// validation for the TERRAFORM_OS product type.
 	DisableTemplateValidation bool
 
 	// Specify the template source with one of the following options, but not both.
@@ -862,9 +860,6 @@ type ProvisioningArtifactProperties struct {
 
 	// The type of provisioning artifact.
 	//   - CLOUD_FORMATION_TEMPLATE - CloudFormation template
-	//   - MARKETPLACE_AMI - Amazon Web Services Marketplace AMI
-	//   - MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web
-	//   Services Resources
 	//   - TERRAFORM_OPEN_SOURCE - Terraform open source configuration file
 	Type ProvisioningArtifactType
 
@@ -1012,8 +1007,8 @@ type RecordDetail struct {
 	// The user-friendly name of the provisioned product.
 	ProvisionedProductName *string
 
-	// The type of provisioned product. The supported values are CFN_STACK and
-	// CFN_STACKSET .
+	// The type of provisioned product. The supported values are CFN_STACK ,
+	// CFN_STACKSET , TERRAFORM_OPEN_SOURCE , and TERRAFORM_CLOUD .
 	ProvisionedProductType *string
 
 	// The identifier of the provisioning artifact.

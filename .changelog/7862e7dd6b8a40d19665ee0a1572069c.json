@@ -1,0 +1,8 @@
+{
+    "id": "7862e7dd-6b8a-40d1-9665-ee0a1572069c",
+    "type": "feature",
+    "description": "Introduce support for HashiCorp Terraform Cloud in Service Catalog by addying TERRAFORM_CLOUD product type in CreateProduct and CreateProvisioningArtifact API.",
+    "modules": [
+        "service/servicecatalog"
+    ]
+}

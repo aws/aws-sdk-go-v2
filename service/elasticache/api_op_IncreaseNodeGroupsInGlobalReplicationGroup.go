@@ -45,7 +45,7 @@ type IncreaseNodeGroupsInGlobalReplicationGroupInput struct {
 	// This member is required.
 	GlobalReplicationGroupId *string
 
-	// The number of node groups you wish to add
+	// Total number of node groups you want
 	//
 	// This member is required.
 	NodeGroupCount int32

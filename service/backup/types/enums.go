@@ -209,3 +209,41 @@ func (StorageClass) Values() []StorageClass {
 		"DELETED",
 	}
 }
+
+type VaultState string
+
+// Enum values for VaultState
+const (
+	VaultStateCreating  VaultState = "CREATING"
+	VaultStateAvailable VaultState = "AVAILABLE"
+	VaultStateFailed    VaultState = "FAILED"
+)
+
+// Values returns all known values for VaultState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VaultState) Values() []VaultState {
+	return []VaultState{
+		"CREATING",
+		"AVAILABLE",
+		"FAILED",
+	}
+}
+
+type VaultType string
+
+// Enum values for VaultType
+const (
+	VaultTypeBackupVault                   VaultType = "BACKUP_VAULT"
+	VaultTypeLogicallyAirGappedBackupVault VaultType = "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+)
+
+// Values returns all known values for VaultType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VaultType) Values() []VaultType {
+	return []VaultType{
+		"BACKUP_VAULT",
+		"LOGICALLY_AIR_GAPPED_BACKUP_VAULT",
+	}
+}

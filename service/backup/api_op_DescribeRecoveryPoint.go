@@ -52,6 +52,9 @@ type DescribeRecoveryPointInput struct {
 	// This member is required.
 	RecoveryPointArn *string
 
+	// This is the account ID of the specified backup vault.
+	BackupVaultAccountId *string
+
 	noSmithyDocumentSerde
 }
 

@@ -44,6 +44,9 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	// This member is required.
 	BackupVaultName *string
 
+	// This parameter will sort the list of recovery points by account ID.
+	BackupVaultAccountId *string
+
 	// Returns only recovery points that match the specified backup plan ID.
 	ByBackupPlanId *string
 

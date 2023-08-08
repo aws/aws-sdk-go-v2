@@ -1,0 +1,8 @@
+{
+    "id": "f3275a09-c9e8-4972-8e16-13808ef43093",
+    "type": "feature",
+    "description": "Added support for cluster mode in online migration and test migration API",
+    "modules": [
+        "service/elasticache"
+    ]
+}

@@ -1010,6 +1010,26 @@ func (m *validateOpTestFailover) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTestMigration struct {
+}
+
+func (*validateOpTestMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTestMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TestMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTestMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAddTagsToResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTagsToResource{}, middleware.After)
 }
@@ -1208,6 +1228,10 @@ func addOpStartMigrationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpTestFailoverValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTestFailover{}, middleware.After)
+}
+
+func addOpTestMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTestMigration{}, middleware.After)
 }
 
 func validateConfigureShard(v *types.ConfigureShard) error {
@@ -2152,6 +2176,24 @@ func validateOpTestFailoverInput(v *TestFailoverInput) error {
 	}
 	if v.NodeGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTestMigrationInput(v *TestMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestMigrationInput"}
+	if v.ReplicationGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationGroupId"))
+	}
+	if v.CustomerNodeEndpointList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerNodeEndpointList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

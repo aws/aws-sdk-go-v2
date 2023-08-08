@@ -20,7 +20,7 @@ import (
 // disable TagOptions sharing or Principal sharing for an existing portfolio
 // share. The portfolio share cannot be updated if the CreatePortfolioShare
 // operation is IN_PROGRESS , as the share is not available to recipient entities.
-// In this case, you must wait for the portfolio share to be COMPLETED. You must
+// In this case, you must wait for the portfolio share to be completed. You must
 // provide the accountId or organization node in the input, but not both. If the
 // portfolio is shared to both an external account and an organization node, and
 // both shares need to be updated, you must invoke UpdatePortfolioShare separately

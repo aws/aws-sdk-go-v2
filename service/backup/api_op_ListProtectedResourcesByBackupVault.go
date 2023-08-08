@@ -14,120 +14,59 @@ import (
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Starts an on-demand backup job for the specified resource.
-func (c *Client) StartBackupJob(ctx context.Context, params *StartBackupJobInput, optFns ...func(*Options)) (*StartBackupJobOutput, error) {
+// This request lists the protected resources corresponding to each backup vault.
+func (c *Client) ListProtectedResourcesByBackupVault(ctx context.Context, params *ListProtectedResourcesByBackupVaultInput, optFns ...func(*Options)) (*ListProtectedResourcesByBackupVaultOutput, error) {
 	if params == nil {
-		params = &StartBackupJobInput{}
+		params = &ListProtectedResourcesByBackupVaultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartBackupJob", params, optFns, c.addOperationStartBackupJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProtectedResourcesByBackupVault", params, optFns, c.addOperationListProtectedResourcesByBackupVaultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*StartBackupJobOutput)
+	out := result.(*ListProtectedResourcesByBackupVaultOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type StartBackupJobInput struct {
+type ListProtectedResourcesByBackupVaultInput struct {
 
-	// The name of a logical container where backups are stored. Backup vaults are
-	// identified by names that are unique to the account used to create them and the
-	// Amazon Web Services Region where they are created. They consist of lowercase
-	// letters, numbers, and hyphens.
+	// This is the list of protected resources by backup vault within the vault(s) you
+	// specify by name.
 	//
 	// This member is required.
 	BackupVaultName *string
 
-	// Specifies the IAM role ARN used to create the target recovery point; for
-	// example, arn:aws:iam::123456789012:role/S3Access .
-	//
-	// This member is required.
-	IamRoleArn *string
+	// This is the list of protected resources by backup vault within the vault(s) you
+	// specify by account ID.
+	BackupVaultAccountId *string
 
-	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
-	// of the ARN depends on the resource type.
-	//
-	// This member is required.
-	ResourceArn *string
+	// The maximum number of items to be returned.
+	MaxResults *int32
 
-	// Specifies the backup option for a selected resource. This option is only
-	// available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid
-	// values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option
-	// and create a Windows VSS backup. Set to "WindowsVSS""disabled" to create a
-	// regular backup. The WindowsVSS option is not enabled by default.
-	BackupOptions map[string]string
-
-	// A value in minutes during which a successfully started backup must complete, or
-	// else Backup will cancel the job. This value is optional. This value begins
-	// counting down from when the backup was scheduled. It does not add additional
-	// time for StartWindowMinutes , or if the backup started later than scheduled.
-	// Like StartWindowMinutes , this parameter has a maximum value of 100 years
-	// (52,560,000 minutes).
-	CompleteWindowMinutes *int64
-
-	// A customer-chosen string that you can use to distinguish between otherwise
-	// identical calls to StartBackupJob . Retrying a successful request with the same
-	// idempotency token results in a success message with no action taken.
-	IdempotencyToken *string
-
-	// The lifecycle defines when a protected resource is transitioned to cold storage
-	// and when it expires. Backup will transition and expire backups automatically
-	// according to the lifecycle that you define. Backups transitioned to cold storage
-	// must be stored in cold storage for a minimum of 90 days. Therefore, the
-	// “retention” setting must be 90 days greater than the “transition to cold after
-	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold. Resource types that are able to be
-	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
-	// section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-	// table. Backup ignores this expression for other resource types. This parameter
-	// has a maximum value of 100 years (36,500 days).
-	Lifecycle *types.Lifecycle
-
-	// To help organize your resources, you can assign your own metadata to the
-	// resources that you create. Each tag is a key-value pair.
-	RecoveryPointTags map[string]string
-
-	// A value in minutes after a backup is scheduled before a job will be canceled if
-	// it doesn't start successfully. This value is optional, and the default is 8
-	// hours. If this value is included, it must be at least 60 minutes to avoid
-	// errors. This parameter has a maximum value of 100 years (52,560,000 minutes).
-	// During the start window, the backup job status remains in CREATED status until
-	// it has successfully begun or until the start window time has run out. If within
-	// the start window time Backup receives an error that allows the job to be
-	// retried, Backup will automatically retry to begin the job at least every 10
-	// minutes until the backup successfully begins (the job status changes to RUNNING
-	// ) or until the job status changes to EXPIRED (which is expected to occur when
-	// the start window time is over).
-	StartWindowMinutes *int64
+	// The next item following a partial list of returned items. For example, if a
+	// request is made to return maxResults number of items, NextToken allows you to
+	// return more items in your list starting at the location pointed to by the next
+	// token.
+	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-type StartBackupJobOutput struct {
+type ListProtectedResourcesByBackupVaultOutput struct {
 
-	// Uniquely identifies a request to Backup to back up a resource.
-	BackupJobId *string
+	// The next item following a partial list of returned items. For example, if a
+	// request is made to return maxResults number of items, NextToken allows you to
+	// return more items in your list starting at the location pointed to by the next
+	// token.
+	NextToken *string
 
-	// The date and time that a backup job is created, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
-	// For example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
-	CreationDate *time.Time
-
-	// This is a returned boolean value indicating this is a parent (composite) backup
-	// job.
-	IsParent bool
-
-	// Note: This field is only returned for Amazon EFS and Advanced DynamoDB
-	// resources. An ARN that uniquely identifies a recovery point; for example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45
-	// .
-	RecoveryPointArn *string
+	// These are the results returned for the request
+	// ListProtectedResourcesByBackupVault.
+	Results []types.ProtectedResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -135,12 +74,12 @@ type StartBackupJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationStartBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartBackupJob{}, middleware.After)
+func (c *Client) addOperationListProtectedResourcesByBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProtectedResourcesByBackupVault{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartBackupJob{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProtectedResourcesByBackupVault{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -183,13 +122,13 @@ func (c *Client) addOperationStartBackupJobMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addStartBackupJobResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addListProtectedResourcesByBackupVaultResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpStartBackupJobValidationMiddleware(stack); err != nil {
+	if err = addOpListProtectedResourcesByBackupVaultValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartBackupJob(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProtectedResourcesByBackupVault(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -210,25 +149,118 @@ func (c *Client) addOperationStartBackupJobMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opStartBackupJob(region string) *awsmiddleware.RegisterServiceMetadata {
+// ListProtectedResourcesByBackupVaultAPIClient is a client that implements the
+// ListProtectedResourcesByBackupVault operation.
+type ListProtectedResourcesByBackupVaultAPIClient interface {
+	ListProtectedResourcesByBackupVault(context.Context, *ListProtectedResourcesByBackupVaultInput, ...func(*Options)) (*ListProtectedResourcesByBackupVaultOutput, error)
+}
+
+var _ ListProtectedResourcesByBackupVaultAPIClient = (*Client)(nil)
+
+// ListProtectedResourcesByBackupVaultPaginatorOptions is the paginator options
+// for ListProtectedResourcesByBackupVault
+type ListProtectedResourcesByBackupVaultPaginatorOptions struct {
+	// The maximum number of items to be returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListProtectedResourcesByBackupVaultPaginator is a paginator for
+// ListProtectedResourcesByBackupVault
+type ListProtectedResourcesByBackupVaultPaginator struct {
+	options   ListProtectedResourcesByBackupVaultPaginatorOptions
+	client    ListProtectedResourcesByBackupVaultAPIClient
+	params    *ListProtectedResourcesByBackupVaultInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListProtectedResourcesByBackupVaultPaginator returns a new
+// ListProtectedResourcesByBackupVaultPaginator
+func NewListProtectedResourcesByBackupVaultPaginator(client ListProtectedResourcesByBackupVaultAPIClient, params *ListProtectedResourcesByBackupVaultInput, optFns ...func(*ListProtectedResourcesByBackupVaultPaginatorOptions)) *ListProtectedResourcesByBackupVaultPaginator {
+	if params == nil {
+		params = &ListProtectedResourcesByBackupVaultInput{}
+	}
+
+	options := ListProtectedResourcesByBackupVaultPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListProtectedResourcesByBackupVaultPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListProtectedResourcesByBackupVaultPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListProtectedResourcesByBackupVault page.
+func (p *ListProtectedResourcesByBackupVaultPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListProtectedResourcesByBackupVaultOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListProtectedResourcesByBackupVault(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListProtectedResourcesByBackupVault(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "backup",
-		OperationName: "StartBackupJob",
+		OperationName: "ListProtectedResourcesByBackupVault",
 	}
 }
 
-type opStartBackupJobResolveEndpointMiddleware struct {
+type opListProtectedResourcesByBackupVaultResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opStartBackupJobResolveEndpointMiddleware) ID() string {
+func (*opListProtectedResourcesByBackupVaultResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opStartBackupJobResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opListProtectedResourcesByBackupVaultResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -330,8 +362,8 @@ func (m *opStartBackupJobResolveEndpointMiddleware) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
-func addStartBackupJobResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opStartBackupJobResolveEndpointMiddleware{
+func addListProtectedResourcesByBackupVaultResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opListProtectedResourcesByBackupVaultResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

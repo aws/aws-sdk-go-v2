@@ -35,6 +35,12 @@ func (c *Client) ListBackupVaults(ctx context.Context, params *ListBackupVaultsI
 
 type ListBackupVaultsInput struct {
 
+	// This parameter will sort the list of vaults by shared vaults.
+	ByShared bool
+
+	// This parameter will sort the list of vaults by vault type.
+	ByVaultType types.VaultType
+
 	// The maximum number of items to be returned.
 	MaxResults *int32
 

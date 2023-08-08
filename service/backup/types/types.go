@@ -135,7 +135,7 @@ type BackupJob struct {
 	// 12:11:30.087 AM.
 	StartBy *time.Time
 
-	// The current state of a resource recovery point.
+	// The current state of a backup job.
 	State BackupJobState
 
 	// A detailed message explaining the status of the job to back up a resource.
@@ -365,7 +365,8 @@ type BackupRuleInput struct {
 	// after a backup has been transitioned to cold. Resource types that are able to be
 	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
 	// section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-	// table. Backup ignores this expression for other resource types.
+	// table. Backup ignores this expression for other resource types. This parameter
+	// has a maximum value of 100 years (36,500 days).
 	Lifecycle *Lifecycle
 
 	// To help organize your resources, you can assign your own metadata to the
@@ -377,14 +378,14 @@ type BackupRuleInput struct {
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
 	// it doesn't start successfully. This value is optional. If this value is
-	// included, it must be at least 60 minutes to avoid errors. During the start
-	// window, the backup job status remains in CREATED status until it has
-	// successfully begun or until the start window time has run out. If within the
-	// start window time Backup receives an error that allows the job to be retried,
-	// Backup will automatically retry to begin the job at least every 10 minutes until
-	// the backup successfully begins (the job status changes to RUNNING ) or until the
-	// job status changes to EXPIRED (which is expected to occur when the start window
-	// time is over).
+	// included, it must be at least 60 minutes to avoid errors. This parameter has a
+	// maximum value of 100 years (52,560,000 minutes). During the start window, the
+	// backup job status remains in CREATED status until it has successfully begun or
+	// until the start window time has run out. If within the start window time Backup
+	// receives an error that allows the job to be retried, Backup will automatically
+	// retry to begin the job at least every 10 minutes until the backup successfully
+	// begins (the job status changes to RUNNING ) or until the job status changes to
+	// EXPIRED (which is expected to occur when the start window time is over).
 	StartWindowMinutes *int64
 
 	noSmithyDocumentSerde

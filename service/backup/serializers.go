@@ -570,6 +570,111 @@ func awsRestjson1_serializeOpDocumentCreateLegalHoldInput(v *CreateLegalHoldInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateLogicallyAirGappedBackupVault struct {
+}
+
+func (*awsRestjson1_serializeOpCreateLogicallyAirGappedBackupVault) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateLogicallyAirGappedBackupVault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLogicallyAirGappedBackupVaultInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/logically-air-gapped-backup-vaults/{BackupVaultName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateLogicallyAirGappedBackupVaultInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateLogicallyAirGappedBackupVaultInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateLogicallyAirGappedBackupVaultInput(v *CreateLogicallyAirGappedBackupVaultInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BackupVaultName == nil || len(*v.BackupVaultName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BackupVaultName must not be empty")}
+	}
+	if v.BackupVaultName != nil {
+		if err := encoder.SetURI("BackupVaultName").String(*v.BackupVaultName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateLogicallyAirGappedBackupVaultInput(v *CreateLogicallyAirGappedBackupVaultInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackupVaultTags != nil {
+		ok := object.Key("BackupVaultTags")
+		if err := awsRestjson1_serializeDocumentTags(v.BackupVaultTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CreatorRequestId != nil {
+		ok := object.Key("CreatorRequestId")
+		ok.String(*v.CreatorRequestId)
+	}
+
+	if v.MaxRetentionDays != nil {
+		ok := object.Key("MaxRetentionDays")
+		ok.Long(*v.MaxRetentionDays)
+	}
+
+	if v.MinRetentionDays != nil {
+		ok := object.Key("MinRetentionDays")
+		ok.Long(*v.MinRetentionDays)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateReportPlan struct {
 }
 
@@ -1397,6 +1502,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeBackupVaultInput(v *DescribeBac
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.BackupVaultAccountId != nil {
+		encoder.SetQuery("backupVaultAccountId").String(*v.BackupVaultAccountId)
+	}
+
 	if v.BackupVaultName == nil || len(*v.BackupVaultName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member BackupVaultName must not be empty")}
 	}
@@ -1707,6 +1816,10 @@ func (m *awsRestjson1_serializeOpDescribeRecoveryPoint) HandleSerialize(ctx cont
 func awsRestjson1_serializeOpHttpBindingsDescribeRecoveryPointInput(v *DescribeRecoveryPointInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BackupVaultAccountId != nil {
+		encoder.SetQuery("backupVaultAccountId").String(*v.BackupVaultAccountId)
 	}
 
 	if v.BackupVaultName == nil || len(*v.BackupVaultName) == 0 {
@@ -2721,6 +2834,10 @@ func awsRestjson1_serializeOpHttpBindingsGetRecoveryPointRestoreMetadataInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.BackupVaultAccountId != nil {
+		encoder.SetQuery("backupVaultAccountId").String(*v.BackupVaultAccountId)
+	}
+
 	if v.BackupVaultName == nil || len(*v.BackupVaultName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member BackupVaultName must not be empty")}
 	}
@@ -3229,6 +3346,14 @@ func awsRestjson1_serializeOpHttpBindingsListBackupVaultsInput(v *ListBackupVaul
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ByShared {
+		encoder.SetQuery("shared").Boolean(v.ByShared)
+	}
+
+	if len(v.ByVaultType) > 0 {
+		encoder.SetQuery("vaultType").String(string(v.ByVaultType))
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
@@ -3536,6 +3661,83 @@ func awsRestjson1_serializeOpHttpBindingsListProtectedResourcesInput(v *ListProt
 	return nil
 }
 
+type awsRestjson1_serializeOpListProtectedResourcesByBackupVault struct {
+}
+
+func (*awsRestjson1_serializeOpListProtectedResourcesByBackupVault) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListProtectedResourcesByBackupVault) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListProtectedResourcesByBackupVaultInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/backup-vaults/{BackupVaultName}/resources")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListProtectedResourcesByBackupVaultInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListProtectedResourcesByBackupVaultInput(v *ListProtectedResourcesByBackupVaultInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BackupVaultAccountId != nil {
+		encoder.SetQuery("backupVaultAccountId").String(*v.BackupVaultAccountId)
+	}
+
+	if v.BackupVaultName == nil || len(*v.BackupVaultName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BackupVaultName must not be empty")}
+	}
+	if v.BackupVaultName != nil {
+		if err := encoder.SetURI("BackupVaultName").String(*v.BackupVaultName); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListRecoveryPointsByBackupVault struct {
 }
 
@@ -3587,6 +3789,10 @@ func (m *awsRestjson1_serializeOpListRecoveryPointsByBackupVault) HandleSerializ
 func awsRestjson1_serializeOpHttpBindingsListRecoveryPointsByBackupVaultInput(v *ListRecoveryPointsByBackupVaultInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BackupVaultAccountId != nil {
+		encoder.SetQuery("backupVaultAccountId").String(*v.BackupVaultAccountId)
 	}
 
 	if v.BackupVaultName == nil || len(*v.BackupVaultName) == 0 {

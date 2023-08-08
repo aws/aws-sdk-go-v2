@@ -4175,6 +4175,70 @@ func (m *awsAwsquery_serializeOpTestFailover) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsquery_serializeOpTestMigration struct {
+}
+
+func (*awsAwsquery_serializeOpTestMigration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpTestMigration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*TestMigrationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("TestMigration")
+	body.Key("Version").String("2015-02-02")
+
+	if err := awsAwsquery_serializeOpDocumentTestMigrationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsquery_serializeDocumentAuthenticationMode(v *types.AuthenticationMode, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -7094,6 +7158,25 @@ func awsAwsquery_serializeOpDocumentTestFailoverInput(v *TestFailoverInput, valu
 	if v.NodeGroupId != nil {
 		objectKey := object.Key("NodeGroupId")
 		objectKey.String(*v.NodeGroupId)
+	}
+
+	if v.ReplicationGroupId != nil {
+		objectKey := object.Key("ReplicationGroupId")
+		objectKey.String(*v.ReplicationGroupId)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentTestMigrationInput(v *TestMigrationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CustomerNodeEndpointList != nil {
+		objectKey := object.Key("CustomerNodeEndpointList")
+		if err := awsAwsquery_serializeDocumentCustomerNodeEndpointList(v.CustomerNodeEndpointList, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.ReplicationGroupId != nil {

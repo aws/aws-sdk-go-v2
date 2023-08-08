@@ -130,6 +130,26 @@ func (m *validateOpCreateLegalHold) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLogicallyAirGappedBackupVault struct {
+}
+
+func (*validateOpCreateLogicallyAirGappedBackupVault) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLogicallyAirGappedBackupVault) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLogicallyAirGappedBackupVaultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLogicallyAirGappedBackupVaultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateReportPlan struct {
 }
 
@@ -770,6 +790,26 @@ func (m *validateOpListBackupSelections) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListProtectedResourcesByBackupVault struct {
+}
+
+func (*validateOpListProtectedResourcesByBackupVault) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProtectedResourcesByBackupVault) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProtectedResourcesByBackupVaultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProtectedResourcesByBackupVaultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRecoveryPointsByBackupVault struct {
 }
 
@@ -1154,6 +1194,10 @@ func addOpCreateLegalHoldValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLegalHold{}, middleware.After)
 }
 
+func addOpCreateLogicallyAirGappedBackupVaultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLogicallyAirGappedBackupVault{}, middleware.After)
+}
+
 func addOpCreateReportPlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReportPlan{}, middleware.After)
 }
@@ -1280,6 +1324,10 @@ func addOpListBackupPlanVersionsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListBackupSelectionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBackupSelections{}, middleware.After)
+}
+
+func addOpListProtectedResourcesByBackupVaultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProtectedResourcesByBackupVault{}, middleware.After)
 }
 
 func addOpListRecoveryPointsByBackupVaultValidationMiddleware(stack *middleware.Stack) error {
@@ -1717,6 +1765,27 @@ func validateOpCreateLegalHoldInput(v *CreateLegalHoldInput) error {
 		if err := validateRecoveryPointSelection(v.RecoveryPointSelection); err != nil {
 			invalidParams.AddNested("RecoveryPointSelection", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLogicallyAirGappedBackupVaultInput(v *CreateLogicallyAirGappedBackupVaultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLogicallyAirGappedBackupVaultInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.MinRetentionDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinRetentionDays"))
+	}
+	if v.MaxRetentionDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxRetentionDays"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2232,6 +2301,21 @@ func validateOpListBackupSelectionsInput(v *ListBackupSelectionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListBackupSelectionsInput"}
 	if v.BackupPlanId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupPlanId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListProtectedResourcesByBackupVaultInput(v *ListProtectedResourcesByBackupVaultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProtectedResourcesByBackupVaultInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
