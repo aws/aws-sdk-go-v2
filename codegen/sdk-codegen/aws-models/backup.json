@@ -157,7 +157,7 @@
                 "State": {
                     "target": "com.amazonaws.backup#BackupJobState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of a resource recovery point.</p>"
+                        "smithy.api#documentation": "<p>The current state of a backup job.</p>"
                     }
                 },
                 "StatusMessage": {
@@ -600,7 +600,7 @@
                 "StartWindowMinutes": {
                     "target": "com.amazonaws.backup#WindowMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value in minutes after a backup is scheduled before a job will be canceled if it\n         doesn't start successfully. This value is optional. \n         If this value is included, it must be at least 60 minutes to avoid errors.</p>\n         <p>During the start window, the backup job status remains in <code>CREATED</code> status until it \n         has successfully begun or until the start window time has run out. If within the start \n         window time Backup receives an error that allows the job to be retried, \n         Backup will automatically retry to begin the job at least every 10 minutes \n         until the backup \n         successfully begins (the job status changes to <code>RUNNING</code>) or until the job status \n         changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>"
+                        "smithy.api#documentation": "<p>A value in minutes after a backup is scheduled before a job will be canceled if it\n         doesn't start successfully. This value is optional. \n         If this value is included, it must be at least 60 minutes to avoid errors.</p>\n         <p>This parameter has a maximum value of 100 years (52,560,000 minutes).</p>\n         <p>During the start window, the backup job status remains in <code>CREATED</code> status until it \n         has successfully begun or until the start window time has run out. If within the start \n         window time Backup receives an error that allows the job to be retried, \n         Backup will automatically retry to begin the job at least every 10 minutes \n         until the backup \n         successfully begins (the job status changes to <code>RUNNING</code>) or until the job status \n         changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>"
                     }
                 },
                 "CompletionWindowMinutes": {
@@ -612,7 +612,7 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.backup#Lifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup will transition and expire backups automatically according\n         to the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “retention” setting must be 90 days greater than the “transition to\n         cold after days” setting. The “transition to cold after days” setting cannot be changed\n         after a backup has been transitioned to cold.</p>\n         <p>Resource types that are able to be transitioned to cold storage are listed in the \"Lifecycle to cold storage\" \n         section of the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource\"> \n            Feature availability by resource</a> table. Backup ignores this expression for\n         other resource types.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup will transition and expire backups automatically according\n         to the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “retention” setting must be 90 days greater than the “transition to\n         cold after days” setting. The “transition to cold after days” setting cannot be changed\n         after a backup has been transitioned to cold.</p>\n         <p>Resource types that are able to be transitioned to cold storage are listed in the \"Lifecycle to cold storage\" \n         section of the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource\"> \n            Feature availability by resource</a> table. Backup ignores this expression for\n         other resource types.</p>\n         <p>This parameter has a maximum value of 100 years (36,500 days).</p>"
                     }
                 },
                 "RecoveryPointTags": {
@@ -1966,6 +1966,118 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.backup#CreateLogicallyAirGappedBackupVault": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#CreateLogicallyAirGappedBackupVaultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#CreateLogicallyAirGappedBackupVaultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.backup#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This request creates a logical container where backups are stored.</p>\n         <p>This request includes a name, optionally one or more resource tags, an encryption key, \n         and a request ID.</p>\n         <note>\n            <p>Do not include sensitive data, such as passport numbers, in the name of a backup\n         vault.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/logically-air-gapped-backup-vaults/{BackupVaultName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#CreateLogicallyAirGappedBackupVaultInput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the name of the vault that is being created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackupVaultTags": {
+                    "target": "com.amazonaws.backup#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>These are the tags that will be included in the newly-created vault.</p>"
+                    }
+                },
+                "CreatorRequestId": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the ID of the creation request.</p>"
+                    }
+                },
+                "MinRetentionDays": {
+                    "target": "com.amazonaws.backup#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This setting specifies the minimum retention period\n         that the vault retains its recovery points. If this parameter is not specified, \n         no minimum retention period is enforced.</p>\n         <p>If specified, any backup or copy job to the vault must have a lifecycle policy with a\n         retention period equal to or longer than the minimum retention period. If a job\n         retention period is shorter than that minimum retention period, then the vault fails the\n         backup or copy job, and you should either modify your lifecycle settings or use a different\n         vault.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxRetentionDays": {
+                    "target": "com.amazonaws.backup#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the setting that specifies the maximum retention period\n         that the vault retains its recovery points. If this parameter is not specified, Backup \n         does not enforce a maximum retention period on the recovery points in the vault (allowing\n         indefinite storage).</p>\n         <p>If specified, any backup or copy job to the vault must have a lifecycle policy with a\n         retention period equal to or shorter than the maximum retention period. If the job \n         retention period is longer than that maximum retention period, then the vault fails the\n         backup or copy job, and you should either modify your lifecycle settings or use a different\n         vault.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#CreateLogicallyAirGappedBackupVaultOutput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Logically air-gapped \n         backup vaults are identified by names that are unique to the account used to create \n         them and the Region where they are created. They consist of lowercase letters, numbers, \n         and hyphens.</p>"
+                    }
+                },
+                "BackupVaultArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the ARN (Amazon Resource Name) of the vault being created.</p>"
+                    }
+                },
+                "CreationDate": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the vault was created.</p>\n         <p>This value is in Unix format, Coordinated Universal Time (UTC), and accurate to\n         milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018\n         12:11:30.087 AM.</p>"
+                    }
+                },
+                "VaultState": {
+                    "target": "com.amazonaws.backup#VaultState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the current state of the vault.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.backup#CreateReportPlan": {
             "type": "operation",
             "input": {
@@ -2101,6 +2213,9 @@
                     "target": "com.amazonaws.backup#CreateLegalHold"
                 },
                 {
+                    "target": "com.amazonaws.backup#CreateLogicallyAirGappedBackupVault"
+                },
+                {
                     "target": "com.amazonaws.backup#CreateReportPlan"
                 },
                 {
@@ -2228,6 +2343,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#ListProtectedResources"
+                },
+                {
+                    "target": "com.amazonaws.backup#ListProtectedResourcesByBackupVault"
                 },
                 {
                     "target": "com.amazonaws.backup#ListRecoveryPointsByBackupVault"
@@ -3929,7 +4047,7 @@
                 "State": {
                     "target": "com.amazonaws.backup#BackupJobState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of a resource recovery point.</p>"
+                        "smithy.api#documentation": "<p>The current state of a backup job.</p>"
                     }
                 },
                 "StatusMessage": {
@@ -4076,6 +4194,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "BackupVaultAccountId": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the account ID of the specified backup vault.</p>",
+                        "smithy.api#httpQuery": "backupVaultAccountId"
+                    }
                 }
             },
             "traits": {
@@ -4095,6 +4220,12 @@
                     "target": "com.amazonaws.backup#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example,\n            <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.</p>"
+                    }
+                },
+                "VaultType": {
+                    "target": "com.amazonaws.backup#VaultType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the type of vault described.</p>"
                     }
                 },
                 "EncryptionKeyArn": {
@@ -4497,6 +4628,13 @@
                         "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example,\n            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "BackupVaultAccountId": {
+                    "target": "com.amazonaws.backup#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the account ID of the specified backup vault.</p>",
+                        "smithy.api#httpQuery": "backupVaultAccountId"
                     }
                 }
             },
@@ -5902,6 +6040,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "BackupVaultAccountId": {
+                    "target": "com.amazonaws.backup#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the account ID of the specified backup vault.</p>",
+                        "smithy.api#httpQuery": "backupVaultAccountId"
+                    }
                 }
             },
             "traits": {
@@ -6737,6 +6882,21 @@
         "com.amazonaws.backup#ListBackupVaultsInput": {
             "type": "structure",
             "members": {
+                "ByVaultType": {
+                    "target": "com.amazonaws.backup#VaultType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter will sort the list of vaults by vault type.</p>",
+                        "smithy.api#httpQuery": "vaultType"
+                    }
+                },
+                "ByShared": {
+                    "target": "com.amazonaws.backup#Boolean2",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>This parameter will sort the list of vaults by shared vaults.</p>",
+                        "smithy.api#httpQuery": "shared"
+                    }
+                },
                 "NextToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
@@ -7103,6 +7263,97 @@
                 }
             }
         },
+        "com.amazonaws.backup#ListProtectedResourcesByBackupVault": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListProtectedResourcesByBackupVaultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListProtectedResourcesByBackupVaultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This request lists the protected resources corresponding to each backup vault.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/backup-vaults/{BackupVaultName}/resources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Results",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backup#ListProtectedResourcesByBackupVaultInput": {
+            "type": "structure",
+            "members": {
+                "BackupVaultName": {
+                    "target": "com.amazonaws.backup#BackupVaultName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the list of protected resources by backup vault within the vault(s) you specify by name.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackupVaultAccountId": {
+                    "target": "com.amazonaws.backup#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the list of protected resources by backup vault within the vault(s) you specify by account ID.</p>",
+                        "smithy.api#httpQuery": "backupVaultAccountId"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.backup#ListProtectedResourcesByBackupVaultOutput": {
+            "type": "structure",
+            "members": {
+                "Results": {
+                    "target": "com.amazonaws.backup#ProtectedResourcesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>These are the results returned for the request ListProtectedResourcesByBackupVault.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned items. For example, if a request is\n         made to return <code>maxResults</code> number of items, <code>NextToken</code> allows you\n         to return more items in your list starting at the location pointed to by the next\n         token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.backup#ListProtectedResourcesInput": {
             "type": "structure",
             "members": {
@@ -7192,6 +7443,13 @@
                         "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>\n         <note>\n            <p>Backup vault name might not be available when a supported service creates the\n            backup.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "BackupVaultAccountId": {
+                    "target": "com.amazonaws.backup#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter will sort the list of recovery points by account ID.</p>",
+                        "smithy.api#httpQuery": "backupVaultAccountId"
                     }
                 },
                 "NextToken": {
@@ -9027,19 +9285,19 @@
                 "StartWindowMinutes": {
                     "target": "com.amazonaws.backup#WindowMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value in minutes after a backup is scheduled before a job will be canceled if it\n         doesn't start successfully. This value is optional, and the default is 8 hours. \n         If this value is included, it must be at least 60 minutes to avoid errors.</p>\n         <p>During the start window, the backup job status remains in <code>CREATED</code> status until it \n         has successfully begun or until the start window time has run out. If within the start \n         window time Backup receives an error that allows the job to be retried, \n         Backup will automatically retry to begin the job at least every 10 minutes \n         until the backup \n         successfully begins (the job status changes to <code>RUNNING</code>) or until the job status \n         changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>"
+                        "smithy.api#documentation": "<p>A value in minutes after a backup is scheduled before a job will be canceled if it\n         doesn't start successfully. This value is optional, and the default is 8 hours. \n         If this value is included, it must be at least 60 minutes to avoid errors.</p>\n         <p>This parameter has a maximum value of 100 years (52,560,000 minutes).</p>\n         <p>During the start window, the backup job status remains in <code>CREATED</code> status until it \n         has successfully begun or until the start window time has run out. If within the start \n         window time Backup receives an error that allows the job to be retried, \n         Backup will automatically retry to begin the job at least every 10 minutes \n         until the backup \n         successfully begins (the job status changes to <code>RUNNING</code>) or until the job status \n         changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>"
                     }
                 },
                 "CompleteWindowMinutes": {
                     "target": "com.amazonaws.backup#WindowMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value in minutes during which a successfully started backup must complete, or else\n            Backup will cancel the job. This value is optional. This value begins\n         counting down from when the backup was scheduled. It does not add additional time for\n            <code>StartWindowMinutes</code>, or if the backup started later than scheduled.</p>"
+                        "smithy.api#documentation": "<p>A value in minutes during which a successfully started backup must complete, or else\n            Backup will cancel the job. This value is optional. This value begins\n         counting down from when the backup was scheduled. It does not add additional time for\n            <code>StartWindowMinutes</code>, or if the backup started later than scheduled.</p>\n         <p>Like <code>StartWindowMinutes</code>, this parameter has a maximum value of \n         100 years (52,560,000 minutes).</p>"
                     }
                 },
                 "Lifecycle": {
                     "target": "com.amazonaws.backup#Lifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup will transition and expire backups automatically according\n         to the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “retention” setting must be 90 days greater than the “transition to\n         cold after days” setting. The “transition to cold after days” setting cannot be changed\n         after a backup has been transitioned to cold. </p>\n         <p>Resource types that are able to be transitioned to cold storage are listed in the \"Lifecycle to cold storage\" \n         section of the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource\"> \n            Feature availability by resource</a> table. Backup ignores this expression for\n         other resource types.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup will transition and expire backups automatically according\n         to the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “retention” setting must be 90 days greater than the “transition to\n         cold after days” setting. The “transition to cold after days” setting cannot be changed\n         after a backup has been transitioned to cold. </p>\n         <p>Resource types that are able to be transitioned to cold storage are listed in the \"Lifecycle to cold storage\" \n         section of the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource\"> \n            Feature availability by resource</a> table. Backup ignores this expression for\n         other resource types.</p>\n         <p>This parameter has a maximum value of 100 years (36,500 days).</p>"
                     }
                 },
                 "RecoveryPointTags": {
@@ -10071,6 +10329,46 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.backup#string"
+            }
+        },
+        "com.amazonaws.backup#VaultState": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#VaultType": {
+            "type": "enum",
+            "members": {
+                "BACKUP_VAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BACKUP_VAULT"
+                    }
+                },
+                "LOGICALLY_AIR_GAPPED_BACKUP_VAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+                    }
+                }
             }
         },
         "com.amazonaws.backup#WindowMinutes": {

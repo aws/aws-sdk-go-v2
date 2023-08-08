@@ -378,9 +378,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://servicecatalog-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://servicecatalog-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -393,15 +572,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://servicecatalog.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://servicecatalog.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -413,258 +627,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://servicecatalog-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://servicecatalog-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://servicecatalog.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://servicecatalog.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1413,7 +1377,7 @@
                 "Value": {
                     "target": "com.amazonaws.servicecatalog#AccessLevelFilterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user to which the access level applies. The only supported value is <code>Self</code>.</p>"
+                        "smithy.api#documentation": "<p>The user to which the access level applies. The only supported value is <code>self</code>.</p>"
                     }
                 }
             },
@@ -5673,7 +5637,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Requests the import \n         of a resource \n         as an Service Catalog provisioned product \n         that is associated \n         to an Service Catalog product and provisioning artifact. \n         Once imported, \n         all supported governance actions are supported \n         on the provisioned product.\n      </p>\n         <p>\n         Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets, and non-root nested stacks are not supported.\n      </p>\n         <p>\n         The CloudFormation stack must have one \n         of the following statuses \n         to be imported: <code>CREATE_COMPLETE</code>, <code>UPDATE_COMPLETE</code>, <code>UPDATE_ROLLBACK_COMPLETE</code>, <code>IMPORT_COMPLETE</code>, and <code>IMPORT_ROLLBACK_COMPLETE</code>.\n      </p>\n         <p>\n         Import \n         of the resource requires \n         that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact.\n      </p>\n         <note>\n            <p>\n            When you import an existing CloudFormation stack \n            into a portfolio, \n            constraints \n            that are associated \n            with the product \n            aren't applied \n            during the import process.  \n            The constraints are applied \n            after you call <code>UpdateProvisionedProduct</code> \n            for the provisioned product.\n         </p>\n         </note>\n         <p>\n         The user or role \n         that performs this operation \n         must have the <code>cloudformation:GetTemplate</code> and <code>cloudformation:DescribeStacks</code> IAM policy permissions.\n      </p>"
+                "smithy.api#documentation": "<p>\n         Requests the import of a resource as an Service Catalog provisioned product \n         that is associated to an Service Catalog product and provisioning artifact. \n         Once imported, all supported governance actions are supported on the provisioned product.\n      </p>\n         <p>\n         Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets,\n         and non-root nested stacks, are not supported.\n      </p>\n         <p>\n         The CloudFormation stack must have one \n         of the following statuses \n         to be imported: <code>CREATE_COMPLETE</code>, <code>UPDATE_COMPLETE</code>, \n         <code>UPDATE_ROLLBACK_COMPLETE</code>, <code>IMPORT_COMPLETE</code>, and \n         <code>IMPORT_ROLLBACK_COMPLETE</code>.\n      </p>\n         <p>\n         Import of the resource requires that the CloudFormation stack template matches \n         the associated Service Catalog product provisioning artifact.\n      </p>\n         <note>\n            <p>\n            When you import an existing CloudFormation stack \n            into a portfolio, Service Catalog does not apply the product's associated constraints \n            during the import process. Service Catalog applies the constraints \n            after you call <code>UpdateProvisionedProduct</code> for the provisioned product.\n         </p>\n         </note>\n         <p>\n         The user or role that performs this operation must have the <code>cloudformation:GetTemplate</code> \n         and <code>cloudformation:DescribeStacks</code> IAM policy permissions.\n      </p>\n         <p>You can only import one provisioned product at a time. The product's CloudFormation stack must have the \n         <code>IMPORT_COMPLETE</code> status before you import another. </p>"
             }
         },
         "com.amazonaws.servicecatalog#ImportAsProvisionedProductInput": {
@@ -5702,7 +5666,7 @@
                 "ProvisionedProductName": {
                     "target": "com.amazonaws.servicecatalog#ProvisionedProductName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user-friendly name of the provisioned product. The value must be unique for the Amazon Web Services account. The name cannot be updated after the product is provisioned. </p>",
+                        "smithy.api#documentation": "<p>The user-friendly name of the provisioned product. The value must be unique for the Amazon Web Services account. \n         The name cannot be updated after the product is provisioned. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8078,6 +8042,12 @@
                     "traits": {
                         "smithy.api#enumValue": "TERRAFORM_OPEN_SOURCE"
                     }
+                },
+                "TERRAFORM_CLOUD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERRAFORM_CLOUD"
+                    }
                 }
             },
             "traits": {
@@ -8581,13 +8551,13 @@
                 "LastProvisioningRecordId": {
                     "target": "com.amazonaws.servicecatalog#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The record identifier of the last request performed on this provisioned product of the following types:</p>\n         <ul>\n            <li>\n               <p>\n               ProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               UpdateProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               ExecuteProvisionedProductPlan\n            </p>\n            </li>\n            <li>\n               <p>\n               TerminateProvisionedProduct\n            </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The record identifier of the last request performed on this provisioned product of the following types:</p>\n         <ul>\n            <li>\n               <p>\n               ProvisionProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               UpdateProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               ExecuteProvisionedProductPlan\n            </p>\n            </li>\n            <li>\n               <p>\n               TerminateProvisionedProduct\n            </p>\n            </li>\n         </ul>"
                     }
                 },
                 "LastSuccessfulProvisioningRecordId": {
                     "target": "com.amazonaws.servicecatalog#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The record identifier of the last successful request performed on this provisioned product of the following types:</p>\n         <ul>\n            <li>\n               <p>\n               ProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               UpdateProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               ExecuteProvisionedProductPlan\n            </p>\n            </li>\n            <li>\n               <p>\n               TerminateProvisionedProduct\n            </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The record identifier of the last successful request performed on this provisioned product of the following types:</p>\n         <ul>\n            <li>\n               <p>\n               ProvisionProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               UpdateProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               ExecuteProvisionedProductPlan\n            </p>\n            </li>\n            <li>\n               <p>\n               TerminateProvisionedProduct\n            </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Tags": {
@@ -8709,13 +8679,13 @@
                 "LastProvisioningRecordId": {
                     "target": "com.amazonaws.servicecatalog#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The record identifier of the last request performed on this provisioned product of the following types:</p>\n         <ul>\n            <li>\n               <p>\n               ProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               UpdateProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               ExecuteProvisionedProductPlan\n            </p>\n            </li>\n            <li>\n               <p>\n               TerminateProvisionedProduct\n            </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The record identifier of the last request performed on this provisioned product of the following types:</p>\n         <ul>\n            <li>\n               <p>\n               ProvisionProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               UpdateProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               ExecuteProvisionedProductPlan\n            </p>\n            </li>\n            <li>\n               <p>\n               TerminateProvisionedProduct\n            </p>\n            </li>\n         </ul>"
                     }
                 },
                 "LastSuccessfulProvisioningRecordId": {
                     "target": "com.amazonaws.servicecatalog#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The record identifier of the last successful request performed on this provisioned product of the following types:</p>\n         <ul>\n            <li>\n               <p>\n               ProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               UpdateProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               ExecuteProvisionedProductPlan\n            </p>\n            </li>\n            <li>\n               <p>\n               TerminateProvisionedProduct\n            </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The record identifier of the last successful request performed on this provisioned product of the following types:</p>\n         <ul>\n            <li>\n               <p>\n               ProvisionProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               UpdateProvisionedProduct\n            </p>\n            </li>\n            <li>\n               <p>\n               ExecuteProvisionedProductPlan\n            </p>\n            </li>\n            <li>\n               <p>\n               TerminateProvisionedProduct\n            </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ProductId": {
@@ -9135,7 +9105,7 @@
                 "Type": {
                     "target": "com.amazonaws.servicecatalog#ProvisioningArtifactType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of provisioning artifact.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLOUD_FORMATION_TEMPLATE</code> - CloudFormation template</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE_AMI</code> - Amazon Web Services Marketplace AMI</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE_CAR</code> - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of provisioning artifact.</p>\n         <p>\n            <code>CLOUD_FORMATION_TEMPLATE</code> - CloudFormation template</p>"
                     }
                 },
                 "CreatedTime": {
@@ -9357,14 +9327,14 @@
                 "Type": {
                     "target": "com.amazonaws.servicecatalog#ProvisioningArtifactType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of provisioning artifact.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLOUD_FORMATION_TEMPLATE</code> - CloudFormation template</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE_AMI</code> - Amazon Web Services Marketplace AMI</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE_CAR</code> - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERRAFORM_OPEN_SOURCE</code> - Terraform open source configuration file</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of provisioning artifact.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLOUD_FORMATION_TEMPLATE</code> - CloudFormation template</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERRAFORM_OPEN_SOURCE</code> - Terraform open source configuration file</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DisableTemplateValidation": {
                     "target": "com.amazonaws.servicecatalog#DisableTemplateValidation",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>If set to true, Service Catalog stops validating the specified provisioning artifact even if it is invalid.</p>"
+                        "smithy.api#documentation": "<p>If set to true, Service Catalog stops validating the specified provisioning artifact even if it is invalid. </p>\n         <p>Service Catalog does not support template validation for the <code>TERRAFORM_OS</code> product type. </p>"
                     }
                 }
             },
@@ -9455,6 +9425,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "TERRAFORM_OPEN_SOURCE"
+                    }
+                },
+                "TERRAFORM_CLOUD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERRAFORM_CLOUD"
                     }
                 }
             }
@@ -9597,7 +9573,7 @@
                 "ProvisionedProductType": {
                     "target": "com.amazonaws.servicecatalog#ProvisionedProductType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of provisioned product. The supported values are <code>CFN_STACK</code>, <code>CFN_STACKSET</code>, \n         <code>TERRAFORM_OPEN_SOURCE</code>, and <code>TERRAFORM_CLOUD</code>.</p>"
                     }
                 },
                 "RecordType": {
@@ -10520,7 +10496,7 @@
                 "Filters": {
                     "target": "com.amazonaws.servicecatalog#ProvisionedProductFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search filters.</p>\n         <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, \n         <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>,\n         <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, \n         <code>provisioningArtifact</code>, <code>type</code>, <code>status</code>,\n         <code>tags</code>, <code>userArn</code>, <code>userArnSession</code>, <code>lastProvisioningRecordId</code>, <code>lastSuccessfulProvisioningRecordId</code>, \n         <code>productName</code>, and <code>provisioningArtifactName</code>.</p>\n         <p>Example: <code>\"SearchQuery\":[\"status:AVAILABLE\"]</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The search filters.</p>\n         <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, \n         <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>,\n         <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, \n         <code>provisioningArtifactId</code>, <code>type</code>, <code>status</code>,\n         <code>tags</code>, <code>userArn</code>, <code>userArnSession</code>, <code>lastProvisioningRecordId</code>, <code>lastSuccessfulProvisioningRecordId</code>, \n         <code>productName</code>, and <code>provisioningArtifactName</code>.</p>\n         <p>Example: <code>\"SearchQuery\":[\"status:AVAILABLE\"]</code>\n         </p>"
                     }
                 },
                 "SortBy": {
@@ -11721,7 +11697,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified portfolio share. You can use this API to enable or disable <code>TagOptions</code> sharing \n         or Principal sharing for an existing portfolio share. </p>\n         <p>The portfolio share cannot be updated if the <code>CreatePortfolioShare</code> operation is <code>IN_PROGRESS</code>, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED.</p>\n         <p>You must provide the <code>accountId</code> or organization node in the input, but not both.</p>\n         <p>If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke <code>UpdatePortfolioShare</code> separately for each share type. </p>\n         <p>This API cannot be used for removing the portfolio share. You must use <code>DeletePortfolioShare</code> API for that action. </p>\n         <note>\n            <p>When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is \n         then shared with other accounts. For a user in a recipient account who is <i>not</i> an Service Catalog Admin, \n         but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal \n         name association for the portfolio. Although this user may not know which principal names are associated through \n         Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then \n         Service Catalog recommends using <code>PrincipalType</code> as <code>IAM</code>. With this configuration, \n         the <code>PrincipalARN</code> must already exist in the recipient account before it can be associated. </p>\n         </note>"
+                "smithy.api#documentation": "<p>Updates the specified portfolio share. You can use this API to enable or disable <code>TagOptions</code> sharing \n         or Principal sharing for an existing portfolio share. </p>\n         <p>The portfolio share cannot be updated if the <code>CreatePortfolioShare</code> operation is <code>IN_PROGRESS</code>, as the share is not available to recipient entities. \n         In this case, you must wait for the portfolio share to be completed.</p>\n         <p>You must provide the <code>accountId</code> or organization node in the input, but not both.</p>\n         <p>If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke <code>UpdatePortfolioShare</code> separately for each share type. </p>\n         <p>This API cannot be used for removing the portfolio share. You must use <code>DeletePortfolioShare</code> API for that action. </p>\n         <note>\n            <p>When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is \n         then shared with other accounts. For a user in a recipient account who is <i>not</i> an Service Catalog Admin, \n         but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal \n         name association for the portfolio. Although this user may not know which principal names are associated through \n         Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then \n         Service Catalog recommends using <code>PrincipalType</code> as <code>IAM</code>. With this configuration, \n         the <code>PrincipalARN</code> must already exist in the recipient account before it can be associated. </p>\n         </note>"
             }
         },
         "com.amazonaws.servicecatalog#UpdatePortfolioShareInput": {
