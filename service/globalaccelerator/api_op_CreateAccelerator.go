@@ -22,7 +22,7 @@ import (
 // Accelerator is a global service that supports endpoints in multiple Amazon Web
 // Services Regions but you must specify the US West (Oregon) Region to create,
 // update, or otherwise work with accelerators. That is, for example, specify
-// --region us-west-2 on AWS CLI commands.
+// --region us-west-2 on Amazon Web Services CLI commands.
 func (c *Client) CreateAccelerator(ctx context.Context, params *CreateAcceleratorInput, optFns ...func(*Options)) (*CreateAcceleratorOutput, error) {
 	if params == nil {
 		params = &CreateAcceleratorInput{}

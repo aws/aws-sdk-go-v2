@@ -1,0 +1,8 @@
+{
+    "id": "5dfee13a-42f0-4c7b-a196-954f2e72fe67",
+    "type": "feature",
+    "description": "Added autoEnable ALL to UpdateOrganizationConfiguration and DescribeOrganizationConfiguration APIs.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

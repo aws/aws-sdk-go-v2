@@ -46,6 +46,9 @@ type CreatePhoneNumberOrderInput struct {
 	// This member is required.
 	ProductType types.PhoneNumberProductType
 
+	// Specifies the name assigned to one or more phone numbers.
+	Name *string
+
 	noSmithyDocumentSerde
 }
 

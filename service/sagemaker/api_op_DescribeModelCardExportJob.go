@@ -65,7 +65,8 @@ type DescribeModelCardExportJobOutput struct {
 	// This member is required.
 	ModelCardExportJobName *string
 
-	// The name of the model card that the model export job exports.
+	// The name or Amazon Resource Name (ARN) of the model card that the model export
+	// job exports.
 	//
 	// This member is required.
 	ModelCardName *string

@@ -48,6 +48,9 @@ type UpdatePhoneNumberInput struct {
 	// The outbound calling name associated with the phone number.
 	CallingName *string
 
+	// Specifies the name assigned to one or more phone numbers.
+	Name *string
+
 	// The product type.
 	ProductType types.PhoneNumberProductType
 

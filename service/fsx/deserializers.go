@@ -7852,6 +7852,11 @@ func awsAwsjson11_deserializeDocumentDataRepositoryTask(v **types.DataRepository
 				return err
 			}
 
+		case "ReleaseConfiguration":
+			if err := awsAwsjson11_deserializeDocumentReleaseConfiguration(&sv.ReleaseConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Report":
 			if err := awsAwsjson11_deserializeDocumentCompletionReport(&sv.Report, value); err != nil {
 				return err
@@ -8514,6 +8519,59 @@ func awsAwsjson11_deserializeDocumentDnsIps(v *[]string, value interface{}) erro
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDurationSinceLastAccess(v **types.DurationSinceLastAccess, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DurationSinceLastAccess
+	if *v == nil {
+		sv = &types.DurationSinceLastAccess{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Unit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Unit to be of type string, got %T instead", value)
+				}
+				sv.Unit = types.Unit(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Value to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Value = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -11066,6 +11124,33 @@ func awsAwsjson11_deserializeDocumentOpenZFSFileSystemConfiguration(v **types.Op
 				return err
 			}
 
+		case "EndpointIpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
+				}
+				sv.EndpointIpAddress = ptr.String(jtv)
+			}
+
+		case "EndpointIpAddressRange":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressRange to be of type string, got %T instead", value)
+				}
+				sv.EndpointIpAddressRange = ptr.String(jtv)
+			}
+
+		case "PreferredSubnetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubnetId to be of type string, got %T instead", value)
+				}
+				sv.PreferredSubnetId = ptr.String(jtv)
+			}
+
 		case "RootVolumeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11073,6 +11158,11 @@ func awsAwsjson11_deserializeDocumentOpenZFSFileSystemConfiguration(v **types.Op
 					return fmt.Errorf("expected VolumeId to be of type string, got %T instead", value)
 				}
 				sv.RootVolumeId = ptr.String(jtv)
+			}
+
+		case "RouteTableIds":
+			if err := awsAwsjson11_deserializeDocumentRouteTableIds(&sv.RouteTableIds, value); err != nil {
+				return err
 			}
 
 		case "ThroughputCapacity":
@@ -11507,6 +11597,42 @@ func awsAwsjson11_deserializeDocumentOpenZFSVolumeConfiguration(v **types.OpenZF
 					return fmt.Errorf("expected VolumePath to be of type string, got %T instead", value)
 				}
 				sv.VolumePath = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentReleaseConfiguration(v **types.ReleaseConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReleaseConfiguration
+	if *v == nil {
+		sv = &types.ReleaseConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DurationSinceLastAccess":
+			if err := awsAwsjson11_deserializeDocumentDurationSinceLastAccess(&sv.DurationSinceLastAccess, value); err != nil {
+				return err
 			}
 
 		default:
@@ -13195,6 +13321,11 @@ func awsAwsjson11_deserializeDocumentWindowsFileSystemConfiguration(v **types.Wi
 					return fmt.Errorf("expected WindowsDeploymentType to be of type string, got %T instead", value)
 				}
 				sv.DeploymentType = types.WindowsDeploymentType(jtv)
+			}
+
+		case "DiskIopsConfiguration":
+			if err := awsAwsjson11_deserializeDocumentDiskIopsConfiguration(&sv.DiskIopsConfiguration, value); err != nil {
+				return err
 			}
 
 		case "MaintenanceOperationsInProgress":

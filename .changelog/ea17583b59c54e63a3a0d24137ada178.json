@@ -1,0 +1,8 @@
+{
+    "id": "ea17583b-59c5-4e63-a3a0-d24137ada178",
+    "type": "feature",
+    "description": "This release adds support for cross account access for SageMaker Model Cards through AWS RAM.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

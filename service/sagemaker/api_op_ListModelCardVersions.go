@@ -35,7 +35,8 @@ func (c *Client) ListModelCardVersions(ctx context.Context, params *ListModelCar
 
 type ListModelCardVersionsInput struct {
 
-	// List model card versions for the model card with the specified name.
+	// List model card versions for the model card with the specified name or Amazon
+	// Resource Name (ARN).
 	//
 	// This member is required.
 	ModelCardName *string

@@ -35,7 +35,7 @@ func (c *Client) UpdateModelCard(ctx context.Context, params *UpdateModelCardInp
 
 type UpdateModelCardInput struct {
 
-	// The name of the model card to update.
+	// The name or Amazon Resource Name (ARN) of the model card to update.
 	//
 	// This member is required.
 	ModelCardName *string

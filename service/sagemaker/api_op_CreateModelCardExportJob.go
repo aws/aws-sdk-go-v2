@@ -39,7 +39,7 @@ type CreateModelCardExportJobInput struct {
 	// This member is required.
 	ModelCardExportJobName *string
 
-	// The name of the model card to export.
+	// The name or Amazon Resource Name (ARN) of the model card to export.
 	//
 	// This member is required.
 	ModelCardName *string

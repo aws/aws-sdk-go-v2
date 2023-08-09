@@ -1,0 +1,8 @@
+{
+    "id": "e18d9f87-1d25-4b0c-9a01-6f2e04a0ff31",
+    "type": "feature",
+    "description": "Updating CreatePhoneNumberOrder, UpdatePhoneNumber and BatchUpdatePhoneNumbers APIs, adding phone number name",
+    "modules": [
+        "service/chimesdkvoice"
+    ]
+}

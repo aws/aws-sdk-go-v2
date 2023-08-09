@@ -1,0 +1,8 @@
+{
+    "id": "abbc04a5-9a1f-42cf-84ef-987fe626227c",
+    "type": "documentation",
+    "description": "Documentation update for dualstack EC2 endpoint support",
+    "modules": [
+        "service/globalaccelerator"
+    ]
+}

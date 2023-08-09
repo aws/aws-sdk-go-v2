@@ -568,6 +568,7 @@ type OrgFeatureStatus string
 const (
 	OrgFeatureStatusNew  OrgFeatureStatus = "NEW"
 	OrgFeatureStatusNone OrgFeatureStatus = "NONE"
+	OrgFeatureStatusAll  OrgFeatureStatus = "ALL"
 )
 
 // Values returns all known values for OrgFeatureStatus. Note that this can be
@@ -577,6 +578,7 @@ func (OrgFeatureStatus) Values() []OrgFeatureStatus {
 	return []OrgFeatureStatus{
 		"NEW",
 		"NONE",
+		"ALL",
 	}
 }
 

@@ -36,6 +36,13 @@ type AdministrativeAction struct {
 	//   - FILE_SYSTEM_UPDATE - A file system update administrative action initiated
 	//   from the Amazon FSx console, API ( UpdateFileSystem ), or CLI (
 	//   update-file-system ).
+	//   - THROUGHPUT_OPTIMIZATION - After the FILE_SYSTEM_UPDATE task to increase a
+	//   file system's throughput capacity has been completed successfully, a
+	//   THROUGHPUT_OPTIMIZATION task starts. You can track the storage-optimization
+	//   progress using the ProgressPercent property. When THROUGHPUT_OPTIMIZATION has
+	//   been completed successfully, the parent FILE_SYSTEM_UPDATE action status
+	//   changes to COMPLETED . For more information, see Managing throughput capacity (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html)
+	//   in the Amazon FSx for Windows File Server User Guide.
 	//   - STORAGE_OPTIMIZATION - After the FILE_SYSTEM_UPDATE task to increase a file
 	//   system's storage capacity has been completed successfully, a
 	//   STORAGE_OPTIMIZATION task starts.
@@ -60,6 +67,19 @@ type AdministrativeAction struct {
 	//   DNS alias from the file system. For more information, see
 	//   DisassociateFileSystemAliases (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DisassociateFileSystemAliases.html)
 	//   .
+	//   - IOPS_OPTIMIZATION - After the FILE_SYSTEM_UPDATE task to increase a file
+	//   system's throughput capacity has been completed successfully, a
+	//   IOPS_OPTIMIZATION task starts. You can track the storage-optimization progress
+	//   using the ProgressPercent property. When IOPS_OPTIMIZATION has been completed
+	//   successfully, the parent FILE_SYSTEM_UPDATE action status changes to COMPLETED
+	//   . For more information, see Managing provisioned SSD IOPS (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-provisioned-ssd-iops.html)
+	//   in the Amazon FSx for Windows File Server User Guide.
+	//   - STORAGE_TYPE_OPTIMIZATION - After the FILE_SYSTEM_UPDATE task to increase a
+	//   file system's throughput capacity has been completed successfully, a
+	//   STORAGE_TYPE_OPTIMIZATION task starts. You can track the storage-optimization
+	//   progress using the ProgressPercent property. When STORAGE_TYPE_OPTIMIZATION
+	//   has been completed successfully, the parent FILE_SYSTEM_UPDATE action status
+	//   changes to COMPLETED .
 	//   - VOLUME_UPDATE - A volume update to an Amazon FSx for NetApp ONTAP or Amazon
 	//   FSx for OpenZFS volume initiated from the Amazon FSx console, API (
 	//   UpdateVolume ), or CLI ( update-volume ).
@@ -615,8 +635,12 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// Specifies the file system deployment type. Single AZ deployment types are
 	// configured for redundancy within a single Availability Zone in an Amazon Web
 	// Services Region . Valid values are the following:
+	//   - MULTI_AZ_1 - Creates file systems with high availability that are configured
+	//   for Multi-AZ redundancy to tolerate temporary unavailability in Availability
+	//   Zones (AZs). Multi_AZ_1 is available in the following Amazon Web Services
+	//   Regions:
 	//   - SINGLE_AZ_1 - (Default) Creates file systems with throughput capacities of
-	//   64 - 4,096 MBps. Single_AZ_1 is available in all Amazon Web Services Regions
+	//   64 - 4,096 MB/s. Single_AZ_1 is available in all Amazon Web Services Regions
 	//   where Amazon FSx for OpenZFS is available.
 	//   - SINGLE_AZ_2 - Creates file systems with throughput capacities of 160 -
 	//   10,240 MB/s using an NVMe L2ARC cache. Single_AZ_2 is available only in the US
@@ -669,16 +693,33 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	DailyAutomaticBackupStartTime *string
 
 	// The SSD IOPS (input/output operations per second) configuration for an Amazon
-	// FSx for NetApp ONTAP or FSx for OpenZFS file system. By default, Amazon FSx
-	// automatically provisions 3 IOPS per GB of storage capacity. You can provision
-	// additional IOPS per GB of storage. The configuration consists of the total
-	// number of provisioned SSD IOPS and how it is was provisioned, or the mode (by
-	// the customer or by Amazon FSx).
+	// FSx for NetApp ONTAP, Amazon FSx for Windows File Server, or FSx for OpenZFS
+	// file system. By default, Amazon FSx automatically provisions 3 IOPS per GB of
+	// storage capacity. You can provision additional IOPS per GB of storage. The
+	// configuration consists of the total number of provisioned SSD IOPS and how it is
+	// was provisioned, or the mode (by the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
+
+	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
+	// your file system will be created. By default in the Amazon FSx API and Amazon
+	// FSx console, Amazon FSx selects an available /28 IP address range for you from
+	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
+	// file systems deployed in the same VPC/route tables.
+	EndpointIpAddressRange *string
+
+	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
+	// which you want the preferred file server to be located.
+	PreferredSubnetId *string
 
 	// The configuration Amazon FSx uses when creating the root value of the Amazon
 	// FSx for OpenZFS file system. All volumes are children of the root volume.
 	RootVolumeConfiguration *OpenZFSCreateRootVolumeConfiguration
+
+	// (Multi-AZ only) Specifies the virtual private cloud (VPC) route tables in which
+	// your file system's endpoints will be created. You should specify all VPC route
+	// tables associated with the subnets in which your clients are located. By
+	// default, Amazon FSx selects your VPC's default route table.
+	RouteTableIds []string
 
 	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
 	// which 1 represents Monday and 7 represents Sunday. For further details, see the
@@ -764,6 +805,13 @@ type CreateFileSystemWindowsConfiguration struct {
 	// File Systems (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html)
 	// .
 	DeploymentType WindowsDeploymentType
+
+	// The SSD IOPS (input/output operations per second) configuration for an Amazon
+	// FSx for Windows file system. By default, Amazon FSx automatically provisions 3
+	// IOPS per GiB of storage capacity. You can provision additional IOPS per GiB of
+	// storage, up to the maximum limit associated with your chosen throughput
+	// capacity.
+	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
 	// which you want the preferred file server to be located. For in-Amazon Web
@@ -1002,7 +1050,7 @@ type CreateSnaplockConfiguration struct {
 	//   deleted by authorized users before their retention periods expire using
 	//   privileged delete. This retention mode is used to advance an organization's data
 	//   integrity and internal compliance or to test retention settings before using
-	//   SnapLock Compliance. For more information, see SnapLock Enterprise (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.htmlFile)
+	//   SnapLock Compliance. For more information, see SnapLock Enterprise (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html)
 	//   .
 	//
 	// This member is required.
@@ -1025,7 +1073,7 @@ type CreateSnaplockConfiguration struct {
 	// administrators to delete WORM files even if they have active retention periods.
 	// PERMANENTLY_DISABLED is a terminal state. If privileged delete is permanently
 	// disabled on a SnapLock volume, you can't re-enable it. The default value is
-	// DISABLED . For more information, see Privileged delete (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete)
+	// DISABLED . For more information, see Privileged delete (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete)
 	// .
 	PrivilegedDelete PrivilegedDelete
 
@@ -1279,10 +1327,17 @@ type DataRepositoryFailureDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A description of the data repository task. You use data repository tasks to
-// perform bulk transfer operations between an Amazon FSx for Lustre file system
-// and a linked data repository. An Amazon File Cache resource uses a task to
-// automatically release files from the cache.
+// A description of the data repository task.
+//   - You use import and export data repository tasks to perform bulk transfer
+//     operations between an Amazon FSx for Lustre file system and a linked data
+//     repository.
+//   - You use release data repository tasks to release archived files from your
+//     Amazon FSx for Lustre file system.
+//   - An Amazon File Cache resource uses a task to automatically release files
+//     from the cache.
+//
+// To learn more about data repository tasks, see Data Repository Tasks (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html)
+// .
 type DataRepositoryTask struct {
 
 	// The time that the resource was created, in seconds (since
@@ -1319,9 +1374,11 @@ type DataRepositoryTask struct {
 	//   system to a linked data repository.
 	//   - IMPORT_METADATA_FROM_REPOSITORY tasks import metadata changes from a linked
 	//   S3 bucket to your Amazon FSx for Lustre file system.
+	//   - RELEASE_DATA_FROM_FILESYSTEM tasks release files in your Amazon FSx for
+	//   Lustre file system that are archived and that meet your specified release
+	//   criteria.
 	//   - AUTO_RELEASE_DATA tasks automatically release files from an Amazon File
 	//   Cache resource.
-	//   - RELEASE_DATA_FROM_FILESYSTEM tasks are not supported.
 	//
 	// This member is required.
 	Type DataRepositoryTaskType
@@ -1349,6 +1406,10 @@ type DataRepositoryTask struct {
 	// data to export to the linked data repository. (Default) If Paths is not
 	// specified, Amazon FSx uses the file system root directory.
 	Paths []string
+
+	// The configuration that specifies the last accessed time criteria for files that
+	// will be released from an Amazon FSx for Lustre file system.
+	ReleaseConfiguration *ReleaseConfiguration
 
 	// Provides a report detailing the data repository task results of the files
 	// processed that match the criteria specified in the report Scope parameter. FSx
@@ -1542,7 +1603,7 @@ type DeleteVolumeOntapConfiguration struct {
 	// SnapLock Enterprise volume with unexpired write once, read many (WORM) files.
 	// The IAM permission fsx:BypassSnaplockEnterpriseRetention is also required to
 	// delete SnapLock Enterprise volumes with unexpired WORM files. The default value
-	// is false . For more information, see  Deleting a SnapLock volume  (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-delete-volume)
+	// is false . For more information, see  Deleting a SnapLock volume (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-delete-volume.html)
 	// .
 	BypassSnaplockEnterpriseRetention *bool
 
@@ -1580,11 +1641,11 @@ type DeleteVolumeOpenZFSConfiguration struct {
 }
 
 // The SSD IOPS (input/output operations per second) configuration for an Amazon
-// FSx for NetApp ONTAP or FSx for OpenZFS file system. By default, Amazon FSx
-// automatically provisions 3 IOPS per GB of storage capacity. You can provision
-// additional IOPS per GB of storage. The configuration consists of the total
-// number of provisioned SSD IOPS and how it is was provisioned, or the mode (by
-// the customer or by Amazon FSx).
+// FSx for NetApp ONTAP, Amazon FSx for Windows File Server, or FSx for OpenZFS
+// file system. By default, Amazon FSx automatically provisions 3 IOPS per GB of
+// storage capacity. You can provision additional IOPS per GB of storage. The
+// configuration consists of the total number of provisioned SSD IOPS and how it is
+// was provisioned, or the mode (by the customer or by Amazon FSx).
 type DiskIopsConfiguration struct {
 
 	// The total number of SSD IOPS provisioned for the file system.
@@ -1593,6 +1654,29 @@ type DiskIopsConfiguration struct {
 	// Specifies whether the file system is using the AUTOMATIC setting of SSD IOPS of
 	// 3 IOPS per GB of storage capacity, , or if it using a USER_PROVISIONED value.
 	Mode DiskIopsConfigurationMode
+
+	noSmithyDocumentSerde
+}
+
+// Defines the minimum amount of time since last access for a file to be eligible
+// for release. Only archived files that were last accessed or modified before this
+// point-in-time are eligible to be released from the Amazon FSx for Lustre file
+// system.
+type DurationSinceLastAccess struct {
+
+	// The unit of time used by the Value parameter to determine if a file can be
+	// released, based on when it was last accessed. DAYS is the only supported value.
+	// This is a required parameter.
+	Unit Unit
+
+	// An integer that represents the minimum amount of time (in days) since a file
+	// was last accessed in the file system. Only archived files with a MAX(atime,
+	// ctime, mtime) timestamp that is more than this amount of time in the past
+	// (relative to the task create time) will be released. The default of Value is 0 .
+	// This is a required parameter. If an archived file meets the last accessed time
+	// criteria, its file or directory path must also be specified in the Paths
+	// parameter of the operation in order for the file to be released.
+	Value *int64
 
 	noSmithyDocumentSerde
 }
@@ -2534,19 +2618,38 @@ type OpenZFSFileSystemConfiguration struct {
 	DailyAutomaticBackupStartTime *string
 
 	// Specifies the file-system deployment type. Amazon FSx for OpenZFS supports
-	// SINGLE_AZ_1 and SINGLE_AZ_2 .
+	// MULTI_AZ_1 , SINGLE_AZ_1 , and SINGLE_AZ_2 .
 	DeploymentType OpenZFSDeploymentType
 
 	// The SSD IOPS (input/output operations per second) configuration for an Amazon
-	// FSx for NetApp ONTAP or FSx for OpenZFS file system. By default, Amazon FSx
-	// automatically provisions 3 IOPS per GB of storage capacity. You can provision
-	// additional IOPS per GB of storage. The configuration consists of the total
-	// number of provisioned SSD IOPS and how it is was provisioned, or the mode (by
-	// the customer or by Amazon FSx).
+	// FSx for NetApp ONTAP, Amazon FSx for Windows File Server, or FSx for OpenZFS
+	// file system. By default, Amazon FSx automatically provisions 3 IOPS per GB of
+	// storage capacity. You can provision additional IOPS per GB of storage. The
+	// configuration consists of the total number of provisioned SSD IOPS and how it is
+	// was provisioned, or the mode (by the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
+
+	// The IP address of the endpoint that is used to access data or to manage the
+	// file system.
+	EndpointIpAddress *string
+
+	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
+	// your file system will be created. By default in the Amazon FSx API and Amazon
+	// FSx console, Amazon FSx selects an available /28 IP address range for you from
+	// one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for
+	// file systems deployed in the same VPC/route tables.
+	EndpointIpAddressRange *string
+
+	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
+	// which you want the preferred file server to be located.
+	PreferredSubnetId *string
 
 	// The ID of the root volume of the OpenZFS file system.
 	RootVolumeId *string
+
+	// (Multi-AZ only) The VPC route tables in which your file system's endpoints are
+	// created.
+	RouteTableIds []string
 
 	// The throughput of an Amazon FSx file system, measured in megabytes per second
 	// (MBps).
@@ -2686,6 +2789,29 @@ type OpenZFSVolumeConfiguration struct {
 	// The path to the volume from the root volume. For example,
 	// fsx/parentVolume/volume1 .
 	VolumePath *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that specifies a minimum amount of time since last access for
+// an archived file to be eligible for release from an Amazon FSx for Lustre file
+// system. Only files that were last accessed before this point-in-time can be
+// released. For example, if you specify a last accessed time criteria of 9 days,
+// only files that were last accessed 9.00001 or more days ago can be released.
+// Only file data that has been archived can be released. Files that have not yet
+// been archived, such as new or changed files that have not been exported, are not
+// eligible for release. When files are released, their metadata stays on the file
+// system, so they can still be accessed later. Users and applications can access a
+// released file by reading the file again, which restores data from Amazon S3 to
+// the FSx for Lustre file system. If a file meets the last accessed time criteria,
+// its file or directory path must also be specified with the Paths parameter of
+// the operation in order for the file to be released.
+type ReleaseConfiguration struct {
+
+	// Defines the point-in-time since an archived file was last accessed, in order
+	// for that file to be eligible for release. Only files that were last accessed
+	// before this point-in-time are eligible to be released from the file system.
+	DurationSinceLastAccess *DurationSinceLastAccess
 
 	noSmithyDocumentSerde
 }
@@ -2880,7 +3006,7 @@ type SnaplockConfiguration struct {
 	// active retention periods. PERMANENTLY_DISABLED is a terminal state. If
 	// privileged delete is permanently disabled on a SnapLock volume, you can't
 	// re-enable it. The default value is DISABLED . For more information, see
-	// Privileged delete (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete)
+	// Privileged delete (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete)
 	// .
 	PrivilegedDelete PrivilegedDelete
 
@@ -2899,7 +3025,7 @@ type SnaplockConfiguration struct {
 	//   deleted by authorized users before their retention periods expire using
 	//   privileged delete. This retention mode is used to advance an organization's data
 	//   integrity and internal compliance or to test retention settings before using
-	//   SnapLock Compliance. For more information, see SnapLock Enterprise (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.htmlFile)
+	//   SnapLock Compliance. For more information, see SnapLock Enterprise (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html)
 	//   .
 	SnaplockType SnaplockType
 
@@ -3321,6 +3447,10 @@ type UpdateFileSystemOntapConfiguration struct {
 // The configuration updates for an Amazon FSx for OpenZFS file system.
 type UpdateFileSystemOpenZFSConfiguration struct {
 
+	// (Multi-AZ only) A list of IDs of new virtual private cloud (VPC) route tables
+	// to associate (add) with your Amazon FSx for OpenZFS file system.
+	AddRouteTableIds []string
+
 	// The number of days to retain automatic backups. Setting this property to 0
 	// disables automatic backups. You can retain automatic backups for a maximum of 90
 	// days. The default is 30 .
@@ -3349,12 +3479,18 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	DailyAutomaticBackupStartTime *string
 
 	// The SSD IOPS (input/output operations per second) configuration for an Amazon
-	// FSx for NetApp ONTAP or FSx for OpenZFS file system. By default, Amazon FSx
-	// automatically provisions 3 IOPS per GB of storage capacity. You can provision
-	// additional IOPS per GB of storage. The configuration consists of the total
-	// number of provisioned SSD IOPS and how it is was provisioned, or the mode (by
-	// the customer or by Amazon FSx).
+	// FSx for NetApp ONTAP, Amazon FSx for Windows File Server, or FSx for OpenZFS
+	// file system. By default, Amazon FSx automatically provisions 3 IOPS per GB of
+	// storage capacity. You can provision additional IOPS per GB of storage. The
+	// configuration consists of the total number of provisioned SSD IOPS and how it is
+	// was provisioned, or the mode (by the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
+
+	// (Multi-AZ only) A list of IDs of existing virtual private cloud (VPC) route
+	// tables to disassociate (remove) from your Amazon FSx for OpenZFS file system.
+	// You can use the API operation to retrieve the list of VPC route table IDs for a
+	// file system.
+	RemoveRouteTableIds []string
 
 	// The throughput of an Amazon FSx for OpenZFS file system, measured in megabytes
 	// per second  (MB/s). Valid values depend on the DeploymentType you choose, as
@@ -3395,6 +3531,13 @@ type UpdateFileSystemWindowsConfiguration struct {
 	// The preferred time to start the daily automatic backup, in the UTC time zone,
 	// for example, 02:00
 	DailyAutomaticBackupStartTime *string
+
+	// The SSD IOPS (input/output operations per second) configuration for an Amazon
+	// FSx for Windows file system. By default, Amazon FSx automatically provisions 3
+	// IOPS per GiB of storage capacity. You can provision additional IOPS per GiB of
+	// storage, up to the maximum limit associated with your chosen throughput
+	// capacity.
+	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// The configuration Amazon FSx uses to join the Windows File Server instance to
 	// the self-managed Microsoft AD directory. You cannot make a self-managed
@@ -3538,7 +3681,7 @@ type UpdateSnaplockConfiguration struct {
 	// active retention periods. PERMANENTLY_DISABLED is a terminal state. If
 	// privileged delete is permanently disabled on a SnapLock volume, you can't
 	// re-enable it. The default value is DISABLED . For more information, see
-	// Privileged delete (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete)
+	// Privileged delete (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete)
 	// .
 	PrivilegedDelete PrivilegedDelete
 
@@ -3674,7 +3817,7 @@ type WindowsAuditLogConfiguration struct {
 	// destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis
 	// Data Firehose delivery stream ARN. The name of the Amazon CloudWatch Logs log
 	// group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data
-	// Firehouse delivery stream must begin with the aws-fsx prefix. The destination
+	// Firehose delivery stream must begin with the aws-fsx prefix. The destination
 	// ARN (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream)
 	// must be in the same Amazon Web Services partition, Amazon Web Services Region,
 	// and Amazon Web Services account as your Amazon FSx file system.
@@ -3716,7 +3859,7 @@ type WindowsAuditLogCreateConfiguration struct {
 	//   partition, Amazon Web Services Region, and Amazon Web Services account as your
 	//   Amazon FSx file system.
 	//   - The name of the Amazon CloudWatch Logs log group must begin with the
-	//   /aws/fsx prefix. The name of the Amazon Kinesis Data Firehouse delivery stream
+	//   /aws/fsx prefix. The name of the Amazon Kinesis Data Firehose delivery stream
 	//   must begin with the aws-fsx prefix.
 	//   - If you do not provide a destination in AuditLogDestination , Amazon FSx will
 	//   create and use a log stream in the CloudWatch Logs /aws/fsx/windows log group.
@@ -3780,6 +3923,13 @@ type WindowsFileSystemConfiguration struct {
 	// For more information, see Single-AZ and Multi-AZ File Systems (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html)
 	// .
 	DeploymentType WindowsDeploymentType
+
+	// The SSD IOPS (input/output operations per second) configuration for an Amazon
+	// FSx for Windows file system. By default, Amazon FSx automatically provisions 3
+	// IOPS per GiB of storage capacity. You can provision additional IOPS per GiB of
+	// storage, up to the maximum limit associated with your chosen throughput
+	// capacity.
+	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// The list of maintenance operations in progress for this file system.
 	MaintenanceOperationsInProgress []FileSystemMaintenanceOperation

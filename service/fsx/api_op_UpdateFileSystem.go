@@ -24,7 +24,9 @@ import (
 //   - DailyAutomaticBackupStartTime
 //   - SelfManagedActiveDirectoryConfiguration
 //   - StorageCapacity
+//   - StorageType
 //   - ThroughputCapacity
+//   - DiskIopsConfiguration
 //   - WeeklyMaintenanceStartTime
 //
 // For FSx for Lustre file systems, you can update the following properties:
@@ -125,6 +127,9 @@ type UpdateFileSystemInput struct {
 	// capacity and provisioned IOPS (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html)
 	// in the Amazon FSx for NetApp ONTAP User Guide.
 	StorageCapacity *int32
+
+	// Specifies the file system's storage type.
+	StorageType types.StorageType
 
 	// The configuration updates for an Amazon FSx for Windows File Server file system.
 	WindowsConfiguration *types.UpdateFileSystemWindowsConfiguration

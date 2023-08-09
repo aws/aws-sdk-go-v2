@@ -16302,6 +16302,15 @@ func awsRestjson1_deserializeDocumentPhoneNumber(v **types.PhoneNumber, value in
 				sv.E164PhoneNumber = ptr.String(jtv)
 			}
 
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PhoneNumberName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
 		case "OrderId":
 			if value != nil {
 				jtv, ok := value.(string)

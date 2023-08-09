@@ -271,6 +271,9 @@ type PhoneNumber struct {
 	// The phone number, in E.164 format.
 	E164PhoneNumber *string
 
+	// The name of the phone number.
+	Name *string
+
 	// The phone number's order ID.
 	OrderId *string
 
@@ -751,6 +754,9 @@ type UpdatePhoneNumberRequestItem struct {
 
 	// The outbound calling name to update.
 	CallingName *string
+
+	// The name of the phone number.
+	Name *string
 
 	// The product type to update.
 	ProductType PhoneNumberProductType

@@ -36,7 +36,7 @@ func (c *Client) DescribeModelCard(ctx context.Context, params *DescribeModelCar
 
 type DescribeModelCardInput struct {
 
-	// The name of the model card to describe.
+	// The name or Amazon Resource Name (ARN) of the model card to describe.
 	//
 	// This member is required.
 	ModelCardName *string

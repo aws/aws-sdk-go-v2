@@ -2583,9 +2583,26 @@ func awsAwsjson11_serializeDocumentCreateFileSystemOpenZFSConfiguration(v *types
 		}
 	}
 
+	if v.EndpointIpAddressRange != nil {
+		ok := object.Key("EndpointIpAddressRange")
+		ok.String(*v.EndpointIpAddressRange)
+	}
+
+	if v.PreferredSubnetId != nil {
+		ok := object.Key("PreferredSubnetId")
+		ok.String(*v.PreferredSubnetId)
+	}
+
 	if v.RootVolumeConfiguration != nil {
 		ok := object.Key("RootVolumeConfiguration")
 		if err := awsAwsjson11_serializeDocumentOpenZFSCreateRootVolumeConfiguration(v.RootVolumeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RouteTableIds != nil {
+		ok := object.Key("RouteTableIds")
+		if err := awsAwsjson11_serializeDocumentRouteTableIds(v.RouteTableIds, ok); err != nil {
 			return err
 		}
 	}
@@ -2644,6 +2661,13 @@ func awsAwsjson11_serializeDocumentCreateFileSystemWindowsConfiguration(v *types
 	if len(v.DeploymentType) > 0 {
 		ok := object.Key("DeploymentType")
 		ok.String(string(v.DeploymentType))
+	}
+
+	if v.DiskIopsConfiguration != nil {
+		ok := object.Key("DiskIopsConfiguration")
+		if err := awsAwsjson11_serializeDocumentDiskIopsConfiguration(v.DiskIopsConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PreferredSubnetId != nil {
@@ -3089,6 +3113,23 @@ func awsAwsjson11_serializeDocumentDnsIps(v []string, value smithyjson.Value) er
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDurationSinceLastAccess(v *types.DurationSinceLastAccess, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Unit) > 0 {
+		ok := object.Key("Unit")
+		ok.String(string(v.Unit))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.Long(*v.Value)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEventTypes(v []types.EventType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3415,6 +3456,20 @@ func awsAwsjson11_serializeDocumentOpenZFSUserOrGroupQuota(v *types.OpenZFSUserO
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentReleaseConfiguration(v *types.ReleaseConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationSinceLastAccess != nil {
+		ok := object.Key("DurationSinceLastAccess")
+		if err := awsAwsjson11_serializeDocumentDurationSinceLastAccess(v.DurationSinceLastAccess, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3922,6 +3977,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemOpenZFSConfiguration(v *types
 	object := value.Object()
 	defer object.Close()
 
+	if v.AddRouteTableIds != nil {
+		ok := object.Key("AddRouteTableIds")
+		if err := awsAwsjson11_serializeDocumentRouteTableIds(v.AddRouteTableIds, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AutomaticBackupRetentionDays != nil {
 		ok := object.Key("AutomaticBackupRetentionDays")
 		ok.Integer(*v.AutomaticBackupRetentionDays)
@@ -3945,6 +4007,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemOpenZFSConfiguration(v *types
 	if v.DiskIopsConfiguration != nil {
 		ok := object.Key("DiskIopsConfiguration")
 		if err := awsAwsjson11_serializeDocumentDiskIopsConfiguration(v.DiskIopsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RemoveRouteTableIds != nil {
+		ok := object.Key("RemoveRouteTableIds")
+		if err := awsAwsjson11_serializeDocumentRouteTableIds(v.RemoveRouteTableIds, ok); err != nil {
 			return err
 		}
 	}
@@ -3981,6 +4050,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemWindowsConfiguration(v *types
 	if v.DailyAutomaticBackupStartTime != nil {
 		ok := object.Key("DailyAutomaticBackupStartTime")
 		ok.String(*v.DailyAutomaticBackupStartTime)
+	}
+
+	if v.DiskIopsConfiguration != nil {
+		ok := object.Key("DiskIopsConfiguration")
+		if err := awsAwsjson11_serializeDocumentDiskIopsConfiguration(v.DiskIopsConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SelfManagedActiveDirectoryConfiguration != nil {
@@ -4408,6 +4484,13 @@ func awsAwsjson11_serializeOpDocumentCreateDataRepositoryTaskInput(v *CreateData
 	if v.Paths != nil {
 		ok := object.Key("Paths")
 		if err := awsAwsjson11_serializeDocumentDataRepositoryTaskPaths(v.Paths, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReleaseConfiguration != nil {
+		ok := object.Key("ReleaseConfiguration")
+		if err := awsAwsjson11_serializeDocumentReleaseConfiguration(v.ReleaseConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -5466,6 +5549,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFileSystemInput(v *UpdateFileSystemIn
 	if v.StorageCapacity != nil {
 		ok := object.Key("StorageCapacity")
 		ok.Integer(*v.StorageCapacity)
+	}
+
+	if len(v.StorageType) > 0 {
+		ok := object.Key("StorageType")
+		ok.String(string(v.StorageType))
 	}
 
 	if v.WindowsConfiguration != nil {

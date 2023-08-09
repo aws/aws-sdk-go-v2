@@ -432,6 +432,11 @@ func awsRestjson1_serializeOpDocumentCreatePhoneNumberOrderInput(v *CreatePhoneN
 		}
 	}
 
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
 	if len(v.ProductType) > 0 {
 		ok := object.Key("ProductType")
 		ok.String(string(v.ProductType))
@@ -6272,6 +6277,11 @@ func awsRestjson1_serializeOpDocumentUpdatePhoneNumberInput(v *UpdatePhoneNumber
 		ok.String(*v.CallingName)
 	}
 
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
 	if len(v.ProductType) > 0 {
 		ok := object.Key("ProductType")
 		ok.String(string(v.ProductType))
@@ -7796,6 +7806,11 @@ func awsRestjson1_serializeDocumentUpdatePhoneNumberRequestItem(v *types.UpdateP
 	if v.CallingName != nil {
 		ok := object.Key("CallingName")
 		ok.String(*v.CallingName)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
 	}
 
 	if v.PhoneNumberId != nil {

@@ -26,7 +26,7 @@ import (
 // operation. Global Accelerator is a global service that supports endpoints in
 // multiple Amazon Web Services Regions but you must specify the US West (Oregon)
 // Region to create, update, or otherwise work with accelerators. That is, for
-// example, specify --region us-west-2 on AWS CLI commands.
+// example, specify --region us-west-2 on Amazon Web Services CLI commands.
 func (c *Client) CreateCustomRoutingAccelerator(ctx context.Context, params *CreateCustomRoutingAcceleratorInput, optFns ...func(*Options)) (*CreateCustomRoutingAcceleratorOutput, error) {
 	if params == nil {
 		params = &CreateCustomRoutingAcceleratorInput{}

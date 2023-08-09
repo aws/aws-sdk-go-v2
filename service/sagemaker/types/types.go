@@ -9976,7 +9976,7 @@ type OutputConfig struct {
 	//   - INFERENTIA : Compilation for target ml_inf1 uses compiler options passed in
 	//   as a JSON string. For example, "CompilerOptions": "\"--verbose 1
 	//   --num-neuroncores 2 -O2\"" . For information about supported compiler options,
-	//   see Neuron Compiler CLI (https://github.com/aws/aws-neuron-sdk/blob/master/docs/neuron-cc/command-line-reference.md)
+	//   see Neuron Compiler CLI Reference Guide (https://awsdocs-neuron.readthedocs-hosted.com/en/latest/compiler/neuronx-cc/api-reference-guide/neuron-compiler-cli-reference-guide.html)
 	//   .
 	//   - CoreML : Compilation for the CoreML OutputConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html)
 	//   TargetDevice supports the following compiler options:
