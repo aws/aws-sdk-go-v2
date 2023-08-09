@@ -242,9 +242,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://fsx-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://fsx-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -257,15 +436,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://fsx.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://fsx.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -277,258 +491,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://fsx-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://fsx-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://fsx.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://fsx.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1408,10 +1372,28 @@
                     "traits": {
                         "smithy.api#enumValue": "VOLUME_RESTORE"
                     }
+                },
+                "THROUGHPUT_OPTIMIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THROUGHPUT_OPTIMIZATION"
+                    }
+                },
+                "IOPS_OPTIMIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IOPS_OPTIMIZATION"
+                    }
+                },
+                "STORAGE_TYPE_OPTIMIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORAGE_TYPE_OPTIMIZATION"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the type of administrative action, as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FILE_SYSTEM_UPDATE</code> - A file system update administrative action\n                    initiated from the Amazon FSx console, API\n                        (<code>UpdateFileSystem</code>), or CLI\n                    (<code>update-file-system</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>STORAGE_OPTIMIZATION</code> - After the <code>FILE_SYSTEM_UPDATE</code>\n                    task to increase a file system's storage capacity has been completed\n                    successfully, a <code>STORAGE_OPTIMIZATION</code> task starts. </p>\n               <ul>\n                  <li>\n                     <p>For Windows and ONTAP, storage optimization is the process of migrating the file system data\n                        to newer larger disks.</p>\n                  </li>\n                  <li>\n                     <p>For Lustre, storage optimization consists of rebalancing the data across the existing and\n                            newly added file servers.</p>\n                  </li>\n               </ul>\n               <p>You can track the storage-optimization progress using the\n                        <code>ProgressPercent</code> property. When\n                        <code>STORAGE_OPTIMIZATION</code> has been completed successfully, the\n                    parent <code>FILE_SYSTEM_UPDATE</code> action status changes to\n                        <code>COMPLETED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing\n                        storage capacity</a> in the <i>Amazon FSx for Windows\n                        File Server User Guide</i>, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html\">Managing storage\n                        and throughput capacity</a> in the <i>Amazon FSx for\n                            Lustre User Guide</i>, and\n                    <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html\">Managing storage capacity and provisioned IOPS</a> in the <i>Amazon FSx for NetApp ONTAP User\n                            Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FILE_SYSTEM_ALIAS_ASSOCIATION</code> - A file system update to associate a new Domain\n                    Name System (DNS) alias with the file system. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_AssociateFileSystemAliases.html\">\n                        AssociateFileSystemAliases</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FILE_SYSTEM_ALIAS_DISASSOCIATION</code> - A file system update to disassociate a DNS alias from the file system.\n                For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DisassociateFileSystemAliases.html\">DisassociateFileSystemAliases</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VOLUME_UPDATE</code> - A volume update to an Amazon FSx for NetApp ONTAP or\n                        Amazon FSx for OpenZFS volume initiated from the Amazon FSx\n                    console, API (<code>UpdateVolume</code>), or CLI\n                    (<code>update-volume</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>VOLUME_RESTORE</code> - An Amazon FSx for OpenZFS volume\n                is returned to the state saved by the specified snapshot, initiated from an\n                API (<code>RestoreVolumeFromSnapshot</code>) or CLI\n                (<code>restore-volume-from-snapshot</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>SNAPSHOT_UPDATE</code> - A snapshot update to an Amazon FSx for\n                    OpenZFS volume initiated from the Amazon FSx console, API\n                        (<code>UpdateSnapshot</code>), or CLI (<code>update-snapshot</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>RELEASE_NFS_V3_LOCKS</code> - Tracks the release of Network File System\n                    (NFS) V3 locks on an Amazon FSx for OpenZFS file system.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Describes the type of administrative action, as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FILE_SYSTEM_UPDATE</code> - A file system update administrative action\n                    initiated from the Amazon FSx console, API\n                        (<code>UpdateFileSystem</code>), or CLI\n                    (<code>update-file-system</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>THROUGHPUT_OPTIMIZATION</code> - After the <code>FILE_SYSTEM_UPDATE</code>\n                    task to increase a file system's throughput capacity has been completed\n                    successfully, a <code>THROUGHPUT_OPTIMIZATION</code> task starts.</p>\n               <p>You can track the storage-optimization progress using the\n                    <code>ProgressPercent</code> property. When\n                    <code>THROUGHPUT_OPTIMIZATION</code> has been completed successfully, the\n                    parent <code>FILE_SYSTEM_UPDATE</code> action status changes to\n                    <code>COMPLETED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html\">Managing\n                        throughput capacity</a> in the <i>Amazon FSx for Windows\n                            File Server User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STORAGE_OPTIMIZATION</code> - After the <code>FILE_SYSTEM_UPDATE</code>\n                    task to increase a file system's storage capacity has been completed\n                    successfully, a <code>STORAGE_OPTIMIZATION</code> task starts. </p>\n               <ul>\n                  <li>\n                     <p>For Windows and ONTAP, storage optimization is the process of migrating the file system data\n                        to newer larger disks.</p>\n                  </li>\n                  <li>\n                     <p>For Lustre, storage optimization consists of rebalancing the data across the existing and\n                            newly added file servers.</p>\n                  </li>\n               </ul>\n               <p>You can track the storage-optimization progress using the\n                        <code>ProgressPercent</code> property. When\n                        <code>STORAGE_OPTIMIZATION</code> has been completed successfully, the\n                    parent <code>FILE_SYSTEM_UPDATE</code> action status changes to\n                        <code>COMPLETED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing\n                        storage capacity</a> in the <i>Amazon FSx for Windows\n                        File Server User Guide</i>, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html\">Managing storage\n                        and throughput capacity</a> in the <i>Amazon FSx for\n                            Lustre User Guide</i>, and\n                    <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html\">Managing storage capacity and provisioned IOPS</a> in the <i>Amazon FSx for NetApp ONTAP User\n                            Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FILE_SYSTEM_ALIAS_ASSOCIATION</code> - A file system update to associate a new Domain\n                    Name System (DNS) alias with the file system. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_AssociateFileSystemAliases.html\">\n                        AssociateFileSystemAliases</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FILE_SYSTEM_ALIAS_DISASSOCIATION</code> - A file system update to disassociate a DNS alias from the file system.\n                For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DisassociateFileSystemAliases.html\">DisassociateFileSystemAliases</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IOPS_OPTIMIZATION</code> - After the <code>FILE_SYSTEM_UPDATE</code>\n                    task to increase a file system's throughput capacity has been completed\n                    successfully, a <code>IOPS_OPTIMIZATION</code> task starts.</p>\n               <p>You can track the storage-optimization progress using the\n                    <code>ProgressPercent</code> property. When\n                    <code>IOPS_OPTIMIZATION</code> has been completed successfully, the\n                    parent <code>FILE_SYSTEM_UPDATE</code> action status changes to\n                    <code>COMPLETED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-provisioned-ssd-iops.html\">Managing\n                        provisioned SSD IOPS</a> in the <i>Amazon FSx for Windows\n                            File Server User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STORAGE_TYPE_OPTIMIZATION</code> - After the <code>FILE_SYSTEM_UPDATE</code>\n                    task to increase a file system's throughput capacity has been completed\n                    successfully, a <code>STORAGE_TYPE_OPTIMIZATION</code> task starts.</p>\n               <p>You can track the storage-optimization progress using the\n                    <code>ProgressPercent</code> property. When\n                    <code>STORAGE_TYPE_OPTIMIZATION</code> has been completed successfully, the\n                    parent <code>FILE_SYSTEM_UPDATE</code> action status changes to\n                    <code>COMPLETED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VOLUME_UPDATE</code> - A volume update to an Amazon FSx for NetApp ONTAP or\n                        Amazon FSx for OpenZFS volume initiated from the Amazon FSx\n                    console, API (<code>UpdateVolume</code>), or CLI\n                    (<code>update-volume</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>VOLUME_RESTORE</code> - An Amazon FSx for OpenZFS volume\n                is returned to the state saved by the specified snapshot, initiated from an\n                API (<code>RestoreVolumeFromSnapshot</code>) or CLI\n                (<code>restore-volume-from-snapshot</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>SNAPSHOT_UPDATE</code> - A snapshot update to an Amazon FSx for\n                    OpenZFS volume initiated from the Amazon FSx console, API\n                        (<code>UpdateSnapshot</code>), or CLI (<code>update-snapshot</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>RELEASE_NFS_V3_LOCKS</code> - Tracks the release of Network File System\n                    (NFS) V3 locks on an Amazon FSx for OpenZFS file system.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.fsx#AdministrativeActions": {
@@ -2053,7 +2035,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the \n            <code>PENDING</code> or <code>EXECUTING</code> state. When you cancel a task, Amazon FSx does the following.</p>\n         <ul>\n            <li>\n               <p>Any files that FSx has already exported are not reverted.</p>\n            </li>\n            <li>\n               <p>FSx continues to export any files that are \"in-flight\" when the cancel operation is received.</p>\n            </li>\n            <li>\n               <p>FSx does not export any files that have not yet been exported.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the \n            <code>PENDING</code> or <code>EXECUTING</code> state. When you cancel am export task, Amazon FSx\n            does the following.</p>\n         <ul>\n            <li>\n               <p>Any files that FSx has already exported are not reverted.</p>\n            </li>\n            <li>\n               <p>FSx continues to export any files that are in-flight when the cancel operation is received.</p>\n            </li>\n            <li>\n               <p>FSx does not export any files that have not yet been exported.</p>\n            </li>\n         </ul>\n         <p>For a release task, Amazon FSx will stop releasing files upon cancellation. Any files that\n            have already been released will remain in the released state.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2200,6 +2182,46 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Copies an existing backup within the same Amazon Web Services account to another Amazon Web Services Region\n         (cross-Region copy) or within the same Amazon Web Services Region (in-Region copy). You can have up to five\n         backup copy requests in progress to a single destination Region per account.</p>\n         <p>You can use cross-Region backup copies for cross-Region disaster recovery. You can\n         periodically take backups and copy them to another Region so that in the event of a\n         disaster in the primary Region, you can restore from backup and recover availability\n         quickly in the other Region. You can make cross-Region copies only within your Amazon Web Services partition. A partition is a grouping of Regions. Amazon Web Services currently\n         has three partitions: <code>aws</code> (Standard Regions), <code>aws-cn</code> (China\n         Regions), and <code>aws-us-gov</code> (Amazon Web Services GovCloud [US] Regions).</p>\n         <p>You can also use backup copies to clone your file dataset to another Region or within\n         the same Region.</p>\n         <p>You can use the <code>SourceRegion</code> parameter to specify the Amazon Web Services Region\n         from which the backup will be copied. For example, if you make the call from the\n         <code>us-west-1</code> Region and want to copy a backup from the <code>us-east-2</code>\n         Region, you specify <code>us-east-2</code> in the <code>SourceRegion</code> parameter\n         to make a cross-Region copy. If you don't specify a Region, the backup copy is\n         created in the same Region where the request is sent from (in-Region copy).</p>\n         <p>For more information about creating backup copies, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups\"> Copying backups</a>\n         in the <i>Amazon FSx for Windows User Guide</i>, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html#copy-backups\">Copying backups</a> in the <i>Amazon FSx for Lustre User\n            Guide</i>, and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/using-backups.html#copy-backups\">Copying backups</a> in the <i>Amazon FSx for OpenZFS User\n            Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To copy a backup",
+                        "documentation": "This operation copies an Amazon FSx backup.",
+                        "input": {
+                            "SourceBackupId": "backup-03e3c82e0183b7b6b",
+                            "SourceRegion": "us-east-2"
+                        },
+                        "output": {
+                            "Backup": {
+                                "BackupId": "backup-0a3364eded1014b28",
+                                "OwnerId": "123456789012",
+                                "Lifecycle": "COPYING",
+                                "Type": "USER_INITIATED",
+                                "CreationTime": 1.617954808068E9,
+                                "KmsKeyId": "arn:aws:fsx:us-east-1:012345678912:key/d1234e22-543a-12b7-a98f-e12c2b54001a",
+                                "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:backup/backup-0a3364eded1014b28",
+                                "Tags": [
+                                    {
+                                        "Key": "Name",
+                                        "Value": "MyBackup"
+                                    }
+                                ],
+                                "FileSystem": {
+                                    "FileSystemId": "fs-0498eed5fe91001ec",
+                                    "FileSystemType": "LUSTRE",
+                                    "StorageCapacity": 2400,
+                                    "StorageType": "SSD",
+                                    "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0f5179e395f597e66",
+                                    "LustreConfiguration": {
+                                        "WeeklyMaintenanceStartTime": "1:05:00",
+                                        "DeploymentType": "PERSISTENT_1",
+                                        "PerUnitStorageThroughput": 50,
+                                        "AutomaticBackupRetentionDays": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -2477,7 +2499,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon FSx for Lustre data repository task. You use data repository tasks\n            to perform bulk operations between your Amazon FSx file system and its linked data\n            repositories. An example of a data repository task is exporting any data and metadata\n            changes, including POSIX metadata, to files, directories, and symbolic links (symlinks)\n            from your FSx file system to a linked data repository. A <code>CreateDataRepositoryTask</code>\n            operation will fail if a data repository is not linked to the FSx file system. To learn\n            more about data repository tasks, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html\">Data Repository Tasks</a>. \n            To learn more about linking a data repository to your file system, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html\">Linking your file system to an S3 bucket</a>.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon FSx for Lustre data repository task.\n            A <code>CreateDataRepositoryTask</code> operation will fail if a data\n            repository is not linked to the FSx file system.</p>\n         <p>You use import and export data repository tasks to perform bulk operations between your\n            FSx for Lustre file system and its linked data repositories. An example of a data repository\n            task is exporting any data and metadata changes, including POSIX metadata, to files, directories,\n            and symbolic links (symlinks) from your FSx file system to a linked data repository.</p>\n         <p>You use release data repository tasks to release data from your file system for files that\n            are archived to S3. The metadata of released files remains on the file system so users or applications\n            can still access released files by reading the files again, which will restore data from\n            Amazon S3 to the FSx for Lustre file system.</p>\n         <p>To learn more about data repository tasks, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html\">Data Repository Tasks</a>. \n            To learn more about linking a data repository to your file system, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html\">Linking your file system to an S3 bucket</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2487,14 +2509,14 @@
                 "Type": {
                     "target": "com.amazonaws.fsx#DataRepositoryTaskType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of data repository task to create.</p>",
+                        "smithy.api#documentation": "<p>Specifies the type of data repository task to create.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXPORT_TO_REPOSITORY</code> tasks export from your\n                Amazon FSx for Lustre file system to a linked data repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPORT_METADATA_FROM_REPOSITORY</code> tasks import metadata\n                changes from a linked S3 bucket to your Amazon FSx for Lustre file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RELEASE_DATA_FROM_FILESYSTEM</code> tasks release files in\n                your Amazon FSx for Lustre file system that are archived and that meet\n                your specified release criteria.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTO_RELEASE_DATA</code> tasks automatically release files from\n                an Amazon File Cache resource.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "Paths": {
                     "target": "com.amazonaws.fsx#DataRepositoryTaskPaths",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of paths for the data repository task to use when the task is processed.\n            If a path that you provide isn't valid, the task fails.</p>\n         <ul>\n            <li>\n               <p>For export tasks, the list contains paths on the Amazon FSx file system\n                from which the files are exported to the Amazon S3 bucket. The default path is the\n                file system root directory. The paths you provide need to be relative to the mount\n                point of the file system. If the mount point is <code>/mnt/fsx</code> and\n                <code>/mnt/fsx/path1</code> is a directory or file on the file system you want\n                to export, then the path to provide is <code>path1</code>.</p>\n            </li>\n            <li>\n               <p>For import tasks, the list contains paths in the Amazon S3 bucket\n                from which POSIX metadata changes are imported to the Amazon FSx file system.\n                The path can be an S3 bucket or prefix in the format\n                <code>s3://myBucket/myPrefix</code> (where <code>myPrefix</code> is optional).</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list of paths for the data repository task to use when the task is processed.\n            If a path that you provide isn't valid, the task fails. If you don't provide\n            paths, the default behavior is to export all files to S3 (for export tasks), import\n            all files from S3 (for import tasks), or release all archived files that meet the\n            last accessed time criteria (for release tasks).</p>\n         <ul>\n            <li>\n               <p>For export tasks, the list contains paths on the FSx for Lustre file system\n                from which the files are exported to the Amazon S3 bucket. The default path is the\n                file system root directory. The paths you provide need to be relative to the mount\n                point of the file system. If the mount point is <code>/mnt/fsx</code> and\n                <code>/mnt/fsx/path1</code> is a directory or file on the file system you want\n                to export, then the path to provide is <code>path1</code>.</p>\n            </li>\n            <li>\n               <p>For import tasks, the list contains paths in the Amazon S3 bucket\n                from which POSIX metadata changes are imported to the FSx for Lustre file system.\n                The path can be an S3 bucket or prefix in the format\n                <code>s3://myBucket/myPrefix</code> (where <code>myPrefix</code> is optional).\n            </p>\n            </li>\n            <li>\n               <p>For release tasks, the list contains directory or file paths on the\n                FSx for Lustre file system from which to release archived files. If a directory is\n                specified, files within the directory are released. If a file path is specified,\n                only that file is released. To release all archived files in the file system,\n                specify a forward slash (/) as the path.</p>\n               <note>\n                  <p>A file must also meet the last accessed time criteria\n                    specified in  for the\n                    file to be released.</p>\n               </note>\n            </li>\n         </ul>"
                     }
                 },
                 "FileSystemId": {
@@ -2523,6 +2545,12 @@
                     "target": "com.amazonaws.fsx#CapacityToRelease",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the amount of data to release, in GiB, by an Amazon File Cache\n            <code>AUTO_RELEASE_DATA</code> task that automatically releases files from the cache.</p>"
+                    }
+                },
+                "ReleaseConfiguration": {
+                    "target": "com.amazonaws.fsx#ReleaseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies the last accessed time criteria for files\n            that will be released from an Amazon FSx for Lustre file system.</p>"
                     }
                 }
             },
@@ -3064,7 +3092,7 @@
                 "DeploymentType": {
                     "target": "com.amazonaws.fsx#OpenZFSDeploymentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file system deployment type. Single AZ deployment types are configured\n            for redundancy within a single Availability Zone in an Amazon Web Services Region .\n            Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_1</code>- (Default) Creates file systems with throughput capacities of 64 - 4,096 MBps.\n                <code>Single_AZ_1</code> is available in all Amazon Web Services Regions where Amazon FSx \n                for OpenZFS is available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_2</code>- Creates file systems with throughput capacities of 160 - 10,240 MB/s\n                using an NVMe L2ARC cache. <code>Single_AZ_2</code> is available only in the US East (N. Virginia), US East (Ohio), \n                US West (Oregon), and Europe (Ireland) Amazon Web Services Regions.</p>\n            </li>\n         </ul>\n         <p>For more information, see: <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions\">Deployment type availability</a>\n            and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance\">File system performance</a>\n            in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the file system deployment type. Single AZ deployment types are configured\n            for redundancy within a single Availability Zone in an Amazon Web Services Region .\n            Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_AZ_1</code>- Creates file systems with high availability that are configured for Multi-AZ redundancy to tolerate temporary unavailability in Availability Zones (AZs).\n                <code>Multi_AZ_1</code> is available in the following Amazon Web Services Regions: </p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_1</code>- (Default) Creates file systems with throughput capacities of 64 - 4,096 MB/s.\n                <code>Single_AZ_1</code> is available in all Amazon Web Services Regions where Amazon FSx \n                for OpenZFS is available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_2</code>- Creates file systems with throughput capacities of 160 - 10,240 MB/s\n                using an NVMe L2ARC cache. <code>Single_AZ_2</code> is available only in the US East (N. Virginia), US East (Ohio), \n                US West (Oregon), and Europe (Ireland) Amazon Web Services Regions.</p>\n            </li>\n         </ul>\n         <p>For more information, see: <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions\">Deployment type availability</a>\n            and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance\">File system performance</a>\n            in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3085,6 +3113,24 @@
                     "target": "com.amazonaws.fsx#OpenZFSCreateRootVolumeConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration Amazon FSx uses when creating the root value of the Amazon FSx for OpenZFS\n            file system. All volumes are children of the root volume. </p>"
+                    }
+                },
+                "PreferredSubnetId": {
+                    "target": "com.amazonaws.fsx#SubnetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This specifies the subnet in which you want the preferred file server to be located.</p>"
+                    }
+                },
+                "EndpointIpAddressRange": {
+                    "target": "com.amazonaws.fsx#IpAddressRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Multi-AZ only) Specifies the IP address range in which the endpoints to access your\n            file system will be created. By default in the Amazon FSx  API and Amazon FSx console, Amazon FSx\n            selects an available /28 IP address range for you from one of the VPC's CIDR ranges.\n            You can have overlapping endpoint IP addresses for file systems deployed in the\n            same VPC/route tables.</p>"
+                    }
+                },
+                "RouteTableIds": {
+                    "target": "com.amazonaws.fsx#RouteTableIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Multi-AZ only) Specifies the virtual private cloud (VPC) route tables in which your\n            file system's endpoints will be created. You should specify all VPC route tables\n            associated with the subnets in which your clients are located. By default, Amazon FSx\n            selects your VPC's default route table.</p>"
                     }
                 }
             },
@@ -3254,6 +3300,12 @@
                     "target": "com.amazonaws.fsx#WindowsAuditLogCreateConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log\n            user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server\n            file system.</p>"
+                    }
+                },
+                "DiskIopsConfiguration": {
+                    "target": "com.amazonaws.fsx#DiskIopsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for Windows file system.\n        By default, Amazon FSx automatically provisions 3 IOPS per GiB of storage capacity. You can provision additional\n        IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.</p>"
                     }
                 }
             },
@@ -3436,7 +3488,7 @@
                 "PrivilegedDelete": {
                     "target": "com.amazonaws.fsx#PrivilegedDelete",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock \n            Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete WORM files even \n            if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. \n            If privileged delete is permanently disabled on a SnapLock volume, you can't re-enable it. The default \n            value is <code>DISABLED</code>. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete\">Privileged delete</a>. </p>"
+                        "smithy.api#documentation": "<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock \n            Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete WORM files even \n            if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. \n            If privileged delete is permanently disabled on a SnapLock volume, you can't re-enable it. The default \n            value is <code>DISABLED</code>. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete\">Privileged delete</a>. </p>"
                     }
                 },
                 "RetentionPeriod": {
@@ -3448,7 +3500,7 @@
                 "SnaplockType": {
                     "target": "com.amazonaws.fsx#SnaplockType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the retention mode of an FSx for ONTAP SnapLock volume.  After it is set, it can't be changed. \n        You can choose one of the following retention modes: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLIANCE</code>: Files transitioned to write once, read many (WORM) on a Compliance volume can't be deleted \n                until their retention periods expire. This retention mode is used to address government or industry-specific mandates or to protect \n                against ransomware attacks. For more information, \n                see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html\">SnapLock Compliance</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code>: Files transitioned to WORM on an Enterprise volume can be deleted by authorized users \n            before their retention periods expire using privileged delete. This retention mode is used to advance an organization's data integrity \n            and internal compliance or to test retention settings before using SnapLock Compliance. For more information, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.htmlFile\">SnapLock Enterprise</a>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the retention mode of an FSx for ONTAP SnapLock volume.  After it is set, it can't be changed. \n        You can choose one of the following retention modes: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLIANCE</code>: Files transitioned to write once, read many (WORM) on a Compliance volume can't be deleted \n                until their retention periods expire. This retention mode is used to address government or industry-specific mandates or to protect \n                against ransomware attacks. For more information, \n                see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html\">SnapLock Compliance</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code>: Files transitioned to WORM on an Enterprise volume can be deleted by authorized users \n            before their retention periods expire using privileged delete. This retention mode is used to advance an organization's data integrity \n            and internal compliance or to test retention settings before using SnapLock Compliance. For more information, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html\">SnapLock Enterprise</a>. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4126,7 +4178,7 @@
                 "Type": {
                     "target": "com.amazonaws.fsx#DataRepositoryTaskType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of data repository task.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXPORT_TO_REPOSITORY</code> tasks export from your\n                Amazon FSx for Lustre file system to a linked data repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPORT_METADATA_FROM_REPOSITORY</code> tasks import metadata\n                changes from a linked S3 bucket to your Amazon FSx for Lustre file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTO_RELEASE_DATA</code> tasks automatically release files from\n                an Amazon File Cache resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RELEASE_DATA_FROM_FILESYSTEM</code> tasks are not supported.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of data repository task.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXPORT_TO_REPOSITORY</code> tasks export from your\n                Amazon FSx for Lustre file system to a linked data repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPORT_METADATA_FROM_REPOSITORY</code> tasks import metadata\n                changes from a linked S3 bucket to your Amazon FSx for Lustre file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RELEASE_DATA_FROM_FILESYSTEM</code> tasks release files in\n                your Amazon FSx for Lustre file system that are archived and that meet\n                your specified release criteria.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTO_RELEASE_DATA</code> tasks automatically release files from\n                an Amazon File Cache resource.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4192,10 +4244,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The system-generated, unique ID of the cache.</p>"
                     }
+                },
+                "ReleaseConfiguration": {
+                    "target": "com.amazonaws.fsx#ReleaseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies the last accessed time criteria for files\n            that will be released from an Amazon FSx for Lustre file system.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A description of the data repository task. You use data repository tasks\n            to perform bulk transfer operations between an Amazon FSx for Lustre file system\n            and a linked data repository. An Amazon File Cache resource uses a task to\n            automatically release files from the cache.</p>"
+                "smithy.api#documentation": "<p>A description of the data repository task.</p>\n         <ul>\n            <li>\n               <p>You use import and export data repository tasks to perform\n                bulk transfer operations between an Amazon FSx for Lustre file system\n                and a linked data repository.</p>\n            </li>\n            <li>\n               <p>You use release data repository tasks to release archived files\n                from your Amazon FSx for Lustre file system.</p>\n            </li>\n            <li>\n               <p>An Amazon File Cache resource uses a task to automatically\n                release files from the cache.</p>\n            </li>\n         </ul>\n         <p>To learn more about data repository tasks, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html\">Data Repository Tasks</a>. \n            </p>"
             }
         },
         "com.amazonaws.fsx#DataRepositoryTaskEnded": {
@@ -4503,6 +4561,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an Amazon FSx backup. After deletion, the backup no longer exists, and\n            its data is gone.</p>\n         <p>The <code>DeleteBackup</code> call returns instantly. The backup won't show up in\n            later <code>DescribeBackups</code> calls.</p>\n         <important>\n            <p>The data in a deleted backup is also deleted and can't be recovered by any\n                means.</p>\n         </important>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a backup",
+                        "documentation": "This operation deletes an Amazon FSx file system backup.",
+                        "input": {
+                            "BackupId": "backup-03e3c82e0183b7b6b"
+                        },
+                        "output": {
+                            "BackupId": "backup-03e3c82e0183b7b6b",
+                            "Lifecycle": "DELETED"
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -4734,6 +4805,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a file system. After deletion, the file system no longer exists, and its data\n            is gone. Any existing automatic backups and snapshots are also deleted.</p>\n         <p>To delete an Amazon FSx for NetApp ONTAP file system, first delete all the\n            volumes and storage virtual machines (SVMs) on the file system. Then provide a\n                <code>FileSystemId</code> value to the <code>DeleFileSystem</code> operation.</p>\n         <p>By default, when you delete an Amazon FSx for Windows File Server file system,\n            a final backup is created upon deletion. This final backup isn't subject to the file\n            system's retention policy, and must be manually deleted.</p>\n         <p>The <code>DeleteFileSystem</code> operation returns while the file system has the\n                <code>DELETING</code> status. You can check the file system deletion status by\n            calling the <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html\">DescribeFileSystems</a> operation, which returns a list of file systems in your\n            account. If you pass the file system ID for a deleted file system, the\n                <code>DescribeFileSystems</code> operation returns a <code>FileSystemNotFound</code>\n            error.</p>\n         <note>\n            <p>If a data repository task is in a <code>PENDING</code> or <code>EXECUTING</code> state,\n                deleting an Amazon FSx for Lustre file system will fail with an HTTP status\n                code 400 (Bad Request).</p>\n         </note>\n         <important>\n            <p>The data in a deleted file system is also deleted and can't be recovered by\n                any means.</p>\n         </important>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a file system",
+                        "documentation": "This operation deletes an Amazon FSx file system.",
+                        "input": {
+                            "FileSystemId": "fs-0498eed5fe91001ec"
+                        },
+                        "output": {
+                            "FileSystemId": "fs-0498eed5fe91001ec",
+                            "Lifecycle": "DELETING"
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -5147,7 +5231,7 @@
                 "BypassSnaplockEnterpriseRetention": {
                     "target": "com.amazonaws.fsx#Flag",
                     "traits": {
-                        "smithy.api#documentation": "<p>Setting this to <code>true</code> allows a SnapLock administrator to delete an FSx for ONTAP SnapLock Enterprise volume \n            with unexpired write once, read many (WORM) files. The IAM permission <code>fsx:BypassSnaplockEnterpriseRetention</code> is also \n        required to delete SnapLock Enterprise volumes with unexpired WORM files. The default value is <code>false</code>. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-delete-volume\">\n                Deleting a SnapLock volume\n            </a>. </p>"
+                        "smithy.api#documentation": "<p>Setting this to <code>true</code> allows a SnapLock administrator to delete an FSx for ONTAP SnapLock Enterprise volume \n            with unexpired write once, read many (WORM) files. The IAM permission <code>fsx:BypassSnaplockEnterpriseRetention</code> is also \n        required to delete SnapLock Enterprise volumes with unexpired WORM files. The default value is <code>false</code>. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-delete-volume.html\">\n                Deleting a SnapLock volume</a>. </p>"
                     }
                 }
             },
@@ -6037,7 +6121,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for NetApp ONTAP or FSx for OpenZFS file system. By default, Amazon FSx \n            automatically provisions 3 IOPS per GB of storage capacity. You can provision additional IOPS per\n            GB of storage. The configuration consists of the total number of provisioned SSD IOPS\n            and how it is was provisioned, or the mode (by the customer or by Amazon FSx).</p>"
+                "smithy.api#documentation": "<p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for NetApp ONTAP, Amazon FSx for Windows File Server, or FSx for OpenZFS file system. By default, Amazon FSx \n            automatically provisions 3 IOPS per GB of storage capacity. You can provision additional IOPS per\n            GB of storage. The configuration consists of the total number of provisioned SSD IOPS\n            and how it is was provisioned, or the mode (by the customer or by Amazon FSx).</p>"
             }
         },
         "com.amazonaws.fsx#DiskIopsConfigurationMode": {
@@ -6084,6 +6168,26 @@
                         "smithy.api#enumValue": "READ"
                     }
                 }
+            }
+        },
+        "com.amazonaws.fsx#DurationSinceLastAccess": {
+            "type": "structure",
+            "members": {
+                "Unit": {
+                    "target": "com.amazonaws.fsx#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of time used by the <code>Value</code> parameter to\n            determine if a file can be released, based on when it was last\n            accessed. <code>DAYS</code> is the only supported value. This\n            is a required parameter.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.fsx#Value",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer that represents the minimum amount of time (in days)\n            since a file was last accessed in the file system. Only archived files\n            with a <code>MAX(atime, ctime, mtime)</code> timestamp that is more than\n            this amount of time in the past (relative to the task create time)\n            will be released. The default of <code>Value</code> is <code>0</code>.\n            This is a required parameter.</p>\n         <note>\n            <p>If an archived file meets the last accessed time criteria,\n            its file or directory path must also be specified in the <code>Paths</code>\n            parameter of the  operation\n            in order for the file to be released.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the minimum amount of time since last access for a \n            file to be eligible for release. Only archived files that were\n            last accessed or modified before this point-in-time are eligible\n            to be released from the Amazon FSx for Lustre file system.</p>"
             }
         },
         "com.amazonaws.fsx#EndTime": {
@@ -7356,6 +7460,23 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists tags for Amazon FSx resources.</p>\n         <p>When retrieving all tags, you can optionally specify the <code>MaxResults</code>\n            parameter to limit the number of tags in a response. If more tags remain, Amazon FSx\n            returns a <code>NextToken</code> value in the response. In this case, send a later\n            request with the <code>NextToken</code> request parameter set to the value of\n                <code>NextToken</code> from the last response.</p>\n         <p>This action is used in an iterative process to retrieve a list of your tags.\n                <code>ListTagsForResource</code> is called first without a\n            <code>NextToken</code>value. Then the action continues to be called with the\n                <code>NextToken</code> parameter set to the value of the last <code>NextToken</code>\n            value until a response has no <code>NextToken</code>.</p>\n         <p>When using this action, keep the following in mind:</p>\n         <ul>\n            <li>\n               <p>The implementation might return fewer than <code>MaxResults</code> file\n                    system descriptions while still including a <code>NextToken</code>\n                    value.</p>\n            </li>\n            <li>\n               <p>The order of tags returned in the response of one\n                        <code>ListTagsForResource</code> call and the order of tags returned across\n                    the responses of a multi-call iteration is unspecified.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list tags for a resource",
+                        "documentation": "This operation lists tags for an Amazon FSx resource.",
+                        "input": {
+                            "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec"
+                        },
+                        "output": {
+                            "Tags": [
+                                {
+                                    "Key": "Name",
+                                    "Value": "MyFileSystem"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -8170,6 +8291,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SINGLE_AZ_2"
                     }
+                },
+                "MULTI_AZ_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI_AZ_1"
+                    }
                 }
             }
         },
@@ -8197,7 +8324,7 @@
                 "DeploymentType": {
                     "target": "com.amazonaws.fsx#OpenZFSDeploymentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file-system deployment type. Amazon FSx for OpenZFS supports\u2028 <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the file-system deployment type. Amazon FSx for OpenZFS supports\u2028 <code>MULTI_AZ_1</code>, <code>SINGLE_AZ_1</code>, and <code>SINGLE_AZ_2</code>.</p>"
                     }
                 },
                 "ThroughputCapacity": {
@@ -8216,6 +8343,30 @@
                     "target": "com.amazonaws.fsx#VolumeId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the root volume of the OpenZFS file system. </p>"
+                    }
+                },
+                "PreferredSubnetId": {
+                    "target": "com.amazonaws.fsx#SubnetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This\n            specifies the subnet in which you want the preferred file server to be located.</p>"
+                    }
+                },
+                "EndpointIpAddressRange": {
+                    "target": "com.amazonaws.fsx#IpAddressRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Multi-AZ only) Specifies the IP address range in which the endpoints to access your\n            file system will be created. By default in the Amazon FSx  API and Amazon FSx console, Amazon FSx\n            selects an available /28 IP address range for you from one of the VPC's CIDR ranges.\n            You can have overlapping endpoint IP addresses for file systems deployed in the\n            same VPC/route tables.</p>"
+                    }
+                },
+                "RouteTableIds": {
+                    "target": "com.amazonaws.fsx#RouteTableIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Multi-AZ only) The VPC route tables in which your file system's endpoints are\n            created.</p>"
+                    }
+                },
+                "EndpointIpAddress": {
+                    "target": "com.amazonaws.fsx#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the endpoint\n            that is used to access data or to manage the file system.</p>"
                     }
                 }
             },
@@ -8511,6 +8662,20 @@
                     "max": 20
                 },
                 "smithy.api#pattern": "^[a-z0-9-]{1,20}$"
+            }
+        },
+        "com.amazonaws.fsx#ReleaseConfiguration": {
+            "type": "structure",
+            "members": {
+                "DurationSinceLastAccess": {
+                    "target": "com.amazonaws.fsx#DurationSinceLastAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the point-in-time since an archived file was last accessed,\n            in order for that file to be eligible for release. Only files that were\n            last accessed before this point-in-time are eligible to be released from\n            the file system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that specifies a minimum amount of time since\n            last access for an archived file to be eligible for release from an\n            Amazon FSx for Lustre file system. Only files that were last\n            accessed before this point-in-time can be released. For example, if\n            you specify a last accessed time criteria of 9 days, only files that\n            were last accessed 9.00001 or more days ago can be released.</p>\n         <p>Only file data that has been archived can be released. Files that\n            have not yet been archived, such as new or changed files that have\n            not been exported, are not eligible for release. When files are\n            released, their metadata stays on the file system, so they\n            can still be accessed later. Users and applications can access a\n            released file by reading the file again, which restores data from\n            Amazon S3 to the FSx for Lustre file system.</p>\n         <note>\n            <p>If a file meets the last accessed time criteria, its\n            file or directory path must also be specified with the\n            <code>Paths</code> parameter of the\n             operation in order\n            for the file to be released.</p>\n         </note>"
             }
         },
         "com.amazonaws.fsx#ReleaseFileSystemNfsV3Locks": {
@@ -9200,7 +9365,7 @@
                 "PrivilegedDelete": {
                     "target": "com.amazonaws.fsx#PrivilegedDelete",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock \n            Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete write once, read \n            many (WORM) files even \n            if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. \n            If privileged delete is permanently disabled on a SnapLock volume, you can't re-enable it. The default \n            value is <code>DISABLED</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete\">Privileged delete</a>. </p>"
+                        "smithy.api#documentation": "<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock \n            Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete write once, read \n            many (WORM) files even \n            if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. \n            If privileged delete is permanently disabled on a SnapLock volume, you can't re-enable it. The default \n            value is <code>DISABLED</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete\">Privileged delete</a>. </p>"
                     }
                 },
                 "RetentionPeriod": {
@@ -9212,7 +9377,7 @@
                 "SnaplockType": {
                     "target": "com.amazonaws.fsx#SnaplockType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the retention mode of an FSx for ONTAP SnapLock volume.  After it is set, it can't be changed. \n            You can choose one of the following retention modes: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLIANCE</code>: Files transitioned to write once, read many (WORM) on a Compliance volume can't be deleted \n                    until their retention periods expire. This retention mode is used to address government or industry-specific mandates or to protect \n                    against ransomware attacks. For more information, \n                    see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html\">SnapLock Compliance</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code>: Files transitioned to WORM on an Enterprise volume can be deleted by authorized users \n                before their retention periods expire using privileged delete. This retention mode is used to advance an organization's data integrity \n                and internal compliance or to test retention settings before using SnapLock Compliance. For more information, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.htmlFile\">SnapLock Enterprise</a>. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the retention mode of an FSx for ONTAP SnapLock volume.  After it is set, it can't be changed. \n            You can choose one of the following retention modes: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLIANCE</code>: Files transitioned to write once, read many (WORM) on a Compliance volume can't be deleted \n                    until their retention periods expire. This retention mode is used to address government or industry-specific mandates or to protect \n                    against ransomware attacks. For more information, \n                    see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html\">SnapLock Compliance</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code>: Files transitioned to WORM on an Enterprise volume can be deleted by authorized users \n                before their retention periods expire using privileged delete. This retention mode is used to advance an organization's data integrity \n                and internal compliance or to test retention settings before using SnapLock Compliance. For more information, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html\">SnapLock Enterprise</a>. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "VolumeAppendModeEnabled": {
@@ -10046,6 +10211,21 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Tags an Amazon FSx resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To tag a resource",
+                        "documentation": "This operation tags an Amazon FSx resource.",
+                        "input": {
+                            "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec",
+                            "Tags": [
+                                {
+                                    "Key": "Name",
+                                    "Value": "MyFileSystem"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -10188,6 +10368,17 @@
                 "smithy.api#pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,36}$"
             }
         },
+        "com.amazonaws.fsx#Unit": {
+            "type": "enum",
+            "members": {
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.fsx#UnsupportedOperation": {
             "type": "structure",
             "members": {
@@ -10227,6 +10418,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>This action removes a tag from an Amazon FSx resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To untag a resource",
+                        "documentation": "This operation untags an Amazon FSx resource.",
+                        "input": {
+                            "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec",
+                            "TagKeys": [
+                                "Name"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -10461,7 +10664,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file\n      system. You can update multiple properties in a single request.</p>\n         <p>For FSx for Windows File Server file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AuditLogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SelfManagedActiveDirectoryConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for Lustre file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutoImportPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DataCompressionType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LustreRootSquashConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for ONTAP file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AddRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FsxAdminPassword</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RemoveRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for OpenZFS file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToBackups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToVolumes</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file\n      system. You can update multiple properties in a single request.</p>\n         <p>For FSx for Windows File Server file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AuditLogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SelfManagedActiveDirectoryConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for Lustre file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutoImportPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DataCompressionType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LustreRootSquashConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for ONTAP file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AddRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FsxAdminPassword</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RemoveRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for OpenZFS file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToBackups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToVolumes</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.fsx#UpdateFileSystemLustreConfiguration": {
@@ -10590,6 +10793,18 @@
                 },
                 "DiskIopsConfiguration": {
                     "target": "com.amazonaws.fsx#DiskIopsConfiguration"
+                },
+                "AddRouteTableIds": {
+                    "target": "com.amazonaws.fsx#RouteTableIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Multi-AZ only) A list of IDs of new virtual private cloud (VPC) route tables\n            to associate (add) with your Amazon FSx for OpenZFS file system.</p>"
+                    }
+                },
+                "RemoveRouteTableIds": {
+                    "target": "com.amazonaws.fsx#RouteTableIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Multi-AZ only) A list of IDs of existing virtual private cloud (VPC)\n            route tables to disassociate (remove) from your Amazon FSx for OpenZFS file system. You can use\n            the  API operation to retrieve the\n            list of VPC route table IDs for a file system.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10636,6 +10851,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration updates for an FSx for OpenZFS file system.</p>"
                     }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.fsx#StorageType"
                 }
             },
             "traits": {
@@ -10695,6 +10913,12 @@
                     "target": "com.amazonaws.fsx#WindowsAuditLogCreateConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log\n            user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server\n            file system..</p>"
+                    }
+                },
+                "DiskIopsConfiguration": {
+                    "target": "com.amazonaws.fsx#DiskIopsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for Windows file system.\n            By default, Amazon FSx automatically provisions 3 IOPS per GiB of storage capacity. You can provision additional\n            IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.</p>"
                     }
                 }
             },
@@ -10826,7 +11050,7 @@
                 "PrivilegedDelete": {
                     "target": "com.amazonaws.fsx#PrivilegedDelete",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock \n            Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete write once, read \n            many (WORM) files even \n            if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. \n        If privileged delete is permanently disabled on a SnapLock volume, you can't re-enable it. The default \n        value is <code>DISABLED</code>. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete\">Privileged delete</a>. </p>"
+                        "smithy.api#documentation": "<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock \n            Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete write once, read \n            many (WORM) files even \n            if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. \n        If privileged delete is permanently disabled on a SnapLock volume, you can't re-enable it. The default \n        value is <code>DISABLED</code>. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete\">Privileged delete</a>. </p>"
                     }
                 },
                 "RetentionPeriod": {
@@ -11082,6 +11306,14 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.fsx#Value": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.fsx#Volume": {
@@ -11430,7 +11662,7 @@
                 "AuditLogDestination": {
                     "target": "com.amazonaws.fsx#GeneralARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the destination of the audit logs.\n            The destination can be any Amazon CloudWatch Logs log group ARN or\n            Amazon Kinesis Data Firehose delivery stream ARN.</p>\n         <p>The name of the Amazon CloudWatch Logs log group must begin with\n            the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data\n            Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p>\n         <p>The destination ARN (either CloudWatch Logs log group or Kinesis\n            Data Firehose delivery stream) must be in the same Amazon Web Services partition,\n            Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the destination of the audit logs.\n            The destination can be any Amazon CloudWatch Logs log group ARN or\n            Amazon Kinesis Data Firehose delivery stream ARN.</p>\n         <p>The name of the Amazon CloudWatch Logs log group must begin with\n            the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data\n            Firehose delivery stream must begin with the <code>aws-fsx</code> prefix.</p>\n         <p>The destination ARN (either CloudWatch Logs log group or Kinesis\n            Data Firehose delivery stream) must be in the same Amazon Web Services partition,\n            Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.</p>"
                     }
                 }
             },
@@ -11458,7 +11690,7 @@
                 "AuditLogDestination": {
                     "target": "com.amazonaws.fsx#GeneralARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that specifies the destination of the audit logs.</p>\n         <p>The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis\n            Data Firehose delivery stream ARN, with the following requirements:</p>\n         <ul>\n            <li>\n               <p>The destination ARN that you provide (either CloudWatch Logs log group\n                    or Kinesis Data Firehose delivery stream) must be in the same Amazon Web Services partition,\n                    Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.</p>\n            </li>\n            <li>\n               <p>The name of the Amazon CloudWatch Logs log group must begin with\n                    the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data\n                    Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p>\n            </li>\n            <li>\n               <p>If you do not provide a destination in <code>AuditLogDestination</code>,\n                    Amazon FSx will create and use a log stream in the CloudWatch Logs\n                    <code>/aws/fsx/windows</code> log group.</p>\n            </li>\n            <li>\n               <p>If <code>AuditLogDestination</code> is provided and the resource does not\n                    exist, the request will fail with a <code>BadRequest</code> error.</p>\n            </li>\n            <li>\n               <p>If <code>FileAccessAuditLogLevel</code> and <code>FileShareAccessAuditLogLevel</code>\n                    are both set to <code>DISABLED</code>, you cannot specify a destination in\n                    <code>AuditLogDestination</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that specifies the destination of the audit logs.</p>\n         <p>The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis\n            Data Firehose delivery stream ARN, with the following requirements:</p>\n         <ul>\n            <li>\n               <p>The destination ARN that you provide (either CloudWatch Logs log group\n                    or Kinesis Data Firehose delivery stream) must be in the same Amazon Web Services partition,\n                    Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.</p>\n            </li>\n            <li>\n               <p>The name of the Amazon CloudWatch Logs log group must begin with\n                    the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data\n                    Firehose delivery stream must begin with the <code>aws-fsx</code> prefix.</p>\n            </li>\n            <li>\n               <p>If you do not provide a destination in <code>AuditLogDestination</code>,\n                    Amazon FSx will create and use a log stream in the CloudWatch Logs\n                    <code>/aws/fsx/windows</code> log group.</p>\n            </li>\n            <li>\n               <p>If <code>AuditLogDestination</code> is provided and the resource does not\n                    exist, the request will fail with a <code>BadRequest</code> error.</p>\n            </li>\n            <li>\n               <p>If <code>FileAccessAuditLogLevel</code> and <code>FileShareAccessAuditLogLevel</code>\n                    are both set to <code>DISABLED</code>, you cannot specify a destination in\n                    <code>AuditLogDestination</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -11568,6 +11800,12 @@
                     "target": "com.amazonaws.fsx#WindowsAuditLogConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log\n            user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server\n            file system.</p>"
+                    }
+                },
+                "DiskIopsConfiguration": {
+                    "target": "com.amazonaws.fsx#DiskIopsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for Windows file system.\n            By default, Amazon FSx automatically provisions 3 IOPS per GiB of storage capacity. You can provision additional\n            IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.</p>"
                     }
                 }
             },

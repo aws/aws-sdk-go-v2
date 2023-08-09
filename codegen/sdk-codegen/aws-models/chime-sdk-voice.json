@@ -1333,9 +1333,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1346,9 +1346,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1359,9 +1359,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1372,9 +1372,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1385,9 +1385,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1398,9 +1398,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1411,9 +1411,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1424,9 +1424,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1435,9 +1435,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1448,9 +1448,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1459,9 +1459,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1472,9 +1472,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1485,9 +1485,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1498,9 +1498,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1511,9 +1511,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1524,9 +1524,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1535,9 +1535,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1548,9 +1548,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1559,9 +1559,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1572,9 +1572,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1585,9 +1585,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1597,9 +1597,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1609,9 +1609,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1736,6 +1736,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of phone numbers, in E.164 format.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkvoice#PhoneNumberName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name assigned to one or more phone numbers.</p>"
                     }
                 }
             },
@@ -6858,6 +6864,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The phone number's order ID.</p>"
                     }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkvoice#PhoneNumberName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the phone number.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7034,6 +7046,17 @@
                     "min": 1,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.chimesdkvoice#PhoneNumberName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^$|^[a-zA-Z0-9\\,\\.\\_\\-]+(\\s+[a-zA-Z0-9\\,\\.\\_\\-]+)*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.chimesdkvoice#PhoneNumberOrder": {
@@ -9740,6 +9763,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The outbound calling name associated with the phone number.</p>"
                     }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkvoice#PhoneNumberName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name assigned to one or more phone numbers.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9766,6 +9795,12 @@
                     "target": "com.amazonaws.chimesdkvoice#CallingName",
                     "traits": {
                         "smithy.api#documentation": "<p>The outbound calling name to update.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkvoice#PhoneNumberName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the phone number.</p>"
                     }
                 }
             },
