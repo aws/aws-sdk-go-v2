@@ -1,3 +1,17 @@
+# Release (2023-08-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.8.0](service/chimesdkvoice/CHANGELOG.md#v180-2023-08-09)
+  * **Feature**: Updating CreatePhoneNumberOrder, UpdatePhoneNumber and BatchUpdatePhoneNumbers APIs, adding phone number name
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.32.0](service/fsx/CHANGELOG.md#v1320-2023-08-09)
+  * **Feature**: For FSx for Lustre, add new data repository task type, RELEASE_DATA_FROM_FILESYSTEM, to release files that have been archived to S3. For FSx for Windows, enable support for configuring and updating SSD IOPS, and for updating storage type. For FSx for OpenZFS, add new deployment type, MULTI_AZ_1.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.17.3](service/globalaccelerator/CHANGELOG.md#v1173-2023-08-09)
+  * **Documentation**: Documentation update for dualstack EC2 endpoint support
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.26.0](service/guardduty/CHANGELOG.md#v1260-2023-08-09)
+  * **Feature**: Added autoEnable ALL to UpdateOrganizationConfiguration and DescribeOrganizationConfiguration APIs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.101.0](service/sagemaker/CHANGELOG.md#v11010-2023-08-09)
+  * **Feature**: This release adds support for cross account access for SageMaker Model Cards through AWS RAM.
+
 # Release (2023-08-08)
 
 ## Module Highlights

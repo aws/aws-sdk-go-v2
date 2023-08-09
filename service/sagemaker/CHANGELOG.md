@@ -1,3 +1,7 @@
+# v1.101.0 (2023-08-09)
+
+* **Feature**: This release adds support for cross account access for SageMaker Model Cards through AWS RAM.
+
 # v1.100.1 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

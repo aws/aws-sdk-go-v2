@@ -1,3 +1,7 @@
+# v1.8.0 (2023-08-09)
+
+* **Feature**: Updating CreatePhoneNumberOrder, UpdatePhoneNumber and BatchUpdatePhoneNumbers APIs, adding phone number name
+
 # v1.7.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions
