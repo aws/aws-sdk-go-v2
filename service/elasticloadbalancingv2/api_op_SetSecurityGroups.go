@@ -10,15 +10,18 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates the specified security groups with the specified Application Load
-// Balancer. The specified security groups override the previously associated
-// security groups. You can't specify a security group for a Network Load Balancer
-// or Gateway Load Balancer.
+// Balancer or Network Load Balancer. The specified security groups override the
+// previously associated security groups. You can't perform this operation on a
+// Network Load Balancer unless you specified a security group for the load
+// balancer when you created it. You can't associate a security group with a
+// Gateway Load Balancer.
 func (c *Client) SetSecurityGroups(ctx context.Context, params *SetSecurityGroupsInput, optFns ...func(*Options)) (*SetSecurityGroupsOutput, error) {
 	if params == nil {
 		params = &SetSecurityGroupsInput{}
@@ -46,10 +49,19 @@ type SetSecurityGroupsInput struct {
 	// This member is required.
 	SecurityGroups []string
 
+	// Indicates whether to evaluate inbound security group rules for traffic sent to
+	// a Network Load Balancer through Amazon Web Services PrivateLink. The default is
+	// on .
+	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic types.EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum
+
 	noSmithyDocumentSerde
 }
 
 type SetSecurityGroupsOutput struct {
+
+	// Indicates whether to evaluate inbound security group rules for traffic sent to
+	// a Network Load Balancer through Amazon Web Services PrivateLink.
+	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic types.EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum
 
 	// The IDs of the security groups associated with the load balancer.
 	SecurityGroupIds []string

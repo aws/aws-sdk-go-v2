@@ -16,78 +16,48 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new routing profile.
-func (c *Client) CreateRoutingProfile(ctx context.Context, params *CreateRoutingProfileInput, optFns ...func(*Options)) (*CreateRoutingProfileOutput, error) {
+// Lists traffic distribution group users.
+func (c *Client) ListTrafficDistributionGroupUsers(ctx context.Context, params *ListTrafficDistributionGroupUsersInput, optFns ...func(*Options)) (*ListTrafficDistributionGroupUsersOutput, error) {
 	if params == nil {
-		params = &CreateRoutingProfileInput{}
+		params = &ListTrafficDistributionGroupUsersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRoutingProfile", params, optFns, c.addOperationCreateRoutingProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTrafficDistributionGroupUsers", params, optFns, c.addOperationListTrafficDistributionGroupUsersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateRoutingProfileOutput)
+	out := result.(*ListTrafficDistributionGroupUsersOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateRoutingProfileInput struct {
+type ListTrafficDistributionGroupUsersInput struct {
 
-	// The default outbound queue for the routing profile.
+	// The identifier of the traffic distribution group. This can be the ID or the ARN
+	// if the API is being called in the Region where the traffic distribution group
+	// was created. The ARN must be provided if the call is from the replicated Region.
 	//
 	// This member is required.
-	DefaultOutboundQueueId *string
+	TrafficDistributionGroupId *string
 
-	// Description of the routing profile. Must not be more than 250 characters.
-	//
-	// This member is required.
-	Description *string
+	// The maximum number of results to return per page.
+	MaxResults *int32
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
-	//
-	// This member is required.
-	InstanceId *string
-
-	// The channels that agents can handle in the Contact Control Panel (CCP) for this
-	// routing profile.
-	//
-	// This member is required.
-	MediaConcurrencies []types.MediaConcurrency
-
-	// The name of the routing profile. Must not be more than 127 characters.
-	//
-	// This member is required.
-	Name *string
-
-	// Whether agents with this routing profile will have their routing order
-	// calculated based on longest idle time or time since their last inbound contact.
-	AgentAvailabilityTimer types.AgentAvailabilityTimer
-
-	// The inbound queues associated with the routing profile. If no queue is added,
-	// the agent can make only outbound calls. The limit of 10 array members applies to
-	// the maximum number of RoutingProfileQueueConfig objects that can be passed
-	// during a CreateRoutingProfile API request. It is different from the quota of 50
-	// queues per routing profile per instance that is listed in Amazon Connect
-	// service quotas (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
-	// .
-	QueueConfigs []types.RoutingProfileQueueConfig
-
-	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
-	Tags map[string]string
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateRoutingProfileOutput struct {
+type ListTrafficDistributionGroupUsersOutput struct {
 
-	// The Amazon Resource Name (ARN) of the routing profile.
-	RoutingProfileArn *string
+	// If there are additional results, this is the token for the next set of results.
+	NextToken *string
 
-	// The identifier of the routing profile.
-	RoutingProfileId *string
+	// A list of traffic distribution group users.
+	TrafficDistributionGroupUserSummaryList []types.TrafficDistributionGroupUserSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -95,12 +65,12 @@ type CreateRoutingProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoutingProfile{}, middleware.After)
+func (c *Client) addOperationListTrafficDistributionGroupUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrafficDistributionGroupUsers{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoutingProfile{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrafficDistributionGroupUsers{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -143,13 +113,13 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addCreateRoutingProfileResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addListTrafficDistributionGroupUsersResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateRoutingProfileValidationMiddleware(stack); err != nil {
+	if err = addOpListTrafficDistributionGroupUsersValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRoutingProfile(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrafficDistributionGroupUsers(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -170,25 +140,118 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateRoutingProfile(region string) *awsmiddleware.RegisterServiceMetadata {
+// ListTrafficDistributionGroupUsersAPIClient is a client that implements the
+// ListTrafficDistributionGroupUsers operation.
+type ListTrafficDistributionGroupUsersAPIClient interface {
+	ListTrafficDistributionGroupUsers(context.Context, *ListTrafficDistributionGroupUsersInput, ...func(*Options)) (*ListTrafficDistributionGroupUsersOutput, error)
+}
+
+var _ ListTrafficDistributionGroupUsersAPIClient = (*Client)(nil)
+
+// ListTrafficDistributionGroupUsersPaginatorOptions is the paginator options for
+// ListTrafficDistributionGroupUsers
+type ListTrafficDistributionGroupUsersPaginatorOptions struct {
+	// The maximum number of results to return per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTrafficDistributionGroupUsersPaginator is a paginator for
+// ListTrafficDistributionGroupUsers
+type ListTrafficDistributionGroupUsersPaginator struct {
+	options   ListTrafficDistributionGroupUsersPaginatorOptions
+	client    ListTrafficDistributionGroupUsersAPIClient
+	params    *ListTrafficDistributionGroupUsersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTrafficDistributionGroupUsersPaginator returns a new
+// ListTrafficDistributionGroupUsersPaginator
+func NewListTrafficDistributionGroupUsersPaginator(client ListTrafficDistributionGroupUsersAPIClient, params *ListTrafficDistributionGroupUsersInput, optFns ...func(*ListTrafficDistributionGroupUsersPaginatorOptions)) *ListTrafficDistributionGroupUsersPaginator {
+	if params == nil {
+		params = &ListTrafficDistributionGroupUsersInput{}
+	}
+
+	options := ListTrafficDistributionGroupUsersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListTrafficDistributionGroupUsersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTrafficDistributionGroupUsersPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListTrafficDistributionGroupUsers page.
+func (p *ListTrafficDistributionGroupUsersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTrafficDistributionGroupUsersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTrafficDistributionGroupUsers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListTrafficDistributionGroupUsers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "connect",
-		OperationName: "CreateRoutingProfile",
+		OperationName: "ListTrafficDistributionGroupUsers",
 	}
 }
 
-type opCreateRoutingProfileResolveEndpointMiddleware struct {
+type opListTrafficDistributionGroupUsersResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opCreateRoutingProfileResolveEndpointMiddleware) ID() string {
+func (*opListTrafficDistributionGroupUsersResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opCreateRoutingProfileResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opListTrafficDistributionGroupUsersResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -290,8 +353,8 @@ func (m *opCreateRoutingProfileResolveEndpointMiddleware) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
-func addCreateRoutingProfileResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opCreateRoutingProfileResolveEndpointMiddleware{
+func addListTrafficDistributionGroupUsersResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opListTrafficDistributionGroupUsersResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

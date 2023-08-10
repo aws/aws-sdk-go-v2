@@ -1,0 +1,8 @@
+{
+    "id": "eec68291-be5e-4aa6-8057-dcb1adfc7ece",
+    "type": "documentation",
+    "description": "Documentation updates for AW Transfer Family",
+    "modules": [
+        "service/transfer"
+    ]
+}

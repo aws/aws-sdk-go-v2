@@ -10,39 +10,28 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
-	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new routing profile.
-func (c *Client) CreateRoutingProfile(ctx context.Context, params *CreateRoutingProfileInput, optFns ...func(*Options)) (*CreateRoutingProfileOutput, error) {
+// Associates an agent with a traffic distribution group.
+func (c *Client) AssociateTrafficDistributionGroupUser(ctx context.Context, params *AssociateTrafficDistributionGroupUserInput, optFns ...func(*Options)) (*AssociateTrafficDistributionGroupUserOutput, error) {
 	if params == nil {
-		params = &CreateRoutingProfileInput{}
+		params = &AssociateTrafficDistributionGroupUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRoutingProfile", params, optFns, c.addOperationCreateRoutingProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateTrafficDistributionGroupUser", params, optFns, c.addOperationAssociateTrafficDistributionGroupUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateRoutingProfileOutput)
+	out := result.(*AssociateTrafficDistributionGroupUserOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateRoutingProfileInput struct {
-
-	// The default outbound queue for the routing profile.
-	//
-	// This member is required.
-	DefaultOutboundQueueId *string
-
-	// Description of the routing profile. Must not be more than 250 characters.
-	//
-	// This member is required.
-	Description *string
+type AssociateTrafficDistributionGroupUserInput struct {
 
 	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
 	// in the Amazon Resource Name (ARN) of the instance.
@@ -50,57 +39,34 @@ type CreateRoutingProfileInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The channels that agents can handle in the Contact Control Panel (CCP) for this
-	// routing profile.
+	// The identifier of the traffic distribution group. This can be the ID or the ARN
+	// if the API is being called in the Region where the traffic distribution group
+	// was created. The ARN must be provided if the call is from the replicated Region.
 	//
 	// This member is required.
-	MediaConcurrencies []types.MediaConcurrency
+	TrafficDistributionGroupId *string
 
-	// The name of the routing profile. Must not be more than 127 characters.
+	// The identifier of the user account. This can be the ID or the ARN of the user.
 	//
 	// This member is required.
-	Name *string
-
-	// Whether agents with this routing profile will have their routing order
-	// calculated based on longest idle time or time since their last inbound contact.
-	AgentAvailabilityTimer types.AgentAvailabilityTimer
-
-	// The inbound queues associated with the routing profile. If no queue is added,
-	// the agent can make only outbound calls. The limit of 10 array members applies to
-	// the maximum number of RoutingProfileQueueConfig objects that can be passed
-	// during a CreateRoutingProfile API request. It is different from the quota of 50
-	// queues per routing profile per instance that is listed in Amazon Connect
-	// service quotas (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
-	// .
-	QueueConfigs []types.RoutingProfileQueueConfig
-
-	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
-	Tags map[string]string
+	UserId *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateRoutingProfileOutput struct {
-
-	// The Amazon Resource Name (ARN) of the routing profile.
-	RoutingProfileArn *string
-
-	// The identifier of the routing profile.
-	RoutingProfileId *string
-
+type AssociateTrafficDistributionGroupUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoutingProfile{}, middleware.After)
+func (c *Client) addOperationAssociateTrafficDistributionGroupUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateTrafficDistributionGroupUser{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoutingProfile{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateTrafficDistributionGroupUser{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -143,13 +109,13 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addCreateRoutingProfileResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addAssociateTrafficDistributionGroupUserResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateRoutingProfileValidationMiddleware(stack); err != nil {
+	if err = addOpAssociateTrafficDistributionGroupUserValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRoutingProfile(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateTrafficDistributionGroupUser(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -170,25 +136,25 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateRoutingProfile(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opAssociateTrafficDistributionGroupUser(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "connect",
-		OperationName: "CreateRoutingProfile",
+		OperationName: "AssociateTrafficDistributionGroupUser",
 	}
 }
 
-type opCreateRoutingProfileResolveEndpointMiddleware struct {
+type opAssociateTrafficDistributionGroupUserResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opCreateRoutingProfileResolveEndpointMiddleware) ID() string {
+func (*opAssociateTrafficDistributionGroupUserResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opCreateRoutingProfileResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opAssociateTrafficDistributionGroupUserResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -290,8 +256,8 @@ func (m *opCreateRoutingProfileResolveEndpointMiddleware) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
-func addCreateRoutingProfileResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opCreateRoutingProfileResolveEndpointMiddleware{
+func addAssociateTrafficDistributionGroupUserResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opAssociateTrafficDistributionGroupUserResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

@@ -68,6 +68,25 @@ func (AuthenticateOidcActionConditionalBehaviorEnum) Values() []AuthenticateOidc
 	}
 }
 
+type EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum string
+
+// Enum values for EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum
+const (
+	EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnumOn  EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = "on"
+	EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnumOff EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = "off"
+)
+
+// Values returns all known values for
+// EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum) Values() []EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum {
+	return []EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum{
+		"on",
+		"off",
+	}
+}
+
 type IpAddressType string
 
 // Enum values for IpAddressType

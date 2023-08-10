@@ -16,9 +16,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the traffic distribution for a given traffic distribution group. For
-// more information about updating a traffic distribution group, see Update
-// telephony traffic distribution across Amazon Web Services Regions  (https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html)
+// Updates the traffic distribution for a given traffic distribution group. You
+// can change the SignInConfig only for a default TrafficDistributionGroup . If you
+// call UpdateTrafficDistribution with a modified SignInConfig and a non-default
+// TrafficDistributionGroup , an InvalidRequestException is returned. For more
+// information about updating a traffic distribution group, see Update telephony
+// traffic distribution across Amazon Web Services Regions  (https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) UpdateTrafficDistribution(ctx context.Context, params *UpdateTrafficDistributionInput, optFns ...func(*Options)) (*UpdateTrafficDistributionOutput, error) {
 	if params == nil {
@@ -43,6 +46,12 @@ type UpdateTrafficDistributionInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	// The distribution of agents between the instance and its replica(s).
+	AgentConfig *types.AgentConfig
+
+	// The distribution of allowing signing in to the instance and its replica(s).
+	SignInConfig *types.SignInConfig
 
 	// The distribution of traffic between the instance and its replica(s).
 	TelephonyConfig *types.TelephonyConfig

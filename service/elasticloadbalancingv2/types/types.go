@@ -305,7 +305,10 @@ type HttpRequestMethodConditionConfig struct {
 }
 
 // Information about an Elastic Load Balancing resource limit for your Amazon Web
-// Services account.
+// Services account. For more information, see the following:
+//   - Quotas for your Application Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html)
+//   - Quotas for your Network Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html)
+//   - Quotas for your Gateway Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/quotas-limits.html)
 type Limit struct {
 
 	// The maximum value of the limit.
@@ -385,6 +388,10 @@ type LoadBalancer struct {
 
 	// The public DNS name of the load balancer.
 	DNSName *string
+
+	// Indicates whether to evaluate inbound security group rules for traffic sent to
+	// a Network Load Balancer through Amazon Web Services PrivateLink.
+	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *string
 
 	// The type of IP addresses used by the subnets for your load balancer. The
 	// possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6
@@ -677,7 +684,9 @@ type Rule struct {
 // to one of each of the following conditions: http-request-method , host-header ,
 // path-pattern , and source-ip . Each rule can also optionally include one or more
 // of each of the following conditions: http-header and query-string . Note that
-// the value for a condition cannot be empty.
+// the value for a condition cannot be empty. For more information, see Quotas for
+// your Application Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html)
+// .
 type RuleCondition struct {
 
 	// The field in the HTTP request. The following are the possible values:
@@ -857,7 +866,8 @@ type TargetDescription struct {
 	// The port on which the target is listening. If the target group protocol is
 	// GENEVE, the supported port is 6081. If the target type is alb , the targeted
 	// Application Load Balancer must have at least one listener whose port matches the
-	// target group port. Not used if the target is a Lambda function.
+	// target group port. This parameter is not used if the target is a Lambda
+	// function.
 	Port *int32
 
 	noSmithyDocumentSerde
@@ -896,16 +906,16 @@ type TargetGroup struct {
 	// defaults to ipv4 .
 	IpAddressType TargetGroupIpAddressTypeEnum
 
-	// The Amazon Resource Names (ARN) of the load balancers that route traffic to
-	// this target group.
+	// The Amazon Resource Name (ARN) of the load balancer that routes traffic to this
+	// target group. You can use each target group with only one load balancer.
 	LoadBalancerArns []string
 
 	// The HTTP or gRPC codes to use when checking for a successful response from a
 	// target.
 	Matcher *Matcher
 
-	// The port on which the targets are listening. Not used if the target is a Lambda
-	// function.
+	// The port on which the targets are listening. This parameter is not used if the
+	// target is a Lambda function.
 	Port *int32
 
 	// The protocol to use for routing traffic to the targets.

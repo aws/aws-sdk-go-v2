@@ -6507,6 +6507,15 @@ func awsRestjson1_deserializeOpDocumentGetRunTaskOutput(v **GetRunTaskOutput, va
 				sv.Gpus = ptr.Int32(int32(i64))
 			}
 
+		case "instanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaskInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = ptr.String(jtv)
+			}
+
 		case "logStream":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17575,6 +17584,15 @@ func awsRestjson1_deserializeDocumentTaskListItem(v **types.TaskListItem, value 
 					return err
 				}
 				sv.Gpus = ptr.Int32(int32(i64))
+			}
+
+		case "instanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaskInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = ptr.String(jtv)
 			}
 
 		case "memory":

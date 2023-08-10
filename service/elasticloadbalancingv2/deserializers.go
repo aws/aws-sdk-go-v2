@@ -8445,6 +8445,19 @@ func awsAwsquery_deserializeDocumentLoadBalancer(v **types.LoadBalancer, decoder
 				sv.DNSName = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("IpAddressType", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -13695,6 +13708,19 @@ func awsAwsquery_deserializeOpDocumentSetSecurityGroupsOutput(v **SetSecurityGro
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = types.EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum(xtv)
+			}
+
 		case strings.EqualFold("SecurityGroupIds", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentSecurityGroups(&sv.SecurityGroupIds, nodeDecoder); err != nil {

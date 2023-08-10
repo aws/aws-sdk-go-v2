@@ -70,8 +70,8 @@ type CreateLoadBalancerInput struct {
 	// cannot specify a scheme for a Gateway Load Balancer.
 	Scheme types.LoadBalancerSchemeEnum
 
-	// [Application Load Balancers] The IDs of the security groups for the load
-	// balancer.
+	// [Application Load Balancers and Network Load Balancers] The IDs of the security
+	// groups for the load balancer.
 	SecurityGroups []string
 
 	// The IDs of the public subnets. You can specify only one subnet per Availability

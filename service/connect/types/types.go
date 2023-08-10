@@ -18,6 +18,17 @@ type ActionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The distribution of agents between the instance and its replica(s).
+type AgentConfig struct {
+
+	// Information about traffic distributions.
+	//
+	// This member is required.
+	Distributions []Distribution
+
+	noSmithyDocumentSerde
+}
+
 // Information about the contact (https://docs.aws.amazon.com/connect/latest/APIReference/API_Contact.html)
 // associated to the user.
 type AgentContactReference struct {
@@ -3292,6 +3303,33 @@ type SendNotificationActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// The distribution of allowing signing in to the instance and its replica(s).
+type SignInConfig struct {
+
+	// Information about traffic distributions.
+	//
+	// This member is required.
+	Distributions []SignInDistribution
+
+	noSmithyDocumentSerde
+}
+
+// The distribution of sign in traffic between the instance and its replica(s).
+type SignInDistribution struct {
+
+	// Whether sign in distribution is enabled.
+	//
+	// This member is required.
+	Enabled bool
+
+	// The Amazon Web Services Region of the sign in distribution.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the automation option based on a rule category for a single
 // select question.
 type SingleSelectQuestionRuleCategoryAutomation struct {
@@ -3562,6 +3600,15 @@ type TrafficDistributionGroup struct {
 	// The Amazon Resource Name (ARN).
 	InstanceArn *string
 
+	// Whether this is the default traffic distribution group created during instance
+	// replication. The default traffic distribution group cannot be deleted by the
+	// DeleteTrafficDistributionGroup API. The default traffic distribution group is
+	// deleted as part of the process for deleting a replica. You can change the
+	// SignInConfig only for a default TrafficDistributionGroup . If you call
+	// UpdateTrafficDistribution with a modified SignInConfig and a non-default
+	// TrafficDistributionGroup , an InvalidRequestException is returned.
+	IsDefault bool
+
 	// The name of the traffic distribution group.
 	Name *string
 
@@ -3601,6 +3648,12 @@ type TrafficDistributionGroupSummary struct {
 	// The Amazon Resource Name (ARN) of the traffic distribution group.
 	InstanceArn *string
 
+	// Whether this is the default traffic distribution group created during instance
+	// replication. The default traffic distribution group cannot be deleted by the
+	// DeleteTrafficDistributionGroup API. The default traffic distribution group is
+	// deleted as part of the process for deleting a replica.
+	IsDefault bool
+
 	// The name of the traffic distribution group.
 	Name *string
 
@@ -3618,6 +3671,15 @@ type TrafficDistributionGroupSummary struct {
 	//   - UPDATE_IN_PROGRESS means the previous UpdateTrafficDistributionGroup (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html)
 	//   operation is still in progress and has not yet completed.
 	Status TrafficDistributionGroupStatus
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a traffic distribution group user.
+type TrafficDistributionGroupUserSummary struct {
+
+	// The identifier for the user. This can be the ID or the ARN of the user.
+	UserId *string
 
 	noSmithyDocumentSerde
 }

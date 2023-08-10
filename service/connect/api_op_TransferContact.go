@@ -70,7 +70,7 @@ type TransferContactInput struct {
 	// The identifier for the queue.
 	QueueId *string
 
-	// The identifier for the user.
+	// The identifier for the user. This can be the ID or the ARN of the user.
 	UserId *string
 
 	noSmithyDocumentSerde

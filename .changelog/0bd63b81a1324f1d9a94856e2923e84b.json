@@ -1,0 +1,8 @@
+{
+    "id": "0bd63b81-a132-4f1d-9a94-856e2923e84b",
+    "type": "feature",
+    "description": "This release adds instanceType to GetRunTask \u0026 ListRunTasks responses.",
+    "modules": [
+        "service/omics"
+    ]
+}

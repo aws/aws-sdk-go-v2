@@ -1,0 +1,8 @@
+{
+    "id": "98df86e8-0d86-4ac3-a0d8-949d6ef95ba4",
+    "type": "feature",
+    "description": "This release adds APIs to provision agents that are global / available in multiple AWS regions and distribute them across these regions by percentage.",
+    "modules": [
+        "service/connect"
+    ]
+}

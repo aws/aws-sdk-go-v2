@@ -57,7 +57,7 @@ type GetFederationTokenOutput struct {
 	// The Amazon Resource Name (ARN) of the user.
 	UserArn *string
 
-	// The identifier for the user.
+	// The identifier for the user. This can be the ID or the ARN of the user.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.

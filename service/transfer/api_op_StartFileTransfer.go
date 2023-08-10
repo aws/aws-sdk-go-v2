@@ -22,10 +22,10 @@ import (
 //   - For an SFTP connector, the file transfer can be either outbound or inbound.
 //     In both cases, you specify the ConnectorId . Depending on the direction of the
 //     transfer, you also specify the following items:
-//   - If you are transferring file from a partner's SFTP server to a Transfer
-//     Family server, you specify one or more RetreiveFilePaths to identify the files
-//     you want to transfer, and a LocalDirectoryPath to specify the destination
-//     folder.
+//   - If you are transferring file from a partner's SFTP server to Amazon Web
+//     Services storage, you specify one or more RetreiveFilePaths to identify the
+//     files you want to transfer, and a LocalDirectoryPath to specify the
+//     destination folder.
 //   - If you are transferring file to a partner's SFTP server from Amazon Web
 //     Services storage, you specify one or more SendFilePaths to identify the files
 //     you want to transfer, and a RemoteDirectoryPath to specify the destination
@@ -68,7 +68,8 @@ type StartFileTransferInput struct {
 
 	// One or more source paths for the Transfer Family server. Each string represents
 	// a source file path for one outbound file transfer. For example,
-	// DOC-EXAMPLE-BUCKET/myfile.txt .
+	// DOC-EXAMPLE-BUCKET/myfile.txt . Replace  DOC-EXAMPLE-BUCKET with one of your
+	// actual buckets.
 	SendFilePaths []string
 
 	noSmithyDocumentSerde

@@ -43,8 +43,8 @@ type ListAnnotationImportJobsInput struct {
 	// The maximum number of jobs to return in one page of results.
 	MaxResults *int32
 
-	// Specify the pagination token from a previous request to retrieve the next page
-	// of results.
+	// Specifies the pagination token from a previous request to retrieve the next
+	// page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -55,7 +55,8 @@ type ListAnnotationImportJobsOutput struct {
 	// A list of jobs.
 	AnnotationImportJobs []types.AnnotationImportJobItem
 
-	// A pagination token that's included if more results are available.
+	// Specifies the pagination token from a previous request to retrieve the next
+	// page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

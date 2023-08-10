@@ -1237,6 +1237,9 @@ type TaskListItem struct {
 	// The number of Graphics Processing Units (GPU) specified for the task.
 	Gpus *int32
 
+	// The instance type for a task.
+	InstanceType *string
+
 	// The task's memory use in gigabyes.
 	Memory *int32
 

@@ -45,6 +45,9 @@ type GetTrafficDistributionInput struct {
 
 type GetTrafficDistributionOutput struct {
 
+	// The distribution of agents between the instance and its replica(s).
+	AgentConfig *types.AgentConfig
+
 	// The Amazon Resource Name (ARN) of the traffic distribution group.
 	Arn *string
 
@@ -52,6 +55,9 @@ type GetTrafficDistributionOutput struct {
 	// if the API is being called in the Region where the traffic distribution group
 	// was created. The ARN must be provided if the call is from the replicated Region.
 	Id *string
+
+	// The distribution of allowing signing in to the instance and its replica(s).
+	SignInConfig *types.SignInConfig
 
 	// The distribution of traffic between the instance and its replicas.
 	TelephonyConfig *types.TelephonyConfig

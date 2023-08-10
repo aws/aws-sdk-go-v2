@@ -3969,6 +3969,11 @@ func awsAwsquery_serializeOpDocumentSetSecurityGroupsInput(v *SetSecurityGroupsI
 	object := value.Object()
 	_ = object
 
+	if len(v.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic) > 0 {
+		objectKey := object.Key("EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic")
+		objectKey.String(string(v.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic))
+	}
+
 	if v.LoadBalancerArn != nil {
 		objectKey := object.Key("LoadBalancerArn")
 		objectKey.String(*v.LoadBalancerArn)

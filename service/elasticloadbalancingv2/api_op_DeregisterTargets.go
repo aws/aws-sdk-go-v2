@@ -18,6 +18,7 @@ import (
 
 // Deregisters the specified targets from the specified target group. After the
 // targets are deregistered, they no longer receive traffic from the load balancer.
+// Note: If the specified target does not exist, the action returns successfully.
 func (c *Client) DeregisterTargets(ctx context.Context, params *DeregisterTargetsInput, optFns ...func(*Options)) (*DeregisterTargetsOutput, error) {
 	if params == nil {
 		params = &DeregisterTargetsInput{}

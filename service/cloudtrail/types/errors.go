@@ -1657,8 +1657,9 @@ func (e *KmsKeyNotFoundException) ErrorCode() string {
 }
 func (e *KmsKeyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You are already running the maximum number of concurrent queries. Wait a minute
-// for some queries to finish, and then run the query again.
+// You are already running the maximum number of concurrent queries. The maximum
+// number of concurrent queries is 10. Wait a minute for some queries to finish,
+// and then run the query again.
 type MaxConcurrentQueriesException struct {
 	Message *string
 

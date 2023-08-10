@@ -230,6 +230,26 @@ func (m *validateOpAssociateSecurityKey) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateTrafficDistributionGroupUser struct {
+}
+
+func (*validateOpAssociateTrafficDistributionGroupUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateTrafficDistributionGroupUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateTrafficDistributionGroupUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateTrafficDistributionGroupUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpClaimPhoneNumber struct {
 }
 
@@ -1670,6 +1690,26 @@ func (m *validateOpDisassociateSecurityKey) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateTrafficDistributionGroupUser struct {
+}
+
+func (*validateOpDisassociateTrafficDistributionGroupUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateTrafficDistributionGroupUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateTrafficDistributionGroupUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateTrafficDistributionGroupUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDismissUserContact struct {
 }
 
@@ -2445,6 +2485,26 @@ func (m *validateOpListTaskTemplates) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTaskTemplatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTrafficDistributionGroupUsers struct {
+}
+
+func (*validateOpListTrafficDistributionGroupUsers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTrafficDistributionGroupUsers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTrafficDistributionGroupUsersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTrafficDistributionGroupUsersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3914,6 +3974,10 @@ func addOpAssociateSecurityKeyValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpAssociateSecurityKey{}, middleware.After)
 }
 
+func addOpAssociateTrafficDistributionGroupUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateTrafficDistributionGroupUser{}, middleware.After)
+}
+
 func addOpClaimPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpClaimPhoneNumber{}, middleware.After)
 }
@@ -4202,6 +4266,10 @@ func addOpDisassociateSecurityKeyValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDisassociateSecurityKey{}, middleware.After)
 }
 
+func addOpDisassociateTrafficDistributionGroupUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateTrafficDistributionGroupUser{}, middleware.After)
+}
+
 func addOpDismissUserContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDismissUserContact{}, middleware.After)
 }
@@ -4356,6 +4424,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListTaskTemplatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTaskTemplates{}, middleware.After)
+}
+
+func addOpListTrafficDistributionGroupUsersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTrafficDistributionGroupUsers{}, middleware.After)
 }
 
 func addOpListUseCasesValidationMiddleware(stack *middleware.Stack) error {
@@ -4640,6 +4712,25 @@ func addOpUpdateUserRoutingProfileValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateUserSecurityProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUserSecurityProfiles{}, middleware.After)
+}
+
+func validateAgentConfig(v *types.AgentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentConfig"}
+	if v.Distributions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Distributions"))
+	} else if v.Distributions != nil {
+		if err := validateDistributionList(v.Distributions); err != nil {
+			invalidParams.AddNested("Distributions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateChatMessage(v *types.ChatMessage) error {
@@ -5703,6 +5794,57 @@ func validateSendNotificationActionDefinition(v *types.SendNotificationActionDef
 	}
 }
 
+func validateSignInConfig(v *types.SignInConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SignInConfig"}
+	if v.Distributions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Distributions"))
+	} else if v.Distributions != nil {
+		if err := validateSignInDistributionList(v.Distributions); err != nil {
+			invalidParams.AddNested("Distributions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSignInDistribution(v *types.SignInDistribution) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SignInDistribution"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSignInDistributionList(v []types.SignInDistribution) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SignInDistributionList"}
+	for i := range v {
+		if err := validateSignInDistribution(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSingleSelectQuestionRuleCategoryAutomation(v *types.SingleSelectQuestionRuleCategoryAutomation) error {
 	if v == nil {
 		return nil
@@ -6069,6 +6211,27 @@ func validateOpAssociateSecurityKeyInput(v *AssociateSecurityKeyInput) error {
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateTrafficDistributionGroupUserInput(v *AssociateTrafficDistributionGroupUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateTrafficDistributionGroupUserInput"}
+	if v.TrafficDistributionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficDistributionGroupId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7505,6 +7668,27 @@ func validateOpDisassociateSecurityKeyInput(v *DisassociateSecurityKeyInput) err
 	}
 }
 
+func validateOpDisassociateTrafficDistributionGroupUserInput(v *DisassociateTrafficDistributionGroupUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateTrafficDistributionGroupUserInput"}
+	if v.TrafficDistributionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficDistributionGroupId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDismissUserContactInput(v *DismissUserContactInput) error {
 	if v == nil {
 		return nil
@@ -8157,6 +8341,21 @@ func validateOpListTaskTemplatesInput(v *ListTaskTemplatesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTaskTemplatesInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTrafficDistributionGroupUsersInput(v *ListTrafficDistributionGroupUsersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTrafficDistributionGroupUsersInput"}
+	if v.TrafficDistributionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficDistributionGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9460,6 +9659,16 @@ func validateOpUpdateTrafficDistributionInput(v *UpdateTrafficDistributionInput)
 	if v.TelephonyConfig != nil {
 		if err := validateTelephonyConfig(v.TelephonyConfig); err != nil {
 			invalidParams.AddNested("TelephonyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SignInConfig != nil {
+		if err := validateSignInConfig(v.SignInConfig); err != nil {
+			invalidParams.AddNested("SignInConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentConfig != nil {
+		if err := validateAgentConfig(v.AgentConfig); err != nil {
+			invalidParams.AddNested("AgentConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

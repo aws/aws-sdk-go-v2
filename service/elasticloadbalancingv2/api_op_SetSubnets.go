@@ -46,7 +46,7 @@ type SetSubnetsInput struct {
 	// [Network Load Balancers] The type of IP addresses used by the subnets for your
 	// load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack
 	// (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer
-	// with a UDP or TCP_UDP listener. .
+	// with a UDP or TCP_UDP listener.
 	IpAddressType types.IpAddressType
 
 	// The IDs of the public subnets. You can specify only one subnet per Availability

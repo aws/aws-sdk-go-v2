@@ -1047,6 +1047,99 @@ func awsRestjson1_serializeOpDocumentAssociateSecurityKeyInput(v *AssociateSecur
 	return nil
 }
 
+type awsRestjson1_serializeOpAssociateTrafficDistributionGroupUser struct {
+}
+
+func (*awsRestjson1_serializeOpAssociateTrafficDistributionGroupUser) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAssociateTrafficDistributionGroupUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateTrafficDistributionGroupUserInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/traffic-distribution-group/{TrafficDistributionGroupId}/user")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAssociateTrafficDistributionGroupUserInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssociateTrafficDistributionGroupUserInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAssociateTrafficDistributionGroupUserInput(v *AssociateTrafficDistributionGroupUserInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TrafficDistributionGroupId == nil || len(*v.TrafficDistributionGroupId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TrafficDistributionGroupId must not be empty")}
+	}
+	if v.TrafficDistributionGroupId != nil {
+		if err := encoder.SetURI("TrafficDistributionGroupId").String(*v.TrafficDistributionGroupId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssociateTrafficDistributionGroupUserInput(v *AssociateTrafficDistributionGroupUserInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	if v.UserId != nil {
+		ok := object.Key("UserId")
+		ok.String(*v.UserId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpClaimPhoneNumber struct {
 }
 
@@ -7204,6 +7297,79 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateSecurityKeyInput(v *Disasso
 	return nil
 }
 
+type awsRestjson1_serializeOpDisassociateTrafficDistributionGroupUser struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociateTrafficDistributionGroupUser) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociateTrafficDistributionGroupUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateTrafficDistributionGroupUserInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/traffic-distribution-group/{TrafficDistributionGroupId}/user")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociateTrafficDistributionGroupUserInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociateTrafficDistributionGroupUserInput(v *DisassociateTrafficDistributionGroupUserInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.InstanceId != nil {
+		encoder.SetQuery("InstanceId").String(*v.InstanceId)
+	}
+
+	if v.TrafficDistributionGroupId == nil || len(*v.TrafficDistributionGroupId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TrafficDistributionGroupId must not be empty")}
+	}
+	if v.TrafficDistributionGroupId != nil {
+		if err := encoder.SetURI("TrafficDistributionGroupId").String(*v.TrafficDistributionGroupId); err != nil {
+			return err
+		}
+	}
+
+	if v.UserId != nil {
+		encoder.SetQuery("UserId").String(*v.UserId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDismissUserContact struct {
 }
 
@@ -10598,6 +10764,79 @@ func awsRestjson1_serializeOpHttpBindingsListTrafficDistributionGroupsInput(v *L
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListTrafficDistributionGroupUsers struct {
+}
+
+func (*awsRestjson1_serializeOpListTrafficDistributionGroupUsers) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListTrafficDistributionGroupUsers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListTrafficDistributionGroupUsersInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/traffic-distribution-group/{TrafficDistributionGroupId}/user")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListTrafficDistributionGroupUsersInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListTrafficDistributionGroupUsersInput(v *ListTrafficDistributionGroupUsersInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.TrafficDistributionGroupId == nil || len(*v.TrafficDistributionGroupId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TrafficDistributionGroupId must not be empty")}
+	}
+	if v.TrafficDistributionGroupId != nil {
+		if err := encoder.SetURI("TrafficDistributionGroupId").String(*v.TrafficDistributionGroupId); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -17039,6 +17278,20 @@ func awsRestjson1_serializeOpDocumentUpdateTrafficDistributionInput(v *UpdateTra
 	object := value.Object()
 	defer object.Close()
 
+	if v.AgentConfig != nil {
+		ok := object.Key("AgentConfig")
+		if err := awsRestjson1_serializeDocumentAgentConfig(v.AgentConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SignInConfig != nil {
+		ok := object.Key("SignInConfig")
+		if err := awsRestjson1_serializeDocumentSignInConfig(v.SignInConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TelephonyConfig != nil {
 		ok := object.Key("TelephonyConfig")
 		if err := awsRestjson1_serializeDocumentTelephonyConfig(v.TelephonyConfig, ok); err != nil {
@@ -17720,6 +17973,20 @@ func awsRestjson1_serializeOpDocumentUpdateUserSecurityProfilesInput(v *UpdateUs
 	if v.SecurityProfileIds != nil {
 		ok := object.Key("SecurityProfileIds")
 		if err := awsRestjson1_serializeDocumentSecurityProfileIds(v.SecurityProfileIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgentConfig(v *types.AgentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Distributions != nil {
+		ok := object.Key("Distributions")
+		if err := awsRestjson1_serializeDocumentDistributionList(v.Distributions, ok); err != nil {
 			return err
 		}
 	}
@@ -19981,6 +20248,50 @@ func awsRestjson1_serializeDocumentSendNotificationActionDefinition(v *types.Sen
 		ok.String(*v.Subject)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSignInConfig(v *types.SignInConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Distributions != nil {
+		ok := object.Key("Distributions")
+		if err := awsRestjson1_serializeDocumentSignInDistributionList(v.Distributions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSignInDistribution(v *types.SignInDistribution, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSignInDistributionList(v []types.SignInDistribution, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSignInDistribution(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

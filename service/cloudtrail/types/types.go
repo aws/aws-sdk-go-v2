@@ -74,14 +74,18 @@ type AdvancedFieldSelector struct {
 	//   - AWS::Glue::Table
 	//   - AWS::GuardDuty::Detector
 	//   - AWS::KendraRanking::ExecutionPlan
+	//   - AWS::ManagedBlockchain::Network
 	//   - AWS::ManagedBlockchain::Node
+	//   - AWS::MedicalImaging::Datastore
 	//   - AWS::SageMaker::ExperimentTrialComponent
 	//   - AWS::SageMaker::FeatureGroup
 	//   - AWS::S3::AccessPoint
 	//   - AWS::S3ObjectLambda::AccessPoint
-	//   - AWS::S3Outposts::Object You can have only one resources.type ﬁeld per
-	//   selector. To log data events on more than one resource type, add another
-	//   selector.
+	//   - AWS::S3Outposts::Object
+	//   - AWS::SSMMessages::ControlChannel
+	//   - AWS::VerifiedPermissions::PolicyStore You can have only one resources.type
+	//   ﬁeld per selector. To log data events on more than one resource type, add
+	//   another selector.
 	//   - resources.ARN - You can use any operator with resources.ARN , but if you use
 	//   Equals or NotEquals , the value must exactly match the ARN of a valid resource
 	//   of the type you've speciﬁed in the template as the value of resources.type. For
@@ -129,9 +133,15 @@ type AdvancedFieldSelector struct {
 	//   AWS::KendraRanking::ExecutionPlan , and the operator is set to Equals or
 	//   NotEquals , the ARN must be in the following format:
 	//   - arn::kendra-ranking:::rescore-execution-plan/ When resources.type equals
+	//   AWS::ManagedBlockchain::Network , and the operator is set to Equals or
+	//   NotEquals , the ARN must be in the following format:
+	//   - arn::managedblockchain:::networks/ When resources.type equals
 	//   AWS::ManagedBlockchain::Node , and the operator is set to Equals or NotEquals
 	//   , the ARN must be in the following format:
 	//   - arn::managedblockchain:::nodes/ When resources.type equals
+	//   AWS::MedicalImaging::Datastore , and the operator is set to Equals or
+	//   NotEquals , the ARN must be in the following format:
+	//   - arn::medical-imaging:::datastore/ When resources.type equals
 	//   AWS::SageMaker::ExperimentTrialComponent , and the operator is set to Equals
 	//   or NotEquals , the ARN must be in the following format:
 	//   - arn::sagemaker:::experiment-trial-component/ When resources.type equals
@@ -149,7 +159,13 @@ type AdvancedFieldSelector struct {
 	//   - arn::s3-object-lambda:::accesspoint/ When resources.type equals
 	//   AWS::S3Outposts::Object , and the operator is set to Equals or NotEquals , the
 	//   ARN must be in the following format:
-	//   - arn::s3-outposts:::
+	//   - arn::s3-outposts::: When resources.type equals
+	//   AWS::SSMMessages::ControlChannel , and the operator is set to Equals or
+	//   NotEquals , the ARN must be in the following format:
+	//   - arn::ssmmessages:::control-channel/ When resources.type equals
+	//   AWS::VerifiedPermissions::PolicyStore , and the operator is set to Equals or
+	//   NotEquals , the ARN must be in the following format:
+	//   - arn::verifiedpermissions:::policy-store/
 	//
 	// This member is required.
 	Field *string
@@ -254,12 +270,16 @@ type DataResource struct {
 	//   - AWS::Glue::Table
 	//   - AWS::GuardDuty::Detector
 	//   - AWS::KendraRanking::ExecutionPlan
+	//   - AWS::ManagedBlockchain::Network
 	//   - AWS::ManagedBlockchain::Node
+	//   - AWS::MedicalImaging::Datastore
 	//   - AWS::SageMaker::ExperimentTrialComponent
 	//   - AWS::SageMaker::FeatureGroup
 	//   - AWS::S3::AccessPoint
 	//   - AWS::S3ObjectLambda::AccessPoint
 	//   - AWS::S3Outposts::Object
+	//   - AWS::SSMMessages::ControlChannel
+	//   - AWS::VerifiedPermissions::PolicyStore
 	Type *string
 
 	// An array of Amazon Resource Name (ARN) strings or partial ARN strings for the
