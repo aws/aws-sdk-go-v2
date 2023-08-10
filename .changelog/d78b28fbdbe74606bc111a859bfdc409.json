@@ -1,8 +1,0 @@
-{
-    "id": "d78b28fb-dbe7-4606-bc11-1a859bfdc409",
-    "type": "feature",
-    "description": "Add additional InvalidRequestException to list of possible exceptions for ListSecret.",
-    "modules": [
-        "service/secretsmanager"
-    ]
-}

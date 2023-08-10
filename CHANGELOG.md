@@ -1,3 +1,19 @@
+# Release (2023-08-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.28.3](service/cloudtrail/CHANGELOG.md#v1283-2023-08-10)
+  * **Documentation**: Documentation updates for CloudTrail.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.65.0](service/connect/CHANGELOG.md#v1650-2023-08-10)
+  * **Feature**: This release adds APIs to provision agents that are global / available in multiple AWS regions and distribute them across these regions by percentage.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.21.0](service/elasticloadbalancingv2/CHANGELOG.md#v1210-2023-08-10)
+  * **Feature**: This release enables configuring security groups for Network Load Balancers
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.7.0](service/omics/CHANGELOG.md#v170-2023-08-10)
+  * **Feature**: This release adds instanceType to GetRunTask & ListRunTasks responses.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.21.0](service/secretsmanager/CHANGELOG.md#v1210-2023-08-10)
+  * **Feature**: Add additional InvalidRequestException to list of possible exceptions for ListSecret.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.33.3](service/transfer/CHANGELOG.md#v1333-2023-08-10)
+  * **Documentation**: Documentation updates for AW Transfer Family
+
 # Release (2023-08-09)
 
 ## Module Highlights

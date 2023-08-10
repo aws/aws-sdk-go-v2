@@ -1,3 +1,7 @@
+# v1.7.0 (2023-08-10)
+
+* **Feature**: This release adds instanceType to GetRunTask & ListRunTasks responses.
+
 # v1.6.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

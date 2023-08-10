@@ -1,8 +1,0 @@
-{
-    "id": "67abe8a8-298d-494b-bf2e-deb351b41edf",
-    "type": "feature",
-    "description": "This release enables configuring security groups for Network Load Balancers",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

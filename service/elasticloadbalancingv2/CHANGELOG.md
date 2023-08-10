@@ -1,3 +1,7 @@
+# v1.21.0 (2023-08-10)
+
+* **Feature**: This release enables configuring security groups for Network Load Balancers
+
 # v1.20.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

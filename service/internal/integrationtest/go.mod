@@ -15,7 +15,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.15.2
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.28.2
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.28.3
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.21.2
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.15.2
@@ -38,7 +38,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.16.2
-	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.20.2
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/emr v1.28.2
@@ -68,7 +68,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.38.2
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.32.2
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.20.2
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.19.2

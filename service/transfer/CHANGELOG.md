@@ -1,3 +1,7 @@
+# v1.33.3 (2023-08-10)
+
+* **Documentation**: Documentation updates for AW Transfer Family
+
 # v1.33.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions
