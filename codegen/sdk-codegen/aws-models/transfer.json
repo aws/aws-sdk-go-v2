@@ -577,7 +577,7 @@
                 "AccessRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n        <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n        <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>",
+                        "smithy.api#documentation": "<p>Connectors are used to send files using either the AS2 or SFTP protocol. For the access role,\n      provide the Amazon Resource Name (ARN) of the Identity and Access Management role to use.</p>\n         <p>\n            <b>For AS2 connectors</b>\n         </p>\n         <p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n      <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n      <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>\n         <p>\n            <b>For SFTP connectors</b>\n         </p>\n         <p>Make sure that the access role provides\n      read and write access to the parent directory of the file location\n      that's used in the <code>StartFileTransfer</code> request.\n      Additionally,  make sure that the role provides\n      <code>secretsmanager:GetSecretValue</code> permission to Secrets Manager.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -642,7 +642,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the connector, which captures the parameters for an outbound connection for the\n      AS2 or SFTP protocol. The connector is required for sending files to an externally hosted AS2 or SFTP server.\n      For more details about AS2 connectors, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector\">Create AS2 connectors</a>.</p>\n         <note>\n            <p>You must specify exactly one configuration object: either for AS2 (<code>As2Config</code>) or SFTP (<code>SftpConfig</code>).</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates the connector, which captures the parameters for a connection for the\n      AS2 or SFTP protocol. For AS2, the connector is required for sending files to an externally hosted AS2 server. For SFTP, the connector is required when sending files to an SFTP server or receiving files from an SFTP server.\n      For more details about connectors, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector\">Create AS2 connectors</a> and <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/configure-sftp-connector.html\">Create SFTP connectors</a>.</p>\n         <note>\n            <p>You must specify exactly one configuration object: either for AS2 (<code>As2Config</code>) or SFTP (<code>SftpConfig</code>).</p>\n         </note>"
             }
         },
         "com.amazonaws.transfer#CreateConnectorRequest": {
@@ -664,7 +664,7 @@
                 "AccessRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n        <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n        <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>",
+                        "smithy.api#documentation": "<p>Connectors are used to send files using either the AS2 or SFTP protocol. For the access role,\n      provide the Amazon Resource Name (ARN) of the Identity and Access Management role to use.</p>\n         <p>\n            <b>For AS2 connectors</b>\n         </p>\n         <p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n      <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n      <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>\n         <p>\n            <b>For SFTP connectors</b>\n         </p>\n         <p>Make sure that the access role provides\n      read and write access to the parent directory of the file location\n      that's used in the <code>StartFileTransfer</code> request.\n      Additionally,  make sure that the role provides\n      <code>secretsmanager:GetSecretValue</code> permission to Secrets Manager.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2561,7 +2561,7 @@
                 "AccessRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n        <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n        <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>"
+                        "smithy.api#documentation": "<p>Connectors are used to send files using either the AS2 or SFTP protocol. For the access role,\n      provide the Amazon Resource Name (ARN) of the Identity and Access Management role to use.</p>\n         <p>\n            <b>For AS2 connectors</b>\n         </p>\n         <p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n      <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n      <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>\n         <p>\n            <b>For SFTP connectors</b>\n         </p>\n         <p>Make sure that the access role provides\n      read and write access to the parent directory of the file location\n      that's used in the <code>StartFileTransfer</code> request.\n      Additionally,  make sure that the role provides\n      <code>secretsmanager:GetSecretValue</code> permission to Secrets Manager.</p>"
                     }
                 },
                 "Tags": {
@@ -2699,7 +2699,7 @@
                 "AccessRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n        <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n        <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>"
+                        "smithy.api#documentation": "<p>Connectors are used to send files using either the AS2 or SFTP protocol. For the access role,\n      provide the Amazon Resource Name (ARN) of the Identity and Access Management role to use.</p>\n         <p>\n            <b>For AS2 connectors</b>\n         </p>\n         <p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n      <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n      <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>\n         <p>\n            <b>For SFTP connectors</b>\n         </p>\n         <p>Make sure that the access role provides\n      read and write access to the parent directory of the file location\n      that's used in the <code>StartFileTransfer</code> request.\n      Additionally,  make sure that the role provides\n      <code>secretsmanager:GetSecretValue</code> permission to Secrets Manager.</p>"
                     }
                 },
                 "LoggingRole": {
@@ -6558,7 +6558,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.</p>\n         <ul>\n            <li>\n               <p>For an AS2 connector, you specify the <code>ConnectorId</code> and one or more <code>SendFilePaths</code> to identify the files\n          you want to transfer.</p>\n            </li>\n            <li>\n               <p>For an SFTP connector, the file transfer can be either outbound or inbound. In both\n          cases, you specify the <code>ConnectorId</code>. Depending on the direction of the transfer,\n          you also specify the following items:</p>\n               <ul>\n                  <li>\n                     <p>If you are transferring file from a partner's SFTP server to a Transfer Family\n              server, you specify one or more <code>RetreiveFilePaths</code> to identify the files\n              you want to transfer, and a <code>LocalDirectoryPath</code> to specify the destination\n              folder.</p>\n                  </li>\n                  <li>\n                     <p>If you are transferring file to a partner's SFTP server from Amazon Web Services\n              storage, you specify one or more <code>SendFilePaths</code> to identify the files you\n              want to transfer, and a <code>RemoteDirectoryPath</code> to specify the destination\n              folder.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.</p>\n         <ul>\n            <li>\n               <p>For an AS2 connector, you specify the <code>ConnectorId</code> and one or more <code>SendFilePaths</code> to identify the files\n          you want to transfer.</p>\n            </li>\n            <li>\n               <p>For an SFTP connector, the file transfer can be either outbound or inbound. In both\n          cases, you specify the <code>ConnectorId</code>. Depending on the direction of the transfer,\n          you also specify the following items:</p>\n               <ul>\n                  <li>\n                     <p>If you are transferring file from a partner's SFTP server to Amazon Web Services\n              storage, you specify one or more <code>RetreiveFilePaths</code> to identify the files\n              you want to transfer, and a <code>LocalDirectoryPath</code> to specify the destination\n              folder.</p>\n                  </li>\n                  <li>\n                     <p>If you are transferring file to a partner's SFTP server from Amazon Web Services\n              storage, you specify one or more <code>SendFilePaths</code> to identify the files you\n              want to transfer, and a <code>RemoteDirectoryPath</code> to specify the destination\n              folder.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.transfer#StartFileTransferRequest": {
@@ -6574,7 +6574,7 @@
                 "SendFilePaths": {
                     "target": "com.amazonaws.transfer#FilePaths",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more source paths for the Transfer Family server. Each string represents a source file path for one outbound file transfer. For example,\n      <code>\n               <i>DOC-EXAMPLE-BUCKET</i>/<i>myfile.txt</i>\n            </code>.</p>"
+                        "smithy.api#documentation": "<p>One or more source paths for the Transfer Family server. Each string represents a source\n      file path for one outbound file transfer. For example,\n          <code>\n               <i>DOC-EXAMPLE-BUCKET</i>/<i>myfile.txt</i>\n            </code>.</p>\n         <note>\n            <p>Replace <code>\n                  <i>DOC-EXAMPLE-BUCKET</i>\n               </code>with one of your actual buckets.</p>\n         </note>"
                     }
                 },
                 "RetrieveFilePaths": {
@@ -7397,9 +7397,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://transfer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://transfer-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -7412,15 +7591,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://transfer.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://transfer.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -7432,258 +7646,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://transfer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://transfer-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://transfer.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://transfer.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -8593,7 +8557,7 @@
                 "AccessRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n        <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n        <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>"
+                        "smithy.api#documentation": "<p>Connectors are used to send files using either the AS2 or SFTP protocol. For the access role,\n      provide the Amazon Resource Name (ARN) of the Identity and Access Management role to use.</p>\n         <p>\n            <b>For AS2 connectors</b>\n         </p>\n         <p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n      <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n      <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>\n         <p>\n            <b>For SFTP connectors</b>\n         </p>\n         <p>Make sure that the access role provides\n      read and write access to the parent directory of the file location\n      that's used in the <code>StartFileTransfer</code> request.\n      Additionally,  make sure that the role provides\n      <code>secretsmanager:GetSecretValue</code> permission to Secrets Manager.</p>"
                     }
                 }
             },
@@ -8750,7 +8714,7 @@
                 "AccessRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n        <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n        <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>"
+                        "smithy.api#documentation": "<p>Connectors are used to send files using either the AS2 or SFTP protocol. For the access role,\n      provide the Amazon Resource Name (ARN) of the Identity and Access Management role to use.</p>\n         <p>\n            <b>For AS2 connectors</b>\n         </p>\n         <p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n      <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n      <code>StartFileTransfer</code>.</p>\n         <p>If you are using Basic authentication for your AS2 connector, the access role requires the\n      <code>secretsmanager:GetSecretValue</code> permission for the secret. If the secret is encrypted using\n      a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also\n      needs the <code>kms:Decrypt</code> permission for that key.</p>\n         <p>\n            <b>For SFTP connectors</b>\n         </p>\n         <p>Make sure that the access role provides\n      read and write access to the parent directory of the file location\n      that's used in the <code>StartFileTransfer</code> request.\n      Additionally,  make sure that the role provides\n      <code>secretsmanager:GetSecretValue</code> permission to Secrets Manager.</p>"
                     }
                 },
                 "LoggingRole": {
