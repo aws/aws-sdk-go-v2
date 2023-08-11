@@ -6,9 +6,11 @@ import (
 	"strings"
 )
 
-type httpClient struct{}
+// HttpClient is a mock http client used by protocol test cases to
+// respond success response back
+type HttpClient struct{}
 
-func (*httpClient) Do(request *http.Request) (*http.Response, error) {
+func (*HttpClient) Do(request *http.Request) (*http.Response, error) {
 	return &http.Response{
 		StatusCode: 200,
 		Header:     request.Header,
@@ -17,6 +19,7 @@ func (*httpClient) Do(request *http.Request) (*http.Response, error) {
 	}, nil
 }
 
-func NewClient() *httpClient {
-	return &httpClient{}
+// NewClient returns pointer of a new HttpClient for protocol test client
+func NewClient() *HttpClient {
+	return &HttpClient{}
 }
