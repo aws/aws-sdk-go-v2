@@ -1,3 +1,19 @@
+# Release (2023-08-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.16.0](service/amplifybackend/CHANGELOG.md#v1160-2023-08-11)
+  * **Feature**: Adds sensitive trait to required input shapes.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.36.0](service/configservice/CHANGELOG.md#v1360-2023-08-11)
+  * **Feature**: Updated ResourceType enum with new resource types onboarded by AWS Config in July 2023.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.111.0](service/ec2/CHANGELOG.md#v11110-2023-08-11)
+  * **Feature**: Amazon EC2 P5 instances, powered by the latest NVIDIA H100 Tensor Core GPUs, deliver the highest performance in EC2 for deep learning (DL) and HPC applications. M7i-flex and M7i instances are next-generation general purpose instances powered by custom 4th Generation Intel Xeon Scalable processors.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.41.0](service/quicksight/CHANGELOG.md#v1410-2023-08-11)
+  * **Feature**: New Authentication method for Account subscription - IAM Identity Center. Hierarchy layout support, default column width support and related style properties for pivot table visuals. Non-additive topic field aggregations for Topic API
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.16.3](service/ses/CHANGELOG.md#v1163-2023-08-11)
+  * **Documentation**: Doc only updates to include: 1) Clarified which part of an email address where it's okay to have Punycode when it contains non-ASCII characters for the SendRawEmail action and other actions where this is applicable. 2) Updated S3Action description with new MB max bucket size from 30 to 40.
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.17.0](service/swf/CHANGELOG.md#v1170-2023-08-11)
+  * **Feature**: This release adds new API parameters to override workflow task list for workflow executions.
+
 # Release (2023-08-10)
 
 ## Module Highlights
