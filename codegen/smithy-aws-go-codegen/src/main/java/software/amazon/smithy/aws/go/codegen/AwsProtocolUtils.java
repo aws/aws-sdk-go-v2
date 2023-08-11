@@ -105,9 +105,7 @@ final class AwsProtocolUtils {
                 })
                 .build());
 
-        Set<HttpProtocolUnitTestGenerator.SkipTest> inputSkipTests = new TreeSet<>(SetUtils.of(
-
-        ));
+        Set<HttpProtocolUnitTestGenerator.SkipTest> inputSkipTests = new TreeSet<>(SetUtils.of());
 
         Set<HttpProtocolUnitTestGenerator.SkipTest> outputSkipTests = new TreeSet<>(SetUtils.of(
                 // REST-JSON optional (SHOULD) test cases
