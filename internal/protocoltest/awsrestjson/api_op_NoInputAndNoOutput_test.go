@@ -6,7 +6,7 @@ import (
 	"bytes"
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
-	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyrand "github.com/aws/smithy-go/rand"
@@ -18,9 +18,7 @@ import (
 	"io/ioutil"
 	"math"
 	"net/http"
-	"net/http/httptest"
 	"net/url"
-	"strconv"
 	"testing"
 )
 
@@ -53,25 +51,7 @@ func TestClient_NoInputAndNoOutput_awsRestjson1Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			var actualReq *http.Request
-			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				actualReq = r.Clone(r.Context())
-				if len(actualReq.URL.RawPath) == 0 {
-					actualReq.URL.RawPath = actualReq.URL.Path
-				}
-				if v := actualReq.ContentLength; v != 0 {
-					actualReq.Header.Set("Content-Length", strconv.FormatInt(v, 10))
-				}
-				var buf bytes.Buffer
-				if _, err := io.Copy(&buf, r.Body); err != nil {
-					t.Errorf("failed to read request body, %v", err)
-				}
-				actualReq.Body = ioutil.NopCloser(&buf)
-
-				w.WriteHeader(200)
-			}))
-			defer server.Close()
-			serverURL := server.URL
+			serverURL := "http://localhost:8888/"
 			if c.Host != nil {
 				u, err := url.Parse(serverURL)
 				if err != nil {
@@ -95,32 +75,37 @@ func TestClient_NoInputAndNoOutput_awsRestjson1Serialize(t *testing.T) {
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient:               awshttp.NewBuildableClient(),
+				HTTPClient:               protocoltesthttp.NewClient(),
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			result, err := client.NoInputAndNoOutput(context.Background(), c.Params)
+			capturedReq := &http.Request{}
+			result, err := client.NoInputAndNoOutput(context.Background(), c.Params, func(options *Options) {
+				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
+					return smithyhttp.AddCaptureRequestMiddleware(stack, capturedReq)
+				})
+			})
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if e, a := c.ExpectMethod, actualReq.Method; e != a {
+			if e, a := c.ExpectMethod, capturedReq.Method; e != a {
 				t.Errorf("expect %v method, got %v", e, a)
 			}
-			if e, a := c.ExpectURIPath, actualReq.URL.RawPath; e != a {
+			if e, a := c.ExpectURIPath, capturedReq.URL.RawPath; e != a {
 				t.Errorf("expect %v path, got %v", e, a)
 			}
-			queryItems := smithytesting.ParseRawQuery(actualReq.URL.RawQuery)
+			queryItems := smithytesting.ParseRawQuery(capturedReq.URL.RawQuery)
 			smithytesting.AssertHasQuery(t, c.ExpectQuery, queryItems)
 			smithytesting.AssertHasQueryKeys(t, c.RequireQuery, queryItems)
 			smithytesting.AssertNotHaveQueryKeys(t, c.ForbidQuery, queryItems)
-			smithytesting.AssertHasHeader(t, c.ExpectHeader, actualReq.Header)
-			smithytesting.AssertHasHeaderKeys(t, c.RequireHeader, actualReq.Header)
-			smithytesting.AssertNotHaveHeaderKeys(t, c.ForbidHeader, actualReq.Header)
+			smithytesting.AssertHasHeader(t, c.ExpectHeader, capturedReq.Header)
+			smithytesting.AssertHasHeaderKeys(t, c.RequireHeader, capturedReq.Header)
+			smithytesting.AssertNotHaveHeaderKeys(t, c.ForbidHeader, capturedReq.Header)
 			if c.BodyAssert != nil {
-				if err := c.BodyAssert(actualReq.Body); err != nil {
+				if err := c.BodyAssert(capturedReq.Body); err != nil {
 					t.Errorf("expect body equal, got %v", err)
 				}
 			}
