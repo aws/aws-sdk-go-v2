@@ -1,0 +1,16 @@
+{
+    "id": "410d0cba-a49e-46de-b10a-8e84915e474b",
+    "type": "bugfix",
+    "collapse": true,
+    "description": "Modify protocol unit test cases to include endpoint and host label cases and deprecate local server dependency",
+    "modules": [
+        ".",
+        "internal/protocoltest/awsrestjson",
+        "internal/protocoltest/ec2query",
+        "internal/protocoltest/jsonrpc",
+        "internal/protocoltest/jsonrpc10",
+        "internal/protocoltest/query",
+        "internal/protocoltest/restxml",
+        "internal/protocoltest/restxmlwithnamespace"
+    ]
+}
