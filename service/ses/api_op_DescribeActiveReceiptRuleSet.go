@@ -18,7 +18,7 @@ import (
 
 // Returns the metadata and receipt rules for the receipt rule set that is
 // currently active. For information about setting up receipt rule sets, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html)
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules)
 // . You can execute this operation no more than once per second.
 func (c *Client) DescribeActiveReceiptRuleSet(ctx context.Context, params *DescribeActiveReceiptRuleSetInput, optFns ...func(*Options)) (*DescribeActiveReceiptRuleSetOutput, error) {
 	if params == nil {
@@ -37,7 +37,7 @@ func (c *Client) DescribeActiveReceiptRuleSet(ctx context.Context, params *Descr
 
 // Represents a request to return the metadata and receipt rules for the receipt
 // rule set that is currently active. You use receipt rule sets to receive email
-// with Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// with Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html)
 // .
 type DescribeActiveReceiptRuleSetInput struct {
 	noSmithyDocumentSerde

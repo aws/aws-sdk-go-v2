@@ -973,6 +973,13 @@ type DecisionTaskCompletedEventAttributes struct {
 	// User defined context for the workflow execution.
 	ExecutionContext *string
 
+	// Represents a task list.
+	TaskList *TaskList
+
+	// The maximum amount of time the decision task can wait to be assigned to a
+	// worker.
+	TaskListScheduleToStartTimeout *string
+
 	noSmithyDocumentSerde
 }
 
@@ -983,6 +990,10 @@ type DecisionTaskScheduledEventAttributes struct {
 	//
 	// This member is required.
 	TaskList *TaskList
+
+	// The maximum amount of time the decision task can wait to be assigned to a
+	// worker.
+	ScheduleToStartTimeout *string
 
 	// The maximum duration for this decision task. The task is considered timed out
 	// if it doesn't completed within this duration. The duration is specified in

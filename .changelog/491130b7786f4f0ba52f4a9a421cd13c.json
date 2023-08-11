@@ -1,0 +1,8 @@
+{
+    "id": "491130b7-786f-4f0b-a52f-4a9a421cd13c",
+    "type": "feature",
+    "description": "This release adds new API parameters to override workflow task list for workflow executions.",
+    "modules": [
+        "service/swf"
+    ]
+}

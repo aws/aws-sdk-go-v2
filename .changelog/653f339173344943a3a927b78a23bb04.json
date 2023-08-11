@@ -1,0 +1,8 @@
+{
+    "id": "653f3391-7334-4943-a3a9-27b78a23bb04",
+    "type": "feature",
+    "description": "Adds sensitive trait to required input shapes.",
+    "modules": [
+        "service/amplifybackend"
+    ]
+}

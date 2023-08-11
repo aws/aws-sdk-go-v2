@@ -36,8 +36,8 @@ type ListVerifiedEmailAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
-// A list of email addresses that you have verified with Amazon SES under your AWS
-// account.
+// A list of email addresses that you have verified with Amazon SES under your
+// Amazon Web Services account.
 type ListVerifiedEmailAddressesOutput struct {
 
 	// A list of email addresses that have been verified.

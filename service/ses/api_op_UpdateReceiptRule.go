@@ -17,7 +17,7 @@ import (
 )
 
 // Updates a receipt rule. For information about managing receipt rules, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html)
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html)
 // . You can execute this operation no more than once per second.
 func (c *Client) UpdateReceiptRule(ctx context.Context, params *UpdateReceiptRuleInput, optFns ...func(*Options)) (*UpdateReceiptRuleOutput, error) {
 	if params == nil {
@@ -35,7 +35,7 @@ func (c *Client) UpdateReceiptRule(ctx context.Context, params *UpdateReceiptRul
 }
 
 // Represents a request to update a receipt rule. You use receipt rules to receive
-// email with Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// email with Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html)
 // .
 type UpdateReceiptRuleInput struct {
 

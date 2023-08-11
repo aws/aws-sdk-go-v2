@@ -30,7 +30,7 @@ import (
 //
 // This operation is throttled at one request per second and can only get DKIM
 // attributes for up to 100 identities at a time. For more information about
-// creating DNS records using DKIM tokens, go to the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html)
+// creating DNS records using DKIM tokens, go to the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy-managing.html)
 // .
 func (c *Client) GetIdentityDkimAttributes(ctx context.Context, params *GetIdentityDkimAttributesInput, optFns ...func(*Options)) (*GetIdentityDkimAttributesOutput, error) {
 	if params == nil {
@@ -51,7 +51,7 @@ func (c *Client) GetIdentityDkimAttributes(ctx context.Context, params *GetIdent
 // identity. For domain identities, this request also returns the DKIM tokens that
 // are required for Easy DKIM signing, and whether Amazon SES successfully verified
 // that these tokens were published. For more information about Easy DKIM, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html)
 // .
 type GetIdentityDkimAttributesInput struct {
 

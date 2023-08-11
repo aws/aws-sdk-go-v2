@@ -17,7 +17,7 @@ import (
 )
 
 // Returns the details of the specified configuration set. For information about
-// using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
 // . You can execute this operation no more than once per second.
 func (c *Client) DescribeConfigurationSet(ctx context.Context, params *DescribeConfigurationSetInput, optFns ...func(*Options)) (*DescribeConfigurationSetOutput, error) {
 	if params == nil {
@@ -36,7 +36,7 @@ func (c *Client) DescribeConfigurationSet(ctx context.Context, params *DescribeC
 
 // Represents a request to return the details of a configuration set.
 // Configuration sets enable you to publish email sending events. For information
-// about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
 // .
 type DescribeConfigurationSetInput struct {
 
@@ -53,7 +53,7 @@ type DescribeConfigurationSetInput struct {
 
 // Represents the details of a configuration set. Configuration sets enable you to
 // publish email sending events. For information about using configuration sets,
-// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
 // .
 type DescribeConfigurationSetOutput struct {
 

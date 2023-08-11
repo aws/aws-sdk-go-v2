@@ -486,9 +486,10 @@ func (e *InvalidFirehoseDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Indicates that the provided AWS Lambda function is invalid, or that Amazon SES
-// could not execute the provided function, possibly due to permissions issues. For
-// information about giving permissions, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html)
+// Indicates that the provided Amazon Web Services Lambda function is invalid, or
+// that Amazon SES could not execute the provided function, possibly due to
+// permissions issues. For information about giving permissions, see the Amazon
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html)
 // .
 type InvalidLambdaFunctionException struct {
 	Message *string
@@ -575,10 +576,10 @@ func (e *InvalidRenderingParameterException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Indicates that the provided Amazon S3 bucket or AWS KMS encryption key is
-// invalid, or that Amazon SES could not publish to the bucket, possibly due to
-// permissions issues. For information about giving permissions, see the Amazon
-// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html)
+// Indicates that the provided Amazon S3 bucket or Amazon Web Services KMS
+// encryption key is invalid, or that Amazon SES could not publish to the bucket,
+// possibly due to permissions issues. For information about giving permissions,
+// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html)
 // .
 type InvalidS3ConfigurationException struct {
 	Message *string

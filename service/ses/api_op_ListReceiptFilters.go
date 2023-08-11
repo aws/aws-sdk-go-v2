@@ -16,9 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the IP address filters associated with your AWS account in the current
-// AWS Region. For information about managing IP address filters, see the Amazon
-// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html)
+// Lists the IP address filters associated with your Amazon Web Services account
+// in the current Amazon Web Services Region. For information about managing IP
+// address filters, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html)
 // . You can execute this operation no more than once per second.
 func (c *Client) ListReceiptFilters(ctx context.Context, params *ListReceiptFiltersInput, optFns ...func(*Options)) (*ListReceiptFiltersOutput, error) {
 	if params == nil {
@@ -35,15 +35,15 @@ func (c *Client) ListReceiptFilters(ctx context.Context, params *ListReceiptFilt
 	return out, nil
 }
 
-// Represents a request to list the IP address filters that exist under your AWS
-// account. You use IP address filters when you receive email with Amazon SES. For
-// more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// Represents a request to list the IP address filters that exist under your
+// Amazon Web Services account. You use IP address filters when you receive email
+// with Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html)
 // .
 type ListReceiptFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
-// A list of IP address filters that exist under your AWS account.
+// A list of IP address filters that exist under your Amazon Web Services account.
 type ListReceiptFiltersOutput struct {
 
 	// A list of IP address filter data structures, which each consist of a name, an

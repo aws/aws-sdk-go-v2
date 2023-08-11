@@ -17,18 +17,18 @@ import (
 )
 
 // Composes an email message and immediately queues it for sending. This operation
-// is more flexible than the SendEmail API operation. When you use the SendRawEmail
+// is more flexible than the SendEmail operation. When you use the SendRawEmail
 // operation, you can specify the headers of the message as well as its content.
-// This flexibility is useful, for example, when you want to send a multipart MIME
+// This flexibility is useful, for example, when you need to send a multipart MIME
 // email (such a message that contains both a text and an HTML version). You can
 // also use this operation to send messages that include attachments. The
 // SendRawEmail operation has the following requirements:
-//   - You can only send email from verified email addresses or domains (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
+//   - You can only send email from verified email addresses or domains (https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html)
 //     . If you try to send email from an address that isn't verified, the operation
 //     results in an "Email address not verified" error.
-//   - If your account is still in the Amazon SES sandbox (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html)
+//   - If your account is still in the Amazon SES sandbox (https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html)
 //     , you can only send email to other verified addresses in your account, or to
-//     addresses that are associated with the Amazon SES mailbox simulator (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mailbox-simulator.html)
+//     addresses that are associated with the Amazon SES mailbox simulator (https://docs.aws.amazon.com/ses/latest/dg/send-an-email-from-console.html)
 //     .
 //   - The maximum message size, including attachments, is 10 MB.
 //   - Each message has to include at least one recipient address. A recipient
@@ -45,33 +45,33 @@ import (
 //     message parts. However, if Amazon SES has to modify the contents of your message
 //     (for example, if you use open and click tracking), 8-bit content isn't
 //     preserved. For this reason, we highly recommend that you encode all content that
-//     isn't 7-bit ASCII. For more information, see MIME Encoding (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html#send-email-mime-encoding)
+//     isn't 7-bit ASCII. For more information, see MIME Encoding (https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html#send-email-mime-encoding)
 //     in the Amazon SES Developer Guide.
 //
 // Additionally, keep the following considerations in mind when using the
 // SendRawEmail operation:
 //   - Although you can customize the message headers when using the SendRawEmail
-//     operation, Amazon SES will automatically apply its own Message-ID and Date
-//     headers; if you passed these headers when creating the message, they will be
+//     operation, Amazon SES automatically applies its own Message-ID and Date
+//     headers; if you passed these headers when creating the message, they are
 //     overwritten by the values that Amazon SES provides.
 //   - If you are using sending authorization to send on behalf of another user,
 //     SendRawEmail enables you to specify the cross-account identity for the email's
 //     Source, From, and Return-Path parameters in one of two ways: you can pass
-//     optional parameters SourceArn , FromArn , and/or ReturnPathArn to the API, or
-//     you can include the following X-headers in the header of your raw email:
+//     optional parameters SourceArn , FromArn , and/or ReturnPathArn , or you can
+//     include the following X-headers in the header of your raw email:
 //   - X-SES-SOURCE-ARN
 //   - X-SES-FROM-ARN
 //   - X-SES-RETURN-PATH-ARN Don't include these X-headers in the DKIM signature.
 //     Amazon SES removes these before it sends the email. If you only specify the
 //     SourceIdentityArn parameter, Amazon SES sets the From and Return-Path
 //     addresses to the same identity that you specified. For more information about
-//     sending authorization, see the Using Sending Authorization with Amazon SES (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+//     sending authorization, see the Using Sending Authorization with Amazon SES (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html)
 //     in the Amazon SES Developer Guide.
 //   - For every message that you send, the total number of recipients (including
 //     each recipient in the To:, CC: and BCC: fields) is counted against the maximum
 //     number of emails you can send in a 24-hour period (your sending quota). For more
 //     information about sending quotas in Amazon SES, see Managing Your Amazon SES
-//     Sending Limits (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html)
+//     Sending Limits (https://docs.aws.amazon.com/ses/latest/dg/manage-sending-quotas.html)
 //     in the Amazon SES Developer Guide.
 func (c *Client) SendRawEmail(ctx context.Context, params *SendRawEmailInput, optFns ...func(*Options)) (*SendRawEmailOutput, error) {
 	if params == nil {
@@ -89,7 +89,7 @@ func (c *Client) SendRawEmail(ctx context.Context, params *SendRawEmailInput, op
 }
 
 // Represents a request to send a single raw email using Amazon SES. For more
-// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html)
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html)
 // .
 type SendRawEmailInput struct {
 
@@ -98,12 +98,12 @@ type SendRawEmailInput struct {
 	//   - All of the required header fields must be present in the message.
 	//   - Each part of a multipart MIME message must be formatted properly.
 	//   - Attachments must be of a content type that Amazon SES supports. For a list
-	//   on unsupported content types, see Unsupported Attachment Types (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html)
+	//   on unsupported content types, see Unsupported Attachment Types (https://docs.aws.amazon.com/ses/latest/dg/mime-types.html)
 	//   in the Amazon SES Developer Guide.
 	//   - The entire message must be base64-encoded.
 	//   - If any of the MIME parts in your message contain content that is outside of
 	//   the 7-bit ASCII character range, we highly recommend that you encode that
-	//   content. For more information, see Sending Raw Email (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html)
+	//   content. For more information, see Sending Raw Email (https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html)
 	//   in the Amazon SES Developer Guide.
 	//   - Per RFC 5321 (https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6) , the
 	//   maximum length of each line of text, including the , must not exceed 1,000
@@ -127,7 +127,7 @@ type SendRawEmailInput struct {
 	// raw message of the email. If you use both the FromArn parameter and the
 	// corresponding X-header, Amazon SES uses the value of the FromArn parameter. For
 	// information about when to use this parameter, see the description of
-	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html)
+	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-delegate-sender-tasks-email.html)
 	// .
 	FromArn *string
 
@@ -143,26 +143,26 @@ type SendRawEmailInput struct {
 	// If you use both the ReturnPathArn parameter and the corresponding X-header,
 	// Amazon SES uses the value of the ReturnPathArn parameter. For information about
 	// when to use this parameter, see the description of SendRawEmail in this guide,
-	// or see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html)
+	// or see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-delegate-sender-tasks-email.html)
 	// .
 	ReturnPathArn *string
 
 	// The identity's email address. If you do not provide a value for this parameter,
 	// you must specify a "From" address in the raw text of the message. (You can also
 	// specify both.) Amazon SES does not support the SMTPUTF8 extension, as described
-	// in RFC6531 (https://tools.ietf.org/html/rfc6531) . For this reason, the local
-	// part of a source email address (the part of the email address that precedes the
-	// @ sign) may only contain 7-bit ASCII characters (https://en.wikipedia.org/wiki/Email_address#Local-part)
-	// . If the domain part of an address (the part after the @ sign) contains
-	// non-ASCII characters, they must be encoded using Punycode, as described in
-	// RFC3492 (https://tools.ietf.org/html/rfc3492.html) . The sender name (also known
-	// as the friendly name) may contain non-ASCII characters. These characters must be
-	// encoded using MIME encoded-word syntax, as described in RFC 2047 (https://tools.ietf.org/html/rfc2047)
-	// . MIME encoded-word syntax uses the following form:
-	// =?charset?encoding?encoded-text?= . If you specify the Source parameter and
-	// have feedback forwarding enabled, then bounces and complaints will be sent to
-	// this email address. This takes precedence over any Return-Path header that you
-	// might include in the raw text of the message.
+	// in RFC6531 (https://tools.ietf.org/html/rfc6531) . For this reason, the email
+	// address string must be 7-bit ASCII. If you want to send to or from email
+	// addresses that contain Unicode characters in the domain part of an address, you
+	// must encode the domain using Punycode. Punycode is not permitted in the local
+	// part of the email address (the part before the @ sign) nor in the "friendly
+	// from" name. If you want to use Unicode characters in the "friendly from" name,
+	// you must encode the "friendly from" name using MIME encoded-word syntax, as
+	// described in Sending raw email using the Amazon SES API (https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html)
+	// . For more information about Punycode, see RFC 3492 (http://tools.ietf.org/html/rfc3492)
+	// . If you specify the Source parameter and have feedback forwarding enabled,
+	// then bounces and complaints are sent to this email address. This takes
+	// precedence over any Return-Path header that you might include in the raw text of
+	// the message.
 	Source *string
 
 	// This parameter is used only for sending authorization. It is the ARN of the
@@ -177,7 +177,7 @@ type SendRawEmailInput struct {
 	// both the SourceArn parameter and the corresponding X-header, Amazon SES uses
 	// the value of the SourceArn parameter. For information about when to use this
 	// parameter, see the description of SendRawEmail in this guide, or see the Amazon
-	// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html)
+	// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-delegate-sender-tasks-email.html)
 	// .
 	SourceArn *string
 

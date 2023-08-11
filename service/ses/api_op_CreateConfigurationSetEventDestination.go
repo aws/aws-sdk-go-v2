@@ -19,10 +19,10 @@ import (
 // Creates a configuration set event destination. When you create or update an
 // event destination, you must provide one, and only one, destination. The
 // destination can be CloudWatch, Amazon Kinesis Firehose, or Amazon Simple
-// Notification Service (Amazon SNS). An event destination is the AWS service to
-// which Amazon SES publishes the email sending events associated with a
-// configuration set. For information about using configuration sets, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// Notification Service (Amazon SNS). An event destination is the Amazon Web
+// Services service to which Amazon SES publishes the email sending events
+// associated with a configuration set. For information about using configuration
+// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
 // . You can execute this operation no more than once per second.
 func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, params *CreateConfigurationSetEventDestinationInput, optFns ...func(*Options)) (*CreateConfigurationSetEventDestinationOutput, error) {
 	if params == nil {
@@ -41,9 +41,10 @@ func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, par
 
 // Represents a request to create a configuration set event destination. A
 // configuration set event destination, which can be either Amazon CloudWatch or
-// Amazon Kinesis Firehose, describes an AWS service in which Amazon SES publishes
-// the email sending events associated with a configuration set. For information
-// about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// Amazon Kinesis Firehose, describes an Amazon Web Services service in which
+// Amazon SES publishes the email sending events associated with a configuration
+// set. For information about using configuration sets, see the Amazon SES
+// Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
 // .
 type CreateConfigurationSetEventDestinationInput struct {
 
@@ -53,8 +54,8 @@ type CreateConfigurationSetEventDestinationInput struct {
 	// This member is required.
 	ConfigurationSetName *string
 
-	// An object that describes the AWS service that email sending event information
-	// will be published to.
+	// An object that describes the Amazon Web Services service that email sending
+	// event where information is published.
 	//
 	// This member is required.
 	EventDestination *types.EventDestination

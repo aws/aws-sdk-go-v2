@@ -25,7 +25,7 @@ import (
 // an identity at any time after you start the verification process for the
 // identity, even if the verification process isn't complete. You can execute this
 // operation no more than once per second. For more information about Easy DKIM
-// signing, go to the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
+// signing, go to the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html)
 // .
 func (c *Client) SetIdentityDkimEnabled(ctx context.Context, params *SetIdentityDkimEnabledInput, optFns ...func(*Options)) (*SetIdentityDkimEnabledOutput, error) {
 	if params == nil {
@@ -44,7 +44,7 @@ func (c *Client) SetIdentityDkimEnabled(ctx context.Context, params *SetIdentity
 
 // Represents a request to enable or disable Amazon SES Easy DKIM signing for an
 // identity. For more information about setting up Easy DKIM, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html)
+// Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html)
 // .
 type SetIdentityDkimEnabledInput struct {
 

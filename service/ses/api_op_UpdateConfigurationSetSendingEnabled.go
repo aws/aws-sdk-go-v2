@@ -16,11 +16,11 @@ import (
 )
 
 // Enables or disables email sending for messages sent using a specific
-// configuration set in a given AWS Region. You can use this operation in
-// conjunction with Amazon CloudWatch alarms to temporarily pause email sending for
-// a configuration set when the reputation metrics for that configuration set (such
-// as your bounce on complaint rate) exceed certain thresholds. You can execute
-// this operation no more than once per second.
+// configuration set in a given Amazon Web Services Region. You can use this
+// operation in conjunction with Amazon CloudWatch alarms to temporarily pause
+// email sending for a configuration set when the reputation metrics for that
+// configuration set (such as your bounce on complaint rate) exceed certain
+// thresholds. You can execute this operation no more than once per second.
 func (c *Client) UpdateConfigurationSetSendingEnabled(ctx context.Context, params *UpdateConfigurationSetSendingEnabledInput, optFns ...func(*Options)) (*UpdateConfigurationSetSendingEnabledOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationSetSendingEnabledInput{}
@@ -40,7 +40,7 @@ func (c *Client) UpdateConfigurationSetSendingEnabled(ctx context.Context, param
 // specific configuration set.
 type UpdateConfigurationSetSendingEnabledInput struct {
 
-	// The name of the configuration set that you want to update.
+	// The name of the configuration set to update.
 	//
 	// This member is required.
 	ConfigurationSetName *string

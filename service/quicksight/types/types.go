@@ -44,6 +44,9 @@ type AccountInfo struct {
 	// The edition of your Amazon QuickSight account.
 	Edition Edition
 
+	// The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+	IAMIdentityCenterInstanceArn *string
+
 	// The email address that will be used for Amazon QuickSight to send notifications
 	// regarding your Amazon Web Services account or Amazon QuickSight subscription.
 	NotificationEmail *string
@@ -9002,6 +9005,9 @@ type PivotTableOptions struct {
 	// The visibility of the column names.
 	ColumnNamesVisibility Visibility
 
+	// The default cell width of the pivot table.
+	DefaultCellWidth *string
+
 	// The metric placement (row, column) options.
 	MetricPlacement PivotTableMetricPlacement
 
@@ -9013,6 +9019,17 @@ type PivotTableOptions struct {
 
 	// The table cell style of the row headers.
 	RowHeaderStyle *TableCellStyle
+
+	// The options for the label that is located above the row headers. This option is
+	// only applicable when RowsLayout is set to HIERARCHY .
+	RowsLabelOptions *PivotTableRowsLabelOptions
+
+	// The layout for the row dimension headers of a pivot table. Choose one of the
+	// following options.
+	//   - TABULAR : (Default) Each row field is displayed in a separate column.
+	//   - HIERARCHY : All row fields are displayed in a single column. Indentation is
+	//   used to differentiate row headers of different fields.
+	RowsLayout PivotTableRowsLayout
 
 	// The visibility of the single metric options.
 	SingleMetricVisibility Visibility
@@ -9031,6 +9048,19 @@ type PivotTablePaginatedReportOptions struct {
 
 	// The visibility of the printing table overflow across pages.
 	VerticalOverflowVisibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The options for the label thta is located above the row headers. This option is
+// only applicable when RowsLayout is set to HIERARCHY .
+type PivotTableRowsLabelOptions struct {
+
+	// The custom label string for the rows label.
+	CustomLabel *string
+
+	// The visibility of the rows label.
+	Visibility Visibility
 
 	noSmithyDocumentSerde
 }
@@ -9948,6 +9978,9 @@ type RowAlternateColorOptions struct {
 
 	// Determines the widget status.
 	Status WidgetStatus
+
+	// The primary background color options for alternate rows.
+	UsePrimaryBackgroundColor WidgetStatus
 
 	noSmithyDocumentSerde
 }
@@ -10950,7 +10983,7 @@ type SnapshotDestinationConfiguration struct {
 // generate. This information is provided by you when you start a new snapshot job.
 type SnapshotFile struct {
 
-	// The format of the snapshot file to be generated. You can choose between CSV and
+	// The format of the snapshot file to be generated. You can choose between CSV or
 	// PDF .
 	//
 	// This member is required.
@@ -10993,14 +11026,14 @@ type SnapshotFileSheetSelection struct {
 	SelectionScope SnapshotFileSheetSelectionScope
 
 	// The sheet ID of the dashboard to generate the snapshot artifact from. This
-	// value is required for CSV or PDF format types.
+	// value is required for CSV and PDF format types.
 	//
 	// This member is required.
 	SheetId *string
 
-	// A structure that lists the IDs of the visuals in the selected sheet. Supported
-	// visual types are table, pivot table visuals. This value is required if you are
-	// generating a CSV. This value supports a maximum of 1 visual ID.
+	// A list of visual IDs that are located in the selected sheet. This structure
+	// supports tables and pivot tables. This structure is required if you are
+	// generating a CSV. You can add a maximum of 1 visual ID to this structure.
 	VisualIds []string
 
 	noSmithyDocumentSerde
@@ -11339,6 +11372,9 @@ type SubtotalOptions struct {
 
 	// The cell styling options for the subtotals of header cells.
 	MetricHeaderCellStyle *TableCellStyle
+
+	// The style targets options for subtotals.
+	StyleTargets []TableStyleTarget
 
 	// The cell styling options for the subtotal cells.
 	TotalCellStyle *TableCellStyle
@@ -11691,6 +11727,17 @@ type TableSortConfiguration struct {
 
 	// The field sort options for rows in the table.
 	RowSort []FieldSortOptions
+
+	noSmithyDocumentSerde
+}
+
+// The table style target.
+type TableStyleTarget struct {
+
+	// The cell type of the table style target.
+	//
+	// This member is required.
+	CellType StyledCellType
 
 	noSmithyDocumentSerde
 }
@@ -12585,6 +12632,9 @@ type TopicCalculatedField struct {
 	// filters.
 	NeverAggregateInFilter bool
 
+	// The non additive for the table style target.
+	NonAdditive *bool
+
 	// The list of aggregation types that are not allowed for the calculated field.
 	// Valid values for this structure are COUNT , DISTINCT_COUNT , MIN , MAX , MEDIAN
 	// , SUM , AVERAGE , STDEV , STDEVP , VAR , VARP , and PERCENTILE .
@@ -12646,8 +12696,6 @@ type TopicColumn struct {
 	ColumnName *string
 
 	// The type of aggregation that is performed on the column data when it's queried.
-	// Valid values for this structure are SUM , MAX , MIN , COUNT , DISTINCT_COUNT ,
-	// and AVERAGE .
 	Aggregation DefaultAggregation
 
 	// The list of aggregation types that are allowed for the column. Valid values for
@@ -12688,6 +12736,9 @@ type TopicColumn struct {
 	// A Boolean value that indicates whether to aggregate the column data when it's
 	// used in a filter context.
 	NeverAggregateInFilter bool
+
+	// The non additive value for the column.
+	NonAdditive *bool
 
 	// The list of aggregation types that are not allowed for the column. Valid values
 	// for this structure are COUNT , DISTINCT_COUNT , MIN , MAX , MEDIAN , SUM ,

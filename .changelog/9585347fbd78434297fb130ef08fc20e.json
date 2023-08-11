@@ -1,0 +1,8 @@
+{
+    "id": "9585347f-bd78-4342-97fb-130ef08fc20e",
+    "type": "feature",
+    "description": "Updated ResourceType enum with new resource types onboarded by AWS Config in July 2023.",
+    "modules": [
+        "service/configservice"
+    ]
+}

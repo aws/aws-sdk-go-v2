@@ -16,7 +16,7 @@ import (
 )
 
 // Returns the email sending status of the Amazon SES account for the current
-// region. You can execute this operation no more than once per second.
+// Region. You can execute this operation no more than once per second.
 func (c *Client) GetAccountSendingEnabled(ctx context.Context, params *GetAccountSendingEnabledInput, optFns ...func(*Options)) (*GetAccountSendingEnabledOutput, error) {
 	if params == nil {
 		params = &GetAccountSendingEnabledInput{}
@@ -37,11 +37,11 @@ type GetAccountSendingEnabledInput struct {
 }
 
 // Represents a request to return the email sending status for your Amazon SES
-// account in the current AWS Region.
+// account in the current Amazon Web Services Region.
 type GetAccountSendingEnabledOutput struct {
 
 	// Describes whether email sending is enabled or disabled for your Amazon SES
-	// account in the current AWS Region.
+	// account in the current Amazon Web Services Region.
 	Enabled bool
 
 	// Metadata pertaining to the operation's result.

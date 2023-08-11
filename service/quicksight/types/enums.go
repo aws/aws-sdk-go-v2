@@ -388,9 +388,10 @@ type AuthenticationMethodOption string
 
 // Enum values for AuthenticationMethodOption
 const (
-	AuthenticationMethodOptionIamAndQuicksight AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"
-	AuthenticationMethodOptionIamOnly          AuthenticationMethodOption = "IAM_ONLY"
-	AuthenticationMethodOptionActiveDirectory  AuthenticationMethodOption = "ACTIVE_DIRECTORY"
+	AuthenticationMethodOptionIamAndQuicksight  AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"
+	AuthenticationMethodOptionIamOnly           AuthenticationMethodOption = "IAM_ONLY"
+	AuthenticationMethodOptionActiveDirectory   AuthenticationMethodOption = "ACTIVE_DIRECTORY"
+	AuthenticationMethodOptionIamIdentityCenter AuthenticationMethodOption = "IAM_IDENTITY_CENTER"
 )
 
 // Values returns all known values for AuthenticationMethodOption. Note that this
@@ -401,6 +402,7 @@ func (AuthenticationMethodOption) Values() []AuthenticationMethodOption {
 		"IAM_AND_QUICKSIGHT",
 		"IAM_ONLY",
 		"ACTIVE_DIRECTORY",
+		"IAM_IDENTITY_CENTER",
 	}
 }
 
@@ -1307,6 +1309,11 @@ const (
 	DefaultAggregationCount         DefaultAggregation = "COUNT"
 	DefaultAggregationDistinctCount DefaultAggregation = "DISTINCT_COUNT"
 	DefaultAggregationAverage       DefaultAggregation = "AVERAGE"
+	DefaultAggregationMedian        DefaultAggregation = "MEDIAN"
+	DefaultAggregationStdev         DefaultAggregation = "STDEV"
+	DefaultAggregationStdevp        DefaultAggregation = "STDEVP"
+	DefaultAggregationVar           DefaultAggregation = "VAR"
+	DefaultAggregationVarp          DefaultAggregation = "VARP"
 )
 
 // Values returns all known values for DefaultAggregation. Note that this can be
@@ -1320,6 +1327,11 @@ func (DefaultAggregation) Values() []DefaultAggregation {
 		"COUNT",
 		"DISTINCT_COUNT",
 		"AVERAGE",
+		"MEDIAN",
+		"STDEV",
+		"STDEVP",
+		"VAR",
+		"VARP",
 	}
 }
 
@@ -1888,8 +1900,9 @@ type IdentityType string
 
 // Enum values for IdentityType
 const (
-	IdentityTypeIam        IdentityType = "IAM"
-	IdentityTypeQuicksight IdentityType = "QUICKSIGHT"
+	IdentityTypeIam               IdentityType = "IAM"
+	IdentityTypeQuicksight        IdentityType = "QUICKSIGHT"
+	IdentityTypeIamIdentityCenter IdentityType = "IAM_IDENTITY_CENTER"
 )
 
 // Values returns all known values for IdentityType. Note that this can be
@@ -1899,6 +1912,7 @@ func (IdentityType) Values() []IdentityType {
 	return []IdentityType{
 		"IAM",
 		"QUICKSIGHT",
+		"IAM_IDENTITY_CENTER",
 	}
 }
 
@@ -2811,6 +2825,24 @@ func (PivotTableMetricPlacement) Values() []PivotTableMetricPlacement {
 	}
 }
 
+type PivotTableRowsLayout string
+
+// Enum values for PivotTableRowsLayout
+const (
+	PivotTableRowsLayoutTabular   PivotTableRowsLayout = "TABULAR"
+	PivotTableRowsLayoutHierarchy PivotTableRowsLayout = "HIERARCHY"
+)
+
+// Values returns all known values for PivotTableRowsLayout. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PivotTableRowsLayout) Values() []PivotTableRowsLayout {
+	return []PivotTableRowsLayout{
+		"TABULAR",
+		"HIERARCHY",
+	}
+}
+
 type PivotTableSubtotalLevel string
 
 // Enum values for PivotTableSubtotalLevel
@@ -3509,6 +3541,26 @@ func (Status) Values() []Status {
 	}
 }
 
+type StyledCellType string
+
+// Enum values for StyledCellType
+const (
+	StyledCellTypeTotal        StyledCellType = "TOTAL"
+	StyledCellTypeMetricHeader StyledCellType = "METRIC_HEADER"
+	StyledCellTypeValue        StyledCellType = "VALUE"
+)
+
+// Values returns all known values for StyledCellType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StyledCellType) Values() []StyledCellType {
+	return []StyledCellType{
+		"TOTAL",
+		"METRIC_HEADER",
+		"VALUE",
+	}
+}
+
 type TableBorderStyle string
 
 // Enum values for TableBorderStyle
@@ -4020,6 +4072,7 @@ const (
 	VerticalTextAlignmentTop    VerticalTextAlignment = "TOP"
 	VerticalTextAlignmentMiddle VerticalTextAlignment = "MIDDLE"
 	VerticalTextAlignmentBottom VerticalTextAlignment = "BOTTOM"
+	VerticalTextAlignmentAuto   VerticalTextAlignment = "AUTO"
 )
 
 // Values returns all known values for VerticalTextAlignment. Note that this can
@@ -4030,6 +4083,7 @@ func (VerticalTextAlignment) Values() []VerticalTextAlignment {
 		"TOP",
 		"MIDDLE",
 		"BOTTOM",
+		"AUTO",
 	}
 }
 

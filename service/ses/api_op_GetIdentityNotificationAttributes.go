@@ -20,7 +20,7 @@ import (
 // structure describing identity notification attributes. This operation is
 // throttled at one request per second and can only get notification attributes for
 // up to 100 identities at a time. For more information about using notifications
-// with Amazon SES, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html)
+// with Amazon SES, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html)
 // .
 func (c *Client) GetIdentityNotificationAttributes(ctx context.Context, params *GetIdentityNotificationAttributesInput, optFns ...func(*Options)) (*GetIdentityNotificationAttributesOutput, error) {
 	if params == nil {
@@ -39,7 +39,7 @@ func (c *Client) GetIdentityNotificationAttributes(ctx context.Context, params *
 
 // Represents a request to return the notification attributes for a list of
 // identities you verified with Amazon SES. For information about Amazon SES
-// notifications, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html)
+// notifications, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html)
 // .
 type GetIdentityNotificationAttributesInput struct {
 

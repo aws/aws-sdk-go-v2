@@ -17,8 +17,8 @@ import (
 )
 
 // Updates an email template. Email templates enable you to send personalized
-// email to one or more destinations in a single API operation. For more
-// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// email to one or more destinations in a single operation. For more information,
+// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html)
 // . You can execute this operation no more than once per second.
 func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput, optFns ...func(*Options)) (*UpdateTemplateOutput, error) {
 	if params == nil {
@@ -37,8 +37,8 @@ func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput
 
 type UpdateTemplateInput struct {
 
-	// The content of the email, composed of a subject line, an HTML part, and a
-	// text-only part.
+	// The content of the email, composed of a subject line and either an HTML part or
+	// a text-only part.
 	//
 	// This member is required.
 	Template *types.Template

@@ -976,6 +976,41 @@ const (
 	ResourceTypeTransferAgreement                           ResourceType = "AWS::Transfer::Agreement"
 	ResourceTypeTransferConnector                           ResourceType = "AWS::Transfer::Connector"
 	ResourceTypeKinesisFirehoseDeliveryStream               ResourceType = "AWS::KinesisFirehose::DeliveryStream"
+	ResourceTypeAmplifyBranch                               ResourceType = "AWS::Amplify::Branch"
+	ResourceTypeAppIntegrationsEventIntegration             ResourceType = "AWS::AppIntegrations::EventIntegration"
+	ResourceTypeAppMeshRoute                                ResourceType = "AWS::AppMesh::Route"
+	ResourceTypeAthenaPreparedStatement                     ResourceType = "AWS::Athena::PreparedStatement"
+	ResourceTypeEC2IPAMScope                                ResourceType = "AWS::EC2::IPAMScope"
+	ResourceTypeEvidentlyLaunch                             ResourceType = "AWS::Evidently::Launch"
+	ResourceTypeForecastDatasetGroup                        ResourceType = "AWS::Forecast::DatasetGroup"
+	ResourceTypeGreengrassV2ComponentVersion                ResourceType = "AWS::GreengrassV2::ComponentVersion"
+	ResourceTypeGroundStationMissionProfile                 ResourceType = "AWS::GroundStation::MissionProfile"
+	ResourceTypeMediaConnectFlowEntitlement                 ResourceType = "AWS::MediaConnect::FlowEntitlement"
+	ResourceTypeMediaConnectFlowVpcInterface                ResourceType = "AWS::MediaConnect::FlowVpcInterface"
+	ResourceTypeMediaTailorPlaybackConfiguration            ResourceType = "AWS::MediaTailor::PlaybackConfiguration"
+	ResourceTypeMSKConfiguration                            ResourceType = "AWS::MSK::Configuration"
+	ResourceTypePersonalizeDataset                          ResourceType = "AWS::Personalize::Dataset"
+	ResourceTypePersonalizeSchema                           ResourceType = "AWS::Personalize::Schema"
+	ResourceTypePersonalizeSolution                         ResourceType = "AWS::Personalize::Solution"
+	ResourceTypePinpointEmailTemplate                       ResourceType = "AWS::Pinpoint::EmailTemplate"
+	ResourceTypePinpointEventStream                         ResourceType = "AWS::Pinpoint::EventStream"
+	ResourceTypeResilienceHubApp                            ResourceType = "AWS::ResilienceHub::App"
+	ResourceTypeACMPCACertificateAuthority                  ResourceType = "AWS::ACMPCA::CertificateAuthority"
+	ResourceTypeAppConfigHostedConfigurationVersion         ResourceType = "AWS::AppConfig::HostedConfigurationVersion"
+	ResourceTypeAppMeshVirtualGateway                       ResourceType = "AWS::AppMesh::VirtualGateway"
+	ResourceTypeAppMeshVirtualRouter                        ResourceType = "AWS::AppMesh::VirtualRouter"
+	ResourceTypeAppRunnerService                            ResourceType = "AWS::AppRunner::Service"
+	ResourceTypeCustomerProfilesObjectType                  ResourceType = "AWS::CustomerProfiles::ObjectType"
+	ResourceTypeDMSEndpoint                                 ResourceType = "AWS::DMS::Endpoint"
+	ResourceTypeEC2CapacityReservation                      ResourceType = "AWS::EC2::CapacityReservation"
+	ResourceTypeEC2ClientVpnEndpoint                        ResourceType = "AWS::EC2::ClientVpnEndpoint"
+	ResourceTypeKendraIndex                                 ResourceType = "AWS::Kendra::Index"
+	ResourceTypeKinesisVideoStream                          ResourceType = "AWS::KinesisVideo::Stream"
+	ResourceTypeLogsDestination                             ResourceType = "AWS::Logs::Destination"
+	ResourceTypePinpointEmailChannel                        ResourceType = "AWS::Pinpoint::EmailChannel"
+	ResourceTypeS3AccessPoint                               ResourceType = "AWS::S3::AccessPoint"
+	ResourceTypeNetworkManagerCustomerGatewayAssociation    ResourceType = "AWS::NetworkManager::CustomerGatewayAssociation"
+	ResourceTypeNetworkManagerLinkAssociation               ResourceType = "AWS::NetworkManager::LinkAssociation"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1301,6 +1336,41 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::Transfer::Agreement",
 		"AWS::Transfer::Connector",
 		"AWS::KinesisFirehose::DeliveryStream",
+		"AWS::Amplify::Branch",
+		"AWS::AppIntegrations::EventIntegration",
+		"AWS::AppMesh::Route",
+		"AWS::Athena::PreparedStatement",
+		"AWS::EC2::IPAMScope",
+		"AWS::Evidently::Launch",
+		"AWS::Forecast::DatasetGroup",
+		"AWS::GreengrassV2::ComponentVersion",
+		"AWS::GroundStation::MissionProfile",
+		"AWS::MediaConnect::FlowEntitlement",
+		"AWS::MediaConnect::FlowVpcInterface",
+		"AWS::MediaTailor::PlaybackConfiguration",
+		"AWS::MSK::Configuration",
+		"AWS::Personalize::Dataset",
+		"AWS::Personalize::Schema",
+		"AWS::Personalize::Solution",
+		"AWS::Pinpoint::EmailTemplate",
+		"AWS::Pinpoint::EventStream",
+		"AWS::ResilienceHub::App",
+		"AWS::ACMPCA::CertificateAuthority",
+		"AWS::AppConfig::HostedConfigurationVersion",
+		"AWS::AppMesh::VirtualGateway",
+		"AWS::AppMesh::VirtualRouter",
+		"AWS::AppRunner::Service",
+		"AWS::CustomerProfiles::ObjectType",
+		"AWS::DMS::Endpoint",
+		"AWS::EC2::CapacityReservation",
+		"AWS::EC2::ClientVpnEndpoint",
+		"AWS::Kendra::Index",
+		"AWS::KinesisVideo::Stream",
+		"AWS::Logs::Destination",
+		"AWS::Pinpoint::EmailChannel",
+		"AWS::S3::AccessPoint",
+		"AWS::NetworkManager::CustomerGatewayAssociation",
+		"AWS::NetworkManager::LinkAssociation",
 	}
 }
 

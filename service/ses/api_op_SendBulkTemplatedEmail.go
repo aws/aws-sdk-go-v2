@@ -17,29 +17,29 @@ import (
 )
 
 // Composes an email message to multiple destinations. The message body is created
-// using an email template. In order to send email using the SendBulkTemplatedEmail
-// operation, your call to the API must meet the following requirements:
+// using an email template. To send email using this operation, your call must meet
+// the following requirements:
 //   - The call must refer to an existing email template. You can create email
-//     templates using the CreateTemplate operation.
+//     templates using CreateTemplate .
 //   - The message must be sent from a verified email address or domain.
-//   - If your account is still in the Amazon SES sandbox, you may only send to
+//   - If your account is still in the Amazon SES sandbox, you may send only to
 //     verified addresses or domains, or to email addresses associated with the Amazon
 //     SES Mailbox Simulator. For more information, see Verifying Email Addresses
-//     and Domains (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
+//     and Domains (https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html)
 //     in the Amazon SES Developer Guide.
 //   - The maximum message size is 10 MB.
 //   - Each Destination parameter must include at least one recipient email
 //     address. The recipient address can be a To: address, a CC: address, or a BCC:
 //     address. If a recipient email address is invalid (that is, it is not in the
-//     format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be
+//     format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message is
 //     rejected, even if the message contains other recipients that are valid.
 //   - The message may not include more than 50 recipients, across the To:, CC:
 //     and BCC: fields. If you need to send an email message to a larger audience, you
 //     can divide your recipient list into groups of 50 or fewer, and then call the
 //     SendBulkTemplatedEmail operation several times to send the message to each
 //     group.
-//   - The number of destinations you can contact in a single call to the API may
-//     be limited by your account's maximum sending rate.
+//   - The number of destinations you can contact in a single call can be limited
+//     by your account's maximum sending rate.
 func (c *Client) SendBulkTemplatedEmail(ctx context.Context, params *SendBulkTemplatedEmailInput, optFns ...func(*Options)) (*SendBulkTemplatedEmailOutput, error) {
 	if params == nil {
 		params = &SendBulkTemplatedEmailInput{}
@@ -56,13 +56,13 @@ func (c *Client) SendBulkTemplatedEmail(ctx context.Context, params *SendBulkTem
 }
 
 // Represents a request to send a templated email to multiple destinations using
-// Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html)
 // .
 type SendBulkTemplatedEmailInput struct {
 
-	// One or more Destination objects. All of the recipients in a Destination will
-	// receive the same version of the email. You can specify up to 50 Destination
-	// objects within a Destinations array.
+	// One or more Destination objects. All of the recipients in a Destination receive
+	// the same version of the email. You can specify up to 50 Destination objects
+	// within a Destinations array.
 	//
 	// This member is required.
 	Destinations []types.BulkEmailDestination
@@ -70,21 +70,21 @@ type SendBulkTemplatedEmailInput struct {
 	// The email address that is sending the email. This email address must be either
 	// individually verified with Amazon SES, or from a domain that has been verified
 	// with Amazon SES. For information about verifying identities, see the Amazon SES
-	// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
+	// Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html)
 	// . If you are sending on behalf of another user and have been permitted to do so
 	// by a sending authorization policy, then you must also specify the SourceArn
 	// parameter. For more information about sending authorization, see the Amazon SES
-	// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+	// Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html)
 	// . Amazon SES does not support the SMTPUTF8 extension, as described in RFC6531 (https://tools.ietf.org/html/rfc6531)
-	// . For this reason, the local part of a source email address (the part of the
-	// email address that precedes the @ sign) may only contain 7-bit ASCII characters (https://en.wikipedia.org/wiki/Email_address#Local-part)
-	// . If the domain part of an address (the part after the @ sign) contains
-	// non-ASCII characters, they must be encoded using Punycode, as described in
-	// RFC3492 (https://tools.ietf.org/html/rfc3492.html) . The sender name (also known
-	// as the friendly name) may contain non-ASCII characters. These characters must be
-	// encoded using MIME encoded-word syntax, as described in RFC 2047 (https://tools.ietf.org/html/rfc2047)
-	// . MIME encoded-word syntax uses the following form:
-	// =?charset?encoding?encoded-text?= .
+	// . For this reason, the email address string must be 7-bit ASCII. If you want to
+	// send to or from email addresses that contain Unicode characters in the domain
+	// part of an address, you must encode the domain using Punycode. Punycode is not
+	// permitted in the local part of the email address (the part before the @ sign)
+	// nor in the "friendly from" name. If you want to use Unicode characters in the
+	// "friendly from" name, you must encode the "friendly from" name using MIME
+	// encoded-word syntax, as described in Sending raw email using the Amazon SES API (https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html)
+	// . For more information about Punycode, see RFC 3492 (http://tools.ietf.org/html/rfc3492)
+	// .
 	//
 	// This member is required.
 	Source *string
@@ -110,16 +110,16 @@ type SendBulkTemplatedEmailInput struct {
 	DefaultTemplateData *string
 
 	// The reply-to email address(es) for the message. If the recipient replies to the
-	// message, each reply-to address will receive the reply.
+	// message, each reply-to address receives the reply.
 	ReplyToAddresses []string
 
-	// The email address that bounces and complaints will be forwarded to when
-	// feedback forwarding is enabled. If the message cannot be delivered to the
-	// recipient, then an error message will be returned from the recipient's ISP; this
-	// message will then be forwarded to the email address specified by the ReturnPath
-	// parameter. The ReturnPath parameter is never overwritten. This email address
-	// must be either individually verified with Amazon SES, or from a domain that has
-	// been verified with Amazon SES.
+	// The email address that bounces and complaints are forwarded to when feedback
+	// forwarding is enabled. If the message cannot be delivered to the recipient, then
+	// an error message is returned from the recipient's ISP; this message is forwarded
+	// to the email address specified by the ReturnPath parameter. The ReturnPath
+	// parameter is never overwritten. This email address must be either individually
+	// verified with Amazon SES, or from a domain that has been verified with Amazon
+	// SES.
 	ReturnPath *string
 
 	// This parameter is used only for sending authorization. It is the ARN of the
@@ -130,7 +130,7 @@ type SendBulkTemplatedEmailInput struct {
 	// it that authorizes you to use feedback@example.com , then you would specify the
 	// ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com ,
 	// and the ReturnPath to be feedback@example.com . For more information about
-	// sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+	// sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html)
 	// .
 	ReturnPathArn *string
 
@@ -142,7 +142,7 @@ type SendBulkTemplatedEmailInput struct {
 	// it that authorizes you to send from user@example.com , then you would specify
 	// the SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com ,
 	// and the Source to be user@example.com . For more information about sending
-	// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+	// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html)
 	// .
 	SourceArn *string
 
@@ -154,7 +154,10 @@ type SendBulkTemplatedEmailInput struct {
 
 type SendBulkTemplatedEmailOutput struct {
 
-	// The unique message identifier returned from the SendBulkTemplatedEmail action.
+	// One object per intended recipient. Check each response object and retry any
+	// messages with a failure status. (Note that order of responses will be respective
+	// to order of destinations in the request.)Receipt rules enable you to specify
+	// which actions
 	//
 	// This member is required.
 	Status []types.BulkEmailDestinationStatus
