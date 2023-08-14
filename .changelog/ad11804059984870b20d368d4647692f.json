@@ -1,0 +1,8 @@
+{
+    "id": "ad118040-5998-4870-b20d-368d4647692f",
+    "type": "feature",
+    "description": "This release provides support for annotation store versioning and cross account sharing for Omics Analytics",
+    "modules": [
+        "service/omics"
+    ]
+}

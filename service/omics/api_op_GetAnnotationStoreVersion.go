@@ -20,104 +20,101 @@ import (
 	"time"
 )
 
-// Gets information about an annotation store.
-func (c *Client) GetAnnotationStore(ctx context.Context, params *GetAnnotationStoreInput, optFns ...func(*Options)) (*GetAnnotationStoreOutput, error) {
+// Retrieves the metadata for an annotation store version.
+func (c *Client) GetAnnotationStoreVersion(ctx context.Context, params *GetAnnotationStoreVersionInput, optFns ...func(*Options)) (*GetAnnotationStoreVersionOutput, error) {
 	if params == nil {
-		params = &GetAnnotationStoreInput{}
+		params = &GetAnnotationStoreVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAnnotationStore", params, optFns, c.addOperationGetAnnotationStoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAnnotationStoreVersion", params, optFns, c.addOperationGetAnnotationStoreVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetAnnotationStoreOutput)
+	out := result.(*GetAnnotationStoreVersionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetAnnotationStoreInput struct {
+type GetAnnotationStoreVersionInput struct {
 
-	// The store's name.
+	// The name given to an annotation store version to distinguish it from others.
 	//
 	// This member is required.
 	Name *string
+
+	// The name given to an annotation store version to distinguish it from others.
+	//
+	// This member is required.
+	VersionName *string
 
 	noSmithyDocumentSerde
 }
 
-type GetAnnotationStoreOutput struct {
+type GetAnnotationStoreVersionOutput struct {
 
-	// When the store was created.
+	// The time stamp for when an annotation store version was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The store's description.
+	// The description for an annotation store version.
 	//
 	// This member is required.
 	Description *string
 
-	// The store's ID.
+	// The annotation store version ID.
 	//
 	// This member is required.
 	Id *string
 
-	// The store's name.
+	// The name of the annotation store.
 	//
 	// This member is required.
 	Name *string
 
-	// An integer indicating how many versions of an annotation store exist.
+	// The status of an annotation store version.
 	//
 	// This member is required.
-	NumVersions *int32
+	Status types.VersionStatus
 
-	// The store's genome reference.
-	//
-	// This member is required.
-	Reference types.ReferenceItem
-
-	// The store's server-side encryption (SSE) settings.
-	//
-	// This member is required.
-	SseConfig *types.SseConfig
-
-	// The store's status.
-	//
-	// This member is required.
-	Status types.StoreStatus
-
-	// A status message.
+	// The status of an annotation store version.
 	//
 	// This member is required.
 	StatusMessage *string
 
-	// The store's ARN.
+	// The store ID for annotation store version.
 	//
 	// This member is required.
-	StoreArn *string
+	StoreId *string
 
-	// The store's size in bytes.
-	//
-	// This member is required.
-	StoreSizeBytes *int64
-
-	// The store's tags.
+	// Any tags associated with an annotation store version.
 	//
 	// This member is required.
 	Tags map[string]string
 
-	// When the store was updated.
+	// The time stamp for when an annotation store version was updated.
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The store's annotation file format.
-	StoreFormat types.StoreFormat
+	// The Arn for the annotation store.
+	//
+	// This member is required.
+	VersionArn *string
 
-	// The store's parsing options.
-	StoreOptions types.StoreOptions
+	// The name given to an annotation store version to distinguish it from others.
+	//
+	// This member is required.
+	VersionName *string
+
+	// The size of the annotation store version in Bytes.
+	//
+	// This member is required.
+	VersionSizeBytes *int64
+
+	// The options for an annotation store version.
+	VersionOptions types.VersionOptions
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -125,12 +122,12 @@ type GetAnnotationStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetAnnotationStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAnnotationStore{}, middleware.After)
+func (c *Client) addOperationGetAnnotationStoreVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAnnotationStoreVersion{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAnnotationStore{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAnnotationStoreVersion{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -173,16 +170,16 @@ func (c *Client) addOperationGetAnnotationStoreMiddlewares(stack *middleware.Sta
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opGetAnnotationStoreMiddleware(stack); err != nil {
+	if err = addEndpointPrefix_opGetAnnotationStoreVersionMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addGetAnnotationStoreResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addGetAnnotationStoreVersionResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetAnnotationStoreValidationMiddleware(stack); err != nil {
+	if err = addOpGetAnnotationStoreVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAnnotationStore(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAnnotationStoreVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -203,14 +200,14 @@ func (c *Client) addOperationGetAnnotationStoreMiddlewares(stack *middleware.Sta
 	return nil
 }
 
-type endpointPrefix_opGetAnnotationStoreMiddleware struct {
+type endpointPrefix_opGetAnnotationStoreVersionMiddleware struct {
 }
 
-func (*endpointPrefix_opGetAnnotationStoreMiddleware) ID() string {
+func (*endpointPrefix_opGetAnnotationStoreVersionMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opGetAnnotationStoreMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *endpointPrefix_opGetAnnotationStoreVersionMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
@@ -226,21 +223,21 @@ func (m *endpointPrefix_opGetAnnotationStoreMiddleware) HandleSerialize(ctx cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func addEndpointPrefix_opGetAnnotationStoreMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opGetAnnotationStoreMiddleware{}, `OperationSerializer`, middleware.After)
+func addEndpointPrefix_opGetAnnotationStoreVersionMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opGetAnnotationStoreVersionMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-// GetAnnotationStoreAPIClient is a client that implements the GetAnnotationStore
-// operation.
-type GetAnnotationStoreAPIClient interface {
-	GetAnnotationStore(context.Context, *GetAnnotationStoreInput, ...func(*Options)) (*GetAnnotationStoreOutput, error)
+// GetAnnotationStoreVersionAPIClient is a client that implements the
+// GetAnnotationStoreVersion operation.
+type GetAnnotationStoreVersionAPIClient interface {
+	GetAnnotationStoreVersion(context.Context, *GetAnnotationStoreVersionInput, ...func(*Options)) (*GetAnnotationStoreVersionOutput, error)
 }
 
-var _ GetAnnotationStoreAPIClient = (*Client)(nil)
+var _ GetAnnotationStoreVersionAPIClient = (*Client)(nil)
 
-// AnnotationStoreCreatedWaiterOptions are waiter options for
-// AnnotationStoreCreatedWaiter
-type AnnotationStoreCreatedWaiterOptions struct {
+// AnnotationStoreVersionCreatedWaiterOptions are waiter options for
+// AnnotationStoreVersionCreatedWaiter
+type AnnotationStoreVersionCreatedWaiterOptions struct {
 
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
@@ -248,14 +245,15 @@ type AnnotationStoreCreatedWaiterOptions struct {
 	APIOptions []func(*middleware.Stack) error
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
-	// AnnotationStoreCreatedWaiter will use default minimum delay of 30 seconds. Note
-	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	// AnnotationStoreVersionCreatedWaiter will use default minimum delay of 30
+	// seconds. Note that MinDelay must resolve to a value lesser than or equal to the
+	// MaxDelay.
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, AnnotationStoreCreatedWaiter will use default max delay of 600
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// set to zero, AnnotationStoreVersionCreatedWaiter will use default max delay of
+	// 600 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -269,45 +267,47 @@ type AnnotationStoreCreatedWaiterOptions struct {
 	// state mutators.The function returns an error in case of a failure state. In case
 	// of retry state, this function returns a bool value of true and nil error, while
 	// in case of success it returns a bool value of false and nil error.
-	Retryable func(context.Context, *GetAnnotationStoreInput, *GetAnnotationStoreOutput, error) (bool, error)
+	Retryable func(context.Context, *GetAnnotationStoreVersionInput, *GetAnnotationStoreVersionOutput, error) (bool, error)
 }
 
-// AnnotationStoreCreatedWaiter defines the waiters for AnnotationStoreCreated
-type AnnotationStoreCreatedWaiter struct {
-	client GetAnnotationStoreAPIClient
+// AnnotationStoreVersionCreatedWaiter defines the waiters for
+// AnnotationStoreVersionCreated
+type AnnotationStoreVersionCreatedWaiter struct {
+	client GetAnnotationStoreVersionAPIClient
 
-	options AnnotationStoreCreatedWaiterOptions
+	options AnnotationStoreVersionCreatedWaiterOptions
 }
 
-// NewAnnotationStoreCreatedWaiter constructs a AnnotationStoreCreatedWaiter.
-func NewAnnotationStoreCreatedWaiter(client GetAnnotationStoreAPIClient, optFns ...func(*AnnotationStoreCreatedWaiterOptions)) *AnnotationStoreCreatedWaiter {
-	options := AnnotationStoreCreatedWaiterOptions{}
+// NewAnnotationStoreVersionCreatedWaiter constructs a
+// AnnotationStoreVersionCreatedWaiter.
+func NewAnnotationStoreVersionCreatedWaiter(client GetAnnotationStoreVersionAPIClient, optFns ...func(*AnnotationStoreVersionCreatedWaiterOptions)) *AnnotationStoreVersionCreatedWaiter {
+	options := AnnotationStoreVersionCreatedWaiterOptions{}
 	options.MinDelay = 30 * time.Second
 	options.MaxDelay = 600 * time.Second
-	options.Retryable = annotationStoreCreatedStateRetryable
+	options.Retryable = annotationStoreVersionCreatedStateRetryable
 
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	return &AnnotationStoreCreatedWaiter{
+	return &AnnotationStoreVersionCreatedWaiter{
 		client:  client,
 		options: options,
 	}
 }
 
-// Wait calls the waiter function for AnnotationStoreCreated waiter. The
+// Wait calls the waiter function for AnnotationStoreVersionCreated waiter. The
 // maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
 // required and must be greater than zero.
-func (w *AnnotationStoreCreatedWaiter) Wait(ctx context.Context, params *GetAnnotationStoreInput, maxWaitDur time.Duration, optFns ...func(*AnnotationStoreCreatedWaiterOptions)) error {
+func (w *AnnotationStoreVersionCreatedWaiter) Wait(ctx context.Context, params *GetAnnotationStoreVersionInput, maxWaitDur time.Duration, optFns ...func(*AnnotationStoreVersionCreatedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
 }
 
-// WaitForOutput calls the waiter function for AnnotationStoreCreated waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
-func (w *AnnotationStoreCreatedWaiter) WaitForOutput(ctx context.Context, params *GetAnnotationStoreInput, maxWaitDur time.Duration, optFns ...func(*AnnotationStoreCreatedWaiterOptions)) (*GetAnnotationStoreOutput, error) {
+// WaitForOutput calls the waiter function for AnnotationStoreVersionCreated
+// waiter and returns the output of the successful operation. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
+func (w *AnnotationStoreVersionCreatedWaiter) WaitForOutput(ctx context.Context, params *GetAnnotationStoreVersionInput, maxWaitDur time.Duration, optFns ...func(*AnnotationStoreVersionCreatedWaiterOptions)) (*GetAnnotationStoreVersionOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
@@ -344,7 +344,7 @@ func (w *AnnotationStoreCreatedWaiter) WaitForOutput(ctx context.Context, params
 			apiOptions = append(apiOptions, logger.AddLogger)
 		}
 
-		out, err := w.client.GetAnnotationStore(ctx, params, func(o *Options) {
+		out, err := w.client.GetAnnotationStoreVersion(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
 		})
 
@@ -375,10 +375,10 @@ func (w *AnnotationStoreCreatedWaiter) WaitForOutput(ctx context.Context, params
 			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return nil, fmt.Errorf("exceeded max wait time for AnnotationStoreCreated waiter")
+	return nil, fmt.Errorf("exceeded max wait time for AnnotationStoreVersionCreated waiter")
 }
 
-func annotationStoreCreatedStateRetryable(ctx context.Context, input *GetAnnotationStoreInput, output *GetAnnotationStoreOutput, err error) (bool, error) {
+func annotationStoreVersionCreatedStateRetryable(ctx context.Context, input *GetAnnotationStoreVersionInput, output *GetAnnotationStoreVersionOutput, err error) (bool, error) {
 
 	if err == nil {
 		pathValue, err := jmespath.Search("status", output)
@@ -387,9 +387,9 @@ func annotationStoreCreatedStateRetryable(ctx context.Context, input *GetAnnotat
 		}
 
 		expectedValue := "ACTIVE"
-		value, ok := pathValue.(types.StoreStatus)
+		value, ok := pathValue.(types.VersionStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.StoreStatus value, got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
 		}
 
 		if string(value) == expectedValue {
@@ -404,9 +404,9 @@ func annotationStoreCreatedStateRetryable(ctx context.Context, input *GetAnnotat
 		}
 
 		expectedValue := "CREATING"
-		value, ok := pathValue.(types.StoreStatus)
+		value, ok := pathValue.(types.VersionStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.StoreStatus value, got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
 		}
 
 		if string(value) == expectedValue {
@@ -421,9 +421,9 @@ func annotationStoreCreatedStateRetryable(ctx context.Context, input *GetAnnotat
 		}
 
 		expectedValue := "UPDATING"
-		value, ok := pathValue.(types.StoreStatus)
+		value, ok := pathValue.(types.VersionStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.StoreStatus value, got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
 		}
 
 		if string(value) == expectedValue {
@@ -438,9 +438,9 @@ func annotationStoreCreatedStateRetryable(ctx context.Context, input *GetAnnotat
 		}
 
 		expectedValue := "FAILED"
-		value, ok := pathValue.(types.StoreStatus)
+		value, ok := pathValue.(types.VersionStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.StoreStatus value, got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
 		}
 
 		if string(value) == expectedValue {
@@ -451,9 +451,9 @@ func annotationStoreCreatedStateRetryable(ctx context.Context, input *GetAnnotat
 	return true, nil
 }
 
-// AnnotationStoreDeletedWaiterOptions are waiter options for
-// AnnotationStoreDeletedWaiter
-type AnnotationStoreDeletedWaiterOptions struct {
+// AnnotationStoreVersionDeletedWaiterOptions are waiter options for
+// AnnotationStoreVersionDeletedWaiter
+type AnnotationStoreVersionDeletedWaiterOptions struct {
 
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
@@ -461,14 +461,15 @@ type AnnotationStoreDeletedWaiterOptions struct {
 	APIOptions []func(*middleware.Stack) error
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
-	// AnnotationStoreDeletedWaiter will use default minimum delay of 30 seconds. Note
-	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	// AnnotationStoreVersionDeletedWaiter will use default minimum delay of 30
+	// seconds. Note that MinDelay must resolve to a value lesser than or equal to the
+	// MaxDelay.
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, AnnotationStoreDeletedWaiter will use default max delay of 600
-	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
-	// MinDelay.
+	// set to zero, AnnotationStoreVersionDeletedWaiter will use default max delay of
+	// 600 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// the MinDelay.
 	MaxDelay time.Duration
 
 	// LogWaitAttempts is used to enable logging for waiter retry attempts
@@ -482,45 +483,47 @@ type AnnotationStoreDeletedWaiterOptions struct {
 	// state mutators.The function returns an error in case of a failure state. In case
 	// of retry state, this function returns a bool value of true and nil error, while
 	// in case of success it returns a bool value of false and nil error.
-	Retryable func(context.Context, *GetAnnotationStoreInput, *GetAnnotationStoreOutput, error) (bool, error)
+	Retryable func(context.Context, *GetAnnotationStoreVersionInput, *GetAnnotationStoreVersionOutput, error) (bool, error)
 }
 
-// AnnotationStoreDeletedWaiter defines the waiters for AnnotationStoreDeleted
-type AnnotationStoreDeletedWaiter struct {
-	client GetAnnotationStoreAPIClient
+// AnnotationStoreVersionDeletedWaiter defines the waiters for
+// AnnotationStoreVersionDeleted
+type AnnotationStoreVersionDeletedWaiter struct {
+	client GetAnnotationStoreVersionAPIClient
 
-	options AnnotationStoreDeletedWaiterOptions
+	options AnnotationStoreVersionDeletedWaiterOptions
 }
 
-// NewAnnotationStoreDeletedWaiter constructs a AnnotationStoreDeletedWaiter.
-func NewAnnotationStoreDeletedWaiter(client GetAnnotationStoreAPIClient, optFns ...func(*AnnotationStoreDeletedWaiterOptions)) *AnnotationStoreDeletedWaiter {
-	options := AnnotationStoreDeletedWaiterOptions{}
+// NewAnnotationStoreVersionDeletedWaiter constructs a
+// AnnotationStoreVersionDeletedWaiter.
+func NewAnnotationStoreVersionDeletedWaiter(client GetAnnotationStoreVersionAPIClient, optFns ...func(*AnnotationStoreVersionDeletedWaiterOptions)) *AnnotationStoreVersionDeletedWaiter {
+	options := AnnotationStoreVersionDeletedWaiterOptions{}
 	options.MinDelay = 30 * time.Second
 	options.MaxDelay = 600 * time.Second
-	options.Retryable = annotationStoreDeletedStateRetryable
+	options.Retryable = annotationStoreVersionDeletedStateRetryable
 
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	return &AnnotationStoreDeletedWaiter{
+	return &AnnotationStoreVersionDeletedWaiter{
 		client:  client,
 		options: options,
 	}
 }
 
-// Wait calls the waiter function for AnnotationStoreDeleted waiter. The
+// Wait calls the waiter function for AnnotationStoreVersionDeleted waiter. The
 // maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
 // required and must be greater than zero.
-func (w *AnnotationStoreDeletedWaiter) Wait(ctx context.Context, params *GetAnnotationStoreInput, maxWaitDur time.Duration, optFns ...func(*AnnotationStoreDeletedWaiterOptions)) error {
+func (w *AnnotationStoreVersionDeletedWaiter) Wait(ctx context.Context, params *GetAnnotationStoreVersionInput, maxWaitDur time.Duration, optFns ...func(*AnnotationStoreVersionDeletedWaiterOptions)) error {
 	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
 	return err
 }
 
-// WaitForOutput calls the waiter function for AnnotationStoreDeleted waiter and
-// returns the output of the successful operation. The maxWaitDur is the maximum
-// wait duration the waiter will wait. The maxWaitDur is required and must be
-// greater than zero.
-func (w *AnnotationStoreDeletedWaiter) WaitForOutput(ctx context.Context, params *GetAnnotationStoreInput, maxWaitDur time.Duration, optFns ...func(*AnnotationStoreDeletedWaiterOptions)) (*GetAnnotationStoreOutput, error) {
+// WaitForOutput calls the waiter function for AnnotationStoreVersionDeleted
+// waiter and returns the output of the successful operation. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
+func (w *AnnotationStoreVersionDeletedWaiter) WaitForOutput(ctx context.Context, params *GetAnnotationStoreVersionInput, maxWaitDur time.Duration, optFns ...func(*AnnotationStoreVersionDeletedWaiterOptions)) (*GetAnnotationStoreVersionOutput, error) {
 	if maxWaitDur <= 0 {
 		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
@@ -557,7 +560,7 @@ func (w *AnnotationStoreDeletedWaiter) WaitForOutput(ctx context.Context, params
 			apiOptions = append(apiOptions, logger.AddLogger)
 		}
 
-		out, err := w.client.GetAnnotationStore(ctx, params, func(o *Options) {
+		out, err := w.client.GetAnnotationStoreVersion(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
 		})
 
@@ -588,10 +591,10 @@ func (w *AnnotationStoreDeletedWaiter) WaitForOutput(ctx context.Context, params
 			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return nil, fmt.Errorf("exceeded max wait time for AnnotationStoreDeleted waiter")
+	return nil, fmt.Errorf("exceeded max wait time for AnnotationStoreVersionDeleted waiter")
 }
 
-func annotationStoreDeletedStateRetryable(ctx context.Context, input *GetAnnotationStoreInput, output *GetAnnotationStoreOutput, err error) (bool, error) {
+func annotationStoreVersionDeletedStateRetryable(ctx context.Context, input *GetAnnotationStoreVersionInput, output *GetAnnotationStoreVersionOutput, err error) (bool, error) {
 
 	if err == nil {
 		pathValue, err := jmespath.Search("status", output)
@@ -600,9 +603,9 @@ func annotationStoreDeletedStateRetryable(ctx context.Context, input *GetAnnotat
 		}
 
 		expectedValue := "DELETED"
-		value, ok := pathValue.(types.StoreStatus)
+		value, ok := pathValue.(types.VersionStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.StoreStatus value, got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
 		}
 
 		if string(value) == expectedValue {
@@ -624,9 +627,9 @@ func annotationStoreDeletedStateRetryable(ctx context.Context, input *GetAnnotat
 		}
 
 		expectedValue := "DELETING"
-		value, ok := pathValue.(types.StoreStatus)
+		value, ok := pathValue.(types.VersionStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.StoreStatus value, got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.VersionStatus value, got %T", pathValue)
 		}
 
 		if string(value) == expectedValue {
@@ -637,25 +640,25 @@ func annotationStoreDeletedStateRetryable(ctx context.Context, input *GetAnnotat
 	return true, nil
 }
 
-func newServiceMetadataMiddleware_opGetAnnotationStore(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetAnnotationStoreVersion(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "omics",
-		OperationName: "GetAnnotationStore",
+		OperationName: "GetAnnotationStoreVersion",
 	}
 }
 
-type opGetAnnotationStoreResolveEndpointMiddleware struct {
+type opGetAnnotationStoreVersionResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver
 }
 
-func (*opGetAnnotationStoreResolveEndpointMiddleware) ID() string {
+func (*opGetAnnotationStoreVersionResolveEndpointMiddleware) ID() string {
 	return "ResolveEndpointV2"
 }
 
-func (m *opGetAnnotationStoreResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *opGetAnnotationStoreVersionResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
@@ -757,8 +760,8 @@ func (m *opGetAnnotationStoreResolveEndpointMiddleware) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
-func addGetAnnotationStoreResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opGetAnnotationStoreResolveEndpointMiddleware{
+func addGetAnnotationStoreVersionResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opGetAnnotationStoreVersionResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
 			Region:       options.Region,

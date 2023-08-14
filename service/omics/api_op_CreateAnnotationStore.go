@@ -58,6 +58,10 @@ type CreateAnnotationStoreInput struct {
 	// Tags for the store.
 	Tags map[string]string
 
+	// The name given to an annotation store version to distinguish it from other
+	// versions.
+	VersionName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -82,6 +86,12 @@ type CreateAnnotationStoreOutput struct {
 	//
 	// This member is required.
 	Status types.StoreStatus
+
+	// The name given to an annotation store version to distinguish it from other
+	// versions.
+	//
+	// This member is required.
+	VersionName *string
 
 	// The store's genome reference. Required for all stores except TSV format with
 	// generic annotations.

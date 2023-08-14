@@ -1547,8 +1547,9 @@ type SftpConnectorConfig struct {
 	//   key you generated.
 	TrustedHostKeys []string
 
-	// The identifiers for the secrets (in Amazon Web Services Secrets Manager) that
-	// contain the SFTP user's private keys or passwords.
+	// The identifier for the secret (in Amazon Web Services Secrets Manager) that
+	// contains the SFTP user's private key, password, or both. The identifier can be
+	// either the Amazon Resource Name (ARN) or the name of the secret.
 	UserSecretId *string
 
 	noSmithyDocumentSerde

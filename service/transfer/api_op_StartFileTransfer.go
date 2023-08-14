@@ -66,9 +66,9 @@ type StartFileTransferInput struct {
 	// a source file path for one inbound file transfer.
 	RetrieveFilePaths []string
 
-	// One or more source paths for the Transfer Family server. Each string represents
-	// a source file path for one outbound file transfer. For example,
-	// DOC-EXAMPLE-BUCKET/myfile.txt . Replace  DOC-EXAMPLE-BUCKET with one of your
+	// One or more source paths for the Amazon S3 storage. Each string represents a
+	// source file path for one outbound file transfer. For example,
+	// DOC-EXAMPLE-BUCKET/myfile.txt . Replace  DOC-EXAMPLE-BUCKET  with one of your
 	// actual buckets.
 	SendFilePaths []string
 
