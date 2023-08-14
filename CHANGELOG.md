@@ -1,3 +1,13 @@
+# Release (2023-08-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.23.0](service/mediapackage/CHANGELOG.md#v1230-2023-08-14)
+  * **Feature**: Fix SDK logging of certain fields.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.8.0](service/omics/CHANGELOG.md#v180-2023-08-14)
+  * **Feature**: This release provides support for annotation store versioning and cross account sharing for Omics Analytics
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.33.4](service/transfer/CHANGELOG.md#v1334-2023-08-14)
+  * **Documentation**: Documentation updates for AWS Transfer Family
+
 # Release (2023-08-11)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "01df2968-b783-4157-aa49-2b54873a14cd",
-    "type": "feature",
-    "description": "Fix SDK logging of certain fields.",
-    "modules": [
-        "service/mediapackage"
-    ]
-}
