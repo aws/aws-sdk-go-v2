@@ -29,6 +29,17 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.pi#AcceptLanguage": {
+            "type": "enum",
+            "members": {
+                "EN_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EN_US"
+                    }
+                }
+            }
+        },
         "com.amazonaws.pi#AdditionalMetricsList": {
             "type": "list",
             "member": {
@@ -48,6 +59,275 @@
             },
             "value": {
                 "target": "com.amazonaws.pi#Double"
+            }
+        },
+        "com.amazonaws.pi#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:.*:pi:.*$"
+            }
+        },
+        "com.amazonaws.pi#AnalysisReport": {
+            "type": "structure",
+            "members": {
+                "AnalysisReportId": {
+                    "target": "com.amazonaws.pi#AnalysisReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the analysis report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.pi#IdentifierString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis report.</p>"
+                    }
+                },
+                "ServiceType": {
+                    "target": "com.amazonaws.pi#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RDS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DOCDB</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.pi#ISOTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time you created the analysis report.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.pi#ISOTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis start time in the report.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.pi#ISOTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis end time in the report.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pi#AnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the created analysis report.</p>"
+                    }
+                },
+                "Insights": {
+                    "target": "com.amazonaws.pi#InsightList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of identified insights in the analysis report.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the summary of the performance analysis report created for a time period.</p>"
+            }
+        },
+        "com.amazonaws.pi#AnalysisReportId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^report-[0-9a-f]{17}$"
+            }
+        },
+        "com.amazonaws.pi#AnalysisReportSummary": {
+            "type": "structure",
+            "members": {
+                "AnalysisReportId": {
+                    "target": "com.amazonaws.pi#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the analysis report.</p>"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.pi#ISOTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time you created the analysis report.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.pi#ISOTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the analysis in the report.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.pi#ISOTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of the analysis in the report.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pi#AnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the analysis report.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.pi#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of all the tags added to the analysis report.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of the performance analysis report.</p>"
+            }
+        },
+        "com.amazonaws.pi#AnalysisReportSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#AnalysisReportSummary"
+            }
+        },
+        "com.amazonaws.pi#AnalysisStatus": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pi#Boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.pi#ContextType": {
+            "type": "enum",
+            "members": {
+                "CAUSAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAUSAL"
+                    }
+                },
+                "CONTEXTUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTEXTUAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pi#CreatePerformanceAnalysisReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pi#CreatePerformanceAnalysisReportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pi#CreatePerformanceAnalysisReportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pi#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.pi#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.pi#NotAuthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new performance analysis report for a specific time period for the\n            DB instance.</p>"
+            }
+        },
+        "com.amazonaws.pi#CreatePerformanceAnalysisReportRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceType": {
+                    "target": "com.amazonaws.pi#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service for which Performance Insights will return metrics. Valid value is <code>RDS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.pi#IdentifierString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An immutable, Amazon Web Services Region-unique identifier for a data source. Performance Insights gathers metrics from\n            this data source.</p>\n         <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value. \n            For example, specify <code>db-ADECBTYHKTSAUMUZQYPDS2GW4A</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.pi#ISOTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time defined for the analysis report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.pi#ISOTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time defined for the analysis report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.pi#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata assigned to the analysis report consisting of a key-value pair.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pi#CreatePerformanceAnalysisReportResponse": {
+            "type": "structure",
+            "members": {
+                "AnalysisReportId": {
+                    "target": "com.amazonaws.pi#AnalysisReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the created analysis report.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pi#Data": {
+            "type": "structure",
+            "members": {
+                "PerformanceInsightsMetric": {
+                    "target": "com.amazonaws.pi#PerformanceInsightsMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field determines the Performance Insights metric to render \n            for the insight. The <code>name</code> field refers to a Performance Insights metric. \n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of data objects which provide details about source metrics. \n            This field can be used to determine the PI metric to render\n            for the insight. This data type also includes static values \n            for the metrics for the Insight that were calculated and included \n            in text and annotations on the DB load chart.</p>"
+            }
+        },
+        "com.amazonaws.pi#DataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#Data"
             }
         },
         "com.amazonaws.pi#DataPoint": {
@@ -76,6 +356,65 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.pi#DataPoint"
+            }
+        },
+        "com.amazonaws.pi#DeletePerformanceAnalysisReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pi#DeletePerformanceAnalysisReportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pi#DeletePerformanceAnalysisReportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pi#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.pi#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.pi#NotAuthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a performance analysis report.</p>"
+            }
+        },
+        "com.amazonaws.pi#DeletePerformanceAnalysisReportRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceType": {
+                    "target": "com.amazonaws.pi#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service for which Performance Insights will return metrics. Valid value is <code>RDS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.pi#IdentifierString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. \n            In the console, the identifier is shown as <i>ResourceID</i>. When you \n            call <code>DescribeDBInstances</code>, the identifier is returned as <code>DbiResourceId</code>.</p>\n         <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify\n            <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnalysisReportId": {
+                    "target": "com.amazonaws.pi#AnalysisReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis report for deletion.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pi#DeletePerformanceAnalysisReportResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pi#DescribeDimensionKeys": {
@@ -117,7 +456,7 @@
                     }
                 },
                 "Identifier": {
-                    "target": "com.amazonaws.pi#RequestString",
+                    "target": "com.amazonaws.pi#IdentifierString",
                     "traits": {
                         "smithy.api#documentation": "<p>An immutable, Amazon Web Services Region-unique identifier for a data source. Performance Insights gathers metrics from\n            this data source.</p>\n         <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value. \n            For example, specify <code>db-FAIHNTYBKTGAUSUZQYPDS2GW4A</code>.\n        </p>",
                         "smithy.api#required": {}
@@ -237,6 +576,25 @@
                     "min": 1,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.pi#DescriptiveMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.pi#DescriptiveString"
+            },
+            "value": {
+                "target": "com.amazonaws.pi#DescriptiveString"
+            }
+        },
+        "com.amazonaws.pi#DescriptiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^.*$"
             }
         },
         "com.amazonaws.pi#DetailStatus": {
@@ -575,6 +933,84 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pi#GetPerformanceAnalysisReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pi#GetPerformanceAnalysisReportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pi#GetPerformanceAnalysisReportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pi#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.pi#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.pi#NotAuthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the report including the report ID, status, time details, and the insights\n            with recommendations. The report status can be <code>RUNNING</code>,\n            <code>SUCCEEDED</code>, or <code>FAILED</code>. The insights include the\n            <code>description</code> and <code>recommendation</code> fields. </p>"
+            }
+        },
+        "com.amazonaws.pi#GetPerformanceAnalysisReportRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceType": {
+                    "target": "com.amazonaws.pi#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service for which Performance Insights will return metrics. Valid value is\n            <code>RDS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.pi#IdentifierString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers \n            metrics from this data source. In the console, the identifier is shown as \n            <i>ResourceID</i>. When you call <code>DescribeDBInstances</code>, the identifier is\n            returned as <code>DbiResourceId</code>.</p>\n         <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify\n            <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnalysisReportId": {
+                    "target": "com.amazonaws.pi#AnalysisReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the created analysis report. For example,\n            <code>report-12345678901234567</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TextFormat": {
+                    "target": "com.amazonaws.pi#TextFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the text format in the report. The options are <code>PLAIN_TEXT</code> or <code>MARKDOWN</code>. The default\n            value is <code>plain text</code>.</p>"
+                    }
+                },
+                "AcceptLanguage": {
+                    "target": "com.amazonaws.pi#AcceptLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text language in the report. The default language is <code>EN_US</code> (English). \n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pi#GetPerformanceAnalysisReportResponse": {
+            "type": "structure",
+            "members": {
+                "AnalysisReport": {
+                    "target": "com.amazonaws.pi#AnalysisReport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the performance analysis report created for a time period.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pi#GetResourceMetadata": {
             "type": "operation",
             "input": {
@@ -609,7 +1045,7 @@
                     }
                 },
                 "Identifier": {
-                    "target": "com.amazonaws.pi#RequestString",
+                    "target": "com.amazonaws.pi#IdentifierString",
                     "traits": {
                         "smithy.api#documentation": "<p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. \n            Performance Insights gathers metrics from this data source. To use a DB instance as a data source, \n            specify its <code>DbiResourceId</code> value. For example, specify <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.\n        </p>",
                         "smithy.api#required": {}
@@ -679,7 +1115,7 @@
                     }
                 },
                 "Identifier": {
-                    "target": "com.amazonaws.pi#RequestString",
+                    "target": "com.amazonaws.pi#IdentifierString",
                     "traits": {
                         "smithy.api#documentation": "<p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the\n            console, the identifier is shown as <i>ResourceID</i>. When you call <code>DescribeDBInstances</code>, the identifier is\n            returned as <code>DbiResourceId</code>.</p>\n         <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify\n                <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>",
                         "smithy.api#required": {}
@@ -783,7 +1219,88 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^db-[a-zA-Z0-9-]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.pi#Insight": {
+            "type": "structure",
+            "members": {
+                "InsightId": {
+                    "target": "com.amazonaws.pi#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the insight. For example, <code>insight-12345678901234567</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InsightType": {
+                    "target": "com.amazonaws.pi#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of insight. For example, <code>HighDBLoad</code>, <code>HighCPU</code>, or <code>DominatingSQLs</code>.</p>"
+                    }
+                },
+                "Context": {
+                    "target": "com.amazonaws.pi#ContextType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the insight is causal or correlated insight.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.pi#ISOTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the insight. For example, <code>2018-10-30T00:00:00Z</code>.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.pi#ISOTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of the insight. For example, <code>2018-10-30T00:00:00Z</code>.</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.pi#Severity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the insight. The values are: <code>Low</code>, <code>Medium</code>, or <code>High</code>.</p>"
+                    }
+                },
+                "SupportingInsights": {
+                    "target": "com.amazonaws.pi#InsightList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of supporting insights that provide additional factors for the insight.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.pi#MarkdownString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the insight. For example:\n            <code>A high severity Insight found between 02:00 to 02:30,\n                where there was an unusually high DB load 600x above baseline. \n                Likely performance impact</code>.</p>"
+                    }
+                },
+                "Recommendations": {
+                    "target": "com.amazonaws.pi#RecommendationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of recommendations for the insight.\n            For example, <code>Investigate the following SQLs that contributed \n                to 100% of the total DBLoad during that time period: sql-id</code>.</p>"
+                    }
+                },
+                "InsightData": {
+                    "target": "com.amazonaws.pi#DataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of data objects containing metrics and references from the time range while generating the insight.</p>"
+                    }
+                },
+                "BaselineData": {
+                    "target": "com.amazonaws.pi#DataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Metric names and values from the timeframe \n            used as baseline to generate the insight.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the list of performance issues which are identified.</p>"
+            }
+        },
+        "com.amazonaws.pi#InsightList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#Insight"
             }
         },
         "com.amazonaws.pi#Integer": {
@@ -861,7 +1378,7 @@
                     }
                 },
                 "Identifier": {
-                    "target": "com.amazonaws.pi#RequestString",
+                    "target": "com.amazonaws.pi#IdentifierString",
                     "traits": {
                         "smithy.api#documentation": "<p>An immutable identifier for a data source that is unique within an Amazon Web Services Region. Performance Insights gathers\n            metrics from this data source. To use an Amazon RDS DB instance as a data source, specify its\n                <code>DbiResourceId</code> value. For example, specify <code>db-ABCDEFGHIJKLMNOPQRSTU1VWZ</code>. </p>",
                         "smithy.api#required": {}
@@ -950,7 +1467,7 @@
                     }
                 },
                 "Identifier": {
-                    "target": "com.amazonaws.pi#RequestString",
+                    "target": "com.amazonaws.pi#IdentifierString",
                     "traits": {
                         "smithy.api#documentation": "<p>An immutable identifier for a data source that is unique within an Amazon Web Services Region. Performance Insights gathers\n            metrics from this data source. To use an Amazon RDS DB instance as a data source, specify its\n                <code>DbiResourceId</code> value. For example, specify <code>db-ABCDEFGHIJKLMNOPQRSTU1VWZ</code>. </p>",
                         "smithy.api#required": {}
@@ -998,6 +1515,164 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pi#ListPerformanceAnalysisReports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pi#ListPerformanceAnalysisReportsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pi#ListPerformanceAnalysisReportsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pi#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.pi#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.pi#NotAuthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the analysis reports created for the DB instance. The reports are sorted based on the start time of each report.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.pi#ListPerformanceAnalysisReportsRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceType": {
+                    "target": "com.amazonaws.pi#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service for which Performance Insights returns metrics. Valid value is\n            <code>RDS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.pi#IdentifierString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the\n            console, the identifier is shown as <i>ResourceID</i>. When you call <code>DescribeDBInstances</code>, the identifier is\n            returned as <code>DbiResourceId</code>.</p>\n         <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify\n            <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pi#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. \n            If this parameter is specified, the response includes only records beyond\n            the token, up to the value specified by <code>MaxResults</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pi#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return in the response. If more items exist than the specified <code>MaxResults</code> value, a\n            pagination token is included in the response so that the remaining results can be retrieved. </p>"
+                    }
+                },
+                "ListTags": {
+                    "target": "com.amazonaws.pi#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not to include the list of tags in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pi#ListPerformanceAnalysisReportsResponse": {
+            "type": "structure",
+            "members": {
+                "AnalysisReports": {
+                    "target": "com.amazonaws.pi#AnalysisReportSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of reports including the report identifier, start and end time, creation time,\n            and status.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pi#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. \n            If this parameter is specified, the response includes only records beyond the token, \n            up to the value specified by <code>MaxResults</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pi#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pi#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pi#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pi#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.pi#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.pi#NotAuthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves all the metadata tags associated with Amazon RDS Performance Insights resource.</p>"
+            }
+        },
+        "com.amazonaws.pi#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceType": {
+                    "target": "com.amazonaws.pi#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceARN": {
+                    "target": "com.amazonaws.pi#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists all the tags for the Amazon RDS Performance Insights resource. This value is an \n            Amazon Resource Name (ARN). For information about creating an ARN, \n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n                Constructing an RDS Amazon Resource Name (ARN)</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pi#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.pi#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pi#MarkdownString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 8000
+                },
+                "smithy.api#pattern": "^(.|\\n)*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.pi#MaxResults": {
@@ -1128,7 +1803,7 @@
                     "min": 1,
                     "max": 8192
                 },
-                "smithy.api#pattern": "^[\\s\\S]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_=-]+$"
             }
         },
         "com.amazonaws.pi#NotAuthorizedException": {
@@ -1143,15 +1818,56 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.pi#PerformanceInsightsMetric": {
+            "type": "structure",
+            "members": {
+                "Metric": {
+                    "target": "com.amazonaws.pi#DescriptiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Performance Insights metric.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.pi#DescriptiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Performance Insights metric name.</p>"
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.pi#DescriptiveMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A dimension map that contains the dimensions for this partition.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.pi#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the metric. For example, <code>9</code> for <code>db.load.avg</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This data type helps to determine Performance Insights metric to render for the insight.</p>"
+            }
+        },
         "com.amazonaws.pi#PerformanceInsightsv20180227": {
             "type": "service",
             "version": "2018-02-27",
             "operations": [
                 {
+                    "target": "com.amazonaws.pi#CreatePerformanceAnalysisReport"
+                },
+                {
+                    "target": "com.amazonaws.pi#DeletePerformanceAnalysisReport"
+                },
+                {
                     "target": "com.amazonaws.pi#DescribeDimensionKeys"
                 },
                 {
                     "target": "com.amazonaws.pi#GetDimensionKeyDetails"
+                },
+                {
+                    "target": "com.amazonaws.pi#GetPerformanceAnalysisReport"
                 },
                 {
                     "target": "com.amazonaws.pi#GetResourceMetadata"
@@ -1164,6 +1880,18 @@
                 },
                 {
                     "target": "com.amazonaws.pi#ListAvailableResourceMetrics"
+                },
+                {
+                    "target": "com.amazonaws.pi#ListPerformanceAnalysisReports"
+                },
+                {
+                    "target": "com.amazonaws.pi#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.pi#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.pi#UntagResource"
                 }
             ],
             "traits": {
@@ -1243,9 +1971,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://pi-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://pi-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -1258,15 +2165,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://pi.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://pi.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -1278,258 +2220,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://pi-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://pi-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://pi.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://pi.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1965,6 +2657,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1975,6 +2678,17 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1991,6 +2705,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -2001,6 +2726,17 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2066,6 +2802,12 @@
                                 "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -2087,6 +2829,32 @@
                         "smithy.api#enumValue": "START_TIME"
                     }
                 }
+            }
+        },
+        "com.amazonaws.pi#Recommendation": {
+            "type": "structure",
+            "members": {
+                "RecommendationId": {
+                    "target": "com.amazonaws.pi#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the recommendation.</p>"
+                    }
+                },
+                "RecommendationDescription": {
+                    "target": "com.amazonaws.pi#MarkdownString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation details to help resolve the performance issue. For example, \n            <code>Investigate the following SQLs that contributed to 100% of the total DBLoad during that time period: sql-id</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of recommendations for the insight.</p>"
+            }
+        },
+        "com.amazonaws.pi#RecommendationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#Recommendation"
             }
         },
         "com.amazonaws.pi#RequestString": {
@@ -2214,6 +2982,29 @@
                 }
             }
         },
+        "com.amazonaws.pi#Severity": {
+            "type": "enum",
+            "members": {
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                }
+            }
+        },
         "com.amazonaws.pi#String": {
             "type": "string",
             "traits": {
@@ -2222,6 +3013,207 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.pi#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.pi#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode \n            characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. \n            The string can only contain only the set of Unicode letters, digits, \n            white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: <code>\"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\"</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.pi#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value is the optional value of the tag. The string value can be from 1 to 256 \n            Unicode characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. \n            The string can only contain only the set of Unicode letters, digits, \n            white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>"
+            }
+        },
+        "com.amazonaws.pi#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.pi#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.pi#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.pi#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pi#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pi#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pi#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.pi#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.pi#NotAuthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds metadata tags to the Amazon RDS Performance Insights resource.</p>"
+            }
+        },
+        "com.amazonaws.pi#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceType": {
+                    "target": "com.amazonaws.pi#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceARN": {
+                    "target": "com.amazonaws.pi#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about  \n            creating an ARN, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n                Constructing an RDS Amazon Resource Name (ARN)</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.pi#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pi#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pi#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.pi#TextFormat": {
+            "type": "enum",
+            "members": {
+                "PLAIN_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLAIN_TEXT"
+                    }
+                },
+                "MARKDOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MARKDOWN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pi#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pi#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pi#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pi#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.pi#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.pi#NotAuthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the metadata tags from the Amazon RDS Performance Insights resource.</p>"
+            }
+        },
+        "com.amazonaws.pi#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceType": {
+                    "target": "com.amazonaws.pi#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceARN": {
+                    "target": "com.amazonaws.pi#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about  \n            creating an ARN, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n                Constructing an RDS Amazon Resource Name (ARN)</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.pi#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata assigned to an Amazon RDS Performance Insights resource consisting of a key-value pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pi#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         }
     }
