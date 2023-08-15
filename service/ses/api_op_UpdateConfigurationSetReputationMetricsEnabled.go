@@ -16,10 +16,11 @@ import (
 )
 
 // Enables or disables the publishing of reputation metrics for emails sent using
-// a specific configuration set in a given AWS Region. Reputation metrics include
-// bounce and complaint rates. These metrics are published to Amazon CloudWatch. By
-// using CloudWatch, you can create alarms when bounce or complaint rates exceed
-// certain thresholds. You can execute this operation no more than once per second.
+// a specific configuration set in a given Amazon Web Services Region. Reputation
+// metrics include bounce and complaint rates. These metrics are published to
+// Amazon CloudWatch. By using CloudWatch, you can create alarms when bounce or
+// complaint rates exceed certain thresholds. You can execute this operation no
+// more than once per second.
 func (c *Client) UpdateConfigurationSetReputationMetricsEnabled(ctx context.Context, params *UpdateConfigurationSetReputationMetricsEnabledInput, optFns ...func(*Options)) (*UpdateConfigurationSetReputationMetricsEnabledOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationSetReputationMetricsEnabledInput{}
@@ -39,12 +40,12 @@ func (c *Client) UpdateConfigurationSetReputationMetricsEnabled(ctx context.Cont
 // configuration set.
 type UpdateConfigurationSetReputationMetricsEnabledInput struct {
 
-	// The name of the configuration set that you want to update.
+	// The name of the configuration set to update.
 	//
 	// This member is required.
 	ConfigurationSetName *string
 
-	// Describes whether or not Amazon SES will publish reputation metrics for the
+	// Describes whether or not Amazon SES publishes reputation metrics for the
 	// configuration set, such as bounce and complaint rates, to Amazon CloudWatch.
 	//
 	// This member is required.

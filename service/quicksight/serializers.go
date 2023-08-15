@@ -27976,6 +27976,11 @@ func awsRestjson1_serializeDocumentPivotTableOptions(v *types.PivotTableOptions,
 		ok.String(string(v.ColumnNamesVisibility))
 	}
 
+	if v.DefaultCellWidth != nil {
+		ok := object.Key("DefaultCellWidth")
+		ok.String(*v.DefaultCellWidth)
+	}
+
 	if len(v.MetricPlacement) > 0 {
 		ok := object.Key("MetricPlacement")
 		ok.String(string(v.MetricPlacement))
@@ -28000,6 +28005,18 @@ func awsRestjson1_serializeDocumentPivotTableOptions(v *types.PivotTableOptions,
 		if err := awsRestjson1_serializeDocumentTableCellStyle(v.RowHeaderStyle, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.RowsLabelOptions != nil {
+		ok := object.Key("RowsLabelOptions")
+		if err := awsRestjson1_serializeDocumentPivotTableRowsLabelOptions(v.RowsLabelOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RowsLayout) > 0 {
+		ok := object.Key("RowsLayout")
+		ok.String(string(v.RowsLayout))
 	}
 
 	if len(v.SingleMetricVisibility) > 0 {
@@ -28027,6 +28044,23 @@ func awsRestjson1_serializeDocumentPivotTablePaginatedReportOptions(v *types.Piv
 	if len(v.VerticalOverflowVisibility) > 0 {
 		ok := object.Key("VerticalOverflowVisibility")
 		ok.String(string(v.VerticalOverflowVisibility))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPivotTableRowsLabelOptions(v *types.PivotTableRowsLabelOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomLabel != nil {
+		ok := object.Key("CustomLabel")
+		ok.String(*v.CustomLabel)
+	}
+
+	if len(v.Visibility) > 0 {
+		ok := object.Key("Visibility")
+		ok.String(string(v.Visibility))
 	}
 
 	return nil
@@ -29351,6 +29385,11 @@ func awsRestjson1_serializeDocumentRowAlternateColorOptions(v *types.RowAlternat
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	if len(v.UsePrimaryBackgroundColor) > 0 {
+		ok := object.Key("UsePrimaryBackgroundColor")
+		ok.String(string(v.UsePrimaryBackgroundColor))
 	}
 
 	return nil
@@ -31399,6 +31438,13 @@ func awsRestjson1_serializeDocumentSubtotalOptions(v *types.SubtotalOptions, val
 		}
 	}
 
+	if v.StyleTargets != nil {
+		ok := object.Key("StyleTargets")
+		if err := awsRestjson1_serializeDocumentTableStyleTargetList(v.StyleTargets, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TotalCellStyle != nil {
 		ok := object.Key("TotalCellStyle")
 		if err := awsRestjson1_serializeDocumentTableCellStyle(v.TotalCellStyle, ok); err != nil {
@@ -32021,6 +32067,31 @@ func awsRestjson1_serializeDocumentTableSortConfiguration(v *types.TableSortConf
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTableStyleTarget(v *types.TableStyleTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CellType) > 0 {
+		ok := object.Key("CellType")
+		ok.String(string(v.CellType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTableStyleTargetList(v []types.TableStyleTarget, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTableStyleTarget(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -32940,6 +33011,11 @@ func awsRestjson1_serializeDocumentTopicCalculatedField(v *types.TopicCalculated
 		ok.Boolean(v.NeverAggregateInFilter)
 	}
 
+	if v.NonAdditive != nil {
+		ok := object.Key("NonAdditive")
+		ok.Boolean(*v.NonAdditive)
+	}
+
 	if v.NotAllowedAggregations != nil {
 		ok := object.Key("NotAllowedAggregations")
 		if err := awsRestjson1_serializeDocumentAuthorSpecifiedAggregations(v.NotAllowedAggregations, ok); err != nil {
@@ -33105,6 +33181,11 @@ func awsRestjson1_serializeDocumentTopicColumn(v *types.TopicColumn, value smith
 	if v.NeverAggregateInFilter {
 		ok := object.Key("NeverAggregateInFilter")
 		ok.Boolean(v.NeverAggregateInFilter)
+	}
+
+	if v.NonAdditive != nil {
+		ok := object.Key("NonAdditive")
+		ok.Boolean(*v.NonAdditive)
 	}
 
 	if v.NotAllowedAggregations != nil {

@@ -1987,6 +1987,11 @@ func validateOpRespondDecisionTaskCompletedInput(v *RespondDecisionTaskCompleted
 			invalidParams.AddNested("Decisions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TaskList != nil {
+		if err := validateTaskList(v.TaskList); err != nil {
+			invalidParams.AddNested("TaskList", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

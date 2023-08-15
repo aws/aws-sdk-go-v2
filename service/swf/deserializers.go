@@ -5744,6 +5744,20 @@ func awsAwsjson10_deserializeDocumentDecisionTaskCompletedEventAttributes(v **ty
 				sv.StartedEventId = i64
 			}
 
+		case "taskList":
+			if err := awsAwsjson10_deserializeDocumentTaskList(&sv.TaskList, value); err != nil {
+				return err
+			}
+
+		case "taskListScheduleToStartTimeout":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
+				}
+				sv.TaskListScheduleToStartTimeout = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5775,6 +5789,15 @@ func awsAwsjson10_deserializeDocumentDecisionTaskScheduledEventAttributes(v **ty
 
 	for key, value := range shape {
 		switch key {
+		case "scheduleToStartTimeout":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DurationInSecondsOptional to be of type string, got %T instead", value)
+				}
+				sv.ScheduleToStartTimeout = ptr.String(jtv)
+			}
+
 		case "startToCloseTimeout":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -1,3 +1,7 @@
+# v1.16.0 (2023-08-11)
+
+* **Feature**: Adds sensitive trait to required input shapes.
+
 # v1.15.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

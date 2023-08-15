@@ -12020,6 +12020,11 @@ func validatePivotTableConfiguration(v *types.PivotTableConfiguration) error {
 			invalidParams.AddNested("SortConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TotalOptions != nil {
+		if err := validatePivotTableTotalOptions(v.TotalOptions); err != nil {
+			invalidParams.AddNested("TotalOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.FieldOptions != nil {
 		if err := validatePivotTableFieldOptions(v.FieldOptions); err != nil {
 			invalidParams.AddNested("FieldOptions", err.(smithy.InvalidParamsError))
@@ -12249,6 +12254,28 @@ func validatePivotTableSortConfiguration(v *types.PivotTableSortConfiguration) e
 	if v.FieldSortOptions != nil {
 		if err := validatePivotFieldSortOptionsList(v.FieldSortOptions); err != nil {
 			invalidParams.AddNested("FieldSortOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePivotTableTotalOptions(v *types.PivotTableTotalOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PivotTableTotalOptions"}
+	if v.RowSubtotalOptions != nil {
+		if err := validateSubtotalOptions(v.RowSubtotalOptions); err != nil {
+			invalidParams.AddNested("RowSubtotalOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ColumnSubtotalOptions != nil {
+		if err := validateSubtotalOptions(v.ColumnSubtotalOptions); err != nil {
+			invalidParams.AddNested("ColumnSubtotalOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -14367,6 +14394,23 @@ func validateStringParameterList(v []types.StringParameter) error {
 	}
 }
 
+func validateSubtotalOptions(v *types.SubtotalOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubtotalOptions"}
+	if v.StyleTargets != nil {
+		if err := validateTableStyleTargetList(v.StyleTargets); err != nil {
+			invalidParams.AddNested("StyleTargets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTableAggregatedFieldWells(v *types.TableAggregatedFieldWells) error {
 	if v == nil {
 		return nil
@@ -14713,6 +14757,38 @@ func validateTableSortConfiguration(v *types.TableSortConfiguration) error {
 	if v.PaginationConfiguration != nil {
 		if err := validatePaginationConfiguration(v.PaginationConfiguration); err != nil {
 			invalidParams.AddNested("PaginationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableStyleTarget(v *types.TableStyleTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableStyleTarget"}
+	if len(v.CellType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CellType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableStyleTargetList(v []types.TableStyleTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableStyleTargetList"}
+	for i := range v {
+		if err := validateTableStyleTarget(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

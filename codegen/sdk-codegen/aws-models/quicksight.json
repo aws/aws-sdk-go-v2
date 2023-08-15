@@ -100,10 +100,26 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of your account subscription.</p>"
                     }
+                },
+                "IAMIdentityCenterInstanceArn": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM Identity Center instance.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that contains the following account information\n            elements:</p>\n         <ul>\n            <li>\n               <p>Your Amazon QuickSight account name.</p>\n            </li>\n            <li>\n               <p>The edition of Amazon QuickSight that your account is using.</p>\n            </li>\n            <li>\n               <p>The notification email address that is associated with the Amazon QuickSight account.\n            </p>\n            </li>\n            <li>\n               <p>The authentication type of the Amazon QuickSight account.</p>\n            </li>\n            <li>\n               <p>The status of the Amazon QuickSight account's subscription.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.quicksight#AccountName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 62
+                },
+                "smithy.api#pattern": "^(?!D-|d-)([\\da-zA-Z]+)([-]*[\\da-zA-Z])*$"
             }
         },
         "com.amazonaws.quicksight#AccountSettings": {
@@ -2451,6 +2467,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ACTIVE_DIRECTORY"
+                    }
+                },
+                "IAM_IDENTITY_CENTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_IDENTITY_CENTER"
                     }
                 }
             }
@@ -5811,7 +5833,7 @@
                     }
                 },
                 "AccountName": {
-                    "target": "com.amazonaws.quicksight#String",
+                    "target": "com.amazonaws.quicksight#AccountName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of your Amazon QuickSight account. This name is unique over all of Amazon Web Services, and it appears only when users sign in. You can't change\n                <code>AccountName</code> value after the Amazon QuickSight account is\n            created.</p>",
                         "smithy.api#required": {}
@@ -12192,6 +12214,36 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AVERAGE"
+                    }
+                },
+                "MEDIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIAN"
+                    }
+                },
+                "STDEV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STDEV"
+                    }
+                },
+                "STDEVP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STDEVP"
+                    }
+                },
+                "VAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VAR"
+                    }
+                },
+                "VARP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARP"
                     }
                 }
             }
@@ -19691,7 +19743,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 100
+                    "max": 200
                 }
             }
         },
@@ -24204,6 +24256,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "QUICKSIGHT"
+                    }
+                },
+                "IAM_IDENTITY_CENTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_IDENTITY_CENTER"
                     }
                 }
             }
@@ -33016,6 +33074,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The visibility setting of a pivot table's collapsed row dimension fields. If the value of this structure is <code>HIDDEN</code>, all collapsed columns in a pivot table are automatically hidden. The default value is <code>VISIBLE</code>.</p>"
                     }
+                },
+                "RowsLayout": {
+                    "target": "com.amazonaws.quicksight#PivotTableRowsLayout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The layout for the row dimension headers of a pivot table. Choose one of the following options.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code>: (Default) Each row field is displayed in a separate column.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIERARCHY</code>: All row fields are displayed in a single column. Indentation is used to differentiate row headers of different fields.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "RowsLabelOptions": {
+                    "target": "com.amazonaws.quicksight#PivotTableRowsLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options for the label that is located above the row headers. This option is only applicable when <code>RowsLayout</code> is set to <code>HIERARCHY</code>.</p>"
+                    }
+                },
+                "DefaultCellWidth": {
+                    "target": "com.amazonaws.quicksight#PixelLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default cell width of the pivot table.</p>"
+                    }
                 }
             },
             "traits": {
@@ -33040,6 +33116,52 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The paginated report options for a pivot table visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PivotTableRowsLabelOptions": {
+            "type": "structure",
+            "members": {
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility of the rows label.</p>"
+                    }
+                },
+                "CustomLabel": {
+                    "target": "com.amazonaws.quicksight#PivotTableRowsLabelText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom label string for the rows label.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The options for the label thta is located above the row headers. This option is only applicable when <code>RowsLayout</code> is set to <code>HIERARCHY</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PivotTableRowsLabelText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.quicksight#PivotTableRowsLayout": {
+            "type": "enum",
+            "members": {
+                "TABULAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TABULAR"
+                    }
+                },
+                "HIERARCHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIERARCHY"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#PivotTableSortBy": {
@@ -34237,9 +34359,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://quicksight-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://quicksight-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -34252,15 +34553,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://quicksight.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://quicksight.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -34272,258 +34608,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://quicksight-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://quicksight-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://quicksight.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://quicksight.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -36827,6 +36913,12 @@
                     "target": "com.amazonaws.quicksight#RowAlternateColorList",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines the list of row alternate colors.</p>"
+                    }
+                },
+                "UsePrimaryBackgroundColor": {
+                    "target": "com.amazonaws.quicksight#WidgetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary background color options for alternate rows.</p>"
                     }
                 }
             },
@@ -39744,7 +39836,7 @@
                 "FormatType": {
                     "target": "com.amazonaws.quicksight#SnapshotFileFormatType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of the snapshot file to be generated. You can choose between <code>CSV</code> and <code>PDF</code>.</p>",
+                        "smithy.api#documentation": "<p>The format of the snapshot file to be generated. You can choose between <code>CSV</code> or <code>PDF</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -39814,7 +39906,7 @@
                 "SheetId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV or PDF format types.</p>",
+                        "smithy.api#documentation": "<p>The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV and PDF format types.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -39828,7 +39920,7 @@
                 "VisualIds": {
                     "target": "com.amazonaws.quicksight#SnapshotFileSheetSelectionVisualIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A structure that lists the IDs of the visuals in the selected sheet. Supported visual types are table, pivot table visuals. This value is required if you are generating a CSV. This value supports a maximum of 1 visual ID.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            A list of visual IDs that are located in the selected sheet. This structure supports tables and pivot tables. This structure is required if you are generating a CSV. You can add a maximum of 1 visual ID to this structure.\n        </p>"
                     }
                 }
             },
@@ -40543,7 +40635,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a dashboard snapshot. You can request up to one paginated PDF and up to five CSVs per API call.</p>\n         <p>Poll job descriptions with a <code>DescribeDashboardSnapshotJob</code> API call. Once the job succeeds, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the download URIs that the job generates.</p>",
+                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.</p>\n         <ul>\n            <li>\n               <p>1 paginated PDF</p>\n            </li>\n            <li>\n               <p>5 CSVs</p>\n            </li>\n         </ul>\n         <p>Poll job descriptions with a <code>DescribeDashboardSnapshotJob</code> API call. Once the job succeeds, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the download URIs that the job generates.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs",
@@ -40892,6 +40984,29 @@
                 "smithy.api#documentation": "<p>The configuration that defines the default value of a <code>String</code> parameter when a value has not been set.</p>"
             }
         },
+        "com.amazonaws.quicksight#StyledCellType": {
+            "type": "enum",
+            "members": {
+                "TOTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOTAL"
+                    }
+                },
+                "METRIC_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METRIC_HEADER"
+                    }
+                },
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#SubnetId": {
             "type": "string",
             "traits": {
@@ -40957,6 +41072,12 @@
                     "target": "com.amazonaws.quicksight#TableCellStyle",
                     "traits": {
                         "smithy.api#documentation": "<p>The cell styling options for the subtotals of header cells.</p>"
+                    }
+                },
+                "StyleTargets": {
+                    "target": "com.amazonaws.quicksight#TableStyleTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The style targets options for subtotals.</p>"
                     }
                 }
             },
@@ -41661,6 +41782,33 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The sort configuration for a <code>TableVisual</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TableStyleTarget": {
+            "type": "structure",
+            "members": {
+                "CellType": {
+                    "target": "com.amazonaws.quicksight#StyledCellType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cell type of the table style target.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The table style target.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TableStyleTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TableStyleTarget"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.quicksight#TableTotalsPlacement": {
@@ -43630,6 +43778,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The other\n         names or aliases for the calculated field cell value.</p>"
                     }
+                },
+                "NonAdditive": {
+                    "target": "com.amazonaws.quicksight#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The non additive for the table style target.</p>"
+                    }
                 }
             },
             "traits": {
@@ -43739,7 +43893,7 @@
                 "Aggregation": {
                     "target": "com.amazonaws.quicksight#DefaultAggregation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of aggregation that is performed on the column data when\n         it's queried. Valid values for this structure are <code>SUM</code>, <code>MAX</code>,\n            <code>MIN</code>, <code>COUNT</code>,\n         <code>DISTINCT_COUNT</code>, and <code>AVERAGE</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of aggregation that is performed on the column data when\n         it's queried.</p>"
                     }
                 },
                 "IsIncludedInTopic": {
@@ -43802,6 +43956,12 @@
                     "target": "com.amazonaws.quicksight#CellValueSynonyms",
                     "traits": {
                         "smithy.api#documentation": "<p>The other names or aliases for the column cell value.</p>"
+                    }
+                },
+                "NonAdditive": {
+                    "target": "com.amazonaws.quicksight#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The non additive value for the column.</p>"
                     }
                 }
             },
@@ -49185,6 +49345,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BOTTOM"
+                    }
+                },
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
                     }
                 }
             }

@@ -33135,6 +33135,15 @@ func awsRestjson1_deserializeDocumentAccountInfo(v **types.AccountInfo, value in
 				sv.Edition = types.Edition(jtv)
 			}
 
+		case "IAMIdentityCenterInstanceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IAMIdentityCenterInstanceArn = ptr.String(jtv)
+			}
+
 		case "NotificationEmail":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -63760,6 +63769,15 @@ func awsRestjson1_deserializeDocumentPivotTableOptions(v **types.PivotTableOptio
 				sv.ColumnNamesVisibility = types.Visibility(jtv)
 			}
 
+		case "DefaultCellWidth":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PixelLength to be of type string, got %T instead", value)
+				}
+				sv.DefaultCellWidth = ptr.String(jtv)
+			}
+
 		case "MetricPlacement":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -63782,6 +63800,20 @@ func awsRestjson1_deserializeDocumentPivotTableOptions(v **types.PivotTableOptio
 		case "RowHeaderStyle":
 			if err := awsRestjson1_deserializeDocumentTableCellStyle(&sv.RowHeaderStyle, value); err != nil {
 				return err
+			}
+
+		case "RowsLabelOptions":
+			if err := awsRestjson1_deserializeDocumentPivotTableRowsLabelOptions(&sv.RowsLabelOptions, value); err != nil {
+				return err
+			}
+
+		case "RowsLayout":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PivotTableRowsLayout to be of type string, got %T instead", value)
+				}
+				sv.RowsLayout = types.PivotTableRowsLayout(jtv)
 			}
 
 		case "SingleMetricVisibility":
@@ -63849,6 +63881,55 @@ func awsRestjson1_deserializeDocumentPivotTablePaginatedReportOptions(v **types.
 					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
 				}
 				sv.VerticalOverflowVisibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPivotTableRowsLabelOptions(v **types.PivotTableRowsLabelOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PivotTableRowsLabelOptions
+	if *v == nil {
+		sv = &types.PivotTableRowsLabelOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CustomLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PivotTableRowsLabelText to be of type string, got %T instead", value)
+				}
+				sv.CustomLabel = ptr.String(jtv)
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.Visibility(jtv)
 			}
 
 		default:
@@ -66708,6 +66789,15 @@ func awsRestjson1_deserializeDocumentRowAlternateColorOptions(v **types.RowAlter
 					return fmt.Errorf("expected WidgetStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.WidgetStatus(jtv)
+			}
+
+		case "UsePrimaryBackgroundColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WidgetStatus to be of type string, got %T instead", value)
+				}
+				sv.UsePrimaryBackgroundColor = types.WidgetStatus(jtv)
 			}
 
 		default:
@@ -71861,6 +71951,11 @@ func awsRestjson1_deserializeDocumentSubtotalOptions(v **types.SubtotalOptions, 
 				return err
 			}
 
+		case "StyleTargets":
+			if err := awsRestjson1_deserializeDocumentTableStyleTargetList(&sv.StyleTargets, value); err != nil {
+				return err
+			}
+
 		case "TotalCellStyle":
 			if err := awsRestjson1_deserializeDocumentTableCellStyle(&sv.TotalCellStyle, value); err != nil {
 				return err
@@ -73139,6 +73234,80 @@ func awsRestjson1_deserializeDocumentTableSortConfiguration(v **types.TableSortC
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTableStyleTarget(v **types.TableStyleTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TableStyleTarget
+	if *v == nil {
+		sv = &types.TableStyleTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CellType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StyledCellType to be of type string, got %T instead", value)
+				}
+				sv.CellType = types.StyledCellType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTableStyleTargetList(v *[]types.TableStyleTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TableStyleTarget
+	if *v == nil {
+		cv = []types.TableStyleTarget{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TableStyleTarget
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTableStyleTarget(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -76203,6 +76372,15 @@ func awsRestjson1_deserializeDocumentTopicCalculatedField(v **types.TopicCalcula
 				sv.NeverAggregateInFilter = jtv
 			}
 
+		case "NonAdditive":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.NonAdditive = ptr.Bool(jtv)
+			}
+
 		case "NotAllowedAggregations":
 			if err := awsRestjson1_deserializeDocumentAuthorSpecifiedAggregations(&sv.NotAllowedAggregations, value); err != nil {
 				return err
@@ -76499,6 +76677,15 @@ func awsRestjson1_deserializeDocumentTopicColumn(v **types.TopicColumn, value in
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.NeverAggregateInFilter = jtv
+			}
+
+		case "NonAdditive":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.NonAdditive = ptr.Bool(jtv)
 			}
 
 		case "NotAllowedAggregations":

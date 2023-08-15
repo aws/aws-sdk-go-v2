@@ -30,6 +30,26 @@ func (m *validateOpAbortMultipartReadSetUpload) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAcceptShare struct {
+}
+
+func (*validateOpAcceptShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteReadSet struct {
 }
 
@@ -150,6 +170,26 @@ func (m *validateOpCreateAnnotationStore) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAnnotationStoreVersion struct {
+}
+
+func (*validateOpCreateAnnotationStoreVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAnnotationStoreVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAnnotationStoreVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAnnotationStoreVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMultipartReadSetUpload struct {
 }
 
@@ -230,6 +270,26 @@ func (m *validateOpCreateSequenceStore) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateShare struct {
+}
+
+func (*validateOpCreateShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateVariantStore struct {
 }
 
@@ -285,6 +345,26 @@ func (m *validateOpDeleteAnnotationStore) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAnnotationStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAnnotationStoreVersions struct {
+}
+
+func (*validateOpDeleteAnnotationStoreVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAnnotationStoreVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAnnotationStoreVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAnnotationStoreVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -390,6 +470,26 @@ func (m *validateOpDeleteSequenceStore) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteShare struct {
+}
+
+func (*validateOpDeleteShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteVariantStore struct {
 }
 
@@ -465,6 +565,26 @@ func (m *validateOpGetAnnotationStore) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAnnotationStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAnnotationStoreVersion struct {
+}
+
+func (*validateOpGetAnnotationStoreVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAnnotationStoreVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAnnotationStoreVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAnnotationStoreVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +850,26 @@ func (m *validateOpGetSequenceStore) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetShare struct {
+}
+
+func (*validateOpGetShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetVariantImportJob struct {
 }
 
@@ -785,6 +925,26 @@ func (m *validateOpGetWorkflow) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAnnotationStoreVersions struct {
+}
+
+func (*validateOpListAnnotationStoreVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAnnotationStoreVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAnnotationStoreVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAnnotationStoreVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -965,6 +1125,26 @@ func (m *validateOpListRunTasks) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRunTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListShares struct {
+}
+
+func (*validateOpListShares) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListShares) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSharesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSharesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1190,6 +1370,26 @@ func (m *validateOpUpdateAnnotationStore) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAnnotationStoreVersion struct {
+}
+
+func (*validateOpUpdateAnnotationStoreVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAnnotationStoreVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAnnotationStoreVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAnnotationStoreVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRunGroup struct {
 }
 
@@ -1274,6 +1474,10 @@ func addOpAbortMultipartReadSetUploadValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpAbortMultipartReadSetUpload{}, middleware.After)
 }
 
+func addOpAcceptShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptShare{}, middleware.After)
+}
+
 func addOpBatchDeleteReadSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteReadSet{}, middleware.After)
 }
@@ -1298,6 +1502,10 @@ func addOpCreateAnnotationStoreValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateAnnotationStore{}, middleware.After)
 }
 
+func addOpCreateAnnotationStoreVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAnnotationStoreVersion{}, middleware.After)
+}
+
 func addOpCreateMultipartReadSetUploadValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMultipartReadSetUpload{}, middleware.After)
 }
@@ -1314,6 +1522,10 @@ func addOpCreateSequenceStoreValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateSequenceStore{}, middleware.After)
 }
 
+func addOpCreateShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateShare{}, middleware.After)
+}
+
 func addOpCreateVariantStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVariantStore{}, middleware.After)
 }
@@ -1324,6 +1536,10 @@ func addOpCreateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteAnnotationStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAnnotationStore{}, middleware.After)
+}
+
+func addOpDeleteAnnotationStoreVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAnnotationStoreVersions{}, middleware.After)
 }
 
 func addOpDeleteReferenceValidationMiddleware(stack *middleware.Stack) error {
@@ -1346,6 +1562,10 @@ func addOpDeleteSequenceStoreValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDeleteSequenceStore{}, middleware.After)
 }
 
+func addOpDeleteShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteShare{}, middleware.After)
+}
+
 func addOpDeleteVariantStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteVariantStore{}, middleware.After)
 }
@@ -1360,6 +1580,10 @@ func addOpGetAnnotationImportJobValidationMiddleware(stack *middleware.Stack) er
 
 func addOpGetAnnotationStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAnnotationStore{}, middleware.After)
+}
+
+func addOpGetAnnotationStoreVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAnnotationStoreVersion{}, middleware.After)
 }
 
 func addOpGetReadSetActivationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1414,6 +1638,10 @@ func addOpGetSequenceStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSequenceStore{}, middleware.After)
 }
 
+func addOpGetShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetShare{}, middleware.After)
+}
+
 func addOpGetVariantImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetVariantImportJob{}, middleware.After)
 }
@@ -1424,6 +1652,10 @@ func addOpGetVariantStoreValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkflow{}, middleware.After)
+}
+
+func addOpListAnnotationStoreVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAnnotationStoreVersions{}, middleware.After)
 }
 
 func addOpListMultipartReadSetUploadsValidationMiddleware(stack *middleware.Stack) error {
@@ -1460,6 +1692,10 @@ func addOpListReferencesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListRunTasksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRunTasks{}, middleware.After)
+}
+
+func addOpListSharesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListShares{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1504,6 +1740,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAnnotationStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAnnotationStore{}, middleware.After)
+}
+
+func addOpUpdateAnnotationStoreVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAnnotationStoreVersion{}, middleware.After)
 }
 
 func addOpUpdateRunGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1819,6 +2059,21 @@ func validateOpAbortMultipartReadSetUploadInput(v *AbortMultipartReadSetUploadIn
 	}
 }
 
+func validateOpAcceptShareInput(v *AcceptShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptShareInput"}
+	if v.ShareId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShareId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDeleteReadSetInput(v *BatchDeleteReadSetInput) error {
 	if v == nil {
 		return nil
@@ -1927,6 +2182,24 @@ func validateOpCreateAnnotationStoreInput(v *CreateAnnotationStoreInput) error {
 	}
 }
 
+func validateOpCreateAnnotationStoreVersionInput(v *CreateAnnotationStoreVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAnnotationStoreVersionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMultipartReadSetUploadInput(v *CreateMultipartReadSetUploadInput) error {
 	if v == nil {
 		return nil
@@ -2012,6 +2285,24 @@ func validateOpCreateSequenceStoreInput(v *CreateSequenceStoreInput) error {
 	}
 }
 
+func validateOpCreateShareInput(v *CreateShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateShareInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.PrincipalSubscriber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalSubscriber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateVariantStoreInput(v *CreateVariantStoreInput) error {
 	if v == nil {
 		return nil
@@ -2054,6 +2345,24 @@ func validateOpDeleteAnnotationStoreInput(v *DeleteAnnotationStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAnnotationStoreInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAnnotationStoreVersionsInput(v *DeleteAnnotationStoreVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAnnotationStoreVersionsInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Versions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Versions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2140,6 +2449,21 @@ func validateOpDeleteSequenceStoreInput(v *DeleteSequenceStoreInput) error {
 	}
 }
 
+func validateOpDeleteShareInput(v *DeleteShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteShareInput"}
+	if v.ShareId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShareId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteVariantStoreInput(v *DeleteVariantStoreInput) error {
 	if v == nil {
 		return nil
@@ -2192,6 +2516,24 @@ func validateOpGetAnnotationStoreInput(v *GetAnnotationStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAnnotationStoreInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAnnotationStoreVersionInput(v *GetAnnotationStoreVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAnnotationStoreVersionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2428,6 +2770,21 @@ func validateOpGetSequenceStoreInput(v *GetSequenceStoreInput) error {
 	}
 }
 
+func validateOpGetShareInput(v *GetShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetShareInput"}
+	if v.ShareId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShareId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetVariantImportJobInput(v *GetVariantImportJobInput) error {
 	if v == nil {
 		return nil
@@ -2465,6 +2822,21 @@ func validateOpGetWorkflowInput(v *GetWorkflowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetWorkflowInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAnnotationStoreVersionsInput(v *ListAnnotationStoreVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAnnotationStoreVersionsInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2606,6 +2978,21 @@ func validateOpListRunTasksInput(v *ListRunTasksInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListRunTasksInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSharesInput(v *ListSharesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSharesInput"}
+	if len(v.ResourceOwner) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceOwner"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2840,6 +3227,24 @@ func validateOpUpdateAnnotationStoreInput(v *UpdateAnnotationStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAnnotationStoreInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAnnotationStoreVersionInput(v *UpdateAnnotationStoreVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAnnotationStoreVersionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,3 +1,7 @@
+# v1.17.0 (2023-08-11)
+
+* **Feature**: This release adds new API parameters to override workflow task list for workflow executions.
+
 # v1.16.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

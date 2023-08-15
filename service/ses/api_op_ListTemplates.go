@@ -16,8 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the email templates present in your Amazon SES account in the current AWS
-// Region. You can execute this operation no more than once per second.
+// Lists the email templates present in your Amazon SES account in the current
+// Amazon Web Services Region. You can execute this operation no more than once per
+// second.
 func (c *Client) ListTemplates(ctx context.Context, params *ListTemplatesInput, optFns ...func(*Options)) (*ListTemplatesOutput, error) {
 	if params == nil {
 		params = &ListTemplatesInput{}
@@ -36,9 +37,9 @@ func (c *Client) ListTemplates(ctx context.Context, params *ListTemplatesInput, 
 type ListTemplatesInput struct {
 
 	// The maximum number of templates to return. This value must be at least 1 and
-	// less than or equal to 10. If you do not specify a value, or if you specify a
-	// value less than 1 or greater than 10, the operation will return up to 10
-	// results.
+	// less than or equal to 100. If more than 100 items are requested, the page size
+	// will automatically set to 100. If you do not specify a value, 10 is the default
+	// page size.
 	MaxItems *int32
 
 	// A token returned from a previous call to ListTemplates to indicate the position
@@ -52,7 +53,7 @@ type ListTemplatesOutput struct {
 
 	// A token indicating that there are additional email templates available to be
 	// listed. Pass this token to a subsequent call to ListTemplates to retrieve the
-	// next 50 email templates.
+	// next set of email templates within your page size.
 	NextToken *string
 
 	// An array the contains the name and creation time stamp for each template in

@@ -17,7 +17,7 @@ import (
 )
 
 // Creates a receipt rule. For information about setting up receipt rules, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html)
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html)
 // . You can execute this operation no more than once per second.
 func (c *Client) CreateReceiptRule(ctx context.Context, params *CreateReceiptRuleInput, optFns ...func(*Options)) (*CreateReceiptRuleOutput, error) {
 	if params == nil {
@@ -35,7 +35,7 @@ func (c *Client) CreateReceiptRule(ctx context.Context, params *CreateReceiptRul
 }
 
 // Represents a request to create a receipt rule. You use receipt rules to receive
-// email with Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html)
+// email with Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html)
 // .
 type CreateReceiptRuleInput struct {
 
@@ -45,14 +45,13 @@ type CreateReceiptRuleInput struct {
 	// This member is required.
 	Rule *types.ReceiptRule
 
-	// The name of the rule set that the receipt rule will be added to.
+	// The name of the rule set where the receipt rule is added.
 	//
 	// This member is required.
 	RuleSetName *string
 
-	// The name of an existing rule after which the new rule will be placed. If this
-	// parameter is null, the new rule will be inserted at the beginning of the rule
-	// list.
+	// The name of an existing rule after which the new rule is placed. If this
+	// parameter is null, the new rule is inserted at the beginning of the rule list.
 	After *string
 
 	noSmithyDocumentSerde

@@ -27,16 +27,16 @@ import (
 // SES sent to that address. If the email address owner clicks the link within 24
 // hours, the verification status of the email address changes to "Success". If the
 // link is not clicked within 24 hours, the verification status changes to
-// "Failed." In that case, if you still want to verify the email address, you must
-// restart the verification process from the beginning. For domain identities, the
-// domain's verification status is "Pending" as Amazon SES searches for the
-// required TXT record in the DNS settings of the domain. When Amazon SES detects
-// the record, the domain's verification status changes to "Success". If Amazon SES
-// is unable to detect the record within 72 hours, the domain's verification status
-// changes to "Failed." In that case, if you still want to verify the domain, you
-// must restart the verification process from the beginning. This operation is
-// throttled at one request per second and can only get verification attributes for
-// up to 100 identities at a time.
+// "Failed." In that case, to verify the email address, you must restart the
+// verification process from the beginning. For domain identities, the domain's
+// verification status is "Pending" as Amazon SES searches for the required TXT
+// record in the DNS settings of the domain. When Amazon SES detects the record,
+// the domain's verification status changes to "Success". If Amazon SES is unable
+// to detect the record within 72 hours, the domain's verification status changes
+// to "Failed." In that case, to verify the domain, you must restart the
+// verification process from the beginning. This operation is throttled at one
+// request per second and can only get verification attributes for up to 100
+// identities at a time.
 func (c *Client) GetIdentityVerificationAttributes(ctx context.Context, params *GetIdentityVerificationAttributesInput, optFns ...func(*Options)) (*GetIdentityVerificationAttributesOutput, error) {
 	if params == nil {
 		params = &GetIdentityVerificationAttributesInput{}
@@ -55,7 +55,7 @@ func (c *Client) GetIdentityVerificationAttributes(ctx context.Context, params *
 // Represents a request to return the Amazon SES verification status of a list of
 // identities. For domain identities, this request also returns the verification
 // token. For information about verifying identities with Amazon SES, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html)
 // .
 type GetIdentityVerificationAttributesInput struct {
 

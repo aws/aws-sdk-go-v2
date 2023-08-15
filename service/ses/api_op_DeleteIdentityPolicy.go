@@ -16,12 +16,12 @@ import (
 )
 
 // Deletes the specified sending authorization policy for the given identity (an
-// email address or a domain). This API returns successfully even if a policy with
-// the specified name does not exist. This API is for the identity owner only. If
-// you have not verified the identity, this API will return an error. Sending
+// email address or a domain). This operation returns successfully even if a policy
+// with the specified name does not exist. This operation is for the identity owner
+// only. If you have not verified the identity, it returns an error. Sending
 // authorization is a feature that enables an identity owner to authorize other
 // senders to use its identities. For information about using sending
-// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html)
 // . You can execute this operation no more than once per second.
 func (c *Client) DeleteIdentityPolicy(ctx context.Context, params *DeleteIdentityPolicyInput, optFns ...func(*Options)) (*DeleteIdentityPolicyOutput, error) {
 	if params == nil {
@@ -41,15 +41,15 @@ func (c *Client) DeleteIdentityPolicy(ctx context.Context, params *DeleteIdentit
 // Represents a request to delete a sending authorization policy for an identity.
 // Sending authorization is an Amazon SES feature that enables you to authorize
 // other senders to use your identities. For information, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+// Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html)
 // .
 type DeleteIdentityPolicyInput struct {
 
-	// The identity that is associated with the policy that you want to delete. You
-	// can specify the identity by using its name or by using its Amazon Resource Name
-	// (ARN). Examples: user@example.com , example.com ,
+	// The identity that is associated with the policy to delete. You can specify the
+	// identity by using its name or by using its Amazon Resource Name (ARN). Examples:
+	// user@example.com , example.com ,
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com . To successfully call
-	// this API, you must own the identity.
+	// this operation, you must own the identity.
 	//
 	// This member is required.
 	Identity *string

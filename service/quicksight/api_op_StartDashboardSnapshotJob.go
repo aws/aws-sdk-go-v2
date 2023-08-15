@@ -17,10 +17,13 @@ import (
 )
 
 // Starts an asynchronous job that generates a dashboard snapshot. You can request
-// up to one paginated PDF and up to five CSVs per API call. Poll job descriptions
-// with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the
-// DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job
-// generates.
+// one of the following format configurations per API call.
+//   - 1 paginated PDF
+//   - 5 CSVs
+//
+// Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the
+// job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the
+// download URIs that the job generates.
 func (c *Client) StartDashboardSnapshotJob(ctx context.Context, params *StartDashboardSnapshotJobInput, optFns ...func(*Options)) (*StartDashboardSnapshotJobOutput, error) {
 	if params == nil {
 		params = &StartDashboardSnapshotJobInput{}

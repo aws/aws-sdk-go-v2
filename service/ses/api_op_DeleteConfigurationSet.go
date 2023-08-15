@@ -17,7 +17,7 @@ import (
 
 // Deletes a configuration set. Configuration sets enable you to publish email
 // sending events. For information about using configuration sets, see the Amazon
-// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
 // . You can execute this operation no more than once per second.
 func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfigurationSetInput, optFns ...func(*Options)) (*DeleteConfigurationSetOutput, error) {
 	if params == nil {
@@ -36,7 +36,7 @@ func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfi
 
 // Represents a request to delete a configuration set. Configuration sets enable
 // you to publish email sending events. For information about using configuration
-// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
 // .
 type DeleteConfigurationSetInput struct {
 

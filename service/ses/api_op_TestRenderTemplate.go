@@ -42,7 +42,7 @@ type TestRenderTemplateInput struct {
 	// This member is required.
 	TemplateData *string
 
-	// The name of the template that you want to render.
+	// The name of the template to render.
 	//
 	// This member is required.
 	TemplateName *string

@@ -16,11 +16,12 @@ import (
 )
 
 // Adds an email address to the list of identities for your Amazon SES account in
-// the current AWS Region and attempts to verify it. As a result of executing this
-// operation, a customized verification email is sent to the specified address. To
-// use this operation, you must first create a custom verification email template.
-// For more information about creating and using custom verification email
-// templates, see Using Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// the current Amazon Web Services Region and attempts to verify it. As a result of
+// executing this operation, a customized verification email is sent to the
+// specified address. To use this operation, you must first create a custom
+// verification email template. For more information about creating and using
+// custom verification email templates, see Using Custom Verification Email
+// Templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
 // in the Amazon SES Developer Guide. You can execute this operation no more than
 // once per second.
 func (c *Client) SendCustomVerificationEmail(ctx context.Context, params *SendCustomVerificationEmailInput, optFns ...func(*Options)) (*SendCustomVerificationEmailOutput, error) {

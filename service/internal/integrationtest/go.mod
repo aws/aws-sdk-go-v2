@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.14.2
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.25.1
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.35.2
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.16.2
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.21.2
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.110.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.111.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.29.3
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.3
@@ -70,7 +70,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.32.2
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/ses v1.16.2
+	github.com/aws/aws-sdk-go-v2/service/ses v1.16.3
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/shield v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.21.2

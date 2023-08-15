@@ -22,7 +22,7 @@ import (
 // does not apply to delivery notifications. Delivery notifications are only
 // available through Amazon SNS. You can execute this operation no more than once
 // per second. For more information about using notifications with Amazon SES, see
-// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html)
+// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html)
 // .
 func (c *Client) SetIdentityFeedbackForwardingEnabled(ctx context.Context, params *SetIdentityFeedbackForwardingEnabledInput, optFns ...func(*Options)) (*SetIdentityFeedbackForwardingEnabledOutput, error) {
 	if params == nil {
@@ -41,16 +41,16 @@ func (c *Client) SetIdentityFeedbackForwardingEnabled(ctx context.Context, param
 
 // Represents a request to enable or disable whether Amazon SES forwards you
 // bounce and complaint notifications through email. For information about email
-// feedback forwarding, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html)
+// feedback forwarding, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications-email.html)
 // .
 type SetIdentityFeedbackForwardingEnabledInput struct {
 
-	// Sets whether Amazon SES will forward bounce and complaint notifications as
-	// email. true specifies that Amazon SES will forward bounce and complaint
-	// notifications as email, in addition to any Amazon SNS topic publishing otherwise
-	// specified. false specifies that Amazon SES will publish bounce and complaint
-	// notifications only through Amazon SNS. This value can only be set to false when
-	// Amazon SNS topics are set for both Bounce and Complaint notification types.
+	// Sets whether Amazon SES forwards bounce and complaint notifications as email.
+	// true specifies that Amazon SES forwards bounce and complaint notifications as
+	// email, in addition to any Amazon SNS topic publishing otherwise specified. false
+	// specifies that Amazon SES publishes bounce and complaint notifications only
+	// through Amazon SNS. This value can only be set to false when Amazon SNS topics
+	// are set for both Bounce and Complaint notification types.
 	//
 	// This member is required.
 	ForwardingEnabled bool

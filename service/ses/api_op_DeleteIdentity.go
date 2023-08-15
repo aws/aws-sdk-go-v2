@@ -37,7 +37,8 @@ func (c *Client) DeleteIdentity(ctx context.Context, params *DeleteIdentityInput
 // address or domain).
 type DeleteIdentityInput struct {
 
-	// The identity to be removed from the list of identities for the AWS Account.
+	// The identity to be removed from the list of identities for the Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	Identity *string

@@ -62,6 +62,22 @@ type RespondDecisionTaskCompletedInput struct {
 	// User defined context to add to workflow execution.
 	ExecutionContext *string
 
+	// The task list to use for the future decision tasks of this workflow execution.
+	// This list overrides the original task list you specified while starting the
+	// workflow execution.
+	TaskList *types.TaskList
+
+	// Specifies a timeout (in seconds) for the task list override. When this
+	// parameter is missing, the task list override is permanent. This parameter makes
+	// it possible to temporarily override the task list. If a decision task scheduled
+	// on the override task list is not started within the timeout, the decision task
+	// will time out. Amazon SWF will revert the override and schedule a new decision
+	// task to the original task list. If a decision task scheduled on the override
+	// task list is started within the timeout, but not completed within the
+	// start-to-close timeout, Amazon SWF will also revert the override and schedule a
+	// new decision task to the original task list.
+	TaskListScheduleToStartTimeout *string
+
 	noSmithyDocumentSerde
 }
 

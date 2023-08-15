@@ -17,8 +17,16 @@ import (
 )
 
 // Returns a list containing all of the identities (email addresses and domains)
-// for your AWS account in the current AWS Region, regardless of verification
-// status. You can execute this operation no more than once per second.
+// for your Amazon Web Services account in the current Amazon Web Services Region,
+// regardless of verification status. You can execute this operation no more than
+// once per second. It's recommended that for successive pagination calls of this
+// API, you continue to the use the same parameter/value pairs as used in the
+// original call, e.g., if you used IdentityType=Domain in the the original call
+// and received a NextToken in the response, you should continue providing the
+// IdentityType=Domain parameter for further NextToken calls; however, if you
+// didn't provide the IdentityType parameter in the original call, then continue
+// to not provide it for successive pagination calls. Using this protocol will
+// ensure consistent results.
 func (c *Client) ListIdentities(ctx context.Context, params *ListIdentitiesInput, optFns ...func(*Options)) (*ListIdentitiesOutput, error) {
 	if params == nil {
 		params = &ListIdentitiesInput{}
@@ -35,12 +43,12 @@ func (c *Client) ListIdentities(ctx context.Context, params *ListIdentitiesInput
 }
 
 // Represents a request to return a list of all identities (email addresses and
-// domains) that you have attempted to verify under your AWS account, regardless of
-// verification status.
+// domains) that you have attempted to verify under your Amazon Web Services
+// account, regardless of verification status.
 type ListIdentitiesInput struct {
 
 	// The type of the identities to list. Possible values are "EmailAddress" and
-	// "Domain". If this parameter is omitted, then all identities will be listed.
+	// "Domain". If this parameter is omitted, then all identities are listed.
 	IdentityType types.IdentityType
 
 	// The maximum number of identities per page. Possible values are 1-1000 inclusive.
@@ -52,8 +60,8 @@ type ListIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
-// A list of all identities that you have attempted to verify under your AWS
-// account, regardless of verification status.
+// A list of all identities that you have attempted to verify under your Amazon
+// Web Services account, regardless of verification status.
 type ListIdentitiesOutput struct {
 
 	// A list of identities.

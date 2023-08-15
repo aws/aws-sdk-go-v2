@@ -1,3 +1,7 @@
+# v1.8.0 (2023-08-14)
+
+* **Feature**: This release provides support for annotation store versioning and cross account sharing for Omics Analytics
+
 # v1.7.0 (2023-08-10)
 
 * **Feature**: This release adds instanceType to GetRunTask & ListRunTasks responses.

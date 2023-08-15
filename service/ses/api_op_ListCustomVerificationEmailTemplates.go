@@ -17,8 +17,8 @@ import (
 )
 
 // Lists the existing custom verification email templates for your account in the
-// current AWS Region. For more information about custom verification email
-// templates, see Using Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// current Amazon Web Services Region. For more information about custom
+// verification email templates, see Using Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
 // in the Amazon SES Developer Guide. You can execute this operation no more than
 // once per second.
 func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, params *ListCustomVerificationEmailTemplatesInput, optFns ...func(*Options)) (*ListCustomVerificationEmailTemplatesOutput, error) {
@@ -38,14 +38,14 @@ func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, param
 
 // Represents a request to list the existing custom verification email templates
 // for your account. For more information about custom verification email
-// templates, see Using Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// templates, see Using Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
 // in the Amazon SES Developer Guide.
 type ListCustomVerificationEmailTemplatesInput struct {
 
 	// The maximum number of custom verification email templates to return. This value
 	// must be at least 1 and less than or equal to 50. If you do not specify a value,
-	// or if you specify a value less than 1 or greater than 50, the operation will
-	// return up to 50 results.
+	// or if you specify a value less than 1 or greater than 50, the operation returns
+	// up to 50 results.
 	MaxResults *int32
 
 	// An array the contains the name and creation time stamp for each template in
@@ -157,8 +157,8 @@ var _ ListCustomVerificationEmailTemplatesAPIClient = (*Client)(nil)
 type ListCustomVerificationEmailTemplatesPaginatorOptions struct {
 	// The maximum number of custom verification email templates to return. This value
 	// must be at least 1 and less than or equal to 50. If you do not specify a value,
-	// or if you specify a value less than 1 or greater than 50, the operation will
-	// return up to 50 results.
+	// or if you specify a value less than 1 or greater than 50, the operation returns
+	// up to 50 results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -10,5 +10,9 @@
 // . For a list of Amazon SES endpoints to use in service requests, see Regions
 // and Amazon SES (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html)
 // in the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html)
-// .
+// . This documentation contains reference information related to the following:
+//   - Amazon SES API Actions (https://docs.aws.amazon.com/ses/latest/APIReference/API_Operations.html)
+//   - Amazon SES API Data Types (https://docs.aws.amazon.com/ses/latest/APIReference/API_Types.html)
+//   - Common Parameters (https://docs.aws.amazon.com/ses/latest/APIReference/CommonParameters.html)
+//   - Common Errors (https://docs.aws.amazon.com/ses/latest/APIReference/CommonErrors.html)
 package ses

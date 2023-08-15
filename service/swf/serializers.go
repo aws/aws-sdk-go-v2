@@ -3574,6 +3574,18 @@ func awsAwsjson10_serializeOpDocumentRespondDecisionTaskCompletedInput(v *Respon
 		ok.String(*v.ExecutionContext)
 	}
 
+	if v.TaskList != nil {
+		ok := object.Key("taskList")
+		if err := awsAwsjson10_serializeDocumentTaskList(v.TaskList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TaskListScheduleToStartTimeout != nil {
+		ok := object.Key("taskListScheduleToStartTimeout")
+		ok.String(*v.TaskListScheduleToStartTimeout)
+	}
+
 	if v.TaskToken != nil {
 		ok := object.Key("taskToken")
 		ok.String(*v.TaskToken)

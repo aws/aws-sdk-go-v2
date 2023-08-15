@@ -163,7 +163,8 @@ type DecisionTaskTimeoutType string
 
 // Enum values for DecisionTaskTimeoutType
 const (
-	DecisionTaskTimeoutTypeStartToClose DecisionTaskTimeoutType = "START_TO_CLOSE"
+	DecisionTaskTimeoutTypeStartToClose    DecisionTaskTimeoutType = "START_TO_CLOSE"
+	DecisionTaskTimeoutTypeScheduleToStart DecisionTaskTimeoutType = "SCHEDULE_TO_START"
 )
 
 // Values returns all known values for DecisionTaskTimeoutType. Note that this can
@@ -172,6 +173,7 @@ const (
 func (DecisionTaskTimeoutType) Values() []DecisionTaskTimeoutType {
 	return []DecisionTaskTimeoutType{
 		"START_TO_CLOSE",
+		"SCHEDULE_TO_START",
 	}
 }
 
