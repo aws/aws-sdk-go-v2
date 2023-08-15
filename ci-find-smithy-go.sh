@@ -19,7 +19,7 @@ if [ -z "$RUNNER_TMPDIR" ]; then
     exit 1
 fi
 
-branch=`git branch --show-current`
+branch=$(git branch --show-current)
 if [ "$branch" == main ]; then
     echo aws-sdk-go-v2 is on branch main, stop
     exit 0
