@@ -1799,6 +1799,11 @@ type CreateCsvClassifierRequest struct {
 	// Must be different from the column delimiter.
 	QuoteSymbol *string
 
+	// Sets the SerDe for processing CSV in the classifier, which will be applied in
+	// the Data Catalog. Valid values are OpenCSVSerDe , LazySimpleSerDe , and None .
+	// You can specify the None value when you want the crawler to do the detection.
+	Serde CsvSerdeOption
+
 	noSmithyDocumentSerde
 }
 
@@ -1908,6 +1913,11 @@ type CsvClassifier struct {
 	// A custom symbol to denote what combines content into a single column value. It
 	// must be different from the column delimiter.
 	QuoteSymbol *string
+
+	// Sets the SerDe for processing CSV in the classifier, which will be applied in
+	// the Data Catalog. Valid values are OpenCSVSerDe , LazySimpleSerDe , and None .
+	// You can specify the None value when you want the crawler to do the detection.
+	Serde CsvSerdeOption
 
 	// The version of this classifier.
 	Version int64
@@ -7828,6 +7838,11 @@ type UpdateCsvClassifierRequest struct {
 	// A custom symbol to denote what combines content into a single column value. It
 	// must be different from the column delimiter.
 	QuoteSymbol *string
+
+	// Sets the SerDe for processing CSV in the classifier, which will be applied in
+	// the Data Catalog. Valid values are OpenCSVSerDe , LazySimpleSerDe , and None .
+	// You can specify the None value when you want the crawler to do the detection.
+	Serde CsvSerdeOption
 
 	noSmithyDocumentSerde
 }

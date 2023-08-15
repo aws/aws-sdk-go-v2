@@ -1,0 +1,8 @@
+{
+    "id": "af8df8a4-9788-4f96-8544-a17bd45d9eec",
+    "type": "feature",
+    "description": "SageMaker Inference Recommender now provides SupportedResponseMIMETypes from DescribeInferenceRecommendationsJob response",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

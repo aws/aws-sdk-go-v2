@@ -13158,6 +13158,11 @@ func awsAwsjson11_serializeDocumentCreateCsvClassifierRequest(v *types.CreateCsv
 		ok.String(*v.QuoteSymbol)
 	}
 
+	if len(v.Serde) > 0 {
+		ok := object.Key("Serde")
+		ok.String(string(v.Serde))
+	}
+
 	return nil
 }
 
@@ -19387,6 +19392,11 @@ func awsAwsjson11_serializeDocumentUpdateCsvClassifierRequest(v *types.UpdateCsv
 	if v.QuoteSymbol != nil {
 		ok := object.Key("QuoteSymbol")
 		ok.String(*v.QuoteSymbol)
+	}
+
+	if len(v.Serde) > 0 {
+		ok := object.Key("Serde")
+		ok.String(string(v.Serde))
 	}
 
 	return nil

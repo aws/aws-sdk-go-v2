@@ -1,0 +1,8 @@
+{
+    "id": "e5c4a977-c340-4e79-b2a0-cbd6d3555497",
+    "type": "feature",
+    "description": "Provide explanation if CheckDomainTransferability return false. Provide requestId if a request is already submitted.  Add sensitive protection for customer information",
+    "modules": [
+        "service/route53domains"
+    ]
+}
