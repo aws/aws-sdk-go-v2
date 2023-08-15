@@ -1,8 +1,0 @@
-{
-    "id": "2ee365df-b177-4db5-b9b6-87ad1d4bdd86",
-    "type": "feature",
-    "description": "Documentation updates for Elastic Compute Cloud (EC2).",
-    "modules": [
-        "service/ec2"
-    ]
-}

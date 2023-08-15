@@ -1,8 +1,0 @@
-{
-    "id": "58367661-a9c2-4e5c-b90a-258433a5b7f1",
-    "type": "feature",
-    "description": "Updated API documentation to include additional exceptions.",
-    "modules": [
-        "service/chimesdkmeetings"
-    ]
-}
