@@ -145,10 +145,24 @@ type PutMetricAlarmInput struct {
 	// . Valid Values: evaluate | ignore
 	EvaluateLowSampleCountPercentile *string
 
-	// The percentile statistic for the metric specified in MetricName . Specify a
-	// value between p0.0 and p100. When you call PutMetricAlarm and specify a
-	// MetricName , you must specify either Statistic or ExtendedStatistic, but not
-	// both.
+	// The extended statistic for the metric specified in MetricName . When you call
+	// PutMetricAlarm and specify a MetricName , you must specify either Statistic or
+	// ExtendedStatistic but not both. If you specify ExtendedStatistic , the following
+	// are valid values:
+	//   - p90
+	//   - tm90
+	//   - tc90
+	//   - ts90
+	//   - wm90
+	//   - IQM
+	//   - PR(n:m) where n and m are values of the metric
+	//   - TC(X%:X%) where X is between 10 and 90 inclusive.
+	//   - TM(X%:X%) where X is between 10 and 90 inclusive.
+	//   - TS(X%:X%) where X is between 10 and 90 inclusive.
+	//   - WM(X%:X%) where X is between 10 and 90 inclusive.
+	// For more information about these extended statistics, see CloudWatch statistics
+	// definitions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html)
+	// .
 	ExtendedStatistic *string
 
 	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
@@ -248,12 +262,13 @@ type PutMetricAlarmInput struct {
 	Statistic types.Statistic
 
 	// A list of key-value pairs to associate with the alarm. You can associate as
-	// many as 50 tags with an alarm. Tags can help you organize and categorize your
-	// resources. You can also use them to scope user permissions by granting a user
-	// permission to access or change only resources with certain tag values. If you
-	// are using this operation to update an existing alarm, any tags you specify in
-	// this parameter are ignored. To change the tags of an existing alarm, use
-	// TagResource (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html)
+	// many as 50 tags with an alarm. To be able to associate tags with the alarm when
+	// you create the alarm, you must have the cloudwatch:TagResource permission. Tags
+	// can help you organize and categorize your resources. You can also use them to
+	// scope user permissions by granting a user permission to access or change only
+	// resources with certain tag values. If you are using this operation to update an
+	// existing alarm, any tags you specify in this parameter are ignored. To change
+	// the tags of an existing alarm, use TagResource (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html)
 	// or UntagResource (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html)
 	// .
 	Tags []types.Tag

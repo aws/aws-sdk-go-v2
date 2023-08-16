@@ -1,0 +1,8 @@
+{
+    "id": "b2905714-aa6e-4769-ba2e-de1a3c7f7a85",
+    "type": "documentation",
+    "description": "Doc-only update to incorporate several doc bug fixes",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}
