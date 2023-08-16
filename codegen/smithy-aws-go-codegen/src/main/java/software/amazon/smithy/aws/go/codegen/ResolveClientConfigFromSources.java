@@ -24,10 +24,14 @@ public class ResolveClientConfigFromSources implements GoIntegration {
     private static final Logger LOGGER = Logger.getLogger(AddAwsConfigFields.class.getName());
 
     private static final String CONFIG_SOURCE_CONFIG_NAME = "ConfigSources";
-    // UseARNRegion
+
     private static final String USE_ARN_REGION_OPTION = "UseARNRegion";
     private static final String USE_ARN_REGION_CONFIG_RESOLVER = "resolveUseARNRegion";
     private static final String RESOLVE_USE_ARN_REGION = "ResolveUseARNRegion";
+
+    private static final String DISABLE_MRAP_OPTION = "DisableMultiRegionAccessPoints";
+    private static final String DISABLE_MRAP_CONFIG_RESOLVER = "resolveDisableMultiRegionAccessPoints";
+    private static final String RESOLVE_DISABLE_MRAP = "ResolveDisableMultiRegionAccessPoints";
 
     // EndpointDiscovery options
     private static final String ENDPOINT_DISCOVERY_OPTION = "EndpointDiscovery";
@@ -52,6 +56,14 @@ public class ResolveClientConfigFromSources implements GoIntegration {
                     .generatedOnClient(false)
                     .servicePredicate(ResolveClientConfigFromSources::isS3SharedService)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(USE_ARN_REGION_CONFIG_RESOLVER)
+                            .build())
+                    .build(),
+        AddAwsConfigFields.AwsConfigField.builder()
+                    .name(DISABLE_MRAP_OPTION)
+                    .type(getUniversalSymbol("bool"))
+                    .generatedOnClient(false)
+                    .servicePredicate(ResolveClientConfigFromSources::isS3SharedService)
+                    .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(DISABLE_MRAP_CONFIG_RESOLVER)
                             .build())
                     .build(),
             AddAwsConfigFields.AwsConfigField.builder()
@@ -89,6 +101,7 @@ public class ResolveClientConfigFromSources implements GoIntegration {
         ServiceShape serviceShape = settings.getService(model);
         goDelegator.useShapeWriter(serviceShape, writer -> {
             generateUseARNRegionResolver(model, serviceShape, writer);
+            generateDisableMrapResolver(model, serviceShape, writer);
             generateEnableEndpointDiscoveryResolver(model, serviceShape, writer);
             generateUseUseDualStackResolver(model, serviceShape, writer);
             generateUseUseFIPSEndpointResolver(model, serviceShape, writer);
@@ -124,6 +137,22 @@ public class ResolveClientConfigFromSources implements GoIntegration {
                     CONFIG_SOURCE_CONFIG_NAME);
             writer.write("if err != nil { return err }");
             writer.write("if found { o.$L = value }", USE_ARN_REGION_OPTION);
+        });
+        writer.write("");
+    }
+
+    private static void generateDisableMrapResolver(Model model, ServiceShape serviceShape, GoWriter writer) {
+        if (!isS3SharedService(model, serviceShape)) {
+            return;
+        }
+        generatedResolverFunction(writer, DISABLE_MRAP_CONFIG_RESOLVER, "resolves DisableMultiRegionAccessPoints S3 configuration", () -> {
+            writer.addUseImports(SmithyGoDependency.CONTEXT);
+            Symbol resolverFunc = SymbolUtils.createValueSymbolBuilder(RESOLVE_DISABLE_MRAP,
+                    AwsGoDependency.S3_SHARED_CONFIG).build();
+            writer.write("value, found, err := $T(context.Background(), cfg.$L)", resolverFunc,
+                    CONFIG_SOURCE_CONFIG_NAME);
+            writer.write("if err != nil { return err }");
+            writer.write("if found { o.$L = value }", DISABLE_MRAP_OPTION);
         });
         writer.write("");
     }
