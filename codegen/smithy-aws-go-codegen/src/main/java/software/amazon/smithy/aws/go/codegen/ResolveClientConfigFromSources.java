@@ -62,7 +62,7 @@ public class ResolveClientConfigFromSources implements GoIntegration {
                     .name(DISABLE_MRAP_OPTION)
                     .type(getUniversalSymbol("bool"))
                     .generatedOnClient(false)
-                    .servicePredicate(ResolveClientConfigFromSources::isS3SharedService)
+                    .servicePredicate(ResolveClientConfigFromSources::isS3Service)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(DISABLE_MRAP_CONFIG_RESOLVER)
                             .build())
                     .build(),
@@ -142,7 +142,7 @@ public class ResolveClientConfigFromSources implements GoIntegration {
     }
 
     private static void generateDisableMrapResolver(Model model, ServiceShape serviceShape, GoWriter writer) {
-        if (!isS3SharedService(model, serviceShape)) {
+        if (!isS3Service(model, serviceShape)) {
             return;
         }
         generatedResolverFunction(writer, DISABLE_MRAP_CONFIG_RESOLVER, "resolves DisableMultiRegionAccessPoints S3 configuration", () -> {
