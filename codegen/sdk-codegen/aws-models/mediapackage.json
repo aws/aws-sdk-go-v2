@@ -202,7 +202,6 @@
                 "KeyRotationIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time (in seconds) between each encryption key rotation.",
                         "smithy.api#jsonName": "keyRotationIntervalSeconds"
                     }
@@ -258,7 +257,6 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each segment. Actual segments will be\nrounded to the nearest multiple of the source segment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -300,7 +298,6 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each segment. Actual segments will be\nrounded to the nearest multiple of the source segment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -841,7 +838,6 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -855,7 +851,6 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -958,7 +953,6 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -972,7 +966,6 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -1002,7 +995,6 @@
                 "KeyRotationIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time (in seconds) between each encryption key rotation.",
                         "smithy.api#jsonName": "keyRotationIntervalSeconds"
                     }
@@ -1043,7 +1035,6 @@
                 "IncludeIframeOnlyStream": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, an I-Frame only stream will be included in the output.",
                         "smithy.api#jsonName": "includeIframeOnlyStream"
                     }
@@ -1058,7 +1049,6 @@
                 "ManifestWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time window (in seconds) contained in each manifest.",
                         "smithy.api#jsonName": "manifestWindowSeconds"
                     }
@@ -1066,7 +1056,6 @@
                 "MinBufferTimeSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
                         "smithy.api#jsonName": "minBufferTimeSeconds"
                     }
@@ -1074,7 +1063,6 @@
                 "MinUpdatePeriodSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).",
                         "smithy.api#jsonName": "minUpdatePeriodSeconds"
                     }
@@ -1096,7 +1084,6 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each segment. Actual segments will be\nrounded to the nearest multiple of the source segment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -1117,7 +1104,6 @@
                 "SuggestedPresentationDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) to delay live content before presentation.",
                         "smithy.api#jsonName": "suggestedPresentationDelaySeconds"
                     }
@@ -1635,7 +1621,6 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -1649,7 +1634,6 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -1835,7 +1819,6 @@
                 "KeyRotationIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Interval (in seconds) between each encryption key rotation.",
                         "smithy.api#jsonName": "keyRotationIntervalSeconds"
                     }
@@ -1843,7 +1826,6 @@
                 "RepeatExtXKey": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
                         "smithy.api#jsonName": "repeatExtXKey"
                     }
@@ -1896,7 +1878,6 @@
                 "IncludeIframeOnlyStream": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, an I-Frame only stream will be included in the output.",
                         "smithy.api#jsonName": "includeIframeOnlyStream"
                     }
@@ -1918,7 +1899,6 @@
                 "PlaylistWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time window (in seconds) contained in each parent manifest.",
                         "smithy.api#jsonName": "playlistWindowSeconds"
                     }
@@ -1926,7 +1906,6 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag\ninserted into manifests. Additionally, when an interval is specified\nID3Timed Metadata messages will be generated every 5 seconds using the\ningest time of the content.\nIf the interval is not specified, or set to 0, then\nno EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no\nID3Timed Metadata messages will be generated. Note that irrespective\nof this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,\nit will be passed through to HLS output.",
                         "smithy.api#jsonName": "programDateTimeIntervalSeconds"
                     }
@@ -1988,7 +1967,6 @@
                 "IncludeIframeOnlyStream": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, an I-Frame only stream will be included in the output.",
                         "smithy.api#jsonName": "includeIframeOnlyStream"
                     }
@@ -2010,7 +1988,6 @@
                 "PlaylistWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time window (in seconds) contained in each parent manifest.",
                         "smithy.api#jsonName": "playlistWindowSeconds"
                     }
@@ -2018,7 +1995,6 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag\ninserted into manifests. Additionally, when an interval is specified\nID3Timed Metadata messages will be generated every 5 seconds using the\ningest time of the content.\nIf the interval is not specified, or set to 0, then\nno EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no\nID3Timed Metadata messages will be generated. Note that irrespective\nof this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,\nit will be passed through to HLS output.",
                         "smithy.api#jsonName": "programDateTimeIntervalSeconds"
                     }
@@ -2059,7 +2035,6 @@
                 "IncludeDvbSubtitles": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
                         "smithy.api#jsonName": "includeDvbSubtitles"
                     }
@@ -2067,7 +2042,6 @@
                 "IncludeIframeOnlyStream": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, an I-Frame only stream will be included in the output.",
                         "smithy.api#jsonName": "includeIframeOnlyStream"
                     }
@@ -2082,7 +2056,6 @@
                 "PlaylistWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Time window (in seconds) contained in each parent manifest.",
                         "smithy.api#jsonName": "playlistWindowSeconds"
                     }
@@ -2090,7 +2063,6 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag\ninserted into manifests. Additionally, when an interval is specified\nID3Timed Metadata messages will be generated every 5 seconds using the\ningest time of the content.\nIf the interval is not specified, or set to 0, then\nno EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no\nID3Timed Metadata messages will be generated. Note that irrespective\nof this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,\nit will be passed through to HLS output.",
                         "smithy.api#jsonName": "programDateTimeIntervalSeconds"
                     }
@@ -2098,7 +2070,6 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each fragment. Actual fragments will be\nrounded to the nearest multiple of the source fragment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -2112,7 +2083,6 @@
                 "UseAudioRenditionGroup": {
                     "target": "com.amazonaws.mediapackage#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, audio streams will be placed in rendition groups in the output.",
                         "smithy.api#jsonName": "useAudioRenditionGroup"
                     }
@@ -2133,7 +2103,7 @@
                     }
                 },
                 "Password": {
-                    "target": "com.amazonaws.mediapackage#__string",
+                    "target": "com.amazonaws.mediapackage#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "The system generated password for ingest authentication.",
                         "smithy.api#jsonName": "password"
@@ -2147,7 +2117,7 @@
                     }
                 },
                 "Username": {
-                    "target": "com.amazonaws.mediapackage#__string",
+                    "target": "com.amazonaws.mediapackage#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "The system generated username for ingest authentication.",
                         "smithy.api#jsonName": "username"
@@ -2238,7 +2208,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediapackage#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Upper bound on number of records to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2340,7 +2309,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediapackage#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The upper bound on the number of records to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2435,7 +2403,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediapackage#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The upper bound on the number of records to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2539,7 +2506,6 @@
         "com.amazonaws.mediapackage#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -2682,9 +2648,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://mediapackage-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://mediapackage-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2697,15 +2842,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://mediapackage.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://mediapackage.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2717,258 +2897,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://mediapackage-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://mediapackage-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://mediapackage.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://mediapackage.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -3326,6 +3256,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -3339,6 +3280,28 @@
                             }
                         },
                         {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -3349,6 +3312,17 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3414,6 +3388,12 @@
                                 "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -3447,7 +3427,6 @@
                 "ManifestWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The time window (in seconds) contained in each manifest.",
                         "smithy.api#jsonName": "manifestWindowSeconds"
                     }
@@ -3455,7 +3434,6 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The duration (in seconds) of each segment.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -3572,7 +3550,6 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -3586,7 +3563,6 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -4073,6 +4049,12 @@
                 }
             }
         },
+        "com.amazonaws.mediapackage#SensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.mediapackage#ServiceUnavailableException": {
             "type": "structure",
             "members": {
@@ -4194,7 +4176,6 @@
                 "MaxVideoBitsPerSecond": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum video bitrate (bps) to include in output.",
                         "smithy.api#jsonName": "maxVideoBitsPerSecond"
                     }
@@ -4202,7 +4183,6 @@
                 "MinVideoBitsPerSecond": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The minimum video bitrate (bps) to include in output.",
                         "smithy.api#jsonName": "minVideoBitsPerSecond"
                     }
@@ -4563,7 +4543,6 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (in seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -4571,7 +4550,6 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (in seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -4674,7 +4652,6 @@
                 "StartoverWindowSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum duration (seconds) of content to retain for startover playback.\nIf not specified, startover playback will be disabled for the OriginEndpoint.",
                         "smithy.api#jsonName": "startoverWindowSeconds"
                     }
@@ -4688,7 +4665,6 @@
                 "TimeDelaySeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Amount of delay (seconds) to enforce on the playback of live content.\nIf not specified, there will be no time delay in effect for the OriginEndpoint.",
                         "smithy.api#jsonName": "timeDelaySeconds"
                     }
@@ -4806,16 +4782,10 @@
             }
         },
         "com.amazonaws.mediapackage#__boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.mediapackage#__integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "type": "integer"
         },
         "com.amazonaws.mediapackage#__listOfChannel": {
             "type": "list",

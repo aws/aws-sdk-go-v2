@@ -64,3 +64,21 @@ func ExampleStoreOptions_outputUsage() {
 }
 
 var _ *types.TsvStoreOptions
+
+func ExampleVersionOptions_outputUsage() {
+	var union types.VersionOptions
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.VersionOptionsMemberTsvVersionOptions:
+		_ = v.Value // Value is types.TsvVersionOptions
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TsvVersionOptions

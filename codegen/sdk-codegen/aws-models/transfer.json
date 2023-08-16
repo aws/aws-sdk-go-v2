@@ -6379,7 +6379,7 @@
                 "UserSecretId": {
                     "target": "com.amazonaws.transfer#SecretId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifiers for the secrets (in Amazon Web Services Secrets Manager) that contain the SFTP user's private keys or passwords.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the secret (in Amazon Web Services Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.</p>"
                     }
                 },
                 "TrustedHostKeys": {
@@ -6574,7 +6574,7 @@
                 "SendFilePaths": {
                     "target": "com.amazonaws.transfer#FilePaths",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more source paths for the Transfer Family server. Each string represents a source\n      file path for one outbound file transfer. For example,\n          <code>\n               <i>DOC-EXAMPLE-BUCKET</i>/<i>myfile.txt</i>\n            </code>.</p>\n         <note>\n            <p>Replace <code>\n                  <i>DOC-EXAMPLE-BUCKET</i>\n               </code>with one of your actual buckets.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>One or more source paths for the Amazon S3 storage. Each string represents a source\n      file path for one outbound file transfer. For example,\n          <code>\n               <i>DOC-EXAMPLE-BUCKET</i>/<i>myfile.txt</i>\n            </code>.</p>\n         <note>\n            <p>Replace <code>\n                  <i>DOC-EXAMPLE-BUCKET</i>\n               </code> with one of your actual buckets.</p>\n         </note>"
                     }
                 },
                 "RetrieveFilePaths": {

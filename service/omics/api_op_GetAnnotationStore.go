@@ -68,6 +68,11 @@ type GetAnnotationStoreOutput struct {
 	// This member is required.
 	Name *string
 
+	// An integer indicating how many versions of an annotation store exist.
+	//
+	// This member is required.
+	NumVersions *int32
+
 	// The store's genome reference.
 	//
 	// This member is required.

@@ -92,6 +92,79 @@
                 }
             }
         },
+        "com.amazonaws.omics#AcceptShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#AcceptShareRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#AcceptShareResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nAccepts a share for an analytics store. \n</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "analytics-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/share/{shareId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.omics#AcceptShareRequest": {
+            "type": "structure",
+            "members": {
+                "shareId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ID for a share offer for analytics store data. \n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#AcceptShareResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.omics#ShareStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of an analytics store share. \n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.omics#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -348,6 +421,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the annotation store version. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "roleArn": {
                     "target": "com.amazonaws.omics#Arn",
                     "traits": {
@@ -475,7 +555,7 @@
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.omics#StoreDescription",
+                    "target": "com.amazonaws.omics#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The store's description.</p>",
                         "smithy.api#required": {}
@@ -525,6 +605,125 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.omics#AnnotationStoreItem"
+            }
+        },
+        "com.amazonaws.omics#AnnotationStoreVersion": {
+            "type": "resource",
+            "identifiers": {
+                "name": {
+                    "target": "smithy.api#String"
+                },
+                "versionName": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.omics#CreateAnnotationStoreVersion"
+            },
+            "read": {
+                "target": "com.amazonaws.omics#GetAnnotationStoreVersion"
+            },
+            "update": {
+                "target": "com.amazonaws.omics#UpdateAnnotationStoreVersion"
+            },
+            "list": {
+                "target": "com.amazonaws.omics#ListAnnotationStoreVersions"
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.omics#DeleteAnnotationStoreVersions"
+                }
+            ]
+        },
+        "com.amazonaws.omics#AnnotationStoreVersionItem": {
+            "type": "structure",
+            "members": {
+                "storeId": {
+                    "target": "com.amazonaws.omics#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe store ID for an annotation store version. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.omics#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe annotation store version ID. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#VersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of an annotation store version. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionArn": {
+                    "target": "com.amazonaws.omics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Arn for an annotation store version. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#StoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA name given to an annotation store version to distinguish it from others. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of an annotation store version.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe description of an annotation store version. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.omics#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time stamp for when an annotation store version was created. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateTime": {
+                    "target": "com.amazonaws.omics#UpdateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time stamp for when an annotation store version was updated. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.omics#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of an annotation store version.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionSizeBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe size of an annotation store version in Bytes. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nAnnotation store versions.\n</p>"
+            }
+        },
+        "com.amazonaws.omics#AnnotationStoreVersionItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#AnnotationStoreVersionItem"
             }
         },
         "com.amazonaws.omics#AnnotationType": {
@@ -577,6 +776,19 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:([^:\n]*):([^:\n]*):([^:\n]*):([0-9]{12}):([^:\n]*)$"
+            }
+        },
+        "com.amazonaws.omics#ArnList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.omics#BatchDeleteReadSet": {
@@ -1064,14 +1276,13 @@
                     }
                 },
                 "name": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.omics#StoreName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the store.</p>",
-                        "smithy.api#pattern": "^([a-z]){1}([a-z0-9_]){2,254}$"
+                        "smithy.api#documentation": "<p>A name for the store.</p>"
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.omics#StoreDescription",
+                    "target": "com.amazonaws.omics#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the store.</p>"
                     }
@@ -1080,6 +1291,12 @@
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags for the store.</p>"
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name given to an annotation store version to distinguish it from other versions. \n</p>"
                     }
                 },
                 "sseConfig": {
@@ -1148,10 +1365,157 @@
                         "smithy.api#required": {}
                     }
                 },
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name given to an annotation store version to distinguish it from other versions. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "creationTime": {
                     "target": "com.amazonaws.omics#CreationTime",
                     "traits": {
                         "smithy.api#documentation": "<p>When the store was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#CreateAnnotationStoreVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#CreateAnnotationStoreVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#CreateAnnotationStoreVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nCreates a new version of an annotation store.  \n</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "analytics-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/annotationStore/{name}/version",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.omics#CreateAnnotationStoreVersionRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.omics#StoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of an annotation store version from which versions are being created. \n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name given to an annotation store version to distinguish it from other versions. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe description of an annotation store version. \n</p>"
+                    }
+                },
+                "versionOptions": {
+                    "target": "com.amazonaws.omics#VersionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe options for an annotation store version. \n</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAny tags added to annotation store version. \n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#CreateAnnotationStoreVersionResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.omics#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA generated ID for the annotation store \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name given to an annotation store version to distinguish it from other versions. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storeId": {
+                    "target": "com.amazonaws.omics#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ID for the annotation store from which new versions are being created. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionOptions": {
+                    "target": "com.amazonaws.omics#VersionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe options for an annotation store version. \n</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#StoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name given to an annotation store version to distinguish it from other versions. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#VersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of a annotation store version. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.omics#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time stamp for the creation of an annotation store version.  \n</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1774,6 +2138,103 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.omics#CreateShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#CreateShareRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#CreateShareResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Creates a share offer that can be accepted outside the account by a subscriber. The share is created by the owner and accepted by the principal subscriber. \n    </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "analytics-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/share",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.omics#CreateShareRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The resource ARN for the analytics store to be shared.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "principalSubscriber": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The principal subscriber is the account being given access to the analytics store data through the share offer. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shareName": {
+                    "target": "com.amazonaws.omics#ShareName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A name given to the share. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#CreateShareResponse": {
+            "type": "structure",
+            "members": {
+                "shareId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An ID generated for the share. \n    </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#ShareStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status of a share. \n    </p>"
+                    }
+                },
+                "shareName": {
+                    "target": "com.amazonaws.omics#ShareName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A name given to the share. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.omics#CreateVariantStore": {
             "type": "operation",
             "input": {
@@ -1828,14 +2289,13 @@
                     }
                 },
                 "name": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.omics#StoreName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the store.</p>",
-                        "smithy.api#pattern": "^([a-z]){1}([a-z0-9_]){2,254}$"
+                        "smithy.api#documentation": "<p>A name for the store.</p>"
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.omics#StoreDescription",
+                    "target": "com.amazonaws.omics#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the store.</p>"
                     }
@@ -2152,6 +2612,92 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The store's status.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteAnnotationStoreVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#DeleteAnnotationStoreVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#DeleteAnnotationStoreVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nDeletes one or multiple versions of an annotation store. \n</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "analytics-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/annotationStore/{name}/versions/delete",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteAnnotationStoreVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the annotation store from which versions are being deleted. \n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versions": {
+                    "target": "com.amazonaws.omics#VersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe versions of an annotation store to be deleted. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "force": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\nForces the deletion of an annotation store version when imports are in-progress.. \n</p>",
+                        "smithy.api#httpQuery": "force"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteAnnotationStoreVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "errors": {
+                    "target": "com.amazonaws.omics#VersionDeleteErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAny errors that occur when attempting to delete an annotation store version. \n</p>"
                     }
                 }
             },
@@ -2494,6 +3040,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.omics#DeleteShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#DeleteShareRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#DeleteShareResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Deletes a share of an analytics store. \n    </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "analytics-"
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/share/{shareId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteShareRequest": {
+            "type": "structure",
+            "members": {
+                "shareId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID for the share request to be deleted. \n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteShareResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.omics#ShareStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status of the share being deleted. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.omics#DeleteVariantStore": {
             "type": "operation",
             "input": {
@@ -2635,6 +3255,15 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
             }
         },
         "com.amazonaws.omics#Encoding": {
@@ -2880,6 +3509,26 @@
                 ]
             }
         },
+        "com.amazonaws.omics#Filter": {
+            "type": "structure",
+            "members": {
+                "resourceArns": {
+                    "target": "com.amazonaws.omics#ArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Number (Arn) for an analytics store. \n</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#StatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of an annotation store version. \n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nUse filters to focus the returned annotation store versions on a specific parameter, such as the status of the annotation store.\n</p>"
+            }
+        },
         "com.amazonaws.omics#FormatOptions": {
             "type": "union",
             "members": {
@@ -3083,6 +3732,13 @@
                     "target": "com.amazonaws.omics#StoreName",
                     "traits": {
                         "smithy.api#documentation": "<p>The job's destination annotation store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the annotation store version. \n</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3335,7 +3991,7 @@
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.omics#StoreDescription",
+                    "target": "com.amazonaws.omics#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The store's description.</p>",
                         "smithy.api#required": {}
@@ -3392,6 +4048,255 @@
                     "target": "smithy.api#Long",
                     "traits": {
                         "smithy.api#documentation": "<p>The store's size in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "numVersions": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn integer indicating how many versions of an annotation store exist. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#GetAnnotationStoreVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#GetAnnotationStoreVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#GetAnnotationStoreVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nRetrieves the metadata for an annotation store version. \n</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "analytics-"
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/annotationStore/{name}/version/{versionName}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "AnnotationStoreVersionCreated": {
+                        "documentation": "Wait until an annotation store version is created",
+                        "minDelay": 30,
+                        "maxDelay": 600,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CREATING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "UPDATING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "AnnotationStoreVersionDeleted": {
+                        "documentation": "Wait until an annotation store version is deleted.",
+                        "minDelay": 30,
+                        "maxDelay": 600,
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.omics#GetAnnotationStoreVersionRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name given to an annotation store version to distinguish it from others. \n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name given to an annotation store version to distinguish it from others. \n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#GetAnnotationStoreVersionResponse": {
+            "type": "structure",
+            "members": {
+                "storeId": {
+                    "target": "com.amazonaws.omics#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe store ID for annotation store version.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.omics#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe annotation store version ID.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#VersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of an annotation store version. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionArn": {
+                    "target": "com.amazonaws.omics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Arn for the annotation store. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#StoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the annotation store. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name given to an annotation store version to distinguish it from others. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe description for an annotation store version. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.omics#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time stamp for when an annotation store version was created. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateTime": {
+                    "target": "com.amazonaws.omics#UpdateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time stamp for when an annotation store version was updated. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAny tags associated with an annotation store version. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionOptions": {
+                    "target": "com.amazonaws.omics#VersionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe options for an annotation store version. \n</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.omics#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of an annotation store version.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionSizeBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe size of the annotation store version in Bytes. \n</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5745,6 +6650,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.omics#GetShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#GetShareRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#GetShareResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Retrieves the metadata for a share. \n    </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "analytics-"
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/share/{shareId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#GetShareRequest": {
+            "type": "structure",
+            "members": {
+                "shareId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The generated ID for a share. \n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#GetShareResponse": {
+            "type": "structure",
+            "members": {
+                "share": {
+                    "target": "com.amazonaws.omics#ShareDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An analytic store share details object. contains status, resourceArn, ownerId, etc. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.omics#GetVariantImportJob": {
             "type": "operation",
             "input": {
@@ -6117,7 +7096,7 @@
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.omics#StoreDescription",
+                    "target": "com.amazonaws.omics#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The store's description.</p>",
                         "smithy.api#required": {}
@@ -6940,6 +7919,128 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the pagination token from a previous request to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#ListAnnotationStoreVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#ListAnnotationStoreVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#ListAnnotationStoreVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nLists the versions of an annotation store. \n</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "analytics-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/annotationStore/{name}/versions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "annotationStoreVersions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#ListAnnotationStoreVersionsFilter": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.omics#VersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of an annotation store version. \n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nUse filters to focus the returned annotation store versions on a specific parameter, such as the status of the annotation store.\n</p>"
+            }
+        },
+        "com.amazonaws.omics#ListAnnotationStoreVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of an annotation store. \n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe maximum number of annotation store versions to return in one page of results.\n</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecifies the pagination token from a previous request to retrieve the next page of results.\n</p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 10000
+                        }
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.omics#ListAnnotationStoreVersionsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA filter to apply to the list of annotation store versions.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#ListAnnotationStoreVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "annotationStoreVersions": {
+                    "target": "com.amazonaws.omics#AnnotationStoreVersionItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nLists all versions of an annotation store.\n</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecifies the pagination token from a previous request to retrieve the next page of results.\n</p>"
                     }
                 }
             },
@@ -8474,6 +9575,112 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.omics#ListShares": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#ListSharesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#ListSharesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Lists all shares associated with an account. \n    </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "analytics-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/shares",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "shares"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#ListSharesRequest": {
+            "type": "structure",
+            "members": {
+                "resourceOwner": {
+                    "target": "com.amazonaws.omics#ResourceOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The account that owns the analytics store shared. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.omics#Filter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Attributes used to filter for a specific subset of shares. \n    </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results.\n    </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum number of shares to return in one page of results.\n    </p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#ListSharesResponse": {
+            "type": "structure",
+            "members": {
+                "shares": {
+                    "target": "com.amazonaws.omics#ShareDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The shares available and their meta details. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nNext token returned in the response of a previous ListSharesResponse call. Used to get the next page of results.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.omics#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -9055,6 +10262,9 @@
                     "target": "com.amazonaws.omics#AnnotationStore"
                 },
                 {
+                    "target": "com.amazonaws.omics#AnnotationStoreVersion"
+                },
+                {
                     "target": "com.amazonaws.omics#ReferenceStoreResource"
                 },
                 {
@@ -9065,6 +10275,9 @@
                 },
                 {
                     "target": "com.amazonaws.omics#SequenceStoreResource"
+                },
+                {
+                    "target": "com.amazonaws.omics#Share"
                 },
                 {
                     "target": "com.amazonaws.omics#TaggingResource"
@@ -11102,6 +12315,23 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.omics#ResourceOwner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SELF",
+                        "name": "SELF",
+                        "documentation": "The resource owner is the calling account"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER",
+                        "documentation": "The resource owner is an account other than the caller"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.omics#RoleArn": {
             "type": "string",
             "traits": {
@@ -11989,6 +13219,144 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.omics#Share": {
+            "type": "resource",
+            "identifiers": {
+                "shareId": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.omics#CreateShare"
+            },
+            "read": {
+                "target": "com.amazonaws.omics#GetShare"
+            },
+            "update": {
+                "target": "com.amazonaws.omics#AcceptShare"
+            },
+            "delete": {
+                "target": "com.amazonaws.omics#DeleteShare"
+            },
+            "list": {
+                "target": "com.amazonaws.omics#ListShares"
+            }
+        },
+        "com.amazonaws.omics#ShareDetails": {
+            "type": "structure",
+            "members": {
+                "shareId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID for a share offer for an analytics store .\n    </p>"
+                    }
+                },
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The resource Arn of the analytics store being shared. \n    </p>"
+                    }
+                },
+                "principalSubscriber": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The principal subscriber is the account the analytics store data is being shared with. \n    </p>"
+                    }
+                },
+                "ownerId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The account ID for the data owner. The owner creates the share offer. \n    </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#ShareStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status of a share. \n    </p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.omics#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status message for a share. It provides more details on the status of the share.\n    </p>"
+                    }
+                },
+                "shareName": {
+                    "target": "com.amazonaws.omics#ShareName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the share. \n    </p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.omics#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The timestamp for when the share was created. \n    </p>"
+                    }
+                },
+                "updateTime": {
+                    "target": "com.amazonaws.omics#UpdateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The timestamp of the share update. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The details of a share. \n    </p>"
+            }
+        },
+        "com.amazonaws.omics#ShareDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#ShareDetails"
+            }
+        },
+        "com.amazonaws.omics#ShareName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.omics#ShareStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING",
+                        "documentation": "The share has been created but is not yet active"
+                    },
+                    {
+                        "value": "ACTIVATING",
+                        "name": "ACTIVATING",
+                        "documentation": "The share is activated"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE",
+                        "documentation": "The share is active and can be used"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING",
+                        "documentation": "The share is being deleted"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED",
+                        "documentation": "The share has been deleted"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED",
+                        "documentation": "The share has failed to activate or delete"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.omics#SourceFiles": {
             "type": "structure",
             "members": {
@@ -12098,6 +13466,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Items to import.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the annotation store version. \n</p>"
                     }
                 },
                 "formatOptions": {
@@ -13042,21 +14416,21 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.omics#StatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#ShareStatus"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.omics#StatusMessage": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1000
-                }
-            }
-        },
-        "com.amazonaws.omics#StoreDescription": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 500
                 }
             }
         },
@@ -13560,6 +14934,36 @@
                 "smithy.api#documentation": "<p>File settings for a TSV store.</p>"
             }
         },
+        "com.amazonaws.omics#TsvVersionOptions": {
+            "type": "structure",
+            "members": {
+                "annotationType": {
+                    "target": "com.amazonaws.omics#AnnotationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe store version's annotation type.\n</p>"
+                    }
+                },
+                "formatToHeader": {
+                    "target": "com.amazonaws.omics#FormatToHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe annotation store version's header key to column name mapping.\n</p>"
+                    }
+                },
+                "schema": {
+                    "target": "com.amazonaws.omics#Schema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe TSV schema for an annotation store version. \n</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe options for a TSV file.\n</p>"
+            }
+        },
         "com.amazonaws.omics#UntagResource": {
             "type": "operation",
             "input": {
@@ -13687,7 +15091,7 @@
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.omics#StoreDescription",
+                    "target": "com.amazonaws.omics#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the store.</p>"
                     }
@@ -13729,7 +15133,7 @@
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.omics#StoreDescription",
+                    "target": "com.amazonaws.omics#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The store's description.</p>",
                         "smithy.api#required": {}
@@ -13759,6 +15163,137 @@
                     "target": "com.amazonaws.omics#StoreFormat",
                     "traits": {
                         "smithy.api#documentation": "<p>The annotation file format of the store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#UpdateAnnotationStoreVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#UpdateAnnotationStoreVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#UpdateAnnotationStoreVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nUpdates the description of an annotation store version. \n</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "analytics-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/annotationStore/{name}/version/{versionName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.omics#UpdateAnnotationStoreVersionRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of an annotation store. \n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of an annotation store version. \n</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe description of an annotation store. \n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#UpdateAnnotationStoreVersionResponse": {
+            "type": "structure",
+            "members": {
+                "storeId": {
+                    "target": "com.amazonaws.omics#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe annotation store ID. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.omics#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe annotation store version ID.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#VersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of an annotation store version. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#StoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of an annotation store. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of an annotation store version. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe description of an annotation store version.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.omics#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time stamp for when an annotation store version was created. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateTime": {
+                    "target": "com.amazonaws.omics#UpdateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time stamp for when an annotation store version was updated. \n</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -13929,7 +15464,7 @@
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.omics#StoreDescription",
+                    "target": "com.amazonaws.omics#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the store.</p>"
                     }
@@ -13971,7 +15506,7 @@
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.omics#StoreDescription",
+                    "target": "com.amazonaws.omics#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The store's description.</p>",
                         "smithy.api#required": {}
@@ -14431,7 +15966,7 @@
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.omics#StoreDescription",
+                    "target": "com.amazonaws.omics#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The store's description.</p>",
                         "smithy.api#required": {}
@@ -14501,6 +16036,102 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Formatting options for a VCF file.</p>"
+            }
+        },
+        "com.amazonaws.omics#VersionDeleteError": {
+            "type": "structure",
+            "members": {
+                "versionName": {
+                    "target": "com.amazonaws.omics#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name given to an annotation store version.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe message explaining the error in annotation store deletion.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe error preventing deletion of the annotation store version. \n</p>"
+            }
+        },
+        "com.amazonaws.omics#VersionDeleteErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#VersionDeleteError"
+            }
+        },
+        "com.amazonaws.omics#VersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#VersionName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.omics#VersionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^([a-z]){1}([a-z0-9_]){2,254}$"
+            }
+        },
+        "com.amazonaws.omics#VersionOptions": {
+            "type": "union",
+            "members": {
+                "tsvVersionOptions": {
+                    "target": "com.amazonaws.omics#TsvVersionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nFile settings for a version of a TSV store.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe  options for an annotation store version. \n</p>"
+            }
+        },
+        "com.amazonaws.omics#VersionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING",
+                        "documentation": "The Version is being created"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING",
+                        "documentation": "The Version is updating"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING",
+                        "documentation": "The Version is deleting"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE",
+                        "documentation": "The Version is active"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED",
+                        "documentation": "The Version creation failed"
+                    }
+                ]
             }
         },
         "com.amazonaws.omics#WorkflowArn": {

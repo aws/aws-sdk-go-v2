@@ -474,6 +474,26 @@ func (ReferenceStatus) Values() []ReferenceStatus {
 	}
 }
 
+type ResourceOwner string
+
+// Enum values for ResourceOwner
+const (
+	// The resource owner is the calling account
+	ResourceOwnerSelf ResourceOwner = "SELF"
+	// The resource owner is an account other than the caller
+	ResourceOwnerOther ResourceOwner = "OTHER"
+)
+
+// Values returns all known values for ResourceOwner. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceOwner) Values() []ResourceOwner {
+	return []ResourceOwner{
+		"SELF",
+		"OTHER",
+	}
+}
+
 type RunExport string
 
 // Enum values for RunExport
@@ -574,6 +594,38 @@ func (SchemaValueType) Values() []SchemaValueType {
 	}
 }
 
+type ShareStatus string
+
+// Enum values for ShareStatus
+const (
+	// The share has been created but is not yet active
+	ShareStatusPending ShareStatus = "PENDING"
+	// The share is activated
+	ShareStatusActivating ShareStatus = "ACTIVATING"
+	// The share is active and can be used
+	ShareStatusActive ShareStatus = "ACTIVE"
+	// The share is being deleted
+	ShareStatusDeleting ShareStatus = "DELETING"
+	// The share has been deleted
+	ShareStatusDeleted ShareStatus = "DELETED"
+	// The share has failed to activate or delete
+	ShareStatusFailed ShareStatus = "FAILED"
+)
+
+// Values returns all known values for ShareStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ShareStatus) Values() []ShareStatus {
+	return []ShareStatus{
+		"PENDING",
+		"ACTIVATING",
+		"ACTIVE",
+		"DELETING",
+		"DELETED",
+		"FAILED",
+	}
+}
+
 type StoreFormat string
 
 // Enum values for StoreFormat
@@ -650,6 +702,35 @@ func (TaskStatus) Values() []TaskStatus {
 		"STOPPING",
 		"COMPLETED",
 		"CANCELLED",
+		"FAILED",
+	}
+}
+
+type VersionStatus string
+
+// Enum values for VersionStatus
+const (
+	// The Version is being created
+	VersionStatusCreating VersionStatus = "CREATING"
+	// The Version is updating
+	VersionStatusUpdating VersionStatus = "UPDATING"
+	// The Version is deleting
+	VersionStatusDeleting VersionStatus = "DELETING"
+	// The Version is active
+	VersionStatusActive VersionStatus = "ACTIVE"
+	// The Version creation failed
+	VersionStatusFailed VersionStatus = "FAILED"
+)
+
+// Values returns all known values for VersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VersionStatus) Values() []VersionStatus {
+	return []VersionStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"ACTIVE",
 		"FAILED",
 	}
 }

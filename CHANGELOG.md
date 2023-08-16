@@ -1,3 +1,29 @@
+# Release (2023-08-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.17.0](service/chimesdkmeetings/CHANGELOG.md#v1170-2023-08-15)
+  * **Feature**: Updated API documentation to include additional exceptions.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.112.0](service/ec2/CHANGELOG.md#v11120-2023-08-15)
+  * **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.61.0](service/glue/CHANGELOG.md#v1610-2023-08-15)
+  * **Feature**: AWS Glue Crawlers can now accept SerDe overrides from a custom csv classifier. The two SerDe options are LazySimpleSerDe and OpenCSVSerDe. In case, the user wants crawler to do the selection, "None" can be selected for this purpose.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.19.0](service/pi/CHANGELOG.md#v1190-2023-08-15)
+  * **Feature**: AWS Performance Insights for Amazon RDS is launching Performance Analysis On Demand, a new feature that allows you to analyze database performance metrics and find out the performance issues. You can now use SDK to create, list, get, delete, and manage tags of performance analysis reports.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.17.0](service/route53domains/CHANGELOG.md#v1170-2023-08-15)
+  * **Feature**: Provide explanation if CheckDomainTransferability return false. Provide requestId if a request is already submitted.  Add sensitive protection for customer information
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.102.0](service/sagemaker/CHANGELOG.md#v11020-2023-08-15)
+  * **Feature**: SageMaker Inference Recommender now provides SupportedResponseMIMETypes from DescribeInferenceRecommendationsJob response
+
+# Release (2023-08-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.23.0](service/mediapackage/CHANGELOG.md#v1230-2023-08-14)
+  * **Feature**: Fix SDK logging of certain fields.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.8.0](service/omics/CHANGELOG.md#v180-2023-08-14)
+  * **Feature**: This release provides support for annotation store versioning and cross account sharing for Omics Analytics
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.33.4](service/transfer/CHANGELOG.md#v1334-2023-08-14)
+  * **Documentation**: Documentation updates for AWS Transfer Family
+
 # Release (2023-08-11)
 
 ## Module Highlights

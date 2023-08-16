@@ -2,6 +2,60 @@
 
 package types
 
+type AcceptLanguage string
+
+// Enum values for AcceptLanguage
+const (
+	AcceptLanguageEnUs AcceptLanguage = "EN_US"
+)
+
+// Values returns all known values for AcceptLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AcceptLanguage) Values() []AcceptLanguage {
+	return []AcceptLanguage{
+		"EN_US",
+	}
+}
+
+type AnalysisStatus string
+
+// Enum values for AnalysisStatus
+const (
+	AnalysisStatusRunning   AnalysisStatus = "RUNNING"
+	AnalysisStatusSucceeded AnalysisStatus = "SUCCEEDED"
+	AnalysisStatusFailed    AnalysisStatus = "FAILED"
+)
+
+// Values returns all known values for AnalysisStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisStatus) Values() []AnalysisStatus {
+	return []AnalysisStatus{
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type ContextType string
+
+// Enum values for ContextType
+const (
+	ContextTypeCausal     ContextType = "CAUSAL"
+	ContextTypeContextual ContextType = "CONTEXTUAL"
+)
+
+// Values returns all known values for ContextType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ContextType) Values() []ContextType {
+	return []ContextType{
+		"CAUSAL",
+		"CONTEXTUAL",
+	}
+}
+
 type DetailStatus string
 
 // Enum values for DetailStatus
@@ -81,5 +135,43 @@ func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"RDS",
 		"DOCDB",
+	}
+}
+
+type Severity string
+
+// Enum values for Severity
+const (
+	SeverityLow    Severity = "LOW"
+	SeverityMedium Severity = "MEDIUM"
+	SeverityHigh   Severity = "HIGH"
+)
+
+// Values returns all known values for Severity. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Severity) Values() []Severity {
+	return []Severity{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
+
+type TextFormat string
+
+// Enum values for TextFormat
+const (
+	TextFormatPlainText TextFormat = "PLAIN_TEXT"
+	TextFormatMarkdown  TextFormat = "MARKDOWN"
+)
+
+// Values returns all known values for TextFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TextFormat) Values() []TextFormat {
+	return []TextFormat{
+		"PLAIN_TEXT",
+		"MARKDOWN",
 	}
 }

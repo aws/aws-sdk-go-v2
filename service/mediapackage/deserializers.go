@@ -5337,7 +5337,7 @@ func awsRestjson1_deserializeDocumentIngestEndpoint(v **types.IngestEndpoint, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Password = ptr.String(jtv)
 			}
@@ -5355,7 +5355,7 @@ func awsRestjson1_deserializeDocumentIngestEndpoint(v **types.IngestEndpoint, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Username = ptr.String(jtv)
 			}

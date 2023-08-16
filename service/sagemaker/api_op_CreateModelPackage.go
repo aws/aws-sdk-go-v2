@@ -119,7 +119,10 @@ type CreateModelPackageInput struct {
 
 	// A list of key value pairs associated with the model. For more information, see
 	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// in the Amazon Web Services General Reference Guide.
+	// in the Amazon Web Services General Reference Guide. If you supply
+	// ModelPackageGroupName , your model package belongs to the model group you
+	// specify and uses the tags associated with the model group. In this case, you
+	// cannot supply a tag argument.
 	Tags []types.Tag
 
 	// The machine learning task your model package accomplishes. Common machine
