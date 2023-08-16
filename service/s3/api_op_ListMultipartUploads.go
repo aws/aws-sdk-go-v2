@@ -160,7 +160,7 @@ type ListMultipartUploadsOutput struct {
 	// of true indicates that the list was truncated. The list can be truncated if the
 	// number of multipart uploads exceeds the limit allowed or specified by max
 	// uploads.
-	IsTruncated bool
+	IsTruncated *bool
 
 	// The key at or after which the listing began.
 	KeyMarker *string

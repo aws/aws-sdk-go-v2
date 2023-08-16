@@ -501,7 +501,7 @@ func (u *uploader) singlePart(r io.ReadSeeker, cleanup func()) (*UploadOutput, e
 	return &UploadOutput{
 		Location: locationRecorder.location,
 
-		BucketKeyEnabled:     out.BucketKeyEnabled,
+		BucketKeyEnabled:     aws.ToBool(out.BucketKeyEnabled),
 		ChecksumCRC32:        out.ChecksumCRC32,
 		ChecksumCRC32C:       out.ChecksumCRC32C,
 		ChecksumSHA1:         out.ChecksumSHA1,
@@ -639,7 +639,7 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 		UploadID:       u.uploadID,
 		CompletedParts: u.parts,
 
-		BucketKeyEnabled:     completeOut.BucketKeyEnabled,
+		BucketKeyEnabled:     aws.ToBool(completeOut.BucketKeyEnabled),
 		ChecksumCRC32:        completeOut.ChecksumCRC32,
 		ChecksumCRC32C:       completeOut.ChecksumCRC32C,
 		ChecksumSHA1:         completeOut.ChecksumSHA1,

@@ -449,7 +449,7 @@ func TestInteg_RequireChecksum(t *testing.T) {
 					Objects: []s3types.ObjectIdentifier{
 						{Key: aws.String(t.Name())},
 					},
-					Quiet: true,
+					Quiet: aws.Bool(true),
 				},
 				ChecksumAlgorithm: c.checksumAlgorithm,
 			})

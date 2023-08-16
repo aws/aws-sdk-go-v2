@@ -3,6 +3,8 @@ package s3
 import (
 	"context"
 	"fmt"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 // ListObjectVersionsAPIClient is a client that implements the ListObjectVersions
@@ -86,10 +88,10 @@ func (p *ListObjectVersionsPaginator) NextPage(ctx context.Context, optFns ...fu
 	p.firstPage = false
 
 	prevToken := p.keyMarker
-	p.isTruncated = result.IsTruncated
+	p.isTruncated = aws.ToBool(result.IsTruncated)
 	p.keyMarker = nil
 	p.versionIDMarker = nil
-	if result.IsTruncated {
+	if aws.ToBool(result.IsTruncated) {
 		p.keyMarker = result.NextKeyMarker
 		p.versionIDMarker = result.NextVersionIdMarker
 	}
@@ -185,10 +187,10 @@ func (p *ListMultipartUploadsPaginator) NextPage(ctx context.Context, optFns ...
 	p.firstPage = false
 
 	prevToken := p.keyMarker
-	p.isTruncated = result.IsTruncated
+	p.isTruncated = aws.ToBool(result.IsTruncated)
 	p.keyMarker = nil
 	p.uploadIDMarker = nil
-	if result.IsTruncated {
+	if aws.ToBool(result.IsTruncated) {
 		p.keyMarker = result.NextKeyMarker
 		p.uploadIDMarker = result.NextUploadIdMarker
 	}
