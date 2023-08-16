@@ -1,3 +1,9 @@
+# Release (2023-08-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.27.3](service/cloudwatch/CHANGELOG.md#v1273-2023-08-16)
+  * **Documentation**: Doc-only update to incorporate several doc bug fixes
+
 # Release (2023-08-15)
 
 ## Module Highlights
