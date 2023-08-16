@@ -11722,6 +11722,9 @@ type RecommendationJobContainerConfig struct {
 	// A list of the instance types that are used to generate inferences in real-time.
 	SupportedInstanceTypes []string
 
+	// The supported MIME types for the output data.
+	SupportedResponseMIMETypes []string
+
 	// The machine learning task that the model accomplishes. Valid Values:
 	// IMAGE_CLASSIFICATION | OBJECT_DETECTION | TEXT_GENERATION | IMAGE_SEGMENTATION |
 	// FILL_MASK | CLASSIFICATION | REGRESSION | OTHER

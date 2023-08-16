@@ -252,7 +252,7 @@ type DomainTransferability struct {
 	// TRANSFERABLE The domain name can be transferred to Route 53. UNTRANSFERRABLE The
 	// domain name can't be transferred to Route 53. DONT_KNOW Reserved for future use.
 	// DOMAIN_IN_OWN_ACCOUNT The domain already exists in the current Amazon Web
-	// Services account. DOMAIN_IN_ANOTHER_ACCOUNT the domain exists in another Amazon
+	// Services account. DOMAIN_IN_ANOTHER_ACCOUNT The domain exists in another Amazon
 	// Web Services account. PREMIUM_DOMAIN Premium domain transfer is not supported.
 	Transferable Transferable
 

@@ -23963,6 +23963,13 @@ func awsAwsjson11_serializeDocumentRecommendationJobContainerConfig(v *types.Rec
 		}
 	}
 
+	if v.SupportedResponseMIMETypes != nil {
+		ok := object.Key("SupportedResponseMIMETypes")
+		if err := awsAwsjson11_serializeDocumentRecommendationJobSupportedResponseMIMETypes(v.SupportedResponseMIMETypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Task != nil {
 		ok := object.Key("Task")
 		ok.String(*v.Task)
@@ -24131,6 +24138,17 @@ func awsAwsjson11_serializeDocumentRecommendationJobSupportedContentTypes(v []st
 }
 
 func awsAwsjson11_serializeDocumentRecommendationJobSupportedInstanceTypes(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecommendationJobSupportedResponseMIMETypes(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

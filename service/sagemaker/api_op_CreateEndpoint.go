@@ -19,16 +19,14 @@ import (
 // Creates an endpoint using the endpoint configuration specified in the request.
 // SageMaker uses the endpoint to provision resources and deploy models. You create
 // the endpoint configuration with the CreateEndpointConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html)
-// API. Use this API to deploy models using SageMaker hosting services. For an
-// example that calls this method when deploying a model to SageMaker hosting
-// services, see the Create Endpoint example notebook. (https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb)
-// You must not delete an EndpointConfig that is in use by an endpoint that is
-// live or while the UpdateEndpoint or CreateEndpoint operations are being
-// performed on the endpoint. To update an endpoint, you must create a new
-// EndpointConfig . The endpoint name must be unique within an Amazon Web Services
-// Region in your Amazon Web Services account. When it receives the request,
-// SageMaker creates the endpoint, launches the resources (ML compute instances),
-// and deploys the model(s) on them. When you call CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html)
+// API. Use this API to deploy models using SageMaker hosting services. You must
+// not delete an EndpointConfig that is in use by an endpoint that is live or
+// while the UpdateEndpoint or CreateEndpoint operations are being performed on
+// the endpoint. To update an endpoint, you must create a new EndpointConfig . The
+// endpoint name must be unique within an Amazon Web Services Region in your Amazon
+// Web Services account. When it receives the request, SageMaker creates the
+// endpoint, launches the resources (ML compute instances), and deploys the
+// model(s) on them. When you call CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html)
 // , a load call is made to DynamoDB to verify that your endpoint configuration
 // exists. When you read data from a DynamoDB table supporting Eventually
 // Consistent Reads (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html)

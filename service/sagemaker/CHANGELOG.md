@@ -1,3 +1,7 @@
+# v1.102.0 (2023-08-15)
+
+* **Feature**: SageMaker Inference Recommender now provides SupportedResponseMIMETypes from DescribeInferenceRecommendationsJob response
+
 # v1.101.0 (2023-08-09)
 
 * **Feature**: This release adds support for cross account access for SageMaker Model Cards through AWS RAM.

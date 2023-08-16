@@ -1,3 +1,7 @@
+# v1.17.0 (2023-08-15)
+
+* **Feature**: Updated API documentation to include additional exceptions.
+
 # v1.16.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

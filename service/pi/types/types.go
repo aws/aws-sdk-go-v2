@@ -7,6 +7,79 @@ import (
 	"time"
 )
 
+// Retrieves the summary of the performance analysis report created for a time
+// period.
+type AnalysisReport struct {
+
+	// The name of the analysis report.
+	//
+	// This member is required.
+	AnalysisReportId *string
+
+	// The time you created the analysis report.
+	CreateTime *time.Time
+
+	// The analysis end time in the report.
+	EndTime *time.Time
+
+	// The unique identifier of the analysis report.
+	Identifier *string
+
+	// The list of identified insights in the analysis report.
+	Insights []Insight
+
+	// List the tags for the Amazon Web Services service for which Performance
+	// Insights returns metrics. Valid values are as follows:
+	//   - RDS
+	//   - DOCDB
+	ServiceType ServiceType
+
+	// The analysis start time in the report.
+	StartTime *time.Time
+
+	// The status of the created analysis report.
+	Status AnalysisStatus
+
+	noSmithyDocumentSerde
+}
+
+// Retrieves the details of the performance analysis report.
+type AnalysisReportSummary struct {
+
+	// The name of the analysis report.
+	AnalysisReportId *string
+
+	// The time you created the analysis report.
+	CreateTime *time.Time
+
+	// The end time of the analysis in the report.
+	EndTime *time.Time
+
+	// The start time of the analysis in the report.
+	StartTime *time.Time
+
+	// The status of the analysis report.
+	Status AnalysisStatus
+
+	// List of all the tags added to the analysis report.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// List of data objects which provide details about source metrics. This field can
+// be used to determine the PI metric to render for the insight. This data type
+// also includes static values for the metrics for the Insight that were calculated
+// and included in text and annotations on the DB load chart.
+type Data struct {
+
+	// This field determines the Performance Insights metric to render for the
+	// insight. The name field refers to a Performance Insights metric.
+	PerformanceInsightsMetric *PerformanceInsightsMetric
+
+	noSmithyDocumentSerde
+}
+
 // A timestamp, and a single numerical value, which together represent a
 // measurement at a particular point in time.
 type DataPoint struct {
@@ -230,6 +303,53 @@ type FeatureMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Retrieves the list of performance issues which are identified.
+type Insight struct {
+
+	// The unique identifier for the insight. For example, insight-12345678901234567 .
+	//
+	// This member is required.
+	InsightId *string
+
+	// Metric names and values from the timeframe used as baseline to generate the
+	// insight.
+	BaselineData []Data
+
+	// Indicates if the insight is causal or correlated insight.
+	Context ContextType
+
+	// Description of the insight. For example: A high severity Insight found between
+	// 02:00 to 02:30, where there was an unusually high DB load 600x above baseline.
+	// Likely performance impact .
+	Description *string
+
+	// The end time of the insight. For example, 2018-10-30T00:00:00Z .
+	EndTime *time.Time
+
+	// List of data objects containing metrics and references from the time range
+	// while generating the insight.
+	InsightData []Data
+
+	// The type of insight. For example, HighDBLoad , HighCPU , or DominatingSQLs .
+	InsightType *string
+
+	// List of recommendations for the insight. For example, Investigate the following
+	// SQLs that contributed to 100% of the total DBLoad during that time period:
+	// sql-id .
+	Recommendations []Recommendation
+
+	// The severity of the insight. The values are: Low , Medium , or High .
+	Severity Severity
+
+	// The start time of the insight. For example, 2018-10-30T00:00:00Z .
+	StartTime *time.Time
+
+	// List of supporting insights that provide additional factors for the insight.
+	SupportingInsights []Insight
+
+	noSmithyDocumentSerde
+}
+
 // The available dimension information for a metric type.
 type MetricDimensionGroups struct {
 
@@ -297,6 +417,39 @@ type MetricQuery struct {
 	noSmithyDocumentSerde
 }
 
+// This data type helps to determine Performance Insights metric to render for the
+// insight.
+type PerformanceInsightsMetric struct {
+
+	// A dimension map that contains the dimensions for this partition.
+	Dimensions map[string]string
+
+	// The Performance Insights metric name.
+	DisplayName *string
+
+	// The Performance Insights metric.
+	Metric *string
+
+	// The value of the metric. For example, 9 for db.load.avg .
+	Value *float64
+
+	noSmithyDocumentSerde
+}
+
+// The list of recommendations for the insight.
+type Recommendation struct {
+
+	// The recommendation details to help resolve the performance issue. For example,
+	// Investigate the following SQLs that contributed to 100% of the total DBLoad
+	// during that time period: sql-id
+	RecommendationDescription *string
+
+	// The unique identifier for the recommendation.
+	RecommendationId *string
+
+	noSmithyDocumentSerde
+}
+
 // If PartitionBy was specified in a DescribeDimensionKeys request, the dimensions
 // are returned in an array. Each element in the array specifies one dimension.
 type ResponsePartitionKey struct {
@@ -348,6 +501,30 @@ type ResponseResourceMetricKey struct {
 
 	// The valid dimensions for the metric.
 	Dimensions map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
+type Tag struct {
+
+	// A key is the required name of the tag. The string value can be from 1 to 128
+	// Unicode characters in length and can't be prefixed with aws: or rds: . The
+	// string can only contain only the set of Unicode letters, digits, white-space,
+	// '_', '.', ':', '/', '=', '+', '-', '@' (Java regex:
+	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$" ).
+	//
+	// This member is required.
+	Key *string
+
+	// A value is the optional value of the tag. The string value can be from 1 to 256
+	// Unicode characters in length and can't be prefixed with aws: or rds: . The
+	// string can only contain only the set of Unicode letters, digits, white-space,
+	// '_', '.', ':', '/', '=', '+', '-', '@' (Java regex:
+	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
