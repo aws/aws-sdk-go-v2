@@ -1,0 +1,8 @@
+{
+    "id": "8e145919-b32d-4a33-816c-eb4aa78031ac",
+    "type": "bugfix",
+    "description": "Adds DisableMRAP option to config loader, and DisableMRAP client resolver to achieve parity with other S3 options in the config loader. Additionally, added breakfix to correct spelling.",
+    "modules": [
+        "service/s3control"
+    ]
+}
