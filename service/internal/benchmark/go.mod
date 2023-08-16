@@ -39,3 +39,5 @@ replace github.com/aws/aws-sdk-go-v2/service/lexruntimeservice => ../../../servi
 replace github.com/aws/aws-sdk-go-v2/service/s3 => ../../../service/s3/
 
 replace github.com/aws/aws-sdk-go-v2/service/schemas => ../../../service/schemas/
+
+replace github.com/aws/smithy-go => /Users/wty/Projects/aws-sdk-go-v2/../smithy-go

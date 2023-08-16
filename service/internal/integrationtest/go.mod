@@ -286,3 +286,5 @@ replace github.com/aws/aws-sdk-go-v2/service/wafregional => ../../../service/waf
 replace github.com/aws/aws-sdk-go-v2/service/wafv2 => ../../../service/wafv2/
 
 replace github.com/aws/aws-sdk-go-v2/service/workspaces => ../../../service/workspaces/
+
+replace github.com/aws/smithy-go => /Users/wty/Projects/aws-sdk-go-v2/../smithy-go

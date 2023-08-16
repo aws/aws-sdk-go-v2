@@ -9,3 +9,5 @@ require (
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
+
+replace github.com/aws/smithy-go => /Users/wty/Projects/aws-sdk-go-v2/../smithy-go

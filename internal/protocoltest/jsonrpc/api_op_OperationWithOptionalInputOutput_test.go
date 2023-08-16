@@ -7,9 +7,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
 	"github.com/aws/smithy-go/middleware"
+	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"net/http"
 	"net/url"
@@ -66,6 +66,7 @@ func TestClient_OperationWithOptionalInputOutput_awsAwsjson11Serialize(t *testin
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {
 				u, err := url.Parse(serverURL)
@@ -93,10 +94,9 @@ func TestClient_OperationWithOptionalInputOutput_awsAwsjson11Serialize(t *testin
 				HTTPClient: protocoltesthttp.NewClient(),
 				Region:     "us-west-2",
 			})
-			capturedReq := &http.Request{}
 			result, err := client.OperationWithOptionalInputOutput(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-					return smithyhttp.AddCaptureRequestMiddleware(stack, capturedReq)
+					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
 				})
 			})
 			if err != nil {
@@ -105,21 +105,21 @@ func TestClient_OperationWithOptionalInputOutput_awsAwsjson11Serialize(t *testin
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if e, a := c.ExpectMethod, capturedReq.Method; e != a {
+			if e, a := c.ExpectMethod, actualReq.Method; e != a {
 				t.Errorf("expect %v method, got %v", e, a)
 			}
-			if e, a := c.ExpectURIPath, capturedReq.URL.RawPath; e != a {
+			if e, a := c.ExpectURIPath, actualReq.URL.RawPath; e != a {
 				t.Errorf("expect %v path, got %v", e, a)
 			}
-			queryItems := smithytesting.ParseRawQuery(capturedReq.URL.RawQuery)
+			queryItems := smithytesting.ParseRawQuery(actualReq.URL.RawQuery)
 			smithytesting.AssertHasQuery(t, c.ExpectQuery, queryItems)
 			smithytesting.AssertHasQueryKeys(t, c.RequireQuery, queryItems)
 			smithytesting.AssertNotHaveQueryKeys(t, c.ForbidQuery, queryItems)
-			smithytesting.AssertHasHeader(t, c.ExpectHeader, capturedReq.Header)
-			smithytesting.AssertHasHeaderKeys(t, c.RequireHeader, capturedReq.Header)
-			smithytesting.AssertNotHaveHeaderKeys(t, c.ForbidHeader, capturedReq.Header)
+			smithytesting.AssertHasHeader(t, c.ExpectHeader, actualReq.Header)
+			smithytesting.AssertHasHeaderKeys(t, c.RequireHeader, actualReq.Header)
+			smithytesting.AssertNotHaveHeaderKeys(t, c.ForbidHeader, actualReq.Header)
 			if c.BodyAssert != nil {
-				if err := c.BodyAssert(capturedReq.Body); err != nil {
+				if err := c.BodyAssert(actualReq.Body); err != nil {
 					t.Errorf("expect body equal, got %v", err)
 				}
 			}
