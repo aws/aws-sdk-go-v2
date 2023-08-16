@@ -12,5 +12,3 @@
 // Lens (https://docs.aws.amazon.com/connect/latest/adminguide/analyze-conversations.html)
 // in the Amazon Connect Administrator Guide.
 package connectcontactlens
-
-

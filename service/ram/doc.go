@@ -14,5 +14,3 @@
 //   - Resource Access Manager product page (http://aws.amazon.com/ram)
 //   - Resource Access Manager User Guide (https://docs.aws.amazon.com/ram/latest/userguide/)
 package ram
-
-

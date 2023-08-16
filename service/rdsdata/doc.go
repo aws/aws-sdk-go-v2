@@ -10,5 +10,3 @@
 // the Data Service API, see Using the Data API (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
 // in the Amazon Aurora User Guide.
 package rdsdata
-
-

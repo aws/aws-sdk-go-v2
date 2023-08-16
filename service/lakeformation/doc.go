@@ -5,5 +5,3 @@
 //
 // Lake Formation Defines the public endpoint for the Lake Formation service.
 package lakeformation
-
-

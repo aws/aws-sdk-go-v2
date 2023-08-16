@@ -7,5 +7,3 @@
 // the service with tutorials for getting started, visit Amazon Lookout for
 // Metrics Developer Guide (https://docs.aws.amazon.com/lookoutmetrics/latest/dev) .
 package lookoutmetrics
-
-

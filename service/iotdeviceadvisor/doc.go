@@ -15,5 +15,3 @@
 // Web Services Partner Device Catalog without the need to send your device in and
 // wait for it to be tested.
 package iotdeviceadvisor
-
-

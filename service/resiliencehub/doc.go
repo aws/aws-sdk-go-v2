@@ -11,5 +11,3 @@
 // applications are met, and resolve issues before they are released into
 // production.
 package resiliencehub
-
-

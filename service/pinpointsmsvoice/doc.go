@@ -5,5 +5,3 @@
 //
 // Pinpoint SMS and Voice Messaging public facing APIs
 package pinpointsmsvoice
-
-

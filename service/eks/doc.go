@@ -15,5 +15,3 @@
 // means that you can easily migrate any standard Kubernetes application to Amazon
 // EKS without any code modification required.
 package eks
-
-

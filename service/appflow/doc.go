@@ -11,13 +11,14 @@
 // Amazon S3 and Amazon Redshift. Use the following links to get started on the
 // Amazon AppFlow API:
 //   - Actions (https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html)
-//   : An alphabetical list of all Amazon AppFlow API operations.
+//     : An alphabetical list of all Amazon AppFlow API operations.
 //   - Data types (https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html)
-//   : An alphabetical list of all Amazon AppFlow data types.
+//     : An alphabetical list of all Amazon AppFlow data types.
 //   - Common parameters (https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html)
-//   : Parameters that all Query operations can use.
+//     : Parameters that all Query operations can use.
 //   - Common errors (https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html)
-//   : Client and server errors that all operations can return.
+//     : Client and server errors that all operations can return.
+//
 // If you're new to Amazon AppFlow, we recommend that you review the Amazon
 // AppFlow User Guide (https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html)
 // . Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and
@@ -27,5 +28,3 @@
 // refer to the Authorize Apps with OAuth  (https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm)
 // documentation.
 package appflow
-
-

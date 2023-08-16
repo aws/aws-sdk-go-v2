@@ -23,5 +23,3 @@
 // see What Is Config (https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html)
 // in the Config Developer Guide.
 package configservice
-
-

@@ -7,5 +7,3 @@
 // is a managed service that scales elastically for real-time processing of
 // streaming big data.
 package kinesis
-
-

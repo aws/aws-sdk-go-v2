@@ -17,5 +17,3 @@
 // commands to track the progress of a job on a specific target and for all the
 // targets of the job
 package iotjobsdataplane
-
-

@@ -5,5 +5,3 @@
 //
 // The Amazon SageMaker runtime API.
 package sagemakerruntime
-
-

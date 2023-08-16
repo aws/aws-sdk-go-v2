@@ -20,5 +20,3 @@
 // page, scroll down to the SDK section, and choose plus (+) sign to expand the
 // section.
 package frauddetector
-
-

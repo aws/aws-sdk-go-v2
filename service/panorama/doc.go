@@ -7,5 +7,3 @@
 // introduction to the service, see What is AWS Panorama? (https://docs.aws.amazon.com/panorama/latest/dev/panorama-welcome.html)
 // in the AWS Panorama Developer Guide.
 package panorama
-
-

@@ -5,5 +5,3 @@
 //
 // An EC2 query service that sends query requests and XML responses.
 package ec2query
-
-

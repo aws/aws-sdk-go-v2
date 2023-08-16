@@ -5,5 +5,3 @@
 //
 // Amazon Mechanical Turk API Reference
 package mturk
-
-

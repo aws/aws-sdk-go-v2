@@ -10,5 +10,3 @@
 // Amazon Kinesis Analytics v1 API Reference. The Amazon Kinesis Analytics
 // Developer Guide provides additional information.
 package kinesisanalytics
-
-

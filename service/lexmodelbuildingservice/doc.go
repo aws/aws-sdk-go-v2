@@ -7,5 +7,3 @@
 // conversational voice and text interfaces. Use these actions to create, update,
 // and delete conversational bots for new and existing client applications.
 package lexmodelbuildingservice
-
-

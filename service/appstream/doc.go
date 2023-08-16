@@ -18,5 +18,3 @@
 //   - Amazon AppStream 2.0 product page (http://aws.amazon.com/appstream2)
 //   - Amazon AppStream 2.0 documentation (http://aws.amazon.com/documentation/appstream2)
 package appstream
-
-

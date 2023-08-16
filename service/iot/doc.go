@@ -19,5 +19,3 @@
 // Authorizing Direct Calls to Amazon Web Services Services (https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html)
 // .
 package iot
-
-

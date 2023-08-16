@@ -5,5 +5,3 @@
 //
 // AWS Elemental MediaPackage VOD
 package mediapackagevod
-
-

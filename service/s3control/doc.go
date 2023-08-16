@@ -6,5 +6,3 @@
 // Amazon Web Services S3 Control provides access to Amazon S3 control plane
 // actions.
 package s3control
-
-

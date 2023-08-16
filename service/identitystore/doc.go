@@ -12,5 +12,3 @@
 // . This reference guide describes the identity store operations that you can call
 // programatically and includes detailed information about data types and errors.
 package identitystore
-
-

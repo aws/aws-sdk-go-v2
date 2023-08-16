@@ -5,5 +5,3 @@
 //
 // Provides APIs for creating and managing Amazon Forecast resources.
 package forecastquery
-
-

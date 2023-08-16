@@ -2,8 +2,4 @@
 
 // Package kinesisvideo provides the API client, operations, and parameter types
 // for Amazon Kinesis Video Streams.
-//
-//
 package kinesisvideo
-
-

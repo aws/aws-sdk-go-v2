@@ -8,5 +8,3 @@
 // training run.
 //   - BatchPutMetrics (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_metrics_BatchPutMetrics.html)
 package sagemakermetrics
-
-

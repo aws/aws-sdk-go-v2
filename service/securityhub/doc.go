@@ -22,17 +22,15 @@
 // for the member account in the same Region that the invitation was sent from. The
 // following throttling limits apply to using Security Hub API operations.
 //   - BatchEnableStandards - RateLimit of 1 request per second. BurstLimit of 1
-//   request per second.
+//     request per second.
 //   - GetFindings - RateLimit of 3 requests per second. BurstLimit of 6 requests
-//   per second.
+//     per second.
 //   - BatchImportFindings - RateLimit of 10 requests per second. BurstLimit of 30
-//   requests per second.
+//     requests per second.
 //   - BatchUpdateFindings - RateLimit of 10 requests per second. BurstLimit of 30
-//   requests per second.
+//     requests per second.
 //   - UpdateStandardsControl - RateLimit of 1 request per second. BurstLimit of 5
-//   requests per second.
+//     requests per second.
 //   - All other operations - RateLimit of 10 requests per second. BurstLimit of 30
-//   requests per second.
+//     requests per second.
 package securityhub
-
-

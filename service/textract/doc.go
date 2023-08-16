@@ -7,5 +7,3 @@
 // machine-readable text. This is the API reference documentation for Amazon
 // Textract.
 package textract
-
-

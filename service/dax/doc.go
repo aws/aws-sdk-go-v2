@@ -10,5 +10,3 @@
 // simple modifications to your code, your application can begin taking advantage
 // of the DAX cluster and realize significant improvements in read performance.
 package dax
-
-

@@ -5,5 +5,3 @@
 //
 // Provides APIs for creating and managing SageMaker geospatial resources.
 package sagemakergeospatial
-
-

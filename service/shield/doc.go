@@ -10,5 +10,3 @@
 // WAF and Shield Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/)
 // .
 package shield
-
-

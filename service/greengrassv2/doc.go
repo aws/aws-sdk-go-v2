@@ -17,5 +17,3 @@
 // information, see What is IoT Greengrass? (https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html)
 // in the IoT Greengrass V2 Developer Guide.
 package greengrassv2
-
-

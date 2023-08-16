@@ -8,5 +8,3 @@
 // AppRegistry provides a repository of your applications, their resources, and the
 // application metadata that you use within your enterprise.
 package servicecatalogappregistry
-
-

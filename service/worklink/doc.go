@@ -12,5 +12,3 @@
 // secure rendering service in the AWS cloud. Amazon WorkLink doesn't download or
 // store any internal web content on mobile devices.
 package worklink
-
-

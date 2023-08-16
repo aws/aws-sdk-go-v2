@@ -20,5 +20,3 @@
 // App Runner endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/apprunner.html)
 // in the Amazon Web Services General Reference.
 package apprunner
-
-

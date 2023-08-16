@@ -5,5 +5,3 @@
 //
 // Recovery readiness
 package route53recoveryreadiness
-
-

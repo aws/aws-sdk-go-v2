@@ -33,6 +33,7 @@
 //   - SearchFacesByImage (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchFacesByImage.html)
 //   - SearchUsers (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchUsers.html)
 //   - SearchUsersByImage (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchUsersByImage.html)
+//
 // Amazon Rekognition Custom Labels
 //   - CopyProjectVersion (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CopyProjectVersion.html)
 //   - CreateDataset (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateDataset.html)
@@ -54,6 +55,7 @@
 //   - StartProjectVersion (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartProjectVersion.html)
 //   - StopProjectVersion (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StopProjectVersion.html)
 //   - UpdateDatasetEntries (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UpdateDatasetEntries.html)
+//
 // Amazon Rekognition Video Stored Video
 //   - GetCelebrityRecognition (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetCelebrityRecognition.html)
 //   - GetContentModeration (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetContentModeration.html)
@@ -71,6 +73,7 @@
 //   - StartPersonTracking (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartPersonTracking.html)
 //   - StartSegmentDetection (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartSegmentDetection.html)
 //   - StartTextDetection (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartTextDetection.html)
+//
 // Amazon Rekognition Video Streaming Video
 //   - CreateStreamProcessor (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateStreamProcessor.html)
 //   - DeleteStreamProcessor (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteStreamProcessor.html)
@@ -80,5 +83,3 @@
 //   - StopStreamProcessor (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StopStreamProcessor.html)
 //   - UpdateStreamProcessor (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UpdateStreamProcessor.html)
 package rekognition
-
-

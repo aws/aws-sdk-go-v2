@@ -29,5 +29,3 @@
 // Services CloudTrail User Guide (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html)
 // .
 package secretsmanager
-
-

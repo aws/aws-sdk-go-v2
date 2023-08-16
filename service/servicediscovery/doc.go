@@ -11,5 +11,3 @@
 // queries, or HTTP requests, for the service receive an answer that contains up to
 // eight healthy records.
 package servicediscovery
-
-

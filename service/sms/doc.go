@@ -13,5 +13,3 @@
 //   - Server Migration Service product page (http://aws.amazon.com/server-migration-service/)
 //   - Server Migration Service User Guide (https://docs.aws.amazon.com/server-migration-service/latest/userguide/)
 package sms
-
-

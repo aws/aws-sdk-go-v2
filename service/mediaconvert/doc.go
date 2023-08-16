@@ -5,5 +5,3 @@
 //
 // AWS Elemental MediaConvert
 package mediaconvert
-
-

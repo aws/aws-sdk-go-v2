@@ -6,5 +6,3 @@
 // Recovery Control Configuration API Reference for Amazon Route 53 Application
 // Recovery Controller
 package route53recoverycontrolconfig
-
-

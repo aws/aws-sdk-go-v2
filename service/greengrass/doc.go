@@ -10,5 +10,3 @@
 // IoT Greengrass minimizes the cost of transmitting data to the cloud by allowing
 // you to author AWS Lambda functions that execute locally.
 package greengrass
-
-

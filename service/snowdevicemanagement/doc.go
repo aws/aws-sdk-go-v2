@@ -5,5 +5,3 @@
 //
 // Amazon Web Services Snow Device Management documentation.
 package snowdevicemanagement
-
-

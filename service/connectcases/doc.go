@@ -10,5 +10,3 @@
 // see Amazon Connect Cases (https://docs.aws.amazon.com/connect/latest/adminguide/cases.html)
 // in the Amazon Connect Administrator Guide.
 package connectcases
-
-

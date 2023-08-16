@@ -8,5 +8,3 @@
 // lifecycle management of your telecommunication network functions throughout
 // planning, deployment, and post-deployment activities.
 package tnb
-
-

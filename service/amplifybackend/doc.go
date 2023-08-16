@@ -5,5 +5,3 @@
 //
 // AWS Amplify Admin API
 package amplifybackend
-
-

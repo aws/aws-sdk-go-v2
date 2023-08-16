@@ -5,5 +5,3 @@
 //
 // Resource Groups Tagging API
 package resourcegroupstaggingapi
-
-

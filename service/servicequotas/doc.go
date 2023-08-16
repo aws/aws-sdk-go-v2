@@ -9,5 +9,3 @@
 // Service Quotas User Guide (https://docs.aws.amazon.com/servicequotas/latest/userguide/)
 // .
 package servicequotas
-
-

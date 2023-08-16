@@ -5,5 +5,3 @@
 //
 // Amazon S3 on Outposts provides access to S3 on Outposts operations.
 package s3outposts
-
-

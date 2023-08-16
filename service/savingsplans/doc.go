@@ -9,5 +9,3 @@
 // for that usage. For more information, see the AWS Savings Plans User Guide (https://docs.aws.amazon.com/savingsplans/latest/userguide/)
 // .
 package savingsplans
-
-

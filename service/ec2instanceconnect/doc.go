@@ -7,5 +7,3 @@
 // use SSH public keys to EC2, providing users a simple and secure way to connect
 // to their instances.
 package ec2instanceconnect
-
-

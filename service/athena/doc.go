@@ -18,5 +18,3 @@
 // Code Samples (https://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in
 // the Amazon Athena User Guide.
 package athena
-
-

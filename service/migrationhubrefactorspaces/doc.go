@@ -15,5 +15,3 @@
 // CreateResourceShare API. See CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html)
 // in the Amazon Web Services RAM API Reference.
 package migrationhubrefactorspaces
-
-

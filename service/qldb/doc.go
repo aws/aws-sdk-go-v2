@@ -5,5 +5,3 @@
 //
 // The resource management API for Amazon QLDB
 package qldb
-
-

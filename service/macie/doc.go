@@ -12,5 +12,3 @@
 // how to use the new Macie, see the Amazon Macie User Guide (https://docs.aws.amazon.com/macie/latest/user/what-is-macie.html)
 // .
 package macie
-
-

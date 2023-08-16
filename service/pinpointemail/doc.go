@@ -34,5 +34,3 @@
 // in each Region, see AWS Global Infrastructure (http://aws.amazon.com/about-aws/global-infrastructure/)
 // .
 package pinpointemail
-
-

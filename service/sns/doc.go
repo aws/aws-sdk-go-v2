@@ -19,5 +19,3 @@
 // For a list of available SDKs, go to Tools for Amazon Web Services (http://aws.amazon.com/tools/)
 // .
 package sns
-
-

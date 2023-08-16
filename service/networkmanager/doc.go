@@ -7,5 +7,3 @@
 // Cloud WAN core network and your Transit Gateway network across Amazon Web
 // Services accounts, Regions, and on-premises locations.
 package networkmanager
-
-

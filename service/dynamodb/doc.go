@@ -19,5 +19,3 @@
 // automatically replicated across multiple Availability Zones in an Amazon Web
 // Services Region, providing built-in high availability and data durability.
 package dynamodb
-
-

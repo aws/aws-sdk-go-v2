@@ -12,5 +12,3 @@
 // For more information, see the Amazon CloudSearch Developer Guide (http://docs.aws.amazon.com/cloudsearch/latest/developerguide)
 // .
 package cloudsearchdomain
-
-

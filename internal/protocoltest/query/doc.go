@@ -5,5 +5,3 @@
 //
 // A query service that sends query requests and XML responses.
 package query
-
-

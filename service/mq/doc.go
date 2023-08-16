@@ -8,5 +8,3 @@
 // broker allows software applications and components to communicate using various
 // programming languages, operating systems, and formal messaging protocols.
 package mq
-
-

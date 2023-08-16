@@ -23,5 +23,3 @@
 // operations are idempotent, which means that they complete at most one time. If
 // you repeat an operation, it succeeds with a 200 OK response code.
 package elasticloadbalancing
-
-

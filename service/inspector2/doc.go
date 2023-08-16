@@ -7,5 +7,3 @@
 // scanning for security vulnerabilities within your Amazon EC2 and Amazon ECR
 // environments.
 package inspector2
-
-

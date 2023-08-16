@@ -14,5 +14,3 @@
 // Web ServicesSignature Version 4 (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
 // to sign requests is: iotdevicegateway.
 package iotdataplane
-
-

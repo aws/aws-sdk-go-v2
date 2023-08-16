@@ -9,5 +9,3 @@
 // information, see Getting data into your cluster using OpenSearch Ingestion (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ingestion.html)
 // .
 package osis
-
-

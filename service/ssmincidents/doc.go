@@ -13,5 +13,3 @@
 // incidents, Incident Manager automates response plans and enables responder team
 // escalation.
 package ssmincidents
-
-

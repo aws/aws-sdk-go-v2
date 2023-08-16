@@ -26,11 +26,10 @@
 //   - Amazon Web Services SDK for PHP V3 (https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-cognito-idp-2016-04-18.html)
 //   - Amazon Web Services SDK for Python (https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cognito-idp.html)
 //   - Amazon Web Services SDK for Ruby V3 (https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html)
+//
 // To get started with an Amazon Web Services SDK, see Tools to Build on Amazon
 // Web Services (http://aws.amazon.com/developer/tools/) . For example actions and
 // scenarios, see Code examples for Amazon Cognito Identity Provider using Amazon
 // Web Services SDKs (https://docs.aws.amazon.com/cognito/latest/developerguide/service_code_examples_cognito-identity-provider.html)
 // .
 package cognitoidentityprovider
-
-

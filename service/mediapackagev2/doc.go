@@ -22,5 +22,3 @@
 // features and operations of MediaPackage, as described in the AWS Elemental
 // MediaPackage User Guide.
 package mediapackagev2
-
-

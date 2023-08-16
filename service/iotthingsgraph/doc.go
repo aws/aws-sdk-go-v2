@@ -12,5 +12,3 @@
 // Guide (https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-whatis.html) .
 // The AWS IoT Things Graph service is discontinued.
 package iotthingsgraph
-
-

@@ -10,5 +10,3 @@
 // Tool User Guide (https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html)
 // .
 package wellarchitected
-
-

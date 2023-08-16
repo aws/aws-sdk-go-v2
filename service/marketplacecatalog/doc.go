@@ -10,5 +10,3 @@
 // pipelines. You can also create your own applications on top of the Catalog API
 // to manage your products on AWS Marketplace.
 package marketplacecatalog
-
-

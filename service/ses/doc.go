@@ -16,5 +16,3 @@
 //   - Common Parameters (https://docs.aws.amazon.com/ses/latest/APIReference/CommonParameters.html)
 //   - Common Errors (https://docs.aws.amazon.com/ses/latest/APIReference/CommonErrors.html)
 package ses
-
-

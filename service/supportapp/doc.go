@@ -11,23 +11,23 @@
 //   - Create, search, update, and resolve your support cases
 //   - Request service quota increases for your account
 //   - Invite Amazon Web Services Support agents to your channel so that you can
-//   chat directly about your support cases
+//     chat directly about your support cases
+//
 // For more information about how to perform these actions in Slack, see the
 // following documentation in the Amazon Web Services Support User Guide:
 //   - Amazon Web Services Support App in Slack (https://docs.aws.amazon.com/awssupport/latest/user/aws-support-app-for-slack.html)
 //   - Joining a live chat session with Amazon Web Services Support (https://docs.aws.amazon.com/awssupport/latest/user/joining-a-live-chat-session.html)
 //   - Requesting service quota increases (https://docs.aws.amazon.com/awssupport/latest/user/service-quota-increase.html)
 //   - Amazon Web Services Support App commands in Slack (https://docs.aws.amazon.com/awssupport/latest/user/support-app-commands.html)
+//
 // You can also use the Amazon Web Services Management Console instead of the
 // Amazon Web Services Support App API to manage your Slack configurations. For
 // more information, see Authorize a Slack workspace to enable the Amazon Web
 // Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/authorize-slack-workspace.html)
 // .
 //   - You must have a Business or Enterprise Support plan to use the Amazon Web
-//   Services Support App API.
+//     Services Support App API.
 //   - For more information about the Amazon Web Services Support App endpoints,
-//   see the Amazon Web Services Support App in Slack endpoints (https://docs.aws.amazon.com/general/latest/gr/awssupport.html#awssupport_app_region)
-//   in the Amazon Web Services General Reference.
+//     see the Amazon Web Services Support App in Slack endpoints (https://docs.aws.amazon.com/general/latest/gr/awssupport.html#awssupport_app_region)
+//     in the Amazon Web Services General Reference.
 package supportapp
-
-

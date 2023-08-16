@@ -5,5 +5,3 @@
 //
 // The AWS IoT 1-Click Projects API Reference
 package iot1clickprojects
-
-

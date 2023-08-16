@@ -8,5 +8,3 @@
 // your documents, the topics they discuss, the predominant sentiment expressed in
 // them, the predominant language used, and more.
 package comprehend
-
-

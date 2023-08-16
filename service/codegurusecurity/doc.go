@@ -13,5 +13,3 @@
 // Security, see the Amazon CodeGuru Security User Guide (https://docs.aws.amazon.com/codeguru/latest/security-ug/what-is-codeguru-security.html)
 // .
 package codegurusecurity
-
-

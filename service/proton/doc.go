@@ -55,6 +55,7 @@
 //   - CreateEnvironmentTemplateVersion
 //   - CreateServiceTemplateVersion
 //   - CreateEnvironmentAccountConnection
+//
 // Idempotent create APIs Given a request action that has succeeded: If you retry
 // the request with an API from this group, and the original resource hasn't been
 // modified, the retry succeeds without performing any further actions other than
@@ -66,6 +67,7 @@
 //   - CreateServiceTemplate
 //   - CreateEnvironment
 //   - CreateService
+//
 // Idempotent delete APIs Given a request action that has succeeded: When you
 // retry the request with an API from this group and the resource was deleted, its
 // metadata is returned in the response. If you retry and the resource doesn't
@@ -76,6 +78,7 @@
 //   - DeleteServiceTemplate
 //   - DeleteServiceTemplateVersion
 //   - DeleteEnvironmentAccountConnection
+//
 // Asynchronous idempotent delete APIs Given a request action that has succeeded:
 // If you retry the request with an API from this group, if the original request
 // delete operation status is DELETE_IN_PROGRESS , the retry returns the resource
@@ -85,5 +88,3 @@
 //   - DeleteEnvironment
 //   - DeleteService
 package proton
-
-

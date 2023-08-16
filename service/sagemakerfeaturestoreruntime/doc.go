@@ -12,5 +12,3 @@
 //   - DescribeFeatureGroup (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeFeatureGroup.html)
 //   - ListFeatureGroups (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListFeatureGroups.html)
 package sagemakerfeaturestoreruntime
-
-

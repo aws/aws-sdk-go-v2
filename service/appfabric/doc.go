@@ -15,5 +15,3 @@
 // your AppFabric resources, see the AppFabric section of the CLI Reference (https://docs.aws.amazon.com/cli/latest/reference/appfabric/index.html)
 // .
 package appfabric
-
-

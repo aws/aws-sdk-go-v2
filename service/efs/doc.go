@@ -12,5 +12,3 @@
 // and the Amazon Elastic File System User Guide (https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html)
 // .
 package efs
-
-

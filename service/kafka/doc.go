@@ -5,5 +5,3 @@
 //
 // The operations for managing an Amazon MSK cluster.
 package kafka
-
-

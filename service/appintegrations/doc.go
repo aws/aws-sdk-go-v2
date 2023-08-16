@@ -9,5 +9,3 @@
 // and Deliver information to agents using Amazon Connect Wisdom (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-wisdom.html)
 // in the Amazon Connect Administrator Guide.
 package appintegrations
-
-

@@ -12,5 +12,3 @@
 // 30-day period are considered current customers and will be able to continue
 // using the service.
 package elasticinference
-
-

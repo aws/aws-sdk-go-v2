@@ -7,5 +7,3 @@
 // service. Also provides sample requests, responses, and errors for the supported
 // web services protocols.
 package iot1clickdevicesservice
-
-

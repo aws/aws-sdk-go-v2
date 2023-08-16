@@ -2,7 +2,4 @@
 
 // Package jsonrpc10 provides the API client, operations, and parameter types for
 // the API.
-//
 package jsonrpc10
-
-

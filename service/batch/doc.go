@@ -18,5 +18,3 @@
 // software. This means that you can focus on analyzing results and solving your
 // specific problems instead.
 package batch
-
-

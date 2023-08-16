@@ -24,5 +24,3 @@
 // Web Services API requests, see Amazon Web Services APIs (https://docs.aws.amazon.com/general/latest/gr/aws-apis.html)
 // in the General Reference.
 package keyspaces
-
-

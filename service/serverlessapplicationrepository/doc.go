@@ -23,10 +23,8 @@
 // repository.The AWS Serverless Application Repository Developer Guide contains
 // more information about the two developer experiences available:
 //   - Consuming Applications – Browse for applications and view information about
-//   them, including source code and readme files. Also install, configure, and
-//   deploy applications of your choosing. Publishing Applications – Configure and
-//   upload applications to make them available to other developers, and publish new
-//   versions of applications.
+//     them, including source code and readme files. Also install, configure, and
+//     deploy applications of your choosing. Publishing Applications – Configure and
+//     upload applications to make them available to other developers, and publish new
+//     versions of applications.
 package serverlessapplicationrepository
-
-

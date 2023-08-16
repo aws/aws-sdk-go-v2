@@ -9,5 +9,3 @@
 // numbers, create and manage Voice Connectors and SIP media applications, and run
 // voice analytics.
 package chimesdkvoice
-
-

@@ -10,5 +10,3 @@
 // the endpoint corresponding to your API's custom domain and base path, if
 // applicable.
 package apigatewaymanagementapi
-
-

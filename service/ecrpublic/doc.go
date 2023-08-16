@@ -13,5 +13,3 @@
 // repositories, see Amazon Elastic Container Registry API Reference (https://docs.aws.amazon.com/AmazonECR/latest/APIReference/Welcome.html)
 // .
 package ecrpublic
-
-

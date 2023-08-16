@@ -19,5 +19,3 @@
 // of the Lightsail service, see Amazon Lightsail Endpoints and Quotas (https://docs.aws.amazon.com/general/latest/gr/lightsail.html)
 // in the Amazon Web Services General Reference.
 package lightsail
-
-

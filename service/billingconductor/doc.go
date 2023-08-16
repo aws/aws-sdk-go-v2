@@ -20,5 +20,3 @@
 // user interface, see the Amazon Web Services Billing Conductor User Guide (https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html)
 // .
 package billingconductor
-
-

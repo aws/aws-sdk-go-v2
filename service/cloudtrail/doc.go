@@ -21,5 +21,3 @@
 // for information about the data that is included with each Amazon Web Services
 // API call listed in the log files.
 package cloudtrail
-
-

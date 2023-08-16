@@ -10,5 +10,3 @@
 // . For information about IoT SiteWise quotas, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
 // in the IoT SiteWise User Guide.
 package iotsitewise
-
-

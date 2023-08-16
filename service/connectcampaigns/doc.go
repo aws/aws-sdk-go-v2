@@ -5,5 +5,3 @@
 //
 // Provide APIs to create and manage Amazon Connect Campaigns.
 package connectcampaigns
-
-

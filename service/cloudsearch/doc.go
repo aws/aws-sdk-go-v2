@@ -13,5 +13,3 @@
 // endpoints, see Regions and Endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region)
 // .
 package cloudsearch
-
-

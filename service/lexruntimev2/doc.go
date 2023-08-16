@@ -6,5 +6,3 @@
 // This section contains documentation for the Amazon Lex V2 Runtime V2 API
 // operations.
 package lexruntimev2
-
-

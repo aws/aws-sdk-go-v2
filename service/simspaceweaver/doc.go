@@ -16,5 +16,3 @@
 // documentation. This documentation is part of the SimSpace Weaver app SDK
 // distributable package.
 package simspaceweaver
-
-

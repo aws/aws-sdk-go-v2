@@ -36,5 +36,3 @@
 // data that's stored in Security Lake for incident response and security data
 // analytics.
 package securitylake
-
-

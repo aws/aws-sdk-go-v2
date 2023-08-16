@@ -10,5 +10,3 @@
 // HomeRegionNotSetException error will be returned. Also, you must make the API
 // calls while in your home region.
 package migrationhub
-
-

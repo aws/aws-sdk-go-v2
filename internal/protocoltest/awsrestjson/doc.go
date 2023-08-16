@@ -5,5 +5,3 @@
 //
 // A REST JSON service that sends JSON requests and responses.
 package awsrestjson
-
-

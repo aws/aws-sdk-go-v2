@@ -5,5 +5,3 @@
 //
 // Amazon Timestream Query
 package timestreamquery
-
-

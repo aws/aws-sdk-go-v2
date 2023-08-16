@@ -15,5 +15,3 @@
 // and manage your Amazon Lex bot. For a list of build-time operations, see the
 // build-time API, .
 package lexruntimeservice
-
-

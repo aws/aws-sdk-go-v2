@@ -13,5 +13,3 @@
 // chat messages, attachment sharing, managing a participant's connection state and
 // message events, and retrieving chat transcripts.
 package connectparticipant
-
-

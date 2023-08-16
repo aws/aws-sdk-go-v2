@@ -19,5 +19,3 @@
 // systems. You also don't need to worry about scaling your management
 // infrastructure.
 package ecs
-
-

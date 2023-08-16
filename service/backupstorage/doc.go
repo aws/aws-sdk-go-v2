@@ -5,5 +5,3 @@
 //
 // The frontend service for Cryo Storage.
 package backupstorage
-
-

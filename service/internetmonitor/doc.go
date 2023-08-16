@@ -29,5 +29,3 @@
 // CloudWatch Internet Monitor (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-InternetMonitor.html)
 // in the Amazon CloudWatch User Guide.
 package internetmonitor
-
-

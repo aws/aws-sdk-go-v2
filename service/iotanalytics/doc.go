@@ -24,5 +24,3 @@
 // common IoT use cases so you can answer questions like which devices are about to
 // fail or which customers are at risk of abandoning their wearable devices.
 package iotanalytics
-
-

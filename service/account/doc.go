@@ -5,5 +5,3 @@
 //
 // Operations for Amazon Web Services Account Management
 package account
-
-

@@ -9,5 +9,3 @@
 // along with managing pronunciations lexicons that enable you to get the best
 // results for your application domain.
 package polly
-
-

@@ -8,5 +8,3 @@
 // types, and errors. For detailed information about CloudFront features, see the
 // Amazon CloudFront Developer Guide.
 package cloudfront
-
-

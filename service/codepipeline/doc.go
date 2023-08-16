@@ -14,25 +14,26 @@
 //   - CreatePipeline , which creates a uniquely named pipeline.
 //   - DeletePipeline , which deletes the specified pipeline.
 //   - GetPipeline , which returns information about the pipeline structure and
-//   pipeline metadata, including the pipeline Amazon Resource Name (ARN).
+//     pipeline metadata, including the pipeline Amazon Resource Name (ARN).
 //   - GetPipelineExecution , which returns information about a specific execution
-//   of a pipeline.
+//     of a pipeline.
 //   - GetPipelineState , which returns information about the current state of the
-//   stages and actions of a pipeline.
+//     stages and actions of a pipeline.
 //   - ListActionExecutions , which returns action-level details for past
-//   executions. The details include full stage and action-level details, including
-//   individual action duration, status, any errors that occurred during the
-//   execution, and input and output artifact location details.
+//     executions. The details include full stage and action-level details, including
+//     individual action duration, status, any errors that occurred during the
+//     execution, and input and output artifact location details.
 //   - ListPipelines , which gets a summary of all of the pipelines associated with
-//   your account.
+//     your account.
 //   - ListPipelineExecutions , which gets a summary of the most recent executions
-//   for a pipeline.
+//     for a pipeline.
 //   - StartPipelineExecution , which runs the most recent revision of an artifact
-//   through the pipeline.
+//     through the pipeline.
 //   - StopPipelineExecution , which stops the specified pipeline execution from
-//   continuing through the pipeline.
+//     continuing through the pipeline.
 //   - UpdatePipeline , which updates a pipeline with edits or changes to the
-//   structure of the pipeline.
+//     structure of the pipeline.
+//
 // Pipelines include stages. Each stage contains one or more actions that must
 // complete before the next stage begins. A stage results in success or failure. If
 // a stage fails, the pipeline stops at that stage and remains stopped until either
@@ -55,13 +56,15 @@
 //   - Deploy
 //   - Approval
 //   - Invoke
+//
 // Pipelines also include transitions, which allow the transition of artifacts
 // from one stage to the next in a pipeline after the actions in one stage
 // complete. You can work with transitions by calling:
 //   - DisableStageTransition , which prevents artifacts from transitioning to the
-//   next stage in a pipeline.
+//     next stage in a pipeline.
 //   - EnableStageTransition , which enables transition of artifacts between stages
-//   in a pipeline.
+//     in a pipeline.
+//
 // Using the API to integrate with CodePipeline For third-party integrators or
 // developers who want to create their own integrations with CodePipeline, the
 // expected sequence varies from the standard API user. To integrate with
@@ -69,23 +72,22 @@
 // instances of an action. For example, a job for a source action might import a
 // revision of an artifact from a source. You can work with jobs by calling:
 //   - AcknowledgeJob , which confirms whether a job worker has received the
-//   specified job.
+//     specified job.
 //   - GetJobDetails , which returns the details of a job.
 //   - PollForJobs , which determines whether there are any jobs to act on.
 //   - PutJobFailureResult , which provides details of a job failure.
 //   - PutJobSuccessResult , which provides details of a job success.
+//
 // Third party jobs, which are instances of an action created by a partner action
 // and integrated into CodePipeline. Partner actions are created by members of the
 // Amazon Web Services Partner Network. You can work with third party jobs by
 // calling:
 //   - AcknowledgeThirdPartyJob , which confirms whether a job worker has received
-//   the specified job.
+//     the specified job.
 //   - GetThirdPartyJobDetails , which requests the details of a job for a partner
-//   action.
+//     action.
 //   - PollForThirdPartyJobs , which determines whether there are any jobs to act
-//   on.
+//     on.
 //   - PutThirdPartyJobFailureResult , which provides details of a job failure.
 //   - PutThirdPartyJobSuccessResult , which provides details of a job success.
 package codepipeline
-
-

@@ -21,5 +21,3 @@
 // and the Developer Guide for iOS (http://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-sync.html)
 // .
 package cognitosync
-
-

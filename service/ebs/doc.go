@@ -26,5 +26,3 @@
 // direct APIs, see Amazon Elastic Block Store Endpoints and Quotas (https://docs.aws.amazon.com/general/latest/gr/ebs-service.html)
 // in the Amazon Web Services General Reference.
 package ebs
-
-

@@ -5,5 +5,3 @@
 //
 // Amazon EventBridge Schema Registry
 package schemas
-
-

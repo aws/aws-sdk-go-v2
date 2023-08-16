@@ -9,5 +9,3 @@
 // Temporary Security Credentials (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html)
 // .
 package sts
-
-

@@ -9,5 +9,3 @@
 // This API reference contains documentation for a programming interface that you
 // can use to manage Amazon QuickSight.
 package quicksight
-
-
