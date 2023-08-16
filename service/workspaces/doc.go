@@ -24,3 +24,5 @@
 // WorkSpaces section of the CLI Reference (https://docs.aws.amazon.com/cli/latest/reference/workspaces/index.html)
 // .
 package workspaces
+
+

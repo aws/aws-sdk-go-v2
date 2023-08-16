@@ -19,3 +19,5 @@
 // Pinpoint integration with other Amazon Web Services services, and the quotas
 // that apply to use of the service.
 package pinpointsmsvoicev2
+
+

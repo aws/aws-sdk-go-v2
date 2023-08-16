@@ -12,3 +12,5 @@
 // Amazon Connect Administrator Guide (https://docs.aws.amazon.com/connect/latest/adminguide/)
 // .
 package customerprofiles
+
+

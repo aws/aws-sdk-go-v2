@@ -11,21 +11,20 @@
 // disaster recovery. Use the following links to get started using the Storage
 // Gateway Service API Reference:
 //   - Storage Gateway required request headers (https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders)
-//     : Describes the required headers that you must send with every POST request to
-//     Storage Gateway.
+//   : Describes the required headers that you must send with every POST request to
+//   Storage Gateway.
 //   - Signing requests (https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests)
-//     : Storage Gateway requires that you authenticate every request you send; this
-//     topic describes how sign such a request.
+//   : Storage Gateway requires that you authenticate every request you send; this
+//   topic describes how sign such a request.
 //   - Error responses (https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses)
-//     : Provides reference information about Storage Gateway errors.
+//   : Provides reference information about Storage Gateway errors.
 //   - Operations in Storage Gateway (https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html)
-//     : Contains detailed descriptions of all Storage Gateway operations, their
-//     request parameters, response elements, possible errors, and examples of requests
-//     and responses.
+//   : Contains detailed descriptions of all Storage Gateway operations, their
+//   request parameters, response elements, possible errors, and examples of requests
+//   and responses.
 //   - Storage Gateway endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html)
-//     : Provides a list of each Amazon Web Services Region and the endpoints available
-//     for use with Storage Gateway.
-//
+//   : Provides a list of each Amazon Web Services Region and the endpoints available
+//   for use with Storage Gateway.
 // Storage Gateway resource IDs are in uppercase. When you use these resource IDs
 // with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change
 // your resource ID to lowercase to use it with the EC2 API. For example, in
@@ -45,3 +44,5 @@
 // Longer Storage Gateway volume and snapshot IDs coming in 2016 (http://forums.aws.amazon.com/ann.jspa?annID=3557)
 // .
 package storagegateway
+
+

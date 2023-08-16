@@ -8,3 +8,5 @@
 // historical data. For more information see Recording Events (https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html)
 // .
 package personalizeevents
+
+

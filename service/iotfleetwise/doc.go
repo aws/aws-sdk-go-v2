@@ -11,3 +11,5 @@
 // For more information, see What is Amazon Web Services IoT FleetWise? (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/)
 // in the Amazon Web Services IoT FleetWise Developer Guide.
 package iotfleetwise
+
+

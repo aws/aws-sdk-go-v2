@@ -22,3 +22,5 @@
 // explains how to design, build, query, and maintain the databases that make up
 // your data warehouse.
 package redshift
+
+

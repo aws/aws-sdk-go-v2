@@ -10,3 +10,5 @@
 // operations. To learn more, see Guidelines and quotas (https://docs.aws.amazon.com/comprehend-medical/latest/dev/comprehendmedical-quotas.html)
 // in the Amazon Comprehend Medical Developer Guide.
 package comprehendmedical
+
+

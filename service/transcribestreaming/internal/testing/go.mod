@@ -34,5 +34,3 @@ replace github.com/aws/aws-sdk-go-v2/service/ssooidc => ../../../../service/ssoo
 replace github.com/aws/aws-sdk-go-v2/service/sts => ../../../../service/sts/
 
 replace github.com/aws/aws-sdk-go-v2/service/transcribestreaming => ../../../../service/transcribestreaming/
-
-replace github.com/aws/smithy-go => /Users/wty/Projects/aws-sdk-go-v2/../smithy-go

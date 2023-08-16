@@ -16,3 +16,5 @@
 // Connect endpoints, see Amazon Connect Endpoints (https://docs.aws.amazon.com/general/latest/gr/connect_region.html)
 // .
 package connect
+
+

@@ -10,3 +10,5 @@
 // same programming interfaces as in Amazon Web Services Regions, while using local
 // compute and storage resources for lower latency and local data processing needs.
 package outposts
+
+

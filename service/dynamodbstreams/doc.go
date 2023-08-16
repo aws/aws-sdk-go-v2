@@ -8,3 +8,5 @@
 // development with Streams, see Capturing Table Activity with DynamoDB Streams (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html)
 // in the Amazon DynamoDB Developer Guide.
 package dynamodbstreams
+
+

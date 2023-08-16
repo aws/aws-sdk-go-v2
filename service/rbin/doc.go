@@ -17,3 +17,5 @@
 // information about Recycle Bin, see Recycle Bin (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-recycle-bin.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 package rbin
+
+

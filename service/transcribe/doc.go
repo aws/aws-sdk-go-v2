@@ -7,9 +7,11 @@
 // Medical, and Call Analytics.
 //   - Standard transcriptions are the most common option. Refer to for details.
 //   - Medical transcriptions are tailored to medical professionals and
-//     incorporate medical terms. A common use case for this service is transcribing
-//     doctor-patient dialogue into after-visit notes. Refer to for details.
+//   incorporate medical terms. A common use case for this service is transcribing
+//   doctor-patient dialogue into after-visit notes. Refer to for details.
 //   - Call Analytics transcriptions are designed for use with call center audio
-//     on two different channels; if you're looking for insight into customer service
-//     calls, use this option. Refer to for details.
+//   on two different channels; if you're looking for insight into customer service
+//   calls, use this option. Refer to for details.
 package transcribe
+
+

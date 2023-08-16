@@ -22,3 +22,5 @@
 // through Amazon EventBridge. For more information, see the Amazon GuardDuty User
 // Guide (https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html) .
 package guardduty
+
+

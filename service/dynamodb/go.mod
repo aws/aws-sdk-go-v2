@@ -22,5 +22,3 @@ replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../internal/end
 replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../service/internal/accept-encoding/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery => ../../service/internal/endpoint-discovery/
-
-replace github.com/aws/smithy-go => /Users/wty/Projects/aws-sdk-go-v2/../smithy-go

@@ -14,7 +14,6 @@
 //   - Cryptographically sign your service requests
 //   - Retry requests
 //   - Handle error responses
-//
 // Additional information
 //   - Amazon SQS Product Page (http://aws.amazon.com/sqs/)
 //   - Amazon SQS Developer Guide
@@ -25,3 +24,5 @@
 //   - Amazon Web Services General Reference
 //   - Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region)
 package sqs
+
+

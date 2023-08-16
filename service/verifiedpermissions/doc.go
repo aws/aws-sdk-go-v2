@@ -24,21 +24,20 @@
 // identifiers used for each of those elements. We strongly recommend that you
 // follow these best practices:
 //   - Use values like universally unique identifiers (UUIDs) for all principal
-//     and resource identifiers. For example, if user jane leaves the company, and
-//     you later let someone else use the name jane , then that new user
-//     automatically gets access to everything granted by policies that still reference
-//     User::"jane" . Cedar can’t distinguish between the new user and the old. This
-//     applies to both principal and resource identifiers. Always use identifiers that
-//     are guaranteed unique and never reused to ensure that you don’t unintentionally
-//     grant access because of the presence of an old identifier in a policy. Where you
-//     use a UUID for an entity, we recommend that you follow it with the // comment
-//     specifier and the ‘friendly’ name of your entity. This helps to make your
-//     policies easier to understand. For example: principal ==
-//     User::"a1b2c3d4-e5f6-a1b2-c3d4-EXAMPLE11111", // alice
+//   and resource identifiers. For example, if user jane leaves the company, and
+//   you later let someone else use the name jane , then that new user
+//   automatically gets access to everything granted by policies that still reference
+//   User::"jane" . Cedar can’t distinguish between the new user and the old. This
+//   applies to both principal and resource identifiers. Always use identifiers that
+//   are guaranteed unique and never reused to ensure that you don’t unintentionally
+//   grant access because of the presence of an old identifier in a policy. Where you
+//   use a UUID for an entity, we recommend that you follow it with the // comment
+//   specifier and the ‘friendly’ name of your entity. This helps to make your
+//   policies easier to understand. For example: principal ==
+//   User::"a1b2c3d4-e5f6-a1b2-c3d4-EXAMPLE11111", // alice
 //   - Do not include personally identifying, confidential, or sensitive
-//     information as part of the unique identifier for your principals or resources.
-//     These identifiers are included in log entries shared in CloudTrail trails.
-//
+//   information as part of the unique identifier for your principals or resources.
+//   These identifiers are included in log entries shared in CloudTrail trails.
 // Several operations return structures that appear similar, but have different
 // purposes. As new functionality is added to the product, the structure used in a
 // parameter of one operation might need to change in a way that wouldn't make
@@ -48,5 +47,7 @@
 //   - Parameter type structures that end in Detail are used in Get operations.
 //   - Parameter type structures that end in Item are used in List operations.
 //   - Parameter type structures that use neither suffix are used in the mutating
-//     (create and update) operations.
+//   (create and update) operations.
 package verifiedpermissions
+
+

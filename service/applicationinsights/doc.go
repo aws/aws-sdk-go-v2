@@ -16,3 +16,5 @@
 // that a memory pressure problem with your SQL Server database is occurring. It
 // bases this analysis on impactful metrics and log errors.
 package applicationinsights
+
+

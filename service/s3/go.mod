@@ -33,5 +33,3 @@ replace github.com/aws/aws-sdk-go-v2/service/internal/checksum => ../../service/
 replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../service/internal/presigned-url/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/s3shared => ../../service/internal/s3shared/
-
-replace github.com/aws/smithy-go => /Users/wty/Projects/aws-sdk-go-v2/../smithy-go

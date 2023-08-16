@@ -18,3 +18,5 @@
 // Considerations for Synthetics Canaries (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html)
 // .
 package synthetics
+
+

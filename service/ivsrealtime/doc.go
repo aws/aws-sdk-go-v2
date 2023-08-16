@@ -8,21 +8,19 @@
 // responses. JSON is used for both requests and responses, including errors.
 // Terminology:
 //   - A stage is a virtual space where participants can exchange video in real
-//     time.
+//   time.
 //   - A participant token is a token that authenticates a participant when they
-//     join a stage.
+//   join a stage.
 //   - A participant object represents participants (people) in the stage and
-//     contains information about them. When a token is created, it includes a
-//     participant ID; when a participant uses that token to join a stage, the
-//     participant is associated with that participant ID There is a 1:1 mapping
-//     between participant tokens and participants.
-//
+//   contains information about them. When a token is created, it includes a
+//   participant ID; when a participant uses that token to join a stage, the
+//   participant is associated with that participant ID There is a 1:1 mapping
+//   between participant tokens and participants.
 // Resources The following resources contain information about your IVS live
 // stream (see Getting Started with Amazon IVS Real-Time Streaming (https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started.html)
 // ):
 //   - Stage — A stage is a virtual space where participants can exchange video in
-//     real time.
-//
+//   real time.
 // Tagging A tag is a metadata label that you assign to an AWS resource. A tag
 // comprises a key and a value, both set by you. For example, you might set a tag
 // as topic:nature to label a particular video category. See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
@@ -36,26 +34,27 @@
 // UntagResource , and ListTagsForResource . The following resource supports
 // tagging: Stage. At most 50 tags can be applied to a resource. Stages Endpoints
 //   - CreateParticipantToken — Creates an additional token for a specified stage.
-//     This can be done after stage creation or when tokens expire.
+//   This can be done after stage creation or when tokens expire.
 //   - CreateStage — Creates a new stage (and optionally participant tokens).
 //   - DeleteStage — Shuts down and deletes the specified stage (disconnecting all
-//     participants).
+//   participants).
 //   - DisconnectParticipant — Disconnects a specified participant and revokes the
-//     participant permanently from a specified stage.
+//   participant permanently from a specified stage.
 //   - GetParticipant — Gets information about the specified participant token.
 //   - GetStage — Gets information for the specified stage.
 //   - GetStageSession — Gets information for the specified stage session.
 //   - ListParticipantEvents — Lists events for a specified participant that
-//     occurred during a specified stage session.
+//   occurred during a specified stage session.
 //   - ListParticipants — Lists all participants in a specified stage session.
 //   - ListStages — Gets summary information about all stages in your account, in
-//     the AWS region where the API request is processed.
+//   the AWS region where the API request is processed.
 //   - ListStageSessions — Gets all sessions for a specified stage.
 //   - UpdateStage — Updates a stage’s configuration.
-//
 // Tags Endpoints
 //   - ListTagsForResource — Gets information about AWS tags for the specified ARN.
 //   - TagResource — Adds or updates tags for the AWS resource with the specified
-//     ARN.
+//   ARN.
 //   - UntagResource — Removes tags from the resource with the specified ARN.
 package ivsrealtime
+
+

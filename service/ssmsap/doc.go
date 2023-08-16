@@ -7,3 +7,5 @@
 // of the actions and data types for AWS Systems Manager for SAP. The topic for
 // each action shows the API request parameters and responses.
 package ssmsap
+
+

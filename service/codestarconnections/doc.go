@@ -21,31 +21,30 @@
 // installed provider type such as GitHub Enterprise Server, you create a host for
 // your connections. You can work with connections by calling:
 //   - CreateConnection , which creates a uniquely named connection that can be
-//     referenced by services such as CodePipeline.
+//   referenced by services such as CodePipeline.
 //   - DeleteConnection , which deletes the specified connection.
 //   - GetConnection , which returns information about the connection, including
-//     the connection status.
+//   the connection status.
 //   - ListConnections , which lists the connections associated with your account.
-//
 // You can work with hosts by calling:
 //   - CreateHost , which creates a host that represents the infrastructure where
-//     your provider is installed.
+//   your provider is installed.
 //   - DeleteHost , which deletes the specified host.
 //   - GetHost , which returns information about the host, including the setup
-//     status.
+//   status.
 //   - ListHosts , which lists the hosts associated with your account.
-//
 // You can work with tags in Amazon Web Services CodeStar Connections by calling
 // the following:
 //   - ListTagsForResource , which gets information about Amazon Web Services tags
-//     for a specified Amazon Resource Name (ARN) in Amazon Web Services CodeStar
-//     Connections.
+//   for a specified Amazon Resource Name (ARN) in Amazon Web Services CodeStar
+//   Connections.
 //   - TagResource , which adds or updates tags for a resource in Amazon Web
-//     Services CodeStar Connections.
+//   Services CodeStar Connections.
 //   - UntagResource , which removes tags for a resource in Amazon Web Services
-//     CodeStar Connections.
-//
+//   CodeStar Connections.
 // For information about how to use Amazon Web Services CodeStar Connections, see
 // the Developer Tools User Guide (https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html)
 // .
 package codestarconnections
+
+

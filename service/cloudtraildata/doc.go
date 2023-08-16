@@ -11,3 +11,5 @@
 // ingest your application activity into CloudTrail, you can use CloudTrail Lake to
 // search, query, and analyze the data that is logged from your applications.
 package cloudtraildata
+
+

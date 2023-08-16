@@ -13,8 +13,7 @@
 //   - Reconcile billing data
 //   - Forecast future spend for budgeting purposes
 //   - Provide cost benefit analysis that compare your internal workloads with
-//     Amazon Web Services
-//
+//   Amazon Web Services
 // Use GetServices without a service code to retrieve the service codes for all
 // Amazon Web Services, then GetServices with a service code to retrieve the
 // attribute names for that service. After you have the service code and attribute
@@ -26,3 +25,5 @@
 //   - https://api.pricing.us-east-1.amazonaws.com
 //   - https://api.pricing.ap-south-1.amazonaws.com
 package pricing
+
+

@@ -15,3 +15,5 @@
 // Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html)
 // .
 package redshiftserverless
+
+
