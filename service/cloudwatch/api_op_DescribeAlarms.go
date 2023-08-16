@@ -59,7 +59,11 @@ type DescribeAlarmsInput struct {
 
 	// Use this parameter to specify whether you want the operation to return metric
 	// alarms or composite alarms. If you omit this parameter, only metric alarms are
-	// returned.
+	// returned, even if composite alarms exist in the account. For example, if you
+	// omit this parameter or specify MetricAlarms , the operation returns only a list
+	// of metric alarms. It does not return any composite alarms, even if composite
+	// alarms exist in the account. If you specify CompositeAlarms , the operation
+	// returns only a list of composite alarms, and does not return any metric alarms.
 	AlarmTypes []types.AlarmType
 
 	// If you use this parameter and specify the name of a composite alarm, the
