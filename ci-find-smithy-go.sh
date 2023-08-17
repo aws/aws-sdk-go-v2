@@ -23,6 +23,10 @@ if [ "$branch" == main ]; then
     echo aws-sdk-go-v2 is on branch main, stop
     exit 0
 fi
+if [ -z "$branch" ]; then
+    echo current branch is blank?
+    exit 1
+fi
 
 if [ -n "$GIT_PAT" ]; then
     repository=https://$GIT_PAT@github.com/$SMITHY_GO_REPOSITORY
@@ -30,6 +34,7 @@ else
     repository=https://github.com/$SMITHY_GO_REPOSITORY
 fi
 
+echo on branch \"$branch\"
 while [ -n "$branch" ] && [[ "$branch" == *-* ]]; do
     echo looking for $branch...
     git ls-remote --exit-code --heads $repository refs/heads/$branch
