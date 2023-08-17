@@ -52,7 +52,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers a player's acceptance or rejection of a proposed FlexMatch match. A\n            matchmaking configuration may require player acceptance; if so, then matches built with\n            that configuration cannot be completed unless all players accept the proposed match\n            within a specified time limit. </p>\n         <p>When FlexMatch builds a match, all the matchmaking tickets involved in the proposed\n            match are placed into status <code>REQUIRES_ACCEPTANCE</code>. This is a trigger for\n            your game to get acceptance from all players in the ticket. Acceptances are only valid\n            for tickets when they are in this status; all other acceptances result in an\n            error.</p>\n         <p>To register acceptance, specify the ticket ID, a response, and one or more players.\n            Once all players have registered acceptance, the matchmaking tickets advance to status\n                <code>PLACING</code>, where a new game session is created for the match. </p>\n         <p>If any player rejects the match, or if acceptances are not received before a specified\n            timeout, the proposed match is dropped. The matchmaking tickets are then handled in one\n            of two ways: For tickets where one or more players rejected the match or failed to\n            respond, the ticket status is set to <code>CANCELLED</code>, and processing is\n            terminated. For tickets where players have accepted or not yet responded, the ticket\n            status is returned to <code>SEARCHING</code> to find a new match. A new matchmaking\n            request for these players can be submitted as needed. </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html\">\n                Add FlexMatch to a game client</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html\">\n                FlexMatch events</a> (reference)</p>"
+                "smithy.api#documentation": "<p>Registers a player's acceptance or rejection of a proposed FlexMatch match. A\n            matchmaking configuration may require player acceptance; if so, then matches built with\n            that configuration cannot be completed unless all players accept the proposed match\n            within a specified time limit. </p>\n         <p>When FlexMatch builds a match, all the matchmaking tickets involved in the proposed\n            match are placed into status <code>REQUIRES_ACCEPTANCE</code>. This is a trigger for\n            your game to get acceptance from all players in each ticket. Calls to this action are only valid\n            for tickets that are in this status; calls for tickets not in this status result in an\n            error.</p>\n         <p>To register acceptance, specify the ticket ID, one or more players, and an acceptance response.\n            When all players have accepted, Amazon GameLift advances the matchmaking tickets to status\n                <code>PLACING</code>, and attempts to create a new game session for the match. </p>\n         <p>If any player rejects the match, or if acceptances are not received before a specified\n            timeout, the proposed match is dropped. Each matchmaking ticket in the failed match is handled as follows: </p>\n         <ul>\n            <li>\n               <p>If the ticket has one or more players who rejected the match or failed to\n                respond, the ticket status is set <code>CANCELLED</code> and processing is\n                terminated.</p>\n            </li>\n            <li>\n               <p>If all players in the ticket accepted the match, the ticket\n                status is returned to <code>SEARCHING</code> to find a new match. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html\">\n                Add FlexMatch to a game client</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html\">\n                FlexMatch events</a> (reference)</p>"
             }
         },
         "com.amazonaws.gamelift#AcceptMatchInput": {
@@ -264,24 +264,24 @@
                 "AccessKeyId": {
                     "target": "com.amazonaws.gamelift#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Temporary key allowing access to the Amazon GameLift S3 account.</p>"
+                        "smithy.api#documentation": "<p>The access key ID that identifies the temporary security credentials. </p>"
                     }
                 },
                 "SecretAccessKey": {
                     "target": "com.amazonaws.gamelift#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Temporary secret key allowing access to the Amazon GameLift S3 account.</p>"
+                        "smithy.api#documentation": "<p>The secret access key that can be used to sign requests.</p>"
                     }
                 },
                 "SessionToken": {
                     "target": "com.amazonaws.gamelift#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token used to associate a specific build ID with the files uploaded using these\n            credentials.</p>"
+                        "smithy.api#documentation": "<p>The token that users must pass to the service API to use the temporary credentials. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Temporary access credentials used for uploading game build files to Amazon GameLift. They are\n            valid for a limited time. If they expire before you upload your game build, get a new\n            set by calling <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_RequestUploadCredentials.html\">RequestUploadCredentials</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services account security credentials that allow interactions with Amazon GameLift resources. The\n            credentials are temporary and valid for a limited time span. You can request fresh\n            credentials at any time. </p>\n         <p> Amazon Web Services security credentials consist of three parts: an access key ID, a secret access\n            key, and a session token. You must use all three parts together to authenticate your\n            access requests.</p>\n         <p>You need Amazon Web Services credentials for the following tasks: </p>\n         <ul>\n            <li>\n               <p>To upload a game server build directly to Amazon GameLift S3 storage using <code>CreateBuild</code>. To get access for this\n            task, call <a>RequestUploadCredentials</a>.</p>\n            </li>\n            <li>\n               <p>To remotely connect to an active Amazon GameLift fleet instances. \n                To get remote access, call <a>GetComputeAccess</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -597,37 +597,37 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the fleet that the compute is registered to.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the fleet that the compute belongs to.</p>"
                     }
                 },
                 "FleetArn": {
                     "target": "com.amazonaws.gamelift#FleetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the fleet that the compute is registered to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the fleet that the compute belongs to.</p>"
                     }
                 },
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A descriptive label that is associated with the compute resource registered to your fleet.</p>"
+                        "smithy.api#documentation": "<p>A descriptive label for the compute resource. For instances in a managed EC2 fleet, the compute name is an instance\n            ID.</p>"
                     }
                 },
                 "ComputeArn": {
                     "target": "com.amazonaws.gamelift#ComputeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN that is assigned to the compute resource and uniquely identifies it. ARNs are\n            unique across locations.</p>"
+                        "smithy.api#documentation": "<p>The ARN that is assigned to a compute resource and uniquely identifies it. ARNs are\n            unique across locations. Instances in managed EC2 fleets are not assigned a\n            ComputeARN.</p>"
                     }
                 },
                 "IpAddress": {
                     "target": "com.amazonaws.gamelift#IpAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address of the compute resource. Amazon GameLift requires the DNS name or IP address to\n            manage your compute resource.</p>"
+                        "smithy.api#documentation": "<p>The IP address of a compute resource. Amazon GameLift requires a DNS name or IP address for a\n            compute.</p>"
                     }
                 },
                 "DnsName": {
                     "target": "com.amazonaws.gamelift#DnsName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DNS name of the compute resource. Amazon GameLift requires the DNS name or IP address to\n            manage your compute resource.</p>"
+                        "smithy.api#documentation": "<p>The DNS name of a compute resource. Amazon GameLift requires a DNS name or IP address for a\n            compute.</p>"
                     }
                 },
                 "ComputeStatus": {
@@ -651,24 +651,24 @@
                 "OperatingSystem": {
                     "target": "com.amazonaws.gamelift#OperatingSystem",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of operating system on your compute resource.</p>"
+                        "smithy.api#documentation": "<p>The type of operating system on the compute resource.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.gamelift#EC2InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute type that the fleet uses. A fleet can use Anywhere compute resources that\n            you own, or use managed Amazon EC2 instances.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type that the fleet uses. For registered computes in an Amazon GameLift Anywhere fleet, this property is empty. </p>"
                     }
                 },
                 "GameLiftServiceSdkEndpoint": {
                     "target": "com.amazonaws.gamelift#GameLiftServiceSdkEndpointOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint connection details of the Amazon GameLift SDK endpoint that your game server\n            connects to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon GameLift SDK endpoint connection for a registered compute resource in an Anywhere\n            fleet. The game servers on the compute use this endpoint to connect to the Amazon GameLift\n            service.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Resources used to host your game servers. A compute resource can be managed Amazon GameLift\n            Amazon EC2 instances or your own resources.</p>"
+                "smithy.api#documentation": "<p>An Amazon GameLift compute resource for hosting your game servers. A compute can be an\n            EC2instance in a managed EC2 fleet or a registered compute in an Anywhere fleet. </p>"
             }
         },
         "com.amazonaws.gamelift#ComputeArn": {
@@ -1400,7 +1400,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a multiplayer game session for players in a specific fleet location. This\n            operation prompts an available server process to start a game session and retrieves\n            connection information for the new game session. As an alternative, consider using the\n            Amazon GameLift game session placement feature with <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html\">StartGameSessionPlacement</a> , which uses FleetIQ algorithms and queues to\n            optimize the placement process.</p>\n         <p>When creating a game session, you specify exactly where you want to place it and\n            provide a set of game session configuration settings. The fleet must be in\n                <code>ACTIVE</code> status before a game session can be created in it. </p>\n         <p>This operation can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To create a game session on an instance in a fleet's home Region, provide a\n                    fleet or alias ID along with your game session configuration. </p>\n            </li>\n            <li>\n               <p>To create a game session on an instance in a fleet's remote location, provide\n                    a fleet or alias ID and a location name, along with your game session\n                    configuration. </p>\n            </li>\n         </ul>\n         <p>If successful, a workflow is initiated to start a new game session. A\n                <code>GameSession</code> object is returned containing the game session\n            configuration and status. When the status is <code>ACTIVE</code>, game session\n            connection information is provided and player sessions can be created for the game\n            session. By default, newly created game sessions are open to new players. You can\n            restrict new player access by using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html\">UpdateGameSession</a> to change the game session's player session creation\n            policy.</p>\n         <p>Game session logs are retained for all active game sessions for 14 days. To access the\n            logs, call <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetGameSessionLogUrl.html\">GetGameSessionLogUrl</a> to download the log files.</p>\n         <p>\n            <i>Available in Amazon GameLift Local.</i>\n         </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession\">Start a game session</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
+                "smithy.api#documentation": "<p>Creates a multiplayer game session for players in a specific fleet location. This\n            operation prompts an available server process to start a game session and retrieves\n            connection information for the new game session. As an alternative, consider using the\n            Amazon GameLift game session placement feature with <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html\">StartGameSessionPlacement</a> , which uses the FleetIQ algorithm and queues to\n            optimize the placement process.</p>\n         <p>When creating a game session, you specify exactly where you want to place it and\n            provide a set of game session configuration settings. The target fleet must be in\n                <code>ACTIVE</code> status. </p>\n         <p>You can use this operation in the following ways: </p>\n         <ul>\n            <li>\n               <p>To create a game session on an instance in a fleet's home Region, provide a\n                    fleet or alias ID along with your game session configuration. </p>\n            </li>\n            <li>\n               <p>To create a game session on an instance in a fleet's remote location, provide\n                    a fleet or alias ID and a location name, along with your game session\n                    configuration. </p>\n            </li>\n            <li>\n               <p>To create a game session on an instance in an Anywhere fleet, specify the\n                    fleet's custom location.</p>\n            </li>\n         </ul>\n         <p>If successful, Amazon GameLift initiates a workflow to start a new game session and returns a\n                <code>GameSession</code> object containing the game session configuration and\n            status. When the game session status is <code>ACTIVE</code>, it is updated with\n            connection information and you can create player sessions for the game session. By\n            default, newly created game sessions are open to new players. You can restrict new\n            player access by using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html\">UpdateGameSession</a> to change the game session's player session creation\n            policy.</p>\n         <p>Amazon GameLift retains logs for active for 14 days. To access the logs, call <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetGameSessionLogUrl.html\">GetGameSessionLogUrl</a> to download the log files.</p>\n         <p>\n            <i>Available in Amazon GameLift Local.</i>\n         </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession\">Start a game session</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#CreateGameSessionInput": {
@@ -1464,7 +1464,7 @@
                 "Location": {
                     "target": "com.amazonaws.gamelift#LocationStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>A fleet's remote location to place the new game session in. If this parameter is not\n            set, the new game session is placed in the fleet's home Region. Specify a remote\n            location with an Amazon Web Services Region code such as <code>us-west-2</code>. </p>"
+                        "smithy.api#documentation": "<p>A fleet's remote location to place the new game session in. If this parameter is not\n            set, the new game session is placed in the fleet's home Region. Specify a remote\n            location with an Amazon Web Services Region code such as <code>us-west-2</code>. When using an\n            Anywhere fleet, this parameter is required and must be set to the Anywhere fleet's\n            custom location.</p>"
                     }
                 }
             },
@@ -2969,7 +2969,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a compute resource from the specified fleet. Deregister your compute resources\n            before you delete the compute.</p>"
+                "smithy.api#documentation": "<p>Removes a compute resource from an Amazon GameLift Anywhere fleet. Deregistered computes can no\n            longer host game sessions through Amazon GameLift.</p>"
             }
         },
         "com.amazonaws.gamelift#DeregisterComputeInput": {
@@ -2978,14 +2978,14 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>>A unique identifier for the fleet the compute resource is registered to.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the fleet the compute resource is currently registered to.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the compute resource you want to delete.</p>",
+                        "smithy.api#documentation": "<p>The name of the compute resource to remove from the specified Anywhere fleet.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3182,7 +3182,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves properties for a compute resource. To request a compute resource specify the\n            fleet ID and compute name. If successful, Amazon GameLift returns an object containing the build\n            properties.</p>"
+                "smithy.api#documentation": "<p>Retrieves properties for a compute resource in an Amazon GameLift fleet. Call <a>ListCompute</a> to get a list of compute resources in a fleet. You can\n            request information for computes in either managed EC2 fleets or Anywhere fleets. </p>\n         <p>To request compute properties, specify the compute name and fleet ID.</p>\n         <p>If successful, this operation returns details for the requested compute resource. For\n            managed EC2 fleets, this operation returns the fleet's EC2 instances. For Anywhere\n            fleets, this operation returns the fleet's registered computes. </p>"
             }
         },
         "com.amazonaws.gamelift#DescribeComputeInput": {
@@ -3191,14 +3191,14 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the fleet the compute is registered to.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the fleet that the compute is registered to. You can use either the fleet ID or ARN\n            value.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A descriptive label that is associated with the compute resource registered to your fleet.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the compute resource to retrieve properties for. For an\n            Anywhere fleet compute, use the registered compute name. For a managed EC2 fleet\n            instance, use the instance ID.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3213,7 +3213,7 @@
                 "Compute": {
                     "target": "com.amazonaws.gamelift#Compute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the compute resource you registered to the specified fleet.</p>"
+                        "smithy.api#documentation": "<p>The set of properties for the requested compute resource.</p>"
                     }
                 }
             },
@@ -3423,7 +3423,7 @@
                 "FleetCapacity": {
                     "target": "com.amazonaws.gamelift#FleetCapacityList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of objects that contains capacity information for each requested fleet\n            ID. Capacity objects are returned only for fleets that currently exist.</p>"
+                        "smithy.api#documentation": "<p>A collection of objects that contains capacity information for each requested fleet\n            ID. Capacity objects are returned only for fleets that currently exist. Changes in\n            desired instance value can take up to 1 minute to be reflected.</p>"
                     }
                 },
                 "NextToken": {
@@ -3684,7 +3684,7 @@
                 "FleetCapacity": {
                     "target": "com.amazonaws.gamelift#FleetCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource capacity information for the requested fleet location. Capacity objects are\n            returned only for fleets and locations that currently exist.</p>"
+                        "smithy.api#documentation": "<p>Resource capacity information for the requested fleet location. Capacity objects are\n            returned only for fleets and locations that currently exist. Changes in desired instance\n            value can take up to 1 minute to be reflected.</p>"
                     }
                 }
             },
@@ -4500,7 +4500,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about a fleet's instances, including instance IDs, connection\n            data, and status. </p>\n         <p>This operation can be used in the following ways:</p>\n         <ul>\n            <li>\n               <p>To get information on all instances that are deployed to a fleet's home\n                    Region, provide the fleet ID.</p>\n            </li>\n            <li>\n               <p>To get information on all instances that are deployed to a fleet's remote\n                    location, provide the fleet ID and location name.</p>\n            </li>\n            <li>\n               <p>To get information on a specific instance in a fleet, provide the fleet ID and\n                    instance ID.</p>\n            </li>\n         </ul>\n         <p>Use the pagination parameters to retrieve results as a set of sequential pages. </p>\n         <p>If successful, an <code>Instance</code> object is returned for each requested\n            instance. Instances are not returned in any particular order. </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html\">Remotely Access Fleet\n                Instances</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html\">Debug Fleet\n                Issues</a>\n         </p>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>",
+                "smithy.api#documentation": "<p>Retrieves information about the EC2 instances in an Amazon GameLift managed fleet, including\n            instance ID, connection data, and status. You can use this operation with a\n            multi-location fleet to get location-specific instance information. As an alternative,\n            use the operations <a>ListCompute</a> and <a>DescribeCompute</a>\n            to retrieve information for compute resources, including EC2 and Anywhere fleets.</p>\n         <p>You can call this operation in the following ways:</p>\n         <ul>\n            <li>\n               <p>To get information on all instances in a fleet's home Region, specify the\n                    fleet ID.</p>\n            </li>\n            <li>\n               <p>To get information on all instances in a fleet's remote location, specify the\n                    fleet ID and location name.</p>\n            </li>\n            <li>\n               <p>To get information on a specific instance in a fleet, specify the fleet ID and\n                    instance ID.</p>\n            </li>\n         </ul>\n         <p>Use the pagination parameters to retrieve results as a set of sequential pages. </p>\n         <p>If successful, this operation returns <code>Instance</code> objects for each requested\n            instance, listed in no particular order. If you call this operation for an Anywhere\n            fleet, you receive an InvalidRequestException.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html\">Remotely connect to\n                fleet instances</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html\">Debug fleet\n                issues</a>\n         </p>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4803,7 +4803,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves properties for one or more player sessions. </p>\n         <p>This action can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To retrieve a specific player session, provide the player session ID\n                    only.</p>\n            </li>\n            <li>\n               <p>To retrieve all player sessions in a game session, provide the game session ID\n                    only.</p>\n            </li>\n            <li>\n               <p>To retrieve all player sessions for a specific player, provide a player ID\n                    only.</p>\n            </li>\n         </ul>\n         <p>To request player sessions, specify either a player session ID, game session ID, or\n            player ID. You can filter this request by player session status. Use the pagination\n            parameters to retrieve results as a set of sequential pages. </p>\n         <p>If successful, a <code>PlayerSession</code> object is returned for each session that\n            matches the request.</p>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>",
+                "smithy.api#documentation": "<p>Retrieves properties for one or more player sessions. </p>\n         <p>This action can be used in the following ways: </p>\n         <ul>\n            <li>\n               <p>To retrieve a specific player session, provide the player session ID\n                    only.</p>\n            </li>\n            <li>\n               <p>To retrieve all player sessions in a game session, provide the game session ID\n                    only.</p>\n            </li>\n            <li>\n               <p>To retrieve all player sessions for a specific player, provide a player ID\n                    only.</p>\n            </li>\n         </ul>\n         <p>To request player sessions, specify either a player session ID, game session ID, or\n            player ID. You can filter this request by player session status. If you provide\n            a specific <code>PlayerSessionId</code> or <code>PlayerId</code>, Amazon GameLift ignores the filter criteria. \n            Use the pagination parameters to retrieve results as a set of sequential pages. </p>\n         <p>If successful, a <code>PlayerSession</code> object is returned for each session that\n            matches the request.</p>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5232,7 +5232,7 @@
                 "DESIRED": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>Ideal number of active instances. GameLift will always try to maintain the desired\n            number of instances. Capacity is scaled up or down by changing the desired instances.\n        </p>"
+                        "smithy.api#documentation": "<p>Requested number of active instances. Amazon GameLift takes action as needed to maintain the\n            desired number of instances. Capacity is scaled up or down by changing the desired\n            instances. A change in the desired instances value can take up to 1 minute to be\n            reflected when viewing a fleet's capacity settings. </p>"
                     }
                 },
                 "MINIMUM": {
@@ -6000,6 +6000,372 @@
                     "traits": {
                         "smithy.api#enumValue": "r5d.24xlarge"
                     }
+                },
+                "m6g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m6g.medium"
+                    }
+                },
+                "m6g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m6g.large"
+                    }
+                },
+                "m6g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m6g.xlarge"
+                    }
+                },
+                "m6g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m6g.2xlarge"
+                    }
+                },
+                "m6g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m6g.4xlarge"
+                    }
+                },
+                "m6g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m6g.8xlarge"
+                    }
+                },
+                "m6g_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m6g.12xlarge"
+                    }
+                },
+                "m6g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m6g.16xlarge"
+                    }
+                },
+                "c6g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6g.medium"
+                    }
+                },
+                "c6g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6g.large"
+                    }
+                },
+                "c6g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6g.xlarge"
+                    }
+                },
+                "c6g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6g.2xlarge"
+                    }
+                },
+                "c6g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6g.4xlarge"
+                    }
+                },
+                "c6g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6g.8xlarge"
+                    }
+                },
+                "c6g_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6g.12xlarge"
+                    }
+                },
+                "c6g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6g.16xlarge"
+                    }
+                },
+                "r6g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r6g.medium"
+                    }
+                },
+                "r6g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r6g.large"
+                    }
+                },
+                "r6g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r6g.xlarge"
+                    }
+                },
+                "r6g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r6g.2xlarge"
+                    }
+                },
+                "r6g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r6g.4xlarge"
+                    }
+                },
+                "r6g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r6g.8xlarge"
+                    }
+                },
+                "r6g_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r6g.12xlarge"
+                    }
+                },
+                "r6g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r6g.16xlarge"
+                    }
+                },
+                "c6gn_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6gn.medium"
+                    }
+                },
+                "c6gn_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6gn.large"
+                    }
+                },
+                "c6gn_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6gn.xlarge"
+                    }
+                },
+                "c6gn_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6gn.2xlarge"
+                    }
+                },
+                "c6gn_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6gn.4xlarge"
+                    }
+                },
+                "c6gn_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6gn.8xlarge"
+                    }
+                },
+                "c6gn_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6gn.12xlarge"
+                    }
+                },
+                "c6gn_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c6gn.16xlarge"
+                    }
+                },
+                "c7g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c7g.medium"
+                    }
+                },
+                "c7g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c7g.large"
+                    }
+                },
+                "c7g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c7g.xlarge"
+                    }
+                },
+                "c7g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c7g.2xlarge"
+                    }
+                },
+                "c7g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c7g.4xlarge"
+                    }
+                },
+                "c7g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c7g.8xlarge"
+                    }
+                },
+                "c7g_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c7g.12xlarge"
+                    }
+                },
+                "c7g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c7g.16xlarge"
+                    }
+                },
+                "r7g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r7g.medium"
+                    }
+                },
+                "r7g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r7g.large"
+                    }
+                },
+                "r7g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r7g.xlarge"
+                    }
+                },
+                "r7g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r7g.2xlarge"
+                    }
+                },
+                "r7g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r7g.4xlarge"
+                    }
+                },
+                "r7g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r7g.8xlarge"
+                    }
+                },
+                "r7g_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r7g.12xlarge"
+                    }
+                },
+                "r7g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r7g.16xlarge"
+                    }
+                },
+                "m7g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m7g.medium"
+                    }
+                },
+                "m7g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m7g.large"
+                    }
+                },
+                "m7g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m7g.xlarge"
+                    }
+                },
+                "m7g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m7g.2xlarge"
+                    }
+                },
+                "m7g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m7g.4xlarge"
+                    }
+                },
+                "m7g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m7g.8xlarge"
+                    }
+                },
+                "m7g_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m7g.12xlarge"
+                    }
+                },
+                "m7g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m7g.16xlarge"
+                    }
+                },
+                "g5g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g5g.xlarge"
+                    }
+                },
+                "g5g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g5g.2xlarge"
+                    }
+                },
+                "g5g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g5g.4xlarge"
+                    }
+                },
+                "g5g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g5g.8xlarge"
+                    }
+                },
+                "g5g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g5g.16xlarge"
+                    }
                 }
             }
         },
@@ -6021,7 +6387,7 @@
                 "EventCode": {
                     "target": "com.amazonaws.gamelift#EventCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of event being logged. </p>\n         <p>\n            <b>Fleet state transition events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_CREATED -- A fleet resource was successfully created with a status of\n                        <code>NEW</code>. Event messaging includes the fleet ID.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_DOWNLOADING -- Fleet status changed from <code>NEW</code> to\n                        <code>DOWNLOADING</code>. The compressed build has started downloading to a\n                    fleet instance for installation.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_VALIDATING -- Fleet status changed from <code>DOWNLOADING</code>\n                    to <code>VALIDATING</code>. Amazon GameLift has successfully downloaded the build and is\n                    now validating the build files.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_BUILDING -- Fleet status changed from <code>VALIDATING</code> to\n                        <code>BUILDING</code>. Amazon GameLift has successfully verified the build files and\n                    is now running the installation scripts.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ACTIVATING -- Fleet status changed from <code>BUILDING</code> to\n                        <code>ACTIVATING</code>. Amazon GameLift is trying to launch an instance and test\n                    the connectivity between the build and the Amazon GameLift Service via the Server\n                    SDK.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ACTIVE -- The fleet's status changed from <code>ACTIVATING</code>\n                    to <code>ACTIVE</code>. The fleet is now ready to host game sessions.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ERROR -- The Fleet's status changed to <code>ERROR</code>.\n                    Describe the fleet event message for more details.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Fleet creation events (ordered by fleet creation\n                activity):</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet\n                    instance.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_EXTRACTING_BUILD -- The game server build was successfully\n                    downloaded to an instance, and the build files are now being extracted from the\n                    uploaded build and saved to an instance. Failure at this stage prevents a fleet\n                    from moving to ACTIVE status. Logs for this stage display a list of the files\n                    that are extracted and saved on the instance. Access the logs by using the URL\n                    in <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_RUNNING_INSTALLER -- The game server build files were\n                    successfully extracted, and the GameLift is now running the build's install\n                    script (if one is included). Failure in this stage prevents a fleet from moving\n                    to ACTIVE status. Logs for this stage list the installation steps and whether or\n                    not the install completed successfully. Access the logs by using the URL in\n                        <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful,\n                    and the GameLift is now verifying that the game server launch paths, which are\n                    specified in the fleet's runtime configuration, exist. If any listed launch path\n                    exists, Amazon GameLift tries to launch a game server process and waits for the process\n                    to report ready. Failures in this stage prevent a fleet from moving to\n                        <code>ACTIVE</code> status. Logs for this stage list the launch paths in the\n                    runtime configuration and indicate whether each is found. Access the logs by\n                    using the URL in <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the runtime\n                    configuration failed because the executable specified in a launch path does not\n                    exist on the instance.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the runtime\n                    configuration failed because the executable specified in a launch path failed to\n                    run on the fleet instance.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_TIMED_OUT -- Validation of the fleet at the end of creation\n                    timed out. Try fleet creation again.</p>\n            </li>\n            <li>\n               <p>FLEET_ACTIVATION_FAILED -- The fleet failed to successfully complete one of\n                    the steps in the fleet activation process. This event code indicates that the\n                    game build was successfully downloaded to a fleet instance, built, and\n                    validated, but was not able to start a server process. For more information, see\n                        <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation\">Debug Fleet Creation Issues</a>.</p>\n            </li>\n            <li>\n               <p>FLEET_ACTIVATION_FAILED_NO_INSTANCES -- Fleet creation was not able to obtain\n                    any instances based on the input fleet attributes. Try again at a different time\n                    or choose a different combination of fleet attributes such as fleet type,\n                    instance type, etc.</p>\n            </li>\n            <li>\n               <p>FLEET_INITIALIZATION_FAILED -- A generic exception occurred during fleet\n                    creation. Describe the fleet event message for more details.</p>\n            </li>\n         </ul>\n         <p>\n            <b>VPC peering events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been established\n                    between the VPC for an Amazon GameLift fleet and a VPC in your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed.\n                    Event details and status information provide additional detail. A common reason\n                    for peering failure is that the two VPCs have overlapping CIDR blocks of IPv4\n                    addresses. To resolve this, change the CIDR block for the VPC in your Amazon Web Services\n                    account. For more information on VPC peering failures, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html\">https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html</a>\n               </p>\n            </li>\n            <li>\n               <p>FLEET_VPC_PEERING_DELETED -- A VPC peering connection has been successfully\n                    deleted.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Spot instance events:</b>\n         </p>\n         <ul>\n            <li>\n               <p> INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with a\n                    two-minute notification.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Server process events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>SERVER_PROCESS_INVALID_PATH -- The game server executable or script could not\n                    be found based on the Fleet runtime configuration. Check that the launch path is\n                    correct based on the operating system of the Fleet.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT -- The server process did not call\n                    InitSDK() within the time expected. Check your game session log to see why\n                    InitSDK() was not called in time.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_PROCESS_READY_TIMEOUT -- The server process did not call\n                    ProcessReady() within the time expected after calling InitSDK(). Check your game\n                    session log to see why ProcessReady() was not called in time.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_CRASHED -- The server process exited without calling\n                    ProcessEnding(). Check your game session log to see why ProcessEnding() was not\n                    called.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_TERMINATED_UNHEALTHY -- The server process did not report a\n                    valid health check for too long and was therefore terminated by GameLift. Check\n                    your game session log to see if the thread became stuck processing a synchronous\n                    task for too long.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_FORCE_TERMINATED -- The server process did not exit cleanly\n                    after OnProcessTerminate() was sent within the time expected. Check your game\n                    session log to see why termination took longer than expected.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_PROCESS_EXIT_TIMEOUT -- The server process did not exit cleanly\n                    within the time expected after calling ProcessEnding(). Check your game session\n                    log to see why termination took longer than expected.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Game session events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>GAME_SESSION_ACTIVATION_TIMEOUT -- GameSession failed to activate within the\n                    expected time. Check your game session log to see why ActivateGameSession() took\n                    longer to complete than expected.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Other fleet events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings\n                    (desired instances, minimum/maximum scaling limits). Event messaging includes\n                    the new capacity settings.</p>\n            </li>\n            <li>\n               <p>FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED -- A change was made to the\n                    fleet's game session protection policy setting. Event messaging includes both\n                    the old and new policy setting. </p>\n            </li>\n            <li>\n               <p>FLEET_DELETED -- A request to delete a fleet was initiated.</p>\n            </li>\n            <li>\n               <p> GENERIC_EVENT -- An unspecified event has occurred.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of event being logged. </p>\n         <p>\n            <b>Fleet state transition events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_CREATED -- A fleet resource was successfully created with a status of\n                        <code>NEW</code>. Event messaging includes the fleet ID.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_DOWNLOADING -- Fleet status changed from <code>NEW</code> to\n                        <code>DOWNLOADING</code>. The compressed build has started downloading to a\n                    fleet instance for installation.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_VALIDATING -- Fleet status changed from <code>DOWNLOADING</code>\n                    to <code>VALIDATING</code>. Amazon GameLift has successfully downloaded the build and is\n                    now validating the build files.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_BUILDING -- Fleet status changed from <code>VALIDATING</code> to\n                        <code>BUILDING</code>. Amazon GameLift has successfully verified the build files and\n                    is now running the installation scripts.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ACTIVATING -- Fleet status changed from <code>BUILDING</code> to\n                        <code>ACTIVATING</code>. Amazon GameLift is trying to launch an instance and test\n                    the connectivity between the build and the Amazon GameLift Service via the Server\n                    SDK.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ACTIVE -- The fleet's status changed from <code>ACTIVATING</code>\n                    to <code>ACTIVE</code>. The fleet is now ready to host game sessions.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ERROR -- The Fleet's status changed to <code>ERROR</code>.\n                    Describe the fleet event message for more details.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Fleet creation events (ordered by fleet creation\n                activity):</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet\n                    instance.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_EXTRACTING_BUILD -- The game server build was successfully\n                    downloaded to an instance, and the build files are now being extracted from the\n                    uploaded build and saved to an instance. Failure at this stage prevents a fleet\n                    from moving to ACTIVE status. Logs for this stage display a list of the files\n                    that are extracted and saved on the instance. Access the logs by using the URL\n                    in <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_RUNNING_INSTALLER -- The game server build files were\n                    successfully extracted, and the GameLift is now running the build's install\n                    script (if one is included). Failure in this stage prevents a fleet from moving\n                    to ACTIVE status. Logs for this stage list the installation steps and whether or\n                    not the install completed successfully. Access the logs by using the URL in\n                        <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful,\n                    and the GameLift is now verifying that the game server launch paths, which are\n                    specified in the fleet's runtime configuration, exist. If any listed launch path\n                    exists, Amazon GameLift tries to launch a game server process and waits for the process\n                    to report ready. Failures in this stage prevent a fleet from moving to\n                        <code>ACTIVE</code> status. Logs for this stage list the launch paths in the\n                    runtime configuration and indicate whether each is found. Access the logs by\n                    using the URL in <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the runtime\n                    configuration failed because the executable specified in a launch path does not\n                    exist on the instance.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the runtime\n                    configuration failed because the executable specified in a launch path failed to\n                    run on the fleet instance.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_TIMED_OUT -- Validation of the fleet at the end of creation\n                    timed out. Try fleet creation again.</p>\n            </li>\n            <li>\n               <p>FLEET_ACTIVATION_FAILED -- The fleet failed to successfully complete one of\n                    the steps in the fleet activation process. This event code indicates that the\n                    game build was successfully downloaded to a fleet instance, built, and\n                    validated, but was not able to start a server process. For more information, see\n                        <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation\">Debug Fleet Creation Issues</a>.</p>\n            </li>\n            <li>\n               <p>FLEET_ACTIVATION_FAILED_NO_INSTANCES -- Fleet creation was not able to obtain\n                    any instances based on the input fleet attributes. Try again at a different time\n                    or choose a different combination of fleet attributes such as fleet type,\n                    instance type, etc.</p>\n            </li>\n            <li>\n               <p>FLEET_INITIALIZATION_FAILED -- A generic exception occurred during fleet\n                    creation. Describe the fleet event message for more details.</p>\n            </li>\n         </ul>\n         <p>\n            <b>VPC peering events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been established\n                    between the VPC for an Amazon GameLift fleet and a VPC in your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed.\n                    Event details and status information provide additional detail. A common reason\n                    for peering failure is that the two VPCs have overlapping CIDR blocks of IPv4\n                    addresses. To resolve this, change the CIDR block for the VPC in your Amazon Web Services\n                    account. For more information on VPC peering failures, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html\">https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html</a>\n               </p>\n            </li>\n            <li>\n               <p>FLEET_VPC_PEERING_DELETED -- A VPC peering connection has been successfully\n                    deleted.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Spot instance events:</b>\n         </p>\n         <ul>\n            <li>\n               <p> INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with a\n                    two-minute notification.</p>\n            </li>\n            <li>\n               <p>INSTANCE_RECYCLED -- A spot instance was determined to have a high risk \n                    of interruption and is scheduled to be recycled once it has no active \n                    game sessions.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Server process events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>SERVER_PROCESS_INVALID_PATH -- The game server executable or script could not\n                    be found based on the Fleet runtime configuration. Check that the launch path is\n                    correct based on the operating system of the Fleet.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT -- The server process did not call\n                    InitSDK() within the time expected. Check your game session log to see why\n                    InitSDK() was not called in time.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_PROCESS_READY_TIMEOUT -- The server process did not call\n                    ProcessReady() within the time expected after calling InitSDK(). Check your game\n                    session log to see why ProcessReady() was not called in time.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_CRASHED -- The server process exited without calling\n                    ProcessEnding(). Check your game session log to see why ProcessEnding() was not\n                    called.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_TERMINATED_UNHEALTHY -- The server process did not report a\n                    valid health check for too long and was therefore terminated by GameLift. Check\n                    your game session log to see if the thread became stuck processing a synchronous\n                    task for too long.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_FORCE_TERMINATED -- The server process did not exit cleanly\n                    after OnProcessTerminate() was sent within the time expected. Check your game\n                    session log to see why termination took longer than expected.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_PROCESS_EXIT_TIMEOUT -- The server process did not exit cleanly\n                    within the time expected after calling ProcessEnding(). Check your game session\n                    log to see why termination took longer than expected.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Game session events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>GAME_SESSION_ACTIVATION_TIMEOUT -- GameSession failed to activate within the\n                    expected time. Check your game session log to see why ActivateGameSession() took\n                    longer to complete than expected.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Other fleet events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings\n                    (desired instances, minimum/maximum scaling limits). Event messaging includes\n                    the new capacity settings.</p>\n            </li>\n            <li>\n               <p>FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED -- A change was made to the\n                    fleet's game session protection policy setting. Event messaging includes both\n                    the old and new policy setting. </p>\n            </li>\n            <li>\n               <p>FLEET_DELETED -- A request to delete a fleet was initiated.</p>\n            </li>\n            <li>\n               <p> GENERIC_EVENT -- An unspecified event has occurred.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Message": {
@@ -7128,9 +7494,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://gamelift-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://gamelift-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -7143,15 +7688,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://gamelift.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://gamelift.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -7163,258 +7743,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://gamelift-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://gamelift-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://gamelift.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://gamelift.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -9104,7 +9434,7 @@
                 "FleetArn": {
                     "target": "com.amazonaws.gamelift#FleetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) associated with the GameLift fleet that this game session is running on.\n        </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) associated with the GameLift fleet that this game session is running on. </p>"
                     }
                 },
                 "CreationTime": {
@@ -9188,7 +9518,7 @@
                 "MatchmakerData": {
                     "target": "com.amazonaws.gamelift#MatchmakerData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the matchmaking process that was used to create the game session. It\n            is in JSON syntax, formatted as a string. In addition the matchmaking configuration\n            used, it contains data on all players assigned to the match, including player attributes\n            and team assignments. For more details on matchmaker data, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data\">Match\n                Data</a>. Matchmaker data is useful when requesting match backfills, and is\n            updated whenever new players are added during a successful backfill (see <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchBackfill.html\">StartMatchBackfill</a>). </p>"
+                        "smithy.api#documentation": "<p>Information about the matchmaking process that resulted in the game session, if\n            matchmaking was used. Data is in JSON syntax, formatted as a string. Information\n            includes the matchmaker ID as well as player attributes and team assignments. For more\n            details on matchmaker data, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data\">Match\n                Data</a>. Matchmaker data is updated whenever new players are added during a\n            successful backfill (see <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchBackfill.html\">StartMatchBackfill</a>).  </p>"
                     }
                 },
                 "Location": {
@@ -9199,7 +9529,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Properties describing a game session.</p>\n         <p>A game session in ACTIVE status can host players. When a game session ends, its status\n            is set to <code>TERMINATED</code>. </p>\n         <p>Once the session ends, the game session object is retained for 30 days. This means you\n            can reuse idempotency token values after this time. Game session logs are retained for\n            14 days.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
+                "smithy.api#documentation": "<p>Properties describing a game session.</p>\n         <p>A game session in ACTIVE status can host players. When a game session ends, its status\n            is set to <code>TERMINATED</code>. </p>\n         <p>Amazon GameLift retains a game session resource for 30 days after the game session ends. You\n            can reuse idempotency token values after this time. Game session logs are retained for\n            14 days.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#GameSessionActivationTimeoutSeconds": {
@@ -9320,7 +9650,7 @@
                 "Status": {
                     "target": "com.amazonaws.gamelift#GameSessionPlacementState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Current status of the game session placement request.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>PENDING</b> -- The placement request is currently\n                    in the queue waiting to be processed.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FULFILLED</b> -- A new game session and player\n                    sessions (if requested) have been successfully created. Values for\n                        <i>GameSessionArn</i> and\n                        <i>GameSessionRegion</i> are available. </p>\n            </li>\n            <li>\n               <p>\n                  <b>CANCELLED</b> -- The placement request was\n                    canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <b>TIMED_OUT</b> -- A new game session was not\n                    successfully created before the time limit expired. You can resubmit the\n                    placement request as needed.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED</b> -- Amazon GameLift is not able to complete the\n                    process of placing the game session. Common reasons are the game session\n                    terminated before the placement process was completed, or an unexpected internal\n                    error.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Current status of the game session placement request.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>PENDING</b> -- The placement request is \n                    in the queue waiting to be processed. Game session properties are not\n                    yet final. </p>\n            </li>\n            <li>\n               <p>\n                  <b>FULFILLED</b> -- A new game session has been \n                    successfully placed. Game session properties are now final.</p>\n            </li>\n            <li>\n               <p>\n                  <b>CANCELLED</b> -- The placement request was\n                    canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <b>TIMED_OUT</b> -- A new game session was not\n                    successfully created before the time limit expired. You can resubmit the\n                    placement request as needed.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED</b> -- Amazon GameLift is not able to complete the\n                    process of placing the game session. Common reasons are the game session\n                    terminated before the placement process was completed, or an unexpected internal\n                    error.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "GameProperties": {
@@ -9344,19 +9674,19 @@
                 "GameSessionId": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the game session. This value is set once the new game session is placed (placement status is\n                <code>FULFILLED</code>).</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the game session. This value isn't final until placement status is\n            <code>FULFILLED</code>.</p>"
                     }
                 },
                 "GameSessionArn": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifier for the game session created by this placement request. This value is set\n            once the new game session is placed (placement status is <code>FULFILLED</code>). This\n            identifier is unique across all Regions. You can use this value as a\n                <code>GameSessionId</code> value as needed.</p>"
+                        "smithy.api#documentation": "<p>Identifier for the game session created by this placement request. This identifier is\n            unique across all Regions. This value isn't final until placement status is\n                <code>FULFILLED</code>.</p>"
                     }
                 },
                 "GameSessionRegion": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the Region where the game session created by this placement request is\n            running. This value is set once the new game session is placed (placement status is\n                <code>FULFILLED</code>).</p>"
+                        "smithy.api#documentation": "<p>Name of the Region where the game session created by this placement request is\n            running. This value isn't final until placement status is <code>FULFILLED</code>.</p>"
                     }
                 },
                 "PlayerLatencies": {
@@ -9380,7 +9710,7 @@
                 "IpAddress": {
                     "target": "com.amazonaws.gamelift#IpAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is\n                <code>FULFILLED</code>). </p>"
+                        "smithy.api#documentation": "<p>The IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value isn't final until placement status is <code>FULFILLED</code>. </p>"
                     }
                 },
                 "DnsName": {
@@ -9392,13 +9722,13 @@
                 "Port": {
                     "target": "com.amazonaws.gamelift#PortNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is\n                <code>FULFILLED</code>).</p>"
+                        "smithy.api#documentation": "<p>The port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value isn't final until placement status is\n            <code>FULFILLED</code>.</p>"
                     }
                 },
                 "PlacedPlayerSessions": {
                     "target": "com.amazonaws.gamelift#PlacedPlayerSessionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of information on player sessions created in response to the game session\n            placement request. These player sessions are created only once a new game session is\n            successfully placed (placement status is <code>FULFILLED</code>). This information\n            includes the player ID (as provided in the placement request) and the corresponding\n            player session ID.</p>"
+                        "smithy.api#documentation": "<p>A collection of information on player sessions created in response to the game session\n            placement request. These player sessions are created only after a new game session is\n            successfully placed (placement status is <code>FULFILLED</code>). This information\n            includes the player ID, provided in the placement request, and a corresponding player\n            session ID.</p>"
                     }
                 },
                 "GameSessionData": {
@@ -9415,7 +9745,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This object includes the full details of the original request plus the current status\n            and start/end time stamps.</p>"
+                "smithy.api#documentation": "<p>Represents a potential game session placement, including the full details of the\n            original placement request and the current status. </p>\n         <note>\n            <p>If the game session placement status is <code>PENDING</code>, the properties for game\n                session ID/ARN, region, IP address/DNS, and port aren't final. A game session is not\n                active and ready to accept players until placement status reaches\n                    <code>FULFILLED</code>. When the placement is in <code>PENDING</code> status,\n                Amazon GameLift may attempt to place a game session multiple times before succeeding. With\n                each attempt it creates a <a>GameSession</a> object and updates this\n                placement object with the new game session properties..</p>\n         </note>"
             }
         },
         "com.amazonaws.gamelift#GameSessionPlacementState": {
@@ -9646,7 +9976,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Requests remote access to a fleet instance. Remote access is useful for debugging,\n            gathering benchmarking data, or observing activity in real time. </p>\n         <p>To remotely access an instance, you need credentials that match the operating system\n            of the instance. For a Windows instance, Amazon GameLift returns a user name and password as\n            strings for use with a Windows Remote Desktop client. For a Linux instance, Amazon GameLift\n            returns a user name and RSA private key, also as strings, for use with an SSH client.\n            The private key must be saved in the proper format to a <code>.pem</code> file before\n            using. If you're making this request using the CLI, saving the secret can be handled\n            as part of the <code>GetInstanceAccess</code> request, as shown in one of the examples\n            for this operation. </p>\n         <p>To request access to a specific instance, specify the IDs of both the instance and the\n            fleet it belongs to.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html\">Remotely Access Fleet\n                Instances</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html\">Debug Fleet\n                Issues</a>\n         </p>"
+                "smithy.api#documentation": "<p>Requests authorization to remotely connect to a compute resource in an Amazon GameLift fleet.\n            Call this action to connect to an instance in a managed EC2 fleet if the fleet's game\n            build uses Amazon GameLift server SDK 5.x or later. To connect to instances with game builds\n            that use server SDK 4.x or earlier, call <a>GetInstanceAccess</a>.</p>\n         <p>To request access to a compute, identify the specific EC2 instance and the fleet it\n            belongs to. You can retrieve instances for a managed EC2 fleet by calling <a>ListCompute</a>. </p>\n         <p>If successful, this operation returns a set of temporary Amazon Web Services credentials, including\n            a two-part access key and a session token. Use these credentials with Amazon EC2 Systems Manager (SSM)\n            to start a session with the compute. For more details, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#sessions-start-cli\"> Starting a session (CLI)</a> in the <i>Amazon EC2 Systems Manager User Guide</i>.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html\">Remotely connect to fleet\n                instances</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html\">Debug fleet\n                issues</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#GetComputeAccessInput": {
@@ -9655,14 +9985,14 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the fleet that the compute resource is registered to.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the fleet that contains the compute resource you want to connect to. You can use either\n            the fleet ID or ARN value.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the compute resource you are requesting credentials for.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the compute resource that you want to connect to. You can use\n            either a registered compute name or an instance ID.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9677,7 +10007,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fleet ID of compute resource.</p>"
+                        "smithy.api#documentation": "<p>The ID of the fleet that contains the compute resource to be accessed.</p>"
                     }
                 },
                 "FleetArn": {
@@ -9689,19 +10019,19 @@
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the compute resource you requested credentials for.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the compute resource to be accessed.  This value might be either a\n            compute name or an instance ID.</p>"
                     }
                 },
                 "ComputeArn": {
                     "target": "com.amazonaws.gamelift#ComputeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) that is assigned to a Amazon GameLift compute resource and uniquely identifies it.\n            ARNs are unique across all Regions. Format is\n                <code>arn:aws:gamelift:<region>::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) that is assigned to an Amazon GameLift compute resource and uniquely identifies it.\n            ARNs are unique across all Regions. Format is\n                <code>arn:aws:gamelift:<region>::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>.</p>"
                     }
                 },
                 "Credentials": {
                     "target": "com.amazonaws.gamelift#AwsCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p>The access credentials for the compute resource.</p>"
+                        "smithy.api#documentation": "<p>A set of temporary Amazon Web Services credentials for use when connecting to the\n            compute resource with Amazon EC2 Systems Manager (SSM).</p>"
                     }
                 }
             },
@@ -9732,7 +10062,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Requests an authentication token from Amazon GameLift. The authentication token is used by\n            your game server to authenticate with Amazon GameLift. Each authentication token has an\n            expiration time. To continue using the compute resource to host your game server,\n            regularly retrieve a new authorization token.</p>"
+                "smithy.api#documentation": "<p>Requests an authentication token from Amazon GameLift for a registered compute in an Anywhere\n            fleet. The game servers that are running on the compute use this token to authenticate\n            with the Amazon GameLift service. Each server process must provide a valid authentication token\n            in its call to the Amazon GameLift server SDK action <code>InitSDK()</code>.</p>\n         <p>Authentication tokens are valid for a limited time span. Use a mechanism to regularly\n            request a fresh authentication token before the current token expires.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html\">Create an\n                        Anywhere fleet</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html\">Test your\n                        integration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html\">Server SDK\n                        reference guides</a> (for version 5.x)</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.gamelift#GetComputeAuthTokenInput": {
@@ -9775,25 +10105,25 @@
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the compute resource you are requesting the authentication token\n            for.</p>"
+                        "smithy.api#documentation": "<p>The name of the compute resource that the authentication token is issued to.</p>"
                     }
                 },
                 "ComputeArn": {
                     "target": "com.amazonaws.gamelift#ComputeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) that is assigned to a Amazon GameLift compute resource and uniquely identifies it.\n            ARNs are unique across all Regions. Format is\n                <code>arn:aws:gamelift:<region>::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) that is assigned to an Amazon GameLift compute resource and uniquely identifies it.\n            ARNs are unique across all Regions. Format is\n                <code>arn:aws:gamelift:<region>::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912</code>.</p>"
                     }
                 },
                 "AuthToken": {
                     "target": "com.amazonaws.gamelift#ComputeAuthToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication token that your game server uses to authenticate with\n            Amazon GameLift.</p>"
+                        "smithy.api#documentation": "<p>A valid temporary authentication token.</p>"
                     }
                 },
                 "ExpirationTimestamp": {
                     "target": "com.amazonaws.gamelift#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time until the authentication token is no longer valid. To continue\n            using the compute resource for game server hosting, renew the authentication token by\n            using this operation again.</p>"
+                        "smithy.api#documentation": "<p>The amount of time until the authentication token is no longer valid.</p>"
                     }
                 }
             },
@@ -9879,7 +10209,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Requests remote access to a fleet instance. Remote access is useful for debugging,\n            gathering benchmarking data, or observing activity in real time. </p>\n         <p>To remotely access an instance, you need credentials that match the operating system\n            of the instance. For a Windows instance, Amazon GameLift returns a user name and password as\n            strings for use with a Windows Remote Desktop client. For a Linux instance, Amazon GameLift\n            returns a user name and RSA private key, also as strings, for use with an SSH client.\n            The private key must be saved in the proper format to a <code>.pem</code> file before\n            using. If you're making this request using the CLI, saving the secret can be handled\n            as part of the <code>GetInstanceAccess</code> request, as shown in one of the examples\n            for this operation. </p>\n         <p>To request access to a specific instance, specify the IDs of both the instance and the\n            fleet it belongs to. You can retrieve a fleet's instance IDs by calling <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeInstances.html\">DescribeInstances</a>. </p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html\">Remotely Access Fleet\n                Instances</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html\">Debug Fleet\n                Issues</a>\n         </p>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
+                "smithy.api#documentation": "<p>Requests authorization to remotely connect to an instance in an Amazon GameLift managed fleet.\n            Use this operation to connect to instances with game servers that use Amazon GameLift server SDK\n            4.x or earlier. To connect to instances with game servers that use server SDK 5.x or\n            later, call <a>GetComputeAccess</a>.</p>\n         <p>To request access to an instance, specify IDs for the instance and the fleet it\n            belongs to. You can retrieve instance IDs for a fleet by calling <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeInstances.html\">DescribeInstances</a> with the fleet ID. </p>\n         <p>If successful, this operation returns an IP address and credentials. The returned\n            credentials match the operating system of the instance, as follows: </p>\n         <ul>\n            <li>\n               <p>For a Windows instance: returns a user name and secret (password) for use with\n                    a Windows Remote Desktop client. </p>\n            </li>\n            <li>\n               <p>For a Linux instance: returns a user name and secret (RSA private key) for use\n                    with an SSH client. You must save the secret to a <code>.pem</code> file. If\n                    you're using the CLI, see the example <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetInstanceAccess.html#API_GetInstanceAccess_Examples\"> Get credentials for a Linux instance</a> for tips on automatically\n                    saving the secret to a <code>.pem</code> file. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html\">Remotely connect to\n                fleet instances</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html\">Debug fleet\n                issues</a>\n         </p>\n         <p>\n            <b>Related actions</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#GetInstanceAccessInput": {
@@ -9888,14 +10218,14 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the fleet that contains the instance you want access to. You can use either the fleet ID\n            or ARN value. The fleet can be in any of the following statuses:\n            <code>ACTIVATING</code>, <code>ACTIVE</code>, or <code>ERROR</code>. Fleets with an\n                <code>ERROR</code> status may be accessible for a short time before they are\n            deleted.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the fleet that contains the instance you want to access. You can request access to\n            instances in EC2 fleets with the following statuses: <code>ACTIVATING</code>,\n                <code>ACTIVE</code>, or <code>ERROR</code>. Use either a fleet ID or an ARN value. </p>\n         <note>\n            <p>You can access fleets in <code>ERROR</code> status for a short period of time before Amazon GameLift deletes them.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "InstanceId": {
                     "target": "com.amazonaws.gamelift#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the instance you want to get access to. You can access an instance in any status.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the instance you want to access. You can access an instance in any status.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9956,7 +10286,7 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the fleet that the instance is in.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the fleet that the instance belongs to.</p>"
                     }
                 },
                 "FleetArn": {
@@ -9980,19 +10310,19 @@
                 "DnsName": {
                     "target": "com.amazonaws.gamelift#DnsName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DNS identifier assigned to the instance that is running the game session. Values have\n            the following format:</p>\n         <ul>\n            <li>\n               <p>TLS-enabled fleets: <code><unique identifier>.<region identifier>.amazongamelift.com</code>.</p>\n            </li>\n            <li>\n               <p>Non-TLS-enabled fleets: <code>ec2-<unique identifier>.compute.amazonaws.com</code>. (See\n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses\">Amazon EC2 Instance IP Addressing</a>.)</p>\n            </li>\n         </ul>\n         <p>When connecting to a game session that is running on a TLS-enabled fleet, you must use the DNS name, not the IP address.</p>"
+                        "smithy.api#documentation": "<p>The DNS identifier assigned to the instance that is running the game session. Values have\n            the following format:</p>\n         <ul>\n            <li>\n               <p>TLS-enabled fleets: <code><unique identifier>.<region identifier>.amazongamelift.com</code>.</p>\n            </li>\n            <li>\n               <p>Non-TLS-enabled fleets: <code>ec2-<unique identifier>.compute.amazonaws.com</code>. (See\n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses\">Amazon Elastic Compute Cloud Instance IP Addressing</a>.)</p>\n            </li>\n         </ul>\n         <p>When connecting to a game session that is running on a TLS-enabled fleet, you must use the DNS name, not the IP address.</p>"
                     }
                 },
                 "OperatingSystem": {
                     "target": "com.amazonaws.gamelift#OperatingSystem",
                     "traits": {
-                        "smithy.api#documentation": "<p>Operating system that is running on this instance. </p>"
+                        "smithy.api#documentation": "<p>Operating system that is running on this EC2 instance. </p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.gamelift#EC2InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon EC2 instance type that defines the computing resources of this instance. </p>"
+                        "smithy.api#documentation": "<p>EC2 instance type that defines the computing resources of this instance. </p>"
                     }
                 },
                 "Status": {
@@ -10015,7 +10345,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an EC2 instance of virtual computing resources that hosts one or more game\n            servers. In Amazon GameLift, a fleet can contain zero or more instances.</p>\n         <p>\n            <b>Related actions</b>\n         </p>"
+                "smithy.api#documentation": "<p>Represents a virtual computing instance that runs game server processes and hosts game\n            sessions. In Amazon GameLift, one or more instances make up a managed EC2 fleet.</p>"
             }
         },
         "com.amazonaws.gamelift#InstanceAccess": {
@@ -10024,19 +10354,19 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the fleet containing the instance being accessed.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the fleet containing the instance to be accessed.</p>"
                     }
                 },
                 "InstanceId": {
                     "target": "com.amazonaws.gamelift#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the instance being accessed.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the instance to be accessed.</p>"
                     }
                 },
                 "IpAddress": {
                     "target": "com.amazonaws.gamelift#IpAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>IP address that is assigned to the instance.</p>"
+                        "smithy.api#documentation": "<p>IP address assigned to the instance.</p>"
                     }
                 },
                 "OperatingSystem": {
@@ -10048,12 +10378,12 @@
                 "Credentials": {
                     "target": "com.amazonaws.gamelift#InstanceCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p>Credentials required to access the instance.</p>"
+                        "smithy.api#documentation": "<p>Security credentials that are required to access the instance.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information required to remotely connect to a fleet instance. </p>"
+                "smithy.api#documentation": "<p>Information and credentials that you can use to remotely connect to an instance in an\n            EC2 managed fleet. This data type is returned in response to a call to <a>GetInstanceAccess</a>. </p>"
             }
         },
         "com.amazonaws.gamelift#InstanceCredentials": {
@@ -10062,18 +10392,18 @@
                 "UserName": {
                     "target": "com.amazonaws.gamelift#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>User login string.</p>"
+                        "smithy.api#documentation": "<p>A user name for logging in.</p>"
                     }
                 },
                 "Secret": {
                     "target": "com.amazonaws.gamelift#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Secret string. For Windows instances, the secret is a password for use with Windows\n            Remote Desktop. For Linux instances, it is a private key (which must be saved as a\n                <code>.pem</code> file) for use with SSH.</p>"
+                        "smithy.api#documentation": "<p>Secret string. For Windows instances, the secret is a password for use with Windows\n            Remote Desktop. For Linux instances, it's a private key for use with SSH.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Set of credentials required to remotely access a fleet instance.</p>",
+                "smithy.api#documentation": "<p>A set of credentials that allow remote access to an instance in an EC2 managed fleet.\n            These credentials are returned in response to a call to <a>GetInstanceAccess</a>, which requests access for instances that are running\n            game servers with the Amazon GameLift server SDK version 4.x or earlier.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -10556,7 +10886,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves all compute resources registered to a fleet in your Amazon Web Services account. You can filter the result set by location.</p>",
+                "smithy.api#documentation": "<p>Retrieves the compute resources in an Amazon GameLift fleet. You can request information for\n            either managed EC2 fleets or Anywhere fleets. </p>\n         <p>To request a list of computes, specify the fleet ID. You can filter the result set by\n            location. Use the pagination parameters to retrieve results in a set of sequential\n            pages.</p>\n         <p>If successful, this operation returns the compute resource for the requested fleet.\n            For managed EC2 fleets, it returns a list of EC2 instances. For Anywhere fleets, it\n            returns a list of registered compute names.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -10571,14 +10901,14 @@
                 "FleetId": {
                     "target": "com.amazonaws.gamelift#FleetIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the fleet the compute resources are registered to.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the fleet to retrieve compute resources for.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Location": {
                     "target": "com.amazonaws.gamelift#LocationStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the custom location that the compute resources are assigned to.</p>"
+                        "smithy.api#documentation": "<p>The name of a location to retrieve compute resources for.</p>"
                     }
                 },
                 "Limit": {
@@ -10604,7 +10934,7 @@
                 "ComputeList": {
                     "target": "com.amazonaws.gamelift#ComputeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of compute resources registered to the fleet you specified.</p>"
+                        "smithy.api#documentation": "<p>A list of compute resources in the specified fleet.</p>"
                     }
                 },
                 "NextToken": {
@@ -12476,7 +12806,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers your compute resources in a fleet you previously created. After you register\n            a compute to your fleet, you can monitor and manage your compute using Amazon GameLift. The\n            operation returns the compute resource containing SDK endpoint you can use to connect\n            your game server to Amazon GameLift.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html\">Create an\n                        Anywhere fleet</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html\">Test your\n                        integration</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Registers a compute resource to an Amazon GameLift Anywhere fleet. With Anywhere fleets you can\n            incorporate your own computing hardware into an Amazon GameLift game hosting solution.</p>\n         <p>To register a compute to a fleet, give the compute a name (must be unique within the\n            fleet) and specify the compute resource's DNS name or IP address. Provide the Anywhere\n            fleet ID and a fleet location to associate with the compute being registered. You can\n            optionally include the path to a TLS certificate on the compute resource.</p>\n         <p>If successful, this operation returns the compute details, including an Amazon GameLift SDK\n            endpoint. Game server processes that run on the compute use this endpoint to communicate\n            with the Amazon GameLift service. Each server process includes the SDK endpoint in its call to\n            the Amazon GameLift server SDK action <code>InitSDK()</code>.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html\">Create an\n                        Anywhere fleet</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html\">Test your\n                        integration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html\">Server SDK\n                        reference guides</a> (for version 5.x)</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.gamelift#RegisterComputeInput": {
@@ -12492,32 +12822,32 @@
                 "ComputeName": {
                     "target": "com.amazonaws.gamelift#ComputeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A descriptive label that is associated with the compute resource registered to your fleet.</p>",
+                        "smithy.api#documentation": "<p>A descriptive label for the compute resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CertificatePath": {
                     "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the TLS certificate on your compute resource. The path and certificate are\n            not validated by Amazon GameLift.</p>"
+                        "smithy.api#documentation": "<p>The path to a TLS certificate on your compute resource. Amazon GameLift doesn't validate the\n            path and certificate.</p>"
                     }
                 },
                 "DnsName": {
                     "target": "com.amazonaws.gamelift#DnsNameInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DNS name of the compute resource. Amazon GameLift requires the DNS name or IP address to\n            manage your compute resource.</p>"
+                        "smithy.api#documentation": "<p>The DNS name of the compute resource. Amazon GameLift requires either a DNS name or IP\n            address.</p>"
                     }
                 },
                 "IpAddress": {
                     "target": "com.amazonaws.gamelift#IpAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address of the compute resource. Amazon GameLift requires the DNS name or IP address to\n            manage your compute resource.</p>"
+                        "smithy.api#documentation": "<p>The IP address of the compute resource. Amazon GameLift requires either a DNS name or IP\n            address.</p>"
                     }
                 },
                 "Location": {
                     "target": "com.amazonaws.gamelift#LocationStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the custom location you added to the fleet you are registering this\n            compute resource to.</p>"
+                        "smithy.api#documentation": "<p>The name of a custom location to associate with the compute resource being registered. </p>"
                     }
                 }
             },
@@ -12531,7 +12861,7 @@
                 "Compute": {
                     "target": "com.amazonaws.gamelift#Compute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the compute resource you registered to the specified fleet.</p>"
+                        "smithy.api#documentation": "<p>The details of the compute resource you registered.</p>"
                     }
                 }
             },
@@ -13307,7 +13637,7 @@
                 "LaunchPath": {
                     "target": "com.amazonaws.gamelift#LaunchPathStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of a game build executable or the Realtime script file that contains the\n                <code>Init()</code> function. Game builds and Realtime scripts are installed on\n            instances at the root: </p>\n         <ul>\n            <li>\n               <p>Windows (custom game builds only): <code>C:\\game</code>. Example:\n                        \"<code>C:\\game\\MyGame\\server.exe</code>\" </p>\n            </li>\n            <li>\n               <p>Linux: <code>/local/game</code>. Examples:\n                        \"<code>/local/game/MyGame/server.exe</code>\" or\n                        \"<code>/local/game/MyRealtimeScript.js</code>\"</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The location of a game build executable or Realtime script. Game builds and Realtime\n            scripts are installed on instances at the root: </p>\n         <ul>\n            <li>\n               <p>Windows (custom game builds only): <code>C:\\game</code>. Example:\n                        \"<code>C:\\game\\MyGame\\server.exe</code>\" </p>\n            </li>\n            <li>\n               <p>Linux: <code>/local/game</code>. Examples:\n                        \"<code>/local/game/MyGame/server.exe</code>\" or\n                        \"<code>/local/game/MyRealtimeScript.js</code>\"</p>\n            </li>\n         </ul>\n         <note>\n            <p>Amazon GameLift doesn't support the use of setup scripts that launch the game executable.\n                For custom game builds, this parameter must indicate the executable that calls the\n                server SDK operations <code>initSDK()</code> and <code>ProcessReady()</code>.\n            </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14404,7 +14734,7 @@
                 "NewGameSessionProtectionPolicy": {
                     "target": "com.amazonaws.gamelift#ProtectionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The game session protection policy to apply to all new instances created in this\n            fleet. Instances that already exist are not affected. You can set protection for\n            individual instances using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html\">UpdateGameSession</a> .</p>\n         <ul>\n            <li>\n               <p>\n                  <b>NoProtection</b> -- The game session can be\n                    terminated during a scale-down event.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FullProtection</b> -- If the game session is in an\n                        <code>ACTIVE</code> status, it cannot be terminated during a scale-down\n                    event.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The game session protection policy to apply to all new game sessions created in this\n            fleet. Game sessions that already exist are not affected. You can set protection for\n            individual game sessions using <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html\">UpdateGameSession</a> .</p>\n         <ul>\n            <li>\n               <p>\n                  <b>NoProtection</b> -- The game session can be\n                    terminated during a scale-down event.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FullProtection</b> -- If the game session is in an\n                        <code>ACTIVE</code> status, it cannot be terminated during a scale-down\n                    event.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ResourceCreationLimitPolicy": {
@@ -14501,7 +14831,7 @@
                 "DesiredInstances": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of Amazon EC2 instances you want to maintain in the specified fleet location.\n            This value must fall between the minimum and maximum size limits.</p>"
+                        "smithy.api#documentation": "<p>The number of Amazon EC2 instances you want to maintain in the specified fleet location.\n            This value must fall between the minimum and maximum size limits. Changes in desired\n            instance value can take up to 1 minute to be reflected when viewing the fleet's capacity\n            settings.</p>"
                     }
                 },
                 "MinSize": {
@@ -14658,7 +14988,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This operation is used with the Amazon GameLift FleetIQ solution and game server groups.</b>\n         </p>\n         <p>Updates information about a\n            registered game server to help Amazon GameLift FleetIQ to track game server availability. This operation\n            is called by a game server process that is running on an instance in a game server\n            group. </p>\n         <p>Use this operation to update the following types of game server information. You can\n            make all three types of updates in the same request:</p>\n         <ul>\n            <li>\n               <p>To update the game server's utilization status, identify the game server and\n                    game server group and specify the current utilization status. Use this status to\n                    identify when game servers are currently hosting games and when they are\n                    available to be claimed.</p>\n            </li>\n            <li>\n               <p>To report health status, identify the game server and game server group and\n                    set health check to <code>HEALTHY</code>. If a game server does not report\n                    health status for a certain length of time, the game server is no longer\n                    considered healthy. As a result, it will be eventually deregistered from the\n                    game server group to avoid affecting utilization metrics. The best practice is\n                    to report health every 60 seconds.</p>\n            </li>\n            <li>\n               <p>To change game server metadata, provide updated game server data.</p>\n            </li>\n         </ul>\n         <p>Once a game server is successfully updated, the relevant statuses and timestamps are\n            updated.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html\">Amazon GameLift FleetIQ\n                Guide</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This operation is used with the Amazon GameLift FleetIQ solution and game server groups.</b>\n         </p>\n         <p>Updates information about a registered game server to help Amazon GameLift FleetIQ track game server\n            availability. This operation is called by a game server process that is running on an\n            instance in a game server group. </p>\n         <p>Use this operation to update the following types of game server information. You can\n            make all three types of updates in the same request:</p>\n         <ul>\n            <li>\n               <p>To update the game server's utilization status from <code>AVAILABLE</code>\n                    (when the game server is available to be claimed) to <code>UTILIZED</code> (when\n                    the game server is currently hosting games). Identify the game server and game\n                    server group and specify the new utilization status. You can't change the status\n                    from to <code>UTILIZED</code> to <code>AVAILABLE</code> .</p>\n            </li>\n            <li>\n               <p>To report health status, identify the game server and game server group and\n                    set health check to <code>HEALTHY</code>. If a game server does not report\n                    health status for a certain length of time, the game server is no longer\n                    considered healthy. As a result, it will be eventually deregistered from the\n                    game server group to avoid affecting utilization metrics. The best practice is\n                    to report health every 60 seconds.</p>\n            </li>\n            <li>\n               <p>To change game server metadata, provide updated game server data.</p>\n            </li>\n         </ul>\n         <p>Once a game server is successfully updated, the relevant statuses and timestamps are\n            updated.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html\">Amazon GameLift FleetIQ\n                Guide</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#UpdateGameServerGroup": {
@@ -14766,7 +15096,7 @@
                 "UtilizationStatus": {
                     "target": "com.amazonaws.gamelift#GameServerUtilizationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the game server is available or is currently hosting\n            gameplay.</p>"
+                        "smithy.api#documentation": "<p>Indicates if the game server is available or is currently hosting gameplay. You can\n            update a game server status from <code>AVAILABLE</code> to <code>UTILIZED</code>, but\n            you can't change a the status from <code>UTILIZED</code> to\n            <code>AVAILABLE</code>.</p>"
                     }
                 },
                 "HealthCheck": {
