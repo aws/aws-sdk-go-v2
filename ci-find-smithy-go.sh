@@ -23,9 +23,11 @@ if [ "$branch" == main ]; then
     echo aws-sdk-go-v2 is on branch main, stop
     exit 0
 fi
+
+# For PR workflows, only the triggering ref is checked out, which in isolation
+# is not recognized as a branch by git. Use the specific workflow env instead.
 if [ -z "$branch" ]; then
-    echo current branch is blank?
-    exit 1
+    branch=$GITHUB_HEAD_REF
 fi
 
 if [ -n "$GIT_PAT" ]; then
