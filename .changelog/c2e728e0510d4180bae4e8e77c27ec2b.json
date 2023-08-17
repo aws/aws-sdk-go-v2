@@ -1,8 +1,0 @@
-{
-    "id": "c2e728e0-510d-4180-bae4-e8e77c27ec2b",
-    "type": "feature",
-    "description": "Amazon GameLift updates its instance types support.",
-    "modules": [
-        "service/gamelift"
-    ]
-}

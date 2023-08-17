@@ -1,3 +1,7 @@
+# v1.29.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2023-08-08)
 
 * **Feature**: Added support for cluster mode in online migration and test migration API

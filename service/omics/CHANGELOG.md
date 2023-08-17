@@ -1,3 +1,7 @@
+# v1.8.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2023-08-14)
 
 * **Feature**: This release provides support for annotation store versioning and cross account sharing for Omics Analytics

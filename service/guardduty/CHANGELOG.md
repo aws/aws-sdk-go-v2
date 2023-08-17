@@ -1,3 +1,7 @@
+# v1.26.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-08-09)
 
 * **Feature**: Added autoEnable ALL to UpdateOrganizationConfiguration and DescribeOrganizationConfiguration APIs.

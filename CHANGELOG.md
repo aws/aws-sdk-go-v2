@@ -1,3 +1,19 @@
+# Release (2023-08-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.20.2
+  * **Bug Fix**: Sign `X-Amz-Server-Side-Encryption-Context` header to fix signing for PutObject requests that set `SSEKMSEncryptionContext`.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.113.0](service/ec2/CHANGELOG.md#v11130-2023-08-17)
+  * **Feature**: Adds support for SubnetConfigurations to allow users to select their own IPv4 and IPv6 addresses for Interface VPC endpoints
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.22.0](service/gamelift/CHANGELOG.md#v1220-2023-08-17)
+  * **Feature**: Amazon GameLift updates its instance types support.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.32.3](service/s3control/CHANGELOG.md#v1323-2023-08-17)
+  * **Announcement**: BREAKFIX: corrected function spelling in environment config from GetS3DisableMultRegionAccessPoints to GetS3DisableMultiRegionAccessPoints
+  * **Bug Fix**: Adds DisableMRAP option to config loader, and DisableMRAP client resolver to achieve parity with other S3 options in the config loader. Additionally, added breakfix to correct spelling.
+
 # Release (2023-08-16)
 
 ## Module Highlights

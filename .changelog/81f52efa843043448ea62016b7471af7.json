@@ -1,8 +1,0 @@
-{
-    "id": "81f52efa-8430-4344-8ea6-2016b7471af7",
-    "type": "bugfix",
-    "description": "Sign `X-Amz-Server-Side-Encryption-Context` header to fix signing for PutObject requests that set `SSEKMSEncryptionContext`.",
-    "modules": [
-        "."
-    ]
-}

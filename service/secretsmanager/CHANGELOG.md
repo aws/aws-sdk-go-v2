@@ -1,3 +1,7 @@
+# v1.21.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-08-10)
 
 * **Feature**: Add additional InvalidRequestException to list of possible exceptions for ListSecret.

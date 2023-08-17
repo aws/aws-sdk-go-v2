@@ -1,3 +1,7 @@
+# v1.23.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-08-14)
 
 * **Feature**: Fix SDK logging of certain fields.
