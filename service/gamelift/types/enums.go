@@ -160,120 +160,181 @@ type EC2InstanceType string
 
 // Enum values for EC2InstanceType
 const (
-	EC2InstanceTypeT2Micro     EC2InstanceType = "t2.micro"
-	EC2InstanceTypeT2Small     EC2InstanceType = "t2.small"
-	EC2InstanceTypeT2Medium    EC2InstanceType = "t2.medium"
-	EC2InstanceTypeT2Large     EC2InstanceType = "t2.large"
-	EC2InstanceTypeC3Large     EC2InstanceType = "c3.large"
-	EC2InstanceTypeC3Xlarge    EC2InstanceType = "c3.xlarge"
-	EC2InstanceTypeC32xlarge   EC2InstanceType = "c3.2xlarge"
-	EC2InstanceTypeC34xlarge   EC2InstanceType = "c3.4xlarge"
-	EC2InstanceTypeC38xlarge   EC2InstanceType = "c3.8xlarge"
-	EC2InstanceTypeC4Large     EC2InstanceType = "c4.large"
-	EC2InstanceTypeC4Xlarge    EC2InstanceType = "c4.xlarge"
-	EC2InstanceTypeC42xlarge   EC2InstanceType = "c4.2xlarge"
-	EC2InstanceTypeC44xlarge   EC2InstanceType = "c4.4xlarge"
-	EC2InstanceTypeC48xlarge   EC2InstanceType = "c4.8xlarge"
-	EC2InstanceTypeC5Large     EC2InstanceType = "c5.large"
-	EC2InstanceTypeC5Xlarge    EC2InstanceType = "c5.xlarge"
-	EC2InstanceTypeC52xlarge   EC2InstanceType = "c5.2xlarge"
-	EC2InstanceTypeC54xlarge   EC2InstanceType = "c5.4xlarge"
-	EC2InstanceTypeC59xlarge   EC2InstanceType = "c5.9xlarge"
-	EC2InstanceTypeC512xlarge  EC2InstanceType = "c5.12xlarge"
-	EC2InstanceTypeC518xlarge  EC2InstanceType = "c5.18xlarge"
-	EC2InstanceTypeC524xlarge  EC2InstanceType = "c5.24xlarge"
-	EC2InstanceTypeC5aLarge    EC2InstanceType = "c5a.large"
-	EC2InstanceTypeC5aXlarge   EC2InstanceType = "c5a.xlarge"
-	EC2InstanceTypeC5a2xlarge  EC2InstanceType = "c5a.2xlarge"
-	EC2InstanceTypeC5a4xlarge  EC2InstanceType = "c5a.4xlarge"
-	EC2InstanceTypeC5a8xlarge  EC2InstanceType = "c5a.8xlarge"
-	EC2InstanceTypeC5a12xlarge EC2InstanceType = "c5a.12xlarge"
-	EC2InstanceTypeC5a16xlarge EC2InstanceType = "c5a.16xlarge"
-	EC2InstanceTypeC5a24xlarge EC2InstanceType = "c5a.24xlarge"
-	EC2InstanceTypeR3Large     EC2InstanceType = "r3.large"
-	EC2InstanceTypeR3Xlarge    EC2InstanceType = "r3.xlarge"
-	EC2InstanceTypeR32xlarge   EC2InstanceType = "r3.2xlarge"
-	EC2InstanceTypeR34xlarge   EC2InstanceType = "r3.4xlarge"
-	EC2InstanceTypeR38xlarge   EC2InstanceType = "r3.8xlarge"
-	EC2InstanceTypeR4Large     EC2InstanceType = "r4.large"
-	EC2InstanceTypeR4Xlarge    EC2InstanceType = "r4.xlarge"
-	EC2InstanceTypeR42xlarge   EC2InstanceType = "r4.2xlarge"
-	EC2InstanceTypeR44xlarge   EC2InstanceType = "r4.4xlarge"
-	EC2InstanceTypeR48xlarge   EC2InstanceType = "r4.8xlarge"
-	EC2InstanceTypeR416xlarge  EC2InstanceType = "r4.16xlarge"
-	EC2InstanceTypeR5Large     EC2InstanceType = "r5.large"
-	EC2InstanceTypeR5Xlarge    EC2InstanceType = "r5.xlarge"
-	EC2InstanceTypeR52xlarge   EC2InstanceType = "r5.2xlarge"
-	EC2InstanceTypeR54xlarge   EC2InstanceType = "r5.4xlarge"
-	EC2InstanceTypeR58xlarge   EC2InstanceType = "r5.8xlarge"
-	EC2InstanceTypeR512xlarge  EC2InstanceType = "r5.12xlarge"
-	EC2InstanceTypeR516xlarge  EC2InstanceType = "r5.16xlarge"
-	EC2InstanceTypeR524xlarge  EC2InstanceType = "r5.24xlarge"
-	EC2InstanceTypeR5aLarge    EC2InstanceType = "r5a.large"
-	EC2InstanceTypeR5aXlarge   EC2InstanceType = "r5a.xlarge"
-	EC2InstanceTypeR5a2xlarge  EC2InstanceType = "r5a.2xlarge"
-	EC2InstanceTypeR5a4xlarge  EC2InstanceType = "r5a.4xlarge"
-	EC2InstanceTypeR5a8xlarge  EC2InstanceType = "r5a.8xlarge"
-	EC2InstanceTypeR5a12xlarge EC2InstanceType = "r5a.12xlarge"
-	EC2InstanceTypeR5a16xlarge EC2InstanceType = "r5a.16xlarge"
-	EC2InstanceTypeR5a24xlarge EC2InstanceType = "r5a.24xlarge"
-	EC2InstanceTypeM3Medium    EC2InstanceType = "m3.medium"
-	EC2InstanceTypeM3Large     EC2InstanceType = "m3.large"
-	EC2InstanceTypeM3Xlarge    EC2InstanceType = "m3.xlarge"
-	EC2InstanceTypeM32xlarge   EC2InstanceType = "m3.2xlarge"
-	EC2InstanceTypeM4Large     EC2InstanceType = "m4.large"
-	EC2InstanceTypeM4Xlarge    EC2InstanceType = "m4.xlarge"
-	EC2InstanceTypeM42xlarge   EC2InstanceType = "m4.2xlarge"
-	EC2InstanceTypeM44xlarge   EC2InstanceType = "m4.4xlarge"
-	EC2InstanceTypeM410xlarge  EC2InstanceType = "m4.10xlarge"
-	EC2InstanceTypeM5Large     EC2InstanceType = "m5.large"
-	EC2InstanceTypeM5Xlarge    EC2InstanceType = "m5.xlarge"
-	EC2InstanceTypeM52xlarge   EC2InstanceType = "m5.2xlarge"
-	EC2InstanceTypeM54xlarge   EC2InstanceType = "m5.4xlarge"
-	EC2InstanceTypeM58xlarge   EC2InstanceType = "m5.8xlarge"
-	EC2InstanceTypeM512xlarge  EC2InstanceType = "m5.12xlarge"
-	EC2InstanceTypeM516xlarge  EC2InstanceType = "m5.16xlarge"
-	EC2InstanceTypeM524xlarge  EC2InstanceType = "m5.24xlarge"
-	EC2InstanceTypeM5aLarge    EC2InstanceType = "m5a.large"
-	EC2InstanceTypeM5aXlarge   EC2InstanceType = "m5a.xlarge"
-	EC2InstanceTypeM5a2xlarge  EC2InstanceType = "m5a.2xlarge"
-	EC2InstanceTypeM5a4xlarge  EC2InstanceType = "m5a.4xlarge"
-	EC2InstanceTypeM5a8xlarge  EC2InstanceType = "m5a.8xlarge"
-	EC2InstanceTypeM5a12xlarge EC2InstanceType = "m5a.12xlarge"
-	EC2InstanceTypeM5a16xlarge EC2InstanceType = "m5a.16xlarge"
-	EC2InstanceTypeM5a24xlarge EC2InstanceType = "m5a.24xlarge"
-	EC2InstanceTypeC5dLarge    EC2InstanceType = "c5d.large"
-	EC2InstanceTypeC5dXlarge   EC2InstanceType = "c5d.xlarge"
-	EC2InstanceTypeC5d2xlarge  EC2InstanceType = "c5d.2xlarge"
-	EC2InstanceTypeC5d4xlarge  EC2InstanceType = "c5d.4xlarge"
-	EC2InstanceTypeC5d9xlarge  EC2InstanceType = "c5d.9xlarge"
-	EC2InstanceTypeC5d12xlarge EC2InstanceType = "c5d.12xlarge"
-	EC2InstanceTypeC5d18xlarge EC2InstanceType = "c5d.18xlarge"
-	EC2InstanceTypeC5d24xlarge EC2InstanceType = "c5d.24xlarge"
-	EC2InstanceTypeC6aLarge    EC2InstanceType = "c6a.large"
-	EC2InstanceTypeC6aXlarge   EC2InstanceType = "c6a.xlarge"
-	EC2InstanceTypeC6a2xlarge  EC2InstanceType = "c6a.2xlarge"
-	EC2InstanceTypeC6a4xlarge  EC2InstanceType = "c6a.4xlarge"
-	EC2InstanceTypeC6a8xlarge  EC2InstanceType = "c6a.8xlarge"
-	EC2InstanceTypeC6a12xlarge EC2InstanceType = "c6a.12xlarge"
-	EC2InstanceTypeC6a16xlarge EC2InstanceType = "c6a.16xlarge"
-	EC2InstanceTypeC6a24xlarge EC2InstanceType = "c6a.24xlarge"
-	EC2InstanceTypeC6iLarge    EC2InstanceType = "c6i.large"
-	EC2InstanceTypeC6iXlarge   EC2InstanceType = "c6i.xlarge"
-	EC2InstanceTypeC6i2xlarge  EC2InstanceType = "c6i.2xlarge"
-	EC2InstanceTypeC6i4xlarge  EC2InstanceType = "c6i.4xlarge"
-	EC2InstanceTypeC6i8xlarge  EC2InstanceType = "c6i.8xlarge"
-	EC2InstanceTypeC6i12xlarge EC2InstanceType = "c6i.12xlarge"
-	EC2InstanceTypeC6i16xlarge EC2InstanceType = "c6i.16xlarge"
-	EC2InstanceTypeC6i24xlarge EC2InstanceType = "c6i.24xlarge"
-	EC2InstanceTypeR5dLarge    EC2InstanceType = "r5d.large"
-	EC2InstanceTypeR5dXlarge   EC2InstanceType = "r5d.xlarge"
-	EC2InstanceTypeR5d2xlarge  EC2InstanceType = "r5d.2xlarge"
-	EC2InstanceTypeR5d4xlarge  EC2InstanceType = "r5d.4xlarge"
-	EC2InstanceTypeR5d8xlarge  EC2InstanceType = "r5d.8xlarge"
-	EC2InstanceTypeR5d12xlarge EC2InstanceType = "r5d.12xlarge"
-	EC2InstanceTypeR5d16xlarge EC2InstanceType = "r5d.16xlarge"
-	EC2InstanceTypeR5d24xlarge EC2InstanceType = "r5d.24xlarge"
+	EC2InstanceTypeT2Micro      EC2InstanceType = "t2.micro"
+	EC2InstanceTypeT2Small      EC2InstanceType = "t2.small"
+	EC2InstanceTypeT2Medium     EC2InstanceType = "t2.medium"
+	EC2InstanceTypeT2Large      EC2InstanceType = "t2.large"
+	EC2InstanceTypeC3Large      EC2InstanceType = "c3.large"
+	EC2InstanceTypeC3Xlarge     EC2InstanceType = "c3.xlarge"
+	EC2InstanceTypeC32xlarge    EC2InstanceType = "c3.2xlarge"
+	EC2InstanceTypeC34xlarge    EC2InstanceType = "c3.4xlarge"
+	EC2InstanceTypeC38xlarge    EC2InstanceType = "c3.8xlarge"
+	EC2InstanceTypeC4Large      EC2InstanceType = "c4.large"
+	EC2InstanceTypeC4Xlarge     EC2InstanceType = "c4.xlarge"
+	EC2InstanceTypeC42xlarge    EC2InstanceType = "c4.2xlarge"
+	EC2InstanceTypeC44xlarge    EC2InstanceType = "c4.4xlarge"
+	EC2InstanceTypeC48xlarge    EC2InstanceType = "c4.8xlarge"
+	EC2InstanceTypeC5Large      EC2InstanceType = "c5.large"
+	EC2InstanceTypeC5Xlarge     EC2InstanceType = "c5.xlarge"
+	EC2InstanceTypeC52xlarge    EC2InstanceType = "c5.2xlarge"
+	EC2InstanceTypeC54xlarge    EC2InstanceType = "c5.4xlarge"
+	EC2InstanceTypeC59xlarge    EC2InstanceType = "c5.9xlarge"
+	EC2InstanceTypeC512xlarge   EC2InstanceType = "c5.12xlarge"
+	EC2InstanceTypeC518xlarge   EC2InstanceType = "c5.18xlarge"
+	EC2InstanceTypeC524xlarge   EC2InstanceType = "c5.24xlarge"
+	EC2InstanceTypeC5aLarge     EC2InstanceType = "c5a.large"
+	EC2InstanceTypeC5aXlarge    EC2InstanceType = "c5a.xlarge"
+	EC2InstanceTypeC5a2xlarge   EC2InstanceType = "c5a.2xlarge"
+	EC2InstanceTypeC5a4xlarge   EC2InstanceType = "c5a.4xlarge"
+	EC2InstanceTypeC5a8xlarge   EC2InstanceType = "c5a.8xlarge"
+	EC2InstanceTypeC5a12xlarge  EC2InstanceType = "c5a.12xlarge"
+	EC2InstanceTypeC5a16xlarge  EC2InstanceType = "c5a.16xlarge"
+	EC2InstanceTypeC5a24xlarge  EC2InstanceType = "c5a.24xlarge"
+	EC2InstanceTypeR3Large      EC2InstanceType = "r3.large"
+	EC2InstanceTypeR3Xlarge     EC2InstanceType = "r3.xlarge"
+	EC2InstanceTypeR32xlarge    EC2InstanceType = "r3.2xlarge"
+	EC2InstanceTypeR34xlarge    EC2InstanceType = "r3.4xlarge"
+	EC2InstanceTypeR38xlarge    EC2InstanceType = "r3.8xlarge"
+	EC2InstanceTypeR4Large      EC2InstanceType = "r4.large"
+	EC2InstanceTypeR4Xlarge     EC2InstanceType = "r4.xlarge"
+	EC2InstanceTypeR42xlarge    EC2InstanceType = "r4.2xlarge"
+	EC2InstanceTypeR44xlarge    EC2InstanceType = "r4.4xlarge"
+	EC2InstanceTypeR48xlarge    EC2InstanceType = "r4.8xlarge"
+	EC2InstanceTypeR416xlarge   EC2InstanceType = "r4.16xlarge"
+	EC2InstanceTypeR5Large      EC2InstanceType = "r5.large"
+	EC2InstanceTypeR5Xlarge     EC2InstanceType = "r5.xlarge"
+	EC2InstanceTypeR52xlarge    EC2InstanceType = "r5.2xlarge"
+	EC2InstanceTypeR54xlarge    EC2InstanceType = "r5.4xlarge"
+	EC2InstanceTypeR58xlarge    EC2InstanceType = "r5.8xlarge"
+	EC2InstanceTypeR512xlarge   EC2InstanceType = "r5.12xlarge"
+	EC2InstanceTypeR516xlarge   EC2InstanceType = "r5.16xlarge"
+	EC2InstanceTypeR524xlarge   EC2InstanceType = "r5.24xlarge"
+	EC2InstanceTypeR5aLarge     EC2InstanceType = "r5a.large"
+	EC2InstanceTypeR5aXlarge    EC2InstanceType = "r5a.xlarge"
+	EC2InstanceTypeR5a2xlarge   EC2InstanceType = "r5a.2xlarge"
+	EC2InstanceTypeR5a4xlarge   EC2InstanceType = "r5a.4xlarge"
+	EC2InstanceTypeR5a8xlarge   EC2InstanceType = "r5a.8xlarge"
+	EC2InstanceTypeR5a12xlarge  EC2InstanceType = "r5a.12xlarge"
+	EC2InstanceTypeR5a16xlarge  EC2InstanceType = "r5a.16xlarge"
+	EC2InstanceTypeR5a24xlarge  EC2InstanceType = "r5a.24xlarge"
+	EC2InstanceTypeM3Medium     EC2InstanceType = "m3.medium"
+	EC2InstanceTypeM3Large      EC2InstanceType = "m3.large"
+	EC2InstanceTypeM3Xlarge     EC2InstanceType = "m3.xlarge"
+	EC2InstanceTypeM32xlarge    EC2InstanceType = "m3.2xlarge"
+	EC2InstanceTypeM4Large      EC2InstanceType = "m4.large"
+	EC2InstanceTypeM4Xlarge     EC2InstanceType = "m4.xlarge"
+	EC2InstanceTypeM42xlarge    EC2InstanceType = "m4.2xlarge"
+	EC2InstanceTypeM44xlarge    EC2InstanceType = "m4.4xlarge"
+	EC2InstanceTypeM410xlarge   EC2InstanceType = "m4.10xlarge"
+	EC2InstanceTypeM5Large      EC2InstanceType = "m5.large"
+	EC2InstanceTypeM5Xlarge     EC2InstanceType = "m5.xlarge"
+	EC2InstanceTypeM52xlarge    EC2InstanceType = "m5.2xlarge"
+	EC2InstanceTypeM54xlarge    EC2InstanceType = "m5.4xlarge"
+	EC2InstanceTypeM58xlarge    EC2InstanceType = "m5.8xlarge"
+	EC2InstanceTypeM512xlarge   EC2InstanceType = "m5.12xlarge"
+	EC2InstanceTypeM516xlarge   EC2InstanceType = "m5.16xlarge"
+	EC2InstanceTypeM524xlarge   EC2InstanceType = "m5.24xlarge"
+	EC2InstanceTypeM5aLarge     EC2InstanceType = "m5a.large"
+	EC2InstanceTypeM5aXlarge    EC2InstanceType = "m5a.xlarge"
+	EC2InstanceTypeM5a2xlarge   EC2InstanceType = "m5a.2xlarge"
+	EC2InstanceTypeM5a4xlarge   EC2InstanceType = "m5a.4xlarge"
+	EC2InstanceTypeM5a8xlarge   EC2InstanceType = "m5a.8xlarge"
+	EC2InstanceTypeM5a12xlarge  EC2InstanceType = "m5a.12xlarge"
+	EC2InstanceTypeM5a16xlarge  EC2InstanceType = "m5a.16xlarge"
+	EC2InstanceTypeM5a24xlarge  EC2InstanceType = "m5a.24xlarge"
+	EC2InstanceTypeC5dLarge     EC2InstanceType = "c5d.large"
+	EC2InstanceTypeC5dXlarge    EC2InstanceType = "c5d.xlarge"
+	EC2InstanceTypeC5d2xlarge   EC2InstanceType = "c5d.2xlarge"
+	EC2InstanceTypeC5d4xlarge   EC2InstanceType = "c5d.4xlarge"
+	EC2InstanceTypeC5d9xlarge   EC2InstanceType = "c5d.9xlarge"
+	EC2InstanceTypeC5d12xlarge  EC2InstanceType = "c5d.12xlarge"
+	EC2InstanceTypeC5d18xlarge  EC2InstanceType = "c5d.18xlarge"
+	EC2InstanceTypeC5d24xlarge  EC2InstanceType = "c5d.24xlarge"
+	EC2InstanceTypeC6aLarge     EC2InstanceType = "c6a.large"
+	EC2InstanceTypeC6aXlarge    EC2InstanceType = "c6a.xlarge"
+	EC2InstanceTypeC6a2xlarge   EC2InstanceType = "c6a.2xlarge"
+	EC2InstanceTypeC6a4xlarge   EC2InstanceType = "c6a.4xlarge"
+	EC2InstanceTypeC6a8xlarge   EC2InstanceType = "c6a.8xlarge"
+	EC2InstanceTypeC6a12xlarge  EC2InstanceType = "c6a.12xlarge"
+	EC2InstanceTypeC6a16xlarge  EC2InstanceType = "c6a.16xlarge"
+	EC2InstanceTypeC6a24xlarge  EC2InstanceType = "c6a.24xlarge"
+	EC2InstanceTypeC6iLarge     EC2InstanceType = "c6i.large"
+	EC2InstanceTypeC6iXlarge    EC2InstanceType = "c6i.xlarge"
+	EC2InstanceTypeC6i2xlarge   EC2InstanceType = "c6i.2xlarge"
+	EC2InstanceTypeC6i4xlarge   EC2InstanceType = "c6i.4xlarge"
+	EC2InstanceTypeC6i8xlarge   EC2InstanceType = "c6i.8xlarge"
+	EC2InstanceTypeC6i12xlarge  EC2InstanceType = "c6i.12xlarge"
+	EC2InstanceTypeC6i16xlarge  EC2InstanceType = "c6i.16xlarge"
+	EC2InstanceTypeC6i24xlarge  EC2InstanceType = "c6i.24xlarge"
+	EC2InstanceTypeR5dLarge     EC2InstanceType = "r5d.large"
+	EC2InstanceTypeR5dXlarge    EC2InstanceType = "r5d.xlarge"
+	EC2InstanceTypeR5d2xlarge   EC2InstanceType = "r5d.2xlarge"
+	EC2InstanceTypeR5d4xlarge   EC2InstanceType = "r5d.4xlarge"
+	EC2InstanceTypeR5d8xlarge   EC2InstanceType = "r5d.8xlarge"
+	EC2InstanceTypeR5d12xlarge  EC2InstanceType = "r5d.12xlarge"
+	EC2InstanceTypeR5d16xlarge  EC2InstanceType = "r5d.16xlarge"
+	EC2InstanceTypeR5d24xlarge  EC2InstanceType = "r5d.24xlarge"
+	EC2InstanceTypeM6gMedium    EC2InstanceType = "m6g.medium"
+	EC2InstanceTypeM6gLarge     EC2InstanceType = "m6g.large"
+	EC2InstanceTypeM6gXlarge    EC2InstanceType = "m6g.xlarge"
+	EC2InstanceTypeM6g2xlarge   EC2InstanceType = "m6g.2xlarge"
+	EC2InstanceTypeM6g4xlarge   EC2InstanceType = "m6g.4xlarge"
+	EC2InstanceTypeM6g8xlarge   EC2InstanceType = "m6g.8xlarge"
+	EC2InstanceTypeM6g12xlarge  EC2InstanceType = "m6g.12xlarge"
+	EC2InstanceTypeM6g16xlarge  EC2InstanceType = "m6g.16xlarge"
+	EC2InstanceTypeC6gMedium    EC2InstanceType = "c6g.medium"
+	EC2InstanceTypeC6gLarge     EC2InstanceType = "c6g.large"
+	EC2InstanceTypeC6gXlarge    EC2InstanceType = "c6g.xlarge"
+	EC2InstanceTypeC6g2xlarge   EC2InstanceType = "c6g.2xlarge"
+	EC2InstanceTypeC6g4xlarge   EC2InstanceType = "c6g.4xlarge"
+	EC2InstanceTypeC6g8xlarge   EC2InstanceType = "c6g.8xlarge"
+	EC2InstanceTypeC6g12xlarge  EC2InstanceType = "c6g.12xlarge"
+	EC2InstanceTypeC6g16xlarge  EC2InstanceType = "c6g.16xlarge"
+	EC2InstanceTypeR6gMedium    EC2InstanceType = "r6g.medium"
+	EC2InstanceTypeR6gLarge     EC2InstanceType = "r6g.large"
+	EC2InstanceTypeR6gXlarge    EC2InstanceType = "r6g.xlarge"
+	EC2InstanceTypeR6g2xlarge   EC2InstanceType = "r6g.2xlarge"
+	EC2InstanceTypeR6g4xlarge   EC2InstanceType = "r6g.4xlarge"
+	EC2InstanceTypeR6g8xlarge   EC2InstanceType = "r6g.8xlarge"
+	EC2InstanceTypeR6g12xlarge  EC2InstanceType = "r6g.12xlarge"
+	EC2InstanceTypeR6g16xlarge  EC2InstanceType = "r6g.16xlarge"
+	EC2InstanceTypeC6gnMedium   EC2InstanceType = "c6gn.medium"
+	EC2InstanceTypeC6gnLarge    EC2InstanceType = "c6gn.large"
+	EC2InstanceTypeC6gnXlarge   EC2InstanceType = "c6gn.xlarge"
+	EC2InstanceTypeC6gn2xlarge  EC2InstanceType = "c6gn.2xlarge"
+	EC2InstanceTypeC6gn4xlarge  EC2InstanceType = "c6gn.4xlarge"
+	EC2InstanceTypeC6gn8xlarge  EC2InstanceType = "c6gn.8xlarge"
+	EC2InstanceTypeC6gn12xlarge EC2InstanceType = "c6gn.12xlarge"
+	EC2InstanceTypeC6gn16xlarge EC2InstanceType = "c6gn.16xlarge"
+	EC2InstanceTypeC7gMedium    EC2InstanceType = "c7g.medium"
+	EC2InstanceTypeC7gLarge     EC2InstanceType = "c7g.large"
+	EC2InstanceTypeC7gXlarge    EC2InstanceType = "c7g.xlarge"
+	EC2InstanceTypeC7g2xlarge   EC2InstanceType = "c7g.2xlarge"
+	EC2InstanceTypeC7g4xlarge   EC2InstanceType = "c7g.4xlarge"
+	EC2InstanceTypeC7g8xlarge   EC2InstanceType = "c7g.8xlarge"
+	EC2InstanceTypeC7g12xlarge  EC2InstanceType = "c7g.12xlarge"
+	EC2InstanceTypeC7g16xlarge  EC2InstanceType = "c7g.16xlarge"
+	EC2InstanceTypeR7gMedium    EC2InstanceType = "r7g.medium"
+	EC2InstanceTypeR7gLarge     EC2InstanceType = "r7g.large"
+	EC2InstanceTypeR7gXlarge    EC2InstanceType = "r7g.xlarge"
+	EC2InstanceTypeR7g2xlarge   EC2InstanceType = "r7g.2xlarge"
+	EC2InstanceTypeR7g4xlarge   EC2InstanceType = "r7g.4xlarge"
+	EC2InstanceTypeR7g8xlarge   EC2InstanceType = "r7g.8xlarge"
+	EC2InstanceTypeR7g12xlarge  EC2InstanceType = "r7g.12xlarge"
+	EC2InstanceTypeR7g16xlarge  EC2InstanceType = "r7g.16xlarge"
+	EC2InstanceTypeM7gMedium    EC2InstanceType = "m7g.medium"
+	EC2InstanceTypeM7gLarge     EC2InstanceType = "m7g.large"
+	EC2InstanceTypeM7gXlarge    EC2InstanceType = "m7g.xlarge"
+	EC2InstanceTypeM7g2xlarge   EC2InstanceType = "m7g.2xlarge"
+	EC2InstanceTypeM7g4xlarge   EC2InstanceType = "m7g.4xlarge"
+	EC2InstanceTypeM7g8xlarge   EC2InstanceType = "m7g.8xlarge"
+	EC2InstanceTypeM7g12xlarge  EC2InstanceType = "m7g.12xlarge"
+	EC2InstanceTypeM7g16xlarge  EC2InstanceType = "m7g.16xlarge"
+	EC2InstanceTypeG5gXlarge    EC2InstanceType = "g5g.xlarge"
+	EC2InstanceTypeG5g2xlarge   EC2InstanceType = "g5g.2xlarge"
+	EC2InstanceTypeG5g4xlarge   EC2InstanceType = "g5g.4xlarge"
+	EC2InstanceTypeG5g8xlarge   EC2InstanceType = "g5g.8xlarge"
+	EC2InstanceTypeG5g16xlarge  EC2InstanceType = "g5g.16xlarge"
 )
 
 // Values returns all known values for EC2InstanceType. Note that this can be
@@ -395,6 +456,67 @@ func (EC2InstanceType) Values() []EC2InstanceType {
 		"r5d.12xlarge",
 		"r5d.16xlarge",
 		"r5d.24xlarge",
+		"m6g.medium",
+		"m6g.large",
+		"m6g.xlarge",
+		"m6g.2xlarge",
+		"m6g.4xlarge",
+		"m6g.8xlarge",
+		"m6g.12xlarge",
+		"m6g.16xlarge",
+		"c6g.medium",
+		"c6g.large",
+		"c6g.xlarge",
+		"c6g.2xlarge",
+		"c6g.4xlarge",
+		"c6g.8xlarge",
+		"c6g.12xlarge",
+		"c6g.16xlarge",
+		"r6g.medium",
+		"r6g.large",
+		"r6g.xlarge",
+		"r6g.2xlarge",
+		"r6g.4xlarge",
+		"r6g.8xlarge",
+		"r6g.12xlarge",
+		"r6g.16xlarge",
+		"c6gn.medium",
+		"c6gn.large",
+		"c6gn.xlarge",
+		"c6gn.2xlarge",
+		"c6gn.4xlarge",
+		"c6gn.8xlarge",
+		"c6gn.12xlarge",
+		"c6gn.16xlarge",
+		"c7g.medium",
+		"c7g.large",
+		"c7g.xlarge",
+		"c7g.2xlarge",
+		"c7g.4xlarge",
+		"c7g.8xlarge",
+		"c7g.12xlarge",
+		"c7g.16xlarge",
+		"r7g.medium",
+		"r7g.large",
+		"r7g.xlarge",
+		"r7g.2xlarge",
+		"r7g.4xlarge",
+		"r7g.8xlarge",
+		"r7g.12xlarge",
+		"r7g.16xlarge",
+		"m7g.medium",
+		"m7g.large",
+		"m7g.xlarge",
+		"m7g.2xlarge",
+		"m7g.4xlarge",
+		"m7g.8xlarge",
+		"m7g.12xlarge",
+		"m7g.16xlarge",
+		"g5g.xlarge",
+		"g5g.2xlarge",
+		"g5g.4xlarge",
+		"g5g.8xlarge",
+		"g5g.16xlarge",
 	}
 }
 

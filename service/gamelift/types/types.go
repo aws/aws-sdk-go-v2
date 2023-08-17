@@ -80,19 +80,26 @@ type AttributeValue struct {
 	noSmithyDocumentSerde
 }
 
-// Temporary access credentials used for uploading game build files to Amazon
-// GameLift. They are valid for a limited time. If they expire before you upload
-// your game build, get a new set by calling RequestUploadCredentials (https://docs.aws.amazon.com/gamelift/latest/apireference/API_RequestUploadCredentials.html)
-// .
+// Amazon Web Services account security credentials that allow interactions with
+// Amazon GameLift resources. The credentials are temporary and valid for a limited
+// time span. You can request fresh credentials at any time. Amazon Web Services
+// security credentials consist of three parts: an access key ID, a secret access
+// key, and a session token. You must use all three parts together to authenticate
+// your access requests. You need Amazon Web Services credentials for the following
+// tasks:
+//   - To upload a game server build directly to Amazon GameLift S3 storage using
+//     CreateBuild . To get access for this task, call RequestUploadCredentials .
+//   - To remotely connect to an active Amazon GameLift fleet instances. To get
+//     remote access, call GetComputeAccess .
 type AwsCredentials struct {
 
-	// Temporary key allowing access to the Amazon GameLift S3 account.
+	// The access key ID that identifies the temporary security credentials.
 	AccessKeyId *string
 
-	// Temporary secret key allowing access to the Amazon GameLift S3 account.
+	// The secret access key that can be used to sign requests.
 	SecretAccessKey *string
 
-	// Token used to associate a specific build ID with the files uploaded using these
+	// The token that users must pass to the service API to use the temporary
 	// credentials.
 	SessionToken *string
 
@@ -180,16 +187,18 @@ type ClaimFilterOption struct {
 	noSmithyDocumentSerde
 }
 
-// Resources used to host your game servers. A compute resource can be managed
-// Amazon GameLift Amazon EC2 instances or your own resources.
+// An Amazon GameLift compute resource for hosting your game servers. A compute
+// can be an EC2instance in a managed EC2 fleet or a registered compute in an
+// Anywhere fleet.
 type Compute struct {
 
-	// The ARN that is assigned to the compute resource and uniquely identifies it.
-	// ARNs are unique across locations.
+	// The ARN that is assigned to a compute resource and uniquely identifies it. ARNs
+	// are unique across locations. Instances in managed EC2 fleets are not assigned a
+	// ComputeARN.
 	ComputeArn *string
 
-	// A descriptive label that is associated with the compute resource registered to
-	// your fleet.
+	// A descriptive label for the compute resource. For instances in a managed EC2
+	// fleet, the compute name is an instance ID.
 	ComputeName *string
 
 	// Current status of the compute. A compute must have an ACTIVE status to host
@@ -200,33 +209,34 @@ type Compute struct {
 	// expressed in Unix time as milliseconds (for example "1469498468.057" ).
 	CreationTime *time.Time
 
-	// The DNS name of the compute resource. Amazon GameLift requires the DNS name or
-	// IP address to manage your compute resource.
+	// The DNS name of a compute resource. Amazon GameLift requires a DNS name or IP
+	// address for a compute.
 	DnsName *string
 
-	// The Amazon Resource Name (ARN) of the fleet that the compute is registered to.
+	// The Amazon Resource Name (ARN) of the fleet that the compute belongs to.
 	FleetArn *string
 
-	// A unique identifier for the fleet that the compute is registered to.
+	// A unique identifier for the fleet that the compute belongs to.
 	FleetId *string
 
-	// The endpoint connection details of the Amazon GameLift SDK endpoint that your
-	// game server connects to.
+	// The Amazon GameLift SDK endpoint connection for a registered compute resource
+	// in an Anywhere fleet. The game servers on the compute use this endpoint to
+	// connect to the Amazon GameLift service.
 	GameLiftServiceSdkEndpoint *string
 
-	// The IP address of the compute resource. Amazon GameLift requires the DNS name
-	// or IP address to manage your compute resource.
+	// The IP address of a compute resource. Amazon GameLift requires a DNS name or IP
+	// address for a compute.
 	IpAddress *string
 
 	// The name of the custom location you added to the fleet that this compute
 	// resource resides in.
 	Location *string
 
-	// The type of operating system on your compute resource.
+	// The type of operating system on the compute resource.
 	OperatingSystem OperatingSystem
 
-	// The compute type that the fleet uses. A fleet can use Anywhere compute
-	// resources that you own, or use managed Amazon EC2 instances.
+	// The Amazon EC2 instance type that the fleet uses. For registered computes in an
+	// Amazon GameLift Anywhere fleet, this property is empty.
 	Type EC2InstanceType
 
 	noSmithyDocumentSerde
@@ -254,9 +264,10 @@ type EC2InstanceCounts struct {
 	// Actual number of instances that are ready to host game sessions.
 	ACTIVE *int32
 
-	// Ideal number of active instances. GameLift will always try to maintain the
-	// desired number of instances. Capacity is scaled up or down by changing the
-	// desired instances.
+	// Requested number of active instances. Amazon GameLift takes action as needed to
+	// maintain the desired number of instances. Capacity is scaled up or down by
+	// changing the desired instances. A change in the desired instances value can take
+	// up to 1 minute to be reflected when viewing a fleet's capacity settings.
 	DESIRED *int32
 
 	// Number of active instances that are not currently hosting a game session.
@@ -385,6 +396,9 @@ type Event struct {
 	// Spot instance events:
 	//   - INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with a
 	//   two-minute notification.
+	//   - INSTANCE_RECYCLED -- A spot instance was determined to have a high risk of
+	//   interruption and is scheduled to be recycled once it has no active game
+	//   sessions.
 	// Server process events:
 	//   - SERVER_PROCESS_INVALID_PATH -- The game server executable or script could
 	//   not be found based on the Fleet runtime configuration. Check that the launch
@@ -911,10 +925,10 @@ type GameServerInstance struct {
 }
 
 // Properties describing a game session. A game session in ACTIVE status can host
-// players. When a game session ends, its status is set to TERMINATED . Once the
-// session ends, the game session object is retained for 30 days. This means you
-// can reuse idempotency token values after this time. Game session logs are
-// retained for 14 days. All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// players. When a game session ends, its status is set to TERMINATED . Amazon
+// GameLift retains a game session resource for 30 days after the game session
+// ends. You can reuse idempotency token values after this time. Game session logs
+// are retained for 14 days. All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 type GameSession struct {
 
 	// A time stamp indicating when this data object was created. Format is a number
@@ -971,14 +985,12 @@ type GameSession struct {
 	// Web Services Region code such as us-west-2 .
 	Location *string
 
-	// Information about the matchmaking process that was used to create the game
-	// session. It is in JSON syntax, formatted as a string. In addition the
-	// matchmaking configuration used, it contains data on all players assigned to the
-	// match, including player attributes and team assignments. For more details on
-	// matchmaker data, see Match Data (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data)
-	// . Matchmaker data is useful when requesting match backfills, and is updated
-	// whenever new players are added during a successful backfill (see
-	// StartMatchBackfill (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchBackfill.html)
+	// Information about the matchmaking process that resulted in the game session, if
+	// matchmaking was used. Data is in JSON syntax, formatted as a string. Information
+	// includes the matchmaker ID as well as player attributes and team assignments.
+	// For more details on matchmaker data, see Match Data (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data)
+	// . Matchmaker data is updated whenever new players are added during a successful
+	// backfill (see StartMatchBackfill (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchBackfill.html)
 	// ).
 	MatchmakerData *string
 
@@ -1064,8 +1076,14 @@ type GameSessionDetail struct {
 	noSmithyDocumentSerde
 }
 
-// This object includes the full details of the original request plus the current
-// status and start/end time stamps.
+// Represents a potential game session placement, including the full details of
+// the original placement request and the current status. If the game session
+// placement status is PENDING , the properties for game session ID/ARN, region, IP
+// address/DNS, and port aren't final. A game session is not active and ready to
+// accept players until placement status reaches FULFILLED . When the placement is
+// in PENDING status, Amazon GameLift may attempt to place a game session multiple
+// times before succeeding. With each attempt it creates a GameSession object and
+// updates this placement object with the new game session properties..
 type GameSessionPlacement struct {
 
 	// The DNS identifier assigned to the instance that is running the game session.
@@ -1087,10 +1105,9 @@ type GameSessionPlacement struct {
 	// ).
 	GameProperties []GameProperty
 
-	// Identifier for the game session created by this placement request. This value
-	// is set once the new game session is placed (placement status is FULFILLED ).
-	// This identifier is unique across all Regions. You can use this value as a
-	// GameSessionId value as needed.
+	// Identifier for the game session created by this placement request. This
+	// identifier is unique across all Regions. This value isn't final until placement
+	// status is FULFILLED .
 	GameSessionArn *string
 
 	// A set of custom game session properties, formatted as a single string value.
@@ -1099,8 +1116,8 @@ type GameSessionPlacement struct {
 	// ).
 	GameSessionData *string
 
-	// A unique identifier for the game session. This value is set once the new game
-	// session is placed (placement status is FULFILLED ).
+	// A unique identifier for the game session. This value isn't final until
+	// placement status is FULFILLED .
 	GameSessionId *string
 
 	// A descriptive label that is associated with a game session. Session names do
@@ -1112,13 +1129,12 @@ type GameSessionPlacement struct {
 	GameSessionQueueName *string
 
 	// Name of the Region where the game session created by this placement request is
-	// running. This value is set once the new game session is placed (placement status
-	// is FULFILLED ).
+	// running. This value isn't final until placement status is FULFILLED .
 	GameSessionRegion *string
 
 	// The IP address of the game session. To connect to a Amazon GameLift game
-	// server, an app needs both the IP address and port number. This value is set once
-	// the new game session is placed (placement status is FULFILLED ).
+	// server, an app needs both the IP address and port number. This value isn't final
+	// until placement status is FULFILLED .
 	IpAddress *string
 
 	// Information on the matchmaking process for this game. Data is in JSON syntax,
@@ -1134,10 +1150,10 @@ type GameSessionPlacement struct {
 	MaximumPlayerSessionCount *int32
 
 	// A collection of information on player sessions created in response to the game
-	// session placement request. These player sessions are created only once a new
+	// session placement request. These player sessions are created only after a new
 	// game session is successfully placed (placement status is FULFILLED ). This
-	// information includes the player ID (as provided in the placement request) and
-	// the corresponding player session ID.
+	// information includes the player ID, provided in the placement request, and a
+	// corresponding player session ID.
 	PlacedPlayerSessions []PlacedPlayerSession
 
 	// A unique identifier for a game session placement.
@@ -1148,8 +1164,8 @@ type GameSessionPlacement struct {
 	PlayerLatencies []PlayerLatency
 
 	// The port number for the game session. To connect to a Amazon GameLift game
-	// server, an app needs both the IP address and port number. This value is set once
-	// the new game session is placed (placement status is FULFILLED ).
+	// server, an app needs both the IP address and port number. This value isn't final
+	// until placement status is FULFILLED .
 	Port *int32
 
 	// Time stamp indicating when this request was placed in the queue. Format is a
@@ -1157,11 +1173,10 @@ type GameSessionPlacement struct {
 	StartTime *time.Time
 
 	// Current status of the game session placement request.
-	//   - PENDING -- The placement request is currently in the queue waiting to be
-	//   processed.
-	//   - FULFILLED -- A new game session and player sessions (if requested) have
-	//   been successfully created. Values for GameSessionArn and GameSessionRegion are
-	//   available.
+	//   - PENDING -- The placement request is in the queue waiting to be processed.
+	//   Game session properties are not yet final.
+	//   - FULFILLED -- A new game session has been successfully placed. Game session
+	//   properties are now final.
 	//   - CANCELLED -- The placement request was canceled.
 	//   - TIMED_OUT -- A new game session was not successfully created before the
 	//   time limit expired. You can resubmit the placement request as needed.
@@ -1244,9 +1259,9 @@ type GameSessionQueueDestination struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an EC2 instance of virtual computing resources that hosts one or
-// more game servers. In Amazon GameLift, a fleet can contain zero or more
-// instances. Related actions
+// Represents a virtual computing instance that runs game server processes and
+// hosts game sessions. In Amazon GameLift, one or more instances make up a managed
+// EC2 fleet.
 type Instance struct {
 
 	// A time stamp indicating when this data object was created. Format is a number
@@ -1256,8 +1271,8 @@ type Instance struct {
 	// The DNS identifier assigned to the instance that is running the game session.
 	// Values have the following format:
 	//   - TLS-enabled fleets: ..amazongamelift.com .
-	//   - Non-TLS-enabled fleets: ec2-.compute.amazonaws.com . (See Amazon EC2
-	//   Instance IP Addressing (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses)
+	//   - Non-TLS-enabled fleets: ec2-.compute.amazonaws.com . (See Amazon Elastic
+	//   Compute Cloud Instance IP Addressing (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses)
 	//   .)
 	// When connecting to a game session that is running on a TLS-enabled fleet, you
 	// must use the DNS name, not the IP address.
@@ -1269,7 +1284,7 @@ type Instance struct {
 	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
 	FleetArn *string
 
-	// A unique identifier for the fleet that the instance is in.
+	// A unique identifier for the fleet that the instance belongs to.
 	FleetId *string
 
 	// A unique identifier for the instance.
@@ -1282,7 +1297,7 @@ type Instance struct {
 	// code, such as us-west-2 .
 	Location *string
 
-	// Operating system that is running on this instance.
+	// Operating system that is running on this EC2 instance.
 	OperatingSystem OperatingSystem
 
 	// Current status of the instance. Possible statuses include the following:
@@ -1297,25 +1312,27 @@ type Instance struct {
 	//   the event of a problem.
 	Status InstanceStatus
 
-	// Amazon EC2 instance type that defines the computing resources of this instance.
+	// EC2 instance type that defines the computing resources of this instance.
 	Type EC2InstanceType
 
 	noSmithyDocumentSerde
 }
 
-// Information required to remotely connect to a fleet instance.
+// Information and credentials that you can use to remotely connect to an instance
+// in an EC2 managed fleet. This data type is returned in response to a call to
+// GetInstanceAccess .
 type InstanceAccess struct {
 
-	// Credentials required to access the instance.
+	// Security credentials that are required to access the instance.
 	Credentials *InstanceCredentials
 
-	// A unique identifier for the fleet containing the instance being accessed.
+	// A unique identifier for the fleet containing the instance to be accessed.
 	FleetId *string
 
-	// A unique identifier for the instance being accessed.
+	// A unique identifier for the instance to be accessed.
 	InstanceId *string
 
-	// IP address that is assigned to the instance.
+	// IP address assigned to the instance.
 	IpAddress *string
 
 	// Operating system that is running on the instance.
@@ -1324,15 +1341,18 @@ type InstanceAccess struct {
 	noSmithyDocumentSerde
 }
 
-// Set of credentials required to remotely access a fleet instance.
+// A set of credentials that allow remote access to an instance in an EC2 managed
+// fleet. These credentials are returned in response to a call to GetInstanceAccess
+// , which requests access for instances that are running game servers with the
+// Amazon GameLift server SDK version 4.x or earlier.
 type InstanceCredentials struct {
 
 	// Secret string. For Windows instances, the secret is a password for use with
-	// Windows Remote Desktop. For Linux instances, it is a private key (which must be
-	// saved as a .pem file) for use with SSH.
+	// Windows Remote Desktop. For Linux instances, it's a private key for use with
+	// SSH.
 	Secret *string
 
-	// User login string.
+	// A user name for logging in.
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -2198,13 +2218,15 @@ type ServerProcess struct {
 	// This member is required.
 	ConcurrentExecutions *int32
 
-	// The location of a game build executable or the Realtime script file that
-	// contains the Init() function. Game builds and Realtime scripts are installed on
-	// instances at the root:
+	// The location of a game build executable or Realtime script. Game builds and
+	// Realtime scripts are installed on instances at the root:
 	//   - Windows (custom game builds only): C:\game . Example: "
 	//   C:\game\MyGame\server.exe "
 	//   - Linux: /local/game . Examples: " /local/game/MyGame/server.exe " or "
 	//   /local/game/MyRealtimeScript.js "
+	// Amazon GameLift doesn't support the use of setup scripts that launch the game
+	// executable. For custom game builds, this parameter must indicate the executable
+	// that calls the server SDK operations initSDK() and ProcessReady() .
 	//
 	// This member is required.
 	LaunchPath *string

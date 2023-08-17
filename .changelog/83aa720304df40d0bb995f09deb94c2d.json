@@ -1,0 +1,8 @@
+{
+    "id": "83aa7203-04df-40d0-bb99-5f09deb94c2d",
+    "type": "feature",
+    "description": "Adds support for SubnetConfigurations to allow users to select their own IPv4 and IPv6 addresses for Interface VPC endpoints",
+    "modules": [
+        "service/ec2"
+    ]
+}

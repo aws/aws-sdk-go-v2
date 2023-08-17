@@ -70,6 +70,8 @@ type UpdateFleetCapacityInput struct {
 
 	// The number of Amazon EC2 instances you want to maintain in the specified fleet
 	// location. This value must fall between the minimum and maximum size limits.
+	// Changes in desired instance value can take up to 1 minute to be reflected when
+	// viewing the fleet's capacity settings.
 	DesiredInstances *int32
 
 	// The name of a remote location to update fleet capacity settings for, in the

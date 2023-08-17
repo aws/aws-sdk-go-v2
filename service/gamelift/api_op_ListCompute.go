@@ -16,8 +16,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves all compute resources registered to a fleet in your Amazon Web
-// Services account. You can filter the result set by location.
+// Retrieves the compute resources in an Amazon GameLift fleet. You can request
+// information for either managed EC2 fleets or Anywhere fleets. To request a list
+// of computes, specify the fleet ID. You can filter the result set by location.
+// Use the pagination parameters to retrieve results in a set of sequential pages.
+// If successful, this operation returns the compute resource for the requested
+// fleet. For managed EC2 fleets, it returns a list of EC2 instances. For Anywhere
+// fleets, it returns a list of registered compute names.
 func (c *Client) ListCompute(ctx context.Context, params *ListComputeInput, optFns ...func(*Options)) (*ListComputeOutput, error) {
 	if params == nil {
 		params = &ListComputeInput{}
@@ -35,7 +40,7 @@ func (c *Client) ListCompute(ctx context.Context, params *ListComputeInput, optF
 
 type ListComputeInput struct {
 
-	// A unique identifier for the fleet the compute resources are registered to.
+	// A unique identifier for the fleet to retrieve compute resources for.
 	//
 	// This member is required.
 	FleetId *string
@@ -44,7 +49,7 @@ type ListComputeInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// The name of the custom location that the compute resources are assigned to.
+	// The name of a location to retrieve compute resources for.
 	Location *string
 
 	// A token that indicates the start of the next sequential page of results. Use
@@ -57,7 +62,7 @@ type ListComputeInput struct {
 
 type ListComputeOutput struct {
 
-	// A list of compute resources registered to the fleet you specified.
+	// A list of compute resources in the specified fleet.
 	ComputeList []types.Compute
 
 	// A token that indicates where to resume retrieving results on the next call to

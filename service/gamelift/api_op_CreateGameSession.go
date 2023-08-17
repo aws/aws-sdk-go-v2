@@ -21,25 +21,26 @@ import (
 // retrieves connection information for the new game session. As an alternative,
 // consider using the Amazon GameLift game session placement feature with
 // StartGameSessionPlacement (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
-// , which uses FleetIQ algorithms and queues to optimize the placement process.
+// , which uses the FleetIQ algorithm and queues to optimize the placement process.
 // When creating a game session, you specify exactly where you want to place it and
-// provide a set of game session configuration settings. The fleet must be in
-// ACTIVE status before a game session can be created in it. This operation can be
-// used in the following ways:
+// provide a set of game session configuration settings. The target fleet must be
+// in ACTIVE status. You can use this operation in the following ways:
 //   - To create a game session on an instance in a fleet's home Region, provide a
 //     fleet or alias ID along with your game session configuration.
 //   - To create a game session on an instance in a fleet's remote location,
 //     provide a fleet or alias ID and a location name, along with your game session
 //     configuration.
+//   - To create a game session on an instance in an Anywhere fleet, specify the
+//     fleet's custom location.
 //
-// If successful, a workflow is initiated to start a new game session. A
-// GameSession object is returned containing the game session configuration and
-// status. When the status is ACTIVE , game session connection information is
-// provided and player sessions can be created for the game session. By default,
+// If successful, Amazon GameLift initiates a workflow to start a new game session
+// and returns a GameSession object containing the game session configuration and
+// status. When the game session status is ACTIVE , it is updated with connection
+// information and you can create player sessions for the game session. By default,
 // newly created game sessions are open to new players. You can restrict new player
 // access by using UpdateGameSession (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)
-// to change the game session's player session creation policy. Game session logs
-// are retained for all active game sessions for 14 days. To access the logs, call
+// to change the game session's player session creation policy. Amazon GameLift
+// retains logs for active for 14 days. To access the logs, call
 // GetGameSessionLogUrl (https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetGameSessionLogUrl.html)
 // to download the log files. Available in Amazon GameLift Local. Learn more Start
 // a game session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
@@ -117,7 +118,9 @@ type CreateGameSessionInput struct {
 
 	// A fleet's remote location to place the new game session in. If this parameter
 	// is not set, the new game session is placed in the fleet's home Region. Specify a
-	// remote location with an Amazon Web Services Region code such as us-west-2 .
+	// remote location with an Amazon Web Services Region code such as us-west-2 . When
+	// using an Anywhere fleet, this parameter is required and must be set to the
+	// Anywhere fleet's custom location.
 	Location *string
 
 	// A descriptive label that is associated with a game session. Session names do

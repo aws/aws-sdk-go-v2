@@ -59,9 +59,9 @@ type UpdateFleetAttributesInput struct {
 	// be unique.
 	Name *string
 
-	// The game session protection policy to apply to all new instances created in
-	// this fleet. Instances that already exist are not affected. You can set
-	// protection for individual instances using UpdateGameSession (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)
+	// The game session protection policy to apply to all new game sessions created in
+	// this fleet. Game sessions that already exist are not affected. You can set
+	// protection for individual game sessions using UpdateGameSession (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)
 	// .
 	//   - NoProtection -- The game session can be terminated during a scale-down
 	//   event.
