@@ -214,6 +214,30 @@ func newServiceMetadataMiddleware_opSynthesizeSpeech(region string) *awsmiddlewa
 	}
 }
 
+// PresignSynthesizeSpeech is used to generate a presigned HTTP Request which
+// contains presigned URL, signed headers and HTTP method used.
+func (c *PresignClient) PresignSynthesizeSpeech(ctx context.Context, params *SynthesizeSpeechInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
+	if params == nil {
+		params = &SynthesizeSpeechInput{}
+	}
+	options := c.options.copy()
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
+
+	result, _, err := c.client.invokeOperation(ctx, "SynthesizeSpeech", params, clientOptFns,
+		c.client.addOperationSynthesizeSpeechMiddlewares,
+		presignConverter(options).convertToPresignMiddleware,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	out := result.(*v4.PresignedHTTPRequest)
+	return out, nil
+}
+
 type opSynthesizeSpeechResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  builtInParameterResolver

@@ -101,6 +101,9 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             ShapeId.from("com.amazonaws.sts#AWSSecurityTokenServiceV20110615"), SetUtils.of(
                     ShapeId.from("com.amazonaws.sts#GetCallerIdentity"),
                     ShapeId.from("com.amazonaws.sts#AssumeRole")
+            ),
+            ShapeId.from("com.amazonaws.polly#Parrot_v1"), SetUtils.of(
+                    ShapeId.from("com.amazonaws.polly#SynthesizeSpeech")
             )
     );
 
@@ -381,14 +384,23 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                                 writer.write("return err");
                             });
 
-                    // if protocol used is ec2query or query
-                    if (serviceShape.hasTrait(AwsQueryTrait.ID) || serviceShape.hasTrait(Ec2QueryTrait.ID)) {
+                    // if protocol used is ec2query or query or if service is polly
+                    if (serviceShape.hasTrait(AwsQueryTrait.ID) || serviceShape.hasTrait(Ec2QueryTrait.ID) || isPollyServiceShape(serviceShape)) {
                         // presigned url should convert to Get request
                         Symbol queryAsGetMiddleware = SymbolUtils.createValueSymbolBuilder("AddAsGetRequestMiddleware",
                                 AwsGoDependency.AWS_QUERY_PROTOCOL).build();
 
                         writer.writeDocs("convert request to a GET request");
                         writer.write("err = $T(stack)", queryAsGetMiddleware);
+                        writer.write("if err != nil { return err }");
+                    }
+
+                    // polly presigner needs to serialize input param into query string
+                    if (isPollyServiceShape(serviceShape)) {
+                        Symbol serializeInputMiddleware = SymbolUtils.createValueSymbolBuilder("AddPresignSynthesizeSpeechMiddleware",
+                                AwsGoDependency.AWS_QUERY_PROTOCOL).build();
+                        writer.writeDocs("use query encoder to encode GET request query string");
+                        writer.write("err = AddPresignSynthesizeSpeechMiddleware(stack)");
                         writer.write("if err != nil { return err }");
                     }
 
@@ -681,6 +693,10 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
     private final boolean isS3ServiceShape(Model model, ServiceShape service) {
         String serviceId = service.expectTrait(ServiceTrait.class).getSdkId();
         return serviceId.equalsIgnoreCase("S3");
+    }
+
+    private final boolean isPollyServiceShape(ServiceShape service) {
+        return service.expectTrait(ServiceTrait.class).getSdkId().equalsIgnoreCase("Polly");
     }
 }
 
