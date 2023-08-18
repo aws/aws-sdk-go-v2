@@ -56,6 +56,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator\n         account that the invitation was sent from.</p>\n         <p>This operation is only used by member accounts that are not added through\n         Organizations.</p>\n         <p>When the member account accepts the invitation, permission is granted to the administrator\n         account to view findings generated in the member account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To accept an invitation be a member account",
+                        "documentation": "The following example demonstrates how an account can accept an invitation from the Security Hub administrator account to be a member account. This operation is applicable only to member accounts that are not added through AWS Organizations.",
+                        "input": {
+                            "AdministratorId": "123456789012",
+                            "InvitationId": "7ab938c5d52d7904ad09f9e7c20cc4eb"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/administrator",
@@ -17564,6 +17574,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the finding is a sample finding.</p>"
                     }
+                },
+                "GeneratorDetails": {
+                    "target": "com.amazonaws.securityhub#GeneratorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides metadata for the Amazon CodeGuru detector associated with a finding. This field pertains to \nfindings that relate to Lambda functions. Amazon Inspector identifies policy violations and \nvulnerabilities in Lambda function code based on internal detectors developed \nin collaboration with Amazon CodeGuru. Security Hub receives those findings.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -19734,6 +19750,30 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>\n         Deletes one or more automation rules.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete one or more automation rules",
+                        "documentation": "The following example deletes the specified automation rules.",
+                        "input": {
+                            "AutomationRulesArns": [
+                                "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222"
+                            ]
+                        },
+                        "output": {
+                            "ProcessedAutomationRules": [
+                                "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                            ],
+                            "UnprocessedAutomationRules": [
+                                {
+                                    "RuleArn": "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+                                    "ErrorCode": 500,
+                                    "ErrorMessage": "InternalException"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/automationrules/delete",
@@ -19800,6 +19840,27 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Disables the standards specified by the provided\n         <code>StandardsSubscriptionArns</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html\">Security Standards</a> section of the <i>Security Hub User\n         Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disable one or more security standards",
+                        "documentation": "The following example disables a security standard in Security Hub.",
+                        "input": {
+                            "StandardsSubscriptionArns": [
+                                "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1"
+                            ]
+                        },
+                        "output": {
+                            "StandardsSubscriptions": [
+                                {
+                                    "StandardsArn": "arn:aws:securityhub:eu-central-1::standards/pci-dss/v/3.2.1",
+                                    "StandardsInput": {},
+                                    "StandardsStatus": "DELETING",
+                                    "StandardsSubscriptionArn": "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/standards/deregister",
@@ -19860,6 +19921,29 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Enables the standards specified by the provided <code>StandardsArn</code>. To obtain the\n         ARN for a standard, use the <code>DescribeStandards</code>\n         operation.</p>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html\">Security Standards</a>\n         section of the <i>Security Hub User Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To enable security standards",
+                        "documentation": "The following example enables the security standard specified by the StandardArn. You can use this operation to enable one or more Security Hub standards.",
+                        "input": {
+                            "StandardsSubscriptionRequests": [
+                                {
+                                    "StandardsArn": "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "StandardsSubscriptions": [
+                                {
+                                    "StandardsArn": "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1",
+                                    "StandardsInput": {},
+                                    "StandardsStatus": "PENDING",
+                                    "StandardsSubscriptionArn": "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/standards/register",
@@ -19926,6 +20010,98 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>\n         Retrieves a list of details for automation rules based on rule Amazon Resource Names \n         (ARNs).\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update one ore more automation rules",
+                        "documentation": "The following example updates the specified automation rules.",
+                        "input": {
+                            "AutomationRulesArns": [
+                                "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222"
+                            ]
+                        },
+                        "output": {
+                            "Rules": [
+                                {
+                                    "RuleName": "sample-rule-name-1",
+                                    "RuleOrder": 1,
+                                    "RuleArn": "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "RuleStatus": "ENABLED",
+                                    "Description": "sample rule description 1",
+                                    "Criteria": {
+                                        "AwsAccountId": [
+                                            {
+                                                "Value": "111122223333",
+                                                "Comparison": "EQUALS"
+                                            }
+                                        ],
+                                        "Type": [
+                                            {
+                                                "Value": "Software and Configuration Checks/Industry and Regulatory Standards",
+                                                "Comparison": "EQUALS"
+                                            }
+                                        ],
+                                        "FirstObservedAt": [
+                                            {
+                                                "DateRange": {
+                                                    "Unit": "DAYS",
+                                                    "Value": 5
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "Actions": [
+                                        {
+                                            "Type": "FINDING_FIELDS_UPDATE",
+                                            "FindingFieldsUpdate": {
+                                                "Workflow": {
+                                                    "Status": "RESOLVED"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "CreatedBy": "AROAJURBUYQQNL5OL2TIM:TEST-16MJ75L9VBK14",
+                                    "CreatedAt": "2022-08-31T01:52:33.250Z",
+                                    "UpdatedAt": "2022-08-31T01:52:33.250Z"
+                                },
+                                {
+                                    "RuleName": "sample-rule-name-2",
+                                    "RuleOrder": 2,
+                                    "RuleArn": "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+                                    "RuleStatus": "ENABLED",
+                                    "Description": "Sample rule description 2",
+                                    "Criteria": {
+                                        "SeverityLabel": [
+                                            {
+                                                "Value": "INFORMATIONAL",
+                                                "Comparison": "EQUALS"
+                                            }
+                                        ],
+                                        "ResourceType": [
+                                            {
+                                                "Value": "Ec2Instance",
+                                                "Comparison": "EQUALS"
+                                            }
+                                        ]
+                                    },
+                                    "Actions": [
+                                        {
+                                            "Type": "FINDING_FIELDS_UPDATE",
+                                            "FindingFieldsUpdate": {
+                                                "Workflow": {
+                                                    "Status": "RESOLVED"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "CreatedBy": "AROAJURBUYQQNL5OL2TIM:TEST-16MJ75L9VBK14",
+                                    "CreatedAt": "2022-08-31T01:52:33.250Z",
+                                    "UpdatedAt": "2022-08-31T01:52:33.250Z"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/automationrules/get",
@@ -19992,6 +20168,40 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>\n         Provides details about a batch of security controls for the current Amazon Web Services account and Amazon Web Services Region.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get security control details ",
+                        "documentation": "The following example gets details for the specified controls in the current AWS account and AWS Region.",
+                        "input": {
+                            "SecurityControlIds": [
+                                "ACM.1",
+                                "APIGateway.1"
+                            ]
+                        },
+                        "output": {
+                            "SecurityControls": [
+                                {
+                                    "SecurityControlId": "ACM.1",
+                                    "SecurityControlArn": "arn:aws:securityhub:us-west-2:123456789012:security-control/ACM.1",
+                                    "Title": "Imported and ACM-issued certificates should be renewed after a specified time period",
+                                    "Description": "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.",
+                                    "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation",
+                                    "SeverityRating": "MEDIUM",
+                                    "SecurityControlStatus": "ENABLED"
+                                },
+                                {
+                                    "SecurityControlId": "APIGateway.1",
+                                    "SecurityControlArn": "arn:aws:securityhub:us-west-2:123456789012:security-control/APIGateway.1",
+                                    "Title": "API Gateway REST and WebSocket API execution logging should be enabled",
+                                    "Description": "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.",
+                                    "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation",
+                                    "SeverityRating": "MEDIUM",
+                                    "SecurityControlStatus": "ENABLED"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/securityControls/batchGet",
@@ -20126,6 +20336,49 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Imports security findings generated by a finding provider into Security Hub.\n         This action is requested by the finding provider to import its findings into\n         Security Hub.</p>\n         <p>\n            <code>BatchImportFindings</code> must be called by one of the following:</p>\n         <ul>\n            <li>\n               <p>The Amazon Web Services account that is associated with a finding if you are using\n               the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-custom-providers.html#securityhub-custom-providers-bfi-reqs\">default product ARN</a> \n               or are a partner sending findings from within a customer's Amazon Web Services account. \n               In these cases, the identifier of the account that you are calling <code>BatchImportFindings</code> \n               from needs to be the same as the <code>AwsAccountId</code> attribute for the finding.</p>\n            </li>\n            <li>\n               <p>An Amazon Web Services account that Security Hub has allow-listed for an official partner\n               integration. In this case, you can call <code>BatchImportFindings</code> from the allow-listed\n               account and send findings from different customer accounts in the same batch.</p>\n            </li>\n         </ul>\n         <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding\n         larger than 240 Kb.</p>\n         <p>After a finding is created, <code>BatchImportFindings</code> cannot be used to update\n         the following finding fields and objects, which Security Hub customers use to manage their\n         investigation workflow.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Note</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UserDefinedFields</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>VerificationState</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Workflow</code>\n               </p>\n            </li>\n         </ul>\n         <p>Finding providers also should not use <code>BatchImportFindings</code> to update the following attributes.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Confidence</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Criticality</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RelatedFindings</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Severity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Types</code>\n               </p>\n            </li>\n         </ul>\n         <p>Instead, finding providers use <code>FindingProviderFields</code> to provide values for these attributes.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To import security findings from a third party provider to Security Hub",
+                        "documentation": "The following example imports findings from a third party provider to Security Hub.",
+                        "input": {
+                            "Findings": [
+                                {
+                                    "AwsAccountId": "123456789012",
+                                    "CreatedAt": "2020-05-27T17:05:54.832Z",
+                                    "Description": "Vulnerability in a CloudTrail trail",
+                                    "FindingProviderFields": {
+                                        "Severity": {
+                                            "Label": "LOW",
+                                            "Original": "10"
+                                        },
+                                        "Types": [
+                                            "Software and Configuration Checks/Vulnerabilities/CVE"
+                                        ]
+                                    },
+                                    "GeneratorId": "TestGeneratorId",
+                                    "Id": "Id1",
+                                    "ProductArn": "arn:aws:securityhub:us-west-1:123456789012:product/123456789012/default",
+                                    "Resources": [
+                                        {
+                                            "Id": "arn:aws:cloudtrail:us-west-1:123456789012:trail/TrailName",
+                                            "Partition": "aws",
+                                            "Region": "us-west-1",
+                                            "Type": "AwsCloudTrailTrail"
+                                        }
+                                    ],
+                                    "SchemaVersion": "2018-10-08",
+                                    "Title": "CloudTrail trail vulnerability",
+                                    "UpdatedAt": "2020-06-02T16:05:54.832Z"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "FailedCount": 123,
+                            "SuccessCount": 123,
+                            "FailedFindings": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findings/import",
@@ -20217,6 +20470,31 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>\n         Updates one or more automation rules based on rule Amazon Resource Names (ARNs) \n         and input parameters.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update one ore more automation rules",
+                        "documentation": "The following example updates the specified automation rules.",
+                        "input": {
+                            "UpdateAutomationRulesRequestItems": [
+                                {
+                                    "RuleArn": "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "RuleStatus": "ENABLED",
+                                    "RuleOrder": 15
+                                },
+                                {
+                                    "RuleArn": "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+                                    "RuleStatus": "DISABLED"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "ProcessedAutomationRules": [
+                                "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/automationrules/update",
@@ -20283,6 +20561,62 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Used by Security Hub customers to update information about their investigation into a finding.\n         Requested by administrator accounts or member accounts. Administrator accounts can update findings for\n         their account and their member accounts. Member accounts can update findings for their\n         account.</p>\n         <p>Updates from <code>BatchUpdateFindings</code> do not affect the value of\n            <code>UpdatedAt</code> for a finding.</p>\n         <p>Administrator and member accounts can use <code>BatchUpdateFindings</code> to update the\n         following finding fields and objects.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Confidence</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Criticality</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Note</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RelatedFindings</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Severity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Types</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UserDefinedFields</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>VerificationState</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Workflow</code>\n               </p>\n            </li>\n         </ul>\n         <p>You can configure IAM policies to restrict access to fields and field values. For\n         example, you might not want member accounts to be able to suppress findings or change the\n         finding severity. See <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access\">Configuring access to BatchUpdateFindings</a> in the\n         <i>Security Hub User Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update Security Hub findings",
+                        "documentation": "The following example updates Security Hub findings. The finding identifier parameter specifies which findings to update. Only specific finding fields can be updated with this operation.",
+                        "input": {
+                            "FindingIdentifiers": [
+                                {
+                                    "Id": "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "ProductArn": "arn:aws:securityhub:us-west-1::product/aws/securityhub"
+                                },
+                                {
+                                    "Id": "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+                                    "ProductArn": "arn:aws:securityhub:us-west-1::product/aws/securityhub"
+                                }
+                            ],
+                            "Note": {
+                                "Text": "Known issue that is not a risk.",
+                                "UpdatedBy": "user1"
+                            },
+                            "Severity": {
+                                "Label": "LOW"
+                            },
+                            "VerificationState": "TRUE_POSITIVE",
+                            "Confidence": 80,
+                            "Criticality": 80,
+                            "Types": [
+                                "Software and Configuration Checks/Vulnerabilities/CVE"
+                            ],
+                            "UserDefinedFields": {
+                                "reviewedByCio": "true"
+                            },
+                            "Workflow": {
+                                "Status": "RESOLVED"
+                            },
+                            "RelatedFindings": [
+                                {
+                                    "Id": "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333",
+                                    "ProductArn": "arn:aws:securityhub:us-west-1::product/aws/securityhub"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "ProcessedFindings": [
+                                {
+                                    "Id": "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "ProductArn": "arn:aws:securityhub:us-west-1::product/aws/securityhub"
+                                },
+                                {
+                                    "Id": "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+                                    "ProductArn": "arn:aws:securityhub:us-west-1::product/aws/securityhub"
+                                }
+                            ],
+                            "UnprocessedFindings": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/findings/batchupdate",
@@ -20439,6 +20773,42 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>\n         For a batch of security controls and standards, this operation updates the enablement status of a control in a standard.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update enablement status of a batch of controls",
+                        "documentation": "The following example disables CloudWatch.12 in CIS AWS Foundations Benchmark v1.2.0. The example returns an error for CloudTrail.1 because an invalid standard ARN is provided.",
+                        "input": {
+                            "StandardsControlAssociationUpdates": [
+                                {
+                                    "SecurityControlId": "CloudTrail.1",
+                                    "StandardsArn": "arn:aws:securityhub:::ruleset/sample-standard/v/1.1.0",
+                                    "AssociationStatus": "DISABLED",
+                                    "UpdatedReason": "Not relevant to environment"
+                                },
+                                {
+                                    "SecurityControlId": "CloudWatch.12",
+                                    "StandardsArn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                                    "AssociationStatus": "DISABLED",
+                                    "UpdatedReason": "Not relevant to environment"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "UnprocessedAssociationUpdates": [
+                                {
+                                    "ErrorCode": "INVALID_INPUT",
+                                    "ErrorReason": "Invalid Standards Arn: 'arn:aws:securityhub:::ruleset/sample-standard/v/1.1.0'",
+                                    "StandardsControlAssociationUpdate": {
+                                        "AssociationStatus": "DISABLED",
+                                        "SecurityControlId": "CloudTrail.1",
+                                        "StandardsArn": "arn:aws:securityhub:::ruleset/sample-standard/v/1.1.0",
+                                        "UpdatedReason": "Test Reason"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/associations",
@@ -20660,6 +21030,40 @@
                 "smithy.api#documentation": "<p>Provides details about the current status of the sensitive data detection.</p>"
             }
         },
+        "com.amazonaws.securityhub#CodeVulnerabilitiesFilePath": {
+            "type": "structure",
+            "members": {
+                "EndLine": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n        \tThe line number of the last line of code in which the vulnerability is located.\n        </p>"
+                    }
+                },
+                "FileName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the file in which the code vulnerability is located.\n        </p>"
+                    }
+                },
+                "FilePath": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The file path to the code in which the vulnerability is located.\n        </p>"
+                    }
+                },
+                "StartLine": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The line number of the first line of code in which the vulnerability is located.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Provides details about where a code vulnerability is located in your Lambda function.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#Compliance": {
             "type": "structure",
             "members": {
@@ -20859,6 +21263,20 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a custom action target in Security Hub.</p>\n         <p>You can use custom actions on findings and insights in Security Hub to trigger target actions\n         in Amazon CloudWatch Events.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a custom action target",
+                        "documentation": "The following example creates a custom action target in Security Hub. Custom actions on findings and insights automatically trigger actions in Amazon CloudWatch Events.",
+                        "input": {
+                            "Name": "Send to remediation",
+                            "Description": "Action to send the finding for remediation tracking",
+                            "Id": "Remediation"
+                        },
+                        "output": {
+                            "ActionTargetArn": "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/actionTargets",
@@ -20937,6 +21355,71 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>\n         Creates an automation rule based on input parameters.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create an automation rule",
+                        "documentation": "The following example creates an automation rule.",
+                        "input": {
+                            "Tags": {
+                                "important-resources-rule": "s3-bucket"
+                            },
+                            "RuleStatus": "ENABLED",
+                            "RuleOrder": 1,
+                            "RuleName": "Elevate severity for important resources",
+                            "Description": "Elevate finding severity to Critical for important resources",
+                            "IsTerminal": false,
+                            "Criteria": {
+                                "ProductName": [
+                                    {
+                                        "Value": "Security Hub",
+                                        "Comparison": "EQUALS"
+                                    }
+                                ],
+                                "ComplianceStatus": [
+                                    {
+                                        "Value": "FAILED",
+                                        "Comparison": "EQUALS"
+                                    }
+                                ],
+                                "RecordState": [
+                                    {
+                                        "Value": "ACTIVE",
+                                        "Comparison": "EQUALS"
+                                    }
+                                ],
+                                "WorkflowStatus": [
+                                    {
+                                        "Value": "NEW",
+                                        "Comparison": "EQUALS"
+                                    }
+                                ],
+                                "ResourceId": [
+                                    {
+                                        "Value": "arn:aws:s3:::examplebucket/developers/design_info.doc",
+                                        "Comparison": "EQUALS"
+                                    }
+                                ]
+                            },
+                            "Actions": [
+                                {
+                                    "Type": "FINDING_FIELDS_UPDATE",
+                                    "FindingFieldsUpdate": {
+                                        "Severity": {
+                                            "Label": "CRITICAL"
+                                        },
+                                        "Note": {
+                                            "Text": "This is a critical S3 bucket, please look into this ASAP",
+                                            "UpdatedBy": "test-user"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        "output": {
+                            "RuleArn": "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/automationrules/create",
@@ -21048,6 +21531,28 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Used to enable finding aggregation. Must be called from the aggregation Region.</p>\n         <p>For more details about cross-Region replication, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/finding-aggregation.html\">Configuring finding aggregation</a> in the <i>Security Hub User Guide</i>.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To enable cross-Region aggregation",
+                        "documentation": "The following example creates a finding aggregator. This is required to enable cross-Region aggregation.",
+                        "input": {
+                            "RegionLinkingMode": "SPECIFIED_REGIONS",
+                            "Regions": [
+                                "us-west-1",
+                                "us-west-2"
+                            ]
+                        },
+                        "output": {
+                            "FindingAggregatorArn": "arn:aws:securityhub:us-east-1:222222222222:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "FindingAggregationRegion": "us-east-1",
+                            "RegionLinkingMode": "SPECIFIED_REGIONS",
+                            "Regions": [
+                                "us-west-1",
+                                "us-west-2"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findingAggregator/create",
@@ -21135,6 +21640,33 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a custom insight in Security Hub. An insight is a consolidation of findings that relate\n         to a security issue that requires attention or remediation.</p>\n         <p>To group the related findings in the insight, use the\n         <code>GroupByAttribute</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a custom insight",
+                        "documentation": "The following example creates a custom insight in Security Hub. An insight is a collection of findings that relate to a security issue.",
+                        "input": {
+                            "Name": "Critical role findings",
+                            "Filters": {
+                                "ResourceType": [
+                                    {
+                                        "Comparison": "EQUALS",
+                                        "Value": "AwsIamRole"
+                                    }
+                                ],
+                                "SeverityLabel": [
+                                    {
+                                        "Comparison": "EQUALS",
+                                        "Value": "CRITICAL"
+                                    }
+                                ]
+                            },
+                            "GroupByAttribute": "ResourceId"
+                        },
+                        "output": {
+                            "InsightArn": "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/insights",
@@ -21213,6 +21745,25 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a member association in Security Hub between the specified accounts and the account\n         used to make the request, which is the administrator account. If you are integrated with\n         Organizations, then the administrator account is designated by the organization management account.</p>\n         <p>\n            <code>CreateMembers</code> is always used to add accounts that are not organization\n         members.</p>\n         <p>For accounts that are managed using Organizations, <code>CreateMembers</code> is only used\n         in the following cases:</p>\n         <ul>\n            <li>\n               <p>Security Hub is not configured to automatically add new organization accounts.</p>\n            </li>\n            <li>\n               <p>The account was disassociated or deleted in Security Hub.</p>\n            </li>\n         </ul>\n         <p>This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you\n         can use the <code>EnableSecurityHub</code> operation.</p>\n         <p>For accounts that are not organization members, you create the account association and\n         then send an invitation to the member account. To send the invitation, you use the\n               <code>InviteMembers</code> operation. If the account owner accepts\n         the invitation, the account becomes a member account in Security Hub.</p>\n         <p>Accounts that are managed using Organizations do not receive an invitation. They\n         automatically become a member account in Security Hub.</p>\n         <ul>\n            <li>\n               <p>If the organization account does not have Security Hub enabled, then Security Hub and the default standards are automatically enabled. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account.</p>\n            </li>\n            <li>\n               <p>For organization accounts that already have Security Hub enabled, Security Hub does not make any other changes to those accounts. It does not change their enabled standards or controls.</p>\n            </li>\n         </ul>\n         <p>A permissions policy is added that permits the administrator account to view the findings\n         generated in the member account.</p>\n         <p>To remove the association between the administrator and member accounts, use the <code>DisassociateFromMasterAccount</code> or <code>DisassociateMembers</code> operation.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To add a member account",
+                        "documentation": "The following example creates a member association between the specified accounts and the administrator account (the account that makes the request). This operation is used to add accounts that aren't part of an organization.",
+                        "input": {
+                            "AccountDetails": [
+                                {
+                                    "AccountId": "123456789012"
+                                },
+                                {
+                                    "AccountId": "111122223333"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "UnprocessedAccounts": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/members",
@@ -21472,6 +22023,21 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Declines invitations to become a member account.</p>\n         <p>A prospective member account uses this operation to decline an invitation to become a member.</p>\n         <p>This operation is only called by member accounts that aren't part of an organization.\n         Organization accounts don't receive invitations.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To decline invitation to become a member account",
+                        "documentation": "The following example declines an invitation from the Security Hub administrator account to become a member account. The invited account makes the request.",
+                        "input": {
+                            "AccountIds": [
+                                "123456789012",
+                                "111122223333"
+                            ]
+                        },
+                        "output": {
+                            "UnprocessedAccounts": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/invitations/decline",
@@ -21532,6 +22098,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a custom action target from Security Hub.</p>\n         <p>Deleting a custom action target does not affect any findings or insights that were\n         already sent to Amazon CloudWatch Events using the custom action.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a custom action target",
+                        "documentation": "The following example deletes a custom action target that triggers target actions in Amazon CloudWatch Events. Deleting a custom action target doesn't affect findings or insights that were already sent to CloudWatch Events based on the custom action.",
+                        "input": {
+                            "ActionTargetArn": "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation"
+                        },
+                        "output": {
+                            "ActionTargetArn": "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/actionTargets/{ActionTargetArn+}",
@@ -21600,6 +22178,15 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a finding aggregator. When you delete the finding aggregator, you stop finding aggregation.</p>\n         <p>When you stop finding aggregation, findings that were already aggregated to the aggregation Region are still visible from the aggregation Region. New findings and finding updates are not aggregated.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a finding aggregator",
+                        "documentation": "The following example deletes a finding aggregator in Security Hub. Deleting the finding aggregator stops cross-Region aggregation. This operation produces no output.",
+                        "input": {
+                            "FindingAggregatorArn": "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/findingAggregator/delete/{FindingAggregatorArn+}",
@@ -21657,6 +22244,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the insight specified by the <code>InsightArn</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a custom insight",
+                        "documentation": "The following example deletes a custom insight in Security Hub.",
+                        "input": {
+                            "InsightArn": "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                        },
+                        "output": {
+                            "InsightArn": "arn:aws:securityhub:eu-central-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/insights/{InsightArn+}",
@@ -21722,6 +22321,20 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes invitations received by the Amazon Web Services account to become a member account.</p>\n         <p>A Security Hub administrator account can use this operation to delete invitations sent to one or more member accounts.</p>\n         <p>This operation is only used to delete invitations that are sent to member accounts that aren't part of an organization.\n         Organization accounts don't receive invitations.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a custom insight",
+                        "documentation": "The following example deletes an invitation sent by the Security Hub administrator account to a prospective member account. This operation is used only for invitations sent to accounts that aren't part of an organization. Organization accounts don't receive invitations.",
+                        "input": {
+                            "AccountIds": [
+                                "123456789012"
+                            ]
+                        },
+                        "output": {
+                            "UnprocessedAccounts": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/invitations/delete",
@@ -21784,7 +22397,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified member accounts from Security Hub.</p>\n         <p>Can be used to delete member accounts that belong to an organization as well as member\n         accounts that were invited manually.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified member accounts from Security Hub.</p>\n         <p>You can invoke this API only to delete accounts that became members through invitation. You can't invoke this \n        API to delete accounts that belong to an Organizations organization.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a member account",
+                        "documentation": "The following example deletes the specified member account from Security Hub. This operation can be used to delete member accounts that are part of an organization or that were invited manually.",
+                        "input": {
+                            "AccountIds": [
+                                "123456789111",
+                                "123456789222"
+                            ]
+                        },
+                        "output": {
+                            "UnprocessedAccounts": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/members/delete",
@@ -21845,6 +22473,26 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of the custom action targets in Security Hub in your account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To return custom action targets",
+                        "documentation": "The following example returns a list of custom action targets. You use custom actions on findings and insights in Security Hub to trigger target actions in Amazon CloudWatch Events.",
+                        "input": {
+                            "ActionTargetArns": [
+                                "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation"
+                            ]
+                        },
+                        "output": {
+                            "ActionTargets": [
+                                {
+                                    "ActionTargetArn": "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation",
+                                    "Description": "Action to send the finding for remediation tracking",
+                                    "Name": "Send to remediation"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/actionTargets/get",
@@ -21933,6 +22581,21 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns details about the Hub resource in your account, including the\n         <code>HubArn</code> and the time when you enabled Security Hub.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To return details about Hub resource",
+                        "documentation": "The following example returns details about the Hub resource in the calling account. The Hub resource represents the implementation of  the AWS Security Hub service in the calling account.",
+                        "input": {
+                            "HubArn": "arn:aws:securityhub:us-west-1:123456789012:hub/default"
+                        },
+                        "output": {
+                            "HubArn": "arn:aws:securityhub:us-west-1:123456789012:hub/default",
+                            "SubscribedAt": "2019-11-19T23:15:10.046Z",
+                            "AutoEnableControls": true,
+                            "ControlFindingGenerator": "SECURITY_CONTROL"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts",
@@ -22012,6 +22675,17 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns information about the Organizations configuration for Security Hub. Can only be\n         called from a Security Hub administrator account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about Organizations configuration",
+                        "documentation": "The following example returns details about the way in which AWS Organizations is configured for a Security Hub account that belongs to an organization. Only a Security Hub administrator account can call this operation.",
+                        "output": {
+                            "AutoEnable": true,
+                            "MemberAccountLimitReached": true,
+                            "AutoEnableStandards": "DEFAULT"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/organization/configuration",
@@ -22078,6 +22752,41 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns information about product integrations in Security Hub.</p>\n         <p>You can optionally provide an integration ARN. If you provide an integration ARN, then\n         the results only include that integration.</p>\n         <p>If you do not provide an integration ARN, then the results include all of the available\n         product integrations. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about Security Hub integrations",
+                        "documentation": "The following example returns details about AWS services and third-party products that Security Hub integrates with.",
+                        "input": {
+                            "NextToken": "NULL",
+                            "MaxResults": 1,
+                            "ProductArn": "arn:aws:securityhub:us-east-1:517716713836:product/crowdstrike/crowdstrike-falcon"
+                        },
+                        "output": {
+                            "Products": [
+                                {
+                                    "ProductArn": "arn:aws:securityhub:us-east-1:517716713836:product/crowdstrike/crowdstrike-falcon",
+                                    "ProductName": "CrowdStrike Falcon",
+                                    "CompanyName": "CrowdStrike",
+                                    "Description": "CrowdStrike Falcon's single lightweight sensor unifies next-gen antivirus, endpoint detection and response, and 24/7 managed hunting, via the cloud.",
+                                    "Categories": [
+                                        "Endpoint Detection and Response (EDR)",
+                                        "AV Scanning and Sandboxing",
+                                        "Threat Intelligence Feeds and Reports",
+                                        "Endpoint Forensics",
+                                        "Network Forensics"
+                                    ],
+                                    "IntegrationTypes": [
+                                        "SEND_FINDINGS_TO_SECURITY_HUB"
+                                    ],
+                                    "MarketplaceUrl": "https://aws.amazon.com/marketplace/seller-profile?id=a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "ActivationUrl": "https://falcon.crowdstrike.com/support/documentation",
+                                    "ProductSubscriptionResourcePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"123456789333\"},\"Action\":[\"securityhub:BatchImportFindings\"],\"Resource\":\"arn:aws:securityhub:us-west-1:123456789012:product-subscription/crowdstrike/crowdstrike-falcon\",\"Condition\":{\"StringEquals\":{\"securityhub:TargetAccount\":\"123456789012\"}}},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"123456789012\"},\"Action\":[\"securityhub:BatchImportFindings\"],\"Resource\":\"arn:aws:securityhub:us-west-1:123456789333:product/crowdstrike/crowdstrike-falcon\",\"Condition\":{\"StringEquals\":{\"securityhub:TargetAccount\":\"123456789012\"}}}]}"
+                                }
+                            ],
+                            "NextToken": "U2FsdGVkX18vvPlOqb7RDrWRWVFBJI46MOIAb+nZmRJmR15NoRi2gm13sdQEn3O/pq/78dGs+bKpgA+7HMPHO0qX33/zoRI+uIG/F9yLNhcOrOWzFUdy36JcXLQji3Rpnn/cD1SVkGA98qI3zPOSDg=="
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/products",
@@ -22163,6 +22872,40 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of the available standards in Security Hub.</p>\n         <p>For each standard, the results include the standard ARN, the name, and a description. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get available Security Hub standards",
+                        "documentation": "The following example returns a list of available security standards in Security Hub.",
+                        "output": {
+                            "Standards": [
+                                {
+                                    "StandardsArn": "arn:aws:securityhub:us-west-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                                    "Name": "AWS Foundational Security Best Practices v1.0.0",
+                                    "Description": "The AWS Foundational Security Best Practices standard is a set of automated security checks that detect when AWS accounts and deployed resources do not align to security best practices. The standard is defined by AWS security experts. This curated set of controls helps improve your security posture in AWS, and cover AWS's most popular and foundational services.",
+                                    "EnabledByDefault": true
+                                },
+                                {
+                                    "StandardsArn": "arn:aws:securityhub:us-west-1::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                                    "Name": "CIS AWS Foundations Benchmark v1.2.0",
+                                    "Description": "The Center for Internet Security (CIS) AWS Foundations Benchmark v1.2.0 is a set of security configuration best practices for AWS. This Security Hub standard automatically checks for your compliance readiness against a subset of CIS requirements.",
+                                    "EnabledByDefault": true
+                                },
+                                {
+                                    "StandardsArn": "arn:aws::securityhub:us-west-1::standards/cis-aws-foundations-benchmark/v/1.4.0",
+                                    "Name": "CIS AWS Foundations Benchmark v1.4.0",
+                                    "Description": "The Center for Internet Security (CIS) AWS Foundations Benchmark v1.4.0 is a set of security configuration best practices for AWS. This Security Hub standard automatically checks for your compliance readiness against a subset of CIS requirements.",
+                                    "EnabledByDefault": false
+                                },
+                                {
+                                    "StandardsArn": "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1",
+                                    "Name": "PCI DSS v3.2.1",
+                                    "Description": "The Payment Card Industry Data Security Standard (PCI DSS) v3.2.1 is an information security standard for entities that store, process, and/or transmit cardholder data. This Security Hub standard automatically checks for your compliance readiness against a subset of PCI DSS requirements.",
+                                    "EnabledByDefault": false
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/standards",
@@ -22334,6 +23077,15 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Disables the integration of the specified product with Security Hub. After the integration is\n         disabled, findings from that product are no longer sent to Security Hub.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To end a Security Hub integration",
+                        "documentation": "The following example ends an integration between Security Hub and the specified product that sends findings to Security Hub. After the integration ends, the product no longer sends findings to Security  Hub.",
+                        "input": {
+                            "ProductSubscriptionArn": "arn:aws:securityhub:us-east-1:517716713836:product/crowdstrike/crowdstrike-falcon"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/productSubscriptions/{ProductSubscriptionArn+}",
@@ -22388,6 +23140,15 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Disables a Security Hub administrator account. Can only be called by the organization\n         management account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To remove a Security Hub administrator account",
+                        "documentation": "The following example removes the Security Hub administrator account in the Region from which the operation was executed. This operation doesn't remove the delegated administrator account in AWS Organizations.",
+                        "input": {
+                            "AdminAccountId": "123456789012"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/organization/admin/disable",
@@ -22440,7 +23201,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables Security Hub in your account only in the current Region. To disable Security Hub in all\n         Regions, you must submit one request per Region where you have enabled Security Hub.</p>\n         <p>When you disable Security Hub for an administrator account, it doesn't disable Security Hub for any associated\n         member accounts.</p>\n         <p>When you disable Security Hub, your existing findings and insights and any Security Hub configuration\n         settings are deleted after 90 days and cannot be recovered. Any standards that were enabled\n         are disabled, and your administrator and member account associations are removed.</p>\n         <p>If you want to save your existing findings, you must export them before you disable\n         Security Hub.</p>",
+                "smithy.api#documentation": "<p>Disables Security Hub in your account only in the current Amazon Web Services Region. To disable Security Hub in all\n         Regions, you must submit one request per Region where you have enabled Security Hub.</p>\n         <p>You can't disable Security Hub in an account that is currently the Security Hub administrator.</p>\n         <p>When you disable Security Hub, your existing findings and insights and any Security Hub configuration\n         settings are deleted after 90 days and cannot be recovered. Any standards that were enabled\n         are disabled, and your administrator and member account associations are removed.</p>\n         <p>If you want to save your existing findings, you must export them before you disable\n         Security Hub.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To deactivate Security Hub",
+                        "documentation": "The following example deactivates Security Hub for the current account and Region."
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/accounts",
@@ -22489,6 +23256,12 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Disassociates the current Security Hub member account from the associated administrator\n         account.</p>\n         <p>This operation is only used by accounts that are not part of an organization. For\n         organization accounts, only the administrator account can\n         disassociate a member account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disassociate requesting account from administrator account",
+                        "documentation": "The following example dissociates the requesting account from its associated administrator account."
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/administrator/disassociate",
@@ -22588,6 +23361,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Disassociates the specified member accounts from the associated administrator account.</p>\n         <p>Can be used to disassociate both accounts that are managed using Organizations and accounts that\n         were invited manually.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disassociate member accounts from administrator account",
+                        "documentation": "The following example dissociates the specified member accounts from the associated administrator account.",
+                        "input": {
+                            "AccountIds": [
+                                "123456789012",
+                                "111122223333"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/members/disassociate",
@@ -22677,6 +23462,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Enables the integration of a partner product with Security Hub. Integrated products send\n         findings to Security Hub.</p>\n         <p>When you enable a product integration, a permissions policy that grants permission for\n         the product to send findings to Security Hub is applied.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To activate an integration",
+                        "documentation": "The following example activates an integration between Security Hub and a third party partner product that sends findings to Security Hub.",
+                        "input": {
+                            "ProductArn": "arn:aws:securityhub:us-east-1:517716713836:product/crowdstrike/crowdstrike-falcon"
+                        },
+                        "output": {
+                            "ProductSubscriptionArn": "arn:aws:securityhub:us-east-1:517716713836:product-subscription/crowdstrike/crowdstrike-falcon"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/productSubscriptions",
@@ -22737,6 +23534,15 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Designates the Security Hub administrator account for an organization. Can only be called by\n         the organization management account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To designate a Security Hub administrator",
+                        "documentation": "The following example designates the specified account as the Security Hub administrator account. The requesting account must be the organization management account.",
+                        "input": {
+                            "AdminAccountId": "123456789012"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/organization/admin/enable",
@@ -22793,6 +23599,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Enables Security Hub for your account in the current Region or the Region you specify in the\n         request.</p>\n         <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings\n         from other services that are integrated with Security Hub.</p>\n         <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also\n         automatically enable the following standards:</p>\n         <ul>\n            <li>\n               <p>Center for Internet Security (CIS) Amazon Web Services Foundations Benchmark v1.2.0</p>\n            </li>\n            <li>\n               <p>Amazon Web Services Foundational Security Best Practices</p>\n            </li>\n         </ul>\n         <p>Other standards are not automatically enabled. </p>\n         <p>To opt out of automatically enabled standards, set\n            <code>EnableDefaultStandards</code> to <code>false</code>.</p>\n         <p>After you enable Security Hub, to enable a standard, use the <code>BatchEnableStandards</code> operation. To disable a standard, use the\n               <code>BatchDisableStandards</code> operation.</p>\n         <p>To learn more, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html\">setup information</a> in the <i>Security Hub User Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To activate Security Hub",
+                        "documentation": "The following example activates the Security Hub service in the requesting AWS account. The service is activated in the current AWS Region or the Region that you specify in the request. Some standards are automatically turned on in your account unless you opt out. To determine which standards are automatically turned on, see the Security Hub documentation.",
+                        "input": {
+                            "Tags": {
+                                "Department": "Security"
+                            },
+                            "EnableDefaultStandards": true
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts",
@@ -23189,6 +24007,32 @@
                 "target": "com.amazonaws.securityhub#FirewallPolicyStatelessRuleGroupReferencesDetails"
             }
         },
+        "com.amazonaws.securityhub#GeneratorDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the detector used to identify the code vulnerability.\n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the detector used to identify the code vulnerability.\n        </p>"
+                    }
+                },
+                "Labels": {
+                    "target": "com.amazonaws.securityhub#TypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of tags used to identify the detector associated with the finding.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n                Provides metadata for the Amazon CodeGuru detector associated with a finding. This field pertains to \n                findings that relate to Lambda functions. Amazon Inspector identifies policy violations and \n                vulnerabilities in Lambda function code based on internal detectors developed \n                in collaboration with Amazon CodeGuru. Security Hub receives those findings.\n        </p>"
+            }
+        },
         "com.amazonaws.securityhub#GeoLocation": {
             "type": "structure",
             "members": {
@@ -23287,6 +24131,27 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of the standards that are currently enabled.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To return a list of enabled standards",
+                        "documentation": "The following example returns a list of Security Hub standards that are currently enabled in your account.  ",
+                        "input": {
+                            "StandardsSubscriptionArns": [
+                                "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1"
+                            ]
+                        },
+                        "output": {
+                            "StandardsSubscriptions": [
+                                {
+                                    "StandardsArn": "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1",
+                                    "StandardsInput": {},
+                                    "StandardsStatus": "READY",
+                                    "StandardsSubscriptionArn": "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/standards/get",
@@ -23377,6 +24242,24 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns the current finding aggregation configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get cross-Region aggregation details",
+                        "documentation": "The following example returns cross-Region aggregation details for the requesting account. ",
+                        "input": {
+                            "FindingAggregatorArn": "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                        },
+                        "output": {
+                            "FindingAggregatorArn": "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "FindingAggregationRegion": "us-east-1",
+                            "RegionLinkingMode": "SPECIFIED_REGIONS",
+                            "Regions": [
+                                "us-west-1",
+                                "us-west-2"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/findingAggregator/get/{FindingAggregatorArn+}",
@@ -23552,6 +24435,113 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of findings that match the specified criteria.</p>\n         <p>If finding aggregation is enabled, then when you call <code>GetFindings</code> from the aggregation Region, the results include all of the matching findings from both the aggregation Region and the linked Regions.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a list of findings",
+                        "documentation": "The following example returns a filtered and sorted list of Security Hub findings.",
+                        "input": {
+                            "Filters": {
+                                "AwsAccountId": [
+                                    {
+                                        "Value": "123456789012",
+                                        "Comparison": "PREFIX"
+                                    }
+                                ]
+                            },
+                            "MaxResults": 1
+                        },
+                        "output": {
+                            "Findings": [
+                                {
+                                    "SchemaVersion": "2018-10-08",
+                                    "Id": "arn:aws:securityhub:us-east-2:123456789012:security-control/CloudTrail.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "ProductArn": "arn:aws:securityhub:us-east-2::product/aws/securityhub",
+                                    "ProductName": "Security Hub",
+                                    "CompanyName": "AWS",
+                                    "Region": "us-east-2",
+                                    "GeneratorId": "security-control/CloudTrail.2",
+                                    "AwsAccountId": "123456789012",
+                                    "Types": [
+                                        "Software and Configuration Checks/Industry and Regulatory Standards"
+                                    ],
+                                    "FirstObservedAt": "2022-10-06T02:18:23.076Z",
+                                    "LastObservedAt": "2022-10-28T16:10:06.956Z",
+                                    "CreatedAt": "2022-10-06T02:18:23.076Z",
+                                    "UpdatedAt": "2022-10-28T16:10:00.093Z",
+                                    "Severity": {
+                                        "Label": "MEDIUM",
+                                        "Normalized": 40,
+                                        "Original": "MEDIUM"
+                                    },
+                                    "Title": "CloudTrail should have encryption at-rest enabled",
+                                    "Description": "This AWS control checks whether AWS CloudTrail is configured to use the server side encryption (SSE) AWS Key Management Service (AWS KMS) customer master key (CMK) encryption. The check will pass if the KmsKeyId is defined.",
+                                    "Remediation": {
+                                        "Recommendation": {
+                                            "Text": "For directions on how to correct this issue, consult the AWS Security Hub controls documentation.",
+                                            "Url": "https://docs.aws.amazon.com/console/securityhub/CloudTrail.2/remediation"
+                                        }
+                                    },
+                                    "ProductFields": {
+                                        "RelatedAWSResources:0/name": "securityhub-cloud-trail-encryption-enabled-fe95bf3f",
+                                        "RelatedAWSResources:0/type": "AWS::Config::ConfigRule",
+                                        "aws/securityhub/ProductName": "Security Hub",
+                                        "aws/securityhub/CompanyName": "AWS",
+                                        "Resources:0/Id": "arn:aws:cloudtrail:us-east-2:123456789012:trail/AWSMacieTrail-DO-NOT-EDIT",
+                                        "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-2::product/aws/securityhub/arn:aws:securityhub:us-east-2:123456789012:security-control/CloudTrail.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                                    },
+                                    "Resources": [
+                                        {
+                                            "Type": "AwsCloudTrailTrail",
+                                            "Id": "arn:aws:cloudtrail:us-east-2:123456789012:trail/AWSMacieTrail-DO-NOT-EDIT",
+                                            "Partition": "aws",
+                                            "Region": "us-east-2"
+                                        }
+                                    ],
+                                    "Compliance": {
+                                        "Status": "FAILED",
+                                        "RelatedRequirements": [
+                                            "PCI DSS v3.2.1/3.4",
+                                            "CIS AWS Foundations Benchmark v1.2.0/2.7",
+                                            "CIS AWS Foundations Benchmark v1.4.0/3.7"
+                                        ],
+                                        "SecurityControlId": "CloudTrail.2",
+                                        "AssociatedStandards": [
+                                            {
+                                                "StandardsId": "standards/aws-foundational-security-best-practices/v/1.0.0"
+                                            },
+                                            {
+                                                "StandardsId": "standards/pci-dss/v/3.2.1"
+                                            },
+                                            {
+                                                "StandardsId": "ruleset/cis-aws-foundations-benchmark/v/1.2.0"
+                                            },
+                                            {
+                                                "StandardsId": "standards/cis-aws-foundations-benchmark/v/1.4.0"
+                                            },
+                                            {
+                                                "StandardsId": "standards/service-managed-aws-control-tower/v/1.0.0"
+                                            }
+                                        ]
+                                    },
+                                    "WorkflowState": "NEW",
+                                    "Workflow": {
+                                        "Status": "NEW"
+                                    },
+                                    "RecordState": "ACTIVE",
+                                    "FindingProviderFields": {
+                                        "Severity": {
+                                            "Label": "MEDIUM",
+                                            "Original": "MEDIUM"
+                                        },
+                                        "Types": [
+                                            "Software and Configuration Checks/Industry and Regulatory Standards"
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findings",
@@ -23646,6 +24636,31 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the results of the Security Hub insight specified by the insight ARN.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get the results of a Security Hub insight",
+                        "documentation": "The following example returns the results of the Security Hub insight specified by the insight ARN.",
+                        "input": {
+                            "InsightArn": "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                        },
+                        "output": {
+                            "InsightResults": {
+                                "GroupByAttribute": "ResourceId",
+                                "InsightArn": "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                "ResultValues": [
+                                    {
+                                        "Count": 10,
+                                        "GroupByAttributeValue": "AWS::::Account:111122223333"
+                                    },
+                                    {
+                                        "Count": 3,
+                                        "GroupByAttributeValue": "AWS::::Account:444455556666"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/insights/results/{InsightArn+}",
@@ -23711,6 +24726,40 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists and describes insights for the specified insight ARNs.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get details of a Security Hub insight",
+                        "documentation": "The following example returns details of the Security Hub insight with the specified ARN.",
+                        "input": {
+                            "InsightArns": [
+                                "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                            ]
+                        },
+                        "output": {
+                            "Insights": [
+                                {
+                                    "Filters": {
+                                        "ResourceType": [
+                                            {
+                                                "Comparison": "EQUALS",
+                                                "Value": "AwsIamRole"
+                                            }
+                                        ],
+                                        "SeverityLabel": [
+                                            {
+                                                "Comparison": "EQUALS",
+                                                "Value": "CRITICAL"
+                                            }
+                                        ]
+                                    },
+                                    "GroupByAttribute": "ResourceId",
+                                    "InsightArn": "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "Name": "Critical role findings"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/insights/get",
@@ -23796,6 +24845,15 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns the count of all Security Hub membership invitations that were sent to the\n         current member account, not including the currently accepted invitation. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a count of membership invitations",
+                        "documentation": "The following example returns a count of invitations that the Security Hub administrator sent to the current member account, not including the currently accepted invitation.\n\n",
+                        "output": {
+                            "InvitationsCount": 3
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/invitations/count",
@@ -24263,6 +25321,21 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Invites other Amazon Web Services accounts to become member accounts for the Security Hub administrator account that\n         the invitation is sent from.</p>\n         <p>This operation is only used to invite accounts that do not belong to an organization.\n         Organization accounts do not receive invitations.</p>\n         <p>Before you can use this action to invite a member, you must first use the <code>CreateMembers</code> action to create the member account in Security Hub.</p>\n         <p>When the account owner enables Security Hub and accepts the invitation to become a member\n         account, the administrator account can view the findings generated from the member account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To invite accounts to become members",
+                        "documentation": "The following example invites the specified AWS accounts to become member accounts associated with the calling Security Hub administrator account. You only use this operation to invite accounts that don't belong to an AWS Organizations organization.",
+                        "input": {
+                            "AccountIds": [
+                                "111122223333",
+                                "444455556666"
+                            ]
+                        },
+                        "output": {
+                            "UnprocessedAccounts": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/members/invite",
@@ -24447,6 +25520,41 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>\n         A list of automation rules and their metadata for the calling account.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list automation rules",
+                        "documentation": "The following example lists automation rules and rule metadata in the calling account.",
+                        "input": {
+                            "NextToken": "example-token",
+                            "MaxResults": 2
+                        },
+                        "output": {
+                            "AutomationRulesMetadata": [
+                                {
+                                    "RuleName": "sample-rule-name-1",
+                                    "RuleOrder": 1,
+                                    "Description": "IAM.8 is a known issue and can be resolved",
+                                    "RuleArn": "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "RuleStatus": "ENABLED",
+                                    "CreatedBy": "AROAJURBUYQQNL5OL2TIM:TEST-16MJ75L9VBK14",
+                                    "CreatedAt": "2022-08-31T01:52:33.250Z",
+                                    "UpdatedAt": "2022-08-31T01:52:33.250Z"
+                                },
+                                {
+                                    "RuleName": "sample-rule-name-2",
+                                    "RuleOrder": 2,
+                                    "Description": "Lambda.2 is a known issue and can be resolved",
+                                    "RuleArn": "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+                                    "RuleStatus": "ENABLED",
+                                    "CreatedBy": "AROAJURBUYQQNL5OL2TIM:TEST-16MJ75L9VBK14",
+                                    "CreatedAt": "2022-08-31T01:52:33.250Z",
+                                    "UpdatedAt": "2022-08-31T01:52:33.250Z"
+                                }
+                            ],
+                            "NextToken": "example-token"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/automationrules/list",
@@ -24518,6 +25626,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists all findings-generating solutions (products) that you are subscribed to receive\n         findings from in Security Hub.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list ARNs for enabled integrations",
+                        "documentation": "The following example returns a list of subscription Amazon Resource Names (ARNs) for the product integrations that you have currently enabled in Security Hub.",
+                        "output": {
+                            "ProductSubscriptions": [
+                                "arn:aws:securityhub:us-east-1:517716713836:product-subscription/crowdstrike/crowdstrike-falcon",
+                                "arn:aws:securityhub:us-east-1::product/3coresec/3coresec"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/productSubscriptions",
@@ -24601,6 +25721,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>If finding aggregation is enabled, then <code>ListFindingAggregators</code> returns the ARN of the finding aggregator. You can run this operation from any Region.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update the enablement status of a standard control",
+                        "documentation": "The following example disables the specified control in the specified security standard.",
+                        "output": {
+                            "FindingAggregators": [
+                                {
+                                    "FindingAggregatorArn": "arn:aws:securityhub:us-east-1:222222222222:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/findingAggregator/list",
@@ -24849,6 +25982,22 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the Security Hub administrator accounts. Can only be called by the organization\n         management account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list administrator acccounts for an organization",
+                        "documentation": "The following example lists the Security  Hub administrator accounts for an organization. Only the organization management account can call this operation.",
+                        "output": {
+                            "AdminAccounts": [
+                                {
+                                    "AccountId": "777788889999"
+                                },
+                                {
+                                    "Status": "ENABLED"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/organization/admin",
@@ -24929,6 +26078,46 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>\n         Lists all of the security controls that apply to a specified standard. \n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list security controls that apply to a standard",
+                        "documentation": "The following example lists security controls that apply to a specified Security Hub standard. ",
+                        "input": {
+                            "StandardsArn": "arn:aws:securityhub:::standards/aws-foundational-security-best-practices/v/1.0.0",
+                            "NextToken": "NULL",
+                            "MaxResults": 3
+                        },
+                        "output": {
+                            "SecurityControlDefinitions": [
+                                {
+                                    "SecurityControlId": "ACM.1",
+                                    "Title": "Imported and ACM-issued certificates should be renewed after a specified time period",
+                                    "Description": "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.",
+                                    "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation",
+                                    "SeverityRating": "MEDIUM",
+                                    "CurrentRegionAvailability": "AVAILABLE"
+                                },
+                                {
+                                    "SecurityControlId": "APIGateway.1",
+                                    "Title": "API Gateway REST and WebSocket API execution logging should be enabled",
+                                    "Description": "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.",
+                                    "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation",
+                                    "SeverityRating": "MEDIUM",
+                                    "CurrentRegionAvailability": "AVAILABLE"
+                                },
+                                {
+                                    "SecurityControlId": "APIGateway.2",
+                                    "Title": "API Gateway REST API stages should be configured to use SSL certificates for backend authentication",
+                                    "Description": "This control checks whether Amazon API Gateway REST API stages have SSL certificates configured that backend systems can use to authenticate that incoming requests are from the API Gateway.",
+                                    "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/APIGateway.2/remediation",
+                                    "SeverityRating": "MEDIUM",
+                                    "CurrentRegionAvailability": "AVAILABLE"
+                                }
+                            ],
+                            "NextToken": "U2FsdGVkX1..."
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/securityControls/definitions",
@@ -25103,6 +26292,21 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of tags associated with a resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a list of tags for a resource",
+                        "documentation": "The following example returns a list of tags associated with the specified resource.",
+                        "input": {
+                            "ResourceArn": "arn:aws:securityhub:us-west-1:123456789012:hub/default"
+                        },
+                        "output": {
+                            "Tags": {
+                                "Department": "Operations",
+                                "Area": "USMidwest"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{ResourceArn}",
@@ -28018,7 +29222,7 @@
                     "name": "securityhub"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Security Hub provides you with a comprehensive view of the security state of\n         your Amazon Web Services environment and resources. It also provides you with the readiness\n         status of your environment based on controls from supported security standards. Security Hub collects security data from Amazon Web Services accounts, services, and\n         integrated third-party products and helps you analyze security trends in your environment\n         to identify the highest priority security issues. For more information about Security Hub, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">Security HubUser\n            Guide</a>.</p>\n         <p>When you use operations in the Security Hub API, the requests are executed only in\n         the Amazon Web Services Region that is currently active or in the specific Amazon Web Services Region that you specify in your request. Any configuration or settings change\n         that results from the operation is applied only to that Region. To make the same change in\n         other Regions, run the same command for each Region in which you want to apply the change.</p>\n         <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of\n         the member account with the administrator account is created only in the <code>us-west-2</code>\n         Region. Security Hub must be enabled for the member account in the same Region that the invitation\n         was sent from.</p>\n         <p>The following throttling limits apply to using Security Hub API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 1 request per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second.\n                  <code>BurstLimit</code> of 6 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BatchImportFindings</code> - <code>RateLimit</code> of 10 requests per second.\n            <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BatchUpdateFindings</code> - <code>RateLimit</code> of 10 requests per second.\n            <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateStandardsControl</code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>All other operations - <code>RateLimit</code> of 10 requests per second.\n                  <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Security Hub provides you with a comprehensive view of the security state of\n         your Amazon Web Services environment and resources. It also provides you with the readiness\n         status of your environment based on controls from supported security standards. Security Hub collects security data from Amazon Web Services accounts, services, and\n         integrated third-party products and helps you analyze security trends in your environment\n         to identify the highest priority security issues. For more information about Security Hub, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">\n               <i>Security Hub User \nGuide</i>\n            </a>.</p>\n         <p>When you use operations in the Security Hub API, the requests are executed only in\n         the Amazon Web Services Region that is currently active or in the specific Amazon Web Services Region that you specify in your request. Any configuration or settings change\n         that results from the operation is applied only to that Region. To make the same change in\n         other Regions, run the same command for each Region in which you want to apply the change.</p>\n         <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of\n         the member account with the administrator account is created only in the <code>us-west-2</code>\n         Region. Security Hub must be enabled for the member account in the same Region that the invitation\n         was sent from.</p>\n         <p>The following throttling limits apply to using Security Hub API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 1 request per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second.\n                  <code>BurstLimit</code> of 6 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BatchImportFindings</code> - <code>RateLimit</code> of 10 requests per second.\n            <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BatchUpdateFindings</code> - <code>RateLimit</code> of 10 requests per second.\n            <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateStandardsControl</code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>All other operations - <code>RateLimit</code> of 10 requests per second.\n                  <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS SecurityHub",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -28080,9 +29284,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://securityhub-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://securityhub-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -28095,15 +29478,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://securityhub.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://securityhub.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -28115,258 +29533,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://securityhub-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://securityhub-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://securityhub.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://securityhub.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -30097,6 +31265,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Adds one or more tags to a resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To tag a resource",
+                        "documentation": "The following example adds the 'Department' and 'Area' tags to the specified resource.",
+                        "input": {
+                            "ResourceArn": "arn:aws:securityhub:us-west-1:123456789012:hub/default",
+                            "Tags": {
+                                "Department": "Operations",
+                                "Area": "USMidwest"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{ResourceArn}",
@@ -30541,6 +31722,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Removes one or more tags from a resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To remove tags from a resource",
+                        "documentation": "The following example removes the 'Department' tag from the specified resource.",
+                        "input": {
+                            "ResourceArn": "arn:aws:securityhub:us-west-1:123456789012:hub/default",
+                            "TagKeys": [
+                                "Department"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{ResourceArn}",
@@ -30603,6 +31796,17 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Updates the name and description of a custom action target in Security Hub.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update the name and description of a custom action target",
+                        "documentation": "The following example updates the name and description of a custom action target in Security Hub. You can create custom actions to automatically respond to Security Hub findings using Amazon EventBridge. ",
+                        "input": {
+                            "ActionTargetArn": "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation",
+                            "Name": "Chat custom action",
+                            "Description": "Sends specified findings to customer service chat"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/actionTargets/{ActionTargetArn+}",
@@ -30746,6 +31950,29 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Updates the finding aggregation configuration. Used to update the Region linking mode and the list of included or excluded Regions. You cannot use <code>UpdateFindingAggregator</code> to change the aggregation Region.</p>\n         <p>You must run <code>UpdateFindingAggregator</code> from the current aggregation Region.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update cross-Region aggregation settings",
+                        "documentation": "The following example updates the cross-Region aggregation configuration. You use this operation to change the list of linked Regions and the treatment of new Regions. However, you cannot use this operation to change the aggregation Region.",
+                        "input": {
+                            "FindingAggregatorArn": "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "RegionLinkingMode": "SPECIFIED_REGIONS",
+                            "Regions": [
+                                "us-west-1",
+                                "us-west-2"
+                            ]
+                        },
+                        "output": {
+                            "FindingAggregatorArn": "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "FindingAggregationRegion": "us-east-1",
+                            "RegionLinkingMode": "SPECIFIED_REGIONS",
+                            "Regions": [
+                                "us-west-1",
+                                "us-west-2"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/findingAggregator/update",
@@ -30908,6 +32135,30 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Updates the Security Hub insight identified by the specified insight ARN.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update an insight",
+                        "documentation": "The following example updates the specified Security Hub insight.",
+                        "input": {
+                            "InsightArn": "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Name": "High severity role findings",
+                            "Filters": {
+                                "ResourceType": [
+                                    {
+                                        "Comparison": "EQUALS",
+                                        "Value": "AwsIamRole"
+                                    }
+                                ],
+                                "SeverityLabel": [
+                                    {
+                                        "Comparison": "EQUALS",
+                                        "Value": "HIGH"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/insights/{InsightArn+}",
@@ -30980,6 +32231,15 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Used to update the configuration related to Organizations. Can only be called from a\n         Security Hub administrator account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update organization configuration",
+                        "documentation": "The following example updates the configuration for an organization so that Security Hub is automatically activated for new member accounts. Only the Security Hub administrator account can call this operation.",
+                        "input": {
+                            "AutoEnable": true
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/organization/configuration",
@@ -31043,6 +32303,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Updates configuration options for Security Hub.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update Security Hub settings",
+                        "documentation": "The following example updates Security Hub settings to turn on consolidated control findings, and to automatically enable new controls in enabled standards.",
+                        "input": {
+                            "AutoEnableControls": true,
+                            "ControlFindingGenerator": "SECURITY_CONTROL"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/accounts",
@@ -31102,6 +32372,17 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Used to control whether an individual security standard control is enabled or\n         disabled.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update the enablement status of a standard control",
+                        "documentation": "The following example disables the specified control in the specified security standard.",
+                        "input": {
+                            "StandardsControlArn": "arn:aws:securityhub:us-west-1:123456789012:control/pci-dss/v/3.2.1/PCI.AutoScaling.1",
+                            "ControlStatus": "DISABLED",
+                            "DisabledReason": "Not applicable to my service"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/standards/control/{StandardsControlArn+}",
@@ -31313,10 +32594,78 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies if all vulnerable packages in a finding have a value for <code>FixedInVersion</code> \nand <code>Remediation</code>.\nThis field is evaluated for each vulnerability <code>Id</code> based on the number of vulnerable packages that have a value for both \n<code>FixedInVersion</code> and <code>Remediation</code>. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>YES</code> if all vulnerable packages have a value for both <code>FixedInVersion</code> and <code>Remediation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NO</code> if no vulnerable packages have a value for <code>FixedInVersion</code> and <code>Remediation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PARTIAL</code> otherwise</p>\n            </li>\n         </ul>"
                     }
+                },
+                "EpssScore": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The Exploit Prediction Scoring System (EPSS) score for a finding. \n\t\t</p>"
+                    }
+                },
+                "ExploitAvailable": {
+                    "target": "com.amazonaws.securityhub#VulnerabilityExploitAvailable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether an exploit is available for a finding.\n\t\t</p>"
+                    }
+                },
+                "CodeVulnerabilities": {
+                    "target": "com.amazonaws.securityhub#VulnerabilityCodeVulnerabilitiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vulnerabilities found in your Lambda function code. This field pertains to findings that \nSecurity Hub receives from Amazon Inspector.\n        </p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A vulnerability associated with a finding.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#VulnerabilityCodeVulnerabilities": {
+            "type": "structure",
+            "members": {
+                "Cwes": {
+                    "target": "com.amazonaws.securityhub#TypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Common Weakness Enumeration (CWE) item associated with the detected code vulnerability.\n        </p>"
+                    }
+                },
+                "FilePath": {
+                    "target": "com.amazonaws.securityhub#CodeVulnerabilitiesFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Provides details about where a code vulnerability is located in your Lambda function.\n        </p>"
+                    }
+                },
+                "SourceArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the Lambda layer in which the code vulnerability is located.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about the vulnerabilities found in your Lambda function code. This field pertains to findings that \n            Security Hub receives from Amazon Inspector.\n        </p>"
+            }
+        },
+        "com.amazonaws.securityhub#VulnerabilityCodeVulnerabilitiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#VulnerabilityCodeVulnerabilities"
+            }
+        },
+        "com.amazonaws.securityhub#VulnerabilityExploitAvailable": {
+            "type": "enum",
+            "members": {
+                "YES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YES"
+                    }
+                },
+                "NO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO"
+                    }
+                }
             }
         },
         "com.amazonaws.securityhub#VulnerabilityFixAvailable": {
@@ -31446,7 +32795,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the status of the investigation into a finding.</p>"
+                "smithy.api#documentation": "<p>Provides details about the status of the investigation into a finding.</p>"
             }
         },
         "com.amazonaws.securityhub#WorkflowState": {
