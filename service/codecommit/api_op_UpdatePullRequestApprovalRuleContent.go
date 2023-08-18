@@ -44,12 +44,12 @@ type UpdatePullRequestApprovalRuleContentInput struct {
 	// The updated content for the approval rule. When you update the content of the
 	// approval rule, you can specify approvers in an approval pool in one of two ways:
 	//
-	//   - CodeCommitApprovers: This option only requires an AWS account and a
-	//   resource. It can be used for both IAM users and federated access users whose
-	//   name matches the provided resource name. This is a very powerful option that
-	//   offers a great deal of flexibility. For example, if you specify the AWS account
-	//   123456789012 and Mary_Major, all of the following are counted as approvals
-	//   coming from that user:
+	//   - CodeCommitApprovers: This option only requires an Amazon Web Services
+	//   account and a resource. It can be used for both IAM users and federated access
+	//   users whose name matches the provided resource name. This is a very powerful
+	//   option that offers a great deal of flexibility. For example, if you specify the
+	//   Amazon Web Services account 123456789012 and Mary_Major, all of the following
+	//   are counted as approvals coming from that user:
 	//   - An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)
 	//   - A federated user identified in IAM as Mary_Major
 	//   (arn:aws:sts::123456789012:federated-user/Mary_Major) This option does not

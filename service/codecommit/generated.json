@@ -54,6 +54,7 @@
         "api_op_ListApprovalRuleTemplates.go",
         "api_op_ListAssociatedApprovalRuleTemplatesForRepository.go",
         "api_op_ListBranches.go",
+        "api_op_ListFileCommitHistory.go",
         "api_op_ListPullRequests.go",
         "api_op_ListRepositories.go",
         "api_op_ListRepositoriesForApprovalRuleTemplate.go",

@@ -10571,6 +10571,13 @@ type AwsSecurityFinding struct {
 	// For example, 2020-03-22T13:22:13.933Z .
 	FirstObservedAt *string
 
+	// Provides metadata for the Amazon CodeGuru detector associated with a finding.
+	// This field pertains to findings that relate to Lambda functions. Amazon
+	// Inspector identifies policy violations and vulnerabilities in Lambda function
+	// code based on internal detectors developed in collaboration with Amazon
+	// CodeGuru. Security Hub receives those findings.
+	GeneratorDetails *GeneratorDetails
+
 	// Indicates when the security findings provider most recently observed the
 	// potential security issue that a finding captured. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
@@ -12219,6 +12226,25 @@ type ClassificationStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about where a code vulnerability is located in your Lambda
+// function.
+type CodeVulnerabilitiesFilePath struct {
+
+	// The line number of the last line of code in which the vulnerability is located.
+	EndLine int32
+
+	// The name of the file in which the code vulnerability is located.
+	FileName *string
+
+	// The file path to the code in which the vulnerability is located.
+	FilePath *string
+
+	// The line number of the first line of code in which the vulnerability is located.
+	StartLine int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains finding details that are specific to control-based findings. Only
 // returned for findings generated from controls.
 type Compliance struct {
@@ -12620,6 +12646,25 @@ type FirewallPolicyStatelessRuleGroupReferencesDetails struct {
 
 	// The ARN of the stateless rule group.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides metadata for the Amazon CodeGuru detector associated with a finding.
+// This field pertains to findings that relate to Lambda functions. Amazon
+// Inspector identifies policy violations and vulnerabilities in Lambda function
+// code based on internal detectors developed in collaboration with Amazon
+// CodeGuru. Security Hub receives those findings.
+type GeneratorDetails struct {
+
+	// The description of the detector used to identify the code vulnerability.
+	Description *string
+
+	// An array of tags used to identify the detector associated with the finding.
+	Labels []string
+
+	// The name of the detector used to identify the code vulnerability.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -15047,8 +15092,18 @@ type Vulnerability struct {
 	// This member is required.
 	Id *string
 
+	// The vulnerabilities found in your Lambda function code. This field pertains to
+	// findings that Security Hub receives from Amazon Inspector.
+	CodeVulnerabilities []VulnerabilityCodeVulnerabilities
+
 	// CVSS scores from the advisory related to the vulnerability.
 	Cvss []Cvss
+
+	// The Exploit Prediction Scoring System (EPSS) score for a finding.
+	EpssScore float64
+
+	// Whether an exploit is available for a finding.
+	ExploitAvailable VulnerabilityExploitAvailable
 
 	// Specifies if all vulnerable packages in a finding have a value for
 	// FixedInVersion and Remediation . This field is evaluated for each vulnerability
@@ -15071,6 +15126,26 @@ type Vulnerability struct {
 
 	// List of software packages that have the vulnerability.
 	VulnerablePackages []SoftwarePackage
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the vulnerabilities found in your Lambda function code.
+// This field pertains to findings that Security Hub receives from Amazon
+// Inspector.
+type VulnerabilityCodeVulnerabilities struct {
+
+	// The Common Weakness Enumeration (CWE) item associated with the detected code
+	// vulnerability.
+	Cwes []string
+
+	// Provides details about where a code vulnerability is located in your Lambda
+	// function.
+	FilePath *CodeVulnerabilitiesFilePath
+
+	// The Amazon Resource Name (ARN) of the Lambda layer in which the code
+	// vulnerability is located.
+	SourceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -15140,7 +15215,7 @@ type WafOverrideAction struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the status of the investigation into a finding.
+// Provides details about the status of the investigation into a finding.
 type Workflow struct {
 
 	// The status of the investigation into the finding. The workflow status is

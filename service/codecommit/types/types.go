@@ -555,6 +555,28 @@ type FileSizes struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a version of a file.
+type FileVersion struct {
+
+	// The blob ID of the object that represents the content of the file in this
+	// version.
+	BlobId *string
+
+	// Returns information about a specific commit.
+	Commit *Commit
+
+	// The name and path of the file at which this blob is indexed which contains the
+	// data for this version of the file. This value will vary between file versions if
+	// a file is renamed or if its path changes.
+	Path *string
+
+	// An array of commit IDs that contain more recent versions of this file. If there
+	// are no additional versions of the file, this array will be empty.
+	RevisionChildren []string
+
+	noSmithyDocumentSerde
+}
+
 // Returns information about a folder in a repository.
 type Folder struct {
 
@@ -942,8 +964,8 @@ type ReactionForComment struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the values for reactions to a comment. AWS CodeCommit
-// supports a limited set of reactions.
+// Information about the values for reactions to a comment. CodeCommit supports a
+// limited set of reactions.
 type ReactionValueFormats struct {
 
 	// The Emoji Version 1.0 graphic of the reaction. These graphics are interpreted
@@ -986,7 +1008,7 @@ type ReplaceContentEntry struct {
 // Information about a repository.
 type RepositoryMetadata struct {
 
-	// The ID of the AWS account associated with the repository.
+	// The ID of the Amazon Web Services account associated with the repository.
 	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the repository.
@@ -1031,7 +1053,11 @@ type RepositoryNameIdPair struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a trigger for a repository.
+// Information about a trigger for a repository. If you want to receive
+// notifications about repository events, consider using notifications instead of
+// triggers. For more information, see Configuring notifications for repository
+// events (https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-repository-email.html)
+// .
 type RepositoryTrigger struct {
 
 	// The ARN of the resource that is the target for a trigger (for example, the ARN

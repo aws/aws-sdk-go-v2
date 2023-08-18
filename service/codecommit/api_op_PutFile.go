@@ -16,8 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates a file in a branch in an AWS CodeCommit repository, and
-// generates a commit for the addition in the specified branch.
+// Adds or updates a file in a branch in an CodeCommit repository, and generates a
+// commit for the addition in the specified branch.
 func (c *Client) PutFile(ctx context.Context, params *PutFileInput, optFns ...func(*Options)) (*PutFileOutput, error) {
 	if params == nil {
 		params = &PutFileInput{}

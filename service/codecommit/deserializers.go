@@ -6552,6 +6552,156 @@ func awsAwsjson11_deserializeOpErrorListBranches(response *smithyhttp.Response, 
 	}
 }
 
+type awsAwsjson11_deserializeOpListFileCommitHistory struct {
+}
+
+func (*awsAwsjson11_deserializeOpListFileCommitHistory) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListFileCommitHistory) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListFileCommitHistory(response, &metadata)
+	}
+	output := &ListFileCommitHistoryOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListFileCommitHistoryOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListFileCommitHistory(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("CommitDoesNotExistException", errorCode):
+		return awsAwsjson11_deserializeErrorCommitDoesNotExistException(response, errorBody)
+
+	case strings.EqualFold("CommitRequiredException", errorCode):
+		return awsAwsjson11_deserializeErrorCommitRequiredException(response, errorBody)
+
+	case strings.EqualFold("EncryptionIntegrityChecksFailedException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionIntegrityChecksFailedException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyAccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyDisabledException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyDisabledException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyNotFoundException(response, errorBody)
+
+	case strings.EqualFold("EncryptionKeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorEncryptionKeyUnavailableException(response, errorBody)
+
+	case strings.EqualFold("InvalidCommitException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidCommitException(response, errorBody)
+
+	case strings.EqualFold("InvalidContinuationTokenException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidContinuationTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidMaxResultsException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidMaxResultsException(response, errorBody)
+
+	case strings.EqualFold("InvalidRepositoryNameException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidRepositoryNameException(response, errorBody)
+
+	case strings.EqualFold("RepositoryDoesNotExistException", errorCode):
+		return awsAwsjson11_deserializeErrorRepositoryDoesNotExistException(response, errorBody)
+
+	case strings.EqualFold("RepositoryNameRequiredException", errorCode):
+		return awsAwsjson11_deserializeErrorRepositoryNameRequiredException(response, errorBody)
+
+	case strings.EqualFold("TipsDivergenceExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorTipsDivergenceExceededException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpListPullRequests struct {
 }
 
@@ -22222,6 +22372,65 @@ func awsAwsjson11_deserializeDocumentFileTooLargeException(v **types.FileTooLarg
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFileVersion(v **types.FileVersion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FileVersion
+	if *v == nil {
+		sv = &types.FileVersion{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "blobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ObjectId to be of type string, got %T instead", value)
+				}
+				sv.BlobId = ptr.String(jtv)
+			}
+
+		case "commit":
+			if err := awsAwsjson11_deserializeDocumentCommit(&sv.Commit, value); err != nil {
+				return err
+			}
+
+		case "path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Path to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
+		case "revisionChildren":
+			if err := awsAwsjson11_deserializeDocumentRevisionChildren(&sv.RevisionChildren, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentFolder(v **types.Folder, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29074,6 +29283,76 @@ func awsAwsjson11_deserializeDocumentRestrictedSourceFileException(v **types.Res
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRevisionChildren(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RevisionId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRevisionDag(v *[]types.FileVersion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FileVersion
+	if *v == nil {
+		cv = []types.FileVersion{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FileVersion
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentFileVersion(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRevisionIdRequiredException(v **types.RevisionIdRequiredException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31952,6 +32231,51 @@ func awsAwsjson11_deserializeOpDocumentListBranchesOutput(v **ListBranchesOutput
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentListFileCommitHistoryOutput(v **ListFileCommitHistoryOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListFileCommitHistoryOutput
+	if *v == nil {
+		sv = &ListFileCommitHistoryOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "revisionDag":
+			if err := awsAwsjson11_deserializeDocumentRevisionDag(&sv.RevisionDag, value); err != nil {
+				return err
 			}
 
 		default:

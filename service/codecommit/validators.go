@@ -870,6 +870,26 @@ func (m *validateOpListBranches) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFileCommitHistory struct {
+}
+
+func (*validateOpListFileCommitHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFileCommitHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFileCommitHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFileCommitHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPullRequests struct {
 }
 
@@ -1660,6 +1680,10 @@ func addOpListAssociatedApprovalRuleTemplatesForRepositoryValidationMiddleware(s
 
 func addOpListBranchesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBranches{}, middleware.After)
+}
+
+func addOpListFileCommitHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFileCommitHistory{}, middleware.After)
 }
 
 func addOpListPullRequestsValidationMiddleware(stack *middleware.Stack) error {
@@ -2830,6 +2854,24 @@ func validateOpListBranchesInput(v *ListBranchesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListBranchesInput"}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFileCommitHistoryInput(v *ListFileCommitHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFileCommitHistoryInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.FilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
