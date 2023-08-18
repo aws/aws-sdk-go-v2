@@ -1,3 +1,8 @@
+# v1.16.0 (2023-08-18)
+
+* **Feature**: Add new ListFileCommitHistory operation to retrieve commits which introduced changes to a specific file.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.3 (2023-08-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

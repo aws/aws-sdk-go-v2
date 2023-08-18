@@ -1,8 +1,0 @@
-{
-    "id": "82efed24-2793-419e-827e-92265f736beb",
-    "type": "feature",
-    "description": "Added Inspector Lambda code Vulnerability section to ASFF, including GeneratorDetails, EpssScore, ExploitAvailable, and CodeVulnerabilities.",
-    "modules": [
-        "service/securityhub"
-    ]
-}

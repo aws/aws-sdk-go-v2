@@ -1,3 +1,14 @@
+# Release (2023-08-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.16.0](service/codecommit/CHANGELOG.md#v1160-2023-08-18)
+  * **Feature**: Add new ListFileCommitHistory operation to retrieve commits which introduced changes to a specific file.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.36.0](service/securityhub/CHANGELOG.md#v1360-2023-08-18)
+  * **Feature**: Added Inspector Lambda code Vulnerability section to ASFF, including GeneratorDetails, EpssScore, ExploitAvailable, and CodeVulnerabilities.
+
 # Release (2023-08-17)
 
 ## General Highlights

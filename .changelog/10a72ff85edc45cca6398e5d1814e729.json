@@ -1,8 +1,0 @@
-{
-    "id": "10a72ff8-5edc-45cc-a639-8e5d1814e729",
-    "type": "feature",
-    "description": "Add new ListFileCommitHistory operation to retrieve commits which introduced changes to a specific file.",
-    "modules": [
-        "service/codecommit"
-    ]
-}

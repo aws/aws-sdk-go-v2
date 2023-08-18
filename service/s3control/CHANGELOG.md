@@ -1,3 +1,7 @@
+# v1.32.4 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.3 (2023-08-17)
 
 * **Announcement**: BREAKFIX: corrected function spelling in environment config from GetS3DisableMultRegionAccessPoints to GetS3DisableMultiRegionAccessPoints
