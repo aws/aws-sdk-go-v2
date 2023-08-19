@@ -8,10 +8,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -484,6 +486,112 @@ func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
 
 func addResponseErrorMiddleware(stack *middleware.Stack) error {
 	return awshttp.AddResponseErrorMiddleware(stack)
+}
+
+// HTTPPresignerV4 represents presigner interface used by presign url client
+type HTTPPresignerV4 interface {
+	PresignHTTP(
+		ctx context.Context, credentials aws.Credentials, r *http.Request,
+		payloadHash string, service string, region string, signingTime time.Time,
+		optFns ...func(*v4.SignerOptions),
+	) (url string, signedHeader http.Header, err error)
+}
+
+// PresignOptions represents the presign client options
+type PresignOptions struct {
+
+	// ClientOptions are list of functional options to mutate client options used by
+	// the presign client.
+	ClientOptions []func(*Options)
+
+	// Presigner is the presigner used by the presign url client
+	Presigner HTTPPresignerV4
+}
+
+func (o PresignOptions) copy() PresignOptions {
+	clientOptions := make([]func(*Options), len(o.ClientOptions))
+	copy(clientOptions, o.ClientOptions)
+	o.ClientOptions = clientOptions
+	return o
+}
+
+// WithPresignClientFromClientOptions is a helper utility to retrieve a function
+// that takes PresignOption as input
+func WithPresignClientFromClientOptions(optFns ...func(*Options)) func(*PresignOptions) {
+	return withPresignClientFromClientOptions(optFns).options
+}
+
+type withPresignClientFromClientOptions []func(*Options)
+
+func (w withPresignClientFromClientOptions) options(o *PresignOptions) {
+	o.ClientOptions = append(o.ClientOptions, w...)
+}
+
+// PresignClient represents the presign url client
+type PresignClient struct {
+	client  *Client
+	options PresignOptions
+}
+
+// NewPresignClient generates a presign client using provided API Client and
+// presign options
+func NewPresignClient(c *Client, optFns ...func(*PresignOptions)) *PresignClient {
+	var options PresignOptions
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	if len(options.ClientOptions) != 0 {
+		c = New(c.options, options.ClientOptions...)
+	}
+
+	if options.Presigner == nil {
+		options.Presigner = newDefaultV4Signer(c.options)
+	}
+
+	return &PresignClient{
+		client:  c,
+		options: options,
+	}
+}
+
+func withNopHTTPClientAPIOption(o *Options) {
+	o.HTTPClient = smithyhttp.NopClient{}
+}
+
+type presignConverter PresignOptions
+
+func (c presignConverter) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
+	stack.Finalize.Clear()
+	stack.Deserialize.Clear()
+	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
+	stack.Build.Remove("UserAgent")
+	pmw := v4.NewPresignHTTPRequestMiddleware(v4.PresignHTTPRequestMiddlewareOptions{
+		CredentialsProvider: options.Credentials,
+		Presigner:           c.Presigner,
+		LogSigning:          options.ClientLogMode.IsSigning(),
+	})
+	err = stack.Finalize.Add(pmw, middleware.After)
+	if err != nil {
+		return err
+	}
+	if err = smithyhttp.AddNoPayloadDefaultContentTypeRemover(stack); err != nil {
+		return err
+	}
+	// convert request to a GET request
+	err = query.AddAsGetRequestMiddleware(stack)
+	if err != nil {
+		return err
+	}
+	// use query encoder to encode GET request query string
+	err = AddPresignSynthesizeSpeechMiddleware(stack)
+	if err != nil {
+		return err
+	}
+	err = presignedurlcust.AddAsIsPresigingMiddleware(stack)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
