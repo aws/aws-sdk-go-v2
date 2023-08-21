@@ -1,8 +1,0 @@
-{
-    "id": "520b63ea-218f-4053-b056-ecd064b26f03",
-    "type": "feature",
-    "description": "Adding support for RDS Aurora Global Database Unplanned Failover",
-    "modules": [
-        "service/rds"
-    ]
-}

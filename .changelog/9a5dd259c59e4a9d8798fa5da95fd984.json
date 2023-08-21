@@ -1,8 +1,0 @@
-{
-    "id": "9a5dd259-c59e-4a9d-8798-fa5da95fd984",
-    "type": "feature",
-    "description": "The DeleteKeyPair API has been updated to return the keyPairId when an existing key pair is deleted.",
-    "modules": [
-        "service/ec2"
-    ]
-}

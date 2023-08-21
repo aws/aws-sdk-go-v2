@@ -1,3 +1,8 @@
+# v1.30.0 (2023-08-21)
+
+* **Feature**: Add support for polly SynthesizeSpeech GET request presigner
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.3 (2023-08-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

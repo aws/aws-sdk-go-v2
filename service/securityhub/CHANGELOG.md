@@ -1,3 +1,7 @@
+# v1.36.1 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2023-08-18)
 
 * **Feature**: Added Inspector Lambda code Vulnerability section to ASFF, including GeneratorDetails, EpssScore, ExploitAvailable, and CodeVulnerabilities.

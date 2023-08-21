@@ -1,8 +1,0 @@
-{
-    "id": "4f46c447-478a-4458-9ab7-2eeee1d1673f",
-    "type": "documentation",
-    "description": "Fixed typos in description fields",
-    "modules": [
-        "service/route53domains"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.114.0 (2023-08-21)
+
+* **Feature**: The DeleteKeyPair API has been updated to return the keyPairId when an existing key pair is deleted.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.113.1 (2023-08-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

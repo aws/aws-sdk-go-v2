@@ -1,9 +1,0 @@
-{
-  "id": "419f3a1b-33d8-4177-9c96-56a7d69c63e6",
-  "type": "feature",
-  "description": "Add support for polly SynthesizeSpeech GET request presigner",
-  "modules": [
-    ".",
-    "service/polly"
-  ]
-}
