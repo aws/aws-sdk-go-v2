@@ -2614,27 +2614,31 @@ type ExportTask struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the state of scheduled or in-process failover operations on an Aurora
-// global database ( GlobalCluster ). This Data type is empty unless a failover
-// operation is scheduled or is currently underway on the Aurora global database.
+// Contains the state of scheduled or in-process operations on a global cluster
+// (Aurora global database). This data type is empty unless a switchover or
+// failover operation is scheduled or is in progress on the Aurora global database.
 type FailoverState struct {
 
 	// The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being
 	// demoted, and which is associated with this state.
 	FromDbClusterArn *string
 
-	// The current status of the Aurora global database ( GlobalCluster ). Possible
-	// values are as follows:
-	//   - pending  A request to fail over the Aurora global database ( GlobalCluster
-	//   ) has been received by the service. The GlobalCluster 's primary DB cluster
-	//   and the specified secondary DB cluster are being verified before the failover
-	//   process can start.
+	// Indicates whether the operation is a global switchover or a global failover. If
+	// data loss is allowed, then the operation is a global failover. Otherwise, it's a
+	// switchover.
+	IsDataLossAllowed bool
+
+	// The current status of the global cluster. Possible values are as follows:
+	//   - pending  The service received a request to switch over or fail over the
+	//   global cluster. The global cluster's primary DB cluster and the specified
+	//   secondary DB cluster are being verified before the operation starts.
 	//   - failing-over  This status covers the range of Aurora internal operations
-	//   that take place during the failover process, such as demoting the primary Aurora
-	//   DB cluster, promoting the secondary Aurora DB, and synchronizing replicas.
-	//   - cancelling  The request to fail over the Aurora global database (
-	//   GlobalCluster ) was cancelled and the primary Aurora DB cluster and the
-	//   selected secondary Aurora DB cluster are returning to their previous states.
+	//   that take place during the switchover or failover process, such as demoting the
+	//   primary Aurora DB cluster, promoting the secondary Aurora DB cluster, and
+	//   synchronizing replicas.
+	//   - cancelling  The request to switch over or fail over the global cluster was
+	//   cancelled and the primary Aurora DB cluster and the selected secondary Aurora DB
+	//   cluster are returning to their previous states.
 	Status FailoverStatus
 
 	// The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being
@@ -2685,9 +2689,9 @@ type GlobalCluster struct {
 	EngineVersion *string
 
 	// A data object containing all properties for the current state of an in-process
-	// or pending failover process for this Aurora global database. This object is
-	// empty unless the FailoverGlobalCluster API operation has been called on this
-	// Aurora global database ( GlobalCluster ).
+	// or pending switchover or failover process for this global cluster (Aurora global
+	// database). This object is empty unless the SwitchoverGlobalCluster or
+	// FailoverGlobalCluster operation was called on this global cluster.
 	FailoverState *FailoverState
 
 	// The Amazon Resource Name (ARN) for the global database cluster.
@@ -2715,24 +2719,26 @@ type GlobalCluster struct {
 }
 
 // A data structure with information about any primary and secondary clusters
-// associated with an Aurora global database.
+// associated with a global cluster (Aurora global database).
 type GlobalClusterMember struct {
 
-	// The Amazon Resource Name (ARN) for each Aurora cluster.
+	// The Amazon Resource Name (ARN) for each Aurora DB cluster in the global cluster.
 	DBClusterArn *string
 
-	// Specifies whether a secondary cluster in an Aurora global database has write
+	// Specifies whether a secondary cluster in the global cluster has write
 	// forwarding enabled, not enabled, or is in the process of enabling it.
 	GlobalWriteForwardingStatus WriteForwardingStatus
 
-	// Specifies whether the Aurora cluster is the primary cluster (that is, has
-	// read-write capability) for the Aurora global database with which it is
-	// associated.
+	// Specifies whether the Aurora DB cluster is the primary cluster (that is, has
+	// read-write capability) for the global cluster with which it is associated.
 	IsWriter bool
 
 	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
-	// with the Aurora global database.
+	// with the global cluster.
 	Readers []string
+
+	// The status of synchronization of each Aurora DB cluster in the global cluster.
+	SynchronizationStatus GlobalClusterMemberSynchronizationStatus
 
 	noSmithyDocumentSerde
 }

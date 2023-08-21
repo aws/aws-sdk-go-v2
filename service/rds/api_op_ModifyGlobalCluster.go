@@ -16,10 +16,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies a setting for an Amazon Aurora global cluster. You can change one or
-// more database configuration parameters by specifying these parameters and the
-// new values in the request. For more information on Amazon Aurora, see What is
-// Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// Modifies a setting for an Amazon Aurora global database cluster. You can change
+// one or more database configuration parameters by specifying these parameters and
+// the new values in the request. For more information on Amazon Aurora, see What
+// is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. This operation only applies to Aurora global
 // database clusters.
 func (c *Client) ModifyGlobalCluster(ctx context.Context, params *ModifyGlobalClusterInput, optFns ...func(*Options)) (*ModifyGlobalClusterOutput, error) {

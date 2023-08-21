@@ -254,6 +254,24 @@ func (KxClusterType) Values() []KxClusterType {
 	}
 }
 
+type KxDeploymentStrategy string
+
+// Enum values for KxDeploymentStrategy
+const (
+	KxDeploymentStrategyNoRestart KxDeploymentStrategy = "NO_RESTART"
+	KxDeploymentStrategyRolling   KxDeploymentStrategy = "ROLLING"
+)
+
+// Values returns all known values for KxDeploymentStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KxDeploymentStrategy) Values() []KxDeploymentStrategy {
+	return []KxDeploymentStrategy{
+		"NO_RESTART",
+		"ROLLING",
+	}
+}
+
 type KxSavedownStorageType string
 
 // Enum values for KxSavedownStorageType
@@ -267,6 +285,24 @@ const (
 func (KxSavedownStorageType) Values() []KxSavedownStorageType {
 	return []KxSavedownStorageType{
 		"SDS01",
+	}
+}
+
+type RuleAction string
+
+// Enum values for RuleAction
+const (
+	RuleActionAllow RuleAction = "allow"
+	RuleActionDeny  RuleAction = "deny"
+)
+
+// Values returns all known values for RuleAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RuleAction) Values() []RuleAction {
+	return []RuleAction{
+		"allow",
+		"deny",
 	}
 }
 

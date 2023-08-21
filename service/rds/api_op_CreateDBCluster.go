@@ -480,6 +480,9 @@ type CreateDBClusterInput struct {
 	// Default:
 	//   - Aurora DB clusters - aurora
 	//   - Multi-AZ DB clusters - io1
+	// When you create an Aurora DB cluster with the storage type set to aurora-iopt1 ,
+	// the storage type is returned in the response. The storage type isn't returned
+	// when you set it to aurora .
 	StorageType *string
 
 	// Tags to assign to the DB cluster. Valid for Cluster Type: Aurora DB clusters

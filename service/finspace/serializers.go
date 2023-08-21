@@ -2550,6 +2550,13 @@ func awsRestjson1_serializeOpDocumentUpdateKxClusterDatabasesInput(v *UpdateKxCl
 		}
 	}
 
+	if v.DeploymentConfiguration != nil {
+		ok := object.Key("deploymentConfiguration")
+		if err := awsRestjson1_serializeDocumentKxDeploymentConfiguration(v.DeploymentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3209,6 +3216,23 @@ func awsRestjson1_serializeDocumentFederationParameters(v *types.FederationParam
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIcmpTypeCode(v *types.IcmpTypeCode, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("code")
+		ok.Integer(v.Code)
+	}
+
+	{
+		ok := object.Key("type")
+		ok.Integer(v.Type)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKxCacheStorageConfiguration(v *types.KxCacheStorageConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3338,6 +3362,18 @@ func awsRestjson1_serializeDocumentKxDatabaseConfigurations(v []types.KxDatabase
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKxDeploymentConfiguration(v *types.KxDeploymentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DeploymentStrategy) > 0 {
+		ok := object.Key("deploymentStrategy")
+		ok.String(string(v.DeploymentStrategy))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKxSavedownStorageConfiguration(v *types.KxSavedownStorageConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3350,6 +3386,77 @@ func awsRestjson1_serializeDocumentKxSavedownStorageConfiguration(v *types.KxSav
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNetworkACLConfiguration(v []types.NetworkACLEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentNetworkACLEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNetworkACLEntry(v *types.NetworkACLEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CidrBlock != nil {
+		ok := object.Key("cidrBlock")
+		ok.String(*v.CidrBlock)
+	}
+
+	if v.IcmpTypeCode != nil {
+		ok := object.Key("icmpTypeCode")
+		if err := awsRestjson1_serializeDocumentIcmpTypeCode(v.IcmpTypeCode, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PortRange != nil {
+		ok := object.Key("portRange")
+		if err := awsRestjson1_serializeDocumentPortRange(v.PortRange, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Protocol != nil {
+		ok := object.Key("protocol")
+		ok.String(*v.Protocol)
+	}
+
+	if len(v.RuleAction) > 0 {
+		ok := object.Key("ruleAction")
+		ok.String(string(v.RuleAction))
+	}
+
+	{
+		ok := object.Key("ruleNumber")
+		ok.Integer(v.RuleNumber)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPortRange(v *types.PortRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("from")
+		ok.Integer(v.From)
+	}
+
+	{
+		ok := object.Key("to")
+		ok.Integer(v.To)
 	}
 
 	return nil
@@ -3413,6 +3520,13 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 func awsRestjson1_serializeDocumentTransitGatewayConfiguration(v *types.TransitGatewayConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AttachmentNetworkAclConfiguration != nil {
+		ok := object.Key("attachmentNetworkAclConfiguration")
+		if err := awsRestjson1_serializeDocumentNetworkACLConfiguration(v.AttachmentNetworkAclConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.RoutableCIDRSpace != nil {
 		ok := object.Key("routableCIDRSpace")
