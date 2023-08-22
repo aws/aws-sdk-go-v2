@@ -24,7 +24,8 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^.*$"
+                "smithy.api#pattern": "^.*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#ActionIdentifier": {
@@ -56,7 +57,8 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^Action$|^.+::Action$"
+                "smithy.api#pattern": "^Action$|^.+::Action$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#AttributeValue": {
@@ -104,7 +106,10 @@
             }
         },
         "com.amazonaws.verifiedpermissions#BooleanAttribute": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.verifiedpermissions#ClientId": {
             "type": "string",
@@ -113,7 +118,8 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^.*$"
+                "smithy.api#pattern": "^.*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#ClientIds": {
@@ -207,11 +213,6 @@
             },
             "value": {
                 "target": "com.amazonaws.verifiedpermissions#AttributeValue"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0
-                }
             }
         },
         "com.amazonaws.verifiedpermissions#CreateIdentitySource": {
@@ -844,11 +845,6 @@
             },
             "value": {
                 "target": "com.amazonaws.verifiedpermissions#AttributeValue"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0
-                }
             }
         },
         "com.amazonaws.verifiedpermissions#EntityId": {
@@ -858,7 +854,8 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^.*$"
+                "smithy.api#pattern": "^.*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#EntityIdentifier": {
@@ -914,11 +911,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.verifiedpermissions#EntityItem"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0
-                }
             }
         },
         "com.amazonaws.verifiedpermissions#EntityReference": {
@@ -948,7 +940,8 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^.*$"
+                "smithy.api#pattern": "^.*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#EvaluationErrorItem": {
@@ -963,7 +956,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains a description of an evaluation error.</p>\n         <p>This data type is used as a request parameter in the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a> and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>"
+                "smithy.api#documentation": "<p>Contains a description of an evaluation error.</p>\n         <p>This data type is used as a request parameter in the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a> and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#EvaluationErrorList": {
@@ -1736,7 +1730,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to make an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source",
-                "smithy.api#documentation": "<p>Makes an authorization decision about a service request described in the parameters.\n            The principal in this request comes from an external identity source. The information in the\n            parameters can also define additional context that Verified Permissions can include in the evaluation.\n            The request is evaluated against all matching policies in the specified policy store. The result\n            of the decision is either <code>Allow</code> or <code>Deny</code>, along with a list of\n            the policies that resulted in the decision.</p>\n         <important>\n            <p>If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Makes an authorization decision about a service request described in the parameters.\n            The principal in this request comes from an external identity source in the form of an identity\n            token formatted as a <a href=\"https://wikipedia.org/wiki/JSON_Web_Token\">JSON web\n                token (JWT)</a>. The information in the parameters can also define additional\n            context that Verified Permissions can include in the evaluation. The request is evaluated against all\n            matching policies in the specified policy store. The result of the decision is either\n                <code>Allow</code> or <code>Deny</code>, along with a list of the policies that\n            resulted in the decision.</p>\n         <important>\n            <p>If you specify the <code>identityToken</code> parameter, then this operation\n                derives the principal from that token. You must not also include that principal in\n                the <code>entities</code> parameter or the operation fails and reports a conflict\n                between the two entity sources.</p>\n            <p>If you provide only an <code>accessToken</code>, then you can include the entity\n                as part of the <code>entities</code> parameter to provide additional\n                attributes.</p>\n         </important>\n         <p>At this time, Verified Permissions accepts tokens from only Amazon Cognito.</p>\n         <p>Verified Permissions validates each token that is specified in a request by checking its expiration\n            date and its signature.</p>\n         <important>\n            <p>If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.</p>\n         </important>",
                 "smithy.api#readonly": {}
             }
         },
@@ -1753,13 +1747,13 @@
                 "identityToken": {
                     "target": "com.amazonaws.verifiedpermissions#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an identity token for the principal to be authorized. This token is provided\n            to you by the identity provider (IdP) associated with the specified identity source. You must\n            specify either an <code>AccessToken</code> or an <code>IdentityToken</code>, but not\n            both.</p>"
+                        "smithy.api#documentation": "<p>Specifies an identity token for the principal to be authorized. This token is provided\n            to you by the identity provider (IdP) associated with the specified identity source. You must\n            specify either an <code>AccessToken</code> or an <code>IdentityToken</code>, or\n            both.</p>"
                     }
                 },
                 "accessToken": {
                     "target": "com.amazonaws.verifiedpermissions#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an access token for the principal to be authorized. This token is provided\n            to you by the identity provider (IdP) associated with the specified identity source. You must\n            specify either an <code>AccessToken</code> or an <code>IdentityToken</code>, but not\n            both.</p>"
+                        "smithy.api#documentation": "<p>Specifies an access token for the principal to be authorized. This token is provided\n            to you by the identity provider (IdP) associated with the specified identity source. You must\n            specify either an <code>AccessToken</code>, or an <code>IdentityToken</code>, or\n            both.</p>"
                     }
                 },
                 "action": {
@@ -1783,7 +1777,7 @@
                 "entities": {
                     "target": "com.amazonaws.verifiedpermissions#EntitiesDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the list of resources and principals and their associated attributes that\n            Verified Permissions can examine when evaluating the policies. </p>\n         <note>\n            <p>You can include only principal and resource entities in this parameter; you can't\n                include actions. You must specify actions in the schema.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the list of resources and their associated attributes that Verified Permissions can examine\n            when evaluating the policies. </p>\n         <note>\n            <p>You can include only resource and action entities in this parameter; you can't\n                include principals.</p>\n            <ul>\n               <li>\n                  <p>The <code>IsAuthorizedWithToken</code> operation takes principal\n                        attributes from <b>\n                        <i>only</i>\n                     </b>\n                        the <code>identityToken</code> or <code>accessToken</code> passed to the\n                        operation.</p>\n               </li>\n               <li>\n                  <p>For action entities, you can include only their <code>Identifier</code>\n                        and <code>EntityType</code>. </p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -1864,7 +1858,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.verifiedpermissions#ListIdentitySourcesMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included on each page \n             of the response. If you do not include this parameter, it defaults to a value that is \n             specific to the operation. If additional items exist beyond the number you specify, the\n             <code>NextToken</code> response element is returned with a value (not null).\n             Include the specified value as the <code>NextToken</code> request parameter in the next \n             call to the operation to get the next part of the results. Note that the service might \n             return fewer results than the maximum even when there are more results available. You \n             should check <code>NextToken</code> after every operation to ensure that you receive all\n             of the results.</p>"
+                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included in each\n             response. If additional items exist beyond the number you specify, the \n             <code>NextToken</code> response element is returned with a value (not null). Include the\n             specified value as the <code>NextToken</code> request parameter in the next call to the\n             operation to get the next set of results. Note that the service might return fewer\n             results than the maximum even when there are more results available. You should check \n             <code>NextToken</code> after every operation to ensure that you receive all of the\n             results.</p>\n         <p>If you do not specify this parameter, the operation defaults to 10 identity sources per response.\n            You can specify a maximum of 200 identity sources per response.</p>"
                     }
                 },
                 "filters": {
@@ -1952,7 +1946,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.verifiedpermissions#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included on each page \n             of the response. If you do not include this parameter, it defaults to a value that is \n             specific to the operation. If additional items exist beyond the number you specify, the\n             <code>NextToken</code> response element is returned with a value (not null).\n             Include the specified value as the <code>NextToken</code> request parameter in the next \n             call to the operation to get the next part of the results. Note that the service might \n             return fewer results than the maximum even when there are more results available. You \n             should check <code>NextToken</code> after every operation to ensure that you receive all\n             of the results.</p>"
+                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included in each\n             response. If additional items exist beyond the number you specify, the \n             <code>NextToken</code> response element is returned with a value (not null). Include the\n             specified value as the <code>NextToken</code> request parameter in the next call to the\n             operation to get the next set of results. Note that the service might return fewer\n             results than the maximum even when there are more results available. You should check \n             <code>NextToken</code> after every operation to ensure that you receive all of the\n             results.</p>\n         <p>If you do not specify this parameter, the operation defaults to 10 policies per\n            response. You can specify a maximum of 50 policies per response.</p>"
                     }
                 },
                 "filter": {
@@ -2019,7 +2013,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.verifiedpermissions#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included on each page \n             of the response. If you do not include this parameter, it defaults to a value that is \n             specific to the operation. If additional items exist beyond the number you specify, the\n             <code>NextToken</code> response element is returned with a value (not null).\n             Include the specified value as the <code>NextToken</code> request parameter in the next \n             call to the operation to get the next part of the results. Note that the service might \n             return fewer results than the maximum even when there are more results available. You \n             should check <code>NextToken</code> after every operation to ensure that you receive all\n             of the results.</p>"
+                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included in each\n             response. If additional items exist beyond the number you specify, the \n             <code>NextToken</code> response element is returned with a value (not null). Include the\n             specified value as the <code>NextToken</code> request parameter in the next call to the\n             operation to get the next set of results. Note that the service might return fewer\n             results than the maximum even when there are more results available. You should check \n             <code>NextToken</code> after every operation to ensure that you receive all of the\n             results.</p>\n         <p>If you do not specify this parameter, the operation defaults to 10 policy stores per\n            response. You can specify a maximum of 50 policy stores per response.</p>"
                     }
                 }
             },
@@ -2092,7 +2086,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.verifiedpermissions#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included on each page \n             of the response. If you do not include this parameter, it defaults to a value that is \n             specific to the operation. If additional items exist beyond the number you specify, the\n             <code>NextToken</code> response element is returned with a value (not null).\n             Include the specified value as the <code>NextToken</code> request parameter in the next \n             call to the operation to get the next part of the results. Note that the service might \n             return fewer results than the maximum even when there are more results available. You \n             should check <code>NextToken</code> after every operation to ensure that you receive all\n             of the results.</p>"
+                        "smithy.api#documentation": "<p>Specifies the total number of results that you want included in each\n             response. If additional items exist beyond the number you specify, the \n             <code>NextToken</code> response element is returned with a value (not null). Include the\n             specified value as the <code>NextToken</code> request parameter in the next call to the\n             operation to get the next set of results. Note that the service might return fewer\n             results than the maximum even when there are more results available. You should check \n             <code>NextToken</code> after every operation to ensure that you receive all of the\n             results.</p>\n         <p>If you do not specify this parameter, the operation defaults to 10 policy templates per\n            response. You can specify a maximum of 50 policy templates per response.</p>"
                     }
                 }
             },
@@ -2122,14 +2116,17 @@
             }
         },
         "com.amazonaws.verifiedpermissions#LongAttribute": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.verifiedpermissions#MaxResults": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 20
+                    "max": 50
                 }
             }
         },
@@ -2140,7 +2137,8 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^.*$"
+                "smithy.api#pattern": "^.*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#NamespaceList": {
@@ -2177,7 +2175,6 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
                     "max": 100
                 },
                 "smithy.api#uniqueItems": {}
@@ -2389,7 +2386,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 10000
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#PolicyStore": {
@@ -2533,7 +2531,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 150
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#PolicyTemplateId": {
@@ -2618,7 +2617,8 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^.*$"
+                "smithy.api#pattern": "^.*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#PutSchema": {
@@ -2836,7 +2836,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 10000
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#ServiceQuotaExceededException": {
@@ -2948,11 +2949,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 150
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#StringAttribute": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.verifiedpermissions#TemplateLinkedPolicyDefinition": {
             "type": "structure",
@@ -3079,7 +3084,8 @@
                     "min": 1,
                     "max": 131072
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9-_=]+.[A-Za-z0-9-_=]+.[A-Za-z0-9-_=]+$"
+                "smithy.api#pattern": "^[A-Za-z0-9-_=]+.[A-Za-z0-9-_=]+.[A-Za-z0-9-_=]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.verifiedpermissions#UpdateCognitoUserPoolConfiguration": {
@@ -3232,7 +3238,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to modify the specified Cedar static policy in the specified policy store",
-                "smithy.api#documentation": "<p>Modifies a Cedar static policy in the specified policy store. You can change only certain elements of\n            the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyInput.html#amazonverifiedpermissions-UpdatePolicy-request-UpdatePolicyDefinition\">UpdatePolicyDefinition</a> parameter. You can directly update only static policies. To\n            change a template-linked policy, you must update the template instead, using <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html\">UpdatePolicyTemplate</a>.</p>\n         <note>\n            <p>If policy validation is enabled in the policy store, then updating a static policy causes Verified Permissions to\n                validate the policy against the schema in the policy store. If the updated static policy doesn't pass\n                validation, the operation fails and the update isn't stored.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Modifies a Cedar static policy in the specified policy store. You can change only certain elements of\n            the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyInput.html#amazonverifiedpermissions-UpdatePolicy-request-UpdatePolicyDefinition\">UpdatePolicyDefinition</a> parameter. You can directly update only static policies. To\n            change a template-linked policy, you must update the template instead, using <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html\">UpdatePolicyTemplate</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>If policy validation is enabled in the policy store, then updating a static policy causes\n                        Verified Permissions to validate the policy against the schema in the policy store. If the updated\n                        static policy doesn't pass validation, the operation fails and the update isn't\n                        stored.</p>\n               </li>\n               <li>\n                  <p>When you edit a static policy, You can change only certain elements of a static\n                        policy:</p>\n                  <ul>\n                     <li>\n                        <p>The action referenced by the policy. </p>\n                     </li>\n                     <li>\n                        <p>A condition clause, such as when and unless. </p>\n                     </li>\n                  </ul>\n                  <p>You can't change these elements of a static policy: </p>\n                  <ul>\n                     <li>\n                        <p>Changing a policy from a static policy to a template-linked\n                                policy. </p>\n                     </li>\n                     <li>\n                        <p>Changing the effect of a static policy from permit or forbid.\n                            </p>\n                     </li>\n                     <li>\n                        <p>The principal referenced by a static policy. </p>\n                     </li>\n                     <li>\n                        <p>The resource referenced by a static policy. </p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>To update a template-linked policy, you must update the template instead. </p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4016,158 +4022,6 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://verifiedpermissions-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://verifiedpermissions-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://verifiedpermissions.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://verifiedpermissions.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://verifiedpermissions-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://verifiedpermissions-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://verifiedpermissions.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://verifiedpermissions.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://verifiedpermissions-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://verifiedpermissions.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
@@ -4175,9 +4029,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4188,9 +4042,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4201,9 +4055,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4214,9 +4068,161 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://verifiedpermissions-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://verifiedpermissions-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://verifiedpermissions.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://verifiedpermissions.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://verifiedpermissions-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://verifiedpermissions-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://verifiedpermissions.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://verifiedpermissions.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://verifiedpermissions-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://verifiedpermissions.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4225,9 +4231,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4238,9 +4244,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4249,9 +4255,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4262,13 +4268,27 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -4277,7 +4297,6 @@
                             "params": {
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4287,9 +4306,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4299,10 +4318,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],

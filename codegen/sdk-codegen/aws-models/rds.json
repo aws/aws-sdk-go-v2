@@ -3697,6 +3697,18 @@
                 },
                 "Tags": {
                     "target": "com.amazonaws.rds#TagList"
+                },
+                "SourceCustomDbEngineVersionIdentifier": {
+                    "target": "com.amazonaws.rds#String255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
+                "UseAwsProvidedLatestImage": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
                 }
             },
             "traits": {
