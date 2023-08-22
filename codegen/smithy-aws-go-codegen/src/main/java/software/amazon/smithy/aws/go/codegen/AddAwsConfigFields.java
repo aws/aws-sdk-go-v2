@@ -377,7 +377,7 @@ public class AddAwsConfigFields implements GoIntegration {
 
         writer.write("""
                 func $finalizeResolveName:L(o *Options, client Client) {
-                    if v := o.RetryMaxAttempts; v == 0 || v == client.options.RetryMaxAttempts {
+                    if v := o.RetryMaxAttempts; v == 0 {
                         return
                     }
 
