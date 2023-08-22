@@ -1,8 +1,0 @@
-{
-    "id": "36c80860-62d3-49c1-9d9a-4ef6b0afdbab",
-    "type": "feature",
-    "description": "Documentation updates for Amazon Verified Permissions. Increases max results per page for ListPolicyStores, ListPolicies, and ListPolicyTemplates APIs from 20 to 50.",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.17.7 (2023-08-22)
+
+* **Documentation**: Global Accelerator now supports Client Ip Preservation for Network Load Balancer endpoints.
+
 # v1.17.6 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

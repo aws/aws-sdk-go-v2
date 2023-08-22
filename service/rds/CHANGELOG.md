@@ -1,3 +1,7 @@
+# v1.52.0 (2023-08-22)
+
+* **Feature**: Adding parameters to CreateCustomDbEngineVersion reserved for future use.
+
 # v1.51.0 (2023-08-21)
 
 * **Feature**: Adding support for RDS Aurora Global Database Unplanned Failover

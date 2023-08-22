@@ -1,3 +1,15 @@
+# Release (2023-08-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.28.0](service/costexplorer/CHANGELOG.md#v1280-2023-08-22)
+  * **Feature**: This release adds the LastUpdatedDate and LastUsedDate timestamps to help you manage your cost allocation tags.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.17.7](service/globalaccelerator/CHANGELOG.md#v1177-2023-08-22)
+  * **Documentation**: Global Accelerator now supports Client Ip Preservation for Network Load Balancer endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.52.0](service/rds/CHANGELOG.md#v1520-2023-08-22)
+  * **Feature**: Adding parameters to CreateCustomDbEngineVersion reserved for future use.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.2.0](service/verifiedpermissions/CHANGELOG.md#v120-2023-08-22)
+  * **Feature**: Documentation updates for Amazon Verified Permissions. Increases max results per page for ListPolicyStores, ListPolicies, and ListPolicyTemplates APIs from 20 to 50.
+
 # Release (2023-08-21)
 
 ## General Highlights

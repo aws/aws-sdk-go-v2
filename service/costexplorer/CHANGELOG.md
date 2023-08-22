@@ -1,3 +1,7 @@
+# v1.28.0 (2023-08-22)
+
+* **Feature**: This release adds the LastUpdatedDate and LastUsedDate timestamps to help you manage your cost allocation tags.
+
 # v1.27.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
