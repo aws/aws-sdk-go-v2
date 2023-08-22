@@ -1,0 +1,8 @@
+{
+    "id": "11a3462d-9749-4bd6-a8fd-1ac90397b691",
+    "type": "documentation",
+    "description": "Global Accelerator now supports Client Ip Preservation for Network Load Balancer endpoints.",
+    "modules": [
+        "service/globalaccelerator"
+    ]
+}

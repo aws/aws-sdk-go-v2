@@ -1,0 +1,8 @@
+{
+    "id": "7177f174-9ed8-4608-a9cc-9cc839aa6062",
+    "type": "feature",
+    "description": "Adding parameters to CreateCustomDbEngineVersion reserved for future use.",
+    "modules": [
+        "service/rds"
+    ]
+}

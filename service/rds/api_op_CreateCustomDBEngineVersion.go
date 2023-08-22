@@ -94,9 +94,15 @@ type CreateCustomDBEngineVersionInput struct {
 	// in the Amazon RDS User Guide.
 	Manifest *string
 
+	// Reserved for future use.
+	SourceCustomDbEngineVersionIdentifier *string
+
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
 	// in the Amazon RDS User Guide.
 	Tags []types.Tag
+
+	// Reserved for future use.
+	UseAwsProvidedLatestImage *bool
 
 	noSmithyDocumentSerde
 }

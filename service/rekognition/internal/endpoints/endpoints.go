@@ -182,6 +182,9 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-west-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "il-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "rekognition-fips.ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "rekognition-fips.ca-central-1.amazonaws.com",

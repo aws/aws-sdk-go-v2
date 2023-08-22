@@ -17,7 +17,7 @@ import (
 )
 
 // Retrieves the details for a Savings Plan recommendation. These details include
-// the hourly data-points that construct the new cost, coverage, and utilization
+// the hourly data-points that construct the cost, coverage, and utilization
 // charts.
 func (c *Client) GetSavingsPlanPurchaseRecommendationDetails(ctx context.Context, params *GetSavingsPlanPurchaseRecommendationDetailsInput, optFns ...func(*Options)) (*GetSavingsPlanPurchaseRecommendationDetailsOutput, error) {
 	if params == nil {

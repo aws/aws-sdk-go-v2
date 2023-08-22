@@ -276,6 +276,12 @@ type CostAllocationTag struct {
 	// This member is required.
 	Type CostAllocationTagType
 
+	// The last date that the tag was either activated or deactivated.
+	LastUpdatedDate *string
+
+	// The last month that the tag was used on an Amazon Web Services resource.
+	LastUsedDate *string
+
 	noSmithyDocumentSerde
 }
 

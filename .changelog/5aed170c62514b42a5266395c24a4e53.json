@@ -1,0 +1,8 @@
+{
+    "id": "5aed170c-6251-4b42-a526-6395c24a4e53",
+    "type": "feature",
+    "description": "This release adds the LastUpdatedDate and LastUsedDate timestamps to help you manage your cost allocation tags.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

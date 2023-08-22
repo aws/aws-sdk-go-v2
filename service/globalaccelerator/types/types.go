@@ -419,7 +419,9 @@ type EndpointConfiguration struct {
 	// X-Forwarded-For request header as traffic travels to applications on the
 	// endpoint fronted by the accelerator. Client IP address preservation is
 	// supported, in specific Amazon Web Services Regions, for endpoints that are
-	// Application Load Balancers and Amazon EC2 instances. For more information, see
+	// Application Load Balancers, Amazon EC2 instances, and Network Load Balancers
+	// with Security Groups. IMPORTANT: You cannot use client IP address preservation
+	// with Network Load Balancers with TLS listeners. For more information, see
 	// Preserve client IP addresses in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html)
 	// in the Global Accelerator Developer Guide.
 	ClientIPPreservationEnabled *bool
@@ -454,7 +456,9 @@ type EndpointDescription struct {
 	// X-Forwarded-For request header as traffic travels to applications on the
 	// endpoint fronted by the accelerator. Client IP address preservation is
 	// supported, in specific Amazon Web Services Regions, for endpoints that are
-	// Application Load Balancers and Amazon EC2 instances. For more information, see
+	// Application Load Balancers, Amazon EC2 instances, and Network Load Balancers
+	// with Security Groups. IMPORTANT: You cannot use client IP address preservation
+	// with Network Load Balancers with TLS listeners. For more information, see
 	// Preserve client IP addresses in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html)
 	// in the Global Accelerator Developer Guide.
 	ClientIPPreservationEnabled *bool

@@ -10272,11 +10272,21 @@ func awsAwsquery_serializeOpDocumentCreateCustomDBEngineVersionInput(v *CreateCu
 		objectKey.String(*v.Manifest)
 	}
 
+	if v.SourceCustomDbEngineVersionIdentifier != nil {
+		objectKey := object.Key("SourceCustomDbEngineVersionIdentifier")
+		objectKey.String(*v.SourceCustomDbEngineVersionIdentifier)
+	}
+
 	if v.Tags != nil {
 		objectKey := object.Key("Tags")
 		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.UseAwsProvidedLatestImage != nil {
+		objectKey := object.Key("UseAwsProvidedLatestImage")
+		objectKey.Boolean(*v.UseAwsProvidedLatestImage)
 	}
 
 	return nil

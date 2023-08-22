@@ -5473,6 +5473,24 @@ func awsAwsjson11_deserializeDocumentCostAllocationTag(v **types.CostAllocationT
 
 	for key, value := range shape {
 		switch key {
+		case "LastUpdatedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ZonedDateTime to be of type string, got %T instead", value)
+				}
+				sv.LastUpdatedDate = ptr.String(jtv)
+			}
+
+		case "LastUsedDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ZonedDateTime to be of type string, got %T instead", value)
+				}
+				sv.LastUsedDate = ptr.String(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

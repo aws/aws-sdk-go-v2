@@ -22,10 +22,21 @@ import (
 // parameter. You can directly update only static policies. To change a
 // template-linked policy, you must update the template instead, using
 // UpdatePolicyTemplate (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html)
-// . If policy validation is enabled in the policy store, then updating a static
-// policy causes Verified Permissions to validate the policy against the schema in
-// the policy store. If the updated static policy doesn't pass validation, the
-// operation fails and the update isn't stored.
+// .
+//   - If policy validation is enabled in the policy store, then updating a static
+//     policy causes Verified Permissions to validate the policy against the schema in
+//     the policy store. If the updated static policy doesn't pass validation, the
+//     operation fails and the update isn't stored.
+//   - When you edit a static policy, You can change only certain elements of a
+//     static policy:
+//   - The action referenced by the policy.
+//   - A condition clause, such as when and unless. You can't change these
+//     elements of a static policy:
+//   - Changing a policy from a static policy to a template-linked policy.
+//   - Changing the effect of a static policy from permit or forbid.
+//   - The principal referenced by a static policy.
+//   - The resource referenced by a static policy.
+//   - To update a template-linked policy, you must update the template instead.
 func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, optFns ...func(*Options)) (*UpdatePolicyOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyInput{}
