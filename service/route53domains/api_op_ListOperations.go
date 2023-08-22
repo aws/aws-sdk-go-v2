@@ -52,7 +52,7 @@ type ListOperationsInput struct {
 	// The sort type for returned values.
 	SortBy types.ListOperationsSortAttributeName
 
-	// The sort order ofr returned values, either ascending or descending.
+	// The sort order for returned values, either ascending or descending.
 	SortOrder types.SortOrder
 
 	// The status of the operations.

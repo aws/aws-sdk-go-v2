@@ -75,6 +75,7 @@ type DescribeFleetCapacityOutput struct {
 
 	// A collection of objects that contains capacity information for each requested
 	// fleet ID. Capacity objects are returned only for fleets that currently exist.
+	// Changes in desired instance value can take up to 1 minute to be reflected.
 	FleetCapacity []types.FleetCapacity
 
 	// A token that indicates where to resume retrieving results on the next call to

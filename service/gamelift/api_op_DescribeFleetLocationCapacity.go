@@ -60,7 +60,8 @@ type DescribeFleetLocationCapacityInput struct {
 type DescribeFleetLocationCapacityOutput struct {
 
 	// Resource capacity information for the requested fleet location. Capacity
-	// objects are returned only for fleets and locations that currently exist.
+	// objects are returned only for fleets and locations that currently exist. Changes
+	// in desired instance value can take up to 1 minute to be reflected.
 	FleetCapacity *types.FleetCapacity
 
 	// Metadata pertaining to the operation's result.

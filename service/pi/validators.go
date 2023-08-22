@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreatePerformanceAnalysisReport struct {
+}
+
+func (*validateOpCreatePerformanceAnalysisReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePerformanceAnalysisReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePerformanceAnalysisReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePerformanceAnalysisReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePerformanceAnalysisReport struct {
+}
+
+func (*validateOpDeletePerformanceAnalysisReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePerformanceAnalysisReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePerformanceAnalysisReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePerformanceAnalysisReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDimensionKeys struct {
 }
 
@@ -45,6 +85,26 @@ func (m *validateOpGetDimensionKeyDetails) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDimensionKeyDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPerformanceAnalysisReport struct {
+}
+
+func (*validateOpGetPerformanceAnalysisReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPerformanceAnalysisReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPerformanceAnalysisReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPerformanceAnalysisReportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -130,12 +190,104 @@ func (m *validateOpListAvailableResourceMetrics) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPerformanceAnalysisReports struct {
+}
+
+func (*validateOpListPerformanceAnalysisReports) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPerformanceAnalysisReports) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPerformanceAnalysisReportsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPerformanceAnalysisReportsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpCreatePerformanceAnalysisReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePerformanceAnalysisReport{}, middleware.After)
+}
+
+func addOpDeletePerformanceAnalysisReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePerformanceAnalysisReport{}, middleware.After)
+}
+
 func addOpDescribeDimensionKeysValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDimensionKeys{}, middleware.After)
 }
 
 func addOpGetDimensionKeyDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDimensionKeyDetails{}, middleware.After)
+}
+
+func addOpGetPerformanceAnalysisReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPerformanceAnalysisReport{}, middleware.After)
 }
 
 func addOpGetResourceMetadataValidationMiddleware(stack *middleware.Stack) error {
@@ -152,6 +304,22 @@ func addOpListAvailableResourceDimensionsValidationMiddleware(stack *middleware.
 
 func addOpListAvailableResourceMetricsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAvailableResourceMetrics{}, middleware.After)
+}
+
+func addOpListPerformanceAnalysisReportsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPerformanceAnalysisReports{}, middleware.After)
+}
+
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
 func validateDimensionGroup(v *types.DimensionGroup) error {
@@ -198,6 +366,91 @@ func validateMetricQueryList(v []types.MetricQuery) error {
 		if err := validateMetricQuery(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagList(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePerformanceAnalysisReportInput(v *CreatePerformanceAnalysisReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePerformanceAnalysisReportInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePerformanceAnalysisReportInput(v *DeletePerformanceAnalysisReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePerformanceAnalysisReportInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.AnalysisReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisReportId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -261,6 +514,27 @@ func validateOpGetDimensionKeyDetailsInput(v *GetDimensionKeyDetailsInput) error
 	}
 	if v.GroupIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPerformanceAnalysisReportInput(v *GetPerformanceAnalysisReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPerformanceAnalysisReportInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.AnalysisReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisReportId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -352,6 +626,88 @@ func validateOpListAvailableResourceMetricsInput(v *ListAvailableResourceMetrics
 	}
 	if v.MetricTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPerformanceAnalysisReportsInput(v *ListPerformanceAnalysisReportsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPerformanceAnalysisReportsInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

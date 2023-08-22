@@ -210,9 +210,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://finspace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://finspace-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -225,15 +404,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://finspace.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://finspace.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -245,258 +459,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://finspace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://finspace-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://finspace.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://finspace.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -870,7 +834,11 @@
         },
         "com.amazonaws.finspace#AccessDeniedException": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.finspace#ErrorMessage2"
+                }
+            },
             "traits": {
                 "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
                 "smithy.api#error": "client",
@@ -979,7 +947,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, number of instances, and the port used while establishing a connection.</p>"
+                "smithy.api#documentation": "<p>A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.</p>"
             }
         },
         "com.amazonaws.finspace#ChangeRequest": {
@@ -1505,7 +1473,7 @@
                 "capacityConfiguration": {
                     "target": "com.amazonaws.finspace#CapacityConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure for the metadata of a cluster. It includes information about like the CPUs needed, memory of instances, number of instances, and the port used while establishing a connection.</p>",
+                        "smithy.api#documentation": "<p>A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1636,7 +1604,7 @@
                 "capacityConfiguration": {
                     "target": "com.amazonaws.finspace#CapacityConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, number of instances, and the port used while establishing a connection.</p>"
+                        "smithy.api#documentation": "<p>A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.</p>"
                     }
                 },
                 "releaseLabel": {
@@ -2067,7 +2035,7 @@
                 "userArn": {
                     "target": "com.amazonaws.finspace#KxUserArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and\n      how to use ARNs in policies, see <a href=\"IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the\n      <i>IAM User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and\n      how to use ARNs in policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the\n      <i>IAM User Guide</i>. </p>"
                     }
                 },
                 "environmentId": {
@@ -3229,7 +3197,7 @@
                 "capacityConfiguration": {
                     "target": "com.amazonaws.finspace#CapacityConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, number of instances, and the port used while establishing a connection.</p>"
+                        "smithy.api#documentation": "<p>A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.</p>"
                     }
                 },
                 "releaseLabel": {
@@ -3343,7 +3311,7 @@
                 "userArn": {
                     "target": "com.amazonaws.finspace#KxUserArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and\n      how to use ARNs in policies, see <a href=\"IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the\n      <i>IAM User Guide</i>. </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and\n      how to use ARNs in policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the\n      <i>IAM User Guide</i>. </p>",
                         "smithy.api#httpQuery": "userArn",
                         "smithy.api#required": {}
                     }
@@ -3736,7 +3704,7 @@
                 "userArn": {
                     "target": "com.amazonaws.finspace#KxUserArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and\n      how to use ARNs in policies, see <a href=\"IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the\n      <i>IAM User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and\n      how to use ARNs in policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the\n      <i>IAM User Guide</i>. </p>"
                     }
                 },
                 "environmentId": {
@@ -3765,6 +3733,36 @@
                         "smithy.api#enumValue": "IP_V4"
                     }
                 }
+            }
+        },
+        "com.amazonaws.finspace#IcmpTypeCode": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.finspace#IcmpTypeOrCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The ICMP type. A value of <i>-1</i> means all types.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.finspace#IcmpTypeOrCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         The ICMP code. A value of <i>-1</i> means all codes for the specified ICMP type.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Defines the ICMP protocol that consists of the ICMP type and code.\n      </p>"
+            }
+        },
+        "com.amazonaws.finspace#IcmpTypeOrCode": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
             }
         },
         "com.amazonaws.finspace#IdType": {
@@ -3994,7 +3992,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of availability zones assigned per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of availability zones assigned per cluster. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "availabilityZoneId": {
@@ -4178,7 +4176,7 @@
                     "min": 1,
                     "max": 50
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_:.]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_:./]+$"
             }
         },
         "com.amazonaws.finspace#KxCommandLineArguments": {
@@ -4278,6 +4276,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.finspace#KxDatabaseListEntry"
+            }
+        },
+        "com.amazonaws.finspace#KxDeploymentConfiguration": {
+            "type": "structure",
+            "members": {
+                "deploymentStrategy": {
+                    "target": "com.amazonaws.finspace#KxDeploymentStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The type of deployment that you want on a cluster.\n        \n      </p>\n         <ul>\n            <li>\n               <p>ROLLING – This options loads the updated database by stopping the exiting q process and starting a new q process with updated configuration.</p>\n            </li>\n            <li>\n               <p>NO_RESTART – This option loads the updated database on the running q process without stopping it. This option is quicker as it reduces the turn around time to update a kdb database changeset configuration on a cluster.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The configuration that allows you to choose how you want to update the databases on a cluster. Depending on the option you choose, you can reduce the time it takes to update the database changesets on to a cluster.\n      </p>"
+            }
+        },
+        "com.amazonaws.finspace#KxDeploymentStrategy": {
+            "type": "enum",
+            "members": {
+                "NO_RESTART": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_RESTART"
+                    }
+                },
+                "ROLLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLING"
+                    }
+                }
             }
         },
         "com.amazonaws.finspace#KxEnvironment": {
@@ -4462,7 +4492,7 @@
                     "target": "com.amazonaws.finspace#KxSavedownStorageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The size of temporary storage in bytes.</p>",
+                        "smithy.api#documentation": "<p>The size of temporary storage in gibibytes.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4498,7 +4528,7 @@
                 "userArn": {
                     "target": "com.amazonaws.finspace#KxUserArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and\n         how to use ARNs in policies, see <a href=\"IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the\n            <i>IAM User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and\n         how to use ARNs in policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the\n            <i>IAM User Guide</i>. </p>"
                     }
                 },
                 "userName": {
@@ -5260,12 +5290,72 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9]{1,50}$"
             }
         },
+        "com.amazonaws.finspace#NetworkACLConfiguration": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#NetworkACLEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.finspace#NetworkACLEntry": {
+            "type": "structure",
+            "members": {
+                "ruleNumber": {
+                    "target": "com.amazonaws.finspace#RuleNumber",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         The rule number for the entry. For example <i>100</i>. All the network ACL entries are processed in ascending order by rule number.\n         \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.finspace#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The protocol number. A value of <i>-1</i> means all the protocols.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ruleAction": {
+                    "target": "com.amazonaws.finspace#RuleAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates whether to allow or deny the traffic that matches the rule.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "portRange": {
+                    "target": "com.amazonaws.finspace#PortRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The range of ports the rule applies to.\n      </p>"
+                    }
+                },
+                "icmpTypeCode": {
+                    "target": "com.amazonaws.finspace#IcmpTypeCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Defines the ICMP protocol that consists of the ICMP type and code.\n      </p>"
+                    }
+                },
+                "cidrBlock": {
+                    "target": "com.amazonaws.finspace#ValidCIDRBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The IPv4 network range to allow or deny, in CIDR notation. For example, <code>172.16.0.0/24</code>. We modify the specified CIDR block to its canonical form. For example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n       The network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. The entry is a set of numbered ingress and egress rules that determine whether a packet should be allowed in or out of a subnet associated with the ACL. We process the entries in the ACL according to the rule numbers, in ascending order.\n      </p>"
+            }
+        },
         "com.amazonaws.finspace#NodeCount": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
-                    "max": 5
+                    "min": 1
                 }
             }
         },
@@ -5287,6 +5377,50 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.finspace#Port": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.finspace#PortRange": {
+            "type": "structure",
+            "members": {
+                "from": {
+                    "target": "com.amazonaws.finspace#Port",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         The first port in the range.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "to": {
+                    "target": "com.amazonaws.finspace#Port",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         The last port in the range.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The range of ports the rule applies to.\n      </p>"
+            }
+        },
+        "com.amazonaws.finspace#Protocol": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^-1|[0-9]+$"
             }
         },
         "com.amazonaws.finspace#ReleaseLabel": {
@@ -5343,6 +5477,33 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+            }
+        },
+        "com.amazonaws.finspace#RuleAction": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "allow"
+                    }
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deny"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#RuleNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 32766
+                }
             }
         },
         "com.amazonaws.finspace#S3Bucket": {
@@ -5596,7 +5757,11 @@
         },
         "com.amazonaws.finspace#ThrottlingException": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.finspace#ErrorMessage2"
+                }
+            },
             "traits": {
                 "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
                 "smithy.api#error": "client",
@@ -5621,6 +5786,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The routing CIDR on behalf of kdb environment. It could be any \"/26 range in the 100.64.0.0 CIDR space. After providing, it will be added to the customer's transit gateway routing table so that the traffics could be routed to kdb network.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "attachmentNetworkAclConfiguration": {
+                    "target": "com.amazonaws.finspace#NetworkACLConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The rules that define how you manage the outbound traffic from kdb network to your internal network.\n         \n      </p>"
                     }
                 }
             },
@@ -5794,6 +5965,9 @@
                     "target": "com.amazonaws.finspace#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.finspace#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.finspace#InternalServerException"
                 },
                 {
@@ -5840,7 +6014,8 @@
                 "clientToken": {
                     "target": "com.amazonaws.finspace#ClientTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>"
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "databases": {
@@ -5848,6 +6023,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The structure of databases mounted on the cluster.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.finspace#KxDeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration that allows you to choose how you want to update the databases on a cluster.\n      </p>"
                     }
                 }
             },
@@ -6402,7 +6583,7 @@
                 "userArn": {
                     "target": "com.amazonaws.finspace#KxUserArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and\n      how to use ARNs in policies, see <a href=\"IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the\n      <i>IAM User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and\n      how to use ARNs in policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM Identifiers</a> in the\n      <i>IAM User Guide</i>. </p>"
                     }
                 },
                 "environmentId": {
@@ -6422,11 +6603,18 @@
                 "smithy.api#output": {}
             }
         },
-        "com.amazonaws.finspace#ValidCIDRSpace": {
+        "com.amazonaws.finspace#ValidCIDRBlock": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/26$"
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 18
+                },
+                "smithy.api#pattern": "^(?:\\d{1,3}\\.){3}\\d{1,3}(?:\\/(?:3[0-2]|[12]\\d|\\d))$"
             }
+        },
+        "com.amazonaws.finspace#ValidCIDRSpace": {
+            "type": "string"
         },
         "com.amazonaws.finspace#ValidHostname": {
             "type": "string",

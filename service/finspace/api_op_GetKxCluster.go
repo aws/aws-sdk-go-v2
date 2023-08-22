@@ -68,8 +68,7 @@ type GetKxClusterOutput struct {
 	CacheStorageConfigurations []types.KxCacheStorageConfiguration
 
 	// A structure for the metadata of a cluster. It includes information like the
-	// CPUs needed, memory of instances, number of instances, and the port used while
-	// establishing a connection.
+	// CPUs needed, memory of instances, and number of instances.
 	CapacityConfiguration *types.CapacityConfiguration
 
 	// A description of the cluster.

@@ -42,8 +42,7 @@ type AutoScalingConfiguration struct {
 }
 
 // A structure for the metadata of a cluster. It includes information like the
-// CPUs needed, memory of instances, number of instances, and the port used while
-// establishing a connection.
+// CPUs needed, memory of instances, and number of instances.
 type CapacityConfiguration struct {
 
 	// The number of instances running in a cluster.
@@ -214,6 +213,22 @@ type FederationParameters struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the ICMP protocol that consists of the ICMP type and code.
+type IcmpTypeCode struct {
+
+	// The ICMP code. A value of -1 means all codes for the specified ICMP type.
+	//
+	// This member is required.
+	Code int32
+
+	// The ICMP type. A value of -1 means all types.
+	//
+	// This member is required.
+	Type int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for read only disk cache associated with a cluster.
 type KxCacheStorageConfiguration struct {
 
@@ -269,7 +284,7 @@ type KxCluster struct {
 	AvailabilityZoneId *string
 
 	// The number of availability zones assigned per cluster. This can be one of the
-	// following
+	// following:
 	//   - SINGLE – Assigns one availability zone per cluster.
 	//   - MULTI – Assigns all the availability zones per cluster.
 	AzMode KxAzMode
@@ -406,6 +421,24 @@ type KxDatabaseListEntry struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that allows you to choose how you want to update the
+// databases on a cluster. Depending on the option you choose, you can reduce the
+// time it takes to update the database changesets on to a cluster.
+type KxDeploymentConfiguration struct {
+
+	// The type of deployment that you want on a cluster.
+	//   - ROLLING – This options loads the updated database by stopping the exiting q
+	//   process and starting a new q process with updated configuration.
+	//   - NO_RESTART – This option loads the updated database on the running q
+	//   process without stopping it. This option is quicker as it reduces the turn
+	//   around time to update a kdb database changeset configuration on a cluster.
+	//
+	// This member is required.
+	DeploymentStrategy KxDeploymentStrategy
+
+	noSmithyDocumentSerde
+}
+
 // The details of a kdb environment.
 type KxEnvironment struct {
 
@@ -504,7 +537,7 @@ type KxNode struct {
 // cluster node is restarted.
 type KxSavedownStorageConfiguration struct {
 
-	// The size of temporary storage in bytes.
+	// The size of temporary storage in gibibytes.
 	//
 	// This member is required.
 	Size int32
@@ -532,12 +565,68 @@ type KxUser struct {
 	UpdateTimestamp *time.Time
 
 	// The Amazon Resource Name (ARN) that identifies the user. For more information
-	// about ARNs and how to use ARNs in policies, see IAM Identifiers in the IAM User
-	// Guide.
+	// about ARNs and how to use ARNs in policies, see IAM Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
+	// in the IAM User Guide.
 	UserArn *string
 
 	// A unique identifier for the user.
 	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// The network access control list (ACL) is an optional layer of security for your
+// VPC that acts as a firewall for controlling traffic in and out of one or more
+// subnets. The entry is a set of numbered ingress and egress rules that determine
+// whether a packet should be allowed in or out of a subnet associated with the
+// ACL. We process the entries in the ACL according to the rule numbers, in
+// ascending order.
+type NetworkACLEntry struct {
+
+	// The IPv4 network range to allow or deny, in CIDR notation. For example,
+	// 172.16.0.0/24 . We modify the specified CIDR block to its canonical form. For
+	// example, if you specify 100.68.0.18/18 , we modify it to 100.68.0.0/18 .
+	//
+	// This member is required.
+	CidrBlock *string
+
+	// The protocol number. A value of -1 means all the protocols.
+	//
+	// This member is required.
+	Protocol *string
+
+	// Indicates whether to allow or deny the traffic that matches the rule.
+	//
+	// This member is required.
+	RuleAction RuleAction
+
+	// The rule number for the entry. For example 100. All the network ACL entries are
+	// processed in ascending order by rule number.
+	//
+	// This member is required.
+	RuleNumber int32
+
+	// Defines the ICMP protocol that consists of the ICMP type and code.
+	IcmpTypeCode *IcmpTypeCode
+
+	// The range of ports the rule applies to.
+	PortRange *PortRange
+
+	noSmithyDocumentSerde
+}
+
+// The range of ports the rule applies to.
+type PortRange struct {
+
+	// The first port in the range.
+	//
+	// This member is required.
+	From int32
+
+	// The last port in the range.
+	//
+	// This member is required.
+	To int32
 
 	noSmithyDocumentSerde
 }
@@ -580,6 +669,10 @@ type TransitGatewayConfiguration struct {
 	//
 	// This member is required.
 	TransitGatewayID *string
+
+	// The rules that define how you manage the outbound traffic from kdb network to
+	// your internal network.
+	AttachmentNetworkAclConfiguration []NetworkACLEntry
 
 	noSmithyDocumentSerde
 }

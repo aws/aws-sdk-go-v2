@@ -1,3 +1,19 @@
+# v1.19.3 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.2 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.0 (2023-08-15)
+
+* **Feature**: AWS Performance Insights for Amazon RDS is launching Performance Analysis On Demand, a new feature that allows you to analyze database performance metrics and find out the performance issues. You can now use SDK to create, list, get, delete, and manage tags of performance analysis reports.
+
 # v1.18.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

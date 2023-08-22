@@ -25,10 +25,11 @@ import (
 //     only.
 //
 // To request player sessions, specify either a player session ID, game session
-// ID, or player ID. You can filter this request by player session status. Use the
-// pagination parameters to retrieve results as a set of sequential pages. If
-// successful, a PlayerSession object is returned for each session that matches
-// the request. Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// ID, or player ID. You can filter this request by player session status. If you
+// provide a specific PlayerSessionId or PlayerId , Amazon GameLift ignores the
+// filter criteria. Use the pagination parameters to retrieve results as a set of
+// sequential pages. If successful, a PlayerSession object is returned for each
+// session that matches the request. Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribePlayerSessions(ctx context.Context, params *DescribePlayerSessionsInput, optFns ...func(*Options)) (*DescribePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &DescribePlayerSessionsInput{}

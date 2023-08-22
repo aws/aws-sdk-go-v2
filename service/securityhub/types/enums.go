@@ -639,6 +639,25 @@ func (VerificationState) Values() []VerificationState {
 	}
 }
 
+type VulnerabilityExploitAvailable string
+
+// Enum values for VulnerabilityExploitAvailable
+const (
+	VulnerabilityExploitAvailableYes VulnerabilityExploitAvailable = "YES"
+	VulnerabilityExploitAvailableNo  VulnerabilityExploitAvailable = "NO"
+)
+
+// Values returns all known values for VulnerabilityExploitAvailable. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (VulnerabilityExploitAvailable) Values() []VulnerabilityExploitAvailable {
+	return []VulnerabilityExploitAvailable{
+		"YES",
+		"NO",
+	}
+}
+
 type VulnerabilityFixAvailable string
 
 // Enum values for VulnerabilityFixAvailable

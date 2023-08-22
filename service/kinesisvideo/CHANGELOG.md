@@ -1,3 +1,15 @@
+# v1.18.3 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.18.2 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.18.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-08-07)
 
 * **Feature**: This release enables minimum of Images SamplingInterval to be as low as 200 milliseconds in Kinesis Video Stream Image feature.

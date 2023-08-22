@@ -45,8 +45,8 @@ type GetKxConnectionStringInput struct {
 	EnvironmentId *string
 
 	// The Amazon Resource Name (ARN) that identifies the user. For more information
-	// about ARNs and how to use ARNs in policies, see IAM Identifiers in the IAM User
-	// Guide.
+	// about ARNs and how to use ARNs in policies, see IAM Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
+	// in the IAM User Guide.
 	//
 	// This member is required.
 	UserArn *string

@@ -1,3 +1,15 @@
+# v1.32.3 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.2 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2023-08-09)
 
 * **Feature**: For FSx for Lustre, add new data repository task type, RELEASE_DATA_FROM_FILESYSTEM, to release files that have been archived to S3. For FSx for Windows, enable support for configuring and updating SSD IOPS, and for updating storage type. For FSx for OpenZFS, add new deployment type, MULTI_AZ_1.

@@ -45420,6 +45420,11 @@ func awsRestjson1_deserializeDocumentAwsSecurityFinding(v **types.AwsSecurityFin
 				sv.FirstObservedAt = ptr.String(jtv)
 			}
 
+		case "GeneratorDetails":
+			if err := awsRestjson1_deserializeDocumentGeneratorDetails(&sv.GeneratorDetails, value); err != nil {
+				return err
+			}
+
 		case "GeneratorId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -50157,6 +50162,81 @@ func awsRestjson1_deserializeDocumentClassificationStatus(v **types.Classificati
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCodeVulnerabilitiesFilePath(v **types.CodeVulnerabilitiesFilePath, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CodeVulnerabilitiesFilePath
+	if *v == nil {
+		sv = &types.CodeVulnerabilitiesFilePath{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndLine":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndLine = int32(i64)
+			}
+
+		case "FileName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.FileName = ptr.String(jtv)
+			}
+
+		case "FilePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.FilePath = ptr.String(jtv)
+			}
+
+		case "StartLine":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartLine = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCompliance(v **types.Compliance, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -51762,6 +51842,60 @@ func awsRestjson1_deserializeDocumentFirewallPolicyStatelessRuleGroupReferencesL
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeneratorDetails(v **types.GeneratorDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeneratorDetails
+	if *v == nil {
+		sv = &types.GeneratorDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "Labels":
+			if err := awsRestjson1_deserializeDocumentTypeList(&sv.Labels, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -60689,9 +60823,57 @@ func awsRestjson1_deserializeDocumentVulnerability(v **types.Vulnerability, valu
 
 	for key, value := range shape {
 		switch key {
+		case "CodeVulnerabilities":
+			if err := awsRestjson1_deserializeDocumentVulnerabilityCodeVulnerabilitiesList(&sv.CodeVulnerabilities, value); err != nil {
+				return err
+			}
+
 		case "Cvss":
 			if err := awsRestjson1_deserializeDocumentCvssList(&sv.Cvss, value); err != nil {
 				return err
+			}
+
+		case "EpssScore":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EpssScore = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.EpssScore = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ExploitAvailable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VulnerabilityExploitAvailable to be of type string, got %T instead", value)
+				}
+				sv.ExploitAvailable = types.VulnerabilityExploitAvailable(jtv)
 			}
 
 		case "FixAvailable":
@@ -60738,6 +60920,90 @@ func awsRestjson1_deserializeDocumentVulnerability(v **types.Vulnerability, valu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVulnerabilityCodeVulnerabilities(v **types.VulnerabilityCodeVulnerabilities, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VulnerabilityCodeVulnerabilities
+	if *v == nil {
+		sv = &types.VulnerabilityCodeVulnerabilities{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Cwes":
+			if err := awsRestjson1_deserializeDocumentTypeList(&sv.Cwes, value); err != nil {
+				return err
+			}
+
+		case "FilePath":
+			if err := awsRestjson1_deserializeDocumentCodeVulnerabilitiesFilePath(&sv.FilePath, value); err != nil {
+				return err
+			}
+
+		case "SourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SourceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVulnerabilityCodeVulnerabilitiesList(v *[]types.VulnerabilityCodeVulnerabilities, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VulnerabilityCodeVulnerabilities
+	if *v == nil {
+		cv = []types.VulnerabilityCodeVulnerabilities{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VulnerabilityCodeVulnerabilities
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVulnerabilityCodeVulnerabilities(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The specified Amazon Resource Name (ARN) does not exist in the AWS account.
+// The specified Amazon Resource Name (ARN) does not exist in the Amazon Web
+// Services account.
 type ActorDoesNotExistException struct {
 	Message *string
 
@@ -173,8 +174,8 @@ func (e *ApprovalRuleTemplateContentRequiredException) ErrorFault() smithy.Error
 }
 
 // The specified approval rule template does not exist. Verify that the name is
-// correct and that you are signed in to the AWS Region where the template was
-// created, and then try again.
+// correct and that you are signed in to the Amazon Web Services Region where the
+// template was created, and then try again.
 type ApprovalRuleTemplateDoesNotExistException struct {
 	Message *string
 
@@ -233,8 +234,8 @@ func (e *ApprovalRuleTemplateInUseException) ErrorFault() smithy.ErrorFault {
 }
 
 // You cannot create an approval rule template with that name because a template
-// with that name already exists in this AWS Region for your AWS account. Approval
-// rule template names must be unique.
+// with that name already exists in this Amazon Web Services Region for your Amazon
+// Web Services account. Approval rule template names must be unique.
 type ApprovalRuleTemplateNameAlreadyExistsException struct {
 	Message *string
 
@@ -316,7 +317,8 @@ func (e *ApprovalStateRequiredException) ErrorCode() string {
 }
 func (e *ApprovalStateRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Amazon Resource Name (ARN) does not exist in the AWS account.
+// The specified Amazon Resource Name (ARN) does not exist in the Amazon Web
+// Services account.
 type AuthorDoesNotExistException struct {
 	Message *string
 
@@ -649,7 +651,7 @@ func (e *CommentContentRequiredException) ErrorCode() string {
 }
 func (e *CommentContentRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The comment is too large. Comments are limited to 1,000 characters.
+// The comment is too large. Comments are limited to 10,240 characters.
 type CommentContentSizeLimitExceededException struct {
 	Message *string
 
@@ -1425,9 +1427,9 @@ func (e *FilePathConflictsWithSubmodulePathException) ErrorFault() smithy.ErrorF
 	return smithy.FaultClient
 }
 
-// The specified file exceeds the file size limit for AWS CodeCommit. For more
-// information about limits in AWS CodeCommit, see AWS CodeCommit User Guide (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
-// .
+// The specified file exceeds the file size limit for CodeCommit. For more
+// information about limits in CodeCommit, see Quotas (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+// in the CodeCommit User Guide.
 type FileTooLargeException struct {
 	Message *string
 
@@ -1652,8 +1654,8 @@ func (e *InvalidApprovalRuleTemplateContentException) ErrorFault() smithy.ErrorF
 
 // The description for the approval rule template is not valid because it exceeds
 // the maximum characters allowed for a description. For more information about
-// limits in AWS CodeCommit, see AWS CodeCommit User Guide (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
-// .
+// limits in CodeCommit, see Quotas (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+// in the CodeCommit User Guide.
 type InvalidApprovalRuleTemplateDescriptionException struct {
 	Message *string
 
@@ -1683,8 +1685,8 @@ func (e *InvalidApprovalRuleTemplateDescriptionException) ErrorFault() smithy.Er
 
 // The name of the approval rule template is not valid. Template names must be
 // between 1 and 100 valid characters in length. For more information about limits
-// in AWS CodeCommit, see AWS CodeCommit User Guide (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
-// .
+// in CodeCommit, see Quotas (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+// in the CodeCommit User Guide.
 type InvalidApprovalRuleTemplateNameException struct {
 	Message *string
 
@@ -2573,7 +2575,7 @@ func (e *InvalidReactionUserArnException) ErrorCode() string {
 }
 func (e *InvalidReactionUserArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The value of the reaction is not valid. For more information, see the AWS
+// The value of the reaction is not valid. For more information, see the
 // CodeCommit User Guide (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
 // .
 type InvalidReactionValueException struct {
@@ -2602,7 +2604,7 @@ func (e *InvalidReactionValueException) ErrorCode() string {
 func (e *InvalidReactionValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified reference name format is not valid. Reference names must conform
-// to the Git references format (for example, refs/heads/master). For more
+// to the Git references format (for example, refs/heads/main). For more
 // information, see Git Internals - Git References (https://git-scm.com/book/en/v2/Git-Internals-Git-References)
 // or consult your Git documentation.
 type InvalidReferenceNameException struct {
@@ -2914,9 +2916,9 @@ func (e *InvalidRepositoryTriggerNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The AWS Region for the trigger target does not match the AWS Region for the
-// repository. Triggers must be created in the same Region as the target for the
-// trigger.
+// The Amazon Web Services Region for the trigger target does not match the Amazon
+// Web Services Region for the repository. Triggers must be created in the same
+// Amazon Web Services Region as the target for the trigger.
 type InvalidRepositoryTriggerRegionException struct {
 	Message *string
 
@@ -2945,8 +2947,8 @@ func (e *InvalidRepositoryTriggerRegionException) ErrorFault() smithy.ErrorFault
 }
 
 // The value for the resource ARN is not valid. For more information about
-// resources in AWS CodeCommit, see CodeCommit Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
-// in the AWS CodeCommit User Guide.
+// resources in CodeCommit, see CodeCommit Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
+// in the CodeCommit User Guide.
 type InvalidResourceArnException struct {
 	Message *string
 
@@ -3746,8 +3748,8 @@ func (e *NumberOfRulesExceededException) ErrorCode() string {
 }
 func (e *NumberOfRulesExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The maximum number of approval rule templates has been exceeded for this AWS
-// Region.
+// The maximum number of approval rule templates has been exceeded for this Amazon
+// Web Services Region.
 type NumberOfRuleTemplatesExceededException struct {
 	Message *string
 
@@ -4644,10 +4646,9 @@ func (e *RepositoryTriggersListRequiredException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// A valid Amazon Resource Name (ARN) for an AWS CodeCommit resource is required.
-// For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and
-// Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
-// in the AWS CodeCommit User Guide.
+// A valid Amazon Resource Name (ARN) for an CodeCommit resource is required. For
+// a list of valid resources in CodeCommit, see CodeCommit Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
+// in the CodeCommit User Guide.
 type ResourceArnRequiredException struct {
 	Message *string
 
@@ -5084,7 +5085,7 @@ func (e *TitleRequiredException) ErrorCode() string {
 }
 func (e *TitleRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The maximum number of tags for an AWS CodeCommit resource has been exceeded.
+// The maximum number of tags for an CodeCommit resource has been exceeded.
 type TooManyTagsException struct {
 	Message *string
 

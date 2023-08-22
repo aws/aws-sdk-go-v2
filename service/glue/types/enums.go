@@ -492,6 +492,26 @@ func (CsvHeaderOption) Values() []CsvHeaderOption {
 	}
 }
 
+type CsvSerdeOption string
+
+// Enum values for CsvSerdeOption
+const (
+	CsvSerdeOptionOpenCSVSerDe    CsvSerdeOption = "OpenCSVSerDe"
+	CsvSerdeOptionLazySimpleSerDe CsvSerdeOption = "LazySimpleSerDe"
+	CsvSerdeOptionNone            CsvSerdeOption = "None"
+)
+
+// Values returns all known values for CsvSerdeOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CsvSerdeOption) Values() []CsvSerdeOption {
+	return []CsvSerdeOption{
+		"OpenCSVSerDe",
+		"LazySimpleSerDe",
+		"None",
+	}
+}
+
 type DataFormat string
 
 // Enum values for DataFormat

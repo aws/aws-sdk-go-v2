@@ -56,6 +56,10 @@ type UpdateKxClusterDatabasesInput struct {
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
 
+	// The configuration that allows you to choose how you want to update the
+	// databases on a cluster.
+	DeploymentConfiguration *types.KxDeploymentConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -120,6 +124,9 @@ func (c *Client) addOperationUpdateKxClusterDatabasesMiddlewares(stack *middlewa
 	if err = addUpdateKxClusterDatabasesResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opUpdateKxClusterDatabasesMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateKxClusterDatabasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,6 +149,39 @@ func (c *Client) addOperationUpdateKxClusterDatabasesMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpUpdateKxClusterDatabases struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdateKxClusterDatabases) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdateKxClusterDatabases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*UpdateKxClusterDatabasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateKxClusterDatabasesInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdateKxClusterDatabasesMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateKxClusterDatabases{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opUpdateKxClusterDatabases(region string) *awsmiddleware.RegisterServiceMetadata {

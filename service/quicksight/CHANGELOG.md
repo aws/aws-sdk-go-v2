@@ -1,3 +1,15 @@
+# v1.41.3 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.2 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2023-08-11)
 
 * **Feature**: New Authentication method for Account subscription - IAM Identity Center. Hierarchy layout support, default column width support and related style properties for pivot table visuals. Non-additive topic field aggregations for Topic API

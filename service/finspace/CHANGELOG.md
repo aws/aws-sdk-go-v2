@@ -1,3 +1,16 @@
+# v1.12.0 (2023-08-21)
+
+* **Feature**: Allow customers to manage outbound traffic from their Kx Environment when attaching a transit gateway by providing network acl entries. Allow the customer to choose how they want to update the databases on a cluster allowing updates to possibly be faster than usual.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.4 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.3 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -67,6 +67,8 @@ type DuplicateRequest struct {
 
 	ErrorCodeOverride *string
 
+	RequestId *string
+
 	noSmithyDocumentSerde
 }
 

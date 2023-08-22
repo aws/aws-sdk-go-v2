@@ -1,3 +1,15 @@
+# v1.30.5 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.30.4 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.30.3 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.2 (2023-08-07)
 
 * **Documentation**: This release adds code snippets for Amazon Rekognition Custom Labels.

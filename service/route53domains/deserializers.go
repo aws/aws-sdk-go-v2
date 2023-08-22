@@ -5143,6 +5143,15 @@ func awsAwsjson11_deserializeDocumentDuplicateRequest(v **types.DuplicateRequest
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "requestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RequestId to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6000,6 +6009,15 @@ func awsAwsjson11_deserializeOpDocumentCheckDomainTransferabilityOutput(v **Chec
 
 	for key, value := range shape {
 		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
 		case "Transferability":
 			if err := awsAwsjson11_deserializeDocumentDomainTransferability(&sv.Transferability, value); err != nil {
 				return err
@@ -7159,7 +7177,7 @@ func awsAwsjson11_deserializeOpDocumentTransferDomainToAnotherAwsAccountOutput(v
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected Password to be of type string, got %T instead", value)
 				}
 				sv.Password = ptr.String(jtv)
 			}

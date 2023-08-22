@@ -31644,6 +31644,15 @@ func awsAwsjson11_deserializeDocumentCsvClassifier(v **types.CsvClassifier, valu
 				sv.QuoteSymbol = ptr.String(jtv)
 			}
 
+		case "Serde":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CsvSerdeOption to be of type string, got %T instead", value)
+				}
+				sv.Serde = types.CsvSerdeOption(jtv)
+			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(json.Number)

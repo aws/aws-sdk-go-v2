@@ -157,6 +157,7 @@
         "api_op_StopDBInstance.go",
         "api_op_StopDBInstanceAutomatedBackupsReplication.go",
         "api_op_SwitchoverBlueGreenDeployment.go",
+        "api_op_SwitchoverGlobalCluster.go",
         "api_op_SwitchoverReadReplica.go",
         "deserializers.go",
         "doc.go",

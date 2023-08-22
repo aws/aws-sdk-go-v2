@@ -1067,6 +1067,7 @@
         },
         "endpoints" : {
           "ap-south-1" : { },
+          "eu-central-1" : { },
           "us-east-1" : { }
         }
       },
@@ -6923,6 +6924,7 @@
             "deprecated" : true,
             "hostname" : "fms-fips.us-west-2.amazonaws.com"
           },
+          "il-central-1" : { },
           "me-central-1" : { },
           "me-south-1" : {
             "variants" : [ {
@@ -8020,12 +8022,60 @@
           "eu-west-1" : { },
           "eu-west-2" : { },
           "eu-west-3" : { },
+          "fips-us-east-1" : {
+            "credentialScope" : {
+              "region" : "us-east-1"
+            },
+            "deprecated" : true,
+            "hostname" : "inspector2-fips.us-east-1.amazonaws.com"
+          },
+          "fips-us-east-2" : {
+            "credentialScope" : {
+              "region" : "us-east-2"
+            },
+            "deprecated" : true,
+            "hostname" : "inspector2-fips.us-east-2.amazonaws.com"
+          },
+          "fips-us-west-1" : {
+            "credentialScope" : {
+              "region" : "us-west-1"
+            },
+            "deprecated" : true,
+            "hostname" : "inspector2-fips.us-west-1.amazonaws.com"
+          },
+          "fips-us-west-2" : {
+            "credentialScope" : {
+              "region" : "us-west-2"
+            },
+            "deprecated" : true,
+            "hostname" : "inspector2-fips.us-west-2.amazonaws.com"
+          },
           "me-south-1" : { },
           "sa-east-1" : { },
-          "us-east-1" : { },
-          "us-east-2" : { },
-          "us-west-1" : { },
-          "us-west-2" : { }
+          "us-east-1" : {
+            "variants" : [ {
+              "hostname" : "inspector2-fips.us-east-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          },
+          "us-east-2" : {
+            "variants" : [ {
+              "hostname" : "inspector2-fips.us-east-2.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          },
+          "us-west-1" : {
+            "variants" : [ {
+              "hostname" : "inspector2-fips.us-west-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          },
+          "us-west-2" : {
+            "variants" : [ {
+              "hostname" : "inspector2-fips.us-west-2.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          }
         }
       },
       "internetmonitor" : {
@@ -10443,9 +10493,11 @@
           "af-south-1" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
+          "ap-northeast-3" : { },
           "ap-south-1" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
+          "ap-southeast-4" : { },
           "ca-central-1" : {
             "variants" : [ {
               "hostname" : "mediaconvert-fips.ca-central-1.amazonaws.com",
@@ -21603,8 +21655,32 @@
       },
       "inspector2" : {
         "endpoints" : {
-          "us-gov-east-1" : { },
-          "us-gov-west-1" : { }
+          "fips-us-gov-east-1" : {
+            "credentialScope" : {
+              "region" : "us-gov-east-1"
+            },
+            "deprecated" : true,
+            "hostname" : "inspector2-fips.us-gov-east-1.amazonaws.com"
+          },
+          "fips-us-gov-west-1" : {
+            "credentialScope" : {
+              "region" : "us-gov-west-1"
+            },
+            "deprecated" : true,
+            "hostname" : "inspector2-fips.us-gov-west-1.amazonaws.com"
+          },
+          "us-gov-east-1" : {
+            "variants" : [ {
+              "hostname" : "inspector2-fips.us-gov-east-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          },
+          "us-gov-west-1" : {
+            "variants" : [ {
+              "hostname" : "inspector2-fips.us-gov-west-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          }
         }
       },
       "internetmonitor" : {
@@ -23106,12 +23182,12 @@
           "us-gov-east-1" : {
             "variants" : [ {
               "hostname" : "servicediscovery-fips.us-gov-east-1.amazonaws.com",
-              "tags" : [ "dualstack", "fips" ]
-            }, {
-              "hostname" : "servicediscovery-fips.us-gov-east-1.amazonaws.com",
               "tags" : [ "fips" ]
             }, {
-              "hostname" : "servicediscovery.us-gov-east-1.amazonaws.com",
+              "hostname" : "servicediscovery-fips.us-gov-east-1.api.aws",
+              "tags" : [ "dualstack", "fips" ]
+            }, {
+              "hostname" : "servicediscovery.us-gov-east-1.api.aws",
               "tags" : [ "dualstack" ]
             } ]
           },
@@ -23125,12 +23201,12 @@
           "us-gov-west-1" : {
             "variants" : [ {
               "hostname" : "servicediscovery-fips.us-gov-west-1.amazonaws.com",
-              "tags" : [ "dualstack", "fips" ]
-            }, {
-              "hostname" : "servicediscovery-fips.us-gov-west-1.amazonaws.com",
               "tags" : [ "fips" ]
             }, {
-              "hostname" : "servicediscovery.us-gov-west-1.amazonaws.com",
+              "hostname" : "servicediscovery-fips.us-gov-west-1.api.aws",
+              "tags" : [ "dualstack", "fips" ]
+            }, {
+              "hostname" : "servicediscovery.us-gov-west-1.api.aws",
               "tags" : [ "dualstack" ]
             } ]
           },
@@ -24095,7 +24171,8 @@
           "protocols" : [ "http", "https" ]
         },
         "endpoints" : {
-          "us-iso-east-1" : { }
+          "us-iso-east-1" : { },
+          "us-iso-west-1" : { }
         }
       },
       "elasticache" : {
@@ -24328,6 +24405,12 @@
         }
       },
       "redshift" : {
+        "endpoints" : {
+          "us-iso-east-1" : { },
+          "us-iso-west-1" : { }
+        }
+      },
+      "resource-groups" : {
         "endpoints" : {
           "us-iso-east-1" : { },
           "us-iso-west-1" : { }
@@ -24773,6 +24856,11 @@
         }
       },
       "monitoring" : {
+        "endpoints" : {
+          "us-isob-east-1" : { }
+        }
+      },
+      "outposts" : {
         "endpoints" : {
           "us-isob-east-1" : { }
         }

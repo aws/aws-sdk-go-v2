@@ -147,9 +147,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://cloud9-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://cloud9-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -162,15 +341,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://cloud9.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://cloud9.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -182,258 +396,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://cloud9-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://cloud9-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://cloud9.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://cloud9.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1153,6 +1117,23 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates an Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and\n      then connects from the instance to the environment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateEnvironmentEC2",
+                        "documentation": "",
+                        "input": {
+                            "name": "my-demo-environment",
+                            "description": "This is my demonstration environment.",
+                            "instanceType": "t2.micro",
+                            "subnetId": "subnet-6300cd1b",
+                            "automaticStopTimeMinutes": 60,
+                            "ownerArn": "arn:aws:iam::123456789012:user/MyDemoUser"
+                        },
+                        "output": {
+                            "environmentId": "8d9967e2f0624182b74e7690ad69ebEX"
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -1279,6 +1260,25 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Adds an environment member to an Cloud9 development environment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateEnvironmentMembership",
+                        "documentation": "",
+                        "input": {
+                            "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
+                            "userArn": "arn:aws:iam::123456789012:user/AnotherDemoUser",
+                            "permissions": "read-write"
+                        },
+                        "output": {
+                            "membership": {
+                                "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
+                                "permissions": "read-write",
+                                "userArn": "arn:aws:iam::123456789012:user/AnotherDemoUser",
+                                "userId": "AIDAJ3BA6O2FMJWCWXHEX"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -1359,6 +1359,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an Cloud9 development environment. If an Amazon EC2 instance is connected to the\n      environment, also terminates the instance.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteEnvironment",
+                        "documentation": "",
+                        "input": {
+                            "environmentId": "8d9967e2f0624182b74e7690ad69ebEX"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -1395,6 +1405,17 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an environment member from a development environment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteEnvironmentMembership",
+                        "documentation": "",
+                        "input": {
+                            "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
+                            "userArn": "arn:aws:iam::123456789012:user/AnotherDemoUser"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -1482,6 +1503,31 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about environment members for an Cloud9 development environment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DescribeEnvironmentMemberships1",
+                        "documentation": "The following example gets information about all of the environment members for the specified development environment.",
+                        "input": {
+                            "environmentId": "8d9967e2f0624182b74e7690ad69ebEX"
+                        },
+                        "output": {
+                            "memberships": [
+                                {
+                                    "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
+                                    "permissions": "read-write",
+                                    "userArn": "arn:aws:iam::123456789012:user/AnotherDemoUser",
+                                    "userId": "AIDAJ3BA6O2FMJWCWXHEX"
+                                },
+                                {
+                                    "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
+                                    "permissions": "owner",
+                                    "userArn": "arn:aws:iam::123456789012:user/MyDemoUser",
+                                    "userId": "AIDAJNUEDQAQWFELJDLEX"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -1579,7 +1625,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets status information for an Cloud9 development environment.</p>"
+                "smithy.api#documentation": "<p>Gets status information for an Cloud9 development environment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DescribeEnvironmentStatus",
+                        "documentation": "",
+                        "input": {
+                            "environmentId": "8d9967e2f0624182b74e7690ad69ebEX"
+                        },
+                        "output": {
+                            "status": "ready",
+                            "message": "Environment is ready to use"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.cloud9#DescribeEnvironmentStatusRequest": {
@@ -1651,7 +1710,45 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about Cloud9 development environments.</p>"
+                "smithy.api#documentation": "<p>Gets information about Cloud9 development environments.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DescribeEnvironments",
+                        "documentation": "",
+                        "input": {
+                            "environmentIds": [
+                                "8d9967e2f0624182b74e7690ad69ebEX",
+                                "349c86d4579e4e7298d500ff57a6b2EX"
+                            ]
+                        },
+                        "output": {
+                            "environments": [
+                                {
+                                    "arn": "arn:aws:cloud9:us-east-2:123456789012:environment:8d9967e2f0624182b74e7690ad69ebEX",
+                                    "description": "This is my demonstration environment.",
+                                    "id": "8d9967e2f0624182b74e7690ad69ebEX",
+                                    "name": "my-demo-environment",
+                                    "ownerArn": "arn:aws:iam::123456789012:user/MyDemoUser",
+                                    "lifecycle": {
+                                        "status": "CREATED"
+                                    },
+                                    "type": "ec2"
+                                },
+                                {
+                                    "arn": "arn:aws:cloud9:us-east-2:123456789012:environment:349c86d4579e4e7298d500ff57a6b2EX",
+                                    "description": "",
+                                    "id": "349c86d4579e4e7298d500ff57a6b2EX",
+                                    "name": "another-demo-environment",
+                                    "ownerArn": "arn:aws:sts::123456789012:assumed-role/AnotherDemoUser/AnotherDemoUser",
+                                    "lifecycle": {
+                                        "status": "CREATED"
+                                    },
+                                    "type": "ssh"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.cloud9#DescribeEnvironmentsRequest": {
@@ -2085,6 +2182,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets a list of Cloud9 development environment identifiers.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListEnvironments",
+                        "documentation": "",
+                        "output": {
+                            "environmentIds": [
+                                "349c86d4579e4e7298d500ff57a6b2EX",
+                                "45a3da47af0840f2b0c0824f5ee232EX"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2600,6 +2709,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Changes the settings of an existing Cloud9 development environment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateEnvironment",
+                        "documentation": "",
+                        "input": {
+                            "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
+                            "name": "my-changed-demo-environment",
+                            "description": "This is my changed demonstration environment."
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -2636,6 +2757,25 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Changes the settings of an existing environment member for an Cloud9 development\n      environment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateEnvironmentMembership",
+                        "documentation": "",
+                        "input": {
+                            "environmentId": "8d9967e2f0624182b74e7690ad69ebEX",
+                            "userArn": "arn:aws:iam::123456789012:user/AnotherDemoUser",
+                            "permissions": "read-only"
+                        },
+                        "output": {
+                            "membership": {
+                                "environmentId": "8d9967e2f0624182b74e7690ad69eb31",
+                                "permissions": "read-only",
+                                "userArn": "arn:aws:iam::123456789012:user/AnotherDemoUser",
+                                "userId": "AIDAJ3BA6O2FMJWCWXHEX"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },

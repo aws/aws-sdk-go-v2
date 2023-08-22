@@ -1,3 +1,17 @@
+# v1.32.5 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.4 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.3 (2023-08-17)
+
+* **Announcement**: BREAKFIX: corrected function spelling in environment config from GetS3DisableMultRegionAccessPoints to GetS3DisableMultiRegionAccessPoints
+* **Bug Fix**: Adds DisableMRAP option to config loader, and DisableMRAP client resolver to achieve parity with other S3 options in the config loader. Additionally, added breakfix to correct spelling.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

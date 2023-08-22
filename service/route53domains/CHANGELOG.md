@@ -1,3 +1,20 @@
+# v1.17.3 (2023-08-21)
+
+* **Documentation**: Fixed typos in description fields
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.2 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.0 (2023-08-15)
+
+* **Feature**: Provide explanation if CheckDomainTransferability return false. Provide requestId if a request is already submitted.  Add sensitive protection for customer information
+
 # v1.16.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

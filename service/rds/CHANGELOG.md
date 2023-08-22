@@ -1,3 +1,16 @@
+# v1.51.0 (2023-08-21)
+
+* **Feature**: Adding support for RDS Aurora Global Database Unplanned Failover
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.50.3 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.50.2 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.1 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -21273,6 +21273,13 @@ func awsRestjson1_serializeDocumentAwsSecurityFinding(v *types.AwsSecurityFindin
 		ok.String(*v.FirstObservedAt)
 	}
 
+	if v.GeneratorDetails != nil {
+		ok := object.Key("GeneratorDetails")
+		if err := awsRestjson1_serializeDocumentGeneratorDetails(v.GeneratorDetails, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.GeneratorId != nil {
 		ok := object.Key("GeneratorId")
 		ok.String(*v.GeneratorId)
@@ -23787,6 +23794,33 @@ func awsRestjson1_serializeDocumentClassificationStatus(v *types.ClassificationS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCodeVulnerabilitiesFilePath(v *types.CodeVulnerabilitiesFilePath, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndLine != 0 {
+		ok := object.Key("EndLine")
+		ok.Integer(v.EndLine)
+	}
+
+	if v.FileName != nil {
+		ok := object.Key("FileName")
+		ok.String(*v.FileName)
+	}
+
+	if v.FilePath != nil {
+		ok := object.Key("FilePath")
+		ok.String(*v.FilePath)
+	}
+
+	if v.StartLine != 0 {
+		ok := object.Key("StartLine")
+		ok.Integer(v.StartLine)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCompliance(v *types.Compliance, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24334,6 +24368,30 @@ func awsRestjson1_serializeDocumentFirewallPolicyStatelessRuleGroupReferencesLis
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGeneratorDetails(v *types.GeneratorDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Labels != nil {
+		ok := object.Key("Labels")
+		if err := awsRestjson1_serializeDocumentTypeList(v.Labels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
 	return nil
 }
 
@@ -27546,11 +27604,41 @@ func awsRestjson1_serializeDocumentVulnerability(v *types.Vulnerability, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.CodeVulnerabilities != nil {
+		ok := object.Key("CodeVulnerabilities")
+		if err := awsRestjson1_serializeDocumentVulnerabilityCodeVulnerabilitiesList(v.CodeVulnerabilities, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Cvss != nil {
 		ok := object.Key("Cvss")
 		if err := awsRestjson1_serializeDocumentCvssList(v.Cvss, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.EpssScore != 0 {
+		ok := object.Key("EpssScore")
+		switch {
+		case math.IsNaN(v.EpssScore):
+			ok.String("NaN")
+
+		case math.IsInf(v.EpssScore, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.EpssScore, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.EpssScore)
+
+		}
+	}
+
+	if len(v.ExploitAvailable) > 0 {
+		ok := object.Key("ExploitAvailable")
+		ok.String(string(v.ExploitAvailable))
 	}
 
 	if len(v.FixAvailable) > 0 {
@@ -27591,6 +27679,45 @@ func awsRestjson1_serializeDocumentVulnerability(v *types.Vulnerability, value s
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVulnerabilityCodeVulnerabilities(v *types.VulnerabilityCodeVulnerabilities, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Cwes != nil {
+		ok := object.Key("Cwes")
+		if err := awsRestjson1_serializeDocumentTypeList(v.Cwes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FilePath != nil {
+		ok := object.Key("FilePath")
+		if err := awsRestjson1_serializeDocumentCodeVulnerabilitiesFilePath(v.FilePath, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceArn != nil {
+		ok := object.Key("SourceArn")
+		ok.String(*v.SourceArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVulnerabilityCodeVulnerabilitiesList(v []types.VulnerabilityCodeVulnerabilities, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentVulnerabilityCodeVulnerabilities(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

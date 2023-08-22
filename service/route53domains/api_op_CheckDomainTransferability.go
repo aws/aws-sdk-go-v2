@@ -60,6 +60,9 @@ type CheckDomainTransferabilityInput struct {
 // The CheckDomainTransferability response includes the following elements.
 type CheckDomainTransferabilityOutput struct {
 
+	// Provides an explanation for when a domain can't be transferred.
+	Message *string
+
 	// A complex type that contains information about whether the specified domain can
 	// be transferred to Route 53.
 	Transferability *types.DomainTransferability

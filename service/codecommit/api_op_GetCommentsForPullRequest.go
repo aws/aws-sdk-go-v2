@@ -43,11 +43,13 @@ type GetCommentsForPullRequestInput struct {
 	PullRequestId *string
 
 	// The full commit ID of the commit in the source branch that was the tip of the
-	// branch at the time the comment was made.
+	// branch at the time the comment was made. Requirement is conditional:
+	// afterCommitId must be specified when repositoryName is included.
 	AfterCommitId *string
 
 	// The full commit ID of the commit in the destination branch that was the tip of
-	// the branch at the time the pull request was created.
+	// the branch at the time the pull request was created. Requirement is conditional:
+	// beforeCommitId must be specified when repositoryName is included.
 	BeforeCommitId *string
 
 	// A non-zero, non-negative integer used to limit the number of returned results.
@@ -59,7 +61,9 @@ type GetCommentsForPullRequestInput struct {
 	// of the results.
 	NextToken *string
 
-	// The name of the repository that contains the pull request.
+	// The name of the repository that contains the pull request. Requirement is
+	// conditional: repositoryName must be specified when beforeCommitId and
+	// afterCommitId are included.
 	RepositoryName *string
 
 	noSmithyDocumentSerde

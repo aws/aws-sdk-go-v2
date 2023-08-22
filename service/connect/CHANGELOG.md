@@ -1,3 +1,15 @@
+# v1.65.3 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.65.2 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.65.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.65.0 (2023-08-10)
 
 * **Feature**: This release adds APIs to provision agents that are global / available in multiple AWS regions and distribute them across these regions by percentage.

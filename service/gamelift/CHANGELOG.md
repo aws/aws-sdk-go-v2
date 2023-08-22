@@ -1,3 +1,16 @@
+# v1.22.2 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.1 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.0 (2023-08-17)
+
+* **Feature**: Amazon GameLift updates its instance types support.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.2 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

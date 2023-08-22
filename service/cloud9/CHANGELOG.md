@@ -1,3 +1,16 @@
+# v1.18.6 (2023-08-21)
+
+* **Documentation**: Doc only update to add Ubuntu 22.04 as an Image ID option for Cloud9
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.18.5 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.18.4 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.3 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

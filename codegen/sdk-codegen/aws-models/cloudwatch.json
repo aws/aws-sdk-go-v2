@@ -1326,7 +1326,7 @@
                 "AlarmTypes": {
                     "target": "com.amazonaws.cloudwatch#AlarmTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to specify whether you want the operation to return metric alarms or composite alarms. If you omit this parameter, \n\t\tonly metric alarms are returned.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to specify whether you want the operation to return metric alarms or composite alarms. If you \n\t\t\tomit this parameter, \n\t\tonly metric alarms are returned, even if composite alarms exist in the account.</p>\n         <p>For example, if you omit this parameter or specify <code>MetricAlarms</code>, the operation returns only a list of metric\n\t\talarms. It does not return any composite alarms, even if composite alarms exist in the account.</p>\n         <p>If you specify <code>CompositeAlarms</code>, the operation returns only a list of composite\n\t\t\talarms, and does not return any metric alarms.</p>"
                     }
                 },
                 "ChildrenOfAlarmName": {
@@ -1994,7 +1994,7 @@
                 "OrderBy": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleOrderBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines what statistic to use to rank the contributors. Valid values are SUM and MAXIMUM.</p>"
+                        "smithy.api#documentation": "<p>Determines what statistic to use to rank the contributors. Valid values are <code>Sum</code> and <code>Maximum</code>.</p>"
                     }
                 }
             },
@@ -2633,9 +2633,213 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://monitoring-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://monitoring.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://monitoring-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2648,15 +2852,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://monitoring.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://monitoring.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2668,283 +2907,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://monitoring-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        "aws-us-gov",
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": [
-                                                                                                {
-                                                                                                    "ref": "PartitionResult"
-                                                                                                },
-                                                                                                "name"
-                                                                                            ]
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://monitoring.{Region}.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://monitoring-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://monitoring.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://monitoring.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -5825,7 +5789,7 @@
                 "ExtendedStatistic": {
                     "target": "com.amazonaws.cloudwatch#ExtendedStatistic",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentile statistic for the metric specified in <code>MetricName</code>. Specify a value \n\t\t\tbetween p0.0 and p100. When you call <code>PutMetricAlarm</code> and specify \n\t\t\ta <code>MetricName</code>, you must \n\t\t\tspecify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.</p>"
+                        "smithy.api#documentation": "<p>The extended statistic for the metric specified in <code>MetricName</code>. When you \n\t\t\tcall <code>PutMetricAlarm</code> and specify \n\t\t\ta <code>MetricName</code>, you must \n\t\t\tspecify either <code>Statistic</code> or <code>ExtendedStatistic</code> but not both.</p>\n         <p>If you specify <code>ExtendedStatistic</code>, the following are valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>p90</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tm90</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tc90</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ts90</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>wm90</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>IQM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PR(<i>n</i>:<i>m</i>)</code> where n and m are values \n\t\t\tof the metric</p>\n            </li>\n            <li>\n               <p>\n                  <code>TC(<i>X</i>%:<i>X</i>%)</code> where X is between \n\t\t\t\t10 and 90 inclusive.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TM(<i>X</i>%:<i>X</i>%)</code> where X is between \n\t\t\t\t10 and 90 inclusive.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TS(<i>X</i>%:<i>X</i>%)</code> where X is between \n\t\t\t\t10 and 90 inclusive.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WM(<i>X</i>%:<i>X</i>%)</code> where X is between \n\t\t\t\t10 and 90 inclusive.</p>\n            </li>\n         </ul>\n         <p>For more information about these extended statistics, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html\">CloudWatch statistics definitions</a>.</p>"
                     }
                 },
                 "Dimensions": {
@@ -5893,7 +5857,7 @@
                 "Tags": {
                     "target": "com.amazonaws.cloudwatch#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n\t\t\tpermissions by granting a user\n\t\t\tpermission to access or change only resources with certain tag values.</p>\n         <p>If you are using this operation to update an existing alarm, any tags\n\t\t\tyou specify in this parameter are ignored. To change the tags of an existing alarm, use\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">TagResource</a>\n\t\t\tor <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm.\n\t\tTo be able to associate tags with the alarm when you create the alarm, you must\n\t\thave the <code>cloudwatch:TagResource</code> permission.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n\t\t\tpermissions by granting a user\n\t\t\tpermission to access or change only resources with certain tag values.</p>\n         <p>If you are using this operation to update an existing alarm, any tags\n\t\t\tyou specify in this parameter are ignored. To change the tags of an existing alarm, use\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">TagResource</a>\n\t\t\tor <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>"
                     }
                 },
                 "ThresholdMetricId": {

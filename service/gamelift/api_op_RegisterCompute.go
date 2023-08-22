@@ -16,12 +16,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers your compute resources in a fleet you previously created. After you
-// register a compute to your fleet, you can monitor and manage your compute using
-// Amazon GameLift. The operation returns the compute resource containing SDK
-// endpoint you can use to connect your game server to Amazon GameLift. Learn more
+// Registers a compute resource to an Amazon GameLift Anywhere fleet. With
+// Anywhere fleets you can incorporate your own computing hardware into an Amazon
+// GameLift game hosting solution. To register a compute to a fleet, give the
+// compute a name (must be unique within the fleet) and specify the compute
+// resource's DNS name or IP address. Provide the Anywhere fleet ID and a fleet
+// location to associate with the compute being registered. You can optionally
+// include the path to a TLS certificate on the compute resource. If successful,
+// this operation returns the compute details, including an Amazon GameLift SDK
+// endpoint. Game server processes that run on the compute use this endpoint to
+// communicate with the Amazon GameLift service. Each server process includes the
+// SDK endpoint in its call to the Amazon GameLift server SDK action InitSDK() .
+// Learn more
 //   - Create an Anywhere fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html)
 //   - Test your integration (https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html)
+//   - Server SDK reference guides (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html)
+//     (for version 5.x)
 func (c *Client) RegisterCompute(ctx context.Context, params *RegisterComputeInput, optFns ...func(*Options)) (*RegisterComputeOutput, error) {
 	if params == nil {
 		params = &RegisterComputeInput{}
@@ -39,8 +49,7 @@ func (c *Client) RegisterCompute(ctx context.Context, params *RegisterComputeInp
 
 type RegisterComputeInput struct {
 
-	// A descriptive label that is associated with the compute resource registered to
-	// your fleet.
+	// A descriptive label for the compute resource.
 	//
 	// This member is required.
 	ComputeName *string
@@ -51,20 +60,20 @@ type RegisterComputeInput struct {
 	// This member is required.
 	FleetId *string
 
-	// The path to the TLS certificate on your compute resource. The path and
-	// certificate are not validated by Amazon GameLift.
+	// The path to a TLS certificate on your compute resource. Amazon GameLift doesn't
+	// validate the path and certificate.
 	CertificatePath *string
 
-	// The DNS name of the compute resource. Amazon GameLift requires the DNS name or
-	// IP address to manage your compute resource.
+	// The DNS name of the compute resource. Amazon GameLift requires either a DNS
+	// name or IP address.
 	DnsName *string
 
-	// The IP address of the compute resource. Amazon GameLift requires the DNS name
-	// or IP address to manage your compute resource.
+	// The IP address of the compute resource. Amazon GameLift requires either a DNS
+	// name or IP address.
 	IpAddress *string
 
-	// The name of the custom location you added to the fleet you are registering this
-	// compute resource to.
+	// The name of a custom location to associate with the compute resource being
+	// registered.
 	Location *string
 
 	noSmithyDocumentSerde
@@ -72,7 +81,7 @@ type RegisterComputeInput struct {
 
 type RegisterComputeOutput struct {
 
-	// The details of the compute resource you registered to the specified fleet.
+	// The details of the compute resource you registered.
 	Compute *types.Compute
 
 	// Metadata pertaining to the operation's result.

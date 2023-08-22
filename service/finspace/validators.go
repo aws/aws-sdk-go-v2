@@ -848,6 +848,18 @@ func validateCustomDNSServer(v *types.CustomDNSServer) error {
 	}
 }
 
+func validateIcmpTypeCode(v *types.IcmpTypeCode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcmpTypeCode"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKxCacheStorageConfiguration(v *types.KxCacheStorageConfiguration) error {
 	if v == nil {
 		return nil
@@ -955,6 +967,21 @@ func validateKxDatabaseConfigurations(v []types.KxDatabaseConfiguration) error {
 	}
 }
 
+func validateKxDeploymentConfiguration(v *types.KxDeploymentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KxDeploymentConfiguration"}
+	if len(v.DeploymentStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKxSavedownStorageConfiguration(v *types.KxSavedownStorageConfiguration) error {
 	if v == nil {
 		return nil
@@ -963,6 +990,66 @@ func validateKxSavedownStorageConfiguration(v *types.KxSavedownStorageConfigurat
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkACLConfiguration(v []types.NetworkACLEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkACLConfiguration"}
+	for i := range v {
+		if err := validateNetworkACLEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkACLEntry(v *types.NetworkACLEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkACLEntry"}
+	if v.Protocol == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if len(v.RuleAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleAction"))
+	}
+	if v.PortRange != nil {
+		if err := validatePortRange(v.PortRange); err != nil {
+			invalidParams.AddNested("PortRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IcmpTypeCode != nil {
+		if err := validateIcmpTypeCode(v.IcmpTypeCode); err != nil {
+			invalidParams.AddNested("IcmpTypeCode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CidrBlock == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CidrBlock"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePortRange(v *types.PortRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PortRange"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1001,6 +1088,11 @@ func validateTransitGatewayConfiguration(v *types.TransitGatewayConfiguration) e
 	}
 	if v.RoutableCIDRSpace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoutableCIDRSpace"))
+	}
+	if v.AttachmentNetworkAclConfiguration != nil {
+		if err := validateNetworkACLConfiguration(v.AttachmentNetworkAclConfiguration); err != nil {
+			invalidParams.AddNested("AttachmentNetworkAclConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1538,6 +1630,11 @@ func validateOpUpdateKxClusterDatabasesInput(v *UpdateKxClusterDatabasesInput) e
 	} else if v.Databases != nil {
 		if err := validateKxDatabaseConfigurations(v.Databases); err != nil {
 			invalidParams.AddNested("Databases", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentConfiguration != nil {
+		if err := validateKxDeploymentConfiguration(v.DeploymentConfiguration); err != nil {
+			invalidParams.AddNested("DeploymentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -15,9 +15,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all approval rule templates in the specified AWS Region in your AWS
-// account. If an AWS Region is not specified, the AWS Region where you are signed
-// in is used.
+// Lists all approval rule templates in the specified Amazon Web Services Region
+// in your Amazon Web Services account. If an Amazon Web Services Region is not
+// specified, the Amazon Web Services Region where you are signed in is used.
 func (c *Client) ListApprovalRuleTemplates(ctx context.Context, params *ListApprovalRuleTemplatesInput, optFns ...func(*Options)) (*ListApprovalRuleTemplatesOutput, error) {
 	if params == nil {
 		params = &ListApprovalRuleTemplatesInput{}
@@ -47,8 +47,8 @@ type ListApprovalRuleTemplatesInput struct {
 
 type ListApprovalRuleTemplatesOutput struct {
 
-	// The names of all the approval rule templates found in the AWS Region for your
-	// AWS account.
+	// The names of all the approval rule templates found in the Amazon Web Services
+	// Region for your Amazon Web Services account.
 	ApprovalRuleTemplateNames []string
 
 	// An enumeration token that allows the operation to batch the next results of the

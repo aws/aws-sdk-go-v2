@@ -15,10 +15,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about AWS tags for a specified Amazon Resource Name (ARN) in
-// AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit
-// Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
-// in the AWS CodeCommit User Guide.
+// Gets information about Amazon Web Servicestags for a specified Amazon Resource
+// Name (ARN) in CodeCommit. For a list of valid resources in CodeCommit, see
+// CodeCommit Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
+// in the CodeCommit User Guide.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

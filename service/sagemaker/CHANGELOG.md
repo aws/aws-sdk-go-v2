@@ -1,3 +1,19 @@
+# v1.102.3 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.102.2 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.102.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.102.0 (2023-08-15)
+
+* **Feature**: SageMaker Inference Recommender now provides SupportedResponseMIMETypes from DescribeInferenceRecommendationsJob response
+
 # v1.101.0 (2023-08-09)
 
 * **Feature**: This release adds support for cross account access for SageMaker Model Cards through AWS RAM.

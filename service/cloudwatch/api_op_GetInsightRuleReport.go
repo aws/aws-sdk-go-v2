@@ -103,8 +103,8 @@ type GetInsightRuleReportInput struct {
 	//   represented by that data point.
 	Metrics []string
 
-	// Determines what statistic to use to rank the contributors. Valid values are SUM
-	// and MAXIMUM.
+	// Determines what statistic to use to rank the contributors. Valid values are Sum
+	// and Maximum .
 	OrderBy *string
 
 	noSmithyDocumentSerde

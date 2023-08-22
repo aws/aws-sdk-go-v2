@@ -1,3 +1,19 @@
+# v1.61.3 (2023-08-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.61.2 (2023-08-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.61.1 (2023-08-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.61.0 (2023-08-15)
+
+* **Feature**: AWS Glue Crawlers can now accept SerDe overrides from a custom csv classifier. The two SerDe options are LazySimpleSerDe and OpenCSVSerDe. In case, the user wants crawler to do the selection, "None" can be selected for this purpose.
+
 # v1.60.1 (2023-08-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions
