@@ -1,0 +1,8 @@
+{
+    "id": "6de4cab7-0378-41c5-9f91-b3db81edee9c",
+    "type": "bugfix",
+    "description": "removed incorrect condition preventing setting retryMaxAttempts via functional options",
+    "modules": [
+        "codegen"
+    ]
+}
