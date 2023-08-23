@@ -577,6 +577,9 @@ func TestResolveCredentialsIMDSClient(t *testing.T) {
 			opts := []func(*LoadOptions) error{
 				WithRetryer(func() aws.Retryer { return aws.NopRetryer{} }),
 				WithHTTPClient(httpClient),
+                                // separate from the local config, should it exist - the default loader will ignore nonexistent profiles
+				WithSharedConfigProfile(" "),
+				WithSharedConfigFiles([]string{}),
 			}
 
 			if tc.enabledState != imds.ClientDefaultEnableState {
