@@ -2,15 +2,15 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.21.0
-	github.com/aws/aws-sdk-go-v2/config v1.18.36
+	github.com/aws/aws-sdk-go-v2/config v1.18.37
 	github.com/aws/aws-sdk-go-v2/service/acm v1.18.5
-	github.com/aws/aws-sdk-go-v2/service/apigateway v1.17.5
+	github.com/aws/aws-sdk-go-v2/service/apigateway v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/athena v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.30.6
-	github.com/aws/aws-sdk-go-v2/service/batch v1.26.4
+	github.com/aws/aws-sdk-go-v2/service/batch v1.26.5
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.34.5
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.15.5
@@ -59,7 +59,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.13.5
-	github.com/aws/aws-sdk-go-v2/service/polly v1.30.0
+	github.com/aws/aws-sdk-go-v2/service/polly v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/rds v1.52.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.29.5
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.30.6

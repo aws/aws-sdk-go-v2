@@ -1,3 +1,7 @@
+# v1.18.0 (2023-08-23)
+
+* **Feature**: This release adds RootResourceId to GetRestApi response.
+
 # v1.17.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

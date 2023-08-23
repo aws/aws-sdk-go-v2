@@ -1,3 +1,7 @@
+# v1.31.0 (2023-08-23)
+
+* **Feature**: Amazon Polly adds 1 new voice - Zayd (ar-AE)
+
 # v1.30.0 (2023-08-21)
 
 * **Feature**: Add support for polly SynthesizeSpeech GET request presigner

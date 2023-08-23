@@ -1,3 +1,14 @@
+# Release (2023-08-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.18.0](service/apigateway/CHANGELOG.md#v1180-2023-08-23)
+  * **Feature**: This release adds RootResourceId to GetRestApi response.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.31.0](service/polly/CHANGELOG.md#v1310-2023-08-23)
+  * **Feature**: Amazon Polly adds 1 new voice - Zayd (ar-AE)
+
 # Release (2023-08-22)
 
 ## Module Highlights
