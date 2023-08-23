@@ -105,7 +105,7 @@
                 "customerId": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.</p>"
+                        "smithy.api#documentation": "<p>An Amazon Web Services Marketplace customer identifier, when integrating with the Amazon Web Services SaaS Marketplace.</p>"
                     }
                 },
                 "description": {
@@ -745,7 +745,7 @@
                     "name": "apigateway"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon API Gateway</fullname>\n         <p>Amazon API Gateway helps developers deliver robust, secure, and scalable mobile and web application back ends. API Gateway allows developers to securely connect mobile and web applications to APIs that run on AWS Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>",
+                "smithy.api#documentation": "<fullname>Amazon API Gateway</fullname>\n         <p>Amazon API Gateway helps developers deliver robust, secure, and scalable mobile and web application back ends. API Gateway allows developers to securely connect mobile and web applications to APIs that run on Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>",
                 "smithy.api#title": "Amazon API Gateway",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -807,9 +807,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://apigateway-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://apigateway-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -822,15 +1001,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://apigateway.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://apigateway.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -842,258 +1056,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://apigateway-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://apigateway-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://apigateway.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://apigateway.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1108,8 +1072,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1121,8 +1085,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1134,8 +1098,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1147,8 +1111,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1160,8 +1124,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1173,8 +1137,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1186,8 +1150,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1199,8 +1163,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1212,8 +1176,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1225,8 +1189,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1238,8 +1202,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1251,8 +1215,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1264,8 +1228,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1277,8 +1241,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1290,8 +1254,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1303,8 +1267,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1316,8 +1280,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1329,8 +1293,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1342,8 +1306,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1355,8 +1319,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1368,8 +1332,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1381,8 +1345,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1394,8 +1358,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1407,8 +1371,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1420,8 +1384,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1433,8 +1397,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1446,8 +1410,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1459,8 +1423,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1472,8 +1436,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1485,8 +1449,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1498,8 +1462,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1511,8 +1475,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1524,8 +1488,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1537,8 +1501,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1550,8 +1514,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1563,8 +1538,30 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1576,8 +1573,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1589,8 +1597,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1602,8 +1610,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1615,8 +1623,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1627,8 +1635,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1639,9 +1647,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2041,7 +2055,7 @@
                 "customerId": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.</p>"
+                        "smithy.api#documentation": "<p>An Amazon Web Services Marketplace customer identifier, when integrating with the Amazon Web Services SaaS Marketplace.</p>"
                     }
                 },
                 "tags": {
@@ -2052,7 +2066,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to create an ApiKey resource.</p>"
+                "smithy.api#documentation": "<p>Request to create an ApiKey resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateAuthorizer": {
@@ -2161,7 +2176,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to add a new Authorizer to an existing RestApi resource.</p>"
+                "smithy.api#documentation": "<p>Request to add a new Authorizer to an existing RestApi resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateBasePathMapping": {
@@ -2233,7 +2249,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to create a new BasePathMapping resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to create a new BasePathMapping resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateDeployment": {
@@ -2337,7 +2354,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to create a Deployment resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to create a Deployment resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateDocumentationPart": {
@@ -2404,7 +2422,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new documentation part of a given API.</p>"
+                "smithy.api#documentation": "<p>Creates a new documentation part of a given API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateDocumentationVersion": {
@@ -2476,7 +2495,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new documentation version of a given API.</p>"
+                "smithy.api#documentation": "<p>Creates a new documentation version of a given API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateDomainName": {
@@ -2550,7 +2570,7 @@
                 "certificateArn": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reference to an AWS-managed certificate that will be used by edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.</p>"
+                        "smithy.api#documentation": "<p>The reference to an Amazon Web Services-managed certificate that will be used by edge-optimized endpoint for this domain name. Certificate Manager is the only supported source.</p>"
                     }
                 },
                 "regionalCertificateName": {
@@ -2562,7 +2582,7 @@
                 "regionalCertificateArn": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reference to an AWS-managed certificate that will be used by regional endpoint for this domain name. AWS Certificate Manager is the only supported source.</p>"
+                        "smithy.api#documentation": "<p>The reference to an Amazon Web Services-managed certificate that will be used by regional endpoint for this domain name. Certificate Manager is the only supported source.</p>"
                     }
                 },
                 "endpointConfiguration": {
@@ -2594,7 +2614,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to create a new domain name.</p>"
+                "smithy.api#documentation": "<p>A request to create a new domain name.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateModel": {
@@ -2673,7 +2694,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to add a new Model to an existing RestApi resource.</p>"
+                "smithy.api#documentation": "<p>Request to add a new Model to an existing RestApi resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateRequestValidator": {
@@ -2746,7 +2768,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a RequestValidator of a given RestApi.</p>"
+                "smithy.api#documentation": "<p>Creates a RequestValidator of a given RestApi.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateResource": {
@@ -2814,7 +2837,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to create a Resource resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to create a Resource resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateRestApi": {
@@ -2894,7 +2918,7 @@
                 "apiKeySource": {
                     "target": "com.amazonaws.apigateway#ApiKeySourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source of the API key for metering requests according to a usage plan. Valid values\n      are: ><code>HEADER</code> to read the API key from the <code>X-API-Key</code> header of a\n      request. <code>AUTHORIZER</code> to read the API key from the <code>UsageIdentifierKey</code>\n      from a custom authorizer.</p>"
+                        "smithy.api#documentation": "<p>The source of the API key for metering requests according to a usage plan. Valid values\n      are: <code>HEADER</code> to read the API key from the <code>X-API-Key</code> header of a\n      request. <code>AUTHORIZER</code> to read the API key from the <code>UsageIdentifierKey</code>\n      from a custom authorizer.</p>"
                     }
                 },
                 "endpointConfiguration": {
@@ -2924,7 +2948,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The POST Request to add a new RestApi resource to your collection.</p>"
+                "smithy.api#documentation": "<p>The POST Request to add a new RestApi resource to your collection.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateStage": {
@@ -3041,7 +3066,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to create a Stage resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to create a Stage resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateUsagePlan": {
@@ -3145,7 +3171,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The POST request to create a usage plan key for adding an existing API key to a usage plan.</p>"
+                "smithy.api#documentation": "<p>The POST request to create a usage plan key for adding an existing API key to a usage plan.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateUsagePlanRequest": {
@@ -3190,7 +3217,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The POST request to create a usage plan with the name, description, throttle limits and quota limits, as well as the associated API stages, specified in the payload.</p>"
+                "smithy.api#documentation": "<p>The POST request to create a usage plan with the name, description, throttle limits and quota limits, as well as the associated API stages, specified in the payload.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#CreateVpcLink": {
@@ -3246,7 +3274,7 @@
                 "targetArns": {
                     "target": "com.amazonaws.apigateway#ListOfString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same Amazon Web Services account of the API owner.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3258,7 +3286,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.</p>"
+                "smithy.api#documentation": "<p>Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteApiKey": {
@@ -3308,7 +3337,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete the ApiKey resource.</p>"
+                "smithy.api#documentation": "<p>A request to delete the ApiKey resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteAuthorizer": {
@@ -3366,7 +3396,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to delete an existing Authorizer resource.</p>"
+                "smithy.api#documentation": "<p>Request to delete an existing Authorizer resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteBasePathMapping": {
@@ -3424,7 +3455,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete the BasePathMapping resource.</p>"
+                "smithy.api#documentation": "<p>A request to delete the BasePathMapping resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteClientCertificate": {
@@ -3474,7 +3506,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete the ClientCertificate resource.</p>"
+                "smithy.api#documentation": "<p>A request to delete the ClientCertificate resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteDeployment": {
@@ -3535,7 +3568,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to delete a Deployment resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to delete a Deployment resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteDocumentationPart": {
@@ -3593,7 +3627,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing documentation part of an API.</p>"
+                "smithy.api#documentation": "<p>Deletes an existing documentation part of an API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteDocumentationVersion": {
@@ -3651,7 +3686,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing documentation version of an API.</p>"
+                "smithy.api#documentation": "<p>Deletes an existing documentation version of an API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteDomainName": {
@@ -3701,7 +3737,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete the DomainName resource.</p>"
+                "smithy.api#documentation": "<p>A request to delete the DomainName resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteGatewayResponse": {
@@ -3759,7 +3796,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Clears any customization of a GatewayResponse of a specified response type on the given RestApi and resets it with the default settings.</p>"
+                "smithy.api#documentation": "<p>Clears any customization of a GatewayResponse of a specified response type on the given RestApi and resets it with the default settings.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteIntegration": {
@@ -3825,7 +3863,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a delete integration request.</p>"
+                "smithy.api#documentation": "<p>Represents a delete integration request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteIntegrationResponse": {
@@ -3899,7 +3938,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a delete integration response request.</p>"
+                "smithy.api#documentation": "<p>Represents a delete integration response request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteMethod": {
@@ -3962,7 +4002,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to delete an existing Method resource.</p>"
+                "smithy.api#documentation": "<p>Request to delete an existing Method resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteMethodResponse": {
@@ -4036,7 +4077,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to delete an existing MethodResponse resource.</p>"
+                "smithy.api#documentation": "<p>A request to delete an existing MethodResponse resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteModel": {
@@ -4094,7 +4136,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to delete an existing model in an existing RestApi resource.</p>"
+                "smithy.api#documentation": "<p>Request to delete an existing model in an existing RestApi resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteRequestValidator": {
@@ -4152,7 +4195,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a specified RequestValidator of a given RestApi.</p>"
+                "smithy.api#documentation": "<p>Deletes a specified RequestValidator of a given RestApi.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteResource": {
@@ -4210,7 +4254,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to delete a Resource.</p>"
+                "smithy.api#documentation": "<p>Request to delete a Resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteRestApi": {
@@ -4260,7 +4305,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to delete the specified API from your collection.</p>"
+                "smithy.api#documentation": "<p>Request to delete the specified API from your collection.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteStage": {
@@ -4321,7 +4367,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to delete a Stage resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to delete a Stage resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteUsagePlan": {
@@ -4413,7 +4460,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The DELETE request to delete a usage plan key and remove the underlying API key from the associated usage plan.</p>"
+                "smithy.api#documentation": "<p>The DELETE request to delete a usage plan key and remove the underlying API key from the associated usage plan.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteUsagePlanRequest": {
@@ -4429,7 +4477,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The DELETE request to delete a usage plan of a given plan Id.</p>"
+                "smithy.api#documentation": "<p>The DELETE request to delete a usage plan of a given plan Id.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#DeleteVpcLink": {
@@ -4479,7 +4528,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing VpcLink of a specified identifier.</p>"
+                "smithy.api#documentation": "<p>Deletes an existing VpcLink of a specified identifier.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#Deployment": {
@@ -4820,7 +4870,7 @@
                 "certificateArn": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reference to an AWS-managed certificate that will be used by edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.</p>"
+                        "smithy.api#documentation": "<p>The reference to an Amazon Web Services-managed certificate that will be used by edge-optimized endpoint for this domain name. Certificate Manager is the only supported source.</p>"
                     }
                 },
                 "certificateUploadDate": {
@@ -4850,7 +4900,7 @@
                 "regionalCertificateArn": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reference to an AWS-managed certificate that will be used for validating the regional domain name. AWS Certificate Manager is the only supported source.</p>"
+                        "smithy.api#documentation": "<p>The reference to an Amazon Web Services-managed certificate that will be used for validating the regional domain name. Certificate Manager is the only supported source.</p>"
                     }
                 },
                 "distributionDomainName": {
@@ -5047,7 +5097,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The binary blob response to GetExport, which contains the generated SDK.</p>"
+                "smithy.api#documentation": "<p>The binary blob response to GetExport, which contains the generated SDK.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigateway#FlushStageAuthorizersCache": {
@@ -5108,7 +5159,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to flush authorizer cache entries on a specified stage.</p>"
+                "smithy.api#documentation": "<p>Request to flush authorizer cache entries on a specified stage.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#FlushStageCache": {
@@ -5169,7 +5221,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to flush a stage's cache.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to flush a stage's cache.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GatewayResponse": {
@@ -5415,7 +5468,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to generate a ClientCertificate resource.</p>"
+                "smithy.api#documentation": "<p>A request to generate a ClientCertificate resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetAccount": {
@@ -5453,7 +5507,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to get information about the current Account resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to get information about the current Account resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetApiKey": {
@@ -5507,7 +5562,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get information about the current ApiKey resource.</p>"
+                "smithy.api#documentation": "<p>A request to get information about the current ApiKey resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetApiKeys": {
@@ -5574,7 +5630,7 @@
                 "customerId": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of a customer in AWS Marketplace or an external system, such as a developer portal.</p>",
+                        "smithy.api#documentation": "<p>The identifier of a customer in Amazon Web Services Marketplace or an external system, such as a developer portal.</p>",
                         "smithy.api#httpQuery": "customerId"
                     }
                 },
@@ -5587,7 +5643,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get information about the current ApiKeys resource.</p>"
+                "smithy.api#documentation": "<p>A request to get information about the current ApiKeys resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetAuthorizer": {
@@ -5642,7 +5699,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to describe an existing Authorizer resource.</p>"
+                "smithy.api#documentation": "<p>Request to describe an existing Authorizer resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetAuthorizers": {
@@ -5703,7 +5761,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to describe an existing Authorizers resource.</p>"
+                "smithy.api#documentation": "<p>Request to describe an existing Authorizers resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetBasePathMapping": {
@@ -5758,7 +5817,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to describe a BasePathMapping resource.</p>"
+                "smithy.api#documentation": "<p>Request to describe a BasePathMapping resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetBasePathMappings": {
@@ -5825,7 +5885,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get information about a collection of BasePathMapping resources.</p>"
+                "smithy.api#documentation": "<p>A request to get information about a collection of BasePathMapping resources.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetClientCertificate": {
@@ -5872,7 +5933,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get information about the current ClientCertificate resource.</p>"
+                "smithy.api#documentation": "<p>A request to get information about the current ClientCertificate resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetClientCertificates": {
@@ -5931,7 +5993,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to get information about a collection of ClientCertificate resources.</p>"
+                "smithy.api#documentation": "<p>A request to get information about a collection of ClientCertificate resources.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetDeployment": {
@@ -5996,7 +6059,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to get information about a Deployment resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to get information about a Deployment resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetDeployments": {
@@ -6066,7 +6130,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to get information about a Deployments collection.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to get information about a Deployments collection.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetDocumentationPart": {
@@ -6121,7 +6186,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets a specified documentation part of a given API.</p>"
+                "smithy.api#documentation": "<p>Gets a specified documentation part of a given API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetDocumentationParts": {
@@ -6210,7 +6276,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets the documentation parts of an API. The result may be filtered by the type, name, or path of API entities (targets).</p>"
+                "smithy.api#documentation": "<p>Gets the documentation parts of an API. The result may be filtered by the type, name, or path of API entities (targets).</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetDocumentationVersion": {
@@ -6262,7 +6329,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets a documentation snapshot of an API.</p>"
+                "smithy.api#documentation": "<p>Gets a documentation snapshot of an API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetDocumentationVersions": {
@@ -6323,7 +6391,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets the documentation versions of an API.</p>"
+                "smithy.api#documentation": "<p>Gets the documentation versions of an API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetDomainName": {
@@ -6370,7 +6439,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to get the name of a DomainName resource.</p>"
+                "smithy.api#documentation": "<p>Request to get the name of a DomainName resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetDomainNames": {
@@ -6429,7 +6499,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to describe a collection of DomainName resources.</p>"
+                "smithy.api#documentation": "<p>Request to describe a collection of DomainName resources.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetExport": {
@@ -6512,7 +6583,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request a new export of a RestApi for a particular Stage.</p>"
+                "smithy.api#documentation": "<p>Request a new export of a RestApi for a particular Stage.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetGatewayResponse": {
@@ -6567,7 +6639,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets a GatewayResponse of a specified response type on the given RestApi.</p>"
+                "smithy.api#documentation": "<p>Gets a GatewayResponse of a specified response type on the given RestApi.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetGatewayResponses": {
@@ -6628,7 +6701,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default GatewayResponses collection for the supported response types.</p>"
+                "smithy.api#documentation": "<p>Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default GatewayResponses collection for the supported response types.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetIntegration": {
@@ -6691,7 +6765,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to get the integration configuration.</p>"
+                "smithy.api#documentation": "<p>Represents a request to get the integration configuration.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetIntegrationResponse": {
@@ -6762,7 +6837,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a get integration response request.</p>"
+                "smithy.api#documentation": "<p>Represents a get integration response request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetMethod": {
@@ -6822,7 +6898,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to describe an existing Method resource.</p>"
+                "smithy.api#documentation": "<p>Request to describe an existing Method resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetMethodResponse": {
@@ -6890,7 +6967,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to describe a MethodResponse resource.</p>"
+                "smithy.api#documentation": "<p>Request to describe a MethodResponse resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetModel": {
@@ -6953,7 +7031,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to list information about a model in an existing RestApi resource.</p>"
+                "smithy.api#documentation": "<p>Request to list information about a model in an existing RestApi resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetModelTemplate": {
@@ -7008,7 +7087,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to generate a sample mapping template used to transform the payload.</p>"
+                "smithy.api#documentation": "<p>Request to generate a sample mapping template used to transform the payload.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetModels": {
@@ -7075,7 +7155,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to list existing Models defined for a RestApi resource.</p>"
+                "smithy.api#documentation": "<p>Request to list existing Models defined for a RestApi resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetRequestValidator": {
@@ -7130,7 +7211,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets a RequestValidator of a given RestApi.</p>"
+                "smithy.api#documentation": "<p>Gets a RequestValidator of a given RestApi.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetRequestValidators": {
@@ -7191,7 +7273,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets the RequestValidators collection of a given RestApi.</p>"
+                "smithy.api#documentation": "<p>Gets the RequestValidators collection of a given RestApi.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetResource": {
@@ -7250,7 +7333,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to list information about a resource.</p>"
+                "smithy.api#documentation": "<p>Request to list information about a resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetResources": {
@@ -7324,7 +7408,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to list information about a collection of resources.</p>"
+                "smithy.api#documentation": "<p>Request to list information about a collection of resources.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetRestApi": {
@@ -7371,7 +7456,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The GET request to list an existing RestApi defined for your collection. </p>"
+                "smithy.api#documentation": "<p>The GET request to list an existing RestApi defined for your collection. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetRestApis": {
@@ -7430,7 +7516,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The GET request to list existing RestApis defined for your collection.</p>"
+                "smithy.api#documentation": "<p>The GET request to list existing RestApis defined for your collection.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetSdk": {
@@ -7506,7 +7593,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request a new generated client SDK for a RestApi and Stage.</p>"
+                "smithy.api#documentation": "<p>Request a new generated client SDK for a RestApi and Stage.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetSdkType": {
@@ -7553,7 +7641,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Get an SdkType instance.</p>"
+                "smithy.api#documentation": "<p>Get an SdkType instance.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetSdkTypes": {
@@ -7606,7 +7695,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Get the SdkTypes collection.</p>"
+                "smithy.api#documentation": "<p>Get the SdkTypes collection.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetStage": {
@@ -7667,7 +7757,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to get information about a Stage resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to get information about a Stage resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetStages": {
@@ -7727,7 +7818,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to get information about one or more Stage resources.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to get information about one or more Stage resources.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetTags": {
@@ -7788,7 +7880,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets the Tags collection for a given resource.</p>"
+                "smithy.api#documentation": "<p>Gets the Tags collection for a given resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetUsage": {
@@ -7911,7 +8004,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The GET request to get a usage plan key of a given key identifier.</p>"
+                "smithy.api#documentation": "<p>The GET request to get a usage plan key of a given key identifier.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetUsagePlanKeys": {
@@ -7985,7 +8079,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The GET request to get all the usage plan keys representing the API keys added to a specified usage plan.</p>"
+                "smithy.api#documentation": "<p>The GET request to get all the usage plan keys representing the API keys added to a specified usage plan.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetUsagePlanRequest": {
@@ -8001,7 +8096,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The GET request to get a usage plan of a given plan identifier.</p>"
+                "smithy.api#documentation": "<p>The GET request to get a usage plan of a given plan identifier.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetUsagePlans": {
@@ -8067,7 +8163,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The GET request to get all the usage plans of the caller's account.</p>"
+                "smithy.api#documentation": "<p>The GET request to get all the usage plans of the caller's account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetUsageRequest": {
@@ -8120,7 +8217,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The GET request to get the usage data of a usage plan in a specified time interval.</p>"
+                "smithy.api#documentation": "<p>The GET request to get the usage data of a usage plan in a specified time interval.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetVpcLink": {
@@ -8167,7 +8265,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets a specified VPC link under the caller's account in a region.</p>"
+                "smithy.api#documentation": "<p>Gets a specified VPC link under the caller's account in a region.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#GetVpcLinks": {
@@ -8226,7 +8325,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets the VpcLinks collection under the caller's account in a selected region.</p>"
+                "smithy.api#documentation": "<p>Gets the VpcLinks collection under the caller's account in a selected region.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#ImportApiKeys": {
@@ -8295,7 +8395,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The POST request to import API keys from an external source, such as a CSV-formatted file.</p>"
+                "smithy.api#documentation": "<p>The POST request to import API keys from an external source, such as a CSV-formatted file.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#ImportDocumentationParts": {
@@ -8349,7 +8450,7 @@
                 "mode": {
                     "target": "com.amazonaws.apigateway#PutMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A query parameter to indicate whether to overwrite (<code>OVERWRITE</code>) any existing DocumentationParts definition or to merge (<code>MERGE</code>) the new definition into the existing one. The default value is <code>MERGE</code>.</p>",
+                        "smithy.api#documentation": "<p>A query parameter to indicate whether to overwrite (<code>overwrite</code>) any existing DocumentationParts definition or to merge (<code>merge</code>) the new definition into the existing one. The default value is <code>merge</code>.</p>",
                         "smithy.api#httpQuery": "mode"
                     }
                 },
@@ -8371,7 +8472,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Import documentation parts from an external (e.g., OpenAPI) definition file. </p>"
+                "smithy.api#documentation": "<p>Import documentation parts from an external (e.g., OpenAPI) definition file. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#ImportRestApi": {
@@ -8425,7 +8527,7 @@
                 "parameters": {
                     "target": "com.amazonaws.apigateway#MapOfStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.</p>\n         <p> To exclude DocumentationParts from the import, set <code>parameters</code> as <code>ignore=documentation</code>.</p>\n         <p> To configure the endpoint type, set <code>parameters</code> as <code>endpointConfigurationTypes=EDGE</code>, <code>endpointConfigurationTypes=REGIONAL</code>, or <code>endpointConfigurationTypes=PRIVATE</code>. The default endpoint type is <code>EDGE</code>.</p>\n         <p> To handle imported <code>basepath</code>, set <code>parameters</code> as <code>basepath=ignore</code>, <code>basepath=prepend</code> or <code>basepath=split</code>.</p>\n         <p>For example, the AWS CLI command to exclude documentation from the imported API is:</p>\n         <p>The AWS CLI command to set the regional endpoint on the imported API is:</p>",
+                        "smithy.api#documentation": "<p>A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.</p>\n         <p> To exclude DocumentationParts from the import, set <code>parameters</code> as <code>ignore=documentation</code>.</p>\n         <p> To configure the endpoint type, set <code>parameters</code> as <code>endpointConfigurationTypes=EDGE</code>, <code>endpointConfigurationTypes=REGIONAL</code>, or <code>endpointConfigurationTypes=PRIVATE</code>. The default endpoint type is <code>EDGE</code>.</p>\n         <p> To handle imported <code>basepath</code>, set <code>parameters</code> as <code>basepath=ignore</code>, <code>basepath=prepend</code> or <code>basepath=split</code>.</p>",
                         "smithy.api#httpQueryParams": {}
                     }
                 },
@@ -8439,7 +8541,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A POST request to import an API to API Gateway using an input of an API definition file.</p>"
+                "smithy.api#documentation": "<p>A POST request to import an API to API Gateway using an input of an API definition file.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#Integer": {
@@ -8460,13 +8563,13 @@
                 "httpMethod": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the integration's HTTP method type.</p>"
+                        "smithy.api#documentation": "<p>Specifies the integration's HTTP method type. For the Type property, if you specify <code>MOCK</code>, this property is optional. For Lambda integrations, you must set the integration method to <code>POST</code>. For all other types, you must specify this property.</p>"
                     }
                 },
                 "uri": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies Uniform Resource Identifier (URI) of the integration endpoint.</p>\n         <p>For <code>HTTP</code> or <code>HTTP_PROXY</code> integrations, the URI must be a fully formed, encoded HTTP(S) URL\n      according to the RFC-3986 specification, for either standard integration, where <code>connectionType</code>\n      is not <code>VPC_LINK</code>, or private integration, where <code>connectionType</code> is <code>VPC_LINK</code>. For a private HTTP\n      integration, the URI is not used for routing. For <code>AWS</code> or <code>AWS_PROXY</code> integrations, the URI is of\n      the form <code>arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}</code>.\n      Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the\n      integrated Amazon Web Services service (e.g., s3); and {subdomain} is a designated subdomain supported by\n      certain Amazon Web Services  service for fast host-name lookup. action can be used for an Amazon Web Services  service\n      action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing\n      {service_api} refers to a supported action {name} plus any required input parameters.\n      Alternatively, path can be used for an AWS service path-based API. The ensuing service_api\n      refers to the path to an Amazon Web Services  service resource, including the region of the integrated Amazon Web Services \n      service, if applicable. For example, for integration with the S3 API of GetObject, the uri can\n      be either <code>arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}</code> or\n      <code>arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies Uniform Resource Identifier (URI) of the integration endpoint.</p>\n         <p>For <code>HTTP</code> or <code>HTTP_PROXY</code> integrations, the URI must be a fully formed, encoded HTTP(S) URL\n\t    according to the RFC-3986 specification for standard integrations. If <code>connectionType</code> is <code>VPC_LINK</code> specify the Network Load Balancer DNS name.\n      For <code>AWS</code> or <code>AWS_PROXY</code> integrations, the URI is of\n      the form <code>arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}</code>.\n      Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the\n      integrated Amazon Web Services service (e.g., s3); and {subdomain} is a designated subdomain supported by\n      certain Amazon Web Services  service for fast host-name lookup. action can be used for an Amazon Web Services  service\n      action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing\n      {service_api} refers to a supported action {name} plus any required input parameters.\n      Alternatively, path can be used for an Amazon Web Services service path-based API. The ensuing service_api\n      refers to the path to an Amazon Web Services  service resource, including the region of the integrated Amazon Web Services \n      service, if applicable. For example, for integration with the S3 API of GetObject, the uri can\n      be either <code>arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}</code> or\n      <code>arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</code>\n         </p>"
                     }
                 },
                 "connectionType": {
@@ -8484,7 +8587,7 @@
                 "credentials": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string <code>arn:aws:iam::\\*:user/\\*</code>. To use resource-based permissions on supported AWS services, specify null.</p>"
+                        "smithy.api#documentation": "<p>Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string <code>arn:aws:iam::\\*:user/\\*</code>. To use resource-based permissions on supported Amazon Web Services services, specify null.</p>"
                     }
                 },
                 "requestParameters": {
@@ -8544,7 +8647,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration.</p>"
+                "smithy.api#documentation": "<p>Represents an <code>HTTP</code>, <code>HTTP_PROXY</code>, <code>AWS</code>, <code>AWS_PROXY</code>, or Mock integration.</p>"
             }
         },
         "com.amazonaws.apigateway#IntegrationResponse": {
@@ -8559,7 +8662,7 @@
                 "selectionPattern": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the back end. For example, if the success response returns nothing and the error response returns some string, you could use the <code>.+</code> regex to match error response. However, make sure that the error response does not contain any newline (<code>\\n</code>) character in such cases. If the back end is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS back ends, the HTTP status code is matched.</p>"
+                        "smithy.api#documentation": "<p>Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the back end. For example, if the success response returns nothing and the error response returns some string, you could use the <code>.+</code> regex to match error response. However, make sure that the error response does not contain any newline (<code>\\n</code>) character in such cases. If the back end is an Lambda function, the Lambda function error header is matched. For all other HTTP and Amazon Web Services back ends, the HTTP status code is matched.</p>"
                     }
                 },
                 "responseParameters": {
@@ -8620,7 +8723,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The integration type. The valid value is <code>HTTP</code> for integrating an API method with an HTTP backend; <code>AWS</code> with any AWS service endpoints; <code>MOCK</code> for testing without actually invoking the backend; <code>HTTP_PROXY</code> for integrating with the HTTP proxy integration; <code>AWS_PROXY</code> for integrating with the Lambda proxy integration. </p>"
+                "smithy.api#documentation": "<p>The integration type. The valid value is <code>HTTP</code> for integrating an API method with an HTTP backend; <code>AWS</code> with any Amazon Web Services service endpoints; <code>MOCK</code> for testing without actually invoking the backend; <code>HTTP_PROXY</code> for integrating with the HTTP proxy integration; <code>AWS_PROXY</code> for integrating with the Lambda proxy integration. </p>"
             }
         },
         "com.amazonaws.apigateway#LimitExceededException": {
@@ -9027,68 +9130,68 @@
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether Amazon CloudWatch metrics are enabled for this method. The PATCH path for this setting is <code>/{method_setting_key}/metrics/enabled</code>, and the value is a Boolean.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether Amazon CloudWatch metrics are enabled for this method.</p>"
                     }
                 },
                 "loggingLevel": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/loglevel</code>, and the available levels are <code>OFF</code>, <code>ERROR</code>, and <code>INFO</code>. Choose <code>ERROR</code> to write only error-level entries to CloudWatch Logs, or choose <code>INFO</code> to include all <code>ERROR</code> events as well as extra informational events.</p>"
+                        "smithy.api#documentation": "<p>Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. Valid values are <code>OFF</code>, <code>ERROR</code>, and <code>INFO</code>. Choose <code>ERROR</code> to write only error-level entries to CloudWatch Logs, or choose <code>INFO</code> to include all <code>ERROR</code> events as well as extra informational events.</p>"
                     }
                 },
                 "dataTraceEnabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs.</p>"
                     }
                 },
                 "throttlingBurstLimit": {
                     "target": "com.amazonaws.apigateway#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Specifies the throttling burst limit. The PATCH path for this setting is <code>/{method_setting_key}/throttling/burstLimit</code>, and the value is an integer.</p>"
+                        "smithy.api#documentation": "<p>Specifies the throttling burst limit.</p>"
                     }
                 },
                 "throttlingRateLimit": {
                     "target": "com.amazonaws.apigateway#Double",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Specifies the throttling rate limit. The PATCH path for this setting is <code>/{method_setting_key}/throttling/rateLimit</code>, and the value is a double.</p>"
+                        "smithy.api#documentation": "<p>Specifies the throttling rate limit.</p>"
                     }
                 },
                 "cachingEnabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached. The PATCH path for this setting is <code>/{method_setting_key}/caching/enabled</code>, and the value is a Boolean.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.</p>"
                     }
                 },
                 "cacheTtlInSeconds": {
                     "target": "com.amazonaws.apigateway#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached. The PATCH path for this setting is <code>/{method_setting_key}/caching/ttlInSeconds</code>, and the value is an integer.</p>"
+                        "smithy.api#documentation": "<p>Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.</p>"
                     }
                 },
                 "cacheDataEncrypted": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether the cached responses are encrypted. The PATCH path for this setting is <code>/{method_setting_key}/caching/dataEncrypted</code>, and the value is a Boolean.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the cached responses are encrypted.</p>"
                     }
                 },
                 "requireAuthorizationForCacheControl": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether authorization is required for a cache invalidation request. The PATCH path for this setting is <code>/{method_setting_key}/caching/requireAuthorizationForCacheControl</code>, and the value is a Boolean.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether authorization is required for a cache invalidation request.</p>"
                     }
                 },
                 "unauthorizedCacheControlHeaderStrategy": {
                     "target": "com.amazonaws.apigateway#UnauthorizedCacheControlHeaderStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how to handle unauthorized requests for cache invalidation. The PATCH path for this setting is <code>/{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy</code>, and the available values are <code>FAIL_WITH_403</code>, <code>SUCCEED_WITH_RESPONSE_HEADER</code>, <code>SUCCEED_WITHOUT_RESPONSE_HEADER</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies how to handle unauthorized requests for cache invalidation.</p>"
                     }
                 }
             },
@@ -9403,7 +9506,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a customization of a GatewayResponse of a specified response type and status code on the given RestApi.</p>"
+                "smithy.api#documentation": "<p>Creates a customization of a GatewayResponse of a specified response type and status code on the given RestApi.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#PutIntegration": {
@@ -9556,7 +9660,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sets up a method's integration.</p>"
+                "smithy.api#documentation": "<p>Sets up a method's integration.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#PutIntegrationResponse": {
@@ -9657,7 +9762,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a put integration response request.</p>"
+                "smithy.api#documentation": "<p>Represents a put integration response request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#PutMethod": {
@@ -9776,7 +9882,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to add a method to an existing Resource resource.</p>"
+                "smithy.api#documentation": "<p>Request to add a method to an existing Resource resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#PutMethodResponse": {
@@ -9865,7 +9972,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to add a MethodResponse to an existing Method resource.</p>"
+                "smithy.api#documentation": "<p>Request to add a MethodResponse to an existing Method resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#PutMode": {
@@ -9965,7 +10073,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A PUT request to update an existing API, with external API definitions specified as the request body.</p>"
+                "smithy.api#documentation": "<p>A PUT request to update an existing API, with external API definitions specified as the request body.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#QuotaPeriodType": {
@@ -10216,6 +10325,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default <code>execute-api</code> endpoint.\n      By default, clients can invoke your API with the default\n      <code>https://{api_id}.execute-api.{region}.amazonaws.com</code> endpoint. To require that clients use a\n      custom domain name to invoke your API, disable the default endpoint.</p>"
                     }
+                },
+                "rootResourceId": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API's root resource ID.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10309,7 +10424,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The binary blob response to GetSdk, which contains the generated SDK.</p>"
+                "smithy.api#documentation": "<p>The binary blob response to GetSdk, which contains the generated SDK.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigateway#SdkType": {
@@ -10608,7 +10724,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates a tag on a given resource.</p>"
+                "smithy.api#documentation": "<p>Adds or updates a tag on a given resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#Tags": {
@@ -10727,7 +10844,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Make a request to simulate the invocation of an Authorizer.</p>"
+                "smithy.api#documentation": "<p>Make a request to simulate the invocation of an Authorizer.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#TestInvokeAuthorizerResponse": {
@@ -10750,7 +10868,7 @@
                     "target": "com.amazonaws.apigateway#Long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The execution latency of the test authorizer request.</p>"
+                        "smithy.api#documentation": "<p>The execution latency, in ms, of the test authorizer request.</p>"
                     }
                 },
                 "principalId": {
@@ -10779,7 +10897,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the response of the test invoke request for a custom Authorizer</p>"
+                "smithy.api#documentation": "<p>Represents the response of the test invoke request for a custom Authorizer</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigateway#TestInvokeMethod": {
@@ -10878,7 +10997,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Make a request to simulate the invocation of a Method.</p>"
+                "smithy.api#documentation": "<p>Make a request to simulate the invocation of a Method.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#TestInvokeMethodResponse": {
@@ -10919,12 +11039,13 @@
                     "target": "com.amazonaws.apigateway#Long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The execution latency of the test invoke request.</p>"
+                        "smithy.api#documentation": "<p>The execution latency, in ms, of the test invoke request.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the response of the test invoke request in the HTTP method.</p>"
+                "smithy.api#documentation": "<p>Represents the response of the test invoke request in the HTTP method.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.apigateway#ThrottleSettings": {
@@ -11080,7 +11201,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Removes a tag from a given resource.</p>"
+                "smithy.api#documentation": "<p>Removes a tag from a given resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateAccount": {
@@ -11131,7 +11253,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to change information about the current Account resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to change information about the current Account resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateApiKey": {
@@ -11190,7 +11313,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to change information about an ApiKey resource.</p>"
+                "smithy.api#documentation": "<p>A request to change information about an ApiKey resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateAuthorizer": {
@@ -11257,7 +11381,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to update an existing Authorizer resource.</p>"
+                "smithy.api#documentation": "<p>Request to update an existing Authorizer resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateBasePathMapping": {
@@ -11324,7 +11449,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to change information about the BasePathMapping resource.</p>"
+                "smithy.api#documentation": "<p>A request to change information about the BasePathMapping resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateClientCertificate": {
@@ -11383,7 +11509,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to change information about an ClientCertificate resource.</p>"
+                "smithy.api#documentation": "<p>A request to change information about an ClientCertificate resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateDeployment": {
@@ -11453,7 +11580,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to change information about a Deployment resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to change information about a Deployment resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateDocumentationPart": {
@@ -11520,7 +11648,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing documentation part of a given API.</p>"
+                "smithy.api#documentation": "<p>Updates an existing documentation part of a given API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateDocumentationVersion": {
@@ -11566,7 +11695,7 @@
                 "restApiId": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string identifier of the associated RestApi..</p>",
+                        "smithy.api#documentation": "<p>The string identifier of the associated RestApi.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11587,7 +11716,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing documentation version of an API.</p>"
+                "smithy.api#documentation": "<p>Updates an existing documentation version of an API.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateDomainName": {
@@ -11646,7 +11776,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to change information about the DomainName resource.</p>"
+                "smithy.api#documentation": "<p>A request to change information about the DomainName resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateGatewayResponse": {
@@ -11713,7 +11844,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates a GatewayResponse of a specified response type on the given RestApi.</p>"
+                "smithy.api#documentation": "<p>Updates a GatewayResponse of a specified response type on the given RestApi.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateIntegration": {
@@ -11788,7 +11920,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an update integration request.</p>"
+                "smithy.api#documentation": "<p>Represents an update integration request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateIntegrationResponse": {
@@ -11871,7 +12004,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an update integration response request.</p>"
+                "smithy.api#documentation": "<p>Represents an update integration response request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateMethod": {
@@ -11943,7 +12077,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to update an existing Method resource.</p>"
+                "smithy.api#documentation": "<p>Request to update an existing Method resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateMethodResponse": {
@@ -12026,7 +12161,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to update an existing MethodResponse resource.</p>"
+                "smithy.api#documentation": "<p>A request to update an existing MethodResponse resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateModel": {
@@ -12093,7 +12229,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to update an existing model in an existing RestApi resource.</p>"
+                "smithy.api#documentation": "<p>Request to update an existing model in an existing RestApi resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateRequestValidator": {
@@ -12160,7 +12297,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates a RequestValidator of a given RestApi.</p>"
+                "smithy.api#documentation": "<p>Updates a RequestValidator of a given RestApi.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateResource": {
@@ -12224,7 +12362,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to change information about a Resource resource.</p>"
+                "smithy.api#documentation": "<p>Request to change information about a Resource resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateRestApi": {
@@ -12283,7 +12422,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to update an existing RestApi resource in your collection.</p>"
+                "smithy.api#documentation": "<p>Request to update an existing RestApi resource in your collection.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateStage": {
@@ -12350,7 +12490,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests API Gateway to change information about a Stage resource.</p>"
+                "smithy.api#documentation": "<p>Requests API Gateway to change information about a Stage resource.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateUsage": {
@@ -12446,7 +12587,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The PATCH request to update a usage plan of a given plan Id.</p>"
+                "smithy.api#documentation": "<p>The PATCH request to update a usage plan of a given plan Id.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateUsageRequest": {
@@ -12476,7 +12618,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The PATCH request to grant a temporary extension to the remaining quota of a usage plan associated with a specified API key.</p>"
+                "smithy.api#documentation": "<p>The PATCH request to grant a temporary extension to the remaining quota of a usage plan associated with a specified API key.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#UpdateVpcLink": {
@@ -12535,7 +12678,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing VpcLink of a specified identifier.</p>"
+                "smithy.api#documentation": "<p>Updates an existing VpcLink of a specified identifier.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.apigateway#Usage": {
@@ -12620,7 +12764,7 @@
                 "productCode": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Marketplace product identifier to associate with the usage plan as a SaaS product on the Amazon Web Services Marketplace.</p>"
                     }
                 },
                 "tags": {
@@ -12734,7 +12878,7 @@
                 "targetArns": {
                     "target": "com.amazonaws.apigateway#ListOfString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same Amazon Web Services account of the API owner.</p>"
                     }
                 },
                 "status": {
