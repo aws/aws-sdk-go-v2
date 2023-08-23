@@ -36,7 +36,7 @@ else
     repository=https://github.com/$SMITHY_GO_REPOSITORY
 fi
 
-echo on branch \"$branch\"
+echo on branch "$branch"
 while [ -n "$branch" ] && [[ "$branch" == *-* ]]; do
     echo looking for "$branch"...
     git ls-remote --exit-code --heads "$repository" refs/heads/"$branch"
