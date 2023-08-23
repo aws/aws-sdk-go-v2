@@ -96,6 +96,9 @@ type UpdateRestApiOutput struct {
 	// the caller and Method configuration.
 	Policy *string
 
+	// The API's root resource ID.
+	RootResourceId *string
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
 

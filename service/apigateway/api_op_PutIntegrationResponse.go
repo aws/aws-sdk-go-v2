@@ -118,8 +118,9 @@ type PutIntegrationResponseOutput struct {
 	// response returns nothing and the error response returns some string, you could
 	// use the .+ regex to match error response. However, make sure that the error
 	// response does not contain any newline ( \n ) character in such cases. If the
-	// back end is an AWS Lambda function, the AWS Lambda function error header is
-	// matched. For all other HTTP and AWS back ends, the HTTP status code is matched.
+	// back end is an Lambda function, the Lambda function error header is matched. For
+	// all other HTTP and Amazon Web Services back ends, the HTTP status code is
+	// matched.
 	SelectionPattern *string
 
 	// Specifies the status code that is used to map the integration response to an

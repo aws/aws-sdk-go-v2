@@ -63,8 +63,8 @@ type GetUsagePlanOutput struct {
 	// The name of a usage plan.
 	Name *string
 
-	// The AWS Markeplace product identifier to associate with the usage plan as a
-	// SaaS product on AWS Marketplace.
+	// The Amazon Web Services Marketplace product identifier to associate with the
+	// usage plan as a SaaS product on the Amazon Web Services Marketplace.
 	ProductCode *string
 
 	// The target maximum number of permitted requests per a given unit time interval.

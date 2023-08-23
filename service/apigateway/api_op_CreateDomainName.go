@@ -41,9 +41,9 @@ type CreateDomainNameInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The reference to an AWS-managed certificate that will be used by edge-optimized
-	// endpoint for this domain name. AWS Certificate Manager is the only supported
-	// source.
+	// The reference to an Amazon Web Services-managed certificate that will be used
+	// by edge-optimized endpoint for this domain name. Certificate Manager is the only
+	// supported source.
 	CertificateArn *string
 
 	// [Deprecated] The body of the server certificate that will be used by
@@ -82,9 +82,9 @@ type CreateDomainNameInput struct {
 	// imported or private CA certificate ARN as the regionalCertificateArn.
 	OwnershipVerificationCertificateArn *string
 
-	// The reference to an AWS-managed certificate that will be used by regional
-	// endpoint for this domain name. AWS Certificate Manager is the only supported
-	// source.
+	// The reference to an Amazon Web Services-managed certificate that will be used
+	// by regional endpoint for this domain name. Certificate Manager is the only
+	// supported source.
 	RegionalCertificateArn *string
 
 	// The user-friendly name of the certificate that will be used by regional
@@ -107,9 +107,9 @@ type CreateDomainNameInput struct {
 // (RestApi).
 type CreateDomainNameOutput struct {
 
-	// The reference to an AWS-managed certificate that will be used by edge-optimized
-	// endpoint for this domain name. AWS Certificate Manager is the only supported
-	// source.
+	// The reference to an Amazon Web Services-managed certificate that will be used
+	// by edge-optimized endpoint for this domain name. Certificate Manager is the only
+	// supported source.
 	CertificateArn *string
 
 	// The name of the certificate that will be used by edge-optimized endpoint for
@@ -160,8 +160,9 @@ type CreateDomainNameOutput struct {
 	// imported or private CA certificate ARN as the regionalCertificateArn.
 	OwnershipVerificationCertificateArn *string
 
-	// The reference to an AWS-managed certificate that will be used for validating
-	// the regional domain name. AWS Certificate Manager is the only supported source.
+	// The reference to an Amazon Web Services-managed certificate that will be used
+	// for validating the regional domain name. Certificate Manager is the only
+	// supported source.
 	RegionalCertificateArn *string
 
 	// The name of the certificate that will be used for validating the regional

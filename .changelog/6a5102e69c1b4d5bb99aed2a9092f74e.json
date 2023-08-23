@@ -1,0 +1,8 @@
+{
+    "id": "6a5102e6-9c1b-4d5b-b99a-ed2a9092f74e",
+    "type": "feature",
+    "description": "Marking fields as sensitive on BundleTask and GetPasswordData",
+    "modules": [
+        "service/ec2"
+    ]
+}

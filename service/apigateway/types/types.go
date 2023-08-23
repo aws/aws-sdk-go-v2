@@ -32,8 +32,8 @@ type ApiKey struct {
 	// The timestamp when the API Key was created.
 	CreatedDate *time.Time
 
-	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
-	// Marketplace.
+	// An Amazon Web Services Marketplace customer identifier, when integrating with
+	// the Amazon Web Services SaaS Marketplace.
 	CustomerId *string
 
 	// The description of the API Key.
@@ -356,9 +356,9 @@ type DocumentationVersion struct {
 // (RestApi).
 type DomainName struct {
 
-	// The reference to an AWS-managed certificate that will be used by edge-optimized
-	// endpoint for this domain name. AWS Certificate Manager is the only supported
-	// source.
+	// The reference to an Amazon Web Services-managed certificate that will be used
+	// by edge-optimized endpoint for this domain name. Certificate Manager is the only
+	// supported source.
 	CertificateArn *string
 
 	// The name of the certificate that will be used by edge-optimized endpoint for
@@ -409,8 +409,9 @@ type DomainName struct {
 	// imported or private CA certificate ARN as the regionalCertificateArn.
 	OwnershipVerificationCertificateArn *string
 
-	// The reference to an AWS-managed certificate that will be used for validating
-	// the regional domain name. AWS Certificate Manager is the only supported source.
+	// The reference to an Amazon Web Services-managed certificate that will be used
+	// for validating the regional domain name. Certificate Manager is the only
+	// supported source.
 	RegionalCertificateArn *string
 
 	// The name of the certificate that will be used for validating the regional
@@ -481,7 +482,7 @@ type GatewayResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration.
+// Represents an HTTP , HTTP_PROXY , AWS , AWS_PROXY , or Mock integration.
 type Integration struct {
 
 	// A list of request parameters whose values API Gateway caches. To be valid
@@ -516,11 +517,14 @@ type Integration struct {
 	// integrations, three options are available. To specify an IAM Role for API
 	// Gateway to assume, use the role's Amazon Resource Name (ARN). To require that
 	// the caller's identity be passed through from the request, specify the string
-	// arn:aws:iam::\*:user/\* . To use resource-based permissions on supported AWS
-	// services, specify null.
+	// arn:aws:iam::\*:user/\* . To use resource-based permissions on supported Amazon
+	// Web Services services, specify null.
 	Credentials *string
 
-	// Specifies the integration's HTTP method type.
+	// Specifies the integration's HTTP method type. For the Type property, if you
+	// specify MOCK , this property is optional. For Lambda integrations, you must set
+	// the integration method to POST . For all other types, you must specify this
+	// property.
 	HttpMethod *string
 
 	// Specifies the integration's responses.
@@ -576,10 +580,9 @@ type Integration struct {
 
 	// Specifies Uniform Resource Identifier (URI) of the integration endpoint. For
 	// HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded
-	// HTTP(S) URL according to the RFC-3986 specification, for either standard
-	// integration, where connectionType is not VPC_LINK , or private integration,
-	// where connectionType is VPC_LINK . For a private HTTP integration, the URI is
-	// not used for routing. For AWS or AWS_PROXY integrations, the URI is of the form
+	// HTTP(S) URL according to the RFC-3986 specification for standard integrations.
+	// If connectionType is VPC_LINK specify the Network Load Balancer DNS name. For
+	// AWS or AWS_PROXY integrations, the URI is of the form
 	// arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}
 	// . Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the
 	// name of the integrated Amazon Web Services service (e.g., s3); and {subdomain}
@@ -587,10 +590,10 @@ type Integration struct {
 	// fast host-name lookup. action can be used for an Amazon Web Services service
 	// action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The
 	// ensuing {service_api} refers to a supported action {name} plus any required
-	// input parameters. Alternatively, path can be used for an AWS service path-based
-	// API. The ensuing service_api refers to the path to an Amazon Web Services
-	// service resource, including the region of the integrated Amazon Web Services
-	// service, if applicable. For example, for integration with the S3 API of
+	// input parameters. Alternatively, path can be used for an Amazon Web Services
+	// service path-based API. The ensuing service_api refers to the path to an Amazon
+	// Web Services service resource, including the region of the integrated Amazon Web
+	// Services service, if applicable. For example, for integration with the S3 API of
 	// GetObject, the uri can be either
 	// arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or
 	// arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
@@ -633,8 +636,9 @@ type IntegrationResponse struct {
 	// response returns nothing and the error response returns some string, you could
 	// use the .+ regex to match error response. However, make sure that the error
 	// response does not contain any newline ( \n ) character in such cases. If the
-	// back end is an AWS Lambda function, the AWS Lambda function error header is
-	// matched. For all other HTTP and AWS back ends, the HTTP status code is matched.
+	// back end is an Lambda function, the Lambda function error header is matched. For
+	// all other HTTP and Amazon Web Services back ends, the HTTP status code is
+	// matched.
 	SelectionPattern *string
 
 	// Specifies the status code that is used to map the integration response to an
@@ -750,59 +754,40 @@ type MethodResponse struct {
 // Specifies the method setting properties.
 type MethodSetting struct {
 
-	// Specifies whether the cached responses are encrypted. The PATCH path for this
-	// setting is /{method_setting_key}/caching/dataEncrypted , and the value is a
-	// Boolean.
+	// Specifies whether the cached responses are encrypted.
 	CacheDataEncrypted bool
 
 	// Specifies the time to live (TTL), in seconds, for cached responses. The higher
-	// the TTL, the longer the response will be cached. The PATCH path for this setting
-	// is /{method_setting_key}/caching/ttlInSeconds , and the value is an integer.
+	// the TTL, the longer the response will be cached.
 	CacheTtlInSeconds int32
 
 	// Specifies whether responses should be cached and returned for requests. A cache
-	// cluster must be enabled on the stage for responses to be cached. The PATCH path
-	// for this setting is /{method_setting_key}/caching/enabled , and the value is a
-	// Boolean.
+	// cluster must be enabled on the stage for responses to be cached.
 	CachingEnabled bool
 
 	// Specifies whether data trace logging is enabled for this method, which affects
-	// the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this
-	// setting is /{method_setting_key}/logging/dataTrace , and the value is a Boolean.
+	// the log entries pushed to Amazon CloudWatch Logs.
 	DataTraceEnabled bool
 
 	// Specifies the logging level for this method, which affects the log entries
-	// pushed to Amazon CloudWatch Logs. The PATCH path for this setting is
-	// /{method_setting_key}/logging/loglevel , and the available levels are OFF ,
-	// ERROR , and INFO . Choose ERROR to write only error-level entries to CloudWatch
-	// Logs, or choose INFO to include all ERROR events as well as extra informational
-	// events.
+	// pushed to Amazon CloudWatch Logs. Valid values are OFF , ERROR , and INFO .
+	// Choose ERROR to write only error-level entries to CloudWatch Logs, or choose
+	// INFO to include all ERROR events as well as extra informational events.
 	LoggingLevel *string
 
-	// Specifies whether Amazon CloudWatch metrics are enabled for this method. The
-	// PATCH path for this setting is /{method_setting_key}/metrics/enabled , and the
-	// value is a Boolean.
+	// Specifies whether Amazon CloudWatch metrics are enabled for this method.
 	MetricsEnabled bool
 
 	// Specifies whether authorization is required for a cache invalidation request.
-	// The PATCH path for this setting is
-	// /{method_setting_key}/caching/requireAuthorizationForCacheControl , and the
-	// value is a Boolean.
 	RequireAuthorizationForCacheControl bool
 
-	// Specifies the throttling burst limit. The PATCH path for this setting is
-	// /{method_setting_key}/throttling/burstLimit , and the value is an integer.
+	// Specifies the throttling burst limit.
 	ThrottlingBurstLimit int32
 
-	// Specifies the throttling rate limit. The PATCH path for this setting is
-	// /{method_setting_key}/throttling/rateLimit , and the value is a double.
+	// Specifies the throttling rate limit.
 	ThrottlingRateLimit float64
 
-	// Specifies how to handle unauthorized requests for cache invalidation. The PATCH
-	// path for this setting is
-	// /{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy , and the
-	// available values are FAIL_WITH_403 , SUCCEED_WITH_RESPONSE_HEADER ,
-	// SUCCEED_WITHOUT_RESPONSE_HEADER .
+	// Specifies how to handle unauthorized requests for cache invalidation.
 	UnauthorizedCacheControlHeaderStrategy UnauthorizedCacheControlHeaderStrategy
 
 	noSmithyDocumentSerde
@@ -1037,6 +1022,9 @@ type RestApi struct {
 	// the caller and Method configuration.
 	Policy *string
 
+	// The API's root resource ID.
+	RootResourceId *string
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
 
@@ -1221,8 +1209,8 @@ type UsagePlan struct {
 	// The name of a usage plan.
 	Name *string
 
-	// The AWS Markeplace product identifier to associate with the usage plan as a
-	// SaaS product on AWS Marketplace.
+	// The Amazon Web Services Marketplace product identifier to associate with the
+	// usage plan as a SaaS product on the Amazon Web Services Marketplace.
 	ProductCode *string
 
 	// The target maximum number of permitted requests per a given unit time interval.
@@ -1282,7 +1270,8 @@ type VpcLink struct {
 	Tags map[string]string
 
 	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
-	// network load balancer must be owned by the same AWS account of the API owner.
+	// network load balancer must be owned by the same Amazon Web Services account of
+	// the API owner.
 	TargetArns []string
 
 	noSmithyDocumentSerde

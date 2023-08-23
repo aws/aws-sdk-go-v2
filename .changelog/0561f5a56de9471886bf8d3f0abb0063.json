@@ -1,0 +1,8 @@
+{
+    "id": "0561f5a5-6de9-4718-86bf-8d3f0abb0063",
+    "type": "feature",
+    "description": "This release adds RootResourceId to GetRestApi response.",
+    "modules": [
+        "service/apigateway"
+    ]
+}

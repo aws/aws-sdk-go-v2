@@ -41,7 +41,7 @@ type UpdateDocumentationVersionInput struct {
 	// This member is required.
 	DocumentationVersion *string
 
-	// The string identifier of the associated RestApi..
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

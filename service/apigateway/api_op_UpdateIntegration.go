@@ -57,7 +57,7 @@ type UpdateIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration.
+// Represents an HTTP , HTTP_PROXY , AWS , AWS_PROXY , or Mock integration.
 type UpdateIntegrationOutput struct {
 
 	// A list of request parameters whose values API Gateway caches. To be valid
@@ -92,11 +92,14 @@ type UpdateIntegrationOutput struct {
 	// integrations, three options are available. To specify an IAM Role for API
 	// Gateway to assume, use the role's Amazon Resource Name (ARN). To require that
 	// the caller's identity be passed through from the request, specify the string
-	// arn:aws:iam::\*:user/\* . To use resource-based permissions on supported AWS
-	// services, specify null.
+	// arn:aws:iam::\*:user/\* . To use resource-based permissions on supported Amazon
+	// Web Services services, specify null.
 	Credentials *string
 
-	// Specifies the integration's HTTP method type.
+	// Specifies the integration's HTTP method type. For the Type property, if you
+	// specify MOCK , this property is optional. For Lambda integrations, you must set
+	// the integration method to POST . For all other types, you must specify this
+	// property.
 	HttpMethod *string
 
 	// Specifies the integration's responses.
@@ -152,10 +155,9 @@ type UpdateIntegrationOutput struct {
 
 	// Specifies Uniform Resource Identifier (URI) of the integration endpoint. For
 	// HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded
-	// HTTP(S) URL according to the RFC-3986 specification, for either standard
-	// integration, where connectionType is not VPC_LINK , or private integration,
-	// where connectionType is VPC_LINK . For a private HTTP integration, the URI is
-	// not used for routing. For AWS or AWS_PROXY integrations, the URI is of the form
+	// HTTP(S) URL according to the RFC-3986 specification for standard integrations.
+	// If connectionType is VPC_LINK specify the Network Load Balancer DNS name. For
+	// AWS or AWS_PROXY integrations, the URI is of the form
 	// arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}
 	// . Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the
 	// name of the integrated Amazon Web Services service (e.g., s3); and {subdomain}
@@ -163,10 +165,10 @@ type UpdateIntegrationOutput struct {
 	// fast host-name lookup. action can be used for an Amazon Web Services service
 	// action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The
 	// ensuing {service_api} refers to a supported action {name} plus any required
-	// input parameters. Alternatively, path can be used for an AWS service path-based
-	// API. The ensuing service_api refers to the path to an Amazon Web Services
-	// service resource, including the region of the integrated Amazon Web Services
-	// service, if applicable. For example, for integration with the S3 API of
+	// input parameters. Alternatively, path can be used for an Amazon Web Services
+	// service path-based API. The ensuing service_api refers to the path to an Amazon
+	// Web Services service resource, including the region of the integrated Amazon Web
+	// Services service, if applicable. For example, for integration with the S3 API of
 	// GetObject, the uri can be either
 	// arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or
 	// arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}

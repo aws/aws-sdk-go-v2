@@ -85,7 +85,7 @@ type TestInvokeMethodOutput struct {
 	// The headers of the HTTP response.
 	Headers map[string]string
 
-	// The execution latency of the test invoke request.
+	// The execution latency, in ms, of the test invoke request.
 	Latency int64
 
 	// The API Gateway execution log for the test invoke request.

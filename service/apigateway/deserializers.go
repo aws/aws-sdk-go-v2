@@ -2408,6 +2408,15 @@ func awsRestjson1_deserializeOpDocumentCreateRestApiOutput(v **CreateRestApiOutp
 				sv.Policy = ptr.String(jtv)
 			}
 
+		case "rootResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RootResourceId = ptr.String(jtv)
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentMapOfStringToString(&sv.Tags, value); err != nil {
 				return err
@@ -11955,6 +11964,15 @@ func awsRestjson1_deserializeOpDocumentGetRestApiOutput(v **GetRestApiOutput, va
 				sv.Policy = ptr.String(jtv)
 			}
 
+		case "rootResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RootResourceId = ptr.String(jtv)
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentMapOfStringToString(&sv.Tags, value); err != nil {
 				return err
@@ -15118,6 +15136,15 @@ func awsRestjson1_deserializeOpDocumentImportRestApiOutput(v **ImportRestApiOutp
 				sv.Policy = ptr.String(jtv)
 			}
 
+		case "rootResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RootResourceId = ptr.String(jtv)
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentMapOfStringToString(&sv.Tags, value); err != nil {
 				return err
@@ -16461,6 +16488,15 @@ func awsRestjson1_deserializeOpDocumentPutRestApiOutput(v **PutRestApiOutput, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Policy = ptr.String(jtv)
+			}
+
+		case "rootResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RootResourceId = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -20985,6 +21021,15 @@ func awsRestjson1_deserializeOpDocumentUpdateRestApiOutput(v **UpdateRestApiOutp
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Policy = ptr.String(jtv)
+			}
+
+		case "rootResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RootResourceId = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -25829,6 +25874,15 @@ func awsRestjson1_deserializeDocumentRestApi(v **types.RestApi, value interface{
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Policy = ptr.String(jtv)
+			}
+
+		case "rootResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RootResourceId = ptr.String(jtv)
 			}
 
 		case "tags":

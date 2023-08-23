@@ -56,9 +56,7 @@ type ImportRestApiInput struct {
 	// configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE ,
 	// endpointConfigurationTypes=REGIONAL , or endpointConfigurationTypes=PRIVATE .
 	// The default endpoint type is EDGE . To handle imported basepath , set parameters
-	// as basepath=ignore , basepath=prepend or basepath=split . For example, the AWS
-	// CLI command to exclude documentation from the imported API is: The AWS CLI
-	// command to set the regional endpoint on the imported API is:
+	// as basepath=ignore , basepath=prepend or basepath=split .
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -111,6 +109,9 @@ type ImportRestApiOutput struct {
 	// A stringified JSON policy document that applies to this RestApi regardless of
 	// the caller and Method configuration.
 	Policy *string
+
+	// The API's root resource ID.
+	RootResourceId *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string

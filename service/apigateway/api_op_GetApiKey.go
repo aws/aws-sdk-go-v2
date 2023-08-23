@@ -56,8 +56,8 @@ type GetApiKeyOutput struct {
 	// The timestamp when the API Key was created.
 	CreatedDate *time.Time
 
-	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
-	// Marketplace.
+	// An Amazon Web Services Marketplace customer identifier, when integrating with
+	// the Amazon Web Services SaaS Marketplace.
 	CustomerId *string
 
 	// The description of the API Key.

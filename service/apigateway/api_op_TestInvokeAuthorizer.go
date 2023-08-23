@@ -85,7 +85,7 @@ type TestInvokeAuthorizerOutput struct {
 	// authorizer succeeded.
 	ClientStatus int32
 
-	// The execution latency of the test authorizer request.
+	// The execution latency, in ms, of the test authorizer request.
 	Latency int64
 
 	// The API Gateway execution log for the test authorizer request.

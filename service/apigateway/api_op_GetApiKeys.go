@@ -35,8 +35,8 @@ func (c *Client) GetApiKeys(ctx context.Context, params *GetApiKeysInput, optFns
 // A request to get information about the current ApiKeys resource.
 type GetApiKeysInput struct {
 
-	// The identifier of a customer in AWS Marketplace or an external system, such as
-	// a developer portal.
+	// The identifier of a customer in Amazon Web Services Marketplace or an external
+	// system, such as a developer portal.
 	CustomerId *string
 
 	// A boolean flag to specify whether ( true ) or not ( false ) the result contains

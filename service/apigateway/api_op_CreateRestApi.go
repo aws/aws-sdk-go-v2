@@ -42,7 +42,7 @@ type CreateRestApiInput struct {
 	Name *string
 
 	// The source of the API key for metering requests according to a usage plan.
-	// Valid values are: > HEADER to read the API key from the X-API-Key header of a
+	// Valid values are: HEADER to read the API key from the X-API-Key header of a
 	// request. AUTHORIZER to read the API key from the UsageIdentifierKey from a
 	// custom authorizer.
 	ApiKeySource types.ApiKeySourceType
@@ -137,6 +137,9 @@ type CreateRestApiOutput struct {
 	// A stringified JSON policy document that applies to this RestApi regardless of
 	// the caller and Method configuration.
 	Policy *string
+
+	// The API's root resource ID.
+	RootResourceId *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
