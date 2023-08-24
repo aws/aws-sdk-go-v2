@@ -167,6 +167,101 @@ func (c *Client) addOperationDescribeDBClusterAutomatedBackupsMiddlewares(stack 
 	return nil
 }
 
+// DescribeDBClusterAutomatedBackupsAPIClient is a client that implements the
+// DescribeDBClusterAutomatedBackups operation.
+type DescribeDBClusterAutomatedBackupsAPIClient interface {
+	DescribeDBClusterAutomatedBackups(context.Context, *DescribeDBClusterAutomatedBackupsInput, ...func(*Options)) (*DescribeDBClusterAutomatedBackupsOutput, error)
+}
+
+var _ DescribeDBClusterAutomatedBackupsAPIClient = (*Client)(nil)
+
+// DescribeDBClusterAutomatedBackupsPaginatorOptions is the paginator options for
+// DescribeDBClusterAutomatedBackups
+type DescribeDBClusterAutomatedBackupsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDBClusterAutomatedBackupsPaginator is a paginator for
+// DescribeDBClusterAutomatedBackups
+type DescribeDBClusterAutomatedBackupsPaginator struct {
+	options   DescribeDBClusterAutomatedBackupsPaginatorOptions
+	client    DescribeDBClusterAutomatedBackupsAPIClient
+	params    *DescribeDBClusterAutomatedBackupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDBClusterAutomatedBackupsPaginator returns a new
+// DescribeDBClusterAutomatedBackupsPaginator
+func NewDescribeDBClusterAutomatedBackupsPaginator(client DescribeDBClusterAutomatedBackupsAPIClient, params *DescribeDBClusterAutomatedBackupsInput, optFns ...func(*DescribeDBClusterAutomatedBackupsPaginatorOptions)) *DescribeDBClusterAutomatedBackupsPaginator {
+	if params == nil {
+		params = &DescribeDBClusterAutomatedBackupsInput{}
+	}
+
+	options := DescribeDBClusterAutomatedBackupsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeDBClusterAutomatedBackupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDBClusterAutomatedBackupsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeDBClusterAutomatedBackups page.
+func (p *DescribeDBClusterAutomatedBackupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBClusterAutomatedBackupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeDBClusterAutomatedBackups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opDescribeDBClusterAutomatedBackups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

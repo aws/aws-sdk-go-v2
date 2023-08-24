@@ -44,12 +44,12 @@ type CreateFolderMembershipInput struct {
 	// This member is required.
 	FolderId *string
 
-	// The ID of the asset (the dashboard, analysis, or dataset).
+	// The ID of the asset that you want to add to the folder.
 	//
 	// This member is required.
 	MemberId *string
 
-	// The type of the member, including DASHBOARD , ANALYSIS , and DATASET .
+	// The member type of the asset that you want to add to a folder.
 	//
 	// This member is required.
 	MemberType types.MemberType

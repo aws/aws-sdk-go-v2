@@ -8,6 +8,7 @@ type AccessType string
 const (
 	AccessTypeS3Sigv4                   AccessType = "S3_SIGV4"
 	AccessTypeSecretsManagerAccessToken AccessType = "SECRETS_MANAGER_ACCESS_TOKEN"
+	AccessTypeAutodetectSigv4           AccessType = "AUTODETECT_SIGV4"
 )
 
 // Values returns all known values for AccessType. Note that this can be expanded
@@ -17,6 +18,7 @@ func (AccessType) Values() []AccessType {
 	return []AccessType{
 		"S3_SIGV4",
 		"SECRETS_MANAGER_ACCESS_TOKEN",
+		"AUTODETECT_SIGV4",
 	}
 }
 

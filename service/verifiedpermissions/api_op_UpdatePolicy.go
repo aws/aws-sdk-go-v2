@@ -37,6 +37,11 @@ import (
 //   - The principal referenced by a static policy.
 //   - The resource referenced by a static policy.
 //   - To update a template-linked policy, you must update the template instead.
+//
+// Verified Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
+// . It can take a few seconds for a new or changed element to be propagate through
+// the service and be visible in the results of other Verified Permissions
+// operations.
 func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, optFns ...func(*Options)) (*UpdatePolicyOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyInput{}

@@ -22,7 +22,10 @@ import (
 // policy store. Any changes to the schema validate only policies and templates
 // submitted after the schema change. Existing policies and templates are not
 // re-evaluated against the changed schema. If you later update a policy, then it
-// is evaluated against the new schema at that time.
+// is evaluated against the new schema at that time. Verified Permissions is
+// eventually consistent (https://wikipedia.org/wiki/Eventual_consistency) . It can
+// take a few seconds for a new or changed element to be propagate through the
+// service and be visible in the results of other Verified Permissions operations.
 func (c *Client) PutSchema(ctx context.Context, params *PutSchemaInput, optFns ...func(*Options)) (*PutSchemaOutput, error) {
 	if params == nil {
 		params = &PutSchemaInput{}

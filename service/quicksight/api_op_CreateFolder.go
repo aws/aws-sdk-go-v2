@@ -58,6 +58,10 @@ type CreateFolderInput struct {
 	// a folder. To specify no permissions, omit Permissions .
 	Permissions []types.ResourcePermission
 
+	// An optional parameter that determines the sharing scope of the folder. The
+	// default value for this parameter is ACCOUNT .
+	SharingModel types.SharingModel
+
 	// Tags for the folder.
 	Tags []types.Tag
 

@@ -288,6 +288,10 @@ type AudioCodecSettings struct {
 	// Required when you set Codec to the value EAC3.
 	Eac3Settings *Eac3Settings
 
+	// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
+	// value FLAC.
+	FlacSettings *FlacSettings
+
 	// Required when you set Codec to the value MP2.
 	Mp2Settings *Mp2Settings
 
@@ -607,11 +611,12 @@ type AutomatedAbrRule struct {
 // ABR package.
 type AutomatedAbrSettings struct {
 
-	// Optional. The maximum target bit rate used in your automated ABR stack. Use
-	// this value to set an upper limit on the bandwidth consumed by the
-	// highest-quality rendition. This is the rendition that is delivered to viewers
-	// with the fastest internet connections. If you don't specify a value,
-	// MediaConvert uses 8,000,000 (8 mb/s) by default.
+	// Specify the maximum average bitrate for MediaConvert to use in your automated
+	// ABR stack. If you don't specify a value, MediaConvert uses 8,000,000 (8 mb/s) by
+	// default. The average bitrate of your highest-quality rendition will be equal to
+	// or below this value, depending on the quality, complexity, and resolution of
+	// your content. Note that the instantaneous maximum bitrate may vary above the
+	// value that you specify.
 	MaxAbrBitrate int32
 
 	// Optional. The maximum number of renditions that MediaConvert will create in
@@ -621,10 +626,11 @@ type AutomatedAbrSettings struct {
 	// job specification, MediaConvert defaults to a limit of 15.
 	MaxRenditions int32
 
-	// Optional. The minimum target bitrate used in your automated ABR stack. Use this
-	// value to set a lower limit on the bitrate of video delivered to viewers with
-	// slow internet connections. If you don't specify a value, MediaConvert uses
-	// 600,000 (600 kb/s) by default.
+	// Specify the minimum average bitrate for MediaConvert to use in your automated
+	// ABR stack. If you don't specify a value, MediaConvert uses 600,000 (600 kb/s) by
+	// default. The average bitrate of your lowest-quality rendition will be near this
+	// value. Note that the instantaneous minimum bitrate may vary below the value that
+	// you specify.
 	MinAbrBitrate int32
 
 	// Optional. Use Automated ABR rules to specify restrictions for the rendition
@@ -688,6 +694,14 @@ type Av1Settings struct {
 
 	// Specify the Bit depth. You can choose 8-bit or 10-bit.
 	BitDepth Av1BitDepth
+
+	// Film grain synthesis replaces film grain present in your content with similar
+	// quality synthesized AV1 film grain. We recommend that you choose Enabled to
+	// reduce the bandwidth of your QVBR quality level 5, 6, 7, or 8 outputs. For QVBR
+	// quality level 9 or 10 outputs we recommend that you keep the default value,
+	// Disabled. When you include Film grain synthesis, you cannot include the Noise
+	// reducer preprocessor.
+	FilmGrainSynthesis Av1FilmGrainSynthesis
 
 	// Use the Framerate setting to specify the frame rate for this output. If you
 	// want to keep the same frame rate as the input video, choose Follow source. If
@@ -2961,6 +2975,25 @@ type FileSourceSettings struct {
 	// that you specify. When you don't specify a value for Time delta units,
 	// MediaConvert uses seconds by default.
 	TimeDeltaUnits FileSourceTimeDeltaUnits
+
+	noSmithyDocumentSerde
+}
+
+// Required when you set Codec, under AudioDescriptions>CodecSettings, to the
+// value FLAC.
+type FlacSettings struct {
+
+	// Specify Bit depth (BitDepth), in bits per sample, to choose the encoding
+	// quality for this audio track.
+	BitDepth int32
+
+	// Specify the number of channels in this output audio track. Choosing Mono on the
+	// console gives you 1 output channel; choosing Stereo gives you 2. In the API,
+	// valid values are between 1 and 8.
+	Channels *int32
+
+	// Sample rate in hz.
+	SampleRate int32
 
 	noSmithyDocumentSerde
 }
@@ -5380,6 +5413,20 @@ type M2tsSettings struct {
 	// parts of MPEG-2 transport stream containers, used for organizing data.
 	ProgramNumber int32
 
+	// Manually specify the initial PTS offset, in seconds, when you set PTS offset to
+	// Seconds. Enter an integer from 0 to 3600. Leave blank to keep the default value
+	// 2.
+	PtsOffset int32
+
+	// Specify the initial presentation timestamp (PTS) offset for your transport
+	// stream output. To let MediaConvert automatically determine the initial PTS
+	// offset: Keep the default value, Auto. We recommend that you choose Auto for the
+	// widest player compatibility. The initial PTS will be at least two seconds and
+	// vary depending on your output's bitrate, HRD buffer size and HRD buffer initial
+	// fill percentage. To manually specify an initial PTS offset: Choose Seconds. Then
+	// specify the number of seconds with PTS offset.
+	PtsOffsetMode TsPtsOffset
+
 	// When set to CBR, inserts null packets into transport stream to fill specified
 	// bitrate. When set to VBR, the bitrate setting acts as the maximum bitrate, but
 	// the output will not be padded up to that bitrate.
@@ -5509,6 +5556,20 @@ type M3u8Settings struct {
 
 	// The value of the program number field in the Program Map Table.
 	ProgramNumber int32
+
+	// Manually specify the initial PTS offset, in seconds, when you set PTS offset to
+	// Seconds. Enter an integer from 0 to 3600. Leave blank to keep the default value
+	// 2.
+	PtsOffset int32
+
+	// Specify the initial presentation timestamp (PTS) offset for your transport
+	// stream output. To let MediaConvert automatically determine the initial PTS
+	// offset: Keep the default value, Auto. We recommend that you choose Auto for the
+	// widest player compatibility. The initial PTS will be at least two seconds and
+	// vary depending on your output's bitrate, HRD buffer size and HRD buffer initial
+	// fill percentage. To manually specify an initial PTS offset: Choose Seconds. Then
+	// specify the number of seconds with PTS offset.
+	PtsOffsetMode TsPtsOffset
 
 	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
 	Scte35Pid int32
@@ -7078,6 +7139,9 @@ type S3DestinationSettings struct {
 	// Settings for how your job outputs are encrypted as they are uploaded to Amazon
 	// S3.
 	Encryption *S3EncryptionSettings
+
+	// Specify the S3 storage class to use for this destination.
+	StorageClass S3StorageClass
 
 	noSmithyDocumentSerde
 }

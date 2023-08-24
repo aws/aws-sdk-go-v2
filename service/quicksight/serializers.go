@@ -1072,6 +1072,11 @@ func awsRestjson1_serializeOpDocumentCreateFolderInput(v *CreateFolderInput, val
 		}
 	}
 
+	if len(v.SharingModel) > 0 {
+		ok := object.Key("SharingModel")
+		ok.String(string(v.SharingModel))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -5902,6 +5907,18 @@ func awsRestjson1_serializeOpHttpBindingsDescribeFolderPermissionsInput(v *Descr
 		}
 	}
 
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.Namespace != nil {
+		encoder.SetQuery("namespace").String(*v.Namespace)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
 	return nil
 }
 
@@ -5974,6 +5991,18 @@ func awsRestjson1_serializeOpHttpBindingsDescribeFolderResolvedPermissionsInput(
 		if err := encoder.SetURI("FolderId").String(*v.FolderId); err != nil {
 			return err
 		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.Namespace != nil {
+		encoder.SetQuery("namespace").String(*v.Namespace)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
 	}
 
 	return nil
@@ -14906,6 +14935,13 @@ func awsRestjson1_serializeDocumentAggregationSortConfigurationList(v []types.Ag
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAllSheetsFilterScopeConfiguration(v *types.AllSheetsFilterScopeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAmazonElasticsearchParameters(v *types.AmazonElasticsearchParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22109,6 +22145,13 @@ func awsRestjson1_serializeDocumentFilterRelativeDateTimeControl(v *types.Filter
 func awsRestjson1_serializeDocumentFilterScopeConfiguration(v *types.FilterScopeConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AllSheets != nil {
+		ok := object.Key("AllSheets")
+		if err := awsRestjson1_serializeDocumentAllSheetsFilterScopeConfiguration(v.AllSheets, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.SelectedSheets != nil {
 		ok := object.Key("SelectedSheets")
@@ -31850,6 +31893,13 @@ func awsRestjson1_serializeDocumentTableFieldOptions(v *types.TableFieldOptions,
 		}
 	}
 
+	if v.PinnedFieldOptions != nil {
+		ok := object.Key("PinnedFieldOptions")
+		if err := awsRestjson1_serializeDocumentTablePinnedFieldOptions(v.PinnedFieldOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SelectedFieldOptions != nil {
 		ok := object.Key("SelectedFieldOptions")
 		if err := awsRestjson1_serializeDocumentTableFieldOptionList(v.SelectedFieldOptions, ok); err != nil {
@@ -31857,6 +31907,17 @@ func awsRestjson1_serializeDocumentTableFieldOptions(v *types.TableFieldOptions,
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTableFieldOrderList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -31974,6 +32035,20 @@ func awsRestjson1_serializeDocumentTablePaginatedReportOptions(v *types.TablePag
 	if len(v.VerticalOverflowVisibility) > 0 {
 		ok := object.Key("VerticalOverflowVisibility")
 		ok.String(string(v.VerticalOverflowVisibility))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTablePinnedFieldOptions(v *types.TablePinnedFieldOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PinnedLeftFields != nil {
+		ok := object.Key("PinnedLeftFields")
+		if err := awsRestjson1_serializeDocumentTableFieldOrderList(v.PinnedLeftFields, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

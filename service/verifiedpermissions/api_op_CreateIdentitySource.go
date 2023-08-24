@@ -36,7 +36,10 @@ import (
 // IdentityType::"<CognitoUserPoolIdentifier>|<CognitoClientId> Where IdentityType
 // is the string that you provide to the PrincipalEntityType parameter for this
 // operation. The CognitoUserPoolId and CognitoClientId are defined by the Amazon
-// Cognito user pool.
+// Cognito user pool. Verified Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
+// . It can take a few seconds for a new or changed element to be propagate through
+// the service and be visible in the results of other Verified Permissions
+// operations.
 func (c *Client) CreateIdentitySource(ctx context.Context, params *CreateIdentitySourceInput, optFns ...func(*Options)) (*CreateIdentitySourceOutput, error) {
 	if params == nil {
 		params = &CreateIdentitySourceInput{}

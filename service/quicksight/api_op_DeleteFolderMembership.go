@@ -44,13 +44,12 @@ type DeleteFolderMembershipInput struct {
 	// This member is required.
 	FolderId *string
 
-	// The ID of the asset (the dashboard, analysis, or dataset) that you want to
-	// delete.
+	// The ID of the asset that you want to delete.
 	//
 	// This member is required.
 	MemberId *string
 
-	// The type of the member, including DASHBOARD , ANALYSIS , and DATASET
+	// The member type of the asset that you want to delete from a folder.
 	//
 	// This member is required.
 	MemberType types.MemberType

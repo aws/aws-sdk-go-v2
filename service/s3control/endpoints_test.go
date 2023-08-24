@@ -929,7 +929,7 @@ func TestEndpointCase15(t *testing.T) {
 // ListRegionalBuckets + OutpostId = outposts endpoint@us-east-2
 func TestEndpointCase16(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("123"),
+		AccountId:         ptr.String("123456789012"),
 		OutpostId:         ptr.String("op-123"),
 		Region:            ptr.String("us-east-2"),
 		RequiresAccountId: ptr.Bool(true),
@@ -982,7 +982,7 @@ func TestEndpointCase16(t *testing.T) {
 // ListRegionalBuckets without OutpostId = regular endpoint@us-east-2
 func TestEndpointCase17(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("123"),
+		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-2"),
 		RequiresAccountId: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
@@ -997,7 +997,7 @@ func TestEndpointCase17(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://123.s3-control.us-east-2.amazonaws.com")
+	uri, _ := url.Parse("https://123456789012.s3-control.us-east-2.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:     *uri,
@@ -1034,7 +1034,7 @@ func TestEndpointCase17(t *testing.T) {
 // ListRegionalBucket + OutpostId with fips = outposts endpoint@us-east-2
 func TestEndpointCase18(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("123"),
+		AccountId:         ptr.String("123456789012"),
 		OutpostId:         ptr.String("op-123"),
 		Region:            ptr.String("us-east-2"),
 		RequiresAccountId: ptr.Bool(true),
@@ -1336,7 +1336,7 @@ func TestEndpointCase26(t *testing.T) {
 func TestEndpointCase27(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
-		AccountId:         ptr.String("9999999"),
+		AccountId:         ptr.String("999999999999"),
 		Region:            ptr.String("us-west-2"),
 		RequiresAccountId: ptr.Bool(true),
 		UseArnRegion:      ptr.Bool(false),
@@ -1351,7 +1351,7 @@ func TestEndpointCase27(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "Invalid ARN: the accountId specified in the ARN (`123456789012`) does not match the parameter (`9999999`)", err.Error(); !strings.Contains(a, e) {
+	if e, a := "Invalid ARN: the accountId specified in the ARN (`123456789012`) does not match the parameter (`999999999999`)", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
@@ -1630,7 +1630,7 @@ func TestEndpointCase33(t *testing.T) {
 // ListRegionalBucket + OutpostId endpoint url@us-east-2
 func TestEndpointCase34(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("123"),
+		AccountId:         ptr.String("123456789012"),
 		Endpoint:          ptr.String("https://beta.example.com"),
 		OutpostId:         ptr.String("op-123"),
 		Region:            ptr.String("us-east-2"),
@@ -1684,7 +1684,7 @@ func TestEndpointCase34(t *testing.T) {
 // ListRegionalBucket + OutpostId + fips + endpoint url@us-east-2
 func TestEndpointCase35(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("123"),
+		AccountId:         ptr.String("123456789012"),
 		Endpoint:          ptr.String("https://beta.example.com"),
 		OutpostId:         ptr.String("op-123"),
 		Region:            ptr.String("us-east-2"),
@@ -3007,7 +3007,7 @@ func TestEndpointCase63(t *testing.T) {
 // custom account id prefix with fips@us-east-1
 func TestEndpointCase64(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("1234567890-aBC"),
+		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
 		RequiresAccountId: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
@@ -3022,7 +3022,7 @@ func TestEndpointCase64(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://1234567890-aBC.s3-control-fips.us-east-1.amazonaws.com")
+	uri, _ := url.Parse("https://123456789012.s3-control-fips.us-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:     *uri,
@@ -3323,7 +3323,7 @@ func TestEndpointCase70(t *testing.T) {
 // custom account id prefix @us-east-1
 func TestEndpointCase71(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("1234567890-aBC"),
+		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
 		RequiresAccountId: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
@@ -3338,7 +3338,7 @@ func TestEndpointCase71(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://1234567890-aBC.s3-control.us-east-1.amazonaws.com")
+	uri, _ := url.Parse("https://123456789012.s3-control.us-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:     *uri,
@@ -3397,7 +3397,7 @@ func TestEndpointCase72(t *testing.T) {
 // custom account id prefix with fips@us-east-1
 func TestEndpointCase73(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("1234567890-aBC"),
+		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
 		RequiresAccountId: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
@@ -3412,7 +3412,7 @@ func TestEndpointCase73(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://1234567890-aBC.s3-control-fips.us-east-1.amazonaws.com")
+	uri, _ := url.Parse("https://123456789012.s3-control-fips.us-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:     *uri,
@@ -3449,7 +3449,7 @@ func TestEndpointCase73(t *testing.T) {
 // custom account id prefix with dualstack,fips@us-east-1
 func TestEndpointCase74(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("1234567890-aBC"),
+		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
 		RequiresAccountId: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(true),
@@ -3464,7 +3464,7 @@ func TestEndpointCase74(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://1234567890-aBC.s3-control-fips.dualstack.us-east-1.amazonaws.com")
+	uri, _ := url.Parse("https://123456789012.s3-control-fips.dualstack.us-east-1.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:     *uri,
@@ -3501,7 +3501,7 @@ func TestEndpointCase74(t *testing.T) {
 // custom account id with custom endpoint
 func TestEndpointCase75(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("1234567890-aBC"),
+		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
 		RequiresAccountId: ptr.Bool(true),
 		Endpoint:          ptr.String("https://example.com"),
@@ -3515,7 +3515,7 @@ func TestEndpointCase75(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://1234567890-aBC.example.com")
+	uri, _ := url.Parse("https://123456789012.example.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:     *uri,
@@ -3609,10 +3609,10 @@ func TestEndpointCase78(t *testing.T) {
 	}
 }
 
-// account id with custom endpoint, fips and dualstack
+// account id with custom endpoint, fips
 func TestEndpointCase79(t *testing.T) {
 	var params = EndpointParameters{
-		AccountId:         ptr.String("1234567890-aBC"),
+		AccountId:         ptr.String("123456789012"),
 		Region:            ptr.String("us-east-1"),
 		RequiresAccountId: ptr.Bool(true),
 		Endpoint:          ptr.String("https://example.com"),
@@ -3627,7 +3627,7 @@ func TestEndpointCase79(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	uri, _ := url.Parse("https://1234567890-aBC.example.com")
+	uri, _ := url.Parse("https://123456789012.example.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:     *uri,
@@ -3661,7 +3661,7 @@ func TestEndpointCase79(t *testing.T) {
 	}
 }
 
-// custom endpoint, fips and dualstack
+// custom endpoint, fips
 func TestEndpointCase80(t *testing.T) {
 	var params = EndpointParameters{
 		Region:   ptr.String("us-east-1"),
@@ -3761,53 +3761,24 @@ func TestEndpointCase81(t *testing.T) {
 	}
 }
 
-// custom endpoint, dualstack
+// custom endpoint, DualStack
 func TestEndpointCase82(t *testing.T) {
 	var params = EndpointParameters{
-		Region:   ptr.String("us-east-1"),
-		Endpoint: ptr.String("https://example.com"),
-		UseFIPS:  ptr.Bool(false),
+		Region:       ptr.String("us-east-1"),
+		Endpoint:     ptr.String("https://example.com"),
+		UseFIPS:      ptr.Bool(false),
+		UseDualStack: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
 	result, err := resolver.ResolveEndpoint(context.Background(), params)
 	_, _ = result, err
 
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	if err == nil {
+		t.Fatalf("expect error, got none")
 	}
-
-	uri, _ := url.Parse("https://example.com")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var properties smithy.Properties
-			properties.Set("authSchemes", []interface{}{
-				map[string]interface{}{
-					"name":                  "sigv4",
-					"signingName":           "s3",
-					"signingRegion":         "us-east-1",
-					"disableDoubleEncoding": true,
-				},
-			})
-			return properties
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
-	}
-
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if e, a := "Invalid Configuration: DualStack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
 	}
 }
 
@@ -4068,7 +4039,7 @@ func TestEndpointCase91(t *testing.T) {
 	}
 }
 
-// Dualstack + Custom endpoint is not supported(non-arn)
+// DualStack + Custom endpoint is not supported(non-arn)
 func TestEndpointCase92(t *testing.T) {
 	var params = EndpointParameters{
 		AccessPointName:   ptr.String("apname"),
@@ -4087,7 +4058,7 @@ func TestEndpointCase92(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "Invalid Configuration: Dualstack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+	if e, a := "Invalid Configuration: DualStack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
@@ -4780,7 +4751,7 @@ func TestEndpointCase111(t *testing.T) {
 	}
 }
 
-// S3 Snow Control with Dual-stack enabled
+// S3 Snow Control with Dualstack enabled
 func TestEndpointCase112(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
@@ -4797,7 +4768,7 @@ func TestEndpointCase112(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "S3 Snow does not support Dual-stack", err.Error(); !strings.Contains(a, e) {
+	if e, a := "S3 Snow does not support DualStack", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }

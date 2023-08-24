@@ -156,6 +156,13 @@ type AggregationSortConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for applying a filter to all sheets. You can apply this
+// filter to all visuals on every sheet. This is a union type structure. For this
+// structure to be valid, only one of the attributes can be defined.
+type AllSheetsFilterScopeConfiguration struct {
+	noSmithyDocumentSerde
+}
+
 // The parameters for OpenSearch.
 type AmazonElasticsearchParameters struct {
 
@@ -5280,6 +5287,9 @@ type FilterRelativeDateTimeControl struct {
 // this structure to be valid, only one of the attributes can be defined.
 type FilterScopeConfiguration struct {
 
+	// The configuration for applying a filter to all sheets.
+	AllSheets *AllSheetsFilterScopeConfiguration
+
 	// The configuration for applying a filter to specific sheets.
 	SelectedSheets *SelectedSheetsFilterScopeConfiguration
 
@@ -5415,6 +5425,9 @@ type Folder struct {
 	// A display name for the folder.
 	Name *string
 
+	// The sharing scope of the folder.
+	SharingModel SharingModel
+
 	noSmithyDocumentSerde
 }
 
@@ -5499,6 +5512,9 @@ type FolderSummary struct {
 	// The display name of the folder.
 	Name *string
 
+	// The sharing scope of the folder.
+	SharingModel SharingModel
+
 	noSmithyDocumentSerde
 }
 
@@ -5558,11 +5574,6 @@ type ForecastComputation struct {
 	// This member is required.
 	ComputationId *string
 
-	// The time field that is used in a computation.
-	//
-	// This member is required.
-	Time *DimensionField
-
 	// The custom seasonality value setup of a forecast computation.
 	CustomSeasonalityValue *int32
 
@@ -5586,6 +5597,9 @@ type ForecastComputation struct {
 	//   - AUTOMATIC
 	//   - CUSTOM : Checks the custom seasonality value.
 	Seasonality ForecastComputationSeasonality
+
+	// The time field that is used in a computation.
+	Time *DimensionField
 
 	// The upper boundary setup of a forecast computation.
 	UpperBoundary *float64
@@ -6378,16 +6392,14 @@ type GrowthRateComputation struct {
 	// This member is required.
 	ComputationId *string
 
-	// The time field that is used in a computation.
-	//
-	// This member is required.
-	Time *DimensionField
-
 	// The name of a computation.
 	Name *string
 
 	// The period size setup of a growth rate computation.
 	PeriodSize int32
+
+	// The time field that is used in a computation.
+	Time *DimensionField
 
 	// The value field that is used in a computation.
 	Value *MeasureField
@@ -7617,11 +7629,6 @@ type MaximumMinimumComputation struct {
 	// This member is required.
 	ComputationId *string
 
-	// The time field that is used in a computation.
-	//
-	// This member is required.
-	Time *DimensionField
-
 	// The type of computation. Choose one of the following options:
 	//   - MAXIMUM: A maximum computation.
 	//   - MINIMUM: A minimum computation.
@@ -7631,6 +7638,9 @@ type MaximumMinimumComputation struct {
 
 	// The name of a computation.
 	Name *string
+
+	// The time field that is used in a computation.
+	Time *DimensionField
 
 	// The value field that is used in a computation.
 	Value *MeasureField
@@ -7677,22 +7687,16 @@ type MetricComparisonComputation struct {
 	ComputationId *string
 
 	// The field that is used in a metric comparison from value setup.
-	//
-	// This member is required.
 	FromValue *MeasureField
-
-	// The field that is used in a metric comparison to value setup.
-	//
-	// This member is required.
-	TargetValue *MeasureField
-
-	// The time field that is used in a computation.
-	//
-	// This member is required.
-	Time *DimensionField
 
 	// The name of a computation.
 	Name *string
+
+	// The field that is used in a metric comparison to value setup.
+	TargetValue *MeasureField
+
+	// The time field that is used in a computation.
+	Time *DimensionField
 
 	noSmithyDocumentSerde
 }
@@ -8588,13 +8592,11 @@ type PeriodOverPeriodComputation struct {
 	// This member is required.
 	ComputationId *string
 
-	// The time field that is used in a computation.
-	//
-	// This member is required.
-	Time *DimensionField
-
 	// The name of a computation.
 	Name *string
+
+	// The time field that is used in a computation.
+	Time *DimensionField
 
 	// The value field that is used in a computation.
 	Value *MeasureField
@@ -8610,11 +8612,6 @@ type PeriodToDateComputation struct {
 	// This member is required.
 	ComputationId *string
 
-	// The time field that is used in a computation.
-	//
-	// This member is required.
-	Time *DimensionField
-
 	// The name of a computation.
 	Name *string
 
@@ -8623,6 +8620,9 @@ type PeriodToDateComputation struct {
 	//   - YEAR: Year to date.
 	//   - MONTH: Month to date.
 	PeriodTimeGranularity TimeGranularity
+
+	// The time field that is used in a computation.
+	Time *DimensionField
 
 	// The value field that is used in a computation.
 	Value *MeasureField
@@ -10983,8 +10983,8 @@ type SnapshotDestinationConfiguration struct {
 // generate. This information is provided by you when you start a new snapshot job.
 type SnapshotFile struct {
 
-	// The format of the snapshot file to be generated. You can choose between CSV or
-	// PDF .
+	// The format of the snapshot file to be generated. You can choose between CSV ,
+	// Excel , or PDF .
 	//
 	// This member is required.
 	FormatType SnapshotFileFormatType
@@ -10992,7 +10992,8 @@ type SnapshotFile struct {
 	// A list of SnapshotFileSheetSelection objects that contain information on the
 	// dashboard sheet that is exported. These objects provide information about the
 	// snapshot artifacts that are generated during the job. This structure can hold a
-	// maximum of 5 CSV configurations or 1 configuration for PDF.
+	// maximum of 5 CSV configurations, 5 Excel configurations, or 1 configuration for
+	// PDF.
 	//
 	// This member is required.
 	SheetSelections []SnapshotFileSheetSelection
@@ -11020,20 +11021,23 @@ type SnapshotFileSheetSelection struct {
 	//   - ALL_VISUALS - Selects all visuals that are on the sheet. This value is
 	//   required if the snapshot is a PDF.
 	//   - SELECTED_VISUALS - Select the visual that you want to add to the snapshot.
-	//   This value is required if the snapshot is a CSV.
+	//   This value is required if the snapshot is a CSV or Excel workbook.
 	//
 	// This member is required.
 	SelectionScope SnapshotFileSheetSelectionScope
 
 	// The sheet ID of the dashboard to generate the snapshot artifact from. This
-	// value is required for CSV and PDF format types.
+	// value is required for CSV, Excel, and PDF format types.
 	//
 	// This member is required.
 	SheetId *string
 
-	// A list of visual IDs that are located in the selected sheet. This structure
-	// supports tables and pivot tables. This structure is required if you are
-	// generating a CSV. You can add a maximum of 1 visual ID to this structure.
+	// A structure that lists the IDs of the visuals in the selected sheet. Supported
+	// visual types are table, pivot table visuals. This value is required if you are
+	// generating a CSV or Excel workbook. This value supports a maximum of 1 visual ID
+	// for CSV and 5 visual IDs across up to 5 sheet selections for Excel. If you are
+	// generating an Excel workbook, the order of the visual IDs provided in this
+	// structure determines the order of the worksheets in the Excel file.
 	VisualIds []string
 
 	noSmithyDocumentSerde
@@ -11605,13 +11609,17 @@ type TableFieldOption struct {
 	noSmithyDocumentSerde
 }
 
-// The field options for a table visual.
+// The field options of a table visual.
 type TableFieldOptions struct {
 
-	// The order of field IDs of the field options for a table visual.
+	// The order of the field IDs that are configured as field options for a table
+	// visual.
 	Order []string
 
-	// The selected field options for the table field options.
+	// The settings for the pinned columns of a table visual.
+	PinnedFieldOptions *TablePinnedFieldOptions
+
+	// The field options to be configured to a table.
 	SelectedFieldOptions []TableFieldOption
 
 	noSmithyDocumentSerde
@@ -11678,6 +11686,15 @@ type TablePaginatedReportOptions struct {
 
 	// The visibility of printing table overflow across pages.
 	VerticalOverflowVisibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The settings for the pinned columns of a table visual.
+type TablePinnedFieldOptions struct {
+
+	// A list of columns to be pinned to the left of a table visual.
+	PinnedLeftFields []string
 
 	noSmithyDocumentSerde
 }
@@ -12510,20 +12527,10 @@ type TopBottomFilter struct {
 // The top movers and bottom movers computation setup.
 type TopBottomMoversComputation struct {
 
-	// The category field that is used in a computation.
-	//
-	// This member is required.
-	Category *DimensionField
-
 	// The ID for a computation.
 	//
 	// This member is required.
 	ComputationId *string
-
-	// The time field that is used in a computation.
-	//
-	// This member is required.
-	Time *DimensionField
 
 	// The computation type. Choose from the following options:
 	//   - TOP: Top movers computation.
@@ -12531,6 +12538,9 @@ type TopBottomMoversComputation struct {
 	//
 	// This member is required.
 	Type TopBottomComputationType
+
+	// The category field that is used in a computation.
+	Category *DimensionField
 
 	// The mover size setup of the top and bottom movers computation.
 	MoverSize int32
@@ -12541,6 +12551,9 @@ type TopBottomMoversComputation struct {
 	// The sort order setup of the top and bottom movers computation.
 	SortOrder TopBottomSortOrder
 
+	// The time field that is used in a computation.
+	Time *DimensionField
+
 	// The value field that is used in a computation.
 	Value *MeasureField
 
@@ -12549,11 +12562,6 @@ type TopBottomMoversComputation struct {
 
 // The top ranked and bottom ranked computation configuration.
 type TopBottomRankedComputation struct {
-
-	// The category field that is used in a computation.
-	//
-	// This member is required.
-	Category *DimensionField
 
 	// The ID for a computation.
 	//
@@ -12566,6 +12574,9 @@ type TopBottomRankedComputation struct {
 	//
 	// This member is required.
 	Type TopBottomComputationType
+
+	// The category field that is used in a computation.
+	Category *DimensionField
 
 	// The name of a computation.
 	Name *string
@@ -13027,13 +13038,11 @@ type TotalAggregationComputation struct {
 	// This member is required.
 	ComputationId *string
 
-	// The value field that is used in a computation.
-	//
-	// This member is required.
-	Value *MeasureField
-
 	// The name of a computation.
 	Name *string
+
+	// The value field that is used in a computation.
+	Value *MeasureField
 
 	noSmithyDocumentSerde
 }
@@ -13380,15 +13389,13 @@ type UnaggregatedField struct {
 // The unique values computation configuration.
 type UniqueValuesComputation struct {
 
-	// The category field that is used in a computation.
-	//
-	// This member is required.
-	Category *DimensionField
-
 	// The ID for a computation.
 	//
 	// This member is required.
 	ComputationId *string
+
+	// The category field that is used in a computation.
+	Category *DimensionField
 
 	// The name of a computation.
 	Name *string

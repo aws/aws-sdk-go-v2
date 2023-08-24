@@ -5472,6 +5472,11 @@ func awsRestjson1_serializeDocumentAc3Settings(v *types.Ac3Settings, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AttenuationControl) > 0 {
+		ok := object.Key("attenuationControl")
+		ok.String(string(v.AttenuationControl))
+	}
+
 	if v.Bitrate != 0 {
 		ok := object.Key("bitrate")
 		switch {
@@ -9341,6 +9346,16 @@ func awsRestjson1_serializeDocumentM3u8Settings(v *types.M3u8Settings, value smi
 		ok.String(*v.EcmPid)
 	}
 
+	if len(v.KlvBehavior) > 0 {
+		ok := object.Key("klvBehavior")
+		ok.String(string(v.KlvBehavior))
+	}
+
+	if v.KlvDataPids != nil {
+		ok := object.Key("klvDataPids")
+		ok.String(*v.KlvDataPids)
+	}
+
 	if len(v.NielsenId3Behavior) > 0 {
 		ok := object.Key("nielsenId3Behavior")
 		ok.String(string(v.NielsenId3Behavior))
@@ -10523,6 +10538,11 @@ func awsRestjson1_serializeDocumentRtmpGroupSettings(v *types.RtmpGroupSettings,
 	if len(v.CaptionData) > 0 {
 		ok := object.Key("captionData")
 		ok.String(string(v.CaptionData))
+	}
+
+	if len(v.IncludeFillerNalUnits) > 0 {
+		ok := object.Key("includeFillerNalUnits")
+		ok.String(string(v.IncludeFillerNalUnits))
 	}
 
 	if len(v.InputLossAction) > 0 {

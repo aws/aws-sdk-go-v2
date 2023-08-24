@@ -152,6 +152,95 @@ func (c *Client) addOperationSearchFoldersMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
+// SearchFoldersAPIClient is a client that implements the SearchFolders operation.
+type SearchFoldersAPIClient interface {
+	SearchFolders(context.Context, *SearchFoldersInput, ...func(*Options)) (*SearchFoldersOutput, error)
+}
+
+var _ SearchFoldersAPIClient = (*Client)(nil)
+
+// SearchFoldersPaginatorOptions is the paginator options for SearchFolders
+type SearchFoldersPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SearchFoldersPaginator is a paginator for SearchFolders
+type SearchFoldersPaginator struct {
+	options   SearchFoldersPaginatorOptions
+	client    SearchFoldersAPIClient
+	params    *SearchFoldersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSearchFoldersPaginator returns a new SearchFoldersPaginator
+func NewSearchFoldersPaginator(client SearchFoldersAPIClient, params *SearchFoldersInput, optFns ...func(*SearchFoldersPaginatorOptions)) *SearchFoldersPaginator {
+	if params == nil {
+		params = &SearchFoldersInput{}
+	}
+
+	options := SearchFoldersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &SearchFoldersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SearchFoldersPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next SearchFolders page.
+func (p *SearchFoldersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchFoldersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.SearchFolders(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opSearchFolders(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -144,6 +144,95 @@ func (c *Client) addOperationListFoldersMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
+// ListFoldersAPIClient is a client that implements the ListFolders operation.
+type ListFoldersAPIClient interface {
+	ListFolders(context.Context, *ListFoldersInput, ...func(*Options)) (*ListFoldersOutput, error)
+}
+
+var _ ListFoldersAPIClient = (*Client)(nil)
+
+// ListFoldersPaginatorOptions is the paginator options for ListFolders
+type ListFoldersPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListFoldersPaginator is a paginator for ListFolders
+type ListFoldersPaginator struct {
+	options   ListFoldersPaginatorOptions
+	client    ListFoldersAPIClient
+	params    *ListFoldersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListFoldersPaginator returns a new ListFoldersPaginator
+func NewListFoldersPaginator(client ListFoldersAPIClient, params *ListFoldersInput, optFns ...func(*ListFoldersPaginatorOptions)) *ListFoldersPaginator {
+	if params == nil {
+		params = &ListFoldersInput{}
+	}
+
+	options := ListFoldersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListFoldersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListFoldersPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListFolders page.
+func (p *ListFoldersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFoldersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListFolders(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListFolders(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -3263,6 +3263,24 @@ func (SelectedTooltipType) Values() []SelectedTooltipType {
 	}
 }
 
+type SharingModel string
+
+// Enum values for SharingModel
+const (
+	SharingModelAccount   SharingModel = "ACCOUNT"
+	SharingModelNamespace SharingModel = "NAMESPACE"
+)
+
+// Values returns all known values for SharingModel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SharingModel) Values() []SharingModel {
+	return []SharingModel{
+		"ACCOUNT",
+		"NAMESPACE",
+	}
+}
+
 type SheetContentType string
 
 // Enum values for SheetContentType
@@ -3430,8 +3448,9 @@ type SnapshotFileFormatType string
 
 // Enum values for SnapshotFileFormatType
 const (
-	SnapshotFileFormatTypeCsv SnapshotFileFormatType = "CSV"
-	SnapshotFileFormatTypePdf SnapshotFileFormatType = "PDF"
+	SnapshotFileFormatTypeCsv   SnapshotFileFormatType = "CSV"
+	SnapshotFileFormatTypePdf   SnapshotFileFormatType = "PDF"
+	SnapshotFileFormatTypeExcel SnapshotFileFormatType = "EXCEL"
 )
 
 // Values returns all known values for SnapshotFileFormatType. Note that this can
@@ -3441,6 +3460,7 @@ func (SnapshotFileFormatType) Values() []SnapshotFileFormatType {
 	return []SnapshotFileFormatType{
 		"CSV",
 		"PDF",
+		"EXCEL",
 	}
 }
 

@@ -250,9 +250,9 @@ type EntityIdentifier struct {
 
 // Contains information about an entity that can be referenced in a Cedar policy.
 // This data type is used as one of the fields in the EntitiesDefinition (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntitiesDefinition.html)
-// structure. { "id": { "entityType": "Photo", "entityId": "VacationPhoto94.jpg"
-// }, "Attributes": {}, "Parents": [ { "entityType": "Album", "entityId":
-// "alice_folder" } ] }
+// structure. { "identifier": { "entityType": "Photo", "entityId":
+// "VacationPhoto94.jpg" }, "attributes": {}, "parents": [ { "entityType": "Album",
+// "entityId": "alice_folder" } ] }
 type EntityItem struct {
 
 	// The identifier of the entity.

@@ -90,7 +90,7 @@ type RestoreDBClusterFromS3Input struct {
 	SourceEngine *string
 
 	// The version of the database that the backup files were created from. MySQL
-	// versions 5.5, 5.6, and 5.7 are supported. Example: 5.6.40 , 5.7.28
+	// versions 5.7 and 8.0 are supported. Example: 5.7.40 , 8.0.28
 	//
 	// This member is required.
 	SourceEngineVersion *string
@@ -167,7 +167,7 @@ type RestoreDBClusterFromS3Input struct {
 	// engine versions for aurora-mysql (Aurora MySQL), use the following command: aws
 	// rds describe-db-engine-versions --engine aurora-mysql --query
 	// "DBEngineVersions[].EngineVersion" Aurora MySQL Examples:
-	// 5.7.mysql_aurora.2.07.1 , 8.0.mysql_aurora.3.02.0
+	// 5.7.mysql_aurora.2.12.0 , 8.0.mysql_aurora.3.04.0
 	EngineVersion *string
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB cluster. The

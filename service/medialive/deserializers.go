@@ -13495,6 +13495,15 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 
 	for key, value := range shape {
 		switch key {
+		case "attenuationControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ac3AttenuationControl to be of type string, got %T instead", value)
+				}
+				sv.AttenuationControl = types.Ac3AttenuationControl(jtv)
+			}
+
 		case "bitrate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -23315,6 +23324,24 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				sv.EcmPid = ptr.String(jtv)
 			}
 
+		case "klvBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M3u8KlvBehavior to be of type string, got %T instead", value)
+				}
+				sv.KlvBehavior = types.M3u8KlvBehavior(jtv)
+			}
+
+		case "klvDataPids":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.KlvDataPids = ptr.String(jtv)
+			}
+
 		case "nielsenId3Behavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -27361,6 +27388,15 @@ func awsRestjson1_deserializeDocumentRtmpGroupSettings(v **types.RtmpGroupSettin
 					return fmt.Errorf("expected RtmpCaptionData to be of type string, got %T instead", value)
 				}
 				sv.CaptionData = types.RtmpCaptionData(jtv)
+			}
+
+		case "includeFillerNalUnits":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IncludeFillerNalUnits to be of type string, got %T instead", value)
+				}
+				sv.IncludeFillerNalUnits = types.IncludeFillerNalUnits(jtv)
 			}
 
 		case "inputLossAction":

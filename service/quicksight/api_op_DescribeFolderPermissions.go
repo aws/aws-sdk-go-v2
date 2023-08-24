@@ -44,6 +44,15 @@ type DescribeFolderPermissionsInput struct {
 	// This member is required.
 	FolderId *string
 
+	// The maximum number of results to be returned per request.
+	MaxResults *int32
+
+	// The namespace of the folder whose permissions you want described.
+	Namespace *string
+
+	// A pagination token for the next set of results.
+	NextToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -54,6 +63,10 @@ type DescribeFolderPermissionsOutput struct {
 
 	// The ID of the folder.
 	FolderId *string
+
+	// The pagination token for the next set of results, or null if there are no more
+	// results.
+	NextToken *string
 
 	// Information about the permissions on the folder.
 	Permissions []types.ResourcePermission
@@ -143,6 +156,98 @@ func (c *Client) addOperationDescribeFolderPermissionsMiddlewares(stack *middlew
 		return err
 	}
 	return nil
+}
+
+// DescribeFolderPermissionsAPIClient is a client that implements the
+// DescribeFolderPermissions operation.
+type DescribeFolderPermissionsAPIClient interface {
+	DescribeFolderPermissions(context.Context, *DescribeFolderPermissionsInput, ...func(*Options)) (*DescribeFolderPermissionsOutput, error)
+}
+
+var _ DescribeFolderPermissionsAPIClient = (*Client)(nil)
+
+// DescribeFolderPermissionsPaginatorOptions is the paginator options for
+// DescribeFolderPermissions
+type DescribeFolderPermissionsPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeFolderPermissionsPaginator is a paginator for DescribeFolderPermissions
+type DescribeFolderPermissionsPaginator struct {
+	options   DescribeFolderPermissionsPaginatorOptions
+	client    DescribeFolderPermissionsAPIClient
+	params    *DescribeFolderPermissionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeFolderPermissionsPaginator returns a new
+// DescribeFolderPermissionsPaginator
+func NewDescribeFolderPermissionsPaginator(client DescribeFolderPermissionsAPIClient, params *DescribeFolderPermissionsInput, optFns ...func(*DescribeFolderPermissionsPaginatorOptions)) *DescribeFolderPermissionsPaginator {
+	if params == nil {
+		params = &DescribeFolderPermissionsInput{}
+	}
+
+	options := DescribeFolderPermissionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeFolderPermissionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeFolderPermissionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeFolderPermissions page.
+func (p *DescribeFolderPermissionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeFolderPermissionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeFolderPermissions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeFolderPermissions(region string) *awsmiddleware.RegisterServiceMetadata {

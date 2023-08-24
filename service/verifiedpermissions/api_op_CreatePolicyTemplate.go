@@ -22,7 +22,11 @@ import (
 // instantiated policy can then be considered in authorization decisions. The
 // instantiated policy works identically to any other policy, except that it is
 // dynamically linked to the template. If the template changes, then any policies
-// that are linked to that template are immediately updated as well.
+// that are linked to that template are immediately updated as well. Verified
+// Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
+// . It can take a few seconds for a new or changed element to be propagate through
+// the service and be visible in the results of other Verified Permissions
+// operations.
 func (c *Client) CreatePolicyTemplate(ctx context.Context, params *CreatePolicyTemplateInput, optFns ...func(*Options)) (*CreatePolicyTemplateOutput, error) {
 	if params == nil {
 		params = &CreatePolicyTemplateInput{}

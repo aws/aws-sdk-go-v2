@@ -1,0 +1,8 @@
+{
+    "id": "dffc9e80-577a-44ea-abed-96f9c20e8be4",
+    "type": "feature",
+    "description": "This release updates the supported versions for Percona XtraBackup in Aurora MySQL.",
+    "modules": [
+        "service/rds"
+    ]
+}

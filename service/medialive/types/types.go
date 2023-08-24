@@ -54,6 +54,10 @@ type AacSettings struct {
 // Ac3 Settings
 type Ac3Settings struct {
 
+	// Applies a 3 dB attenuation to the surround channels. Applies only when the
+	// coding mode parameter is CODING_MODE_3_2_LFE.
+	AttenuationControl Ac3AttenuationControl
+
 	// Average bitrate in bits/second. Valid bitrates depend on the coding mode.
 	Bitrate float64
 
@@ -3585,6 +3589,15 @@ type M3u8Settings struct {
 	// This parameter is unused and deprecated.
 	EcmPid *string
 
+	// If set to passthrough, passes any KLV data from the input source to this output.
+	KlvBehavior M3u8KlvBehavior
+
+	// Packet Identifier (PID) for input source KLV data to this output. Multiple
+	// values are accepted, and can be entered in ranges and/or by comma separation.
+	// Can be entered as decimal or hexadecimal values. Each PID specified must be in
+	// the range of 32 (or 0x20)..8182 (or 0x1ff6).
+	KlvDataPids *string
+
 	// If set to passthrough, Nielsen inaudible tones for media tracking will be
 	// detected in the input audio and an equivalent ID3 tag will be inserted in the
 	// output.
@@ -4842,6 +4855,13 @@ type RtmpGroupSettings struct {
 	// both fields will be passed. If set to 'field1608' then only the data carried in
 	// 608 from field 1 video will be passed.
 	CaptionData RtmpCaptionData
+
+	// Applies only when the rate control mode (in the codec settings) is CBR
+	// (constant bit rate). Controls whether the RTMP output stream is padded (with
+	// FILL NAL units) in order to achieve a constant bit rate that is truly constant.
+	// When there is no padding, the bandwidth varies (up to the bitrate value in the
+	// codec settings). We recommend that you choose Auto.
+	IncludeFillerNalUnits IncludeFillerNalUnits
 
 	// Controls the behavior of this RTMP group if input becomes unavailable.
 	//   - emitOutput: Emit a slate until input returns.

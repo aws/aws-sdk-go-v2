@@ -47416,6 +47416,22 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 				return err
 			}
 
+		case "CompletedOn":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CompletedOn = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TimestampValue to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "Connections":
 			if err := awsAwsjson11_deserializeDocumentConnectionsList(&sv.Connections, value); err != nil {
 				return err
@@ -47451,6 +47467,40 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "DPUSeconds":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DPUSeconds = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DPUSeconds = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected NullableDouble to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -47458,6 +47508,40 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 					return fmt.Errorf("expected DescriptionString to be of type string, got %T instead", value)
 				}
 				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "ExecutionTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ExecutionTime = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ExecutionTime = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected NullableDouble to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "GlueVersion":
@@ -47476,6 +47560,19 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "IdleTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IdleTimeout to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IdleTimeout = ptr.Int32(int32(i64))
 			}
 
 		case "MaxCapacity":
@@ -47510,6 +47607,19 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 					return fmt.Errorf("expected NullableDouble to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "NumberOfWorkers":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfWorkers = ptr.Int32(int32(i64))
 			}
 
 		case "Progress":
@@ -47571,6 +47681,15 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 					return fmt.Errorf("expected SessionStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.SessionStatus(jtv)
+			}
+
+		case "WorkerType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkerType to be of type string, got %T instead", value)
+				}
+				sv.WorkerType = types.WorkerType(jtv)
 			}
 
 		default:

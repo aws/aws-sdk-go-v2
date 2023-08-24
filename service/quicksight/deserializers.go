@@ -13215,6 +13215,9 @@ func awsRestjson1_deserializeOpErrorDescribeFolderPermissions(response *smithyht
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
+	case strings.EqualFold("InvalidNextTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidNextTokenException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterValueException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
 
@@ -13284,6 +13287,15 @@ func awsRestjson1_deserializeOpDocumentDescribeFolderPermissionsOutput(v **Descr
 					return fmt.Errorf("expected RestrictiveResourceId to be of type string, got %T instead", value)
 				}
 				sv.FolderId = ptr.String(jtv)
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Permissions":
@@ -13418,6 +13430,9 @@ func awsRestjson1_deserializeOpErrorDescribeFolderResolvedPermissions(response *
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
+	case strings.EqualFold("InvalidNextTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidNextTokenException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterValueException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
 
@@ -13487,6 +13502,15 @@ func awsRestjson1_deserializeOpDocumentDescribeFolderResolvedPermissionsOutput(v
 					return fmt.Errorf("expected RestrictiveResourceId to be of type string, got %T instead", value)
 				}
 				sv.FolderId = ptr.String(jtv)
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Permissions":
@@ -33585,6 +33609,37 @@ func awsRestjson1_deserializeDocumentAggregationSortConfigurationList(v *[]types
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAllSheetsFilterScopeConfiguration(v **types.AllSheetsFilterScopeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AllSheetsFilterScopeConfiguration
+	if *v == nil {
+		sv = &types.AllSheetsFilterScopeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAmazonElasticsearchParameters(v **types.AmazonElasticsearchParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -50522,6 +50577,11 @@ func awsRestjson1_deserializeDocumentFilterScopeConfiguration(v **types.FilterSc
 
 	for key, value := range shape {
 		switch key {
+		case "AllSheets":
+			if err := awsRestjson1_deserializeDocumentAllSheetsFilterScopeConfiguration(&sv.AllSheets, value); err != nil {
+				return err
+			}
+
 		case "SelectedSheets":
 			if err := awsRestjson1_deserializeDocumentSelectedSheetsFilterScopeConfiguration(&sv.SelectedSheets, value); err != nil {
 				return err
@@ -50976,6 +51036,15 @@ func awsRestjson1_deserializeDocumentFolder(v **types.Folder, value interface{})
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "SharingModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SharingModel to be of type string, got %T instead", value)
+				}
+				sv.SharingModel = types.SharingModel(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -51192,6 +51261,15 @@ func awsRestjson1_deserializeDocumentFolderSummary(v **types.FolderSummary, valu
 					return fmt.Errorf("expected FolderName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "SharingModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SharingModel to be of type string, got %T instead", value)
+				}
+				sv.SharingModel = types.SharingModel(jtv)
 			}
 
 		default:
@@ -72824,6 +72902,11 @@ func awsRestjson1_deserializeDocumentTableFieldOptions(v **types.TableFieldOptio
 				return err
 			}
 
+		case "PinnedFieldOptions":
+			if err := awsRestjson1_deserializeDocumentTablePinnedFieldOptions(&sv.PinnedFieldOptions, value); err != nil {
+				return err
+			}
+
 		case "SelectedFieldOptions":
 			if err := awsRestjson1_deserializeDocumentTableFieldOptionList(&sv.SelectedFieldOptions, value); err != nil {
 				return err
@@ -72835,6 +72918,42 @@ func awsRestjson1_deserializeDocumentTableFieldOptions(v **types.TableFieldOptio
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTableFieldOrderList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected FieldId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -73083,6 +73202,42 @@ func awsRestjson1_deserializeDocumentTablePaginatedReportOptions(v **types.Table
 					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
 				}
 				sv.VerticalOverflowVisibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTablePinnedFieldOptions(v **types.TablePinnedFieldOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TablePinnedFieldOptions
+	if *v == nil {
+		sv = &types.TablePinnedFieldOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PinnedLeftFields":
+			if err := awsRestjson1_deserializeDocumentTableFieldOrderList(&sv.PinnedLeftFields, value); err != nil {
+				return err
 			}
 
 		default:

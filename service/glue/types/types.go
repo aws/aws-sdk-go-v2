@@ -6676,11 +6676,17 @@ type Session struct {
 	// The command object.See SessionCommand.
 	Command *SessionCommand
 
+	// The date and time that this session is completed.
+	CompletedOn *time.Time
+
 	// The number of connections used for the session.
 	Connections *ConnectionsList
 
 	// The time and date when the session was created.
 	CreatedOn *time.Time
+
+	// The DPUs consumed by the session (formula: ExecutionTime * MaxCapacity).
+	DPUSeconds *float64
 
 	// A map array of key-value pairs. Max is 75 pairs.
 	DefaultArguments map[string]string
@@ -6691,6 +6697,9 @@ type Session struct {
 	// The error message displayed during the session.
 	ErrorMessage *string
 
+	// The total time the session ran for.
+	ExecutionTime *float64
+
 	// The Glue version determines the versions of Apache Spark and Python that Glue
 	// supports. The GlueVersion must be greater than 2.0.
 	GlueVersion *string
@@ -6698,10 +6707,16 @@ type Session struct {
 	// The ID of the session.
 	Id *string
 
+	// The number of minutes when idle before the session times out.
+	IdleTimeout *int32
+
 	// The number of Glue data processing units (DPUs) that can be allocated when the
 	// job runs. A DPU is a relative measure of processing power that consists of 4
 	// vCPUs of compute capacity and 16 GB memory.
 	MaxCapacity *float64
+
+	// The number of workers of a defined WorkerType to use for the session.
+	NumberOfWorkers *int32
 
 	// The code execution progress of the session.
 	Progress float64
@@ -6715,6 +6730,11 @@ type Session struct {
 
 	// The session status.
 	Status SessionStatus
+
+	// The type of predefined worker that is allocated when a session runs. Accepts a
+	// value of G.1X , G.2X , G.4X , or G.8X for Spark sessions. Accepts the value Z.2X
+	// for Ray sessions.
+	WorkerType WorkerType
 
 	noSmithyDocumentSerde
 }

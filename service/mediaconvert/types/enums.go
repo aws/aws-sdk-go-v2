@@ -497,21 +497,34 @@ type AudioChannelTag string
 
 // Enum values for AudioChannelTag
 const (
-	AudioChannelTagL   AudioChannelTag = "L"
-	AudioChannelTagR   AudioChannelTag = "R"
-	AudioChannelTagC   AudioChannelTag = "C"
-	AudioChannelTagLfe AudioChannelTag = "LFE"
-	AudioChannelTagLs  AudioChannelTag = "LS"
-	AudioChannelTagRs  AudioChannelTag = "RS"
-	AudioChannelTagLc  AudioChannelTag = "LC"
-	AudioChannelTagRc  AudioChannelTag = "RC"
-	AudioChannelTagCs  AudioChannelTag = "CS"
-	AudioChannelTagLsd AudioChannelTag = "LSD"
-	AudioChannelTagRsd AudioChannelTag = "RSD"
-	AudioChannelTagTcs AudioChannelTag = "TCS"
-	AudioChannelTagVhl AudioChannelTag = "VHL"
-	AudioChannelTagVhc AudioChannelTag = "VHC"
-	AudioChannelTagVhr AudioChannelTag = "VHR"
+	AudioChannelTagL    AudioChannelTag = "L"
+	AudioChannelTagR    AudioChannelTag = "R"
+	AudioChannelTagC    AudioChannelTag = "C"
+	AudioChannelTagLfe  AudioChannelTag = "LFE"
+	AudioChannelTagLs   AudioChannelTag = "LS"
+	AudioChannelTagRs   AudioChannelTag = "RS"
+	AudioChannelTagLc   AudioChannelTag = "LC"
+	AudioChannelTagRc   AudioChannelTag = "RC"
+	AudioChannelTagCs   AudioChannelTag = "CS"
+	AudioChannelTagLsd  AudioChannelTag = "LSD"
+	AudioChannelTagRsd  AudioChannelTag = "RSD"
+	AudioChannelTagTcs  AudioChannelTag = "TCS"
+	AudioChannelTagVhl  AudioChannelTag = "VHL"
+	AudioChannelTagVhc  AudioChannelTag = "VHC"
+	AudioChannelTagVhr  AudioChannelTag = "VHR"
+	AudioChannelTagTbl  AudioChannelTag = "TBL"
+	AudioChannelTagTbc  AudioChannelTag = "TBC"
+	AudioChannelTagTbr  AudioChannelTag = "TBR"
+	AudioChannelTagRsl  AudioChannelTag = "RSL"
+	AudioChannelTagRsr  AudioChannelTag = "RSR"
+	AudioChannelTagLw   AudioChannelTag = "LW"
+	AudioChannelTagRw   AudioChannelTag = "RW"
+	AudioChannelTagLfe2 AudioChannelTag = "LFE2"
+	AudioChannelTagLt   AudioChannelTag = "LT"
+	AudioChannelTagRt   AudioChannelTag = "RT"
+	AudioChannelTagHi   AudioChannelTag = "HI"
+	AudioChannelTagNar  AudioChannelTag = "NAR"
+	AudioChannelTagM    AudioChannelTag = "M"
 )
 
 // Values returns all known values for AudioChannelTag. Note that this can be
@@ -534,6 +547,19 @@ func (AudioChannelTag) Values() []AudioChannelTag {
 		"VHL",
 		"VHC",
 		"VHR",
+		"TBL",
+		"TBC",
+		"TBR",
+		"RSL",
+		"RSR",
+		"LW",
+		"RW",
+		"LFE2",
+		"LT",
+		"RT",
+		"HI",
+		"NAR",
+		"M",
 	}
 }
 
@@ -552,6 +578,7 @@ const (
 	AudioCodecVorbis      AudioCodec = "VORBIS"
 	AudioCodecOpus        AudioCodec = "OPUS"
 	AudioCodecPassthrough AudioCodec = "PASSTHROUGH"
+	AudioCodecFlac        AudioCodec = "FLAC"
 )
 
 // Values returns all known values for AudioCodec. Note that this can be expanded
@@ -570,6 +597,7 @@ func (AudioCodec) Values() []AudioCodec {
 		"VORBIS",
 		"OPUS",
 		"PASSTHROUGH",
+		"FLAC",
 	}
 }
 
@@ -791,6 +819,24 @@ func (Av1BitDepth) Values() []Av1BitDepth {
 	return []Av1BitDepth{
 		"BIT_8",
 		"BIT_10",
+	}
+}
+
+type Av1FilmGrainSynthesis string
+
+// Enum values for Av1FilmGrainSynthesis
+const (
+	Av1FilmGrainSynthesisDisabled Av1FilmGrainSynthesis = "DISABLED"
+	Av1FilmGrainSynthesisEnabled  Av1FilmGrainSynthesis = "ENABLED"
+)
+
+// Values returns all known values for Av1FilmGrainSynthesis. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Av1FilmGrainSynthesis) Values() []Av1FilmGrainSynthesis {
+	return []Av1FilmGrainSynthesis{
+		"DISABLED",
+		"ENABLED",
 	}
 }
 
@@ -7447,6 +7493,34 @@ func (S3ServerSideEncryptionType) Values() []S3ServerSideEncryptionType {
 	}
 }
 
+type S3StorageClass string
+
+// Enum values for S3StorageClass
+const (
+	S3StorageClassStandard           S3StorageClass = "STANDARD"
+	S3StorageClassReducedRedundancy  S3StorageClass = "REDUCED_REDUNDANCY"
+	S3StorageClassStandardIa         S3StorageClass = "STANDARD_IA"
+	S3StorageClassOnezoneIa          S3StorageClass = "ONEZONE_IA"
+	S3StorageClassIntelligentTiering S3StorageClass = "INTELLIGENT_TIERING"
+	S3StorageClassGlacier            S3StorageClass = "GLACIER"
+	S3StorageClassDeepArchive        S3StorageClass = "DEEP_ARCHIVE"
+)
+
+// Values returns all known values for S3StorageClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3StorageClass) Values() []S3StorageClass {
+	return []S3StorageClass{
+		"STANDARD",
+		"REDUCED_REDUNDANCY",
+		"STANDARD_IA",
+		"ONEZONE_IA",
+		"INTELLIGENT_TIERING",
+		"GLACIER",
+		"DEEP_ARCHIVE",
+	}
+}
+
 type SampleRangeConversion string
 
 // Enum values for SampleRangeConversion
@@ -7680,6 +7754,24 @@ func (TimedMetadata) Values() []TimedMetadata {
 	return []TimedMetadata{
 		"PASSTHROUGH",
 		"NONE",
+	}
+}
+
+type TsPtsOffset string
+
+// Enum values for TsPtsOffset
+const (
+	TsPtsOffsetAuto    TsPtsOffset = "AUTO"
+	TsPtsOffsetSeconds TsPtsOffset = "SECONDS"
+)
+
+// Values returns all known values for TsPtsOffset. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TsPtsOffset) Values() []TsPtsOffset {
+	return []TsPtsOffset{
+		"AUTO",
+		"SECONDS",
 	}
 }
 

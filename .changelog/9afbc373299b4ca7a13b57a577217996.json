@@ -1,0 +1,8 @@
+{
+    "id": "9afbc373-299b-4ca7-a13b-57a577217996",
+    "type": "feature",
+    "description": "Updates to endpoint ruleset tests to address Smithy validation issues and standardize the capitalization of DualStack.",
+    "modules": [
+        "service/s3control"
+    ]
+}

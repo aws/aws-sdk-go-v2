@@ -1,0 +1,8 @@
+{
+    "id": "38ee21b9-4952-4c6c-ab64-27f96277553c",
+    "type": "feature",
+    "description": "Excel support in Snapshot Export APIs. Removed Required trait for some insight Computations. Namespace-shared Folders support. Global Filters support. Table pin Column support.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

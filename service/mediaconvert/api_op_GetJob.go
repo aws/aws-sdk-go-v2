@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve the JSON for a specific completed transcoding job.
+// Retrieve the JSON for a specific transcoding job.
 func (c *Client) GetJob(ctx context.Context, params *GetJobInput, optFns ...func(*Options)) (*GetJobOutput, error) {
 	if params == nil {
 		params = &GetJobInput{}

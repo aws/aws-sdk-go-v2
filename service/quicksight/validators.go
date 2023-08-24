@@ -8641,9 +8641,7 @@ func validateForecastComputation(v *types.ForecastComputation) error {
 	if v.ComputationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputationId"))
 	}
-	if v.Time == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Time"))
-	} else if v.Time != nil {
+	if v.Time != nil {
 		if err := validateDimensionField(v.Time); err != nil {
 			invalidParams.AddNested("Time", err.(smithy.InvalidParamsError))
 		}
@@ -9670,9 +9668,7 @@ func validateGrowthRateComputation(v *types.GrowthRateComputation) error {
 	if v.ComputationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputationId"))
 	}
-	if v.Time == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Time"))
-	} else if v.Time != nil {
+	if v.Time != nil {
 		if err := validateDimensionField(v.Time); err != nil {
 			invalidParams.AddNested("Time", err.(smithy.InvalidParamsError))
 		}
@@ -10875,9 +10871,7 @@ func validateMaximumMinimumComputation(v *types.MaximumMinimumComputation) error
 	if v.ComputationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputationId"))
 	}
-	if v.Time == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Time"))
-	} else if v.Time != nil {
+	if v.Time != nil {
 		if err := validateDimensionField(v.Time); err != nil {
 			invalidParams.AddNested("Time", err.(smithy.InvalidParamsError))
 		}
@@ -10954,23 +10948,17 @@ func validateMetricComparisonComputation(v *types.MetricComparisonComputation) e
 	if v.ComputationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputationId"))
 	}
-	if v.Time == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Time"))
-	} else if v.Time != nil {
+	if v.Time != nil {
 		if err := validateDimensionField(v.Time); err != nil {
 			invalidParams.AddNested("Time", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.FromValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FromValue"))
-	} else if v.FromValue != nil {
+	if v.FromValue != nil {
 		if err := validateMeasureField(v.FromValue); err != nil {
 			invalidParams.AddNested("FromValue", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.TargetValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetValue"))
-	} else if v.TargetValue != nil {
+	if v.TargetValue != nil {
 		if err := validateMeasureField(v.TargetValue); err != nil {
 			invalidParams.AddNested("TargetValue", err.(smithy.InvalidParamsError))
 		}
@@ -11616,9 +11604,7 @@ func validatePeriodOverPeriodComputation(v *types.PeriodOverPeriodComputation) e
 	if v.ComputationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputationId"))
 	}
-	if v.Time == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Time"))
-	} else if v.Time != nil {
+	if v.Time != nil {
 		if err := validateDimensionField(v.Time); err != nil {
 			invalidParams.AddNested("Time", err.(smithy.InvalidParamsError))
 		}
@@ -11643,9 +11629,7 @@ func validatePeriodToDateComputation(v *types.PeriodToDateComputation) error {
 	if v.ComputationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputationId"))
 	}
-	if v.Time == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Time"))
-	} else if v.Time != nil {
+	if v.Time != nil {
 		if err := validateDimensionField(v.Time); err != nil {
 			invalidParams.AddNested("Time", err.(smithy.InvalidParamsError))
 		}
@@ -15247,16 +15231,12 @@ func validateTopBottomMoversComputation(v *types.TopBottomMoversComputation) err
 	if v.ComputationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputationId"))
 	}
-	if v.Time == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Time"))
-	} else if v.Time != nil {
+	if v.Time != nil {
 		if err := validateDimensionField(v.Time); err != nil {
 			invalidParams.AddNested("Time", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Category == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Category"))
-	} else if v.Category != nil {
+	if v.Category != nil {
 		if err := validateDimensionField(v.Category); err != nil {
 			invalidParams.AddNested("Category", err.(smithy.InvalidParamsError))
 		}
@@ -15284,9 +15264,7 @@ func validateTopBottomRankedComputation(v *types.TopBottomRankedComputation) err
 	if v.ComputationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputationId"))
 	}
-	if v.Category == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Category"))
-	} else if v.Category != nil {
+	if v.Category != nil {
 		if err := validateDimensionField(v.Category); err != nil {
 			invalidParams.AddNested("Category", err.(smithy.InvalidParamsError))
 		}
@@ -15480,9 +15458,7 @@ func validateTotalAggregationComputation(v *types.TotalAggregationComputation) e
 	if v.ComputationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputationId"))
 	}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	} else if v.Value != nil {
+	if v.Value != nil {
 		if err := validateMeasureField(v.Value); err != nil {
 			invalidParams.AddNested("Value", err.(smithy.InvalidParamsError))
 		}
@@ -15804,9 +15780,7 @@ func validateUniqueValuesComputation(v *types.UniqueValuesComputation) error {
 	if v.ComputationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputationId"))
 	}
-	if v.Category == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Category"))
-	} else if v.Category != nil {
+	if v.Category != nil {
 		if err := validateDimensionField(v.Category); err != nil {
 			invalidParams.AddNested("Category", err.(smithy.InvalidParamsError))
 		}

@@ -1,0 +1,8 @@
+{
+    "id": "534f595c-40ae-4ad3-a376-e881dbfd199f",
+    "type": "feature",
+    "description": "Added API attributes that help in the monitoring of sessions.",
+    "modules": [
+        "service/glue"
+    ]
+}

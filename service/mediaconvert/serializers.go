@@ -2990,6 +2990,13 @@ func awsRestjson1_serializeDocumentAudioCodecSettings(v *types.AudioCodecSetting
 		}
 	}
 
+	if v.FlacSettings != nil {
+		ok := object.Key("flacSettings")
+		if err := awsRestjson1_serializeDocumentFlacSettings(v.FlacSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Mp2Settings != nil {
 		ok := object.Key("mp2Settings")
 		if err := awsRestjson1_serializeDocumentMp2Settings(v.Mp2Settings, ok); err != nil {
@@ -3380,6 +3387,11 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 	if len(v.BitDepth) > 0 {
 		ok := object.Key("bitDepth")
 		ok.String(string(v.BitDepth))
+	}
+
+	if len(v.FilmGrainSynthesis) > 0 {
+		ok := object.Key("filmGrainSynthesis")
+		ok.String(string(v.FilmGrainSynthesis))
 	}
 
 	if len(v.FramerateControl) > 0 {
@@ -5434,6 +5446,28 @@ func awsRestjson1_serializeDocumentFileSourceSettings(v *types.FileSourceSetting
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFlacSettings(v *types.FlacSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BitDepth != 0 {
+		ok := object.Key("bitDepth")
+		ok.Integer(v.BitDepth)
+	}
+
+	if v.Channels != nil {
+		ok := object.Key("channels")
+		ok.Integer(*v.Channels)
+	}
+
+	if v.SampleRate != 0 {
+		ok := object.Key("sampleRate")
+		ok.Integer(v.SampleRate)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentForceIncludeRenditionSize(v *types.ForceIncludeRenditionSize, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7427,6 +7461,16 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 		ok.Integer(v.ProgramNumber)
 	}
 
+	if v.PtsOffset != 0 {
+		ok := object.Key("ptsOffset")
+		ok.Integer(v.PtsOffset)
+	}
+
+	if len(v.PtsOffsetMode) > 0 {
+		ok := object.Key("ptsOffsetMode")
+		ok.String(string(v.PtsOffsetMode))
+	}
+
 	if len(v.RateMode) > 0 {
 		ok := object.Key("rateMode")
 		ok.String(string(v.RateMode))
@@ -7564,6 +7608,16 @@ func awsRestjson1_serializeDocumentM3u8Settings(v *types.M3u8Settings, value smi
 	if v.ProgramNumber != 0 {
 		ok := object.Key("programNumber")
 		ok.Integer(v.ProgramNumber)
+	}
+
+	if v.PtsOffset != 0 {
+		ok := object.Key("ptsOffset")
+		ok.Integer(v.PtsOffset)
+	}
+
+	if len(v.PtsOffsetMode) > 0 {
+		ok := object.Key("ptsOffsetMode")
+		ok.String(string(v.PtsOffsetMode))
 	}
 
 	if v.Scte35Pid != 0 {
@@ -8853,6 +8907,11 @@ func awsRestjson1_serializeDocumentS3DestinationSettings(v *types.S3DestinationS
 		if err := awsRestjson1_serializeDocumentS3EncryptionSettings(v.Encryption, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.StorageClass) > 0 {
+		ok := object.Key("storageClass")
+		ok.String(string(v.StorageClass))
 	}
 
 	return nil

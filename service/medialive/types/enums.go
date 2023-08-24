@@ -140,6 +140,24 @@ func (AacVbrQuality) Values() []AacVbrQuality {
 	}
 }
 
+type Ac3AttenuationControl string
+
+// Enum values for Ac3AttenuationControl
+const (
+	Ac3AttenuationControlAttenuate3Db Ac3AttenuationControl = "ATTENUATE_3_DB"
+	Ac3AttenuationControlNone         Ac3AttenuationControl = "NONE"
+)
+
+// Values returns all known values for Ac3AttenuationControl. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Ac3AttenuationControl) Values() []Ac3AttenuationControl {
+	return []Ac3AttenuationControl{
+		"ATTENUATE_3_DB",
+		"NONE",
+	}
+}
+
 type Ac3BitstreamMode string
 
 // Enum values for Ac3BitstreamMode
@@ -2869,6 +2887,26 @@ func (IFrameOnlyPlaylistType) Values() []IFrameOnlyPlaylistType {
 	}
 }
 
+type IncludeFillerNalUnits string
+
+// Enum values for IncludeFillerNalUnits
+const (
+	IncludeFillerNalUnitsAuto    IncludeFillerNalUnits = "AUTO"
+	IncludeFillerNalUnitsDrop    IncludeFillerNalUnits = "DROP"
+	IncludeFillerNalUnitsInclude IncludeFillerNalUnits = "INCLUDE"
+)
+
+// Values returns all known values for IncludeFillerNalUnits. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IncludeFillerNalUnits) Values() []IncludeFillerNalUnits {
+	return []IncludeFillerNalUnits{
+		"AUTO",
+		"DROP",
+		"INCLUDE",
+	}
+}
+
 type InputClass string
 
 // Enum values for InputClass
@@ -3782,6 +3820,24 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (M2tsTimedMetadataBehavior) Values() []M2tsTimedMetadataBehavior {
 	return []M2tsTimedMetadataBehavior{
+		"NO_PASSTHROUGH",
+		"PASSTHROUGH",
+	}
+}
+
+type M3u8KlvBehavior string
+
+// Enum values for M3u8KlvBehavior
+const (
+	M3u8KlvBehaviorNoPassthrough M3u8KlvBehavior = "NO_PASSTHROUGH"
+	M3u8KlvBehaviorPassthrough   M3u8KlvBehavior = "PASSTHROUGH"
+)
+
+// Values returns all known values for M3u8KlvBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M3u8KlvBehavior) Values() []M3u8KlvBehavior {
+	return []M3u8KlvBehavior{
 		"NO_PASSTHROUGH",
 		"PASSTHROUGH",
 	}

@@ -6437,6 +6437,11 @@ func awsRestjson1_deserializeDocumentAudioCodecSettings(v **types.AudioCodecSett
 				return err
 			}
 
+		case "flacSettings":
+			if err := awsRestjson1_deserializeDocumentFlacSettings(&sv.FlacSettings, value); err != nil {
+				return err
+			}
+
 		case "mp2Settings":
 			if err := awsRestjson1_deserializeDocumentMp2Settings(&sv.Mp2Settings, value); err != nil {
 				return err
@@ -7191,6 +7196,15 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 					return fmt.Errorf("expected Av1BitDepth to be of type string, got %T instead", value)
 				}
 				sv.BitDepth = types.Av1BitDepth(jtv)
+			}
+
+		case "filmGrainSynthesis":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Av1FilmGrainSynthesis to be of type string, got %T instead", value)
+				}
+				sv.FilmGrainSynthesis = types.Av1FilmGrainSynthesis(jtv)
 			}
 
 		case "framerateControl":
@@ -11742,6 +11756,76 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 					return fmt.Errorf("expected FileSourceTimeDeltaUnits to be of type string, got %T instead", value)
 				}
 				sv.TimeDeltaUnits = types.FileSourceTimeDeltaUnits(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFlacSettings(v **types.FlacSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FlacSettings
+	if *v == nil {
+		sv = &types.FlacSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bitDepth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin16Max24 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BitDepth = int32(i64)
+			}
+
+		case "channels":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max8 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Channels = ptr.Int32(int32(i64))
+			}
+
+		case "sampleRate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin22050Max48000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SampleRate = int32(i64)
 			}
 
 		default:
@@ -16352,6 +16436,28 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				sv.ProgramNumber = int32(i64)
 			}
 
+		case "ptsOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max3600 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PtsOffset = int32(i64)
+			}
+
+		case "ptsOffsetMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TsPtsOffset to be of type string, got %T instead", value)
+				}
+				sv.PtsOffsetMode = types.TsPtsOffset(jtv)
+			}
+
 		case "rateMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16653,6 +16759,28 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 					return err
 				}
 				sv.ProgramNumber = int32(i64)
+			}
+
+		case "ptsOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max3600 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PtsOffset = int32(i64)
+			}
+
+		case "ptsOffsetMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TsPtsOffset to be of type string, got %T instead", value)
+				}
+				sv.PtsOffsetMode = types.TsPtsOffset(jtv)
 			}
 
 		case "scte35Pid":
@@ -20181,6 +20309,15 @@ func awsRestjson1_deserializeDocumentS3DestinationSettings(v **types.S3Destinati
 		case "encryption":
 			if err := awsRestjson1_deserializeDocumentS3EncryptionSettings(&sv.Encryption, value); err != nil {
 				return err
+			}
+
+		case "storageClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3StorageClass to be of type string, got %T instead", value)
+				}
+				sv.StorageClass = types.S3StorageClass(jtv)
 			}
 
 		default:

@@ -29,7 +29,10 @@ import (
 //
 // Creating a policy causes it to be validated against the schema in the policy
 // store. If the policy doesn't pass validation, the operation fails and the policy
-// isn't stored.
+// isn't stored. Verified Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
+// . It can take a few seconds for a new or changed element to be propagate through
+// the service and be visible in the results of other Verified Permissions
+// operations.
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {
 		params = &CreatePolicyInput{}

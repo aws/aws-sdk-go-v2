@@ -426,7 +426,7 @@ func (r *resolver) ResolveEndpoint(
 						_partitionResult := *exprVal
 						_ = _partitionResult
 						if _UseDualStack == true {
-							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3 Snow does not support Dual-stack")
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3 Snow does not support DualStack")
 						}
 						if _UseFIPS == true {
 							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3 Snow does not support FIPS")
@@ -461,7 +461,7 @@ func (r *resolver) ResolveEndpoint(
 							}(),
 						}, nil
 					}
-					return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+					return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 				}
 			}
 		}
@@ -602,7 +602,7 @@ func (r *resolver) ResolveEndpoint(
 				}
 				return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid region: region was not a valid DNS name.")
 			}
-			return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+			return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 		}
 		if exprVal := params.AccessPointName; exprVal != nil {
 			_AccessPointName := *exprVal
@@ -827,15 +827,9 @@ func (r *resolver) ResolveEndpoint(
 												return out.String()
 											}())
 										}
-										return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
-											var out strings.Builder
-											out.WriteString("Could not load partition for ARN region `")
-											out.WriteString(_accessPointArn.Region)
-											out.WriteString("`")
-											return out.String()
-										}())
+										return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 									}
-									return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+									return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 								}
 								return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
 									var out strings.Builder
@@ -1076,15 +1070,9 @@ func (r *resolver) ResolveEndpoint(
 												return out.String()
 											}())
 										}
-										return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+										return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 									}
-									return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
-										var out strings.Builder
-										out.WriteString("Could not load partition for ARN region `")
-										out.WriteString(_bucketArn.Region)
-										out.WriteString("`")
-										return out.String()
-									}())
+									return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 								}
 								return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
 									var out strings.Builder
@@ -1134,7 +1122,7 @@ func (r *resolver) ResolveEndpoint(
 						_url := *exprVal
 						_ = _url
 						if _UseDualStack == true {
-							return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Dualstack and custom endpoint are not supported")
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: DualStack and custom endpoint are not supported")
 						}
 						if exprVal := params.RequiresAccountId; exprVal != nil {
 							_RequiresAccountId := *exprVal
@@ -1534,7 +1522,7 @@ func (r *resolver) ResolveEndpoint(
 			}
 			return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid region: region was not a valid DNS name.")
 		}
-		return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 	}
 	return endpoint, fmt.Errorf("endpoint rule error, %s", "Region must be set")
 }
