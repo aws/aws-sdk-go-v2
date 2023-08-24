@@ -323,6 +323,13 @@
                 "smithy.api#pattern": "^[\\w\\-]+|(\\$LATEST)|(\\$PUBLISHED)$"
             }
         },
+        "com.amazonaws.quicksight#AllSheetsFilterScopeConfiguration": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for applying a filter to all sheets. You can apply this filter to all visuals on every sheet.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
+            }
+        },
         "com.amazonaws.quicksight#AmazonElasticsearchParameters": {
             "type": "structure",
             "members": {
@@ -6732,7 +6739,7 @@
                 "MemberId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the asset (the dashboard, analysis, or dataset).</p>",
+                        "smithy.api#documentation": "<p>The ID of the asset that you want to add to the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6740,7 +6747,7 @@
                 "MemberType": {
                     "target": "com.amazonaws.quicksight#MemberType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>.</p>",
+                        "smithy.api#documentation": "<p>The member type of the asset that you want to add to a folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6824,6 +6831,12 @@
                     "target": "com.amazonaws.quicksight#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags for the folder.</p>"
+                    }
+                },
+                "SharingModel": {
+                    "target": "com.amazonaws.quicksight#SharingModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that determines the sharing scope of the folder. The default value for this parameter is <code>ACCOUNT</code>.</p>"
                     }
                 }
             },
@@ -13132,7 +13145,7 @@
                 "MemberId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the asset (the dashboard, analysis, or dataset) that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>The ID of the asset that you want to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -13140,7 +13153,7 @@
                 "MemberType": {
                     "target": "com.amazonaws.quicksight#MemberType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The member type of the asset that you want to delete from a folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -16656,6 +16669,9 @@
                     "target": "com.amazonaws.quicksight#InternalFailureException"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
                     "target": "com.amazonaws.quicksight#InvalidParameterValueException"
                 },
                 {
@@ -16674,6 +16690,12 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/folders/{FolderId}/permissions",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Permissions",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -16694,6 +16716,28 @@
                         "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the folder whose permissions you want described.</p>",
+                        "smithy.api#httpQuery": "namespace"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token for the next set of results.</p>",
+                        "smithy.api#httpQuery": "next-token"
                     }
                 }
             },
@@ -16734,6 +16778,12 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for the next set of results, or null if there are no more results.</p>"
                     }
                 }
             },
@@ -16781,6 +16831,9 @@
                     "target": "com.amazonaws.quicksight#InternalFailureException"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
                     "target": "com.amazonaws.quicksight#InvalidParameterValueException"
                 },
                 {
@@ -16799,6 +16852,12 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/folders/{FolderId}/resolved-permissions",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Permissions",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -16819,6 +16878,28 @@
                         "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the folder whose permissions you want described.</p>",
+                        "smithy.api#httpQuery": "namespace"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token for the next set of results.</p>",
+                        "smithy.api#httpQuery": "next-token"
                     }
                 }
             },
@@ -16859,6 +16940,12 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token for the next set of results, or null if there are no more results.</p>"
                     }
                 }
             },
@@ -20650,6 +20737,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for applying a filter to specific sheets.</p>"
                     }
+                },
+                "AllSheets": {
+                    "target": "com.amazonaws.quicksight#AllSheetsFilterScopeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for applying a filter to all sheets.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20884,6 +20977,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time that the folder was last updated.</p>"
                     }
+                },
+                "SharingModel": {
+                    "target": "com.amazonaws.quicksight#SharingModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sharing scope of the folder.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21065,6 +21164,12 @@
                     "target": "com.amazonaws.quicksight#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time that the folder was last updated.</p>"
+                    }
+                },
+                "SharingModel": {
+                    "target": "com.amazonaws.quicksight#SharingModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sharing scope of the folder.</p>"
                     }
                 }
             },
@@ -21257,8 +21362,7 @@
                 "Time": {
                     "target": "com.amazonaws.quicksight#DimensionField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>"
                     }
                 },
                 "Value": {
@@ -23431,8 +23535,7 @@
                 "Time": {
                     "target": "com.amazonaws.quicksight#DimensionField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>"
                     }
                 },
                 "Value": {
@@ -27167,6 +27270,12 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/folders/{FolderId}/members",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "FolderMemberList",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -27280,6 +27389,12 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/folders",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "FolderSummaryList",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -29890,8 +30005,7 @@
                 "Time": {
                     "target": "com.amazonaws.quicksight#DimensionField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>"
                     }
                 },
                 "Value": {
@@ -30035,22 +30149,19 @@
                 "Time": {
                     "target": "com.amazonaws.quicksight#DimensionField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>"
                     }
                 },
                 "FromValue": {
                     "target": "com.amazonaws.quicksight#MeasureField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field that is used in a metric comparison from value setup.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The field that is used in a metric comparison from value setup.</p>"
                     }
                 },
                 "TargetValue": {
                     "target": "com.amazonaws.quicksight#MeasureField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field that is used in a metric comparison to value setup.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The field that is used in a metric comparison to value setup.</p>"
                     }
                 }
             },
@@ -32228,8 +32339,7 @@
                 "Time": {
                     "target": "com.amazonaws.quicksight#DimensionField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>"
                     }
                 },
                 "Value": {
@@ -32262,8 +32372,7 @@
                 "Time": {
                     "target": "com.amazonaws.quicksight#DimensionField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>"
                     }
                 },
                 "Value": {
@@ -38135,6 +38244,12 @@
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/search/folders",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "FolderSummaryList",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -38950,6 +39065,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The shape conditional formatting of a filled map visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SharingModel": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                },
+                "NAMESPACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAMESPACE"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#Sheet": {
@@ -39829,14 +39961,14 @@
                 "SheetSelections": {
                     "target": "com.amazonaws.quicksight#SnapshotFileSheetSelectionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>SnapshotFileSheetSelection</code> objects that contain information on the dashboard sheet that is exported. These objects provide information about the snapshot artifacts that are generated during the job. This structure can hold a maximum of 5 CSV configurations or 1 configuration for PDF.</p>",
+                        "smithy.api#documentation": "<p>A list of <code>SnapshotFileSheetSelection</code> objects that contain information on the dashboard sheet that is exported. These objects provide information about the snapshot artifacts that are generated during the job. This structure can hold a maximum of 5 CSV configurations, 5 Excel configurations, or 1 configuration for PDF.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FormatType": {
                     "target": "com.amazonaws.quicksight#SnapshotFileFormatType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of the snapshot file to be generated. You can choose between <code>CSV</code> or <code>PDF</code>.</p>",
+                        "smithy.api#documentation": "<p>The format of the snapshot file to be generated. You can choose between <code>CSV</code>, <code>Excel</code>, or <code>PDF</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -39858,6 +39990,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PDF"
+                    }
+                },
+                "EXCEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCEL"
                     }
                 }
             }
@@ -39884,7 +40022,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 6
+                    "max": 7
                 }
             }
         },
@@ -39906,21 +40044,21 @@
                 "SheetId": {
                     "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV and PDF format types.</p>",
+                        "smithy.api#documentation": "<p>The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV, Excel, and PDF format types.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SelectionScope": {
                     "target": "com.amazonaws.quicksight#SnapshotFileSheetSelectionScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The selection scope of the visuals on a sheet of a dashboard that you are generating a snapthot of. You can choose one of the following options.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_VISUALS</code> - Selects all visuals that are on the sheet. This value is required if the snapshot is a PDF.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SELECTED_VISUALS</code> - Select the visual that you want to add to the snapshot. This value is required if the snapshot is a CSV.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The selection scope of the visuals on a sheet of a dashboard that you are generating a snapthot of. You can choose one of the following options.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_VISUALS</code> - Selects all visuals that are on the sheet. This value is required if the snapshot is a PDF.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SELECTED_VISUALS</code> - Select the visual that you want to add to the snapshot. This value is required if the snapshot is a CSV or Excel workbook.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "VisualIds": {
                     "target": "com.amazonaws.quicksight#SnapshotFileSheetSelectionVisualIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of visual IDs that are located in the selected sheet. This structure supports tables and pivot tables. This structure is required if you are generating a CSV. You can add a maximum of 1 visual ID to this structure.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            A structure that lists the IDs of the visuals in the selected sheet. Supported visual types are table, pivot table visuals. This value is required if you are generating a CSV or Excel workbook. This value supports a maximum of 1 visual ID for CSV and 5 visual IDs across up to 5 sheet selections for Excel. If you are generating an Excel workbook, the order of the visual IDs provided in this structure determines the order of the worksheets in the Excel file.\n        </p>"
                     }
                 }
             },
@@ -39936,7 +40074,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1
+                    "max": 5
                 }
             }
         },
@@ -39965,7 +40103,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1
+                    "max": 5
                 }
             }
         },
@@ -40635,7 +40773,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.</p>\n         <ul>\n            <li>\n               <p>1 paginated PDF</p>\n            </li>\n            <li>\n               <p>5 CSVs</p>\n            </li>\n         </ul>\n         <p>Poll job descriptions with a <code>DescribeDashboardSnapshotJob</code> API call. Once the job succeeds, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the download URIs that the job generates.</p>",
+                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.</p>\n         <ul>\n            <li>\n               <p>1 paginated PDF</p>\n            </li>\n            <li>\n               <p>1 Excel workbook</p>\n            </li>\n            <li>\n               <p>5 CSVs</p>\n            </li>\n         </ul>\n         <p>Poll job descriptions with a <code>DescribeDashboardSnapshotJob</code> API call. Once the job succeeds, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the download URIs that the job generates.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs",
@@ -41551,18 +41689,37 @@
                 "SelectedFieldOptions": {
                     "target": "com.amazonaws.quicksight#TableFieldOptionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The selected field options for the table field options.</p>"
+                        "smithy.api#documentation": "<p>The field options to be configured to a table.</p>"
                     }
                 },
                 "Order": {
                     "target": "com.amazonaws.quicksight#FieldOrderList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The order of field IDs of the field options for a table visual.</p>"
+                        "smithy.api#documentation": "<p>The order of the field IDs that are configured as field options for a table visual.</p>"
+                    }
+                },
+                "PinnedFieldOptions": {
+                    "target": "com.amazonaws.quicksight#TablePinnedFieldOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the pinned columns of a table visual.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The field options for a table visual.</p>"
+                "smithy.api#documentation": "<p>The field options of a table visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TableFieldOrderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#FieldId"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of table field IDs.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 201
+                }
             }
         },
         "com.amazonaws.quicksight#TableFieldURLConfiguration": {
@@ -41698,6 +41855,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The paginated report options for a table visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TablePinnedFieldOptions": {
+            "type": "structure",
+            "members": {
+                "PinnedLeftFields": {
+                    "target": "com.amazonaws.quicksight#TableFieldOrderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of columns to be pinned to the left of a table visual.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for the pinned columns of a table visual.</p>"
             }
         },
         "com.amazonaws.quicksight#TableRowConditionalFormatting": {
@@ -43549,15 +43720,13 @@
                 "Time": {
                     "target": "com.amazonaws.quicksight#DimensionField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The time field that is used in a computation.</p>"
                     }
                 },
                 "Category": {
                     "target": "com.amazonaws.quicksight#DimensionField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The category field that is used in a computation.</p>"
                     }
                 },
                 "Value": {
@@ -43620,8 +43789,7 @@
                 "Category": {
                     "target": "com.amazonaws.quicksight#DimensionField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The category field that is used in a computation.</p>"
                     }
                 },
                 "Value": {
@@ -44605,8 +44773,7 @@
                 "Value": {
                     "target": "com.amazonaws.quicksight#MeasureField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The value field that is used in a computation.</p>"
                     }
                 }
             },
@@ -45192,8 +45359,7 @@
                 "Category": {
                     "target": "com.amazonaws.quicksight#DimensionField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category field that is used in a computation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The category field that is used in a computation.</p>"
                     }
                 }
             },

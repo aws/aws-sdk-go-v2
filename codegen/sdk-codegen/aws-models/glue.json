@@ -19969,6 +19969,9 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.glue#IdleTimeout": {
+            "type": "integer"
+        },
         "com.amazonaws.glue#IllegalBlueprintStateException": {
             "type": "structure",
             "members": {
@@ -28839,6 +28842,42 @@
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
                         "smithy.api#documentation": "<p>The Glue version determines the versions of Apache Spark and Python that Glue supports. \n      The GlueVersion must be greater than 2.0.</p>"
+                    }
+                },
+                "NumberOfWorkers": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of workers of a defined <code>WorkerType</code> to use for the session.</p>"
+                    }
+                },
+                "WorkerType": {
+                    "target": "com.amazonaws.glue#WorkerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of predefined worker that is allocated when a session runs. Accepts a value of <code>G.1X</code>, <code>G.2X</code>, <code>G.4X</code>, or <code>G.8X</code> for Spark sessions. Accepts the value <code>Z.2X</code> for Ray sessions.</p>"
+                    }
+                },
+                "CompletedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that this session is completed.</p>"
+                    }
+                },
+                "ExecutionTime": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total time the session ran for.</p>"
+                    }
+                },
+                "DPUSeconds": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DPUs consumed by the session (formula: ExecutionTime * MaxCapacity).</p>"
+                    }
+                },
+                "IdleTimeout": {
+                    "target": "com.amazonaws.glue#IdleTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of minutes when idle before the session times out.</p>"
                     }
                 }
             },

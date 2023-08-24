@@ -12156,7 +12156,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays backups for both current and deleted DB clusters. For example, use this operation to find details \n            about automated backups for previously deleted clusters. Current clusters are returned for both the \n            <code>DescribeDBClusterAutomatedBackups</code> and <code>DescribeDBClusters</code> operations.</p>\n         <p>All parameters are optional.</p>"
+                "smithy.api#documentation": "<p>Displays backups for both current and deleted DB clusters. For example, use this operation to find details \n            about automated backups for previously deleted clusters. Current clusters are returned for both the \n            <code>DescribeDBClusterAutomatedBackups</code> and <code>DescribeDBClusters</code> operations.</p>\n         <p>All parameters are optional.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "DBClusterAutomatedBackups",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.rds#DescribeDBClusterAutomatedBackupsMessage": {
@@ -23743,7 +23749,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n         <p>To list all of the available engine versions for <code>aurora-mysql</code> (Aurora MySQL), use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>Examples: <code>5.7.mysql_aurora.2.07.1</code>, <code>8.0.mysql_aurora.3.02.0</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n         <p>To list all of the available engine versions for <code>aurora-mysql</code> (Aurora MySQL), use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>Examples: <code>5.7.mysql_aurora.2.12.0</code>, <code>8.0.mysql_aurora.3.04.0</code>\n         </p>"
                     }
                 },
                 "Port": {
@@ -23814,7 +23820,7 @@
                 "SourceEngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the database that the backup files were created from.</p>\n         <p>MySQL versions 5.5, 5.6, and 5.7 are supported.</p>\n         <p>Example: <code>5.6.40</code>, <code>5.7.28</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The version of the database that the backup files were created from.</p>\n         <p>MySQL versions 5.7 and 8.0 are supported.</p>\n         <p>Example: <code>5.7.40</code>, <code>8.0.28</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
