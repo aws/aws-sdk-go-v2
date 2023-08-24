@@ -94,7 +94,7 @@ type WriteGetObjectResponseInput struct {
 
 	// Indicates whether the object stored in Amazon S3 uses an S3 bucket key for
 	// server-side encryption with Amazon Web Services KMS (SSE-KMS).
-	BucketKeyEnabled *bool
+	BucketKeyEnabled bool
 
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
@@ -217,7 +217,7 @@ type WriteGetObjectResponseInput struct {
 	ObjectLockRetainUntilDate *time.Time
 
 	// The count of parts this object has.
-	PartsCount *int32
+	PartsCount int32
 
 	// Indicates if request involves bucket that is either a source or destination in
 	// a Replication rule. For more information about S3 Replication, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html)
@@ -267,7 +267,7 @@ type WriteGetObjectResponseInput struct {
 	//   - 416 - Range Not Satisfiable
 	//   - 500 - Internal Server Error
 	//   - 503 - Service Unavailable
-	StatusCode *int32
+	StatusCode int32
 
 	// Provides storage class information of the object. Amazon S3 returns this header
 	// for all objects except for S3 Standard storage class objects. For more
@@ -276,7 +276,7 @@ type WriteGetObjectResponseInput struct {
 	StorageClass types.StorageClass
 
 	// The number of tags, if any, on the object.
-	TagCount *int32
+	TagCount int32
 
 	// An ID used to reference a specific version of the object.
 	VersionId *string

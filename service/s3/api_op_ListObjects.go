@@ -135,7 +135,7 @@ type ListObjectsOutput struct {
 
 	// A flag that indicates whether Amazon S3 returned all of the results that
 	// satisfied the search criteria.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// Indicates where in the bucket listing begins. Marker is included in the
 	// response if it was sent with the request.

@@ -38,6 +38,7 @@
                 "DaysAfterInitiation": {
                     "target": "com.amazonaws.s3#DaysAfterInitiation",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the number of days after which Amazon S3 aborts an incomplete multipart\n         upload.</p>"
                     }
                 }
@@ -193,7 +194,10 @@
             "type": "string"
         },
         "com.amazonaws.s3#AllowQuotedRecordDelimiter": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#AllowedHeader": {
             "type": "string"
@@ -15861,7 +15865,10 @@
             }
         },
         "com.amazonaws.s3#BucketKeyEnabled": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#BucketLifecycleConfiguration": {
             "type": "structure",
@@ -16117,16 +16124,28 @@
             }
         },
         "com.amazonaws.s3#BypassGovernanceRetention": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#BytesProcessed": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#BytesReturned": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#BytesScanned": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#CORSConfiguration": {
             "type": "structure",
@@ -16191,6 +16210,7 @@
                 "MaxAgeSeconds": {
                     "target": "com.amazonaws.s3#MaxAgeSeconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The time in seconds that your browser is to cache the preflight response for the\n         specified resource.</p>"
                     }
                 }
@@ -16247,6 +16267,7 @@
                 "AllowQuotedRecordDelimiter": {
                     "target": "com.amazonaws.s3#AllowQuotedRecordDelimiter",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies that CSV field values may contain quoted record delimiters and such records\n         should be allowed. Default value is FALSE. Setting this value to TRUE may lower\n         performance.</p>"
                     }
                 }
@@ -16511,6 +16532,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption\n         with Key Management Service (KMS) keys (SSE-KMS).</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -16743,7 +16765,10 @@
             }
         },
         "com.amazonaws.s3#ConfirmRemoveSelfBucketAccess": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#ContentDisposition": {
             "type": "string"
@@ -16867,6 +16892,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the copied object uses an S3 Bucket Key for server-side encryption\n         with Key Management Service (KMS) keys (SSE-KMS).</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -17104,6 +17130,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with\n         server-side encryption using Key Management Service (KMS) keys (SSE-KMS). Setting this header to\n            <code>true</code> causes Amazon S3 to use an S3 Bucket Key for object encryption with\n         SSE-KMS. </p>\n         <p>Specifying this header with a COPY action doesn’t affect bucket-level settings for S3\n         Bucket Key.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -17432,6 +17459,7 @@
                 "ObjectLockEnabledForBucket": {
                     "target": "com.amazonaws.s3#ObjectLockEnabledForBucket",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether you want S3 Object Lock to be enabled for the new bucket.</p>",
                         "smithy.api#httpHeader": "x-amz-bucket-object-lock-enabled"
                     }
@@ -17538,6 +17566,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption\n         with Key Management Service (KMS) keys (SSE-KMS).</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -17726,6 +17755,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with\n         server-side encryption using Key Management Service (KMS) keys (SSE-KMS). Setting this header to\n            <code>true</code> causes Amazon S3 to use an S3 Bucket Key for object encryption with\n         SSE-KMS.</p>\n         <p>Specifying this header with an object action doesn’t affect bucket-level settings for S3\n         Bucket Key.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -17793,10 +17823,16 @@
             }
         },
         "com.amazonaws.s3#Days": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#DaysAfterInitiation": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#DefaultRetention": {
             "type": "structure",
@@ -17810,12 +17846,14 @@
                 "Days": {
                     "target": "com.amazonaws.s3#Days",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of days that you want to specify for the default retention period. Must be\n         used with <code>Mode</code>.</p>"
                     }
                 },
                 "Years": {
                     "target": "com.amazonaws.s3#Years",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of years that you want to specify for the default retention period. Must be\n         used with <code>Mode</code>.</p>"
                     }
                 }
@@ -17839,6 +17877,7 @@
                 "Quiet": {
                     "target": "com.amazonaws.s3#Quiet",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Element to enable quiet mode for the request. When you add this element, you must set\n         its value to true.</p>"
                     }
                 }
@@ -18461,6 +18500,7 @@
                 "IsLatest": {
                     "target": "com.amazonaws.s3#IsLatest",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the object is (true) or is not (false) the latest version of an\n         object.</p>"
                     }
                 },
@@ -18606,6 +18646,7 @@
                 "BypassGovernanceRetention": {
                     "target": "com.amazonaws.s3#BypassGovernanceRetention",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process\n         this operation. To use this header, you must have the\n            <code>s3:BypassGovernanceRetention</code> permission.</p>",
                         "smithy.api#httpHeader": "x-amz-bypass-governance-retention"
                     }
@@ -18785,6 +18826,7 @@
                 "BypassGovernanceRetention": {
                     "target": "com.amazonaws.s3#BypassGovernanceRetention",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether you want to delete this object even if it has a Governance-type Object\n         Lock in place. To use this header, you must have the\n            <code>s3:BypassGovernanceRetention</code> permission.</p>",
                         "smithy.api#httpHeader": "x-amz-bypass-governance-retention"
                     }
@@ -18957,7 +18999,10 @@
             "type": "string"
         },
         "com.amazonaws.s3#EnableRequestProgress": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#EncodingType": {
             "type": "enum",
@@ -19015,7 +19060,10 @@
             }
         },
         "com.amazonaws.s3#End": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#EndEvent": {
             "type": "structure",
@@ -19319,7 +19367,10 @@
             }
         },
         "com.amazonaws.s3#ExpiredObjectDeleteMarker": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#Expires": {
             "type": "timestamp"
@@ -19348,7 +19399,10 @@
             }
         },
         "com.amazonaws.s3#FetchOwner": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#FieldDelimiter": {
             "type": "string"
@@ -20851,6 +20905,7 @@
                 "ObjectSize": {
                     "target": "com.amazonaws.s3#ObjectSize",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the object in bytes.</p>"
                     }
                 }
@@ -20865,6 +20920,7 @@
                 "TotalPartsCount": {
                     "target": "com.amazonaws.s3#PartsCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of parts.</p>",
                         "smithy.api#xmlName": "PartsCount"
                     }
@@ -20891,6 +20947,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.s3#IsTruncated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the returned list of parts is truncated. A value of <code>true</code>\n         indicates that the list was truncated. A list can be truncated if the number of parts\n         exceeds the limit returned in the <code>MaxParts</code> element.</p>"
                     }
                 },
@@ -21334,6 +21391,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the object uses an S3 Bucket Key for server-side encryption with\n         Key Management Service (KMS) keys (SSE-KMS).</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -21361,6 +21419,7 @@
                 "PartsCount": {
                     "target": "com.amazonaws.s3#PartsCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The count of parts this object has. This value is only returned if you specify\n            <code>partNumber</code> in your request and the object was uploaded as a multipart\n         upload.</p>",
                         "smithy.api#httpHeader": "x-amz-mp-parts-count"
                     }
@@ -21368,6 +21427,7 @@
                 "TagCount": {
                     "target": "com.amazonaws.s3#TagCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tags, if any, on the object.</p>",
                         "smithy.api#httpHeader": "x-amz-tagging-count"
                     }
@@ -21559,7 +21619,10 @@
             }
         },
         "com.amazonaws.s3#GetObjectResponseStatusCode": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#GetObjectRetention": {
             "type": "operation",
@@ -22289,6 +22352,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the object uses an S3 Bucket Key for server-side encryption with\n         Key Management Service (KMS) keys (SSE-KMS).</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -22316,6 +22380,7 @@
                 "PartsCount": {
                     "target": "com.amazonaws.s3#PartsCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The count of parts this object has. This value is only returned if you specify\n            <code>partNumber</code> in your request and the object was uploaded as a multipart\n         upload.</p>",
                         "smithy.api#httpHeader": "x-amz-mp-parts-count"
                     }
@@ -22641,7 +22706,10 @@
             }
         },
         "com.amazonaws.s3#IntelligentTieringDays": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#IntelligentTieringFilter": {
             "type": "structure",
@@ -22714,6 +22782,7 @@
                 "IsEnabled": {
                     "target": "com.amazonaws.s3#IsEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the inventory is enabled or disabled. If set to <code>True</code>, an\n         inventory list is generated. If set to <code>False</code>, no inventory list is\n         generated.</p>",
                         "smithy.api#required": {}
                     }
@@ -23034,13 +23103,22 @@
             }
         },
         "com.amazonaws.s3#IsEnabled": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#IsLatest": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#IsPublic": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#IsRestoreInProgress": {
             "type": "boolean",
@@ -23049,7 +23127,10 @@
             }
         },
         "com.amazonaws.s3#IsTruncated": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#JSONInput": {
             "type": "structure",
@@ -23166,12 +23247,14 @@
                 "Days": {
                     "target": "com.amazonaws.s3#Days",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Indicates the lifetime, in days, of the objects that are subject to the rule. The value\n         must be a non-zero positive integer.</p>"
                     }
                 },
                 "ExpiredObjectDeleteMarker": {
                     "target": "com.amazonaws.s3#ExpiredObjectDeleteMarker",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set\n         to true, the delete marker will be expired; if set to false the policy takes no action.\n         This cannot be specified with Days or Date in a Lifecycle Expiration Policy.</p>"
                     }
                 }
@@ -23262,12 +23345,14 @@
                 "ObjectSizeGreaterThan": {
                     "target": "com.amazonaws.s3#ObjectSizeGreaterThanBytes",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Minimum object size to which the rule applies.</p>"
                     }
                 },
                 "ObjectSizeLessThan": {
                     "target": "com.amazonaws.s3#ObjectSizeLessThanBytes",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum object size to which the rule applies.</p>"
                     }
                 }
@@ -23340,6 +23425,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.s3#IsTruncated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the returned list of analytics configurations is complete. A value of\n         true indicates that the list is not complete and the NextContinuationToken will be provided\n         for a subsequent request.</p>"
                     }
                 },
@@ -23425,6 +23511,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.s3#IsTruncated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the returned list of analytics configurations is complete. A value of\n            <code>true</code> indicates that the list is not complete and the\n            <code>NextContinuationToken</code> will be provided for a subsequent request.</p>"
                     }
                 },
@@ -23516,6 +23603,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.s3#IsTruncated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Tells whether the returned list of inventory configurations is complete. A value of true\n         indicates that the list is not complete and the NextContinuationToken is provided for a\n         subsequent request.</p>"
                     }
                 },
@@ -23587,6 +23675,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.s3#IsTruncated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the returned list of metrics configurations is complete. A value of\n         true indicates that the list is not complete and the NextContinuationToken will be provided\n         for a subsequent request.</p>"
                     }
                 },
@@ -23759,6 +23848,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.s3#IsTruncated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the returned list of multipart uploads is truncated. A value of true\n         indicates that the list was truncated. The list can be truncated if the number of multipart\n         uploads exceeds the limit allowed or specified by max uploads.</p>"
                     }
                 },
@@ -23892,6 +23982,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.s3#IsTruncated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether Amazon S3 returned all of the results that satisfied the search\n         criteria. If your results were truncated, you can make a follow-up paginated request by\n         using the <code>NextKeyMarker</code> and <code>NextVersionIdMarker</code> response\n         parameters as a starting place in another request to return the rest of the results.</p>"
                     }
                 },
@@ -24094,6 +24185,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.s3#IsTruncated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether Amazon S3 returned all of the results that satisfied the search\n         criteria.</p>"
                     }
                 },
@@ -24274,6 +24366,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.s3#IsTruncated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to <code>false</code> if all of the results were returned. Set to <code>true</code>\n         if more keys are available to return. If the number of results exceeds that specified by\n            <code>MaxKeys</code>, all of the results might not be returned.</p>"
                     }
                 },
@@ -24412,6 +24505,7 @@
                 "FetchOwner": {
                     "target": "com.amazonaws.s3#FetchOwner",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The owner field is not present in <code>ListObjectsV2</code> by default. If you want to\n         return the owner field with each key in the result, then set the <code>FetchOwner</code>\n         field to <code>true</code>.</p>",
                         "smithy.api#httpQuery": "fetch-owner"
                     }
@@ -24529,6 +24623,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.s3#IsTruncated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates whether the returned list of parts is truncated. A true value indicates that\n         the list was truncated. A list can be truncated if the number of parts exceeds the limit\n         returned in the MaxParts element.</p>"
                     }
                 },
@@ -24735,7 +24830,10 @@
             "type": "string"
         },
         "com.amazonaws.s3#MaxAgeSeconds": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#MaxKeys": {
             "type": "integer",
@@ -24939,7 +25037,10 @@
             }
         },
         "com.amazonaws.s3#Minutes": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#MissingMeta": {
             "type": "integer",
@@ -25054,12 +25155,14 @@
                 "NoncurrentDays": {
                     "target": "com.amazonaws.s3#Days",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the number of days an object is noncurrent before Amazon S3 can perform the\n         associated action. The value must be a non-zero positive integer. For information about the\n         noncurrent days calculations, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations\">How\n            Amazon S3 Calculates When an Object Became Noncurrent</a> in the\n            <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "NewerNoncurrentVersions": {
                     "target": "com.amazonaws.s3#VersionCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies how many noncurrent versions Amazon S3 will retain. If there are this many more\n         recent noncurrent versions, Amazon S3 will take the associated action. For more information\n         about noncurrent versions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html\">Lifecycle configuration\n            elements</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
@@ -25074,6 +25177,7 @@
                 "NoncurrentDays": {
                     "target": "com.amazonaws.s3#Days",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the number of days an object is noncurrent before Amazon S3 can perform the\n         associated action. For information about the noncurrent days calculations, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations\">How\n            Amazon S3 Calculates How Long an Object Has Been Noncurrent</a> in the\n            <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
@@ -25086,6 +25190,7 @@
                 "NewerNoncurrentVersions": {
                     "target": "com.amazonaws.s3#VersionCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies how many noncurrent versions Amazon S3 will retain. If there are this many more\n         recent noncurrent versions, Amazon S3 will take the associated action. For more information\n         about noncurrent versions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html\">Lifecycle configuration\n            elements</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
@@ -25197,6 +25302,7 @@
                 "Size": {
                     "target": "com.amazonaws.s3#Size",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Size in bytes of the object</p>"
                     }
                 },
@@ -25392,7 +25498,10 @@
             }
         },
         "com.amazonaws.s3#ObjectLockEnabledForBucket": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#ObjectLockLegalHold": {
             "type": "structure",
@@ -25549,6 +25658,7 @@
                 "Size": {
                     "target": "com.amazonaws.s3#Size",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the uploaded part in bytes.</p>"
                     }
                 },
@@ -25582,13 +25692,22 @@
             }
         },
         "com.amazonaws.s3#ObjectSize": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#ObjectSizeGreaterThanBytes": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#ObjectSizeLessThanBytes": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#ObjectStorageClass": {
             "type": "enum",
@@ -25674,6 +25793,7 @@
                 "Size": {
                     "target": "com.amazonaws.s3#Size",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Size in bytes of the object.</p>"
                     }
                 },
@@ -25698,6 +25818,7 @@
                 "IsLatest": {
                     "target": "com.amazonaws.s3#IsLatest",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the object is (true) or is not (false) the latest version of an\n         object.</p>"
                     }
                 },
@@ -25895,6 +26016,7 @@
                 "Size": {
                     "target": "com.amazonaws.s3#Size",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Size in bytes of the uploaded part data.</p>"
                     }
                 },
@@ -25943,7 +26065,10 @@
             }
         },
         "com.amazonaws.s3#PartsCount": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#PartsList": {
             "type": "list",
@@ -26012,6 +26137,7 @@
                 "IsPublic": {
                     "target": "com.amazonaws.s3#IsPublic",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The policy status for this bucket. <code>TRUE</code> indicates that this bucket is\n         public. <code>FALSE</code> indicates that the bucket is not public.</p>",
                         "smithy.api#xmlName": "IsPublic"
                     }
@@ -26025,7 +26151,10 @@
             "type": "string"
         },
         "com.amazonaws.s3#Priority": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#Progress": {
             "type": "structure",
@@ -26033,18 +26162,21 @@
                 "BytesScanned": {
                     "target": "com.amazonaws.s3#BytesScanned",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current number of object bytes scanned.</p>"
                     }
                 },
                 "BytesProcessed": {
                     "target": "com.amazonaws.s3#BytesProcessed",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current number of uncompressed object bytes processed.</p>"
                     }
                 },
                 "BytesReturned": {
                     "target": "com.amazonaws.s3#BytesReturned",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current number of bytes of records payload data returned.</p>"
                     }
                 }
@@ -26091,6 +26223,7 @@
                 "BlockPublicAcls": {
                     "target": "com.amazonaws.s3#Setting",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket\n         and objects in this bucket. Setting this element to <code>TRUE</code> causes the following\n         behavior:</p>\n         <ul>\n            <li>\n               <p>PUT Bucket ACL and PUT Object ACL calls fail if the specified ACL is\n               public.</p>\n            </li>\n            <li>\n               <p>PUT Object calls fail if the request includes a public ACL.</p>\n            </li>\n            <li>\n               <p>PUT Bucket calls fail if the request includes a public ACL.</p>\n            </li>\n         </ul>\n         <p>Enabling this setting doesn't affect existing policies or ACLs.</p>",
                         "smithy.api#xmlName": "BlockPublicAcls"
                     }
@@ -26098,6 +26231,7 @@
                 "IgnorePublicAcls": {
                     "target": "com.amazonaws.s3#Setting",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this\n         bucket. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on\n         this bucket and objects in this bucket.</p>\n         <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't\n         prevent new public ACLs from being set.</p>",
                         "smithy.api#xmlName": "IgnorePublicAcls"
                     }
@@ -26105,6 +26239,7 @@
                 "BlockPublicPolicy": {
                     "target": "com.amazonaws.s3#Setting",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this\n         element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the\n         specified bucket policy allows public access. </p>\n         <p>Enabling this setting doesn't affect existing bucket policies.</p>",
                         "smithy.api#xmlName": "BlockPublicPolicy"
                     }
@@ -26112,6 +26247,7 @@
                 "RestrictPublicBuckets": {
                     "target": "com.amazonaws.s3#Setting",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting\n         this element to <code>TRUE</code> restricts access to this bucket to only Amazon Web Service principals and authorized users within this account if the bucket has\n         a public policy.</p>\n         <p>Enabling this setting doesn't affect previously stored bucket policies, except that\n         public and cross-account access within any public bucket policy, including non-public\n         delegation to specific accounts, is blocked.</p>",
                         "smithy.api#xmlName": "RestrictPublicBuckets"
                     }
@@ -26847,6 +26983,7 @@
                 "SkipDestinationValidation": {
                     "target": "com.amazonaws.s3#SkipValidation",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Skips validation of Amazon SQS, Amazon SNS, and Lambda\n         destinations. True or false value.</p>",
                         "smithy.api#httpHeader": "x-amz-skip-destination-validation"
                     }
@@ -26970,6 +27107,7 @@
                 "ConfirmRemoveSelfBucketAccess": {
                     "target": "com.amazonaws.s3#ConfirmRemoveSelfBucketAccess",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set this parameter to true to confirm that you want to remove your permissions to change\n         this bucket policy in the future.</p>",
                         "smithy.api#httpHeader": "x-amz-confirm-remove-self-bucket-access"
                     }
@@ -27818,6 +27956,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the uploaded object uses an S3 Bucket Key for server-side encryption\n         with Key Management Service (KMS) keys (SSE-KMS).</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -28056,6 +28195,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with\n         server-side encryption using Key Management Service (KMS) keys (SSE-KMS). Setting this header to\n            <code>true</code> causes Amazon S3 to use an S3 Bucket Key for object encryption with\n         SSE-KMS.</p>\n         <p>Specifying this header with a PUT action doesn’t affect bucket-level settings for S3\n         Bucket Key.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -28187,6 +28327,7 @@
                 "BypassGovernanceRetention": {
                     "target": "com.amazonaws.s3#BypassGovernanceRetention",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether this action should bypass Governance-mode restrictions.</p>",
                         "smithy.api#httpHeader": "x-amz-bypass-governance-retention"
                     }
@@ -28434,7 +28575,10 @@
             }
         },
         "com.amazonaws.s3#Quiet": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#QuoteCharacter": {
             "type": "string"
@@ -28616,6 +28760,7 @@
                 "Priority": {
                     "target": "com.amazonaws.s3#Priority",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The priority indicates which rule has precedence whenever two or more replication rules\n         conflict. Amazon S3 will attempt to replicate objects according to all replication rules.\n         However, if there are two or more rules with the same destination bucket, then objects will\n         be replicated according to the rule with the highest priority. The higher the number, the\n         higher the priority. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html\">Replication</a> in the\n            <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
@@ -28808,6 +28953,7 @@
                 "Minutes": {
                     "target": "com.amazonaws.s3#Minutes",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p> Contains an integer specifying time in minutes. </p>\n         <p> Valid value: 15</p>"
                     }
                 }
@@ -28865,6 +29011,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.s3#EnableRequestProgress",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether periodic QueryProgress frames should be sent. Valid values: TRUE,\n         FALSE. Default value: FALSE.</p>"
                     }
                 }
@@ -29022,6 +29169,7 @@
                 "Days": {
                     "target": "com.amazonaws.s3#Days",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Lifetime of the active copy in days. Do not use with restores that specify\n            <code>OutputLocation</code>.</p>\n         <p>The Days element is required for regular restores, and must not be provided for select\n         requests.</p>"
                     }
                 },
@@ -29255,12 +29403,14 @@
                 "Start": {
                     "target": "com.amazonaws.s3#Start",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the start of the byte range. This parameter is optional. Valid values:\n         non-negative integers. The default value is 0. If only <code>start</code> is supplied, it\n         means scan from that point to the end of the file. For example,\n            <code><scanrange><start>50</start></scanrange></code> means scan\n         from byte 50 until the end of the file.</p>"
                     }
                 },
                 "End": {
                     "target": "com.amazonaws.s3#End",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the end of the byte range. This parameter is optional. Valid values:\n         non-negative integers. The default value is one less than the size of the object being\n         queried. If only the End parameter is supplied, it is interpreted to mean scan the last N\n         bytes of the file. For example,\n            <code><scanrange><end>50</end></scanrange></code> means scan the\n         last 50 bytes.</p>"
                     }
                 }
@@ -29545,6 +29695,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS\n         (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the\n            <code>BucketKeyEnabled</code> element to <code>true</code> causes Amazon S3 to use an S3\n         Bucket Key. By default, S3 Bucket Key is not enabled.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html\">Amazon S3 Bucket Keys</a> in the\n            <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
@@ -29560,13 +29711,22 @@
             }
         },
         "com.amazonaws.s3#Setting": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#Size": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#SkipValidation": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.s3#SourceSelectionCriteria": {
             "type": "structure",
@@ -29621,7 +29781,10 @@
             }
         },
         "com.amazonaws.s3#Start": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#StartAfter": {
             "type": "string"
@@ -29632,18 +29795,21 @@
                 "BytesScanned": {
                     "target": "com.amazonaws.s3#BytesScanned",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of object bytes scanned.</p>"
                     }
                 },
                 "BytesProcessed": {
                     "target": "com.amazonaws.s3#BytesProcessed",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of uncompressed object bytes processed.</p>"
                     }
                 },
                 "BytesReturned": {
                     "target": "com.amazonaws.s3#BytesReturned",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of bytes of records payload data returned.</p>"
                     }
                 }
@@ -29811,7 +29977,10 @@
             }
         },
         "com.amazonaws.s3#TagCount": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#TagSet": {
             "type": "list",
@@ -29925,6 +30094,7 @@
                 "Days": {
                     "target": "com.amazonaws.s3#IntelligentTieringDays",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of consecutive days of no access after which an object will be eligible to be\n         transitioned to the corresponding tier. The minimum number of days specified for\n         Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least\n         180 days. The maximum can be up to 2 years (730 days).</p>",
                         "smithy.api#required": {}
                     }
@@ -30002,6 +30172,7 @@
                 "Days": {
                     "target": "com.amazonaws.s3#Days",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Indicates the number of days after creation when objects are transitioned to the\n         specified storage class. The value must be a positive integer.</p>"
                     }
                 },
@@ -30177,6 +30348,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption\n         with Key Management Service (KMS) keys (SSE-KMS).</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -30410,6 +30582,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption\n         with Key Management Service (KMS) keys (SSE-KMS).</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -30574,7 +30747,10 @@
             "type": "string"
         },
         "com.amazonaws.s3#VersionCount": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.s3#VersionIdMarker": {
             "type": "string"
@@ -30695,6 +30871,7 @@
                 "StatusCode": {
                     "target": "com.amazonaws.s3#GetObjectResponseStatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The integer status code for an HTTP response of a corresponding <code>GetObject</code>\n         request. The following is a list of status codes.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>200 - OK</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>206 - Partial Content</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>304 - Not Modified</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>400 - Bad Request</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>401 - Unauthorized</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>403 - Forbidden</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>404 - Not Found</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>405 - Method Not Allowed</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>409 - Conflict</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>411 - Length Required</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>412 - Precondition Failed</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>416 - Range Not Satisfiable</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>500 - Internal Server Error</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>503 - Service Unavailable</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpHeader": "x-amz-fwd-status"
                     }
@@ -30873,6 +31050,7 @@
                 "PartsCount": {
                     "target": "com.amazonaws.s3#PartsCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The count of parts this object has.</p>",
                         "smithy.api#httpHeader": "x-amz-fwd-header-x-amz-mp-parts-count"
                     }
@@ -30935,6 +31113,7 @@
                 "TagCount": {
                     "target": "com.amazonaws.s3#TagCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tags, if any, on the object.</p>",
                         "smithy.api#httpHeader": "x-amz-fwd-header-x-amz-tagging-count"
                     }
@@ -30949,6 +31128,7 @@
                 "BucketKeyEnabled": {
                     "target": "com.amazonaws.s3#BucketKeyEnabled",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates whether the object stored in Amazon S3 uses an S3 bucket key for server-side\n         encryption with Amazon Web Services KMS (SSE-KMS).</p>",
                         "smithy.api#httpHeader": "x-amz-fwd-header-x-amz-server-side-encryption-bucket-key-enabled"
                     }
@@ -30959,7 +31139,10 @@
             }
         },
         "com.amazonaws.s3#Years": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         }
     }
 }

@@ -193,7 +193,7 @@ type HeadObjectOutput struct {
 
 	// Indicates whether the object uses an S3 Bucket Key for server-side encryption
 	// with Key Management Service (KMS) keys (SSE-KMS).
-	BucketKeyEnabled *bool
+	BucketKeyEnabled bool
 
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
@@ -293,7 +293,7 @@ type HeadObjectOutput struct {
 
 	// The count of parts this object has. This value is only returned if you specify
 	// partNumber in your request and the object was uploaded as a multipart upload.
-	PartsCount *int32
+	PartsCount int32
 
 	// Amazon S3 can return this header if your request involves a bucket that is
 	// either a source or a destination in a replication rule. In replication, you have

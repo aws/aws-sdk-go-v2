@@ -94,7 +94,7 @@ type ListObjectsV2Input struct {
 	// The owner field is not present in ListObjectsV2 by default. If you want to
 	// return the owner field with each key in the result, then set the FetchOwner
 	// field to true .
-	FetchOwner *bool
+	FetchOwner bool
 
 	// Sets the maximum number of keys returned in the response. By default, the
 	// action returns up to 1,000 key names. The response might contain fewer keys but
@@ -155,7 +155,7 @@ type ListObjectsV2Output struct {
 	// Set to false if all of the results were returned. Set to true if more keys are
 	// available to return. If the number of results exceeds that specified by MaxKeys
 	// , all of the results might not be returned.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// KeyCount is the number of keys returned with this request. KeyCount will always
 	// be less than or equal to the MaxKeys field. For example, if you ask for 50
@@ -378,7 +378,7 @@ func (p *ListObjectsV2Paginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	prevToken := p.nextToken
 	p.nextToken = nil
-	if result.IsTruncated != nil && *result.IsTruncated {
+	if result.IsTruncated {
 		p.nextToken = result.NextContinuationToken
 	}
 
