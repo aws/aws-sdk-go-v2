@@ -2699,9 +2699,6 @@ func validateInventoryConfiguration(v *types.InventoryConfiguration) error {
 			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.IsEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IsEnabled"))
-	}
 	if v.Filter != nil {
 		if err := validateInventoryFilter(v.Filter); err != nil {
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
@@ -3738,9 +3735,6 @@ func validateTiering(v *types.Tiering) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tiering"}
-	if v.Days == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Days"))
-	}
 	if len(v.AccessTier) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessTier"))
 	}

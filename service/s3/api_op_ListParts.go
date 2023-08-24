@@ -160,7 +160,7 @@ type ListPartsOutput struct {
 	// Indicates whether the returned list of parts is truncated. A true value
 	// indicates that the list was truncated. A list can be truncated if the number of
 	// parts exceeds the limit returned in the MaxParts element.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// Object key for which the multipart upload was initiated.
 	Key *string
@@ -375,7 +375,7 @@ func (p *ListPartsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	prevToken := p.nextToken
 	p.nextToken = nil
-	if result.IsTruncated != nil && *result.IsTruncated {
+	if result.IsTruncated {
 		p.nextToken = result.NextPartNumberMarker
 	}
 

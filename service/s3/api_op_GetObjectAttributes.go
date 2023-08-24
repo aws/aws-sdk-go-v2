@@ -186,7 +186,7 @@ type GetObjectAttributesOutput struct {
 	ObjectParts *types.GetObjectAttributesParts
 
 	// The size of the object in bytes.
-	ObjectSize *int64
+	ObjectSize int64
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.

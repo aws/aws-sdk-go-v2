@@ -293,9 +293,9 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
-	if v.BucketKeyEnabled != nil {
+	if v.BucketKeyEnabled {
 		locationName := "X-Amz-Server-Side-Encryption-Bucket-Key-Enabled"
-		encoder.SetHeader(locationName).Boolean(*v.BucketKeyEnabled)
+		encoder.SetHeader(locationName).Boolean(v.BucketKeyEnabled)
 	}
 
 	if v.CacheControl != nil && len(*v.CacheControl) > 0 {
@@ -606,9 +606,9 @@ func awsRestxml_serializeOpHttpBindingsCreateBucketInput(v *CreateBucketInput, e
 		encoder.SetHeader(locationName).String(*v.GrantWriteACP)
 	}
 
-	if v.ObjectLockEnabledForBucket != nil {
+	if v.ObjectLockEnabledForBucket {
 		locationName := "X-Amz-Bucket-Object-Lock-Enabled"
-		encoder.SetHeader(locationName).Boolean(*v.ObjectLockEnabledForBucket)
+		encoder.SetHeader(locationName).Boolean(v.ObjectLockEnabledForBucket)
 	}
 
 	if len(v.ObjectOwnership) > 0 {
@@ -677,9 +677,9 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
-	if v.BucketKeyEnabled != nil {
+	if v.BucketKeyEnabled {
 		locationName := "X-Amz-Server-Side-Encryption-Bucket-Key-Enabled"
-		encoder.SetHeader(locationName).Boolean(*v.BucketKeyEnabled)
+		encoder.SetHeader(locationName).Boolean(v.BucketKeyEnabled)
 	}
 
 	if v.CacheControl != nil && len(*v.CacheControl) > 0 {
@@ -1685,9 +1685,9 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.BypassGovernanceRetention != nil {
+	if v.BypassGovernanceRetention {
 		locationName := "X-Amz-Bypass-Governance-Retention"
-		encoder.SetHeader(locationName).Boolean(*v.BypassGovernanceRetention)
+		encoder.SetHeader(locationName).Boolean(v.BypassGovernanceRetention)
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -1798,9 +1798,9 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectsInput(v *DeleteObjectsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.BypassGovernanceRetention != nil {
+	if v.BypassGovernanceRetention {
 		locationName := "X-Amz-Bypass-Governance-Retention"
-		encoder.SetHeader(locationName).Boolean(*v.BypassGovernanceRetention)
+		encoder.SetHeader(locationName).Boolean(v.BypassGovernanceRetention)
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
@@ -4736,8 +4736,8 @@ func awsRestxml_serializeOpHttpBindingsListObjectsV2Input(v *ListObjectsV2Input,
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
-	if v.FetchOwner != nil {
-		encoder.SetQuery("fetch-owner").Boolean(*v.FetchOwner)
+	if v.FetchOwner {
+		encoder.SetQuery("fetch-owner").Boolean(v.FetchOwner)
 	}
 
 	if v.MaxKeys != 0 {
@@ -6003,9 +6003,9 @@ func awsRestxml_serializeOpHttpBindingsPutBucketNotificationConfigurationInput(v
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
-	if v.SkipDestinationValidation != nil {
+	if v.SkipDestinationValidation {
 		locationName := "X-Amz-Skip-Destination-Validation"
-		encoder.SetHeader(locationName).Boolean(*v.SkipDestinationValidation)
+		encoder.SetHeader(locationName).Boolean(v.SkipDestinationValidation)
 	}
 
 	return nil
@@ -6171,9 +6171,9 @@ func awsRestxml_serializeOpHttpBindingsPutBucketPolicyInput(v *PutBucketPolicyIn
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
-	if v.ConfirmRemoveSelfBucketAccess != nil {
+	if v.ConfirmRemoveSelfBucketAccess {
 		locationName := "X-Amz-Confirm-Remove-Self-Bucket-Access"
-		encoder.SetHeader(locationName).Boolean(*v.ConfirmRemoveSelfBucketAccess)
+		encoder.SetHeader(locationName).Boolean(v.ConfirmRemoveSelfBucketAccess)
 	}
 
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
@@ -6744,9 +6744,9 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
-	if v.BucketKeyEnabled != nil {
+	if v.BucketKeyEnabled {
 		locationName := "X-Amz-Server-Side-Encryption-Bucket-Key-Enabled"
-		encoder.SetHeader(locationName).Boolean(*v.BucketKeyEnabled)
+		encoder.SetHeader(locationName).Boolean(v.BucketKeyEnabled)
 	}
 
 	if v.CacheControl != nil && len(*v.CacheControl) > 0 {
@@ -7363,9 +7363,9 @@ func awsRestxml_serializeOpHttpBindingsPutObjectRetentionInput(v *PutObjectReten
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.BypassGovernanceRetention != nil {
+	if v.BypassGovernanceRetention {
 		locationName := "X-Amz-Bypass-Governance-Retention"
-		encoder.SetHeader(locationName).Boolean(*v.BypassGovernanceRetention)
+		encoder.SetHeader(locationName).Boolean(v.BypassGovernanceRetention)
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
@@ -8265,9 +8265,9 @@ func awsRestxml_serializeOpHttpBindingsWriteGetObjectResponseInput(v *WriteGetOb
 		encoder.SetHeader(locationName).String(*v.AcceptRanges)
 	}
 
-	if v.BucketKeyEnabled != nil {
+	if v.BucketKeyEnabled {
 		locationName := "X-Amz-Fwd-Header-X-Amz-Server-Side-Encryption-Bucket-Key-Enabled"
-		encoder.SetHeader(locationName).Boolean(*v.BucketKeyEnabled)
+		encoder.SetHeader(locationName).Boolean(v.BucketKeyEnabled)
 	}
 
 	if v.CacheControl != nil && len(*v.CacheControl) > 0 {
@@ -8389,9 +8389,9 @@ func awsRestxml_serializeOpHttpBindingsWriteGetObjectResponseInput(v *WriteGetOb
 		encoder.SetHeader(locationName).String(smithytime.FormatDateTime(*v.ObjectLockRetainUntilDate))
 	}
 
-	if v.PartsCount != nil {
+	if v.PartsCount != 0 {
 		locationName := "X-Amz-Fwd-Header-X-Amz-Mp-Parts-Count"
-		encoder.SetHeader(locationName).Integer(*v.PartsCount)
+		encoder.SetHeader(locationName).Integer(v.PartsCount)
 	}
 
 	if len(v.ReplicationStatus) > 0 {
@@ -8439,9 +8439,9 @@ func awsRestxml_serializeOpHttpBindingsWriteGetObjectResponseInput(v *WriteGetOb
 		encoder.SetHeader(locationName).String(*v.SSEKMSKeyId)
 	}
 
-	if v.StatusCode != nil {
+	if v.StatusCode != 0 {
 		locationName := "X-Amz-Fwd-Status"
-		encoder.SetHeader(locationName).Integer(*v.StatusCode)
+		encoder.SetHeader(locationName).Integer(v.StatusCode)
 	}
 
 	if len(v.StorageClass) > 0 {
@@ -8449,9 +8449,9 @@ func awsRestxml_serializeOpHttpBindingsWriteGetObjectResponseInput(v *WriteGetOb
 		encoder.SetHeader(locationName).String(string(v.StorageClass))
 	}
 
-	if v.TagCount != nil {
+	if v.TagCount != 0 {
 		locationName := "X-Amz-Fwd-Header-X-Amz-Tagging-Count"
-		encoder.SetHeader(locationName).Integer(*v.TagCount)
+		encoder.SetHeader(locationName).Integer(v.TagCount)
 	}
 
 	if v.VersionId != nil && len(*v.VersionId) > 0 {
@@ -8464,7 +8464,7 @@ func awsRestxml_serializeOpHttpBindingsWriteGetObjectResponseInput(v *WriteGetOb
 
 func awsRestxml_serializeDocumentAbortIncompleteMultipartUpload(v *types.AbortIncompleteMultipartUpload, value smithyxml.Value) error {
 	defer value.Close()
-	if v.DaysAfterInitiation != nil {
+	if v.DaysAfterInitiation != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -8473,7 +8473,7 @@ func awsRestxml_serializeDocumentAbortIncompleteMultipartUpload(v *types.AbortIn
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.DaysAfterInitiation)
+		el.Integer(v.DaysAfterInitiation)
 	}
 	return nil
 }
@@ -9015,7 +9015,7 @@ func awsRestxml_serializeDocumentCORSRule(v *types.CORSRule, value smithyxml.Val
 		el := value.MemberElement(root)
 		el.String(*v.ID)
 	}
-	if v.MaxAgeSeconds != nil {
+	if v.MaxAgeSeconds != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -9024,7 +9024,7 @@ func awsRestxml_serializeDocumentCORSRule(v *types.CORSRule, value smithyxml.Val
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.MaxAgeSeconds)
+		el.Integer(v.MaxAgeSeconds)
 	}
 	return nil
 }
@@ -9062,7 +9062,7 @@ func awsRestxml_serializeDocumentCreateBucketConfiguration(v *types.CreateBucket
 
 func awsRestxml_serializeDocumentCSVInput(v *types.CSVInput, value smithyxml.Value) error {
 	defer value.Close()
-	if v.AllowQuotedRecordDelimiter != nil {
+	if v.AllowQuotedRecordDelimiter {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -9071,7 +9071,7 @@ func awsRestxml_serializeDocumentCSVInput(v *types.CSVInput, value smithyxml.Val
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.AllowQuotedRecordDelimiter)
+		el.Boolean(v.AllowQuotedRecordDelimiter)
 	}
 	if v.Comments != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -9204,7 +9204,7 @@ func awsRestxml_serializeDocumentCSVOutput(v *types.CSVOutput, value smithyxml.V
 
 func awsRestxml_serializeDocumentDefaultRetention(v *types.DefaultRetention, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Days != nil {
+	if v.Days != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -9213,7 +9213,7 @@ func awsRestxml_serializeDocumentDefaultRetention(v *types.DefaultRetention, val
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Days)
+		el.Integer(v.Days)
 	}
 	if len(v.Mode) > 0 {
 		rootAttr := []smithyxml.Attr{}
@@ -9226,7 +9226,7 @@ func awsRestxml_serializeDocumentDefaultRetention(v *types.DefaultRetention, val
 		el := value.MemberElement(root)
 		el.String(string(v.Mode))
 	}
-	if v.Years != nil {
+	if v.Years != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -9235,7 +9235,7 @@ func awsRestxml_serializeDocumentDefaultRetention(v *types.DefaultRetention, val
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Years)
+		el.Integer(v.Years)
 	}
 	return nil
 }
@@ -9255,7 +9255,7 @@ func awsRestxml_serializeDocumentDelete(v *types.Delete, value smithyxml.Value) 
 			return err
 		}
 	}
-	if v.Quiet != nil {
+	if v.Quiet {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -9264,7 +9264,7 @@ func awsRestxml_serializeDocumentDelete(v *types.Delete, value smithyxml.Value) 
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.Quiet)
+		el.Boolean(v.Quiet)
 	}
 	return nil
 }
@@ -9901,7 +9901,7 @@ func awsRestxml_serializeDocumentInventoryConfiguration(v *types.InventoryConfig
 		el := value.MemberElement(root)
 		el.String(string(v.IncludedObjectVersions))
 	}
-	if v.IsEnabled != nil {
+	{
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -9910,7 +9910,7 @@ func awsRestxml_serializeDocumentInventoryConfiguration(v *types.InventoryConfig
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.IsEnabled)
+		el.Boolean(v.IsEnabled)
 	}
 	if v.OptionalFields != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -10217,7 +10217,7 @@ func awsRestxml_serializeDocumentLifecycleExpiration(v *types.LifecycleExpiratio
 		el := value.MemberElement(root)
 		el.String(smithytime.FormatDateTime(*v.Date))
 	}
-	if v.Days != nil {
+	if v.Days != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -10226,9 +10226,9 @@ func awsRestxml_serializeDocumentLifecycleExpiration(v *types.LifecycleExpiratio
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Days)
+		el.Integer(v.Days)
 	}
-	if v.ExpiredObjectDeleteMarker != nil {
+	if v.ExpiredObjectDeleteMarker {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -10237,7 +10237,7 @@ func awsRestxml_serializeDocumentLifecycleExpiration(v *types.LifecycleExpiratio
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.ExpiredObjectDeleteMarker)
+		el.Boolean(v.ExpiredObjectDeleteMarker)
 	}
 	return nil
 }
@@ -10360,7 +10360,7 @@ func awsRestxml_serializeDocumentLifecycleRule(v *types.LifecycleRule, value smi
 
 func awsRestxml_serializeDocumentLifecycleRuleAndOperator(v *types.LifecycleRuleAndOperator, value smithyxml.Value) error {
 	defer value.Close()
-	if v.ObjectSizeGreaterThan != nil {
+	if v.ObjectSizeGreaterThan != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -10369,9 +10369,9 @@ func awsRestxml_serializeDocumentLifecycleRuleAndOperator(v *types.LifecycleRule
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Long(*v.ObjectSizeGreaterThan)
+		el.Long(v.ObjectSizeGreaterThan)
 	}
-	if v.ObjectSizeLessThan != nil {
+	if v.ObjectSizeLessThan != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -10380,7 +10380,7 @@ func awsRestxml_serializeDocumentLifecycleRuleAndOperator(v *types.LifecycleRule
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Long(*v.ObjectSizeLessThan)
+		el.Long(v.ObjectSizeLessThan)
 	}
 	if v.Prefix != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -10718,7 +10718,7 @@ func awsRestxml_serializeDocumentMetricsFilter(v types.MetricsFilter, value smit
 
 func awsRestxml_serializeDocumentNoncurrentVersionExpiration(v *types.NoncurrentVersionExpiration, value smithyxml.Value) error {
 	defer value.Close()
-	if v.NewerNoncurrentVersions != nil {
+	if v.NewerNoncurrentVersions != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -10727,9 +10727,9 @@ func awsRestxml_serializeDocumentNoncurrentVersionExpiration(v *types.Noncurrent
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.NewerNoncurrentVersions)
+		el.Integer(v.NewerNoncurrentVersions)
 	}
-	if v.NoncurrentDays != nil {
+	if v.NoncurrentDays != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -10738,14 +10738,14 @@ func awsRestxml_serializeDocumentNoncurrentVersionExpiration(v *types.Noncurrent
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.NoncurrentDays)
+		el.Integer(v.NoncurrentDays)
 	}
 	return nil
 }
 
 func awsRestxml_serializeDocumentNoncurrentVersionTransition(v *types.NoncurrentVersionTransition, value smithyxml.Value) error {
 	defer value.Close()
-	if v.NewerNoncurrentVersions != nil {
+	if v.NewerNoncurrentVersions != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -10754,9 +10754,9 @@ func awsRestxml_serializeDocumentNoncurrentVersionTransition(v *types.Noncurrent
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.NewerNoncurrentVersions)
+		el.Integer(v.NewerNoncurrentVersions)
 	}
-	if v.NoncurrentDays != nil {
+	if v.NoncurrentDays != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -10765,7 +10765,7 @@ func awsRestxml_serializeDocumentNoncurrentVersionTransition(v *types.Noncurrent
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.NoncurrentDays)
+		el.Integer(v.NoncurrentDays)
 	}
 	if len(v.StorageClass) > 0 {
 		rootAttr := []smithyxml.Attr{}
@@ -11135,7 +11135,7 @@ func awsRestxml_serializeDocumentParquetInput(v *types.ParquetInput, value smith
 
 func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicAccessBlockConfiguration, value smithyxml.Value) error {
 	defer value.Close()
-	if v.BlockPublicAcls != nil {
+	if v.BlockPublicAcls {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11144,9 +11144,9 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.BlockPublicAcls)
+		el.Boolean(v.BlockPublicAcls)
 	}
-	if v.BlockPublicPolicy != nil {
+	if v.BlockPublicPolicy {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11155,9 +11155,9 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.BlockPublicPolicy)
+		el.Boolean(v.BlockPublicPolicy)
 	}
-	if v.IgnorePublicAcls != nil {
+	if v.IgnorePublicAcls {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11166,9 +11166,9 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.IgnorePublicAcls)
+		el.Boolean(v.IgnorePublicAcls)
 	}
-	if v.RestrictPublicBuckets != nil {
+	if v.RestrictPublicBuckets {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11177,7 +11177,7 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.RestrictPublicBuckets)
+		el.Boolean(v.RestrictPublicBuckets)
 	}
 	return nil
 }
@@ -11458,7 +11458,7 @@ func awsRestxml_serializeDocumentReplicationRule(v *types.ReplicationRule, value
 		el := value.MemberElement(root)
 		el.String(*v.Prefix)
 	}
-	if v.Priority != nil {
+	if v.Priority != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11467,7 +11467,7 @@ func awsRestxml_serializeDocumentReplicationRule(v *types.ReplicationRule, value
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Priority)
+		el.Integer(v.Priority)
 	}
 	if v.SourceSelectionCriteria != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -11618,7 +11618,7 @@ func awsRestxml_serializeDocumentReplicationTime(v *types.ReplicationTime, value
 
 func awsRestxml_serializeDocumentReplicationTimeValue(v *types.ReplicationTimeValue, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Minutes != nil {
+	if v.Minutes != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11627,7 +11627,7 @@ func awsRestxml_serializeDocumentReplicationTimeValue(v *types.ReplicationTimeVa
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Minutes)
+		el.Integer(v.Minutes)
 	}
 	return nil
 }
@@ -11650,7 +11650,7 @@ func awsRestxml_serializeDocumentRequestPaymentConfiguration(v *types.RequestPay
 
 func awsRestxml_serializeDocumentRequestProgress(v *types.RequestProgress, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Enabled != nil {
+	if v.Enabled {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11659,14 +11659,14 @@ func awsRestxml_serializeDocumentRequestProgress(v *types.RequestProgress, value
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.Enabled)
+		el.Boolean(v.Enabled)
 	}
 	return nil
 }
 
 func awsRestxml_serializeDocumentRestoreRequest(v *types.RestoreRequest, value smithyxml.Value) error {
 	defer value.Close()
-	if v.Days != nil {
+	if v.Days != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11675,7 +11675,7 @@ func awsRestxml_serializeDocumentRestoreRequest(v *types.RestoreRequest, value s
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Days)
+		el.Integer(v.Days)
 	}
 	if v.Description != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -11926,7 +11926,7 @@ func awsRestxml_serializeDocumentS3Location(v *types.S3Location, value smithyxml
 
 func awsRestxml_serializeDocumentScanRange(v *types.ScanRange, value smithyxml.Value) error {
 	defer value.Close()
-	if v.End != nil {
+	if v.End != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11935,9 +11935,9 @@ func awsRestxml_serializeDocumentScanRange(v *types.ScanRange, value smithyxml.V
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Long(*v.End)
+		el.Long(v.End)
 	}
-	if v.Start != nil {
+	if v.Start != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11946,7 +11946,7 @@ func awsRestxml_serializeDocumentScanRange(v *types.ScanRange, value smithyxml.V
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Long(*v.Start)
+		el.Long(v.Start)
 	}
 	return nil
 }
@@ -12064,7 +12064,7 @@ func awsRestxml_serializeDocumentServerSideEncryptionRule(v *types.ServerSideEnc
 			return err
 		}
 	}
-	if v.BucketKeyEnabled != nil {
+	if v.BucketKeyEnabled {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -12073,7 +12073,7 @@ func awsRestxml_serializeDocumentServerSideEncryptionRule(v *types.ServerSideEnc
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.BucketKeyEnabled)
+		el.Boolean(v.BucketKeyEnabled)
 	}
 	return nil
 }
@@ -12345,7 +12345,7 @@ func awsRestxml_serializeDocumentTiering(v *types.Tiering, value smithyxml.Value
 		el := value.MemberElement(root)
 		el.String(string(v.AccessTier))
 	}
-	if v.Days != nil {
+	{
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -12354,7 +12354,7 @@ func awsRestxml_serializeDocumentTiering(v *types.Tiering, value smithyxml.Value
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Days)
+		el.Integer(v.Days)
 	}
 	return nil
 }
@@ -12455,7 +12455,7 @@ func awsRestxml_serializeDocumentTransition(v *types.Transition, value smithyxml
 		el := value.MemberElement(root)
 		el.String(smithytime.FormatDateTime(*v.Date))
 	}
-	if v.Days != nil {
+	if v.Days != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -12464,7 +12464,7 @@ func awsRestxml_serializeDocumentTransition(v *types.Transition, value smithyxml
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Days)
+		el.Integer(v.Days)
 	}
 	if len(v.StorageClass) > 0 {
 		rootAttr := []smithyxml.Attr{}
