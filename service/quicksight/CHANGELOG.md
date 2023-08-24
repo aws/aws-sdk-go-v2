@@ -1,3 +1,7 @@
+# v1.42.0 (2023-08-24)
+
+* **Feature**: Excel support in Snapshot Export APIs. Removed Required trait for some insight Computations. Namespace-shared Folders support. Global Filters support. Table pin Column support.
+
 # v1.41.3 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

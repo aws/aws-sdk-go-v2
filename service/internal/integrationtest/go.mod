@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.22.5
-	github.com/aws/aws-sdk-go-v2/service/athena v1.31.5
+	github.com/aws/aws-sdk-go-v2/service/athena v1.31.6
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.30.6
 	github.com/aws/aws-sdk-go-v2/service/batch v1.26.5
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.34.5
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.21.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.114.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.115.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.29.6
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.6
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.15.5
-	github.com/aws/aws-sdk-go-v2/service/glue v1.61.3
+	github.com/aws/aws-sdk-go-v2/service/glue v1.62.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/iam v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.14.5
@@ -60,14 +60,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/polly v1.31.0
-	github.com/aws/aws-sdk-go-v2/service/rds v1.52.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.29.5
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.30.6
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.29.5
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.19.6
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.38.5
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.32.5
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/ses v1.16.6

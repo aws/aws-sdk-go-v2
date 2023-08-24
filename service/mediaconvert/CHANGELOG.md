@@ -1,3 +1,7 @@
+# v1.41.0 (2023-08-24)
+
+* **Feature**: This release includes additional audio channel tags in Quicktime outputs, support for film grain synthesis for AV1 outputs, ability to create audio-only FLAC outputs, and ability to specify Amazon S3 destination storage class.
+
 # v1.40.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

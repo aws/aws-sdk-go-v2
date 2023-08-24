@@ -1,3 +1,7 @@
+# v1.2.1 (2023-08-24)
+
+* **Documentation**: Documentation updates for Amazon Verified Permissions.
+
 # v1.2.0 (2023-08-22)
 
 * **Feature**: Documentation updates for Amazon Verified Permissions. Increases max results per page for ListPolicyStores, ListPolicies, and ListPolicyTemplates APIs from 20 to 50.

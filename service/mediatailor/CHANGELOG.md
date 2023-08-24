@@ -1,3 +1,7 @@
+# v1.27.0 (2023-08-24)
+
+* **Feature**: Adds new source location AUTODETECT_SIGV4 access type.
+
 # v1.26.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

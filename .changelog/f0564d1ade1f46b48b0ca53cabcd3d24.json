@@ -1,8 +1,0 @@
-{
-    "id": "f0564d1a-de1f-46b4-8b0c-a53cabcd3d24",
-    "type": "feature",
-    "description": "This release includes additional audio channel tags in Quicktime outputs, support for film grain synthesis for AV1 outputs, ability to create audio-only FLAC outputs, and ability to specify Amazon S3 destination storage class.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.62.0 (2023-08-24)
+
+* **Feature**: Added API attributes that help in the monitoring of sessions.
+
 # v1.61.3 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

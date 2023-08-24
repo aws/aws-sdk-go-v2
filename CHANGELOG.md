@@ -1,3 +1,25 @@
+# Release (2023-08-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.115.0](service/ec2/CHANGELOG.md#v11150-2023-08-24)
+  * **Feature**: Amazon EC2 M7a instances, powered by 4th generation AMD EPYC processors, deliver up to 50% higher performance compared to M6a instances. Amazon EC2 Hpc7a instances, powered by 4th Gen AMD EPYC processors, deliver up to 2.5x better performance compared to Amazon EC2 Hpc6a instances.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.62.0](service/glue/CHANGELOG.md#v1620-2023-08-24)
+  * **Feature**: Added API attributes that help in the monitoring of sessions.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.41.0](service/mediaconvert/CHANGELOG.md#v1410-2023-08-24)
+  * **Feature**: This release includes additional audio channel tags in Quicktime outputs, support for film grain synthesis for AV1 outputs, ability to create audio-only FLAC outputs, and ability to specify Amazon S3 destination storage class.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.35.0](service/medialive/CHANGELOG.md#v1350-2023-08-24)
+  * **Feature**: MediaLive now supports passthrough of KLV data to a HLS output group with a TS container. MediaLive now supports setting an attenuation mode for AC3 audio when the coding mode is 3/2 LFE. MediaLive now supports specifying whether to include filler NAL units in RTMP output group settings.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.27.0](service/mediatailor/CHANGELOG.md#v1270-2023-08-24)
+  * **Feature**: Adds new source location AUTODETECT_SIGV4 access type.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.42.0](service/quicksight/CHANGELOG.md#v1420-2023-08-24)
+  * **Feature**: Excel support in Snapshot Export APIs. Removed Required trait for some insight Computations. Namespace-shared Folders support. Global Filters support. Table pin Column support.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.53.0](service/rds/CHANGELOG.md#v1530-2023-08-24)
+  * **Feature**: This release updates the supported versions for Percona XtraBackup in Aurora MySQL.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.33.0](service/s3control/CHANGELOG.md#v1330-2023-08-24)
+  * **Feature**: Updates to endpoint ruleset tests to address Smithy validation issues and standardize the capitalization of DualStack.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.2.1](service/verifiedpermissions/CHANGELOG.md#v121-2023-08-24)
+  * **Documentation**: Documentation updates for Amazon Verified Permissions.
+
 # Release (2023-08-23)
 
 ## General Highlights

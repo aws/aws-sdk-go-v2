@@ -1,3 +1,7 @@
+# v1.53.0 (2023-08-24)
+
+* **Feature**: This release updates the supported versions for Percona XtraBackup in Aurora MySQL.
+
 # v1.52.0 (2023-08-22)
 
 * **Feature**: Adding parameters to CreateCustomDbEngineVersion reserved for future use.

@@ -1,8 +1,0 @@
-{
-    "id": "39ed2bef-ec10-4a28-b0e8-8ce04edd6742",
-    "type": "feature",
-    "description": "Updates to endpoint ruleset tests to address Smithy validation issues.",
-    "modules": [
-        "service/s3"
-    ]
-}

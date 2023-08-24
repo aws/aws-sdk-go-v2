@@ -1,8 +1,0 @@
-{
-    "id": "f99b9f6c-87d1-4102-8a2a-2554909da31f",
-    "type": "feature",
-    "description": "MediaLive now supports passthrough of KLV data to a HLS output group with a TS container. MediaLive now supports setting an attenuation mode for AC3 audio when the coding mode is 3/2 LFE. MediaLive now supports specifying whether to include filler NAL units in RTMP output group settings.",
-    "modules": [
-        "service/medialive"
-    ]
-}

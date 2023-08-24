@@ -1,3 +1,7 @@
+# v1.33.0 (2023-08-24)
+
+* **Feature**: Updates to endpoint ruleset tests to address Smithy validation issues and standardize the capitalization of DualStack.
+
 # v1.32.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

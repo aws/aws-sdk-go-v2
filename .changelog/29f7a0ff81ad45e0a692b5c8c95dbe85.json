@@ -1,8 +1,0 @@
-{
-    "id": "29f7a0ff-81ad-45e0-a692-b5c8c95dbe85",
-    "type": "feature",
-    "description": "Adds new source location AUTODETECT_SIGV4 access type.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}
