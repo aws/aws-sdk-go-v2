@@ -1,0 +1,10 @@
+{
+    "id": "331929f2-c5c9-41d4-9d61-60d2d2f34ee7",
+    "type": "feature",
+    "description": "Update modules that consume service/s3 for nil changes.",
+    "modules": [
+        "feature/s3/manager",
+        "service/internal/integrationtest",
+        "service/s3"
+    ]
+}

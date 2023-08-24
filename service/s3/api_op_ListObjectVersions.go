@@ -134,7 +134,7 @@ type ListObjectVersionsOutput struct {
 	// follow-up paginated request by using the NextKeyMarker and NextVersionIdMarker
 	// response parameters as a starting place in another request to return the rest of
 	// the results.
-	IsTruncated bool
+	IsTruncated *bool
 
 	// Marks the last key returned in a truncated response.
 	KeyMarker *string

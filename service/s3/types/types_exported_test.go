@@ -63,8 +63,8 @@ func ExampleLifecycleRuleFilter_outputUsage() {
 
 var _ *string
 var _ *types.LifecycleRuleAndOperator
-var _ int64
-var _ int64
+var _ *int64
+var _ *int64
 var _ *types.Tag
 
 func ExampleMetricsFilter_outputUsage() {
