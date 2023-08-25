@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"net"
 	"net/url"
 	"time"
 
@@ -24,6 +25,8 @@ const (
 	credSourceEc2Metadata  = "Ec2InstanceMetadata"
 	credSourceEnvironment  = "Environment"
 	credSourceECSContainer = "EcsContainer"
+	ecsContainerHost       = "169.254.170.2"
+	eksContainerHost       = "169.254.170.23"
 )
 
 var (
@@ -222,6 +225,38 @@ func processCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *Shar
 	return nil
 }
 
+// isAllowedHost allows host to be loopback host,ECS container host 169.254.170.2
+// and EKS container host 169.254.170.23
+func isAllowedHost(host string) (bool, error) {
+	if isHostAllowed(host) {
+		return true, nil
+	}
+
+	// Host is not an ip, perform lookup
+	addrs, err := lookupHostFn(host)
+	if err != nil {
+		return false, err
+	}
+	for _, addr := range addrs {
+		if !isHostAllowed(addr) {
+			return false, nil
+		}
+	}
+
+	return true, nil
+}
+
+func isHostAllowed(host string) bool {
+	if host == ecsContainerHost || host == eksContainerHost {
+		return true
+	}
+	ip := net.ParseIP(host)
+	if ip != nil {
+		return ip.IsLoopback()
+	}
+	return false
+}
+
 func resolveLocalHTTPCredProvider(ctx context.Context, cfg *aws.Config, endpointURL, authToken string, configs configs) error {
 	var resolveErr error
 
@@ -232,10 +267,12 @@ func resolveLocalHTTPCredProvider(ctx context.Context, cfg *aws.Config, endpoint
 		host := parsed.Hostname()
 		if len(host) == 0 {
 			resolveErr = fmt.Errorf("unable to parse host from local HTTP cred provider URL")
-		} else if isLoopback, loopbackErr := isLoopbackHost(host); loopbackErr != nil {
-			resolveErr = fmt.Errorf("failed to resolve host %q, %v", host, loopbackErr)
-		} else if !isLoopback {
-			resolveErr = fmt.Errorf("invalid endpoint host, %q, only loopback hosts are allowed", host)
+		} else if parsed.Scheme == "http" {
+			if isAllowedHost, allowHostErr := isAllowedHost(host); allowHostErr != nil {
+				resolveErr = fmt.Errorf("failed to resolve host %q, %v", host, allowHostErr)
+			} else if !isAllowedHost {
+				resolveErr = fmt.Errorf("invalid endpoint host, %q, only loopback/ecs/eks hosts are allowed.", host)
+			}
 		}
 	}
 

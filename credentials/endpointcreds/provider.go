@@ -35,7 +35,10 @@ package endpointcreds
 import (
 	"context"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"os"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds/internal/client"
@@ -43,7 +46,10 @@ import (
 )
 
 // ProviderName is the name of the credentials provider.
-const ProviderName = `CredentialsEndpointProvider`
+const (
+	ProviderName               = `CredentialsEndpointProvider`
+	httpProviderAuthFileEnvVar = "AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE"
+)
 
 type getCredentialsAPIClient interface {
 	GetCredentials(context.Context, *client.GetCredentialsInput, ...func(*client.Options)) (*client.GetCredentialsOutput, error)
@@ -132,5 +138,24 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 }
 
 func (p *Provider) getCredentials(ctx context.Context) (*client.GetCredentialsOutput, error) {
-	return p.client.GetCredentials(ctx, &client.GetCredentialsInput{AuthorizationToken: p.options.AuthorizationToken})
+	authToken := p.options.AuthorizationToken
+
+	if authFilePath := os.Getenv(httpProviderAuthFileEnvVar); authFilePath != "" {
+		var contents []byte
+		var err error
+		if contents, err = ioutil.ReadFile(authFilePath); err != nil {
+			return nil, fmt.Errorf("failed to read authorization token from %v: %v", authFilePath, err)
+		}
+		authToken = string(contents)
+	}
+
+	if strings.ContainsAny(authToken, "\r\n") {
+		return nil, fmt.Errorf("authorization token contains invalid newline sequence")
+	}
+
+	input := &client.GetCredentialsInput{}
+	if authToken != "" {
+		input.AuthorizationToken = authToken
+	}
+	return p.client.GetCredentials(ctx, input)
 }
