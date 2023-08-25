@@ -1,3 +1,11 @@
+# Release (2023-08-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.29.0](service/cloudtrail/CHANGELOG.md#v1290-2023-08-25)
+  * **Feature**: Add ThrottlingException with error code 429 to handle CloudTrail Delegated Admin request rate exceeded on organization resources.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.27.7](service/cloudwatch/CHANGELOG.md#v1277-2023-08-25)
+  * **Documentation**: Doc-only update to get doc bug fixes into the SDK docs
+
 # Release (2023-08-24)
 
 ## Module Highlights

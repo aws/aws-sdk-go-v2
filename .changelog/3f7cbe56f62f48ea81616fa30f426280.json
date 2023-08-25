@@ -1,8 +1,0 @@
-{
-    "id": "3f7cbe56-f62f-48ea-8161-6fa30f426280",
-    "type": "documentation",
-    "description": "Doc-only update to get doc bug fixes into the SDK docs",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

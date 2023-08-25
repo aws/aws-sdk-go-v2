@@ -15,8 +15,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.15.5
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.28.6
-	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.27.6
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.29.0
+	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.16.1
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.17.5
@@ -58,7 +58,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.15.5
-	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.13.5
+	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.13.6
 	github.com/aws/aws-sdk-go-v2/service/polly v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/rds v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.29.5
@@ -70,7 +70,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.21.3
-	github.com/aws/aws-sdk-go-v2/service/ses v1.16.6
+	github.com/aws/aws-sdk-go-v2/service/ses v1.16.7
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/shield v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.21.5

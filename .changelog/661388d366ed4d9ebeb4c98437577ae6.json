@@ -1,8 +1,0 @@
-{
-    "id": "661388d3-66ed-4d9e-beb4-c98437577ae6",
-    "type": "feature",
-    "description": "Added protections to interacting with fields containing customer information.",
-    "modules": [
-        "service/detective"
-    ]
-}
