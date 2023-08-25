@@ -2273,6 +2273,9 @@
                     "target": "com.amazonaws.cloudtrail#TagsLimitExceededException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#TrailAlreadyExistsException"
                 },
                 {
@@ -2717,6 +2720,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#TrailNotFoundException"
@@ -3957,6 +3963,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#TrailNotFoundException"
@@ -6650,6 +6659,9 @@
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#TrailNotFoundException"
                 },
                 {
@@ -6755,6 +6767,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#S3BucketDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#TrailNotFoundException"
@@ -7974,6 +7989,9 @@
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#TrailNotFoundException"
                 },
                 {
@@ -8315,6 +8333,9 @@
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#TrailNotFoundException"
                 },
                 {
@@ -8427,6 +8448,26 @@
         },
         "com.amazonaws.cloudtrail#TerminationProtectionEnabled": {
             "type": "boolean"
+        },
+        "com.amazonaws.cloudtrail#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ThrottlingException",
+                    "httpResponseCode": 429
+                },
+                "smithy.api#documentation": "<p>\n         This exception is thrown when the request rate exceeds the limit. \n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
         },
         "com.amazonaws.cloudtrail#Trail": {
             "type": "structure",
@@ -9069,6 +9110,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#S3BucketDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#TrailNotFoundException"
