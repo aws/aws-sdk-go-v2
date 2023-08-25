@@ -1,0 +1,10 @@
+{
+    "id": "0593bfc1-f008-41fe-bcb7-3c7957839f01",
+    "type": "feature",
+    "collapse": true,
+    "description": "Modify http cred provider logic to support ecs/eks host and auth token file",
+    "modules": [
+        "config",
+        "credentials"
+    ]
+}
