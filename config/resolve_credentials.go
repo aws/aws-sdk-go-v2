@@ -271,7 +271,7 @@ func resolveLocalHTTPCredProvider(ctx context.Context, cfg *aws.Config, endpoint
 			if isAllowedHost, allowHostErr := isAllowedHost(host); allowHostErr != nil {
 				resolveErr = fmt.Errorf("failed to resolve host %q, %v", host, allowHostErr)
 			} else if !isAllowedHost {
-				resolveErr = fmt.Errorf("invalid endpoint host, %q, only loopback/ecs/eks hosts are allowed.", host)
+				resolveErr = fmt.Errorf("invalid endpoint host, %q, only loopback/ecs/eks hosts are allowed", host)
 			}
 		}
 	}
