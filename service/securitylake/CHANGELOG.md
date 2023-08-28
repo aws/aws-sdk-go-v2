@@ -1,3 +1,7 @@
+# v1.7.0 (2023-08-28)
+
+* **Feature**: Remove incorrect regex enforcement on pagination tokens.
+
 # v1.6.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

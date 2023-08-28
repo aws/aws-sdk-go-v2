@@ -1,8 +1,0 @@
-{
-    "id": "872a1cad-6c93-44c1-892d-83dff75bb940",
-    "type": "feature",
-    "description": "Service Quotas now supports viewing the applied quota value and requesting a quota increase for a specific resource in an AWS account.",
-    "modules": [
-        "service/servicequotas"
-    ]
-}

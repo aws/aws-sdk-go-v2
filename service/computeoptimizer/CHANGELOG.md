@@ -1,3 +1,7 @@
+# v1.26.0 (2023-08-28)
+
+* **Feature**: This release enables AWS Compute Optimizer to analyze and generate licensing optimization recommendations for sql server running on EC2 instances.
+
 # v1.25.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
