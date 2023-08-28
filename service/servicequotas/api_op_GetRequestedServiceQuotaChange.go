@@ -34,7 +34,7 @@ func (c *Client) GetRequestedServiceQuotaChange(ctx context.Context, params *Get
 
 type GetRequestedServiceQuotaChangeInput struct {
 
-	// The ID of the quota increase request.
+	// Specifies the ID of the quota increase request.
 	//
 	// This member is required.
 	RequestId *string

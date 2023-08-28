@@ -31,6 +31,8 @@ type BrowserSettings struct {
 type BrowserSettingsSummary struct {
 
 	// The ARN of the browser settings.
+	//
+	// This member is required.
 	BrowserSettingsArn *string
 
 	noSmithyDocumentSerde
@@ -77,6 +79,40 @@ type CertificateSummary struct {
 
 	// A hexadecimal identifier for the certificate.
 	Thumbprint *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a single cookie or set of cookies in an end user's browser.
+type CookieSpecification struct {
+
+	// The domain of the cookie.
+	//
+	// This member is required.
+	Domain *string
+
+	// The name of the cookie.
+	Name *string
+
+	// The path of the cookie.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that specifies which cookies should be synchronized from the
+// end user's local browser to the remote browser.
+type CookieSynchronizationConfiguration struct {
+
+	// The list of cookie specifications that are allowed to be synchronized to the
+	// remote browser.
+	//
+	// This member is required.
+	Allowlist []CookieSpecification
+
+	// The list of cookie specifications that are blocked from being synchronized to
+	// the remote browser.
+	Blocklist []CookieSpecification
 
 	noSmithyDocumentSerde
 }
@@ -136,6 +172,8 @@ type IdentityProvider struct {
 type IdentityProviderSummary struct {
 
 	// The ARN of the identity provider.
+	//
+	// This member is required.
 	IdentityProviderArn *string
 
 	// The identity provider name.
@@ -177,6 +215,11 @@ type IpAccessSettings struct {
 // The summary of IP access settings.
 type IpAccessSettingsSummary struct {
 
+	// The ARN of IP access settings.
+	//
+	// This member is required.
+	IpAccessSettingsArn *string
+
 	// The creation date timestamp of the IP access settings.
 	CreationDate *time.Time
 
@@ -185,9 +228,6 @@ type IpAccessSettingsSummary struct {
 
 	// The display name of the IP access settings.
 	DisplayName *string
-
-	// The ARN of IP access settings.
-	IpAccessSettingsArn *string
 
 	noSmithyDocumentSerde
 }
@@ -238,6 +278,8 @@ type NetworkSettings struct {
 type NetworkSettingsSummary struct {
 
 	// The ARN of the network settings.
+	//
+	// This member is required.
 	NetworkSettingsArn *string
 
 	// The VPC ID of the network settings.
@@ -248,6 +290,11 @@ type NetworkSettingsSummary struct {
 
 // The web portal.
 type Portal struct {
+
+	// The ARN of the web portal.
+	//
+	// This member is required.
+	PortalArn *string
 
 	// The type of authentication integration points used when signing into the web
 	// portal. Defaults to Standard . Standard web portals are authenticated directly
@@ -279,9 +326,6 @@ type Portal struct {
 	// The ARN of the network settings that is associated with the web portal.
 	NetworkSettingsArn *string
 
-	// The ARN of the web portal.
-	PortalArn *string
-
 	// The endpoint URL of the web portal that users access in order to start
 	// streaming sessions.
 	PortalEndpoint *string
@@ -310,6 +354,11 @@ type Portal struct {
 
 // The summary of the portal.
 type PortalSummary struct {
+
+	// The ARN of the web portal.
+	//
+	// This member is required.
+	PortalArn *string
 
 	// The type of authentication integration points used when signing into the web
 	// portal. Defaults to Standard . Standard web portals are authenticated directly
@@ -340,9 +389,6 @@ type PortalSummary struct {
 
 	// The ARN of the network settings that is associated with the web portal.
 	NetworkSettingsArn *string
-
-	// The ARN of the web portal.
-	PortalArn *string
 
 	// The endpoint URL of the web portal that users access in order to start
 	// streaming sessions.
@@ -391,11 +437,13 @@ type Tag struct {
 // CA certificate to the trust store.
 type TrustStore struct {
 
+	// The ARN of the trust store.
+	//
+	// This member is required.
+	TrustStoreArn *string
+
 	// A list of web portal ARNs that this trust store is associated with.
 	AssociatedPortalArns []string
-
-	// The ARN of the trust store.
-	TrustStoreArn *string
 
 	noSmithyDocumentSerde
 }
@@ -431,11 +479,13 @@ type UserAccessLoggingSettings struct {
 // The summary of user access logging settings.
 type UserAccessLoggingSettingsSummary struct {
 
+	// The ARN of the user access logging settings.
+	//
+	// This member is required.
+	UserAccessLoggingSettingsArn *string
+
 	// The ARN of the Kinesis stream.
 	KinesisStreamArn *string
-
-	// The ARN of the user access logging settings.
-	UserAccessLoggingSettingsArn *string
 
 	noSmithyDocumentSerde
 }
@@ -452,6 +502,10 @@ type UserSettings struct {
 
 	// A list of web portal ARNs that this user settings is associated with.
 	AssociatedPortalArns []string
+
+	// The configuration that specifies which cookies should be synchronized from the
+	// end user's local browser to the remote browser.
+	CookieSynchronizationConfiguration *CookieSynchronizationConfiguration
 
 	// Specifies whether the user can copy text from the streaming session to the
 	// local device.
@@ -487,6 +541,15 @@ type UserSettings struct {
 // The summary of user settings.
 type UserSettingsSummary struct {
 
+	// The ARN of the user settings.
+	//
+	// This member is required.
+	UserSettingsArn *string
+
+	// The configuration that specifies which cookies should be synchronized from the
+	// end user's local browser to the remote browser.
+	CookieSynchronizationConfiguration *CookieSynchronizationConfiguration
+
 	// Specifies whether the user can copy text from the streaming session to the
 	// local device.
 	CopyAllowed EnabledType
@@ -514,9 +577,6 @@ type UserSettingsSummary struct {
 	// Specifies whether the user can upload files from the local device to the
 	// streaming session.
 	UploadAllowed EnabledType
-
-	// The ARN of the user settings.
-	UserSettingsArn *string
 
 	noSmithyDocumentSerde
 }

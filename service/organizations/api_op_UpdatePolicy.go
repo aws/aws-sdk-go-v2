@@ -19,7 +19,8 @@ import (
 // Updates an existing policy with a new name, description, or content. If you
 // don't supply any parameter, that value remains unchanged. You can't change a
 // policy's type. This operation can be called only from the organization's
-// management account.
+// management account or by a member account that is a delegated administrator for
+// an Amazon Web Services service.
 func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, optFns ...func(*Options)) (*UpdatePolicyOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyInput{}
@@ -47,7 +48,7 @@ type UpdatePolicyInput struct {
 
 	// If provided, the new content for the policy. The text must be correctly
 	// formatted JSON that complies with the syntax for the policy's type. For more
-	// information, see Service Control Policy Syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
+	// information, see SCP syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html)
 	// in the Organizations User Guide.
 	Content *string
 

@@ -25,8 +25,8 @@ import (
 // features enabled and service control policies automatically enabled in the root.
 // If you instead choose to create the organization supporting only the
 // consolidated billing features by setting the FeatureSet parameter to
-// CONSOLIDATED_BILLING" , no policy types are enabled by default, and you can't
-// use organization policies
+// CONSOLIDATED_BILLING , no policy types are enabled by default and you can't use
+// organization policies.
 func (c *Client) CreateOrganization(ctx context.Context, params *CreateOrganizationInput, optFns ...func(*Options)) (*CreateOrganizationOutput, error) {
 	if params == nil {
 		params = &CreateOrganizationInput{}

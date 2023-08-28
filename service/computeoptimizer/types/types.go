@@ -1272,6 +1272,156 @@ type LambdaFunctionUtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the configuration of a license for an Amazon EC2 instance.
+type LicenseConfiguration struct {
+
+	// The instance type used in the license.
+	InstanceType *string
+
+	// The edition of the license for the application that runs on the instance.
+	LicenseEdition LicenseEdition
+
+	// The license type associated with the instance.
+	LicenseModel LicenseModel
+
+	// The name of the license for the application that runs on the instance.
+	LicenseName LicenseName
+
+	// The version of the license for the application that runs on the instance.
+	LicenseVersion *string
+
+	// The list of metric sources required to generate recommendations for commercial
+	// software licenses.
+	MetricsSource []MetricSource
+
+	// The current number of cores associated with the instance.
+	NumberOfCores int32
+
+	// The operating system of the instance.
+	OperatingSystem *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a license recommendation for an EC2 instance.
+type LicenseRecommendation struct {
+
+	// The Amazon Web Services account ID of the license.
+	AccountId *string
+
+	// An object that describes the current configuration of an instance that runs on
+	// a license.
+	CurrentLicenseConfiguration *LicenseConfiguration
+
+	// The finding classification for an instance that runs on a license. Findings
+	// include:
+	//   - InsufficentMetrics — When Compute Optimizer detects that your CloudWatch
+	//   Application Insights isn't enabled or is enabled with insufficient permissions.
+	//   - NotOptimized — When Compute Optimizer detects that your EC2 infrastructure
+	//   isn't using any of the SQL server license features you're paying for, a license
+	//   is considered not optimized.
+	//   - Optimized — When Compute Optimizer detects that all specifications of your
+	//   license meet the performance requirements of your workload.
+	Finding LicenseFinding
+
+	// The reason for the finding classification for an instance that runs on a
+	// license. Finding reason codes include:
+	//   - Optimized — All specifications of your license meet the performance
+	//   requirements of your workload.
+	//   - LicenseOverprovisioned — A license is considered over-provisioned when your
+	//   license can be downgraded while still meeting the performance requirements of
+	//   your workload.
+	//   - InvalidCloudwatchApplicationInsights — CloudWatch Application Insights isn't
+	//   configured properly.
+	//   - CloudwatchApplicationInsightsError — There is a CloudWatch Application
+	//   Insights error.
+	FindingReasonCodes []LicenseFindingReasonCode
+
+	// The timestamp of when the license recommendation was last generated.
+	LastRefreshTimestamp *time.Time
+
+	// An array of objects that describe the license recommendation options.
+	LicenseRecommendationOptions []LicenseRecommendationOption
+
+	// The number of days for which utilization metrics were analyzed for an instance
+	// that runs on a license.
+	LookbackPeriodInDays float64
+
+	// The ARN that identifies the Amazon EC2 instance.
+	ResourceArn *string
+
+	// A list of tags assigned to an EC2 instance.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Describes a filter that returns a more specific list of license
+// recommendations. Use this filter with the GetLicenseRecommendation action.
+type LicenseRecommendationFilter struct {
+
+	// The name of the filter. Specify Finding to return recommendations with a
+	// specific finding classification. Specify FindingReasonCode to return
+	// recommendations with a specific finding reason code. You can filter your license
+	// recommendations by tag:key and tag-key tags. A tag:key is a key and value
+	// combination of a tag assigned to your license recommendations. Use the tag key
+	// in the filter name and the tag value as the filter value. For example, to find
+	// all license recommendations that have a tag with the key of Owner and the value
+	// of TeamA , specify tag:Owner for the filter name and TeamA for the filter
+	// value. A tag-key is the key of a tag assigned to your license recommendations.
+	// Use this filter to find all of your license recommendations that have a tag with
+	// a specific key. This doesn’t consider the tag value. For example, you can find
+	// your license recommendations with a tag key value of Owner or without any tag
+	// keys assigned.
+	Name LicenseRecommendationFilterName
+
+	// The value of the filter. The valid values for this parameter are as follows,
+	// depending on what you specify for the name parameter:
+	//   - If you specify the name parameter as Finding , then specify Optimized ,
+	//   NotOptimized , or InsufficentMetrics .
+	//   - If you specify the name parameter as FindingReasonCode , then specify
+	//   Optimized , LicenseOverprovisioned , InvalidCloudwatchApplicationInsights , or
+	//   CloudwatchApplicationInsightsError .
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the recommendation options for licenses.
+type LicenseRecommendationOption struct {
+
+	// The recommended edition of the license for the application that runs on the
+	// instance.
+	LicenseEdition LicenseEdition
+
+	// The recommended license type associated with the instance.
+	LicenseModel LicenseModel
+
+	// The operating system of a license recommendation option.
+	OperatingSystem *string
+
+	// The rank of the license recommendation option. The top recommendation option is
+	// ranked as 1 .
+	Rank int32
+
+	// Describes the savings opportunity for recommendations of a given resource type
+	// or for the recommendation option of an individual resource. Savings opportunity
+	// represents the estimated monthly savings you can achieve by implementing a given
+	// Compute Optimizer recommendation. Savings opportunity data requires that you opt
+	// in to Cost Explorer, as well as activate Receive Amazon EC2 resource
+	// recommendations in the Cost Explorer preferences page. That creates a connection
+	// between Cost Explorer and Compute Optimizer. With this connection, Cost Explorer
+	// generates savings estimates considering the price of existing resources, the
+	// price of recommended resources, and historical usage data. Estimated monthly
+	// savings reflects the projected dollar savings associated with each of the
+	// recommendations generated. For more information, see Enabling Cost Explorer (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html)
+	// and Optimizing your cost with Rightsizing Recommendations (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html)
+	// in the Cost Management User Guide.
+	SavingsOpportunity *SavingsOpportunity
+
+	noSmithyDocumentSerde
+}
+
 // The memory size configurations of a container.
 type MemorySizeConfiguration struct {
 
@@ -1280,6 +1430,19 @@ type MemorySizeConfiguration struct {
 
 	// The limit of memory reserve for the container.
 	MemoryReservation *int32
+
+	noSmithyDocumentSerde
+}
+
+// The list of metric sources required to generate recommendations for commercial
+// software licenses.
+type MetricSource struct {
+
+	// The name of the metric source provider.
+	Provider MetricSourceProvider
+
+	// The ARN of the metric source provider.
+	ProviderArn *string
 
 	noSmithyDocumentSerde
 }

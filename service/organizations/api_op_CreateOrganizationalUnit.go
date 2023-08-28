@@ -21,7 +21,7 @@ import (
 // policies according to your business requirements. The number of levels deep that
 // you can nest OUs is dependent upon the policy types enabled for that root. For
 // service control policies, the limit is five. For more information about OUs, see
-// Managing Organizational Units (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html)
+// Managing organizational units (OUs) (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html)
 // in the Organizations User Guide. If the request includes tags, then the
 // requester must have the organizations:TagResource permission. This operation
 // can be called only from the organization's management account.

@@ -1,0 +1,8 @@
+{
+    "id": "6769be65-b7c5-4288-b67b-2b5037ad36cc",
+    "type": "feature",
+    "description": "This release enables AWS Compute Optimizer to analyze and generate licensing optimization recommendations for sql server running on EC2 instances.",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

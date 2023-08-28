@@ -37,8 +37,9 @@ import (
 //   - You can close only 10% of member accounts, between 10 and 200, within a
 //     rolling 30 day period. This quota is not bound by a calendar month, but starts
 //     when you close an account. After you reach this limit, you can close additional
-//     accounts in the Billing console. For more information, see Closing an account (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/close-account.html)
-//     in the Amazon Web Services Billing and Cost Management User Guide.
+//     accounts. For more information, see Closing a member account in your
+//     organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
+//     in the Organizations User Guide.
 //
 //   - To reinstate a closed account, contact Amazon Web Services Support within
 //     the 90-day grace period while the account is in SUSPENDED status.
@@ -48,10 +49,6 @@ import (
 //     both accounts. To learn important pre-closure details, see Closing an Amazon
 //     Web Services GovCloud (US) account (https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html)
 //     in the Amazon Web Services GovCloud User Guide.
-//
-// For more information about closing accounts, see Closing an Amazon Web Services
-// account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
-// in the Organizations User Guide.
 func (c *Client) CloseAccount(ctx context.Context, params *CloseAccountInput, optFns ...func(*Options)) (*CloseAccountOutput, error) {
 	if params == nil {
 		params = &CloseAccountInput{}

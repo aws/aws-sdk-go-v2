@@ -29,7 +29,7 @@ import (
 //
 // Organizations automatically creates the required service-linked role named
 // AWSServiceRoleForOrganizations . For more information, see Organizations and
-// Service-Linked Roles (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
+// service-linked roles (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
 // in the Organizations User Guide. Amazon Web Services automatically enables
 // CloudTrail for Amazon Web Services GovCloud (US) accounts, but you should also
 // do the following:
@@ -59,8 +59,8 @@ import (
 //   - Use the OperationId response element from this operation to provide as a
 //     parameter to the DescribeCreateAccountStatus operation.
 //   - Check the CloudTrail log for the CreateAccountResult event. For information
-//     on using CloudTrail with Organizations, see Monitoring the Activity in Your
-//     Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
+//     on using CloudTrail with Organizations, see Logging and monitoring in
+//     Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html)
 //     in the Organizations User Guide.
 //
 // When you call the CreateGovCloudAccount action, you create two accounts: a
@@ -78,16 +78,15 @@ import (
 // information and to view a diagram that explains how account access works, see
 // Organizations (https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)
 // in the Amazon Web Services GovCloud User Guide. For more information about
-// creating accounts, see Creating an Amazon Web Services account in Your
-// Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
+// creating accounts, see Creating a member account in your organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
 // in the Organizations User Guide.
 //   - When you create an account in an organization using the Organizations
 //     console, API, or CLI commands, the information required for the account to
 //     operate as a standalone account is not automatically collected. This includes a
 //     payment method and signing the end user license agreement (EULA). If you must
 //     remove an account from your organization later, you can do so only after you
-//     provide the missing information. Follow the steps at To leave an organization
-//     as a member account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+//     provide the missing information. For more information, see Considerations
+//     before removing an account from an organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html)
 //     in the Organizations User Guide.
 //   - If you get an exception that indicates that you exceeded your account
 //     limits for the organization, contact Amazon Web Services Support (https://console.aws.amazon.com/support/home#/)
@@ -100,7 +99,7 @@ import (
 //     recommended. You can only close an account from the Amazon Web Services Billing
 //     and Cost Management console, and you must be signed in as the root user. For
 //     information on the requirements and process for closing an account, see
-//     Closing an Amazon Web Services account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
+//     Closing a member account in your organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
 //     in the Organizations User Guide.
 //
 // When you create a member account with this operation, you can choose whether to
@@ -108,8 +107,8 @@ import (
 // switch enabled. If you enable it, IAM users and roles that have appropriate
 // permissions can view billing information for the account. If you disable it,
 // only the account root user can access billing information. For information about
-// how to disable this switch for an account, see Granting Access to Your Billing
-// Information and Tools (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html)
+// how to disable this switch for an account, see Granting access to your billing
+// information and tools (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html)
 // .
 func (c *Client) CreateGovCloudAccount(ctx context.Context, params *CreateGovCloudAccountInput, optFns ...func(*Options)) (*CreateGovCloudAccountOutput, error) {
 	if params == nil {
@@ -162,8 +161,8 @@ type CreateGovCloudAccountInput struct {
 	// If set to ALLOW , the new linked account in the commercial Region enables IAM
 	// users to access account billing information if they have the required
 	// permissions. If set to DENY , only the root user of the new account can access
-	// account billing information. For more information, see Activating Access to the
-	// Billing and Cost Management Console (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
+	// account billing information. For more information, see About IAM access to the
+	// Billing and Cost Management console (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
 	// in the Amazon Web Services Billing and Cost Management User Guide. If you don't
 	// specify this parameter, the value defaults to ALLOW , and IAM users and roles
 	// with the required permissions can access billing information for the new
@@ -177,14 +176,15 @@ type CreateGovCloudAccountInput struct {
 	// as permitted by the management account administrator. The role has administrator
 	// permissions in the new member account. If you don't specify this parameter, the
 	// role name defaults to OrganizationAccountAccessRole . For more information about
-	// how to use this role to access the member account, see Accessing and
-	// Administering the Member Accounts in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
-	// in the Organizations User Guide and steps 2 and 3 in Tutorial: Delegate Access
-	// Across Amazon Web Services accounts Using IAM Roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
-	// in the IAM User Guide. The regex pattern (http://wikipedia.org/wiki/regex) that
-	// is used to validate this parameter. The pattern can include uppercase letters,
-	// lowercase letters, digits with no spaces, and any of the following characters:
-	// =,.@-
+	// how to use this role to access the member account, see the following links:
+	//   - Creating the OrganizationAccountAccessRole in an invited member account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
+	//   in the Organizations User Guide
+	//   - Steps 2 and 3 in IAM Tutorial: Delegate access across Amazon Web Services
+	//   accounts using IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
+	//   in the IAM User Guide
+	// The regex pattern (http://wikipedia.org/wiki/regex) that is used to validate
+	// this parameter. The pattern can include uppercase letters, lowercase letters,
+	// digits with no spaces, and any of the following characters: =,.@-
 	RoleName *string
 
 	// A list of tags that you want to attach to the newly created account. These tags

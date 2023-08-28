@@ -27,7 +27,9 @@ import (
 // attached, and specify "Effect": "Deny" in the second SCP to override the
 // "Effect": "Allow" in the FullAWSAccess policy (or any other attached SCP),
 // you're using the authorization strategy of a " deny list (https://docs.aws.amazon.com/organizations/latest/userguide/SCP_strategies.html#orgs_policies_denylist)
-// ". This operation can be called only from the organization's management account.
+// ". This operation can be called only from the organization's management account
+// or by a member account that is a delegated administrator for an Amazon Web
+// Services service.
 func (c *Client) DetachPolicy(ctx context.Context, params *DetachPolicyInput, optFns ...func(*Options)) (*DetachPolicyOutput, error) {
 	if params == nil {
 		params = &DetachPolicyInput{}

@@ -56,8 +56,8 @@ import (
 // perform the DisableAWSServiceAccess operation, the specified service can no
 // longer perform operations in your organization's accounts For more information
 // about integrating other services with Organizations, including the list of
-// services that work with Organizations, see Integrating Organizations with Other
-// Amazon Web Services Services (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
+// services that work with Organizations, see Using Organizations with other
+// Amazon Web Services services (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
 // in the Organizations User Guide. This operation can be called only from the
 // organization's management account.
 func (c *Client) DisableAWSServiceAccess(ctx context.Context, params *DisableAWSServiceAccessInput, optFns ...func(*Options)) (*DisableAWSServiceAccessOutput, error) {

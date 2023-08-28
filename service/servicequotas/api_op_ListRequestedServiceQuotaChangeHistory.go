@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the quota increase requests for the specified service.
+// Retrieves the quota increase requests for the specified Amazon Web Service.
 func (c *Client) ListRequestedServiceQuotaChangeHistory(ctx context.Context, params *ListRequestedServiceQuotaChangeHistoryInput, optFns ...func(*Options)) (*ListRequestedServiceQuotaChangeHistoryOutput, error) {
 	if params == nil {
 		params = &ListRequestedServiceQuotaChangeHistoryInput{}
@@ -34,18 +34,33 @@ func (c *Client) ListRequestedServiceQuotaChangeHistory(ctx context.Context, par
 
 type ListRequestedServiceQuotaChangeHistoryInput struct {
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, if any, make another call with the token returned from this
-	// call.
+	// Specifies the maximum number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value
+	// appropriate to the operation. If additional items exist beyond those included in
+	// the current response, the NextToken response element is present and has a value
+	// (is not null). Include that value as the NextToken request parameter in the
+	// next call to the operation to get the next part of the results. An API operation
+	// can return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	MaxResults *int32
 
-	// The token for the next page of results.
+	// Specifies a value for receiving additional results after you receive a NextToken
+	// response in a previous request. A NextToken response indicates that more output
+	// is available. Set this parameter to the value of the previous call's NextToken
+	// response to indicate where the output should continue from.
 	NextToken *string
 
-	// The service identifier.
+	// Specifies at which level within the Amazon Web Services account the quota
+	// request applies to.
+	QuotaRequestedAtLevel types.AppliedLevelEnum
+
+	// Specifies the service identifier. To find the service code value for an Amazon
+	// Web Services service, use the ListServices operation.
 	ServiceCode *string
 
-	// The status of the quota increase request.
+	// Specifies that you want to filter the results to only the requests with the
+	// matching status.
 	Status types.RequestStatus
 
 	noSmithyDocumentSerde
@@ -53,8 +68,10 @@ type ListRequestedServiceQuotaChangeHistoryInput struct {
 
 type ListRequestedServiceQuotaChangeHistoryOutput struct {
 
-	// The token to use to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// If present, indicates that more output is available than is included in the
+	// current response. Use this value in the NextToken request parameter in a
+	// subsequent call to the operation to get the next part of the output. You should
+	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
 	// Information about the quota increase requests.
@@ -149,9 +166,15 @@ var _ ListRequestedServiceQuotaChangeHistoryAPIClient = (*Client)(nil)
 // ListRequestedServiceQuotaChangeHistoryPaginatorOptions is the paginator options
 // for ListRequestedServiceQuotaChangeHistory
 type ListRequestedServiceQuotaChangeHistoryPaginatorOptions struct {
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, if any, make another call with the token returned from this
-	// call.
+	// Specifies the maximum number of results that you want included on each page of
+	// the response. If you do not include this parameter, it defaults to a value
+	// appropriate to the operation. If additional items exist beyond those included in
+	// the current response, the NextToken response element is present and has a value
+	// (is not null). Include that value as the NextToken request parameter in the
+	// next call to the operation to get the next part of the results. An API operation
+	// can return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that you
+	// receive all of the results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

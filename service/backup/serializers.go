@@ -5900,6 +5900,11 @@ func awsRestjson1_serializeDocumentBackupRuleInput(v *types.BackupRuleInput, val
 		ok.String(*v.ScheduleExpression)
 	}
 
+	if v.ScheduleExpressionTimezone != nil {
+		ok := object.Key("ScheduleExpressionTimezone")
+		ok.String(*v.ScheduleExpressionTimezone)
+	}
+
 	if v.StartWindowMinutes != nil {
 		ok := object.Key("StartWindowMinutes")
 		ok.Long(*v.StartWindowMinutes)

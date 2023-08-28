@@ -51,15 +51,17 @@ type ListTrustStoreCertificatesInput struct {
 
 type ListTrustStoreCertificatesOutput struct {
 
+	// The ARN of the trust store.
+	//
+	// This member is required.
+	TrustStoreArn *string
+
 	// The certificate list.
 	CertificateList []types.CertificateSummary
 
 	// The pagination token used to retrieve the next page of results for this
 	// operation.>
 	NextToken *string
-
-	// The ARN of the trust store.
-	TrustStoreArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

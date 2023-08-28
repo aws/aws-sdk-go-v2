@@ -27,8 +27,9 @@ import (
 // are enabled for the organization. Amazon Web Services recommends that you first
 // use ListRoots to see the status of policy types for a specified root, and then
 // use this operation. This operation can be called only from the organization's
-// management account. To view the status of available policy types in the
-// organization, use DescribeOrganization .
+// management account or by a member account that is a delegated administrator for
+// an Amazon Web Services service. To view the status of available policy types in
+// the organization, use DescribeOrganization .
 func (c *Client) DisablePolicyType(ctx context.Context, params *DisablePolicyTypeInput, optFns ...func(*Options)) (*DisablePolicyTypeOutput, error) {
 	if params == nil {
 		params = &DisablePolicyTypeInput{}

@@ -305,6 +305,15 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "appmesh.eu-west-3.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "il-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "il-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "appmesh.il-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "me-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

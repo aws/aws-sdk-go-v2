@@ -180,7 +180,7 @@ func (e *AccountNotRegisteredException) ErrorFault() smithy.ErrorFault { return 
 
 // You can't invite an existing account to your organization until you verify that
 // you own the email address associated with the management account. For more
-// information, see Email Address Verification (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_create.html#about-email-verification)
+// information, see Email address verification (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_create.html#about-email-verification)
 // in the Organizations User Guide.
 type AccountOwnerNotVerifiedException struct {
 	Message *string
@@ -365,7 +365,7 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //     create an organization.
 //   - ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the
 //     number of accounts in an organization. If you need more accounts, contact
-//     Amazon Web Services Support (https://docs.aws.amazon.com/support/home#/) to
+//     Amazon Web Services Support (https://console.aws.amazon.com/support/home#/) to
 //     request an increase in your limit. Or the number of invitations that you tried
 //     to send would cause you to exceed the limit of accounts in your organization.
 //     Send fewer invitations or contact Amazon Web Services Support to request an
@@ -373,7 +373,9 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //     toward your limit. If you get this exception when running a command immediately
 //     after creating the organization, wait one hour and try again. After an hour, if
 //     the command continues to fail with this error, contact Amazon Web Services
-//     Support (https://docs.aws.amazon.com/support/home#/) .
+//     Support (https://console.aws.amazon.com/support/home#/) .
+//   - CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR: You cannot
+//     register a suspended account as a delegated administrator.
 //   - CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to
 //     register the management account of the organization as a delegated administrator
 //     for an Amazon Web Services service integrated with Organizations. You can
@@ -425,8 +427,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //     in the Amazon Web Services GovCloud User Guide.
 //   - MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with
 //     this management account, you first must associate a valid payment instrument,
-//     such as a credit card, with the account. Follow the steps at To leave an
-//     organization when all required account information has not yet been provided (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+//     such as a credit card, with the account. For more information, see
+//     Considerations before removing an account from an organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html)
 //     in the Organizations User Guide.
 //   - MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED: You attempted to
 //     register more delegated administrators than allowed for the service principal.
@@ -437,8 +439,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //     this resource.
 //   - MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this operation with
 //     this member account, you first must associate a valid payment instrument, such
-//     as a credit card, with the account. Follow the steps at To leave an
-//     organization when all required account information has not yet been provided (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+//     as a credit card, with the account. For more information, see Considerations
+//     before removing an account from an organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html)
 //     in the Organizations User Guide.
 //   - MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy
 //     from an entity that would cause the entity to have fewer than the minimum number
@@ -778,7 +780,7 @@ func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { retu
 //     number of accounts in an organization. Note that deleted and closed accounts
 //     still count toward your limit. If you get this exception immediately after
 //     creating the organization, wait one hour and try again. If after an hour it
-//     continues to fail with this error, contact Amazon Web Services Support (https://docs.aws.amazon.com/support/home#/)
+//     continues to fail with this error, contact Amazon Web Services Support (https://console.aws.amazon.com/support/home#/)
 //     .
 //   - ALREADY_IN_AN_ORGANIZATION: The handshake request is invalid because the
 //     invited account is already a member of an organization.
@@ -967,7 +969,7 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 // The provided policy document doesn't meet the requirements of the specified
 // policy type. For example, the syntax might be incorrect. For details about
-// service control policy syntax, see Service Control Policy Syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
+// service control policy syntax, see SCP syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html)
 // in the Organizations User Guide.
 type MalformedPolicyDocumentException struct {
 	Message *string
@@ -1082,8 +1084,7 @@ func (e *OrganizationalUnitNotFoundException) ErrorFault() smithy.ErrorFault {
 }
 
 // The organization isn't empty. To delete an organization, you must first remove
-// all accounts except the management account, delete all OUs, and delete all
-// policies.
+// all accounts except the management account.
 type OrganizationNotEmptyException struct {
 	Message *string
 
@@ -1270,7 +1271,7 @@ func (e *PolicyTypeAlreadyEnabledException) ErrorFault() smithy.ErrorFault { ret
 // You can't use the specified policy type with the feature set currently enabled
 // for this organization. For example, you can enable SCPs only after you enable
 // all features in the organization. For more information, see Managing
-// Organizations Policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html#enable_policies_on_root)
+// Organizations policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html#enable_policies_on_root)
 // in the Organizations User Guide.
 type PolicyTypeNotAvailableForOrganizationException struct {
 	Message *string
@@ -1301,8 +1302,8 @@ func (e *PolicyTypeNotAvailableForOrganizationException) ErrorFault() smithy.Err
 
 // The specified policy type isn't currently enabled in this root. You can't
 // attach policies of the specified type to entities in a root until you enable
-// that type in the root. For more information, see Enabling All Features in Your
-// Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
+// that type in the root. For more information, see Enabling all features in your
+// organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
 // in the Organizations User Guide.
 type PolicyTypeNotEnabledException struct {
 	Message *string

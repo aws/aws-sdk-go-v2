@@ -1,0 +1,8 @@
+{
+    "id": "d618e409-8cb6-4fd9-8ff7-82f691f9069f",
+    "type": "feature",
+    "description": "Remove incorrect regex enforcement on pagination tokens.",
+    "modules": [
+        "service/securitylake"
+    ]
+}
