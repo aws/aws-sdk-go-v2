@@ -37,7 +37,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The action you attempted is not allowed unless Service Access with Service Quotas is\n      enabled in your organization.</p>",
+                "smithy.api#documentation": "<p>The action you attempted is not allowed unless Service Access with Service Quotas is enabled in\n            your organization.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -62,7 +62,30 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "arn:aws(-[\\w]+)*:*:.+:[0-9]{12}:.+"
+                "smithy.api#pattern": "^arn:aws(-[\\w]+)*:*:.+:[0-9]{12}:.+$"
+            }
+        },
+        "com.amazonaws.servicequotas#AppliedLevelEnum": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
             }
         },
         "com.amazonaws.servicequotas#AssociateServiceQuotaTemplate": {
@@ -100,16 +123,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates your quota request template with your organization. When a new account is\n      created in your organization, the quota increase requests in the template are automatically\n      applied to the account. You can add a quota increase request for any adjustable quota to your\n      template.</p>"
+                "smithy.api#documentation": "<p>Associates your quota request template with your organization. When a new\n            Amazon Web Services account is created in your organization, the quota increase requests in the\n            template are automatically applied to the account. You can add a quota increase request\n            for any adjustable quota to your template.</p>"
             }
         },
         "com.amazonaws.servicequotas#AssociateServiceQuotaTemplateRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.servicequotas#AssociateServiceQuotaTemplateResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.servicequotas#AwsRegion": {
             "type": "string",
@@ -118,7 +147,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z][a-zA-Z0-9-]{1,128}"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,128}$"
             }
         },
         "com.amazonaws.servicequotas#CustomerServiceEngagementId": {
@@ -165,7 +194,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the quota increase request for the specified quota from your quota request\n      template.</p>"
+                "smithy.api#documentation": "<p>Deletes the quota increase request for the specified quota from your quota request\n            template.</p>"
             }
         },
         "com.amazonaws.servicequotas#DeleteServiceQuotaIncreaseRequestFromTemplateRequest": {
@@ -174,29 +203,35 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QuotaCode": {
                     "target": "com.amazonaws.servicequotas#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AwsRegion": {
                     "target": "com.amazonaws.servicequotas#AwsRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services Region for which the request was made.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#DeleteServiceQuotaIncreaseRequestFromTemplateResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.servicequotas#DependencyAccessDeniedException": {
             "type": "structure",
@@ -246,38 +281,50 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables your quota request template. After a template is disabled, the quota increase\n      requests in the template are not applied to new accounts in your organization. Disabling a\n      quota request template does not apply its quota increase requests.</p>"
+                "smithy.api#documentation": "<p>Disables your quota request template. After a template is disabled, the quota increase\n            requests in the template are not applied to new Amazon Web Services accounts in your organization.\n            Disabling a quota request template does not apply its quota increase requests.</p>"
             }
         },
         "com.amazonaws.servicequotas#DisassociateServiceQuotaTemplateRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.servicequotas#DisassociateServiceQuotaTemplateResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.servicequotas#ErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DEPENDENCY_ACCESS_DENIED_ERROR",
-                        "name": "DEPENDENCY_ACCESS_DENIED_ERROR"
-                    },
-                    {
-                        "value": "DEPENDENCY_THROTTLING_ERROR",
-                        "name": "DEPENDENCY_THROTTLING_ERROR"
-                    },
-                    {
-                        "value": "DEPENDENCY_SERVICE_ERROR",
-                        "name": "DEPENDENCY_SERVICE_ERROR"
-                    },
-                    {
-                        "value": "SERVICE_QUOTA_NOT_AVAILABLE_ERROR",
-                        "name": "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"
+            "type": "enum",
+            "members": {
+                "DEPENDENCY_ACCESS_DENIED_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPENDENCY_ACCESS_DENIED_ERROR"
                     }
-                ]
+                },
+                "DEPENDENCY_THROTTLING_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPENDENCY_THROTTLING_ERROR"
+                    }
+                },
+                "DEPENDENCY_SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPENDENCY_SERVICE_ERROR"
+                    }
+                },
+                "SERVICE_QUOTA_NOT_AVAILABLE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.servicequotas#ErrorMessage": {
@@ -289,7 +336,7 @@
                 "ErrorCode": {
                     "target": "com.amazonaws.servicequotas#ErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Service Quotas returns the following error values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> - The caller does not have the required\n          permissions to complete the action. To resolve the error, you must have permission to\n          access the service or quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPENDENCY_THROTTLING_ERROR</code> - The service is throttling Service\n          Quotas.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPENDENCY_SERVICE_ERROR</code> - The service is not available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> - There was an error in Service\n          Quotas.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Service Quotas returns the following error values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> - The caller does not have the\n                    required permissions to complete the action. To resolve the error, you must have\n                    permission to access the Amazon Web Service or quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPENDENCY_THROTTLING_ERROR</code> - The Amazon Web Service is throttling\n                    Service Quotas. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPENDENCY_SERVICE_ERROR</code> - The Amazon Web Service is not\n                    available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> - There was an error in\n                    Service Quotas.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ErrorMessage": {
@@ -332,7 +379,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the default value for the specified quota. The default value does not reflect\n      any quota increases.</p>"
+                "smithy.api#documentation": "<p>Retrieves the default value for the specified quota. The default value does not\n            reflect any quota increases.</p>"
             }
         },
         "com.amazonaws.servicequotas#GetAWSDefaultServiceQuotaRequest": {
@@ -341,17 +388,20 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QuotaCode": {
                     "target": "com.amazonaws.servicequotas#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#GetAWSDefaultServiceQuotaResponse": {
@@ -363,6 +413,9 @@
                         "smithy.api#documentation": "<p>Information about the quota.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#GetAssociationForServiceQuotaTemplate": {
@@ -405,7 +458,10 @@
         },
         "com.amazonaws.servicequotas#GetAssociationForServiceQuotaTemplateRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.servicequotas#GetAssociationForServiceQuotaTemplateResponse": {
             "type": "structure",
@@ -413,9 +469,12 @@
                 "ServiceQuotaTemplateAssociationStatus": {
                     "target": "com.amazonaws.servicequotas#ServiceQuotaTemplateAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The association status. If the status is <code>ASSOCIATED</code>, the quota increase\n      requests in the template are automatically applied to new accounts in your\n      organization.</p>"
+                        "smithy.api#documentation": "<p>The association status. If the status is <code>ASSOCIATED</code>, the quota increase\n            requests in the template are automatically applied to new Amazon Web Services accounts in your\n            organization.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#GetRequestedServiceQuotaChange": {
@@ -453,10 +512,13 @@
                 "RequestId": {
                     "target": "com.amazonaws.servicequotas#RequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the quota increase request.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the quota increase request.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#GetRequestedServiceQuotaChangeResponse": {
@@ -468,6 +530,9 @@
                         "smithy.api#documentation": "<p>Information about the quota increase request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#GetServiceQuota": {
@@ -496,7 +561,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the applied quota value for the specified quota. For some quotas, only the\n      default values are available. If the applied quota value is not available for a quota, the\n      quota is not retrieved.</p>"
+                "smithy.api#documentation": "<p>Retrieves the applied quota value for the specified quota. For some quotas, only the\n            default values are available. If the applied quota value is not available for a quota,\n            the quota is not retrieved.</p>"
             }
         },
         "com.amazonaws.servicequotas#GetServiceQuotaIncreaseRequestFromTemplate": {
@@ -537,7 +602,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the specified quota increase request in your quota request\n      template.</p>"
+                "smithy.api#documentation": "<p>Retrieves information about the specified quota increase request in your quota request\n            template.</p>"
             }
         },
         "com.amazonaws.servicequotas#GetServiceQuotaIncreaseRequestFromTemplateRequest": {
@@ -546,24 +611,27 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QuotaCode": {
                     "target": "com.amazonaws.servicequotas#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AwsRegion": {
                     "target": "com.amazonaws.servicequotas#AwsRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services Region for which you made the request.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#GetServiceQuotaIncreaseRequestFromTemplateResponse": {
@@ -575,6 +643,9 @@
                         "smithy.api#documentation": "<p>Information about the quota increase request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#GetServiceQuotaRequest": {
@@ -583,17 +654,26 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QuotaCode": {
                     "target": "com.amazonaws.servicequotas#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ContextId": {
+                    "target": "com.amazonaws.servicequotas#QuotaContextId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services account or resource to which the quota applies. The value in this field\n              depends on the context scope associated with the specified service quota.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#GetServiceQuotaResponse": {
@@ -605,6 +685,9 @@
                         "smithy.api#documentation": "<p>Information about the quota.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#GlobalQuota": {
@@ -698,7 +781,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the default values for the quotas for the specified AWS service. A default value\n      does not reflect any quota increases.</p>",
+                "smithy.api#documentation": "<p>Lists the default values for the quotas for the specified Amazon Web Service. A default\n            value does not reflect any quota increases.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -713,22 +796,25 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                        "smithy.api#documentation": "<p>Specifies a value for receiving additional results after you \n    receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> \n    response indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.servicequotas#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n      results, if any, make another call with the token returned from this call.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum number of results that you want included on each \n    page of the response. If you do not include this parameter, it defaults to a value appropriate \n    to the operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#ListAWSDefaultServiceQuotasResponse": {
@@ -737,7 +823,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n      no more results to return.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
                     }
                 },
                 "Quotas": {
@@ -746,6 +832,9 @@
                         "smithy.api#documentation": "<p>Information about the quotas.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#ListRequestedServiceQuotaChangeHistory": {
@@ -777,7 +866,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the quota increase requests for the specified service.</p>",
+                "smithy.api#documentation": "<p>Retrieves the quota increase requests for the specified Amazon Web Service.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -830,35 +919,44 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QuotaCode": {
                     "target": "com.amazonaws.servicequotas#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.servicequotas#RequestStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status value of the quota increase request.</p>"
+                        "smithy.api#documentation": "<p>Specifies that you want to filter the results to only the requests with the matching\n            status.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                        "smithy.api#documentation": "<p>Specifies a value for receiving additional results after you \n    receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> \n    response indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.servicequotas#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n      results, if any, make another call with the token returned from this call.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum number of results that you want included on each \n    page of the response. If you do not include this parameter, it defaults to a value appropriate \n    to the operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>"
+                    }
+                },
+                "QuotaRequestedAtLevel": {
+                    "target": "com.amazonaws.servicequotas#AppliedLevelEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies at which level within the Amazon Web Services account the quota request applies to.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#ListRequestedServiceQuotaChangeHistoryByQuotaResponse": {
@@ -867,7 +965,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n      no more results to return.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
                     }
                 },
                 "RequestedQuotas": {
@@ -876,6 +974,9 @@
                         "smithy.api#documentation": "<p>Information about the quota increase requests.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#ListRequestedServiceQuotaChangeHistoryRequest": {
@@ -884,27 +985,36 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>"
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.servicequotas#RequestStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the quota increase request.</p>"
+                        "smithy.api#documentation": "<p>Specifies that you want to filter the results to only the requests with the matching\n            status.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                        "smithy.api#documentation": "<p>Specifies a value for receiving additional results after you \n    receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> \n    response indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.servicequotas#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n      results, if any, make another call with the token returned from this call.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum number of results that you want included on each \n    page of the response. If you do not include this parameter, it defaults to a value appropriate \n    to the operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>"
+                    }
+                },
+                "QuotaRequestedAtLevel": {
+                    "target": "com.amazonaws.servicequotas#AppliedLevelEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies at which level within the Amazon Web Services account the quota request applies to.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#ListRequestedServiceQuotaChangeHistoryResponse": {
@@ -913,7 +1023,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n      no more results to return.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
                     }
                 },
                 "RequestedQuotas": {
@@ -922,6 +1032,9 @@
                         "smithy.api#documentation": "<p>Information about the quota increase requests.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#ListServiceQuotaIncreaseRequestsInTemplate": {
@@ -974,27 +1087,30 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>"
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>"
                     }
                 },
                 "AwsRegion": {
                     "target": "com.amazonaws.servicequotas#AwsRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services Region for which you made the request.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                        "smithy.api#documentation": "<p>Specifies a value for receiving additional results after you \n    receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> \n    response indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.servicequotas#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n      results, if any, make another call with the token returned from this call.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum number of results that you want included on each \n    page of the response. If you do not include this parameter, it defaults to a value appropriate \n    to the operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#ListServiceQuotaIncreaseRequestsInTemplateResponse": {
@@ -1009,9 +1125,12 @@
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n      no more results to return.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#ListServiceQuotas": {
@@ -1043,7 +1162,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the applied quota values for the specified AWS service. For some quotas, only the\n      default values are available. If the applied quota value is not available for a quota, the\n      quota is not retrieved.</p>",
+                "smithy.api#documentation": "<p>Lists the applied quota values for the specified Amazon Web Service. For some quotas, only\n            the default values are available. If the applied quota value is not available for a\n            quota, the quota is not retrieved.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1058,22 +1177,37 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                        "smithy.api#documentation": "<p>Specifies a value for receiving additional results after you \n    receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> \n    response indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.servicequotas#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n      results, if any, make another call with the token returned from this call.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum number of results that you want included on each \n    page of the response. If you do not include this parameter, it defaults to a value appropriate \n    to the operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>"
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.servicequotas#QuotaCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>"
+                    }
+                },
+                "QuotaAppliedAtLevel": {
+                    "target": "com.amazonaws.servicequotas#AppliedLevelEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies at which level of granularity that the quota value is applied.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#ListServiceQuotasResponse": {
@@ -1082,7 +1216,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n      no more results to return.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
                     }
                 },
                 "Quotas": {
@@ -1091,6 +1225,9 @@
                         "smithy.api#documentation": "<p>Information about the quotas.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#ListServices": {
@@ -1119,7 +1256,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the names and codes for the services integrated with Service Quotas.</p>",
+                "smithy.api#documentation": "<p>Lists the names and codes for the Amazon Web Services integrated with Service Quotas.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1134,15 +1271,18 @@
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                        "smithy.api#documentation": "<p>Specifies a value for receiving additional results after you \n    receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> \n    response indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.servicequotas#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n      results, if any, make another call with the token returned from this call.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum number of results that you want included on each \n    page of the response. If you do not include this parameter, it defaults to a value appropriate \n    to the operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#ListServicesResponse": {
@@ -1151,15 +1291,18 @@
                 "NextToken": {
                     "target": "com.amazonaws.servicequotas#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n      no more results to return.</p>"
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
                     }
                 },
                 "Services": {
                     "target": "com.amazonaws.servicequotas#ServiceInfoListDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the services.</p>"
+                        "smithy.api#documentation": "<p>The list of the Amazon Web Service names and service codes.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#ListTagsForResource": {
@@ -1197,10 +1340,13 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.servicequotas#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the applied quota for which you want to list tags. You\n      can get this information by using the Service Quotas console, or by listing the quotas using the\n        <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> AWS CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> AWS API operation.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the applied quota for which you want to list tags.\n            You can get this information by using the Service Quotas console, or by listing the quotas\n            using the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> Amazon Web Services API operation.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#ListTagsForResourceResponse": {
@@ -1212,6 +1358,9 @@
                         "smithy.api#documentation": "<p>A complex data type that contains zero or more tag elements.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#MaxResults": {
@@ -1262,7 +1411,7 @@
                 "MetricDimensions": {
                     "target": "com.amazonaws.servicequotas#MetricDimensionsMapDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metric dimension. This is a name/value pair that is part of the identity of a\n      metric.</p>"
+                        "smithy.api#documentation": "<p>The metric dimension. This is a name/value pair that is part of the identity of a\n            metric.</p>"
                     }
                 },
                 "MetricStatisticRecommendation": {
@@ -1294,7 +1443,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The account making this call is not a member of an organization.</p>",
+                "smithy.api#documentation": "<p>The Amazon Web Services account making this call is not a member of an organization.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -1320,7 +1469,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The organization that your account belongs to is not in All Features mode.</p>",
+                "smithy.api#documentation": "<p>The organization that your Amazon Web Services account belongs to is not in All Features\n            mode.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1338,38 +1487,50 @@
             }
         },
         "com.amazonaws.servicequotas#PeriodUnit": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MICROSECOND",
-                        "name": "MICROSECOND"
-                    },
-                    {
-                        "value": "MILLISECOND",
-                        "name": "MILLISECOND"
-                    },
-                    {
-                        "value": "SECOND",
-                        "name": "SECOND"
-                    },
-                    {
-                        "value": "MINUTE",
-                        "name": "MINUTE"
-                    },
-                    {
-                        "value": "HOUR",
-                        "name": "HOUR"
-                    },
-                    {
-                        "value": "DAY",
-                        "name": "DAY"
-                    },
-                    {
-                        "value": "WEEK",
-                        "name": "WEEK"
+            "type": "enum",
+            "members": {
+                "MICROSECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MICROSECOND"
                     }
-                ]
+                },
+                "MILLISECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MILLISECOND"
+                    }
+                },
+                "SECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECOND"
+                    }
+                },
+                "MINUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINUTE"
+                    }
+                },
+                "HOUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOUR"
+                    }
+                },
+                "DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAY"
+                    }
+                },
+                "WEEK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEK"
+                    }
+                }
             }
         },
         "com.amazonaws.servicequotas#PeriodValue": {
@@ -1425,31 +1586,34 @@
                 "QuotaCode": {
                     "target": "com.amazonaws.servicequotas#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AwsRegion": {
                     "target": "com.amazonaws.servicequotas#AwsRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services Region to which the template applies.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DesiredValue": {
                     "target": "com.amazonaws.servicequotas#QuotaValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new, increased value for the quota.</p>",
+                        "smithy.api#documentation": "<p>Specifies the new, increased value for the quota.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#PutServiceQuotaIncreaseRequestIntoTemplateResponse": {
@@ -1461,6 +1625,9 @@
                         "smithy.api#documentation": "<p>Information about the quota increase request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#QuotaAdjustable": {
@@ -1479,8 +1646,57 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z][a-zA-Z0-9-]{1,128}"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,128}$"
             }
+        },
+        "com.amazonaws.servicequotas#QuotaContextId": {
+            "type": "string"
+        },
+        "com.amazonaws.servicequotas#QuotaContextInfo": {
+            "type": "structure",
+            "members": {
+                "ContextScope": {
+                    "target": "com.amazonaws.servicequotas#QuotaContextScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the quota applies to an Amazon Web Services account, or to a resource.</p>"
+                    }
+                },
+                "ContextScopeType": {
+                    "target": "com.amazonaws.servicequotas#QuotaContextScopeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the <code>ContextScope</code> is <code>RESOURCE</code>, then this specifies the resource type of the specified resource.</p>"
+                    }
+                },
+                "ContextId": {
+                    "target": "com.amazonaws.servicequotas#QuotaContextId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services account or resource to which the quota applies. The value in this field\n              depends on the context scope associated with the specified service quota.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that describes the context for a service quota. The context identifies what the quota applies to.</p>"
+            }
+        },
+        "com.amazonaws.servicequotas#QuotaContextScope": {
+            "type": "enum",
+            "members": {
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                },
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.servicequotas#QuotaContextScopeType": {
+            "type": "string"
         },
         "com.amazonaws.servicequotas#QuotaExceededException": {
             "type": "structure",
@@ -1490,7 +1706,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You have exceeded your service quota. To perform the requested action, remove some of the\n      relevant resources, or use Service Quotas to request a service quota increase.</p>",
+                "smithy.api#documentation": "<p>You have exceeded your service quota. To perform the requested action, remove some of\n            the relevant resources, or use Service Quotas to request a service quota increase.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -1510,7 +1726,7 @@
                 "PeriodValue": {
                     "target": "com.amazonaws.servicequotas#PeriodValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value.</p>"
+                        "smithy.api#documentation": "<p>The value associated with the reported <code>PeriodUnit</code>.</p>"
                     }
                 },
                 "PeriodUnit": {
@@ -1543,7 +1759,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[0-9a-zA-Z][a-zA-Z0-9-]{1,128}"
+                "smithy.api#pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]{1,128}$"
             }
         },
         "com.amazonaws.servicequotas#RequestServiceQuotaIncrease": {
@@ -1593,24 +1809,33 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QuotaCode": {
                     "target": "com.amazonaws.servicequotas#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota identifier.</p>",
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DesiredValue": {
                     "target": "com.amazonaws.servicequotas#QuotaValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new, increased value for the quota.</p>",
+                        "smithy.api#documentation": "<p>Specifies the new, increased value for the quota.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ContextId": {
+                    "target": "com.amazonaws.servicequotas#QuotaContextId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services account or resource to which the quota applies. The value in this field\n              depends on the context scope associated with the specified service quota.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#RequestServiceQuotaIncreaseResponse": {
@@ -1622,33 +1847,56 @@
                         "smithy.api#documentation": "<p>Information about the quota increase request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicequotas#RequestStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "CASE_OPENED",
-                        "name": "CASE_OPENED"
-                    },
-                    {
-                        "value": "APPROVED",
-                        "name": "APPROVED"
-                    },
-                    {
-                        "value": "DENIED",
-                        "name": "DENIED"
-                    },
-                    {
-                        "value": "CASE_CLOSED",
-                        "name": "CASE_CLOSED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "CASE_OPENED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CASE_OPENED"
+                    }
+                },
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENIED"
+                    }
+                },
+                "CASE_CLOSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CASE_CLOSED"
+                    }
+                },
+                "NOT_APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPROVED"
+                    }
+                },
+                "INVALID_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_REQUEST"
+                    }
+                }
             }
         },
         "com.amazonaws.servicequotas#RequestedServiceQuotaChange": {
@@ -1669,25 +1917,25 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>"
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>"
                     }
                 },
                 "ServiceName": {
                     "target": "com.amazonaws.servicequotas#ServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service name.</p>"
+                        "smithy.api#documentation": "<p>Specifies the service name.</p>"
                     }
                 },
                 "QuotaCode": {
                     "target": "com.amazonaws.servicequotas#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota identifier.</p>"
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>"
                     }
                 },
                 "QuotaName": {
                     "target": "com.amazonaws.servicequotas#QuotaName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota name.</p>"
+                        "smithy.api#documentation": "<p>Specifies the quota name.</p>"
                     }
                 },
                 "DesiredValue": {
@@ -1705,7 +1953,7 @@
                 "Created": {
                     "target": "com.amazonaws.servicequotas#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time when the quota increase request was received and the case ID was\n      created.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the quota increase request was received and the case ID was\n            created.</p>"
                     }
                 },
                 "LastUpdated": {
@@ -1737,6 +1985,18 @@
                     "target": "com.amazonaws.servicequotas#QuotaUnit",
                     "traits": {
                         "smithy.api#documentation": "<p>The unit of measurement.</p>"
+                    }
+                },
+                "QuotaRequestedAtLevel": {
+                    "target": "com.amazonaws.servicequotas#AppliedLevelEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies at which level within the Amazon Web Services account the quota request applies to.</p>"
+                    }
+                },
+                "QuotaContext": {
+                    "target": "com.amazonaws.servicequotas#QuotaContextInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context for this service quota.</p>"
                     }
                 }
             },
@@ -1773,7 +2033,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-zA-Z][a-zA-Z0-9-]{1,63}"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,63}$"
             }
         },
         "com.amazonaws.servicequotas#ServiceException": {
@@ -1795,18 +2055,18 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>"
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>"
                     }
                 },
                 "ServiceName": {
                     "target": "com.amazonaws.servicequotas#ServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service name.</p>"
+                        "smithy.api#documentation": "<p>Specifies the service name.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a service.</p>"
+                "smithy.api#documentation": "<p>Information about an Amazon Web Service.</p>"
             }
         },
         "com.amazonaws.servicequotas#ServiceInfoListDefinition": {
@@ -1824,13 +2084,13 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>"
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>"
                     }
                 },
                 "ServiceName": {
                     "target": "com.amazonaws.servicequotas#ServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service name.</p>"
+                        "smithy.api#documentation": "<p>Specifies the service name.</p>"
                     }
                 },
                 "QuotaArn": {
@@ -1842,13 +2102,13 @@
                 "QuotaCode": {
                     "target": "com.amazonaws.servicequotas#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota identifier.</p>"
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>"
                     }
                 },
                 "QuotaName": {
                     "target": "com.amazonaws.servicequotas#QuotaName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota name.</p>"
+                        "smithy.api#documentation": "<p>Specifies the quota name.</p>"
                     }
                 },
                 "Value": {
@@ -1894,6 +2154,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The error code and error reason.</p>"
                     }
+                },
+                "QuotaAppliedAtLevel": {
+                    "target": "com.amazonaws.servicequotas#AppliedLevelEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies at which level of granularity that the quota value is applied.</p>"
+                    }
+                },
+                "QuotaContext": {
+                    "target": "com.amazonaws.servicequotas#QuotaContextInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context for this service quota.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1906,25 +2178,25 @@
                 "ServiceCode": {
                     "target": "com.amazonaws.servicequotas#ServiceCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service identifier.</p>"
+                        "smithy.api#documentation": "<p>Specifies the service identifier. To find the service code value \n             for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>"
                     }
                 },
                 "ServiceName": {
                     "target": "com.amazonaws.servicequotas#ServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service name.</p>"
+                        "smithy.api#documentation": "<p>Specifies the service name.</p>"
                     }
                 },
                 "QuotaCode": {
                     "target": "com.amazonaws.servicequotas#QuotaCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota identifier.</p>"
+                        "smithy.api#documentation": "<p>Specifies the quota identifier. To find the quota code for a specific \n             quota, use the <a>ListServiceQuotas</a> operation, and look for the\n             <code>QuotaCode</code> response in the output for the quota you want.</p>"
                     }
                 },
                 "QuotaName": {
                     "target": "com.amazonaws.servicequotas#QuotaName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quota name.</p>"
+                        "smithy.api#documentation": "<p>Specifies the quota name.</p>"
                     }
                 },
                 "DesiredValue": {
@@ -1936,7 +2208,7 @@
                 "AwsRegion": {
                     "target": "com.amazonaws.servicequotas#AwsRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>"
                     }
                 },
                 "Unit": {
@@ -1970,18 +2242,20 @@
             }
         },
         "com.amazonaws.servicequotas#ServiceQuotaTemplateAssociationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASSOCIATED",
-                        "name": "ASSOCIATED"
-                    },
-                    {
-                        "value": "DISASSOCIATED",
-                        "name": "DISASSOCIATED"
+            "type": "enum",
+            "members": {
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED"
                     }
-                ]
+                },
+                "DISASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATED"
+                    }
+                }
             }
         },
         "com.amazonaws.servicequotas#ServiceQuotaTemplateNotInUseException": {
@@ -2071,7 +2345,7 @@
                     "name": "servicequotas"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>With Service Quotas, you can view and manage your quotas easily as your AWS workloads\n      grow. Quotas, also referred to as limits, are the maximum number of resources that you can\n      create in your AWS account. For more information, see the <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/\">Service Quotas User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>With Service Quotas, you can view and manage your quotas easily as your Amazon Web Services workloads grow.\n            Quotas, also referred to as limits, are the maximum number of resources that you can\n            create in your Amazon Web Services account. For more information, see the <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/\">Service Quotas User Guide</a>.</p>",
                 "smithy.api#title": "Service Quotas",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2133,9 +2407,213 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://servicequotas-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://servicequotas.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://servicequotas-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2148,15 +2626,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://servicequotas.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://servicequotas.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2168,283 +2681,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://servicequotas-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        "aws-us-gov",
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": [
-                                                                                                {
-                                                                                                    "ref": "PartitionResult"
-                                                                                                },
-                                                                                                "name"
-                                                                                            ]
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://servicequotas.{Region}.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://servicequotas-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://servicequotas.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://servicequotas.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -2459,8 +2697,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2472,8 +2710,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2485,8 +2723,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2498,8 +2736,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2511,8 +2749,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2524,8 +2762,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2537,8 +2775,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2550,8 +2788,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2563,8 +2801,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2576,8 +2814,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2589,8 +2827,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2602,8 +2840,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2615,8 +2853,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2628,8 +2866,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2641,8 +2879,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2654,8 +2892,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2667,8 +2905,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2680,8 +2918,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2693,8 +2931,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2706,8 +2944,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2719,8 +2957,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2732,8 +2970,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2745,8 +2983,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2758,8 +2996,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2771,8 +3009,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2784,8 +3022,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2797,8 +3035,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2810,8 +3048,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2823,8 +3061,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2836,8 +3074,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2849,8 +3087,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2862,8 +3100,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2875,8 +3113,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2888,8 +3126,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2901,8 +3139,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2914,8 +3163,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2927,8 +3187,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2940,8 +3211,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2953,8 +3235,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2966,8 +3248,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2979,8 +3261,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2991,8 +3273,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3003,9 +3285,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -3020,7 +3308,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "(Sum|Maximum)"
+                "smithy.api#pattern": "^(Sum|Maximum)$"
             }
         },
         "com.amazonaws.servicequotas#Tag": {
@@ -3029,14 +3317,14 @@
                 "Key": {
                     "target": "com.amazonaws.servicequotas#TagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that contains a tag key. The string length should be between 1 and 128\n      characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . :\n      / = + @.</p>",
+                        "smithy.api#documentation": "<p>A string that contains a tag key. The string length should be between 1 and 128\n            characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _\n            - . : / = + @.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.servicequotas#TagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that contains an optional tag value. The string length should be between 0 and\n      256 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ -\n      . : / = + @.</p>",
+                        "smithy.api#documentation": "<p>A string that contains an optional tag value. The string length should be between 0\n            and 256 characters. Valid characters include a-z, A-Z, 0-9, space, and the special\n            characters _ - . : / = + @.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3100,7 +3388,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds tags to the specified applied quota. You can include one or more tags to add to the\n      quota.</p>"
+                "smithy.api#documentation": "<p>Adds tags to the specified applied quota. You can include one or more tags to add to\n            the quota.</p>"
             }
         },
         "com.amazonaws.servicequotas#TagResourceRequest": {
@@ -3109,7 +3397,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.servicequotas#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the applied quota. You can get this information by\n      using the Service Quotas console, or by listing the quotas using the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> AWS CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> AWS API operation.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the applied quota. You can get this information by\n            using the Service Quotas console, or by listing the quotas using the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> Amazon Web Services API operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3120,11 +3408,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.servicequotas#TagValue": {
             "type": "string",
@@ -3144,7 +3438,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Service Quotas template is not available in this AWS Region.</p>",
+                "smithy.api#documentation": "<p>The Service Quotas template is not available in this Amazon Web Services Region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -3157,7 +3451,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Due to throttling, the request was denied. Slow down the rate of request calls, or request\n      an increase for this quota.</p>",
+                "smithy.api#documentation": "<p>Due to throttling, the request was denied. Slow down the rate of request calls, or\n            request an increase for this quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -3170,7 +3464,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You've exceeded the number of tags allowed for a resource. For more information, see\n        <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/sq-tagging.html#sq-tagging-restrictions\">Tag\n        restrictions</a> in the <i>Service Quotas User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>You've exceeded the number of tags allowed for a resource. For more information, see\n                <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/sq-tagging.html#sq-tagging-restrictions\">Tag\n                restrictions</a> in the <i>Service Quotas User Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3201,7 +3495,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes tags from the specified applied quota. You can specify one or more tags to\n      remove.</p>"
+                "smithy.api#documentation": "<p>Removes tags from the specified applied quota. You can specify one or more tags to\n            remove.</p>"
             }
         },
         "com.amazonaws.servicequotas#UntagResourceRequest": {
@@ -3210,7 +3504,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.servicequotas#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can get\n      this information by using the Service Quotas console, or by listing the quotas using the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> AWS CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> AWS API operation.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can\n            get this information by using the Service Quotas console, or by listing the quotas using the\n            <a href=\"https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html\">list-service-quotas</a> CLI command or the <a href=\"https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html\">ListServiceQuotas</a> Amazon Web Services API operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3221,11 +3515,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicequotas#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         }
     }
 }
