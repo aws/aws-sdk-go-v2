@@ -321,6 +321,9 @@
                     "target": "com.amazonaws.computeoptimizer#ExportLambdaFunctionRecommendations"
                 },
                 {
+                    "target": "com.amazonaws.computeoptimizer#ExportLicenseRecommendations"
+                },
+                {
                     "target": "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendations"
                 },
                 {
@@ -349,6 +352,9 @@
                 },
                 {
                     "target": "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#GetLicenseRecommendations"
                 },
                 {
                     "target": "com.amazonaws.computeoptimizer#GetRecommendationPreferences"
@@ -437,9 +443,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -452,15 +637,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://compute-optimizer.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://compute-optimizer.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -472,258 +692,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://compute-optimizer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://compute-optimizer-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://compute-optimizer.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://compute-optimizer.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -2804,6 +2774,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.computeoptimizer#ExportLicenseRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#ExportLicenseRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#ExportLicenseRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Export optimization recommendations for your licenses.\n        </p>\n         <p>Recommendations are exported in a comma-separated values (CSV) file, and its metadata\n            in a JavaScript Object Notation (JSON) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting\n                Recommendations</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>\n         <p>You can have only one license export job in progress per Amazon Web Services Region.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportLicenseRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Amazon Web Services accounts for which to export license\n            recommendations.</p>\n         <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to export recommendations.</p>\n         <p>This parameter can't be specified together with the include member accounts\n            parameter. The parameters are mutually exclusive.</p>\n         <p>If this parameter is omitted, recommendations \n            for member accounts aren't included in the export.</p>\n         <p>You can specify multiple account IDs per request.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseRecommendationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that exports a more specific set of license recommendations.\n        </p>"
+                    }
+                },
+                "fieldsToExport": {
+                    "target": "com.amazonaws.computeoptimizer#ExportableLicenseFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendations data to include in the export file. For more information about the\n            fields that can be exported, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files\">Exported files</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>"
+                    }
+                },
+                "s3DestinationConfig": {
+                    "target": "com.amazonaws.computeoptimizer#S3DestinationConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.computeoptimizer#FileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the export file.</p>\n         <p>A CSV file is the only export format currently supported.</p>"
+                    }
+                },
+                "includeMemberAccounts": {
+                    "target": "com.amazonaws.computeoptimizer#IncludeMemberAccounts",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether to include recommendations for resources in all member accounts of\n            the organization if your account is the management account of an organization.</p>\n         <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for\n            Compute Optimizer must be enabled in the organization account. For more information,\n            see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access\">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the\n            <i>Compute Optimizer User Guide</i>.</p>\n         <p>If this parameter is omitted, recommendations for member accounts of the organization \n            aren't included in the export file .</p>\n         <p>This parameter cannot be specified together with the account IDs parameter. The\n            parameters are mutually exclusive.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportLicenseRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.computeoptimizer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identification number of the export job.\n        </p>\n         <p>To view the status of an export job, use the <a>DescribeRecommendationExportJobs</a> \n            action and specify the job ID.</p>"
+                    }
+                },
+                "s3Destination": {
+                    "target": "com.amazonaws.computeoptimizer#S3Destination"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.computeoptimizer#ExportableAutoScalingGroupField": {
             "type": "enum",
             "members": {
@@ -3818,6 +3888,143 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.computeoptimizer#ExportableLambdaFunctionField"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportableLicenseField": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccountId"
+                    }
+                },
+                "RESOURCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceArn"
+                    }
+                },
+                "LOOKBACK_PERIOD_IN_DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LookbackPeriodInDays"
+                    }
+                },
+                "LAST_REFRESH_TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastRefreshTimestamp"
+                    }
+                },
+                "LICENSE_FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Finding"
+                    }
+                },
+                "LICENSE_FINDING_REASON_CODES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FindingReasonCodes"
+                    }
+                },
+                "CURRENT_LICENSE_CONFIGURATION_NUMBER_OF_CORES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentLicenseConfigurationNumberOfCores"
+                    }
+                },
+                "CURRENT_LICENSE_CONFIGURATION_INSTANCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentLicenseConfigurationInstanceType"
+                    }
+                },
+                "CURRENT_LICENSE_CONFIGURATION_OPERATING_SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentLicenseConfigurationOperatingSystem"
+                    }
+                },
+                "CURRENT_LICENSE_CONFIGURATION_LICENSE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentLicenseConfigurationLicenseName"
+                    }
+                },
+                "CURRENT_LICENSE_CONFIGURATION_LICENSE_EDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentLicenseConfigurationLicenseEdition"
+                    }
+                },
+                "CURRENT_LICENSE_CONFIGURATION_LICENSE_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentLicenseConfigurationLicenseModel"
+                    }
+                },
+                "CURRENT_LICENSE_CONFIGURATION_LICENSE_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentLicenseConfigurationLicenseVersion"
+                    }
+                },
+                "CURRENT_LICENSE_CONFIGURATION_METRICS_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentLicenseConfigurationMetricsSource"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_OPERATING_SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsOperatingSystem"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_LICENSE_EDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsLicenseEdition"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_LICENSE_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsLicenseModel"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsSavingsOpportunityPercentage"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsEstimatedMonthlySavingsCurrency"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsEstimatedMonthlySavingsValue"
+                    }
+                },
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tags"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportableLicenseFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#ExportableLicenseField"
             }
         },
         "com.amazonaws.computeoptimizer#ExportableVolumeField": {
@@ -5233,6 +5440,108 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.computeoptimizer#GetLicenseRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetLicenseRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetLicenseRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns license recommendations for Amazon EC2 instances that run on a specific license.</p>\n         <p>Compute Optimizer generates recommendations for licenses that meet a specific set of requirements. For more\n            information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                requirements</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetLicenseRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArns": {
+                    "target": "com.amazonaws.computeoptimizer#ResourceArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN that identifies the Amazon EC2 instance.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:ec2:region:aws_account_id:instance/instance-id</code>\n         </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of license recommendations.\n        </p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.computeoptimizer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of license recommendations to return with a single request.\n        </p>\n         <p>\n            To retrieve the remaining results, make another request with the returned\n            <code>nextToken</code> value.\n        </p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseRecommendationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that returns a more specific list of license recommendations.\n        </p>"
+                    }
+                },
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account for which to return license recommendations.</p>\n         <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to return license recommendations.</p>\n         <p>Only one account ID can be specified per request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetLicenseRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The token to use to advance to the next page of license recommendations.\n        </p>"
+                    }
+                },
+                "licenseRecommendations": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe license recommendations.\n        </p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.computeoptimizer#GetRecommendationErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe errors of the request.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.computeoptimizer#GetRecommendationError": {
             "type": "structure",
             "members": {
@@ -6387,6 +6696,341 @@
         "com.amazonaws.computeoptimizer#LastUpdatedTimestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.computeoptimizer#LicenseConfiguration": {
+            "type": "structure",
+            "members": {
+                "numberOfCores": {
+                    "target": "com.amazonaws.computeoptimizer#NumberOfCores",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The current number of cores associated with the instance.\n        </p>"
+                    }
+                },
+                "instanceType": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The instance type used in the license.\n        </p>"
+                    }
+                },
+                "operatingSystem": {
+                    "target": "com.amazonaws.computeoptimizer#OperatingSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The operating system of the instance. \n        </p>"
+                    }
+                },
+                "licenseEdition": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseEdition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The edition of the license for the application that runs on the instance.\n        </p>"
+                    }
+                },
+                "licenseName": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the license for the application that runs on the instance.\n        </p>"
+                    }
+                },
+                "licenseModel": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The license type associated with the instance.\n        </p>"
+                    }
+                },
+                "licenseVersion": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The version of the license for the application that runs on the instance.\n        </p>"
+                    }
+                },
+                "metricsSource": {
+                    "target": "com.amazonaws.computeoptimizer#MetricsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The list of metric sources required to generate recommendations for commercial software licenses.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the configuration of a license for an Amazon EC2 instance.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseEdition": {
+            "type": "enum",
+            "members": {
+                "ENTERPRISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enterprise"
+                    }
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Standard"
+                    }
+                },
+                "FREE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Free"
+                    }
+                },
+                "NO_LICENSE_EDITION_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NoLicenseEditionFound"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseFinding": {
+            "type": "enum",
+            "members": {
+                "INSUFFICIENT_METRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InsufficientMetrics"
+                    }
+                },
+                "OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Optimized"
+                    }
+                },
+                "NOT_OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotOptimized"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseFindingReasonCode": {
+            "type": "enum",
+            "members": {
+                "CW_APP_INSIGHTS_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidCloudWatchApplicationInsightsSetup"
+                    }
+                },
+                "CW_APP_INSIGHTS_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CloudWatchApplicationInsightsError"
+                    }
+                },
+                "LICENSE_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LicenseOverprovisioned"
+                    }
+                },
+                "OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Optimized"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseFindingReasonCodes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#LicenseFindingReasonCode"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseModel": {
+            "type": "enum",
+            "members": {
+                "LICENSE_INCLUDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LicenseIncluded"
+                    }
+                },
+                "BRING_YOUR_OWN_LICENSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BringYourOwnLicense"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseName": {
+            "type": "enum",
+            "members": {
+                "SQLSERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQLServer"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseRecommendation": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.computeoptimizer#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN that identifies the Amazon EC2 instance.\n        </p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.computeoptimizer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account ID of the license. \n        </p>"
+                    }
+                },
+                "currentLicenseConfiguration": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that describes the current configuration of an instance that runs on a license.\n        </p>"
+                    }
+                },
+                "lookbackPeriodInDays": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodInDays",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The number of days for which utilization metrics were analyzed for an instance that runs on a license.\n        </p>"
+                    }
+                },
+                "lastRefreshTimestamp": {
+                    "target": "com.amazonaws.computeoptimizer#LastRefreshTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamp of when the license recommendation was last generated.\n        </p>"
+                    }
+                },
+                "finding": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The finding classification for an instance that runs on a license.\n        </p>\n         <p>Findings include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>InsufficentMetrics</code> — When Compute Optimizer detects that your CloudWatch\n                        Application Insights isn't enabled or is enabled with insufficient permissions. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NotOptimized</code> — When Compute Optimizer detects that your EC2 infrastructure \n                        isn't using any of the SQL server license features you're paying for, a license is considered \n                        not optimized.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Optimized</code> — When Compute Optimizer detects that all specifications of your \n                        license meet the performance requirements of your workload. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "findingReasonCodes": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseFindingReasonCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The reason for the finding classification for an instance that runs on a license.\n        </p>\n         <p>Finding reason codes include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Optimized</code> — All specifications of your \n                        license meet the performance requirements of your workload. </p>\n            </li>\n            <li>\n               <p>\n                  <code>LicenseOverprovisioned</code> — A license is considered over-provisioned when your license can be \n                        downgraded while still meeting the performance requirements of your workload.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InvalidCloudwatchApplicationInsights</code> — CloudWatch\n                        Application Insights isn't configured properly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CloudwatchApplicationInsightsError</code> — There is a CloudWatch\n                        Application Insights error. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "licenseRecommendationOptions": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseRecommendationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the license recommendation options.\n        </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.computeoptimizer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of tags assigned to an EC2 instance.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes a license recommendation for an EC2 instance.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseRecommendationFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseRecommendationFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification.</p>\n         <p>Specify <code>FindingReasonCode</code> to return recommendations with a specific\n            finding reason code.</p>\n         <p>You can filter your license recommendations by <code>tag:key</code> \n            and <code>tag-key</code> tags.</p>\n         <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your \n            license recommendations. Use the tag key in the filter name and the tag value \n            as the filter value. For example, to find all license recommendations that have \n            a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, \n            specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n         <p>A <code>tag-key</code> is the key of a tag assigned to your license recommendations. Use \n            this filter to find all of your license recommendations that have a tag with a \n            specific key. This doesn’t consider the tag value. For example, you can find \n            your license recommendations with a tag key value of <code>Owner</code> or without any tag \n            keys assigned.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.computeoptimizer#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the filter.</p>\n         <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter:</p>\n         <ul>\n            <li>\n               <p>If you specify the <code>name</code> parameter as\n                    <code>Finding</code>, then specify <code>Optimized</code>, <code>NotOptimized</code>, or\n                    <code>InsufficentMetrics</code>.</p>\n            </li>\n            <li>\n               <p>If you specify the <code>name</code> parameter as\n                    <code>FindingReasonCode</code>, then specify <code>Optimized</code>,\n                    <code>LicenseOverprovisioned</code>, <code>InvalidCloudwatchApplicationInsights</code>, or\n                    <code>CloudwatchApplicationInsightsError</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes a filter that returns a more specific list of license recommendations. Use this filter \n            with the <code>GetLicenseRecommendation</code> action.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseRecommendationFilterName": {
+            "type": "enum",
+            "members": {
+                "LICENSE_FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Finding"
+                    }
+                },
+                "LICENSE_FINDING_REASON_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FindingReasonCode"
+                    }
+                },
+                "LICENSE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LicenseName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseRecommendationFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#LicenseRecommendationFilter"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseRecommendationOption": {
+            "type": "structure",
+            "members": {
+                "rank": {
+                    "target": "com.amazonaws.computeoptimizer#Rank",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The rank of the license recommendation option.\n        </p>\n         <p>\n            The top recommendation option is ranked as <code>1</code>.\n        </p>"
+                    }
+                },
+                "operatingSystem": {
+                    "target": "com.amazonaws.computeoptimizer#OperatingSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The operating system of a license recommendation option.\n        </p>"
+                    }
+                },
+                "licenseEdition": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseEdition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The recommended edition of the license for the application that runs on the instance.\n        </p>"
+                    }
+                },
+                "licenseModel": {
+                    "target": "com.amazonaws.computeoptimizer#LicenseModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The recommended license type associated with the instance.\n        </p>"
+                    }
+                },
+                "savingsOpportunity": {
+                    "target": "com.amazonaws.computeoptimizer#SavingsOpportunity"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the recommendation options for licenses.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseRecommendationOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#LicenseRecommendationOption"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseRecommendations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#LicenseRecommendation"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LicenseVersion": {
+            "type": "string"
+        },
         "com.amazonaws.computeoptimizer#LimitExceededException": {
             "type": "structure",
             "members": {
@@ -6566,6 +7210,40 @@
                 }
             }
         },
+        "com.amazonaws.computeoptimizer#MetricProviderArn": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#MetricSource": {
+            "type": "structure",
+            "members": {
+                "provider": {
+                    "target": "com.amazonaws.computeoptimizer#MetricSourceProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the metric source provider.\n        </p>"
+                    }
+                },
+                "providerArn": {
+                    "target": "com.amazonaws.computeoptimizer#MetricProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN of the metric source provider.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The list of metric sources required to generate recommendations for commercial software licenses.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#MetricSourceProvider": {
+            "type": "enum",
+            "members": {
+                "CloudWatchAppInsights": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CloudWatchApplicationInsights"
+                    }
+                }
+            }
+        },
         "com.amazonaws.computeoptimizer#MetricStatistic": {
             "type": "enum",
             "members": {
@@ -6593,6 +7271,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.computeoptimizer#MetricValue"
+            }
+        },
+        "com.amazonaws.computeoptimizer#MetricsSource": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#MetricSource"
             }
         },
         "com.amazonaws.computeoptimizer#MigrationEffort": {
@@ -6655,6 +7339,12 @@
         "com.amazonaws.computeoptimizer#NullableMemoryReservation": {
             "type": "integer"
         },
+        "com.amazonaws.computeoptimizer#NumberOfCores": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.computeoptimizer#NumberOfInvocations": {
             "type": "long",
             "traits": {
@@ -6663,6 +7353,9 @@
         },
         "com.amazonaws.computeoptimizer#NumberOfMemberAccountsOptedIn": {
             "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#OperatingSystem": {
+            "type": "string"
         },
         "com.amazonaws.computeoptimizer#OptInRequiredException": {
             "type": "structure",
@@ -7099,6 +7792,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EcsService"
                     }
+                },
+                "LICENSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "License"
+                    }
                 }
             }
         },
@@ -7197,6 +7896,12 @@
         "com.amazonaws.computeoptimizer#ResourceArn": {
             "type": "string"
         },
+        "com.amazonaws.computeoptimizer#ResourceArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#ResourceArn"
+            }
+        },
         "com.amazonaws.computeoptimizer#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -7247,6 +7952,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EcsService"
+                    }
+                },
+                "LICENSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "License"
                     }
                 }
             }
