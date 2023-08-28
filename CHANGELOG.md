@@ -1,3 +1,19 @@
+# Release (2023-08-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.25.0](service/backup/CHANGELOG.md#v1250-2023-08-28)
+  * **Feature**: Add support for customizing time zone for backup window in backup plan rules.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.26.0](service/computeoptimizer/CHANGELOG.md#v1260-2023-08-28)
+  * **Feature**: This release enables AWS Compute Optimizer to analyze and generate licensing optimization recommendations for sql server running on EC2 instances.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.20.6](service/organizations/CHANGELOG.md#v1206-2023-08-28)
+  * **Documentation**: Documentation updates for permissions and links.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.7.0](service/securitylake/CHANGELOG.md#v170-2023-08-28)
+  * **Feature**: Remove incorrect regex enforcement on pagination tokens.
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.16.0](service/servicequotas/CHANGELOG.md#v1160-2023-08-28)
+  * **Feature**: Service Quotas now supports viewing the applied quota value and requesting a quota increase for a specific resource in an AWS account.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.12.0](service/workspacesweb/CHANGELOG.md#v1120-2023-08-28)
+  * **Feature**: WorkSpaces Web now enables Admins to configure which cookies are synchronized from an end-user's local browser to the in-session browser. In conjunction with a browser extension, this feature enables enhanced Single-Sign On capability by reducing the number of times an end-user has to authenticate.
+
 # Release (2023-08-25)
 
 ## Module Highlights

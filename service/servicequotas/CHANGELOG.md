@@ -1,3 +1,7 @@
+# v1.16.0 (2023-08-28)
+
+* **Feature**: Service Quotas now supports viewing the applied quota value and requesting a quota increase for a specific resource in an AWS account.
+
 # v1.15.6 (2023-08-25)
 
 * No change notes available for this release.

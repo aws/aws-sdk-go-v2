@@ -1,8 +1,0 @@
-{
-    "id": "3aabe388-aee7-47c1-967f-12a8661216f4",
-    "type": "feature",
-    "description": "Add support for customizing time zone for backup window in backup plan rules.",
-    "modules": [
-        "service/backup"
-    ]
-}

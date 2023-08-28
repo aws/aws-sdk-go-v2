@@ -1,8 +1,0 @@
-{
-    "id": "7d7d4579-4fe9-44ce-b04e-9b822531a5a9",
-    "type": "documentation",
-    "description": "Documentation updates for permissions and links.",
-    "modules": [
-        "service/organizations"
-    ]
-}

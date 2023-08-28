@@ -1,3 +1,7 @@
+# v1.12.0 (2023-08-28)
+
+* **Feature**: WorkSpaces Web now enables Admins to configure which cookies are synchronized from an end-user's local browser to the in-session browser. In conjunction with a browser extension, this feature enables enhanced Single-Sign On capability by reducing the number of times an end-user has to authenticate.
+
 # v1.11.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
