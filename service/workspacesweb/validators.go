@@ -1234,6 +1234,62 @@ func addOpUpdateUserSettingsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUpdateUserSettings{}, middleware.After)
 }
 
+func validateCookieSpecification(v *types.CookieSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CookieSpecification"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCookieSpecifications(v []types.CookieSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CookieSpecifications"}
+	for i := range v {
+		if err := validateCookieSpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCookieSynchronizationConfiguration(v *types.CookieSynchronizationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CookieSynchronizationConfiguration"}
+	if v.Allowlist == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Allowlist"))
+	} else if v.Allowlist != nil {
+		if err := validateCookieSpecifications(v.Allowlist); err != nil {
+			invalidParams.AddNested("Allowlist", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Blocklist != nil {
+		if err := validateCookieSpecifications(v.Blocklist); err != nil {
+			invalidParams.AddNested("Blocklist", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIpRule(v *types.IpRule) error {
 	if v == nil {
 		return nil
@@ -1583,6 +1639,11 @@ func validateOpCreateUserSettingsInput(v *CreateUserSettingsInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CookieSynchronizationConfiguration != nil {
+		if err := validateCookieSynchronizationConfiguration(v.CookieSynchronizationConfiguration); err != nil {
+			invalidParams.AddNested("CookieSynchronizationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2157,6 +2218,11 @@ func validateOpUpdateUserSettingsInput(v *UpdateUserSettingsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserSettingsInput"}
 	if v.UserSettingsArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserSettingsArn"))
+	}
+	if v.CookieSynchronizationConfiguration != nil {
+		if err := validateCookieSynchronizationConfiguration(v.CookieSynchronizationConfiguration); err != nil {
+			invalidParams.AddNested("CookieSynchronizationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

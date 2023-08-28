@@ -22,7 +22,9 @@ import (
 //   - Organizational unit (OU)
 //   - Policy (any type)
 //
-// This operation can be called only from the organization's management account.
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

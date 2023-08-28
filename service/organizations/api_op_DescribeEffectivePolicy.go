@@ -21,10 +21,9 @@ import (
 // specified type that the account inherits, plus any policy of that type that is
 // directly attached to the account. This operation applies only to policy types
 // other than service control policies (SCPs). For more information about policy
-// inheritance, see How Policy Inheritance Works (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies-inheritance.html)
-// in the Organizations User Guide. This operation can be called only from the
-// organization's management account or by a member account that is a delegated
-// administrator for an Amazon Web Services service.
+// inheritance, see Understanding management policy inheritance (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inheritance_mgmt.html)
+// in the Organizations User Guide. This operation can be called from any account
+// in the organization.
 func (c *Client) DescribeEffectivePolicy(ctx context.Context, params *DescribeEffectivePolicyInput, optFns ...func(*Options)) (*DescribeEffectivePolicyOutput, error) {
 	if params == nil {
 		params = &DescribeEffectivePolicyInput{}

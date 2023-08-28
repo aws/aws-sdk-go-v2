@@ -26,14 +26,8 @@ import (
 //     configured with the information required to operate as a standalone account.
 //     When you create an account in an organization using the Organizations console,
 //     API, or CLI commands, the information required of standalone accounts is not
-//     automatically collected. For an account that you want to make standalone, you
-//     must choose a support plan, provide and verify the required contact information,
-//     and provide a current payment method. Amazon Web Services uses the payment
-//     method to charge for any billable (not free tier) Amazon Web Services activity
-//     that occurs while the account isn't attached to an organization. To remove an
-//     account that doesn't yet have this information, you must sign in as the member
-//     account and follow the steps at To leave an organization when all required
-//     account information has not yet been provided (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+//     automatically collected. For more information, see Considerations before
+//     removing an account from an organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html)
 //     in the Organizations User Guide.
 //   - The account that you want to leave must not be a delegated administrator
 //     account for any Amazon Web Services service enabled for your organization. If

@@ -25,7 +25,7 @@ import (
 //     all features in the organization, the user must also have the
 //     iam:CreateServiceLinkedRole permission so that Organizations can create the
 //     required service-linked role named AWSServiceRoleForOrganizations . For more
-//     information, see Organizations and Service-Linked Roles (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles)
+//     information, see Organizations and service-linked roles (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integrate_services-using_slrs)
 //     in the Organizations User Guide.
 //   - Enable all features final confirmation handshake: only a principal from the
 //     management account. For more information about invitations, see Inviting an

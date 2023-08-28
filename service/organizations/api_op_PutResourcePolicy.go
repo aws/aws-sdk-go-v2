@@ -37,7 +37,7 @@ type PutResourcePolicyInput struct {
 
 	// If provided, the new content for the resource policy. The text must be
 	// correctly formatted JSON that complies with the syntax for the resource policy's
-	// type. For more information, see Service Control Policy Syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
+	// type. For more information, see SCP syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html)
 	// in the Organizations User Guide.
 	//
 	// This member is required.

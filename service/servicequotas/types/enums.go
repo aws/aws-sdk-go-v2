@@ -2,6 +2,26 @@
 
 package types
 
+type AppliedLevelEnum string
+
+// Enum values for AppliedLevelEnum
+const (
+	AppliedLevelEnumAccount  AppliedLevelEnum = "ACCOUNT"
+	AppliedLevelEnumResource AppliedLevelEnum = "RESOURCE"
+	AppliedLevelEnumAll      AppliedLevelEnum = "ALL"
+)
+
+// Values returns all known values for AppliedLevelEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AppliedLevelEnum) Values() []AppliedLevelEnum {
+	return []AppliedLevelEnum{
+		"ACCOUNT",
+		"RESOURCE",
+		"ALL",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -52,15 +72,35 @@ func (PeriodUnit) Values() []PeriodUnit {
 	}
 }
 
+type QuotaContextScope string
+
+// Enum values for QuotaContextScope
+const (
+	QuotaContextScopeResource QuotaContextScope = "RESOURCE"
+	QuotaContextScopeAccount  QuotaContextScope = "ACCOUNT"
+)
+
+// Values returns all known values for QuotaContextScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QuotaContextScope) Values() []QuotaContextScope {
+	return []QuotaContextScope{
+		"RESOURCE",
+		"ACCOUNT",
+	}
+}
+
 type RequestStatus string
 
 // Enum values for RequestStatus
 const (
-	RequestStatusPending    RequestStatus = "PENDING"
-	RequestStatusCaseOpened RequestStatus = "CASE_OPENED"
-	RequestStatusApproved   RequestStatus = "APPROVED"
-	RequestStatusDenied     RequestStatus = "DENIED"
-	RequestStatusCaseClosed RequestStatus = "CASE_CLOSED"
+	RequestStatusPending        RequestStatus = "PENDING"
+	RequestStatusCaseOpened     RequestStatus = "CASE_OPENED"
+	RequestStatusApproved       RequestStatus = "APPROVED"
+	RequestStatusDenied         RequestStatus = "DENIED"
+	RequestStatusCaseClosed     RequestStatus = "CASE_CLOSED"
+	RequestStatusNotApproved    RequestStatus = "NOT_APPROVED"
+	RequestStatusInvalidRequest RequestStatus = "INVALID_REQUEST"
 )
 
 // Values returns all known values for RequestStatus. Note that this can be
@@ -73,6 +113,8 @@ func (RequestStatus) Values() []RequestStatus {
 		"APPROVED",
 		"DENIED",
 		"CASE_CLOSED",
+		"NOT_APPROVED",
+		"INVALID_REQUEST",
 	}
 }
 

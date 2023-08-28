@@ -21,8 +21,8 @@ import (
 // resources that it requires for the integration, it can perform operations on
 // your organization and its accounts. For more information about integrating other
 // services with Organizations, including the list of services that currently work
-// with Organizations, see Integrating Organizations with Other Amazon Web
-// Services Services (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
+// with Organizations, see Using Organizations with other Amazon Web Services
+// services (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
 // in the Organizations User Guide. This operation can be called only from the
 // organization's management account or by a member account that is a delegated
 // administrator for an Amazon Web Services service.

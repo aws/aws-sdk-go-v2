@@ -18,10 +18,11 @@ import (
 
 // Creates a policy of a specified type that you can attach to a root, an
 // organizational unit (OU), or an individual Amazon Web Services account. For more
-// information about policies and their use, see Managing Organization Policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html)
+// information about policies and their use, see Managing Organizations policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html)
 // . If the request includes tags, then the requester must have the
 // organizations:TagResource permission. This operation can be called only from the
-// organization's management account.
+// organization's management account or by a member account that is a delegated
+// administrator for an Amazon Web Services service.
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {
 		params = &CreatePolicyInput{}

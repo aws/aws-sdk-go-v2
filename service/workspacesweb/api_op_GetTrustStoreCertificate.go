@@ -49,11 +49,13 @@ type GetTrustStoreCertificateInput struct {
 
 type GetTrustStoreCertificateOutput struct {
 
+	// The ARN of the trust store certificate.
+	//
+	// This member is required.
+	TrustStoreArn *string
+
 	// The certificate of the trust store certificate.
 	Certificate *types.Certificate
-
-	// The ARN of the trust store certificate.
-	TrustStoreArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

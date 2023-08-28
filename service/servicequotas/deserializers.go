@@ -3599,6 +3599,64 @@ func awsAwsjson11_deserializeDocumentOutputTags(v *[]types.Tag, value interface{
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentQuotaContextInfo(v **types.QuotaContextInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuotaContextInfo
+	if *v == nil {
+		sv = &types.QuotaContextInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContextId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaContextId to be of type string, got %T instead", value)
+				}
+				sv.ContextId = ptr.String(jtv)
+			}
+
+		case "ContextScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaContextScope to be of type string, got %T instead", value)
+				}
+				sv.ContextScope = types.QuotaContextScope(jtv)
+			}
+
+		case "ContextScopeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuotaContextScopeType to be of type string, got %T instead", value)
+				}
+				sv.ContextScopeType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentQuotaExceededException(v **types.QuotaExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3825,6 +3883,11 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				sv.QuotaCode = ptr.String(jtv)
 			}
 
+		case "QuotaContext":
+			if err := awsAwsjson11_deserializeDocumentQuotaContextInfo(&sv.QuotaContext, value); err != nil {
+				return err
+			}
+
 		case "QuotaName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3832,6 +3895,15 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 					return fmt.Errorf("expected QuotaName to be of type string, got %T instead", value)
 				}
 				sv.QuotaName = ptr.String(jtv)
+			}
+
+		case "QuotaRequestedAtLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppliedLevelEnum to be of type string, got %T instead", value)
+				}
+				sv.QuotaRequestedAtLevel = types.AppliedLevelEnum(jtv)
 			}
 
 		case "Requester":
@@ -4135,6 +4207,15 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				return err
 			}
 
+		case "QuotaAppliedAtLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppliedLevelEnum to be of type string, got %T instead", value)
+				}
+				sv.QuotaAppliedAtLevel = types.AppliedLevelEnum(jtv)
+			}
+
 		case "QuotaArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4151,6 +4232,11 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 					return fmt.Errorf("expected QuotaCode to be of type string, got %T instead", value)
 				}
 				sv.QuotaCode = ptr.String(jtv)
+			}
+
+		case "QuotaContext":
+			if err := awsAwsjson11_deserializeDocumentQuotaContextInfo(&sv.QuotaContext, value); err != nil {
+				return err
 			}
 
 		case "QuotaName":

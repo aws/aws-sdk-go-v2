@@ -1183,14 +1183,33 @@ func awsRestjson1_serializeOpDocumentCreateUserSettingsInput(v *CreateUserSettin
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalEncryptionContext != nil {
+		ok := object.Key("additionalEncryptionContext")
+		if err := awsRestjson1_serializeDocumentEncryptionContextMap(v.AdditionalEncryptionContext, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
 	}
 
+	if v.CookieSynchronizationConfiguration != nil {
+		ok := object.Key("cookieSynchronizationConfiguration")
+		if err := awsRestjson1_serializeDocumentCookieSynchronizationConfiguration(v.CookieSynchronizationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.CopyAllowed) > 0 {
 		ok := object.Key("copyAllowed")
 		ok.String(string(v.CopyAllowed))
+	}
+
+	if v.CustomerManagedKey != nil {
+		ok := object.Key("customerManagedKey")
+		ok.String(*v.CustomerManagedKey)
 	}
 
 	if v.DisconnectTimeoutInMinutes != nil {
@@ -4405,6 +4424,13 @@ func awsRestjson1_serializeOpDocumentUpdateUserSettingsInput(v *UpdateUserSettin
 		ok.String(*v.ClientToken)
 	}
 
+	if v.CookieSynchronizationConfiguration != nil {
+		ok := object.Key("cookieSynchronizationConfiguration")
+		if err := awsRestjson1_serializeDocumentCookieSynchronizationConfiguration(v.CookieSynchronizationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.CopyAllowed) > 0 {
 		ok := object.Key("copyAllowed")
 		ok.String(string(v.CopyAllowed))
@@ -4465,6 +4491,62 @@ func awsRestjson1_serializeDocumentCertificateThumbprintList(v []string, value s
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCookieSpecification(v *types.CookieSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Domain != nil {
+		ok := object.Key("domain")
+		ok.String(*v.Domain)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Path != nil {
+		ok := object.Key("path")
+		ok.String(*v.Path)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCookieSpecifications(v []types.CookieSpecification, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCookieSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCookieSynchronizationConfiguration(v *types.CookieSynchronizationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Allowlist != nil {
+		ok := object.Key("allowlist")
+		if err := awsRestjson1_serializeDocumentCookieSpecifications(v.Allowlist, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Blocklist != nil {
+		ok := object.Key("blocklist")
+		if err := awsRestjson1_serializeDocumentCookieSpecifications(v.Blocklist, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

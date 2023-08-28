@@ -16,9 +16,9 @@ import (
 )
 
 // Disables your quota request template. After a template is disabled, the quota
-// increase requests in the template are not applied to new accounts in your
-// organization. Disabling a quota request template does not apply its quota
-// increase requests.
+// increase requests in the template are not applied to new Amazon Web Services
+// accounts in your organization. Disabling a quota request template does not apply
+// its quota increase requests.
 func (c *Client) DisassociateServiceQuotaTemplate(ctx context.Context, params *DisassociateServiceQuotaTemplateInput, optFns ...func(*Options)) (*DisassociateServiceQuotaTemplateOutput, error) {
 	if params == nil {
 		params = &DisassociateServiceQuotaTemplateInput{}

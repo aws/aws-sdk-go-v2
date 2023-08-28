@@ -25,8 +25,8 @@ import (
 //     was created by Amazon Internet Services Pvt. Ltd (AISPL), an Amazon Web Services
 //     seller in India, you can invite only other AISPL accounts to your organization.
 //     You can't combine accounts from AISPL and Amazon Web Services or from any other
-//     Amazon Web Services seller. For more information, see Consolidated Billing in
-//     India (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html)
+//     Amazon Web Services seller. For more information, see Consolidated billing in
+//     India (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilling-India.html)
 //     .
 //   - If you receive an exception that indicates that you exceeded your account
 //     limits for the organization or that the operation failed because your

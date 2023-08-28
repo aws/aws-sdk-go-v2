@@ -668,6 +668,62 @@ func (ExportableLambdaFunctionField) Values() []ExportableLambdaFunctionField {
 	}
 }
 
+type ExportableLicenseField string
+
+// Enum values for ExportableLicenseField
+const (
+	ExportableLicenseFieldAccountId                                            ExportableLicenseField = "AccountId"
+	ExportableLicenseFieldResourceArn                                          ExportableLicenseField = "ResourceArn"
+	ExportableLicenseFieldLookbackPeriodInDays                                 ExportableLicenseField = "LookbackPeriodInDays"
+	ExportableLicenseFieldLastRefreshTimestamp                                 ExportableLicenseField = "LastRefreshTimestamp"
+	ExportableLicenseFieldLicenseFinding                                       ExportableLicenseField = "Finding"
+	ExportableLicenseFieldLicenseFindingReasonCodes                            ExportableLicenseField = "FindingReasonCodes"
+	ExportableLicenseFieldCurrentLicenseConfigurationNumberOfCores             ExportableLicenseField = "CurrentLicenseConfigurationNumberOfCores"
+	ExportableLicenseFieldCurrentLicenseConfigurationInstanceType              ExportableLicenseField = "CurrentLicenseConfigurationInstanceType"
+	ExportableLicenseFieldCurrentLicenseConfigurationOperatingSystem           ExportableLicenseField = "CurrentLicenseConfigurationOperatingSystem"
+	ExportableLicenseFieldCurrentLicenseConfigurationLicenseName               ExportableLicenseField = "CurrentLicenseConfigurationLicenseName"
+	ExportableLicenseFieldCurrentLicenseConfigurationLicenseEdition            ExportableLicenseField = "CurrentLicenseConfigurationLicenseEdition"
+	ExportableLicenseFieldCurrentLicenseConfigurationLicenseModel              ExportableLicenseField = "CurrentLicenseConfigurationLicenseModel"
+	ExportableLicenseFieldCurrentLicenseConfigurationLicenseVersion            ExportableLicenseField = "CurrentLicenseConfigurationLicenseVersion"
+	ExportableLicenseFieldCurrentLicenseConfigurationMetricsSource             ExportableLicenseField = "CurrentLicenseConfigurationMetricsSource"
+	ExportableLicenseFieldRecommendationOptionsOperatingSystem                 ExportableLicenseField = "RecommendationOptionsOperatingSystem"
+	ExportableLicenseFieldRecommendationOptionsLicenseEdition                  ExportableLicenseField = "RecommendationOptionsLicenseEdition"
+	ExportableLicenseFieldRecommendationOptionsLicenseModel                    ExportableLicenseField = "RecommendationOptionsLicenseModel"
+	ExportableLicenseFieldRecommendationOptionsSavingsOpportunityPercentage    ExportableLicenseField = "RecommendationOptionsSavingsOpportunityPercentage"
+	ExportableLicenseFieldRecommendationOptionsEstimatedMonthlySavingsCurrency ExportableLicenseField = "RecommendationOptionsEstimatedMonthlySavingsCurrency"
+	ExportableLicenseFieldRecommendationOptionsEstimatedMonthlySavingsValue    ExportableLicenseField = "RecommendationOptionsEstimatedMonthlySavingsValue"
+	ExportableLicenseFieldTags                                                 ExportableLicenseField = "Tags"
+)
+
+// Values returns all known values for ExportableLicenseField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportableLicenseField) Values() []ExportableLicenseField {
+	return []ExportableLicenseField{
+		"AccountId",
+		"ResourceArn",
+		"LookbackPeriodInDays",
+		"LastRefreshTimestamp",
+		"Finding",
+		"FindingReasonCodes",
+		"CurrentLicenseConfigurationNumberOfCores",
+		"CurrentLicenseConfigurationInstanceType",
+		"CurrentLicenseConfigurationOperatingSystem",
+		"CurrentLicenseConfigurationLicenseName",
+		"CurrentLicenseConfigurationLicenseEdition",
+		"CurrentLicenseConfigurationLicenseModel",
+		"CurrentLicenseConfigurationLicenseVersion",
+		"CurrentLicenseConfigurationMetricsSource",
+		"RecommendationOptionsOperatingSystem",
+		"RecommendationOptionsLicenseEdition",
+		"RecommendationOptionsLicenseModel",
+		"RecommendationOptionsSavingsOpportunityPercentage",
+		"RecommendationOptionsEstimatedMonthlySavingsCurrency",
+		"RecommendationOptionsEstimatedMonthlySavingsValue",
+		"Tags",
+	}
+}
+
 type ExportableVolumeField string
 
 // Enum values for ExportableVolumeField
@@ -1178,6 +1234,125 @@ func (LambdaFunctionRecommendationFindingReasonCode) Values() []LambdaFunctionRe
 	}
 }
 
+type LicenseEdition string
+
+// Enum values for LicenseEdition
+const (
+	LicenseEditionEnterprise            LicenseEdition = "Enterprise"
+	LicenseEditionStandard              LicenseEdition = "Standard"
+	LicenseEditionFree                  LicenseEdition = "Free"
+	LicenseEditionNoLicenseEditionFound LicenseEdition = "NoLicenseEditionFound"
+)
+
+// Values returns all known values for LicenseEdition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LicenseEdition) Values() []LicenseEdition {
+	return []LicenseEdition{
+		"Enterprise",
+		"Standard",
+		"Free",
+		"NoLicenseEditionFound",
+	}
+}
+
+type LicenseFinding string
+
+// Enum values for LicenseFinding
+const (
+	LicenseFindingInsufficientMetrics LicenseFinding = "InsufficientMetrics"
+	LicenseFindingOptimized           LicenseFinding = "Optimized"
+	LicenseFindingNotOptimized        LicenseFinding = "NotOptimized"
+)
+
+// Values returns all known values for LicenseFinding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LicenseFinding) Values() []LicenseFinding {
+	return []LicenseFinding{
+		"InsufficientMetrics",
+		"Optimized",
+		"NotOptimized",
+	}
+}
+
+type LicenseFindingReasonCode string
+
+// Enum values for LicenseFindingReasonCode
+const (
+	LicenseFindingReasonCodeCwAppInsightsDisabled  LicenseFindingReasonCode = "InvalidCloudWatchApplicationInsightsSetup"
+	LicenseFindingReasonCodeCwAppInsightsError     LicenseFindingReasonCode = "CloudWatchApplicationInsightsError"
+	LicenseFindingReasonCodeLicenseOverProvisioned LicenseFindingReasonCode = "LicenseOverprovisioned"
+	LicenseFindingReasonCodeOptimized              LicenseFindingReasonCode = "Optimized"
+)
+
+// Values returns all known values for LicenseFindingReasonCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LicenseFindingReasonCode) Values() []LicenseFindingReasonCode {
+	return []LicenseFindingReasonCode{
+		"InvalidCloudWatchApplicationInsightsSetup",
+		"CloudWatchApplicationInsightsError",
+		"LicenseOverprovisioned",
+		"Optimized",
+	}
+}
+
+type LicenseModel string
+
+// Enum values for LicenseModel
+const (
+	LicenseModelLicenseIncluded     LicenseModel = "LicenseIncluded"
+	LicenseModelBringYourOwnLicense LicenseModel = "BringYourOwnLicense"
+)
+
+// Values returns all known values for LicenseModel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LicenseModel) Values() []LicenseModel {
+	return []LicenseModel{
+		"LicenseIncluded",
+		"BringYourOwnLicense",
+	}
+}
+
+type LicenseName string
+
+// Enum values for LicenseName
+const (
+	LicenseNameSqlserver LicenseName = "SQLServer"
+)
+
+// Values returns all known values for LicenseName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LicenseName) Values() []LicenseName {
+	return []LicenseName{
+		"SQLServer",
+	}
+}
+
+type LicenseRecommendationFilterName string
+
+// Enum values for LicenseRecommendationFilterName
+const (
+	LicenseRecommendationFilterNameLicenseFinding           LicenseRecommendationFilterName = "Finding"
+	LicenseRecommendationFilterNameLicenseFindingReasonCode LicenseRecommendationFilterName = "FindingReasonCode"
+	LicenseRecommendationFilterNameLicenseName              LicenseRecommendationFilterName = "LicenseName"
+)
+
+// Values returns all known values for LicenseRecommendationFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LicenseRecommendationFilterName) Values() []LicenseRecommendationFilterName {
+	return []LicenseRecommendationFilterName{
+		"Finding",
+		"FindingReasonCode",
+		"LicenseName",
+	}
+}
+
 type MetricName string
 
 // Enum values for MetricName
@@ -1217,6 +1392,22 @@ func (MetricName) Values() []MetricName {
 		"NETWORK_OUT_BYTES_PER_SECOND",
 		"NETWORK_PACKETS_IN_PER_SECOND",
 		"NETWORK_PACKETS_OUT_PER_SECOND",
+	}
+}
+
+type MetricSourceProvider string
+
+// Enum values for MetricSourceProvider
+const (
+	MetricSourceProviderCloudWatchAppInsights MetricSourceProvider = "CloudWatchApplicationInsights"
+)
+
+// Values returns all known values for MetricSourceProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricSourceProvider) Values() []MetricSourceProvider {
+	return []MetricSourceProvider{
+		"CloudWatchApplicationInsights",
 	}
 }
 
@@ -1316,6 +1507,7 @@ const (
 	RecommendationSourceTypeEbsVolume        RecommendationSourceType = "EbsVolume"
 	RecommendationSourceTypeLambdaFunction   RecommendationSourceType = "LambdaFunction"
 	RecommendationSourceTypeEcsService       RecommendationSourceType = "EcsService"
+	RecommendationSourceTypeLicense          RecommendationSourceType = "License"
 )
 
 // Values returns all known values for RecommendationSourceType. Note that this
@@ -1328,6 +1520,7 @@ func (RecommendationSourceType) Values() []RecommendationSourceType {
 		"EbsVolume",
 		"LambdaFunction",
 		"EcsService",
+		"License",
 	}
 }
 
@@ -1341,6 +1534,7 @@ const (
 	ResourceTypeLambdaFunction   ResourceType = "LambdaFunction"
 	ResourceTypeNotApplicable    ResourceType = "NotApplicable"
 	ResourceTypeEcsService       ResourceType = "EcsService"
+	ResourceTypeLicense          ResourceType = "License"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1354,6 +1548,7 @@ func (ResourceType) Values() []ResourceType {
 		"LambdaFunction",
 		"NotApplicable",
 		"EcsService",
+		"License",
 	}
 }
 

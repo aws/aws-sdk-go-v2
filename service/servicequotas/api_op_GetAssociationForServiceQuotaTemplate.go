@@ -39,8 +39,8 @@ type GetAssociationForServiceQuotaTemplateInput struct {
 type GetAssociationForServiceQuotaTemplateOutput struct {
 
 	// The association status. If the status is ASSOCIATED , the quota increase
-	// requests in the template are automatically applied to new accounts in your
-	// organization.
+	// requests in the template are automatically applied to new Amazon Web Services
+	// accounts in your organization.
 	ServiceQuotaTemplateAssociationStatus types.ServiceQuotaTemplateAssociationStatus
 
 	// Metadata pertaining to the operation's result.

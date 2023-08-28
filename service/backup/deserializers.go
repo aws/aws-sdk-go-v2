@@ -13591,6 +13591,15 @@ func awsRestjson1_deserializeDocumentBackupRule(v **types.BackupRule, value inte
 				sv.ScheduleExpression = ptr.String(jtv)
 			}
 
+		case "ScheduleExpressionTimezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timezone to be of type string, got %T instead", value)
+				}
+				sv.ScheduleExpressionTimezone = ptr.String(jtv)
+			}
+
 		case "StartWindowMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)

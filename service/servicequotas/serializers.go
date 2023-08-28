@@ -1199,6 +1199,11 @@ func awsAwsjson11_serializeOpDocumentGetServiceQuotaInput(v *GetServiceQuotaInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.ContextId != nil {
+		ok := object.Key("ContextId")
+		ok.String(*v.ContextId)
+	}
+
 	if v.QuotaCode != nil {
 		ok := object.Key("QuotaCode")
 		ok.String(*v.QuotaCode)
@@ -1253,6 +1258,11 @@ func awsAwsjson11_serializeOpDocumentListRequestedServiceQuotaChangeHistoryByQuo
 		ok.String(*v.QuotaCode)
 	}
 
+	if len(v.QuotaRequestedAtLevel) > 0 {
+		ok := object.Key("QuotaRequestedAtLevel")
+		ok.String(string(v.QuotaRequestedAtLevel))
+	}
+
 	if v.ServiceCode != nil {
 		ok := object.Key("ServiceCode")
 		ok.String(*v.ServiceCode)
@@ -1278,6 +1288,11 @@ func awsAwsjson11_serializeOpDocumentListRequestedServiceQuotaChangeHistoryInput
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if len(v.QuotaRequestedAtLevel) > 0 {
+		ok := object.Key("QuotaRequestedAtLevel")
+		ok.String(string(v.QuotaRequestedAtLevel))
 	}
 
 	if v.ServiceCode != nil {
@@ -1332,6 +1347,16 @@ func awsAwsjson11_serializeOpDocumentListServiceQuotasInput(v *ListServiceQuotas
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if len(v.QuotaAppliedAtLevel) > 0 {
+		ok := object.Key("QuotaAppliedAtLevel")
+		ok.String(string(v.QuotaAppliedAtLevel))
+	}
+
+	if v.QuotaCode != nil {
+		ok := object.Key("QuotaCode")
+		ok.String(*v.QuotaCode)
 	}
 
 	if v.ServiceCode != nil {
@@ -1414,6 +1439,11 @@ func awsAwsjson11_serializeOpDocumentPutServiceQuotaIncreaseRequestIntoTemplateI
 func awsAwsjson11_serializeOpDocumentRequestServiceQuotaIncreaseInput(v *RequestServiceQuotaIncreaseInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ContextId != nil {
+		ok := object.Key("ContextId")
+		ok.String(*v.ContextId)
+	}
 
 	if v.DesiredValue != nil {
 		ok := object.Key("DesiredValue")

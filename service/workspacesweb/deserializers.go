@@ -1392,7 +1392,7 @@ func awsRestjson1_deserializeOpDocumentCreateIdentityProviderOutput(v **CreateId
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SubresourceARN to be of type string, got %T instead", value)
 				}
 				sv.IdentityProviderArn = ptr.String(jtv)
 			}
@@ -9304,6 +9304,139 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCookieSpecification(v **types.CookieSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CookieSpecification
+	if *v == nil {
+		sv = &types.CookieSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CookieDomain to be of type string, got %T instead", value)
+				}
+				sv.Domain = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CookieName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CookiePath to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCookieSpecifications(v *[]types.CookieSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CookieSpecification
+	if *v == nil {
+		cv = []types.CookieSpecification{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CookieSpecification
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCookieSpecification(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCookieSynchronizationConfiguration(v **types.CookieSynchronizationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CookieSynchronizationConfiguration
+	if *v == nil {
+		sv = &types.CookieSynchronizationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowlist":
+			if err := awsRestjson1_deserializeDocumentCookieSpecifications(&sv.Allowlist, value); err != nil {
+				return err
+			}
+
+		case "blocklist":
+			if err := awsRestjson1_deserializeDocumentCookieSpecifications(&sv.Blocklist, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdentityProvider(v **types.IdentityProvider, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9330,7 +9463,7 @@ func awsRestjson1_deserializeDocumentIdentityProvider(v **types.IdentityProvider
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SubresourceARN to be of type string, got %T instead", value)
 				}
 				sv.IdentityProviderArn = ptr.String(jtv)
 			}
@@ -9463,7 +9596,7 @@ func awsRestjson1_deserializeDocumentIdentityProviderSummary(v **types.IdentityP
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SubresourceARN to be of type string, got %T instead", value)
 				}
 				sv.IdentityProviderArn = ptr.String(jtv)
 			}
@@ -11033,6 +11166,11 @@ func awsRestjson1_deserializeDocumentUserSettings(v **types.UserSettings, value 
 				return err
 			}
 
+		case "cookieSynchronizationConfiguration":
+			if err := awsRestjson1_deserializeDocumentCookieSynchronizationConfiguration(&sv.CookieSynchronizationConfiguration, value); err != nil {
+				return err
+			}
+
 		case "copyAllowed":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11178,6 +11316,11 @@ func awsRestjson1_deserializeDocumentUserSettingsSummary(v **types.UserSettingsS
 
 	for key, value := range shape {
 		switch key {
+		case "cookieSynchronizationConfiguration":
+			if err := awsRestjson1_deserializeDocumentCookieSynchronizationConfiguration(&sv.CookieSynchronizationConfiguration, value); err != nil {
+				return err
+			}
+
 		case "copyAllowed":
 			if value != nil {
 				jtv, ok := value.(string)

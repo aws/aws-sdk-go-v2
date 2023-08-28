@@ -36,15 +36,23 @@ func (c *Client) GetServiceQuota(ctx context.Context, params *GetServiceQuotaInp
 
 type GetServiceQuotaInput struct {
 
-	// The quota identifier.
+	// Specifies the quota identifier. To find the quota code for a specific quota,
+	// use the ListServiceQuotas operation, and look for the QuotaCode response in the
+	// output for the quota you want.
 	//
 	// This member is required.
 	QuotaCode *string
 
-	// The service identifier.
+	// Specifies the service identifier. To find the service code value for an Amazon
+	// Web Services service, use the ListServices operation.
 	//
 	// This member is required.
 	ServiceCode *string
+
+	// Specifies the Amazon Web Services account or resource to which the quota
+	// applies. The value in this field depends on the context scope associated with
+	// the specified service quota.
+	ContextId *string
 
 	noSmithyDocumentSerde
 }

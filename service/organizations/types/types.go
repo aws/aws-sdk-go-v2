@@ -372,7 +372,7 @@ type Organization struct {
 	// set to "ALL", then all features are enabled and policies can be applied to
 	// accounts in the organization. If set to "CONSOLIDATED_BILLING", then only
 	// consolidated billing functionality is available. For more information, see
-	// Enabling All Features in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
+	// Enabling all features in your organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
 	// in the Organizations User Guide.
 	FeatureSet OrganizationFeatureSet
 
