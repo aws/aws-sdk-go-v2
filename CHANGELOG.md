@@ -1,3 +1,15 @@
+# Release (2023-08-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.26.0](service/cognitoidentityprovider/CHANGELOG.md#v1260-2023-08-29)
+  * **Feature**: Added API example requests and responses for several operations. Fixed the validation regex for user pools Identity Provider name.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.32.5](service/fsx/CHANGELOG.md#v1325-2023-08-29)
+  * **Documentation**: Documentation updates for project quotas.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.9.0](service/omics/CHANGELOG.md#v190-2023-08-29)
+  * **Feature**: Add RetentionMode support for Runs.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.20.0](service/sesv2/CHANGELOG.md#v1200-2023-08-29)
+  * **Feature**: Adds support for the new Export and Message Insights features: create, get, list and cancel export jobs; get message insights.
+
 # Release (2023-08-28)
 
 ## Module Highlights

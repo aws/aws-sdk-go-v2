@@ -1,3 +1,7 @@
+# v1.9.0 (2023-08-29)
+
+* **Feature**: Add RetentionMode support for Runs.
+
 # v1.8.3 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

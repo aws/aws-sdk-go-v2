@@ -1,3 +1,7 @@
+# v1.26.0 (2023-08-29)
+
+* **Feature**: Added API example requests and responses for several operations. Fixed the validation regex for user pools Identity Provider name.
+
 # v1.25.4 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

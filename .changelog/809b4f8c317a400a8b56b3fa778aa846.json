@@ -1,8 +1,0 @@
-{
-    "id": "809b4f8c-317a-400a-8b56-b3fa778aa846",
-    "type": "feature",
-    "description": "Add RetentionMode support for Runs.",
-    "modules": [
-        "service/omics"
-    ]
-}
