@@ -1,3 +1,7 @@
+# v1.32.5 (2023-08-29)
+
+* **Documentation**: Documentation updates for project quotas.
+
 # v1.32.4 (2023-08-25)
 
 * No change notes available for this release.

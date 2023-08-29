@@ -1,8 +1,0 @@
-{
-    "id": "11cf74ec-11a2-483b-bf6b-239f1ee6cfdd",
-    "type": "documentation",
-    "description": "Documentation updates for project quotas.",
-    "modules": [
-        "service/fsx"
-    ]
-}
