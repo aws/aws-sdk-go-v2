@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -87,13 +86,7 @@ func (c *Client) addOperationGlobalSignOutMiddlewares(stack *middleware.Stack, o
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
-		return err
-	}
 	if err = addRetryMiddlewares(stack, options); err != nil {
-		return err
-	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
@@ -142,7 +135,6 @@ func newServiceMetadataMiddleware_opGlobalSignOut(region string) *awsmiddleware.
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "GlobalSignOut",
 	}
 }

@@ -88,6 +88,9 @@ type GetRunOutput struct {
 	// The run's resource digests.
 	ResourceDigests map[string]string
 
+	// The run's retention mode.
+	RetentionMode types.RunRetentionMode
+
 	// The run's service role ARN.
 	RoleArn *string
 

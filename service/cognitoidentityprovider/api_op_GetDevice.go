@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
@@ -90,13 +89,7 @@ func (c *Client) addOperationGetDeviceMiddlewares(stack *middleware.Stack, optio
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
-		return err
-	}
 	if err = addRetryMiddlewares(stack, options); err != nil {
-		return err
-	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
@@ -145,7 +138,6 @@ func newServiceMetadataMiddleware_opGetDevice(region string) *awsmiddleware.Regi
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "GetDevice",
 	}
 }

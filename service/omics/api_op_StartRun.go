@@ -17,7 +17,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a run.
+// Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN.
+// The remaining parameters are copied from the previous run. The total number of
+// runs in your account is subject to a quota per Region. To avoid needing to
+// delete runs manually, you can set the retention mode to REMOVE . Runs with this
+// setting are deleted automatically when the run quoata is exceeded.
 func (c *Client) StartRun(ctx context.Context, params *StartRunInput, optFns ...func(*Options)) (*StartRunOutput, error) {
 	if params == nil {
 		params = &StartRunInput{}
@@ -61,10 +65,13 @@ type StartRunInput struct {
 	// A priority for the run.
 	Priority *int32
 
+	// The retention mode for the run.
+	RetentionMode types.RunRetentionMode
+
 	// The run's group ID.
 	RunGroupId *string
 
-	// The run's ID.
+	// The ID of a run to duplicate.
 	RunId *string
 
 	// A storage capacity for the run in gigabytes.
@@ -76,7 +83,7 @@ type StartRunInput struct {
 	// The run's workflow ID.
 	WorkflowId *string
 
-	// The run's workflows type.
+	// The run's workflow type.
 	WorkflowType types.WorkflowType
 
 	noSmithyDocumentSerde

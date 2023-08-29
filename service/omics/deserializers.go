@@ -7145,6 +7145,15 @@ func awsRestjson1_deserializeOpDocumentGetRunOutput(v **GetRunOutput, value inte
 				return err
 			}
 
+		case "retentionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RunRetentionMode to be of type string, got %T instead", value)
+				}
+				sv.RetentionMode = types.RunRetentionMode(jtv)
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)

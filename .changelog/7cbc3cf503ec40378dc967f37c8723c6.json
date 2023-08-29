@@ -1,0 +1,8 @@
+{
+    "id": "7cbc3cf5-03ec-4037-8dc9-67f37c8723c6",
+    "type": "feature",
+    "description": "Added API example requests and responses for several operations. Fixed the validation regex for user pools Identity Provider name.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

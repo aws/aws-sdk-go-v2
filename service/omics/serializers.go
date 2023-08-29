@@ -6138,6 +6138,11 @@ func awsRestjson1_serializeOpDocumentStartRunInput(v *StartRunInput, value smith
 		ok.String(*v.RequestId)
 	}
 
+	if len(v.RetentionMode) > 0 {
+		ok := object.Key("retentionMode")
+		ok.String(string(v.RetentionMode))
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)

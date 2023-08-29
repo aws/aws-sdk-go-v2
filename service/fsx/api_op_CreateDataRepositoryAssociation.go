@@ -20,8 +20,8 @@ import (
 // repository association is a link between a directory on the file system and an
 // Amazon S3 bucket or prefix. You can have a maximum of 8 data repository
 // associations on a file system. Data repository associations are supported on all
-// FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment
-// type. Each data repository association must have a unique Amazon FSx file system
+// FSx for Lustre 2.12 and 2.15 file systems, excluding scratch_1 deployment type.
+// Each data repository association must have a unique Amazon FSx file system
 // directory and a unique S3 bucket or prefix associated with it. You can configure
 // a data repository association for automatic import only, for automatic export
 // only, or for both. To learn more about linking a data repository to your file

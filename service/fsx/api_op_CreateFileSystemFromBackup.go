@@ -81,8 +81,8 @@ type CreateFileSystemFromBackupInput struct {
 	ClientRequestToken *string
 
 	// Sets the version for the Amazon FSx for Lustre file system that you're creating
-	// from a backup. Valid values are 2.10 and 2.12 . You don't need to specify
-	// FileSystemTypeVersion because it will be applied using the backup's
+	// from a backup. Valid values are 2.10 , 2.12 , and 2.15 . You don't need to
+	// specify FileSystemTypeVersion because it will be applied using the backup's
 	// FileSystemTypeVersion setting. If you choose to specify FileSystemTypeVersion
 	// when creating from backup, the value must match the backup's
 	// FileSystemTypeVersion setting.

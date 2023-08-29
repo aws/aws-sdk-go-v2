@@ -1,0 +1,8 @@
+{
+    "id": "25989c4a-2f57-4c12-9630-51c1e5f5e7bb",
+    "type": "feature",
+    "description": "Adds support for the new Export and Message Insights features: create, get, list and cancel export jobs; get message insights.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

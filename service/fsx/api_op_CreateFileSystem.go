@@ -116,10 +116,10 @@ type CreateFileSystemInput struct {
 	ClientRequestToken *string
 
 	// (Optional) For FSx for Lustre file systems, sets the Lustre version for the
-	// file system that you're creating. Valid values are 2.10 and 2.12 :
+	// file system that you're creating. Valid values are 2.10 , 2.12 m and 2.15 :
 	//   - 2.10 is supported by the Scratch and Persistent_1 Lustre deployment types.
-	//   - 2.12 is supported by all Lustre deployment types. 2.12 is required when
-	//   setting FSx for Lustre DeploymentType to PERSISTENT_2 .
+	//   - 2.12 and 2.15 are supported by all Lustre deployment types. 2.12 or 2.15 is
+	//   required when setting FSx for Lustre DeploymentType to PERSISTENT_2 .
 	// Default value = 2.10 , except when DeploymentType is set to PERSISTENT_2 , then
 	// the default is 2.12 . If you set FileSystemTypeVersion to 2.10 for a
 	// PERSISTENT_2 Lustre deployment type, the CreateFileSystem operation fails.

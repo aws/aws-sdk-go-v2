@@ -532,6 +532,24 @@ func (RunLogLevel) Values() []RunLogLevel {
 	}
 }
 
+type RunRetentionMode string
+
+// Enum values for RunRetentionMode
+const (
+	RunRetentionModeRetain RunRetentionMode = "RETAIN"
+	RunRetentionModeRemove RunRetentionMode = "REMOVE"
+)
+
+// Values returns all known values for RunRetentionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RunRetentionMode) Values() []RunRetentionMode {
+	return []RunRetentionMode{
+		"RETAIN",
+		"REMOVE",
+	}
+}
+
 type RunStatus string
 
 // Enum values for RunStatus
