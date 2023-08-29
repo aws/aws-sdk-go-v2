@@ -6247,6 +6247,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The computational accelerator used to run the workflow. \n    </p>"
                     }
+                },
+                "retentionMode": {
+                    "target": "com.amazonaws.omics#RunRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run's retention mode.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12790,6 +12796,25 @@
                 "target": "com.amazonaws.omics#RunResourceDigest"
             }
         },
+        "com.amazonaws.omics#RunRetentionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "RETAIN",
+                        "value": "RETAIN"
+                    },
+                    {
+                        "name": "REMOVE",
+                        "value": "REMOVE"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.omics#RunRoleArn": {
             "type": "string",
             "traits": {
@@ -14179,7 +14204,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a run.</p>",
+                "smithy.api#documentation": "<p>Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN. The\n      remaining parameters are copied from the previous run.</p>\n         <p>The total number of runs in your account is subject to a quota per Region. To avoid\n      needing to delete runs manually, you can set the retention mode to <code>REMOVE</code>.\n      Runs with this setting are deleted automatically when the run quoata is exceeded.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -14202,13 +14227,13 @@
                 "workflowType": {
                     "target": "com.amazonaws.omics#WorkflowType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The run's workflows type.</p>"
+                        "smithy.api#documentation": "<p>The run's workflow type.</p>"
                     }
                 },
                 "runId": {
                     "target": "com.amazonaws.omics#RunId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The run's ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of a run to duplicate.</p>"
                     }
                 },
                 "roleArn": {
@@ -14280,6 +14305,12 @@
                         "smithy.api#documentation": "<p>To ensure that requests don't run multiple times, specify a unique ID for each request.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "retentionMode": {
+                    "target": "com.amazonaws.omics#RunRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention mode for the run.</p>"
                     }
                 }
             },

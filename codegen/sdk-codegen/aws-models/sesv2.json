@@ -370,6 +370,58 @@
                 "smithy.api#documentation": "<p>Represents the body of the email message.</p>"
             }
         },
+        "com.amazonaws.sesv2#Bounce": {
+            "type": "structure",
+            "members": {
+                "BounceType": {
+                    "target": "com.amazonaws.sesv2#BounceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the bounce, as determined by SES.\n            Can be one of <code>UNDETERMINED</code>, <code>TRANSIENT</code>, or <code>PERMANENT</code>\n         </p>"
+                    }
+                },
+                "BounceSubType": {
+                    "target": "com.amazonaws.sesv2#BounceSubType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subtype of the bounce, as determined by SES.</p>"
+                    }
+                },
+                "DiagnosticCode": {
+                    "target": "com.amazonaws.sesv2#DiagnosticCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status code issued by the reporting Message Transfer Authority (MTA).\n            This field only appears if a delivery status notification (DSN) was attached to the bounce\n            and the <code>Diagnostic-Code</code> was provided in the DSN.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a <code>Bounce</code> event.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#BounceSubType": {
+            "type": "string"
+        },
+        "com.amazonaws.sesv2#BounceType": {
+            "type": "enum",
+            "members": {
+                "UNDETERMINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNDETERMINED"
+                    }
+                },
+                "TRANSIENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIENT"
+                    }
+                },
+                "PERMANENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMANENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sesv2#BulkEmailContent": {
             "type": "structure",
             "members": {
@@ -544,6 +596,68 @@
         "com.amazonaws.sesv2#CampaignId": {
             "type": "string"
         },
+        "com.amazonaws.sesv2#CancelExportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#CancelExportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#CancelExportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels an export job.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Cancel export job",
+                        "documentation": "Cancels the export job with ID ef28cf62-9d8e-4b60-9283-b09816c99a99",
+                        "input": {
+                            "JobId": "ef28cf62-9d8e-4b60-9283-b09816c99a99"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/email/export-jobs/{JobId}/cancel",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#CancelExportJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.sesv2#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export job ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to cancel an export job using the export job ID.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#CancelExportJobResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#CaseId": {
             "type": "string"
         },
@@ -599,6 +713,32 @@
             "member": {
                 "target": "com.amazonaws.sesv2#CloudWatchDimensionConfiguration"
             }
+        },
+        "com.amazonaws.sesv2#Complaint": {
+            "type": "structure",
+            "members": {
+                "ComplaintSubType": {
+                    "target": "com.amazonaws.sesv2#ComplaintSubType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Can either be <code>null</code> or <code>OnAccountSuppressionList</code>.\n            If the value is <code>OnAccountSuppressionList</code>, SES accepted the message,\n            but didn't attempt to send it because it was on the account-level suppression list.\n        </p>"
+                    }
+                },
+                "ComplaintFeedbackType": {
+                    "target": "com.amazonaws.sesv2#ComplaintFeedbackType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The value of the <code>Feedback-Type</code> field from the feedback report received from the ISP.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a <code>Complaint</code> event.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ComplaintFeedbackType": {
+            "type": "string"
+        },
+        "com.amazonaws.sesv2#ComplaintSubType": {
+            "type": "string"
         },
         "com.amazonaws.sesv2#ConcurrentModificationException": {
             "type": "structure",
@@ -1609,6 +1749,75 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#CreateExportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#CreateExportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#CreateExportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an export job for a data source and destination.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/export-jobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#CreateExportJobRequest": {
+            "type": "structure",
+            "members": {
+                "ExportDataSource": {
+                    "target": "com.amazonaws.sesv2#ExportDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source for the export job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExportDestination": {
+                    "target": "com.amazonaws.sesv2#ExportDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the export job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to create an export job from a data source to a data\n            destination.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#CreateExportJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.sesv2#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that represents the export job ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#CreateImportJob": {
             "type": "operation",
             "input": {
@@ -1805,7 +2014,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The data format of the import job's data source.</p>"
+                "smithy.api#documentation": "<p>The data format of a file, can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CSV</code> – A comma-separated values file.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> – A JSON file.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#DedicatedIp": {
@@ -2544,6 +2753,50 @@
                 "smithy.api#documentation": "<p>The subject line for an email that you submitted in a predictive inbox placement test.</p>"
             }
         },
+        "com.amazonaws.sesv2#DeliveryEventType": {
+            "type": "enum",
+            "members": {
+                "SEND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEND"
+                    }
+                },
+                "DELIVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERY"
+                    }
+                },
+                "TRANSIENT_BOUNCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIENT_BOUNCE"
+                    }
+                },
+                "PERMANENT_BOUNCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMANENT_BOUNCE"
+                    }
+                },
+                "UNDETERMINED_BOUNCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNDETERMINED_BOUNCE"
+                    }
+                },
+                "COMPLAINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLAINT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of delivery events:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SEND</code> - The send request was successful and SES will\n                    attempt to deliver the message to the recipient’s mail server. (If account-level\n                    or global suppression is being used, SES will still count it as a send,\n                    but delivery is suppressed.)</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIVERY</code> - SES successfully delivered the email to the\n                    recipient's mail server. Excludes deliveries to the mailbox simulator and\n                    emails addressed to more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSIENT_BOUNCE</code> - Feedback received for\n                    delivery failures excluding issues with non-existent mailboxes. Excludes bounces from the\n                    mailbox simulator, and those from emails addressed to more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PERMANENT_BOUNCE</code> - Feedback received for\n                    emails sent to non-existent mailboxes. Excludes bounces from the mailbox simulator, those\n                    originating from your account-level suppression list (if enabled), and those from emails\n                    addressed to more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNDETERMINED_BOUNCE</code> - SES was unable to determine the bounce reason.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> - Complaint received for the email.\n                    This excludes complaints from the mailbox simulator, those originating from\n                    your account-level suppression list (if enabled), and those from emails addressed to more\n                    than one recipient.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.sesv2#DeliveryOptions": {
             "type": "structure",
             "members": {
@@ -2592,6 +2845,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>An object that describes the recipients for an email.</p>\n         <note>\n            <p>Amazon SES does not support the SMTPUTF8 extension, as described in <a href=\"https://tools.ietf.org/html/rfc6531\">RFC6531</a>. For this reason, the\n                    <i>local part</i> of a destination email address (the part of the\n                email address that precedes the @ sign) may only contain <a href=\"https://en.wikipedia.org/wiki/Email_address#Local-part\">7-bit ASCII\n                    characters</a>. If the <i>domain part</i> of an address (the\n                part after the @ sign) contains non-ASCII characters, they must be encoded using\n                Punycode, as described in <a href=\"https://tools.ietf.org/html/rfc3492.html\">RFC3492</a>.</p>\n         </note>"
             }
+        },
+        "com.amazonaws.sesv2#DiagnosticCode": {
+            "type": "string"
         },
         "com.amazonaws.sesv2#DimensionName": {
             "type": "string",
@@ -2987,6 +3243,18 @@
         "com.amazonaws.sesv2#EmailAddress": {
             "type": "string"
         },
+        "com.amazonaws.sesv2#EmailAddressFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#InsightsEmailAddress"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.sesv2#EmailAddressList": {
             "type": "list",
             "member": {
@@ -3017,6 +3285,60 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that defines the entire content of the email, including the message headers\n            and the body content. You can create a simple email message, in which you specify the\n            subject and the text and HTML versions of the message body. You can also create raw\n            messages, in which you specify a complete MIME-formatted message. Raw messages can\n            include attachments and custom headers.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#EmailInsights": {
+            "type": "structure",
+            "members": {
+                "Destination": {
+                    "target": "com.amazonaws.sesv2#InsightsEmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recipient of the email.</p>"
+                    }
+                },
+                "Isp": {
+                    "target": "com.amazonaws.sesv2#Isp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recipient's ISP (e.g., <code>Gmail</code>, <code>Yahoo</code>,\n        etc.).</p>"
+                    }
+                },
+                "Events": {
+                    "target": "com.amazonaws.sesv2#InsightsEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of events associated with the sent email.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An email's insights contain metadata and delivery information about a specific email.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#EmailInsightsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#EmailInsights"
+            }
+        },
+        "com.amazonaws.sesv2#EmailSubject": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 998
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sesv2#EmailSubjectFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#EmailSubject"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.sesv2#EmailTemplateContent": {
@@ -3119,6 +3441,26 @@
         },
         "com.amazonaws.sesv2#EnabledWrapper": {
             "type": "boolean"
+        },
+        "com.amazonaws.sesv2#EngagementEventType": {
+            "type": "enum",
+            "members": {
+                "OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPEN"
+                    }
+                },
+                "CLICK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLICK"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of delivery events:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OPEN</code> - Open event for emails including open trackers.\n                    Excludes opens for emails addressed to more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CLICK</code> - Click event for emails including wrapped links.\n                    Excludes clicks for emails addressed to more than one recipient.</p>\n            </li>\n         </ul>"
+            }
         },
         "com.amazonaws.sesv2#ErrorMessage": {
             "type": "string"
@@ -3242,6 +3584,26 @@
                 "target": "com.amazonaws.sesv2#EventDestination"
             }
         },
+        "com.amazonaws.sesv2#EventDetails": {
+            "type": "structure",
+            "members": {
+                "Bounce": {
+                    "target": "com.amazonaws.sesv2#Bounce",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a <code>Bounce</code> event.</p>"
+                    }
+                },
+                "Complaint": {
+                    "target": "com.amazonaws.sesv2#Complaint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a <code>Complaint</code> event.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Contains a <code>Bounce</code> object if the event type is <code>BOUNCE</code>.\n            Contains a <code>Complaint</code> object if the event type is <code>COMPLAINT</code>.\n        </p>"
+            }
+        },
         "com.amazonaws.sesv2#EventType": {
             "type": "enum",
             "members": {
@@ -3316,6 +3678,184 @@
                 "target": "com.amazonaws.sesv2#EventType"
             }
         },
+        "com.amazonaws.sesv2#ExportDataSource": {
+            "type": "structure",
+            "members": {
+                "MetricsDataSource": {
+                    "target": "com.amazonaws.sesv2#MetricsDataSource"
+                },
+                "MessageInsightsDataSource": {
+                    "target": "com.amazonaws.sesv2#MessageInsightsDataSource"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains details about the data source of the export job. It can only\n            contain one of <code>MetricsDataSource</code> or <code>MessageInsightsDataSource</code> object.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ExportDestination": {
+            "type": "structure",
+            "members": {
+                "DataFormat": {
+                    "target": "com.amazonaws.sesv2#DataFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data format of the final export job file, can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CSV</code> - A comma-separated values file.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - A Json file.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Url": {
+                    "target": "com.amazonaws.sesv2#S3Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon S3 pre-signed URL that points to the generated export file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains details about the destination of the export job.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ExportDimensionValue": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#MetricDimensionValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ExportDimensions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sesv2#MetricDimensionName"
+            },
+            "value": {
+                "target": "com.amazonaws.sesv2#ExportDimensionValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ExportJobSummary": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.sesv2#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export job ID.</p>"
+                    }
+                },
+                "ExportSourceType": {
+                    "target": "com.amazonaws.sesv2#ExportSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source type of the export job.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.sesv2#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the export job.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the export job was created.</p>"
+                    }
+                },
+                "CompletedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the export job was completed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the export job.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ExportJobSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#ExportJobSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the export job summaries.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ExportMetric": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sesv2#Metric"
+                },
+                "Aggregation": {
+                    "target": "com.amazonaws.sesv2#MetricAggregation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a mapping between a <code>Metric</code> and\n            <code>MetricAggregation</code>.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ExportMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#ExportMetric"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ExportSourceType": {
+            "type": "enum",
+            "members": {
+                "METRICS_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METRICS_DATA"
+                    }
+                },
+                "MESSAGE_INSIGHTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MESSAGE_INSIGHTS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of data source of an export, can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>METRICS_DATA</code> - The metrics export.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MESSAGE_INSIGHTS</code> - The Message Insights export.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sesv2#ExportStatistics": {
+            "type": "structure",
+            "members": {
+                "ProcessedRecordsCount": {
+                    "target": "com.amazonaws.sesv2#ProcessedRecordsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that were processed to generate the final export file.</p>"
+                    }
+                },
+                "ExportedRecordsCount": {
+                    "target": "com.amazonaws.sesv2#ExportedRecordsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that were exported to the final export file.</p>\n         <p>This value might not be available for all export source types</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Statistics about the execution of an export job.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ExportedRecordsCount": {
+            "type": "integer"
+        },
         "com.amazonaws.sesv2#FailedRecordsCount": {
             "type": "integer"
         },
@@ -3328,18 +3868,18 @@
                 "FailedRecordsS3Url": {
                     "target": "com.amazonaws.sesv2#FailedRecordsS3Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon S3 presigned URL that contains all the failed records and related\n            information.</p>"
+                        "smithy.api#documentation": "<p>An Amazon S3 pre-signed URL that contains all the failed records and related information.</p>"
                     }
                 },
                 "ErrorMessage": {
                     "target": "com.amazonaws.sesv2#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>A message about why the import job failed.</p>"
+                        "smithy.api#documentation": "<p>A message about why the job failed.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains the failure details about an import job.</p>"
+                "smithy.api#documentation": "<p>An object that contains the failure details about a job.</p>"
             }
         },
         "com.amazonaws.sesv2#FailureRedirectionURL": {
@@ -4725,6 +5265,114 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#GetExportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#GetExportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#GetExportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about an export job.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/email/export-jobs/{JobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#GetExportJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.sesv2#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export job ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to retrieve information about an export job using the export job\n            ID.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#GetExportJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.sesv2#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export job ID.</p>"
+                    }
+                },
+                "ExportSourceType": {
+                    "target": "com.amazonaws.sesv2#ExportSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of source of the export job.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.sesv2#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the export job.</p>"
+                    }
+                },
+                "ExportDestination": {
+                    "target": "com.amazonaws.sesv2#ExportDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination of the export job.</p>"
+                    }
+                },
+                "ExportDataSource": {
+                    "target": "com.amazonaws.sesv2#ExportDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source of the export job.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the export job was created.</p>"
+                    }
+                },
+                "CompletedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the export job was completed.</p>"
+                    }
+                },
+                "FailureInfo": {
+                    "target": "com.amazonaws.sesv2#FailureInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure details about an export job.</p>"
+                    }
+                },
+                "Statistics": {
+                    "target": "com.amazonaws.sesv2#ExportStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistics about the export job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#GetImportJob": {
             "type": "operation",
             "input": {
@@ -4830,6 +5478,90 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#GetMessageInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#GetMessageInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#GetMessageInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a specific message, including the from address, the\n            subject, the recipient address, email tags, as well as events associated with the message.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/email/insights/{MessageId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#GetMessageInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "MessageId": {
+                    "target": "com.amazonaws.sesv2#OutboundMessageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A <code>MessageId</code> is a unique identifier for a message, and is\n            returned when sending emails through Amazon SES.\n        </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to return information about a message.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#GetMessageInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "MessageId": {
+                    "target": "com.amazonaws.sesv2#OutboundMessageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the message.</p>"
+                    }
+                },
+                "FromEmailAddress": {
+                    "target": "com.amazonaws.sesv2#InsightsEmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The from address used to send the message.</p>"
+                    }
+                },
+                "Subject": {
+                    "target": "com.amazonaws.sesv2#EmailSubject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subject line of the message.</p>"
+                    }
+                },
+                "EmailTags": {
+                    "target": "com.amazonaws.sesv2#MessageTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of tags, in the form of name/value pairs, that were applied to the email you sent, along with Amazon SES\n            <a href=\"https://docs.aws.amazon.com/ses/latest/dg/monitor-using-event-publishing.html\">Auto-Tags</a>.\n        </p>"
+                    }
+                },
+                "Insights": {
+                    "target": "com.amazonaws.sesv2#EmailInsightsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of insights associated with the message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a message.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -5122,6 +5854,48 @@
                 "smithy.api#documentation": "<p>An object that contains information about the inbox placement data settings for a\n            verified domain that’s associated with your Amazon Web Services account. This data is available only\n            if you enabled the Deliverability dashboard for the domain.</p>"
             }
         },
+        "com.amazonaws.sesv2#InsightsEmailAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 320
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sesv2#InsightsEvent": {
+            "type": "structure",
+            "members": {
+                "Timestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the event.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.sesv2#EventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of event:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SEND</code> - The send request was successful and SES will\n                    attempt to deliver the message to the recipient’s mail server. (If account-level\n                    or global suppression is being used, SES will still count it as a send,\n                    but delivery is suppressed.)\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIVERY</code> - SES successfully delivered the email to the\n                    recipient's mail server. Excludes deliveries to the mailbox simulator,\n                    and those from emails addressed to more than one recipient.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> - Feedback received for delivery failures. Additional details about the bounce are provided in the <code>Details</code> object.\n                    Excludes bounces from the mailbox simulator, and those from emails addressed to more than one recipient.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> - Complaint received for the email. Additional details about the complaint are provided in the <code>Details</code> object.\n                    This excludes complaints from the mailbox simulator, those originating from\n                    your account-level suppression list (if enabled), and those from emails addressed\n                    to more than one recipient.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>OPEN</code> - Open event for emails including open trackers.\n                    Excludes opens for emails addressed to more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CLICK</code> - Click event for emails including wrapped links.\n                    Excludes clicks for emails addressed to more than one recipient.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Details": {
+                    "target": "com.amazonaws.sesv2#EventDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about bounce or complaint events.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing details about a specific event.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#InsightsEvents": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#InsightsEvent"
+            }
+        },
         "com.amazonaws.sesv2#InternalServiceErrorException": {
             "type": "structure",
             "members": {
@@ -5158,6 +5932,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sesv2#Ip"
+            }
+        },
+        "com.amazonaws.sesv2#Isp": {
+            "type": "string"
+        },
+        "com.amazonaws.sesv2#IspFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#Isp"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.sesv2#IspName": {
@@ -5201,7 +5990,7 @@
         "com.amazonaws.sesv2#JobId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>A string that represents the import job ID.</p>",
+                "smithy.api#documentation": "<p>A string that represents a job ID.</p>",
                 "smithy.api#length": {
                     "min": 1
                 }
@@ -5233,10 +6022,16 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of the import job.</p>"
+                "smithy.api#documentation": "<p>The status of a job.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATED</code> – Job has just been created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PROCESSING</code> – Job is processing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> – An error occurred during processing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> – Job has completed processing successfully.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#KinesisFirehoseDestination": {
@@ -5259,6 +6054,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that defines an Amazon Kinesis Data Firehose destination for email events. You can use Amazon Kinesis Data Firehose to\n            stream data to other services, such as Amazon S3 and Amazon Redshift.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#LastDeliveryEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#DeliveryEventType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.sesv2#LastEngagementEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#EngagementEventType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.sesv2#LastFreshStart": {
@@ -6011,6 +6830,90 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#ListExportJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#ListExportJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#ListExportJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the export jobs.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/list-export-jobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListExportJobsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token returned from a previous call to <code>ListExportJobs</code> to\n            indicate the position in the list of export jobs.</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.sesv2#MaxItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of export jobs to return at once. Use this parameter to paginate\n            results. If additional export jobs exist beyond the specified limit, the\n            <code>NextToken</code> element is sent in the response. Use the\n            <code>NextToken</code> value in subsequent calls to <code>ListExportJobs</code> to\n            retrieve additional export jobs.</p>"
+                    }
+                },
+                "ExportSourceType": {
+                    "target": "com.amazonaws.sesv2#ExportSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value used to list export jobs that have a certain\n            <code>ExportSourceType</code>.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.sesv2#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value used to list export jobs that have a certain <code>JobStatus</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to list all export jobs with filters.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#ListExportJobsResponse": {
+            "type": "structure",
+            "members": {
+                "ExportJobs": {
+                    "target": "com.amazonaws.sesv2#ExportJobSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the export job summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string token indicating that there might be additional export jobs available to be\n            listed. Use this token to a subsequent call to <code>ListExportJobs</code> with the same\n            parameters to retrieve the next page of export jobs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#ListImportJobs": {
             "type": "operation",
             "input": {
@@ -6571,6 +7474,99 @@
         "com.amazonaws.sesv2#MessageData": {
             "type": "string"
         },
+        "com.amazonaws.sesv2#MessageInsightsDataSource": {
+            "type": "structure",
+            "members": {
+                "StartDate": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the start date for the export interval as a timestamp. The start date is inclusive.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the end date for the export interval as a timestamp. The end date is inclusive.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Include": {
+                    "target": "com.amazonaws.sesv2#MessageInsightsFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters for results to be included in the export file.</p>"
+                    }
+                },
+                "Exclude": {
+                    "target": "com.amazonaws.sesv2#MessageInsightsFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters for results to be excluded from the export file.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sesv2#MessageInsightsExportMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains filters applied when performing the Message Insights export.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#MessageInsightsExportMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.sesv2#MessageInsightsFilters": {
+            "type": "structure",
+            "members": {
+                "FromEmailAddress": {
+                    "target": "com.amazonaws.sesv2#EmailAddressFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The from address used to send the message.</p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.sesv2#EmailAddressFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recipient's email address.</p>"
+                    }
+                },
+                "Subject": {
+                    "target": "com.amazonaws.sesv2#EmailSubjectFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subject line of the message.</p>"
+                    }
+                },
+                "Isp": {
+                    "target": "com.amazonaws.sesv2#IspFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recipient's ISP (e.g., <code>Gmail</code>, <code>Yahoo</code>,\n            etc.).</p>"
+                    }
+                },
+                "LastDeliveryEvent": {
+                    "target": "com.amazonaws.sesv2#LastDeliveryEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The last delivery-related event for the email, where the ordering is as follows:\n            <code>SEND</code> < <code>BOUNCE</code> < <code>DELIVERY</code> < <code>COMPLAINT</code>.\n        </p>"
+                    }
+                },
+                "LastEngagementEvent": {
+                    "target": "com.amazonaws.sesv2#LastEngagementEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The last engagement-related event for the email, where the ordering is as follows:\n            <code>OPEN</code> < <code>CLICK</code>.\n        </p>\n         <p>\n            Engagement events are only available if <a href=\"https://docs.aws.amazon.com/ses/latest/dg/vdm-settings.html\">Engagement tracking</a>\n            is enabled.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing Message Insights filters.</p>\n         <p>If you specify multiple filters, the filters are joined by AND.</p>\n         <p>If you specify multiple values for a filter, the values are joined by OR. Filter values are case-sensitive.</p>\n         <p>\n            <code>FromEmailAddress</code>, <code>Destination</code>, and <code>Subject</code> filters support partial match.\n            A partial match is performed by using the <code>*</code> wildcard character placed at the beginning (suffix match), the end (prefix match)\n            or both ends of the string (contains match).\n            In order to match the literal characters <code>*</code> or <code>\\</code>, they must be escaped using the <code>\\</code> character.\n            If no wildcard character is present, an exact match is performed.\n        </p>"
+            }
+        },
         "com.amazonaws.sesv2#MessageRejected": {
             "type": "structure",
             "members": {
@@ -6690,6 +7686,29 @@
                         "smithy.api#enumValue": "DELIVERY_COMPLAINT"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metric to export, can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SEND</code> - Emails sent eligible for tracking in the VDM\n                    dashboard. This excludes emails sent to the mailbox simulator and emails\n                    addressed to more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> - Complaints received for your account. This\n                    excludes complaints from the mailbox simulator, those originating from your\n                    account-level suppression list (if enabled), and those for emails addressed to\n                    more than one recipient</p>\n            </li>\n            <li>\n               <p>\n                  <code>PERMANENT_BOUNCE</code> - Permanent bounces - i.e., feedback\n                    received for emails sent to non-existent mailboxes. Excludes bounces from the\n                    mailbox simulator, those originating from your account-level suppression list\n                    (if enabled), and those for emails addressed to more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSIENT_BOUNCE</code> - Transient bounces - i.e., feedback\n                    received for delivery failures excluding issues with non-existent mailboxes.\n                    Excludes bounces from the mailbox simulator, and those for emails addressed to\n                    more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OPEN</code> - Unique open events for emails including open\n                    trackers. Excludes opens for emails addressed to more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CLICK</code> - Unique click events for emails including wrapped\n                    links. Excludes clicks for emails addressed to more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIVERY</code> - Successful deliveries for email sending\n                    attempts. Excludes deliveries to the mailbox simulator and for emails addressed\n                    to more than one recipient.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIVERY_OPEN</code> - Successful deliveries for email sending\n                    attempts. Excludes deliveries to the mailbox simulator, for emails addressed to\n                    more than one recipient, and emails without open trackers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIVERY_CLICK</code> - Successful deliveries for email sending\n                    attempts. Excludes deliveries to the mailbox simulator, for emails addressed to\n                    more than one recipient, and emails without click trackers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIVERY_COMPLAINT</code> - Successful deliveries for email\n                    sending attempts. Excludes deliveries to the mailbox simulator, for emails\n                    addressed to more than one recipient, and emails addressed to recipients hosted\n                    by ISPs with which Amazon SES does not have a feedback loop agreement.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sesv2#MetricAggregation": {
+            "type": "enum",
+            "members": {
+                "RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RATE"
+                    }
+                },
+                "VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOLUME"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The aggregation to apply to a metric, can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VOLUME</code> - The volume of events for this metric.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RATE</code> - The rate for this metric relative to the\n                    <code>SEND</code> metric volume.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#MetricDataError": {
@@ -6783,7 +7802,10 @@
             }
         },
         "com.amazonaws.sesv2#MetricDimensionValue": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A list of values associated with the <code>MetricDimensionName</code> to filter\n            metrics by. Can either be <code>*</code> as a wildcard for all values or a list of up to\n            10 specific values. If one <code>Dimension</code> has the <code>*</code> value, other\n            dimensions can only contain one value. </p>"
+            }
         },
         "com.amazonaws.sesv2#MetricNamespace": {
             "type": "enum",
@@ -6800,6 +7822,49 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sesv2#Counter"
+            }
+        },
+        "com.amazonaws.sesv2#MetricsDataSource": {
+            "type": "structure",
+            "members": {
+                "Dimensions": {
+                    "target": "com.amazonaws.sesv2#ExportDimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains a mapping between a <code>MetricDimensionName</code> and\n            <code>MetricDimensionValue</code> to filter metrics by. Must contain a least 1\n            dimension but no more than 3 unique ones.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.sesv2#MetricNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics namespace - e.g., <code>VDM</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metrics": {
+                    "target": "com.amazonaws.sesv2#ExportMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ExportMetric</code> objects to export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the start date for the export interval as a timestamp.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the end date for the export interval as a timestamp.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains details about the data source for the metrics export.</p>"
             }
         },
         "com.amazonaws.sesv2#NextToken": {
@@ -7683,6 +8748,17 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Used to convert a dedicated IP pool to a different scaling mode.</p>\n         <note>\n            <p>\n               <code>MANAGED</code> pools cannot be converted to <code>STANDARD</code> scaling mode.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Used to convert a dedicated IP pool to a different scaling mode.",
+                        "documentation": "This example converts a dedicated IP pool from STANDARD to MANAGED.",
+                        "input": {
+                            "PoolName": "sample-ses-pool",
+                            "ScalingMode": "MANAGED"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v2/email/dedicated-ip-pools/{PoolName}/scaling",
@@ -8524,7 +9600,7 @@
         "com.amazonaws.sesv2#S3Url": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>An Amazon S3 URL in the format\n                s3://<i><bucket_name></i>/<i><object></i>.</p>",
+                "smithy.api#documentation": "<p>An Amazon S3 URL in the format s3://<i><bucket_name></i>/<i><object></i> or\n            a pre-signed URL.</p>",
                 "smithy.api#pattern": "^s3:\\/\\/([^\\/]+)\\/(.*?([^\\/]+)\\/?)$"
             }
         },
@@ -8968,6 +10044,9 @@
                     "target": "com.amazonaws.sesv2#BatchGetMetricData"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#CancelExportJob"
+                },
+                {
                     "target": "com.amazonaws.sesv2#CreateConfigurationSet"
                 },
                 {
@@ -8996,6 +10075,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#CreateEmailTemplate"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#CreateExportJob"
                 },
                 {
                     "target": "com.amazonaws.sesv2#CreateImportJob"
@@ -9082,7 +10164,13 @@
                     "target": "com.amazonaws.sesv2#GetEmailTemplate"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#GetExportJob"
+                },
+                {
                     "target": "com.amazonaws.sesv2#GetImportJob"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#GetMessageInsights"
                 },
                 {
                     "target": "com.amazonaws.sesv2#GetSuppressedDestination"
@@ -9113,6 +10201,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#ListEmailTemplates"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ListExportJobs"
                 },
                 {
                     "target": "com.amazonaws.sesv2#ListImportJobs"
@@ -9300,9 +10391,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://email-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://email-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -9315,15 +10585,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://email.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://email.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -9335,258 +10640,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://email-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://email-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://email.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://email.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
