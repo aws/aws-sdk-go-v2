@@ -138,6 +138,24 @@ type Body struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a Bounce event.
+type Bounce struct {
+
+	// The subtype of the bounce, as determined by SES.
+	BounceSubType *string
+
+	// The type of the bounce, as determined by SES. Can be one of UNDETERMINED ,
+	// TRANSIENT , or PERMANENT
+	BounceType BounceType
+
+	// The status code issued by the reporting Message Transfer Authority (MTA). This
+	// field only appears if a delivery status notification (DSN) was attached to the
+	// bounce and the Diagnostic-Code was provided in the DSN.
+	DiagnosticCode *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains the body of the message. You can specify a template
 // message.
 type BulkEmailContent struct {
@@ -266,6 +284,21 @@ type CloudWatchDimensionConfiguration struct {
 	//
 	// This member is required.
 	DimensionValueSource DimensionValueSource
+
+	noSmithyDocumentSerde
+}
+
+// Information about a Complaint event.
+type Complaint struct {
+
+	// The value of the Feedback-Type field from the feedback report received from the
+	// ISP.
+	ComplaintFeedbackType *string
+
+	// Can either be null or OnAccountSuppressionList . If the value is
+	// OnAccountSuppressionList , SES accepted the message, but didn't attempt to send
+	// it because it was on the account-level suppression list.
+	ComplaintSubType *string
 
 	noSmithyDocumentSerde
 }
@@ -756,6 +789,22 @@ type EmailContent struct {
 	noSmithyDocumentSerde
 }
 
+// An email's insights contain metadata and delivery information about a specific
+// email.
+type EmailInsights struct {
+
+	// The recipient of the email.
+	Destination *string
+
+	// A list of events associated with the sent email.
+	Events []InsightsEvent
+
+	// The recipient's ISP (e.g., Gmail , Yahoo , etc.).
+	Isp *string
+
+	noSmithyDocumentSerde
+}
+
 // The content of the email, composed of a subject line, an HTML part, and a
 // text-only part.
 type EmailTemplateContent struct {
@@ -904,13 +953,135 @@ type EventDestinationDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains the failure details about an import job.
+// Contains a Bounce object if the event type is BOUNCE . Contains a Complaint
+// object if the event type is COMPLAINT .
+type EventDetails struct {
+
+	// Information about a Bounce event.
+	Bounce *Bounce
+
+	// Information about a Complaint event.
+	Complaint *Complaint
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains details about the data source of the export job. It can
+// only contain one of MetricsDataSource or MessageInsightsDataSource object.
+type ExportDataSource struct {
+
+	// An object that contains filters applied when performing the Message Insights
+	// export.
+	MessageInsightsDataSource *MessageInsightsDataSource
+
+	// An object that contains details about the data source for the metrics export.
+	MetricsDataSource *MetricsDataSource
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains details about the destination of the export job.
+type ExportDestination struct {
+
+	// The data format of the final export job file, can be one of the following:
+	//   - CSV - A comma-separated values file.
+	//   - JSON - A Json file.
+	//
+	// This member is required.
+	DataFormat DataFormat
+
+	// An Amazon S3 pre-signed URL that points to the generated export file.
+	S3Url *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the export job.
+type ExportJobSummary struct {
+
+	// The timestamp of when the export job was completed.
+	CompletedTimestamp *time.Time
+
+	// The timestamp of when the export job was created.
+	CreatedTimestamp *time.Time
+
+	// The source type of the export job.
+	ExportSourceType ExportSourceType
+
+	// The export job ID.
+	JobId *string
+
+	// The status of the export job.
+	JobStatus JobStatus
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a mapping between a Metric and MetricAggregation .
+type ExportMetric struct {
+
+	// The aggregation to apply to a metric, can be one of the following:
+	//   - VOLUME - The volume of events for this metric.
+	//   - RATE - The rate for this metric relative to the SEND metric volume.
+	Aggregation MetricAggregation
+
+	// The metric to export, can be one of the following:
+	//   - SEND - Emails sent eligible for tracking in the VDM dashboard. This excludes
+	//   emails sent to the mailbox simulator and emails addressed to more than one
+	//   recipient.
+	//   - COMPLAINT - Complaints received for your account. This excludes complaints
+	//   from the mailbox simulator, those originating from your account-level
+	//   suppression list (if enabled), and those for emails addressed to more than one
+	//   recipient
+	//   - PERMANENT_BOUNCE - Permanent bounces - i.e., feedback received for emails
+	//   sent to non-existent mailboxes. Excludes bounces from the mailbox simulator,
+	//   those originating from your account-level suppression list (if enabled), and
+	//   those for emails addressed to more than one recipient.
+	//   - TRANSIENT_BOUNCE - Transient bounces - i.e., feedback received for delivery
+	//   failures excluding issues with non-existent mailboxes. Excludes bounces from the
+	//   mailbox simulator, and those for emails addressed to more than one recipient.
+	//   - OPEN - Unique open events for emails including open trackers. Excludes opens
+	//   for emails addressed to more than one recipient.
+	//   - CLICK - Unique click events for emails including wrapped links. Excludes
+	//   clicks for emails addressed to more than one recipient.
+	//   - DELIVERY - Successful deliveries for email sending attempts. Excludes
+	//   deliveries to the mailbox simulator and for emails addressed to more than one
+	//   recipient.
+	//   - DELIVERY_OPEN - Successful deliveries for email sending attempts. Excludes
+	//   deliveries to the mailbox simulator, for emails addressed to more than one
+	//   recipient, and emails without open trackers.
+	//   - DELIVERY_CLICK - Successful deliveries for email sending attempts. Excludes
+	//   deliveries to the mailbox simulator, for emails addressed to more than one
+	//   recipient, and emails without click trackers.
+	//   - DELIVERY_COMPLAINT - Successful deliveries for email sending attempts.
+	//   Excludes deliveries to the mailbox simulator, for emails addressed to more than
+	//   one recipient, and emails addressed to recipients hosted by ISPs with which
+	//   Amazon SES does not have a feedback loop agreement.
+	Name Metric
+
+	noSmithyDocumentSerde
+}
+
+// Statistics about the execution of an export job.
+type ExportStatistics struct {
+
+	// The number of records that were exported to the final export file. This value
+	// might not be available for all export source types
+	ExportedRecordsCount *int32
+
+	// The number of records that were processed to generate the final export file.
+	ProcessedRecordsCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains the failure details about a job.
 type FailureInfo struct {
 
-	// A message about why the import job failed.
+	// A message about why the job failed.
 	ErrorMessage *string
 
-	// An Amazon S3 presigned URL that contains all the failed records and related
+	// An Amazon S3 pre-signed URL that contains all the failed records and related
 	// information.
 	FailedRecordsS3Url *string
 
@@ -1019,10 +1190,14 @@ type ImportJobSummary struct {
 	// is going to target.
 	ImportDestination *ImportDestination
 
-	// A string that represents the import job ID.
+	// A string that represents a job ID.
 	JobId *string
 
-	// The status of the import job.
+	// The status of a job.
+	//   - CREATED – Job has just been created.
+	//   - PROCESSING – Job is processing.
+	//   - ERROR – An error occurred during processing.
+	//   - COMPLETED – Job has completed processing successfully.
 	JobStatus JobStatus
 
 	// The current number of records processed.
@@ -1043,6 +1218,38 @@ type InboxPlacementTrackingOption struct {
 	// An array of strings, one for each major email provider that the inbox placement
 	// data applies to.
 	TrackedIsps []string
+
+	noSmithyDocumentSerde
+}
+
+// An object containing details about a specific event.
+type InsightsEvent struct {
+
+	// Details about bounce or complaint events.
+	Details *EventDetails
+
+	// The timestamp of the event.
+	Timestamp *time.Time
+
+	// The type of event:
+	//   - SEND - The send request was successful and SES will attempt to deliver the
+	//   message to the recipient’s mail server. (If account-level or global suppression
+	//   is being used, SES will still count it as a send, but delivery is suppressed.)
+	//   - DELIVERY - SES successfully delivered the email to the recipient's mail
+	//   server. Excludes deliveries to the mailbox simulator, and those from emails
+	//   addressed to more than one recipient.
+	//   - BOUNCE - Feedback received for delivery failures. Additional details about
+	//   the bounce are provided in the Details object. Excludes bounces from the
+	//   mailbox simulator, and those from emails addressed to more than one recipient.
+	//   - COMPLAINT - Complaint received for the email. Additional details about the
+	//   complaint are provided in the Details object. This excludes complaints from
+	//   the mailbox simulator, those originating from your account-level suppression
+	//   list (if enabled), and those from emails addressed to more than one recipient.
+	//   - OPEN - Open event for emails including open trackers. Excludes opens for
+	//   emails addressed to more than one recipient.
+	//   - CLICK - Click event for emails including wrapped links. Excludes clicks for
+	//   emails addressed to more than one recipient.
+	Type EventType
 
 	noSmithyDocumentSerde
 }
@@ -1162,6 +1369,69 @@ type Message struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains filters applied when performing the Message Insights
+// export.
+type MessageInsightsDataSource struct {
+
+	// Represents the end date for the export interval as a timestamp. The end date is
+	// inclusive.
+	//
+	// This member is required.
+	EndDate *time.Time
+
+	// Represents the start date for the export interval as a timestamp. The start
+	// date is inclusive.
+	//
+	// This member is required.
+	StartDate *time.Time
+
+	// Filters for results to be excluded from the export file.
+	Exclude *MessageInsightsFilters
+
+	// Filters for results to be included in the export file.
+	Include *MessageInsightsFilters
+
+	// The maximum number of results.
+	MaxResults *int32
+
+	noSmithyDocumentSerde
+}
+
+// An object containing Message Insights filters. If you specify multiple filters,
+// the filters are joined by AND. If you specify multiple values for a filter, the
+// values are joined by OR. Filter values are case-sensitive. FromEmailAddress ,
+// Destination , and Subject filters support partial match. A partial match is
+// performed by using the * wildcard character placed at the beginning (suffix
+// match), the end (prefix match) or both ends of the string (contains match). In
+// order to match the literal characters * or \ , they must be escaped using the \
+// character. If no wildcard character is present, an exact match is performed.
+type MessageInsightsFilters struct {
+
+	// The recipient's email address.
+	Destination []string
+
+	// The from address used to send the message.
+	FromEmailAddress []string
+
+	// The recipient's ISP (e.g., Gmail , Yahoo , etc.).
+	Isp []string
+
+	// The last delivery-related event for the email, where the ordering is as
+	// follows: SEND < BOUNCE < DELIVERY < COMPLAINT .
+	LastDeliveryEvent []DeliveryEventType
+
+	// The last engagement-related event for the email, where the ordering is as
+	// follows: OPEN < CLICK . Engagement events are only available if Engagement
+	// tracking (https://docs.aws.amazon.com/ses/latest/dg/vdm-settings.html) is
+	// enabled.
+	LastEngagementEvent []EngagementEventType
+
+	// The subject line of the message.
+	Subject []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the name and value of a tag that you apply to an email. You can use
 // message tags when you publish email sending events.
 type MessageTag struct {
@@ -1217,6 +1487,39 @@ type MetricDataResult struct {
 
 	// A list of values (cumulative / sum) for the metric data results.
 	Values []int64
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains details about the data source for the metrics export.
+type MetricsDataSource struct {
+
+	// An object that contains a mapping between a MetricDimensionName and
+	// MetricDimensionValue to filter metrics by. Must contain a least 1 dimension but
+	// no more than 3 unique ones.
+	//
+	// This member is required.
+	Dimensions map[string][]string
+
+	// Represents the end date for the export interval as a timestamp.
+	//
+	// This member is required.
+	EndDate *time.Time
+
+	// A list of ExportMetric objects to export.
+	//
+	// This member is required.
+	Metrics []ExportMetric
+
+	// The metrics namespace - e.g., VDM .
+	//
+	// This member is required.
+	Namespace MetricNamespace
+
+	// Represents the start date for the export interval as a timestamp.
+	//
+	// This member is required.
+	StartDate *time.Time
 
 	noSmithyDocumentSerde
 }

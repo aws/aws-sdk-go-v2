@@ -30,6 +30,26 @@ func (m *validateOpBatchGetMetricData) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelExportJob struct {
+}
+
+func (*validateOpCancelExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConfigurationSetEventDestination struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpCreateEmailTemplate) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateEmailTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateExportJob struct {
+}
+
+func (*validateOpCreateExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +770,26 @@ func (m *validateOpGetEmailTemplate) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetExportJob struct {
+}
+
+func (*validateOpGetExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetImportJob struct {
 }
 
@@ -745,6 +805,26 @@ func (m *validateOpGetImportJob) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMessageInsights struct {
+}
+
+func (*validateOpGetMessageInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMessageInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMessageInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMessageInsightsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1434,6 +1514,10 @@ func addOpBatchGetMetricDataValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpBatchGetMetricData{}, middleware.After)
 }
 
+func addOpCancelExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelExportJob{}, middleware.After)
+}
+
 func addOpCreateConfigurationSetEventDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConfigurationSetEventDestination{}, middleware.After)
 }
@@ -1472,6 +1556,10 @@ func addOpCreateEmailIdentityPolicyValidationMiddleware(stack *middleware.Stack)
 
 func addOpCreateEmailTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEmailTemplate{}, middleware.After)
+}
+
+func addOpCreateExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExportJob{}, middleware.After)
 }
 
 func addOpCreateImportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1574,8 +1662,16 @@ func addOpGetEmailTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEmailTemplate{}, middleware.After)
 }
 
+func addOpGetExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExportJob{}, middleware.After)
+}
+
 func addOpGetImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetImportJob{}, middleware.After)
+}
+
+func addOpGetMessageInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMessageInsights{}, middleware.After)
 }
 
 func addOpGetSuppressedDestinationValidationMiddleware(stack *middleware.Stack) error {
@@ -1956,6 +2052,43 @@ func validateEventDestinationDefinition(v *types.EventDestinationDefinition) err
 	}
 }
 
+func validateExportDataSource(v *types.ExportDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportDataSource"}
+	if v.MetricsDataSource != nil {
+		if err := validateMetricsDataSource(v.MetricsDataSource); err != nil {
+			invalidParams.AddNested("MetricsDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MessageInsightsDataSource != nil {
+		if err := validateMessageInsightsDataSource(v.MessageInsightsDataSource); err != nil {
+			invalidParams.AddNested("MessageInsightsDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExportDestination(v *types.ExportDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportDestination"}
+	if len(v.DataFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImportDataSource(v *types.ImportDataSource) error {
 	if v == nil {
 		return nil
@@ -2055,6 +2188,24 @@ func validateMessage(v *types.Message) error {
 	}
 }
 
+func validateMessageInsightsDataSource(v *types.MessageInsightsDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageInsightsDataSource"}
+	if v.StartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if v.EndDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMessageTag(v *types.MessageTag) error {
 	if v == nil {
 		return nil
@@ -2082,6 +2233,33 @@ func validateMessageTagList(v []types.MessageTag) error {
 		if err := validateMessageTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricsDataSource(v *types.MetricsDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsDataSource"}
+	if v.Dimensions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Dimensions"))
+	}
+	if len(v.Namespace) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	}
+	if v.StartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if v.EndDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2284,6 +2462,21 @@ func validateOpBatchGetMetricDataInput(v *BatchGetMetricDataInput) error {
 		if err := validateBatchGetMetricDataQueries(v.Queries); err != nil {
 			invalidParams.AddNested("Queries", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelExportJobInput(v *CancelExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelExportJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2518,6 +2711,32 @@ func validateOpCreateEmailTemplateInput(v *CreateEmailTemplateInput) error {
 	}
 	if v.TemplateContent == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateContent"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateExportJobInput(v *CreateExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExportJobInput"}
+	if v.ExportDataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportDataSource"))
+	} else if v.ExportDataSource != nil {
+		if err := validateExportDataSource(v.ExportDataSource); err != nil {
+			invalidParams.AddNested("ExportDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExportDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportDestination"))
+	} else if v.ExportDestination != nil {
+		if err := validateExportDestination(v.ExportDestination); err != nil {
+			invalidParams.AddNested("ExportDestination", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2930,6 +3149,21 @@ func validateOpGetEmailTemplateInput(v *GetEmailTemplateInput) error {
 	}
 }
 
+func validateOpGetExportJobInput(v *GetExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExportJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetImportJobInput(v *GetImportJobInput) error {
 	if v == nil {
 		return nil
@@ -2937,6 +3171,21 @@ func validateOpGetImportJobInput(v *GetImportJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetImportJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMessageInsightsInput(v *GetMessageInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMessageInsightsInput"}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

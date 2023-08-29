@@ -20,7 +20,7 @@ import (
 // data repository associations, if one or more AssociationIds values are provided
 // in the request, or if filters are used in the request. Data repository
 // associations are supported on Amazon File Cache resources and all FSx for Lustre
-// 2.12 and newer file systems, excluding scratch_1 deployment type. You can use
+// 2.12 and 2,15 file systems, excluding scratch_1 deployment type. You can use
 // filters to narrow the response to include just data repository associations for
 // specific file systems (use the file-system-id filter with the ID of the file
 // system) or caches (use the file-cache-id filter with the ID of the cache), or

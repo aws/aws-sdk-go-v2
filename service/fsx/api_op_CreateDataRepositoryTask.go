@@ -24,7 +24,7 @@ import (
 // and metadata changes, including POSIX metadata, to files, directories, and
 // symbolic links (symlinks) from your FSx file system to a linked data repository.
 // You use release data repository tasks to release data from your file system for
-// files that are archived to S3. The metadata of released files remains on the
+// files that are exported to S3. The metadata of released files remains on the
 // file system so users or applications can still access released files by reading
 // the files again, which will restore data from Amazon S3 to the FSx for Lustre
 // file system. To learn more about data repository tasks, see Data Repository
@@ -69,8 +69,8 @@ type CreateDataRepositoryTaskInput struct {
 	//   - IMPORT_METADATA_FROM_REPOSITORY tasks import metadata changes from a linked
 	//   S3 bucket to your Amazon FSx for Lustre file system.
 	//   - RELEASE_DATA_FROM_FILESYSTEM tasks release files in your Amazon FSx for
-	//   Lustre file system that are archived and that meet your specified release
-	//   criteria.
+	//   Lustre file system that have been exported to a linked S3 bucket and that meet
+	//   your specified release criteria.
 	//   - AUTO_RELEASE_DATA tasks automatically release files from an Amazon File
 	//   Cache resource.
 	//
@@ -89,7 +89,7 @@ type CreateDataRepositoryTaskInput struct {
 	// A list of paths for the data repository task to use when the task is processed.
 	// If a path that you provide isn't valid, the task fails. If you don't provide
 	// paths, the default behavior is to export all files to S3 (for export tasks),
-	// import all files from S3 (for import tasks), or release all archived files that
+	// import all files from S3 (for import tasks), or release all exported files that
 	// meet the last accessed time criteria (for release tasks).
 	//   - For export tasks, the list contains paths on the FSx for Lustre file system
 	//   from which the files are exported to the Amazon S3 bucket. The default path is
@@ -102,9 +102,9 @@ type CreateDataRepositoryTaskInput struct {
 	//   path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix (where
 	//   myPrefix is optional).
 	//   - For release tasks, the list contains directory or file paths on the FSx for
-	//   Lustre file system from which to release archived files. If a directory is
+	//   Lustre file system from which to release exported files. If a directory is
 	//   specified, files within the directory are released. If a file path is specified,
-	//   only that file is released. To release all archived files in the file system,
+	//   only that file is released. To release all exported files in the file system,
 	//   specify a forward slash (/) as the path. A file must also meet the last accessed
 	//   time criteria specified in for the file to be released.
 	Paths []string

@@ -30,13 +30,15 @@ import (
 // production. For more information, see SMS message settings for Amazon Cognito
 // user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html)
 // in the Amazon Cognito Developer Guide. Updates the specified user's attributes,
-// including developer attributes, as an administrator. Works on any user. For
-// custom attributes, you must prepend the custom: prefix to the attribute name.
-// In addition to updating user attributes, this API can also be used to mark phone
-// and email as verified. Amazon Cognito evaluates Identity and Access Management
-// (IAM) policies in requests for this API operation. For this operation, you must
-// use IAM credentials to authorize requests, and you must grant yourself the
-// corresponding IAM permission in a policy. Learn more
+// including developer attributes, as an administrator. Works on any user. To
+// delete an attribute from your user, submit the attribute in your API request
+// with a blank value. For custom attributes, you must prepend the custom: prefix
+// to the attribute name. In addition to updating user attributes, this API can
+// also be used to mark phone and email as verified. Amazon Cognito evaluates
+// Identity and Access Management (IAM) policies in requests for this API
+// operation. For this operation, you must use IAM credentials to authorize
+// requests, and you must grant yourself the corresponding IAM permission in a
+// policy. Learn more
 //   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
 //   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 func (c *Client) AdminUpdateUserAttributes(ctx context.Context, params *AdminUpdateUserAttributesInput, optFns ...func(*Options)) (*AdminUpdateUserAttributesOutput, error) {

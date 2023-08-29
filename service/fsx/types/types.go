@@ -612,10 +612,11 @@ type CreateFileSystemOntapConfiguration struct {
 	// which you want the preferred file server to be located.
 	PreferredSubnetId *string
 
-	// (Multi-AZ only) Specifies the virtual private cloud (VPC) route tables in which
-	// your file system's endpoints will be created. You should specify all VPC route
-	// tables associated with the subnets in which your clients are located. By
-	// default, Amazon FSx selects your VPC's default route table.
+	// (Multi-AZ only) Specifies the route tables in which Amazon FSx creates the
+	// rules for routing traffic to the correct file server. You should specify all
+	// virtual private cloud (VPC) route tables associated with the subnets in which
+	// your clients are located. By default, Amazon FSx selects your VPC's default
+	// route table.
 	RouteTableIds []string
 
 	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
@@ -637,16 +638,17 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// Services Region . Valid values are the following:
 	//   - MULTI_AZ_1 - Creates file systems with high availability that are configured
 	//   for Multi-AZ redundancy to tolerate temporary unavailability in Availability
-	//   Zones (AZs). Multi_AZ_1 is available in the following Amazon Web Services
-	//   Regions:
-	//   - SINGLE_AZ_1 - (Default) Creates file systems with throughput capacities of
-	//   64 - 4,096 MB/s. Single_AZ_1 is available in all Amazon Web Services Regions
-	//   where Amazon FSx for OpenZFS is available.
+	//   Zones (AZs). Multi_AZ_1 is available only in the US East (N. Virginia), US
+	//   East (Ohio), US West (Oregon), Asia Pacific (Singapore), Asia Pacific (Tokyo),
+	//   and Europe (Ireland) Amazon Web Services Regions.
+	//   - SINGLE_AZ_1 - Creates file systems with throughput capacities of 64 - 4,096
+	//   MB/s. Single_AZ_1 is available in all Amazon Web Services Regions where Amazon
+	//   FSx for OpenZFS is available.
 	//   - SINGLE_AZ_2 - Creates file systems with throughput capacities of 160 -
 	//   10,240 MB/s using an NVMe L2ARC cache. Single_AZ_2 is available only in the US
-	//   East (N. Virginia), US East (Ohio), US West (Oregon), and Europe (Ireland)
-	//   Amazon Web Services Regions.
-	// For more information, see: Deployment type availability (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions)
+	//   East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Singapore),
+	//   Asia Pacific (Tokyo), and Europe (Ireland) Amazon Web Services Regions.
+	// For more information, see Deployment type availability (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions)
 	// and File system performance (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance)
 	// in the Amazon FSx for OpenZFS User Guide.
 	//
@@ -656,10 +658,10 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// Specifies the throughput of an Amazon FSx for OpenZFS file system, measured in
 	// megabytes per second (MBps). Valid values depend on the DeploymentType you
 	// choose, as follows:
+	//   - For MULTI_AZ_1 and SINGLE_AZ_2 , valid values are 160, 320, 640, 1280, 2560,
+	//   3840, 5120, 7680, or 10240 MBps.
 	//   - For SINGLE_AZ_1 , valid values are 64, 128, 256, 512, 1024, 2048, 3072, or
 	//   4096 MBps.
-	//   - For SINGLE_AZ_2 , valid values are 160, 320, 640, 1280, 2560, 3840, 5120,
-	//   7680, or 10240 MBps.
 	// You pay for additional throughput capacity that you provision.
 	//
 	// This member is required.
@@ -715,10 +717,11 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// FSx for OpenZFS file system. All volumes are children of the root volume.
 	RootVolumeConfiguration *OpenZFSCreateRootVolumeConfiguration
 
-	// (Multi-AZ only) Specifies the virtual private cloud (VPC) route tables in which
-	// your file system's endpoints will be created. You should specify all VPC route
-	// tables associated with the subnets in which your clients are located. By
-	// default, Amazon FSx selects your VPC's default route table.
+	// (Multi-AZ only) Specifies the route tables in which Amazon FSx creates the
+	// rules for routing traffic to the correct file server. You should specify all
+	// virtual private cloud (VPC) route tables associated with the subnets in which
+	// your clients are located. By default, Amazon FSx selects your VPC's default
+	// route table.
 	RouteTableIds []string
 
 	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
@@ -1122,7 +1125,7 @@ type CreateSvmActiveDirectoryConfiguration struct {
 //   - DescribeDataRepositoryAssociations
 //
 // Data repository associations are supported on Amazon File Cache resources and
-// all FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment
+// all FSx for Lustre 2.12 and 2.15 file systems, excluding scratch_1 deployment
 // type.
 type DataRepositoryAssociation struct {
 
@@ -1331,8 +1334,8 @@ type DataRepositoryFailureDetails struct {
 //   - You use import and export data repository tasks to perform bulk transfer
 //     operations between an Amazon FSx for Lustre file system and a linked data
 //     repository.
-//   - You use release data repository tasks to release archived files from your
-//     Amazon FSx for Lustre file system.
+//   - You use release data repository tasks to release have been exported to a
+//     linked S3 bucketed files from your Amazon FSx for Lustre file system.
 //   - An Amazon File Cache resource uses a task to automatically release files
 //     from the cache.
 //
@@ -1375,8 +1378,8 @@ type DataRepositoryTask struct {
 	//   - IMPORT_METADATA_FROM_REPOSITORY tasks import metadata changes from a linked
 	//   S3 bucket to your Amazon FSx for Lustre file system.
 	//   - RELEASE_DATA_FROM_FILESYSTEM tasks release files in your Amazon FSx for
-	//   Lustre file system that are archived and that meet your specified release
-	//   criteria.
+	//   Lustre file system that have been exported to a linked S3 bucket and that meet
+	//   your specified release criteria.
 	//   - AUTO_RELEASE_DATA tasks automatically release files from an Amazon File
 	//   Cache resource.
 	//
@@ -1659,9 +1662,9 @@ type DiskIopsConfiguration struct {
 }
 
 // Defines the minimum amount of time since last access for a file to be eligible
-// for release. Only archived files that were last accessed or modified before this
-// point-in-time are eligible to be released from the Amazon FSx for Lustre file
-// system.
+// for release. Only files that have been exported to S3 and that were last
+// accessed or modified before this point-in-time are eligible to be released from
+// the Amazon FSx for Lustre file system.
 type DurationSinceLastAccess struct {
 
 	// The unit of time used by the Value parameter to determine if a file can be
@@ -1670,10 +1673,10 @@ type DurationSinceLastAccess struct {
 	Unit Unit
 
 	// An integer that represents the minimum amount of time (in days) since a file
-	// was last accessed in the file system. Only archived files with a MAX(atime,
+	// was last accessed in the file system. Only exported files with a MAX(atime,
 	// ctime, mtime) timestamp that is more than this amount of time in the past
 	// (relative to the task create time) will be released. The default of Value is 0 .
-	// This is a required parameter. If an archived file meets the last accessed time
+	// This is a required parameter. If an exported file meets the last accessed time
 	// criteria, its file or directory path must also be specified in the Paths
 	// parameter of the operation in order for the file to be released.
 	Value *int64
@@ -1998,8 +2001,8 @@ type FileSystem struct {
 	// OPENZFS .
 	FileSystemType FileSystemType
 
-	// The Lustre version of the Amazon FSx for Lustre file system, either 2.10 or 2.12
-	// .
+	// The Lustre version of the Amazon FSx for Lustre file system, which is 2.10 ,
+	// 2.12 , or 2.15 .
 	FileSystemTypeVersion *string
 
 	// The ID of the Key Management Service (KMS) key used to encrypt Amazon FSx file
@@ -2192,10 +2195,9 @@ type LustreFileSystemConfiguration struct {
 	// provides in-transit encryption of data and higher burst throughput capacity than
 	// SCRATCH_1 . The PERSISTENT_1 and PERSISTENT_2 deployment type is used for
 	// longer-term storage and workloads and encryption of data in transit.
-	// PERSISTENT_2 is built on Lustre v2.12 and offers higher PerUnitStorageThroughput
-	// (up to 1000 MB/s/TiB) along with a lower minimum storage capacity requirement
-	// (600 GiB). To learn more about FSx for Lustre deployment types, see FSx for
-	// Lustre deployment options (https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html)
+	// PERSISTENT_2 offers higher PerUnitStorageThroughput (up to 1000 MB/s/TiB) along
+	// with a lower minimum storage capacity requirement (600 GiB). To learn more about
+	// FSx for Lustre deployment types, see FSx for Lustre deployment options (https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html)
 	// . The default is SCRATCH_1 .
 	DeploymentType LustreDeploymentType
 
@@ -2794,21 +2796,22 @@ type OpenZFSVolumeConfiguration struct {
 }
 
 // The configuration that specifies a minimum amount of time since last access for
-// an archived file to be eligible for release from an Amazon FSx for Lustre file
+// an exported file to be eligible for release from an Amazon FSx for Lustre file
 // system. Only files that were last accessed before this point-in-time can be
 // released. For example, if you specify a last accessed time criteria of 9 days,
 // only files that were last accessed 9.00001 or more days ago can be released.
-// Only file data that has been archived can be released. Files that have not yet
-// been archived, such as new or changed files that have not been exported, are not
-// eligible for release. When files are released, their metadata stays on the file
-// system, so they can still be accessed later. Users and applications can access a
-// released file by reading the file again, which restores data from Amazon S3 to
-// the FSx for Lustre file system. If a file meets the last accessed time criteria,
-// its file or directory path must also be specified with the Paths parameter of
-// the operation in order for the file to be released.
+// Only file data that has been exported to S3 can be released. Files that have not
+// yet been exported to S3, such as new or changed files that have not been
+// exported, are not eligible for release. When files are released, their metadata
+// stays on the file system, so they can still be accessed later. Users and
+// applications can access a released file by reading the file again, which
+// restores data from Amazon S3 to the FSx for Lustre file system. If a file meets
+// the last accessed time criteria, its file or directory path must also be
+// specified with the Paths parameter of the operation in order for the file to be
+// released.
 type ReleaseConfiguration struct {
 
-	// Defines the point-in-time since an archived file was last accessed, in order
+	// Defines the point-in-time since an exported file was last accessed, in order
 	// for that file to be eligible for release. Only files that were last accessed
 	// before this point-in-time are eligible to be released from the file system.
 	DurationSinceLastAccess *DurationSinceLastAccess
@@ -3495,10 +3498,10 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	// The throughput of an Amazon FSx for OpenZFS file system, measured in megabytes
 	// per second  (MB/s). Valid values depend on the DeploymentType you choose, as
 	// follows:
+	//   - For MULTI_AZ_1 and SINGLE_AZ_2 , valid values are 160, 320, 640, 1280, 2560,
+	//   3840, 5120, 7680, or 10240 MBps.
 	//   - For SINGLE_AZ_1 , valid values are 64, 128, 256, 512, 1024, 2048, 3072, or
 	//   4096 MB/s.
-	//   - For SINGLE_AZ_2 , valid values are 160, 320, 640, 1280, 2560, 3840, 5120,
-	//   7680, or 10240 MB/s.
 	ThroughputCapacity *int32
 
 	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for

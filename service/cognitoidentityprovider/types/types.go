@@ -228,7 +228,12 @@ type CloudWatchLogsConfigurationType struct {
 
 	// The Amazon Resource Name (arn) of a CloudWatch Logs log group where your user
 	// pool sends logs. The log group must not be encrypted with Key Management Service
-	// and must be in the same Amazon Web Services account as your user pool.
+	// and must be in the same Amazon Web Services account as your user pool. To send
+	// logs to log groups with a resource policy of a size greater than 5120
+	// characters, configure a log group with a path that starts with /aws/vendedlogs .
+	// For more information, see Enabling logging from certain Amazon Web Services
+	// services (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html)
+	// .
 	LogGroupArn *string
 
 	noSmithyDocumentSerde

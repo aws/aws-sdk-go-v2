@@ -51,11 +51,13 @@ import (
 //   - WeeklyMaintenanceStartTime
 //
 // For FSx for OpenZFS file systems, you can update the following properties:
+//   - AddRouteTableIds
 //   - AutomaticBackupRetentionDays
 //   - CopyTagsToBackups
 //   - CopyTagsToVolumes
 //   - DailyAutomaticBackupStartTime
 //   - DiskIopsConfiguration
+//   - RemoveRouteTableIds
 //   - StorageCapacity
 //   - ThroughputCapacity
 //   - WeeklyMaintenanceStartTime

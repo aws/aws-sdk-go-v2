@@ -20,6 +20,26 @@ func (BehaviorOnMxFailure) Values() []BehaviorOnMxFailure {
 	}
 }
 
+type BounceType string
+
+// Enum values for BounceType
+const (
+	BounceTypeUndetermined BounceType = "UNDETERMINED"
+	BounceTypeTransient    BounceType = "TRANSIENT"
+	BounceTypePermanent    BounceType = "PERMANENT"
+)
+
+// Values returns all known values for BounceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BounceType) Values() []BounceType {
+	return []BounceType{
+		"UNDETERMINED",
+		"TRANSIENT",
+		"PERMANENT",
+	}
+}
+
 type BulkEmailStatus string
 
 // Enum values for BulkEmailStatus
@@ -155,6 +175,32 @@ func (DeliverabilityTestStatus) Values() []DeliverabilityTestStatus {
 	}
 }
 
+type DeliveryEventType string
+
+// Enum values for DeliveryEventType
+const (
+	DeliveryEventTypeSend               DeliveryEventType = "SEND"
+	DeliveryEventTypeDelivery           DeliveryEventType = "DELIVERY"
+	DeliveryEventTypeTransientBounce    DeliveryEventType = "TRANSIENT_BOUNCE"
+	DeliveryEventTypePermanentBounce    DeliveryEventType = "PERMANENT_BOUNCE"
+	DeliveryEventTypeUndeterminedBounce DeliveryEventType = "UNDETERMINED_BOUNCE"
+	DeliveryEventTypeComplaint          DeliveryEventType = "COMPLAINT"
+)
+
+// Values returns all known values for DeliveryEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeliveryEventType) Values() []DeliveryEventType {
+	return []DeliveryEventType{
+		"SEND",
+		"DELIVERY",
+		"TRANSIENT_BOUNCE",
+		"PERMANENT_BOUNCE",
+		"UNDETERMINED_BOUNCE",
+		"COMPLAINT",
+	}
+}
+
 type DimensionValueSource string
 
 // Enum values for DimensionValueSource
@@ -235,6 +281,24 @@ func (DkimStatus) Values() []DkimStatus {
 	}
 }
 
+type EngagementEventType string
+
+// Enum values for EngagementEventType
+const (
+	EngagementEventTypeOpen  EngagementEventType = "OPEN"
+	EngagementEventTypeClick EngagementEventType = "CLICK"
+)
+
+// Values returns all known values for EngagementEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EngagementEventType) Values() []EngagementEventType {
+	return []EngagementEventType{
+		"OPEN",
+		"CLICK",
+	}
+}
+
 type EventType string
 
 // Enum values for EventType
@@ -266,6 +330,24 @@ func (EventType) Values() []EventType {
 		"RENDERING_FAILURE",
 		"DELIVERY_DELAY",
 		"SUBSCRIPTION",
+	}
+}
+
+type ExportSourceType string
+
+// Enum values for ExportSourceType
+const (
+	ExportSourceTypeMetricsData     ExportSourceType = "METRICS_DATA"
+	ExportSourceTypeMessageInsights ExportSourceType = "MESSAGE_INSIGHTS"
+)
+
+// Values returns all known values for ExportSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportSourceType) Values() []ExportSourceType {
+	return []ExportSourceType{
+		"METRICS_DATA",
+		"MESSAGE_INSIGHTS",
 	}
 }
 
@@ -333,6 +415,7 @@ const (
 	JobStatusProcessing JobStatus = "PROCESSING"
 	JobStatusCompleted  JobStatus = "COMPLETED"
 	JobStatusFailed     JobStatus = "FAILED"
+	JobStatusCancelled  JobStatus = "CANCELLED"
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
@@ -344,6 +427,7 @@ func (JobStatus) Values() []JobStatus {
 		"PROCESSING",
 		"COMPLETED",
 		"FAILED",
+		"CANCELLED",
 	}
 }
 
@@ -441,6 +525,24 @@ func (Metric) Values() []Metric {
 		"DELIVERY_OPEN",
 		"DELIVERY_CLICK",
 		"DELIVERY_COMPLAINT",
+	}
+}
+
+type MetricAggregation string
+
+// Enum values for MetricAggregation
+const (
+	MetricAggregationRate   MetricAggregation = "RATE"
+	MetricAggregationVolume MetricAggregation = "VOLUME"
+)
+
+// Values returns all known values for MetricAggregation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricAggregation) Values() []MetricAggregation {
+	return []MetricAggregation{
+		"RATE",
+		"VOLUME",
 	}
 }
 
