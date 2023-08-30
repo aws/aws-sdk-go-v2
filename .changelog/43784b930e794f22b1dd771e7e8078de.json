@@ -1,8 +1,0 @@
-{
-    "id": "43784b93-0e79-4f22-b1dd-771e7e8078de",
-    "type": "feature",
-    "description": "This release marks some assessment metadata as sensitive. We added a sensitive trait to the following attributes: assessmentName, emailAddress, scope, createdBy, lastUpdatedBy, and userName.",
-    "modules": [
-        "service/auditmanager"
-    ]
-}

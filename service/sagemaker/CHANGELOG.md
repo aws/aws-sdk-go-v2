@@ -1,3 +1,7 @@
+# v1.103.0 (2023-08-30)
+
+* **Feature**: Amazon SageMaker Canvas adds IdentityProviderOAuthSettings support for CanvasAppSettings
+
 # v1.102.3 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

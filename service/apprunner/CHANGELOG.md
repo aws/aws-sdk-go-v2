@@ -1,3 +1,7 @@
+# v1.19.0 (2023-08-30)
+
+* **Feature**: App Runner adds support for Bitbucket. You can now create App Runner connection that connects to your Bitbucket repositories and deploy App Runner service with the source code stored in a Bitbucket repository.
+
 # v1.18.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

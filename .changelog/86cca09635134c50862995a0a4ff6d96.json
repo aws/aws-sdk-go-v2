@@ -1,8 +1,0 @@
-{
-    "id": "86cca096-3513-4c50-8629-95a0a4ff6d96",
-    "type": "feature",
-    "description": "Network Firewall increasing pagination token string length",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

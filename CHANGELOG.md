@@ -1,3 +1,25 @@
+# Release (2023-08-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.34.0](service/appflow/CHANGELOG.md#v1340-2023-08-30)
+  * **Feature**: Add SAP source connector parallel and pagination feature
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.19.0](service/apprunner/CHANGELOG.md#v1190-2023-08-30)
+  * **Feature**: App Runner adds support for Bitbucket. You can now create App Runner connection that connects to your Bitbucket repositories and deploy App Runner service with the source code stored in a Bitbucket repository.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.4.0](service/cleanrooms/CHANGELOG.md#v140-2023-08-30)
+  * **Feature**: This release decouples member abilities in a collaboration. With this change, the member who can run queries no longer needs to be the same as the member who can receive results.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.29.0](service/datasync/CHANGELOG.md#v1290-2023-08-30)
+  * **Feature**: AWS DataSync introduces Task Reports, a new feature that provides detailed reports of data transfer operations for each task execution.
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.0.0](service/neptunedata/CHANGELOG.md#v100-2023-08-30)
+  * **Release**: New AWS service client module
+  * **Feature**: Allows customers to execute data plane actions like bulk loading graphs, issuing graph queries using Gremlin and openCypher directly from the SDK.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.30.0](service/networkfirewall/CHANGELOG.md#v1300-2023-08-30)
+  * **Feature**: Network Firewall increasing pagination token string length
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorad`: [v1.0.0](service/pcaconnectorad/CHANGELOG.md#v100-2023-08-30)
+  * **Release**: New AWS service client module
+  * **Feature**: The Connector for AD allows you to use a fully-managed AWS Private CA as a drop-in replacement for your self-managed enterprise CAs without local agents or proxy servers. Enterprises that use AD to manage Windows environments can reduce their private certificate authority (CA) costs and complexity.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.103.0](service/sagemaker/CHANGELOG.md#v11030-2023-08-30)
+  * **Feature**: Amazon SageMaker Canvas adds IdentityProviderOAuthSettings support for CanvasAppSettings
+
 # Release (2023-08-29)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "b4b1637b-1110-4d2c-9228-da905e5e4ccd",
-    "type": "feature",
-    "description": "Add SAP source connector parallel and pagination feature",
-    "modules": [
-        "service/appflow"
-    ]
-}
