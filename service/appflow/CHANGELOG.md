@@ -1,3 +1,7 @@
+# v1.34.0 (2023-08-30)
+
+* **Feature**: Add SAP source connector parallel and pagination feature
+
 # v1.33.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

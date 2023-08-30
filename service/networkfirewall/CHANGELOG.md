@@ -1,3 +1,7 @@
+# v1.30.0 (2023-08-30)
+
+* **Feature**: Network Firewall increasing pagination token string length
+
 # v1.29.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

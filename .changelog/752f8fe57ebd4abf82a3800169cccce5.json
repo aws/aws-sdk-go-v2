@@ -1,8 +1,0 @@
-{
-    "id": "752f8fe5-7ebd-4abf-82a3-800169cccce5",
-    "type": "feature",
-    "description": "This release decouples member abilities in a collaboration. With this change, the member who can run queries no longer needs to be the same as the member who can receive results.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

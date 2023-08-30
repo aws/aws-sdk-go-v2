@@ -1,3 +1,7 @@
+# v1.29.0 (2023-08-30)
+
+* **Feature**: AWS DataSync introduces Task Reports, a new feature that provides detailed reports of data transfer operations for each task execution.
+
 # v1.28.5 (2023-08-24)
 
 * No change notes available for this release.

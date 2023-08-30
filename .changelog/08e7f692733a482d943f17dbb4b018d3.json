@@ -1,8 +1,0 @@
-{
-    "id": "08e7f692-733a-482d-943f-17dbb4b018d3",
-    "type": "feature",
-    "description": "AWS DataSync introduces Task Reports, a new feature that provides detailed reports of data transfer operations for each task execution.",
-    "modules": [
-        "service/datasync"
-    ]
-}
