@@ -311,11 +311,12 @@ func resolveHTTPCredProvider(ctx context.Context, cfg *aws.Config, url, authToke
 			}
 			if authFilePath := os.Getenv(httpProviderAuthFileEnvVar); authFilePath != "" {
 				options.AuthorizationTokenProvider = endpointcreds.TokenProviderFunc(func() (string, error) {
-					if contents, err := ioutil.ReadFile(authFilePath); err != nil {
+					var contents []byte
+					var err error
+					if contents, err = ioutil.ReadFile(authFilePath); err != nil {
 						return "", fmt.Errorf("failed to read authorization token from %v: %v", authFilePath, err)
-					} else {
-						return string(contents), nil
 					}
+					return string(contents), nil
 				})
 			}
 			options.APIOptions = cfg.APIOptions
