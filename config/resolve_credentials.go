@@ -3,8 +3,10 @@ package config
 import (
 	"context"
 	"fmt"
+	"io/ioutil"
 	"net"
 	"net/url"
+	"os"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -22,12 +24,32 @@ import (
 
 const (
 	// valid credential source values
-	credSourceEc2Metadata  = "Ec2InstanceMetadata"
-	credSourceEnvironment  = "Environment"
-	credSourceECSContainer = "EcsContainer"
-	ecsContainerHost       = "169.254.170.2"
-	eksContainerHost       = "169.254.170.23"
+	credSourceEc2Metadata      = "Ec2InstanceMetadata"
+	credSourceEnvironment      = "Environment"
+	credSourceECSContainer     = "EcsContainer"
+	httpProviderAuthFileEnvVar = "AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE"
 )
+
+// direct representation of the IPv4 address for the ECS container
+// "169.254.170.2"
+var ecsContainerIPv4 net.IP = []byte{
+	169, 254, 170, 2,
+}
+
+// direct representation of the IPv4 address for the EKS container
+// "169.254.170.23"
+var eksContainerIPv4 net.IP = []byte{
+	169, 254, 170, 23,
+}
+
+// direct representation of the IPv6 address for the EKS container
+// "fd00:ec2::23"
+var eksContainerIPv6 net.IP = []byte{
+	0xFD, 0, 0xE, 0xC2,
+	0, 0, 0, 0,
+	0, 0, 0, 0,
+	0, 0, 0, 0x23,
+}
 
 var (
 	ecsContainerEndpoint = "http://169.254.170.2" // not constant to allow for swapping during unit-testing
@@ -225,20 +247,22 @@ func processCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *Shar
 	return nil
 }
 
-// isAllowedHost allows host to be loopback host,ECS container host 169.254.170.2
-// and EKS container host 169.254.170.23
+// isAllowedHost allows host to be loopback or known ECS/EKS container IPs
+//
+// host can either be an IP address OR an unresolved hostname - resolution will
+// be automatically performed in the latter case
 func isAllowedHost(host string) (bool, error) {
-	if isHostAllowed(host) {
-		return true, nil
+	if ip := net.ParseIP(host); ip != nil {
+		return isIPAllowed(ip), nil
 	}
 
-	// Host is not an ip, perform lookup
 	addrs, err := lookupHostFn(host)
 	if err != nil {
 		return false, err
 	}
+
 	for _, addr := range addrs {
-		if !isHostAllowed(addr) {
+		if ip := net.ParseIP(addr); ip == nil || !isIPAllowed(ip) {
 			return false, nil
 		}
 	}
@@ -246,15 +270,11 @@ func isAllowedHost(host string) (bool, error) {
 	return true, nil
 }
 
-func isHostAllowed(host string) bool {
-	if host == ecsContainerHost || host == eksContainerHost {
-		return true
-	}
-	ip := net.ParseIP(host)
-	if ip != nil {
-		return ip.IsLoopback()
-	}
-	return false
+func isIPAllowed(ip net.IP) bool {
+	return ip.IsLoopback() ||
+		ip.Equal(ecsContainerIPv4) ||
+		ip.Equal(eksContainerIPv4) ||
+		ip.Equal(eksContainerIPv6)
 }
 
 func resolveLocalHTTPCredProvider(ctx context.Context, cfg *aws.Config, endpointURL, authToken string, configs configs) error {
@@ -288,6 +308,15 @@ func resolveHTTPCredProvider(ctx context.Context, cfg *aws.Config, url, authToke
 		func(options *endpointcreds.Options) {
 			if len(authToken) != 0 {
 				options.AuthorizationToken = authToken
+			}
+			if authFilePath := os.Getenv(httpProviderAuthFileEnvVar); authFilePath != "" {
+				options.AuthorizationTokenProvider = endpointcreds.TokenProviderFunc(func() (string, error) {
+					if contents, err := ioutil.ReadFile(authFilePath); err != nil {
+						return "", fmt.Errorf("failed to read authorization token from %v: %v", authFilePath, err)
+					} else {
+						return string(contents), nil
+					}
+				})
 			}
 			options.APIOptions = cfg.APIOptions
 			if cfg.Retryer != nil {
