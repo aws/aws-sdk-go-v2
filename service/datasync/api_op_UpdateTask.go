@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the metadata associated with a task.
+// Updates the configuration of a DataSync transfer task.
 func (c *Client) UpdateTask(ctx context.Context, params *UpdateTaskInput, optFns ...func(*Options)) (*UpdateTaskOutput, error) {
 	if params == nil {
 		params = &UpdateTaskInput{}
@@ -57,11 +57,12 @@ type UpdateTaskInput struct {
 	// The name of the task to update.
 	Name *string
 
-	// Configures your DataSync task settings. These options include how DataSync
-	// handles files, objects, and their associated metadata. You also can specify how
-	// DataSync verifies data integrity, set bandwidth limits for your task, among
-	// other options. Each task setting has a default value. Unless you need to, you
-	// don't have to configure any of these Options before starting your task.
+	// Indicates how your transfer task is configured. These options include how
+	// DataSync handles files, objects, and their associated metadata during your
+	// transfer. You also can specify how to verify data integrity, set bandwidth
+	// limits for your task, among other options. Each option has a default value.
+	// Unless you need to, you don't have to configure any of these options before
+	// starting your task.
 	Options *types.Options
 
 	// Specifies a schedule used to periodically transfer files from a source to a
@@ -71,6 +72,10 @@ type UpdateTaskInput struct {
 	// information, see Scheduling your task (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
 	// .
 	Schedule *types.TaskSchedule
+
+	// Specifies how you want to configure a task report, which provides detailed
+	// information about for your DataSync transfer.
+	TaskReportConfig *types.TaskReportConfig
 
 	noSmithyDocumentSerde
 }

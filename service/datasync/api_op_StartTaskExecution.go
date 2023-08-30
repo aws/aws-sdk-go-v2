@@ -16,9 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an DataSync task. For each task, you can only run one task execution at
-// a time. There are several phases to a task execution. For more information, see
-// Task execution statuses (https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses)
+// Starts an DataSync transfer task. For each task, you can only run one task
+// execution at a time. There are several phases to a task execution. For more
+// information, see Task execution statuses (https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses)
 // . If you're planning to transfer data to or from an Amazon S3 location, review
 // how DataSync can affect your S3 request charges (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests)
 // and the DataSync pricing page (http://aws.amazon.com/datasync/pricing/) before
@@ -58,17 +58,22 @@ type StartTaskExecutionInput struct {
 	// for example, "/folder1|/folder2" .
 	Includes []types.FilterRule
 
-	// Configures your DataSync task settings. These options include how DataSync
-	// handles files, objects, and their associated metadata. You also can specify how
-	// DataSync verifies data integrity, set bandwidth limits for your task, among
-	// other options. Each task setting has a default value. Unless you need to, you
-	// don't have to configure any of these Options before starting your task.
+	// Indicates how your transfer task is configured. These options include how
+	// DataSync handles files, objects, and their associated metadata during your
+	// transfer. You also can specify how to verify data integrity, set bandwidth
+	// limits for your task, among other options. Each option has a default value.
+	// Unless you need to, you don't have to configure any of these options before
+	// starting your task.
 	OverrideOptions *types.Options
 
 	// Specifies the tags that you want to apply to the Amazon Resource Name (ARN)
 	// representing the task execution. Tags are key-value pairs that help you manage,
 	// filter, and search for your DataSync resources.
 	Tags []types.TagListEntry
+
+	// Specifies how you want to configure a task report, which provides detailed
+	// information about for your DataSync transfer.
+	TaskReportConfig *types.TaskReportConfig
 
 	noSmithyDocumentSerde
 }

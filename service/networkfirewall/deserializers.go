@@ -744,11 +744,17 @@ func awsAwsjson10_deserializeOpErrorCreateTLSInspectionConfiguration(response *s
 	}
 
 	switch {
+	case strings.EqualFold("InsufficientCapacityException", errorCode):
+		return awsAwsjson10_deserializeErrorInsufficientCapacityException(response, errorBody)
+
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidRequestException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)

@@ -1165,6 +1165,14 @@ type ExecutionResult struct {
 	// Provides any error message information related to the flow run.
 	ErrorInfo *ErrorInfo
 
+	// The maximum number of records that Amazon AppFlow receives in each page of the
+	// response from your SAP application.
+	MaxPageSize *int64
+
+	// The number of processes that Amazon AppFlow ran at the same time when it
+	// retrieved your data.
+	NumParallelProcesses *int64
+
 	// The number of records processed in the flow run.
 	RecordsProcessed *int64
 
@@ -2329,11 +2337,51 @@ type SAPODataMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Sets the page size for each concurrent process that transfers OData records
+// from your SAP instance. A concurrent process is query that retrieves a batch of
+// records as part of a flow run. Amazon AppFlow can run multiple concurrent
+// processes in parallel to transfer data faster.
+type SAPODataPaginationConfig struct {
+
+	// The maximum number of records that Amazon AppFlow receives in each page of the
+	// response from your SAP application. For transfers of OData records, the maximum
+	// page size is 3,000. For transfers of data that comes from an ODP provider, the
+	// maximum page size is 10,000.
+	//
+	// This member is required.
+	MaxPageSize *int32
+
+	noSmithyDocumentSerde
+}
+
+// Sets the number of concurrent processes that transfer OData records from your
+// SAP instance. A concurrent process is query that retrieves a batch of records as
+// part of a flow run. Amazon AppFlow can run multiple concurrent processes in
+// parallel to transfer data faster.
+type SAPODataParallelismConfig struct {
+
+	// The maximum number of processes that Amazon AppFlow runs at the same time when
+	// it retrieves your data from your SAP application.
+	//
+	// This member is required.
+	MaxParallelism *int32
+
+	noSmithyDocumentSerde
+}
+
 // The properties that are applied when using SAPOData as a flow source.
 type SAPODataSourceProperties struct {
 
 	// The object path specified in the SAPOData flow source.
 	ObjectPath *string
+
+	// Sets the page size for each concurrent process that transfers OData records
+	// from your SAP instance.
+	PaginationConfig *SAPODataPaginationConfig
+
+	// Sets the number of concurrent processes that transfers OData records from your
+	// SAP instance.
+	ParallelismConfig *SAPODataParallelismConfig
 
 	noSmithyDocumentSerde
 }

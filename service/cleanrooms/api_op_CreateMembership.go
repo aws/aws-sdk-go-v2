@@ -46,6 +46,10 @@ type CreateMembershipInput struct {
 	// This member is required.
 	QueryLogStatus types.MembershipQueryLogStatus
 
+	// The default protected query result configuration as specified by the member who
+	// can receive results.
+	DefaultResultConfiguration *types.MembershipProtectedQueryResultConfiguration
+
 	// An optional label that you can assign to a resource when you create it. Each
 	// tag consists of a key and an optional value, both of which you define. When you
 	// use tagging, you can also use tag-based access control in IAM policies to

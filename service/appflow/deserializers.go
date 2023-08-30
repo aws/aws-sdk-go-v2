@@ -440,6 +440,9 @@ func awsRestjson1_deserializeOpErrorCreateFlow(response *smithyhttp.Response, me
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
@@ -3753,6 +3756,9 @@ func awsRestjson1_deserializeOpErrorUpdateFlow(response *smithyhttp.Response, me
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
@@ -7721,6 +7727,32 @@ func awsRestjson1_deserializeDocumentExecutionResult(v **types.ExecutionResult, 
 				return err
 			}
 
+		case "maxPageSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxPageSize = ptr.Int64(i64)
+			}
+
+		case "numParallelProcesses":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumParallelProcesses = ptr.Int64(i64)
+			}
+
 		case "recordsProcessed":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10780,6 +10812,94 @@ func awsRestjson1_deserializeDocumentSAPODataMetadata(v **types.SAPODataMetadata
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSAPODataPaginationConfig(v **types.SAPODataPaginationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SAPODataPaginationConfig
+	if *v == nil {
+		sv = &types.SAPODataPaginationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxPageSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SAPODataMaxPageSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxPageSize = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSAPODataParallelismConfig(v **types.SAPODataParallelismConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SAPODataParallelismConfig
+	if *v == nil {
+		sv = &types.SAPODataParallelismConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxParallelism":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SAPODataMaxParallelism to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxParallelism = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSAPODataSourceProperties(v **types.SAPODataSourceProperties, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10809,6 +10929,16 @@ func awsRestjson1_deserializeDocumentSAPODataSourceProperties(v **types.SAPOData
 					return fmt.Errorf("expected Object to be of type string, got %T instead", value)
 				}
 				sv.ObjectPath = ptr.String(jtv)
+			}
+
+		case "paginationConfig":
+			if err := awsRestjson1_deserializeDocumentSAPODataPaginationConfig(&sv.PaginationConfig, value); err != nil {
+				return err
+			}
+
+		case "parallelismConfig":
+			if err := awsRestjson1_deserializeDocumentSAPODataParallelismConfig(&sv.ParallelismConfig, value); err != nil {
+				return err
 			}
 
 		default:

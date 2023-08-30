@@ -16,9 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies a running DataSync task. Currently, the only Option that you can
-// modify with UpdateTaskExecution is BytesPerSecond (https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond)
-// , which throttles bandwidth for a running or queued task.
+// Updates the configuration of a running DataSync task execution. Currently, the
+// only Option that you can modify with UpdateTaskExecution is BytesPerSecond (https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond)
+// , which throttles bandwidth for a running or queued task execution.
 func (c *Client) UpdateTaskExecution(ctx context.Context, params *UpdateTaskExecutionInput, optFns ...func(*Options)) (*UpdateTaskExecutionOutput, error) {
 	if params == nil {
 		params = &UpdateTaskExecutionInput{}
@@ -36,11 +36,12 @@ func (c *Client) UpdateTaskExecution(ctx context.Context, params *UpdateTaskExec
 
 type UpdateTaskExecutionInput struct {
 
-	// Configures your DataSync task settings. These options include how DataSync
-	// handles files, objects, and their associated metadata. You also can specify how
-	// DataSync verifies data integrity, set bandwidth limits for your task, among
-	// other options. Each task setting has a default value. Unless you need to, you
-	// don't have to configure any of these Options before starting your task.
+	// Indicates how your transfer task is configured. These options include how
+	// DataSync handles files, objects, and their associated metadata during your
+	// transfer. You also can specify how to verify data integrity, set bandwidth
+	// limits for your task, among other options. Each option has a default value.
+	// Unless you need to, you don't have to configure any of these options before
+	// starting your task.
 	//
 	// This member is required.
 	Options *types.Options

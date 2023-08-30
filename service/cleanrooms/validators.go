@@ -1301,6 +1301,44 @@ func validateMemberList(v []types.MemberSpecification) error {
 	}
 }
 
+func validateMembershipProtectedQueryOutputConfiguration(v types.MembershipProtectedQueryOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MembershipProtectedQueryOutputConfiguration"}
+	switch uv := v.(type) {
+	case *types.MembershipProtectedQueryOutputConfigurationMemberS3:
+		if err := validateProtectedQueryS3OutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMembershipProtectedQueryResultConfiguration(v *types.MembershipProtectedQueryResultConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MembershipProtectedQueryResultConfiguration"}
+	if v.OutputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfiguration"))
+	} else if v.OutputConfiguration != nil {
+		if err := validateMembershipProtectedQueryOutputConfiguration(v.OutputConfiguration); err != nil {
+			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMemberSpecification(v *types.MemberSpecification) error {
 	if v == nil {
 		return nil
@@ -1588,6 +1626,11 @@ func validateOpCreateMembershipInput(v *CreateMembershipInput) error {
 	}
 	if len(v.QueryLogStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryLogStatus"))
+	}
+	if v.DefaultResultConfiguration != nil {
+		if err := validateMembershipProtectedQueryResultConfiguration(v.DefaultResultConfiguration); err != nil {
+			invalidParams.AddNested("DefaultResultConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2006,9 +2049,7 @@ func validateOpStartProtectedQueryInput(v *StartProtectedQueryInput) error {
 	if v.SqlParameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SqlParameters"))
 	}
-	if v.ResultConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResultConfiguration"))
-	} else if v.ResultConfiguration != nil {
+	if v.ResultConfiguration != nil {
 		if err := validateProtectedQueryResultConfiguration(v.ResultConfiguration); err != nil {
 			invalidParams.AddNested("ResultConfiguration", err.(smithy.InvalidParamsError))
 		}
@@ -2154,6 +2195,11 @@ func validateOpUpdateMembershipInput(v *UpdateMembershipInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMembershipInput"}
 	if v.MembershipIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.DefaultResultConfiguration != nil {
+		if err := validateMembershipProtectedQueryResultConfiguration(v.DefaultResultConfiguration); err != nil {
+			invalidParams.AddNested("DefaultResultConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

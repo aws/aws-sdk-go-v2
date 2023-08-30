@@ -4190,6 +4190,30 @@ func awsRestjson1_serializeDocumentSAPODataDestinationProperties(v *types.SAPODa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSAPODataPaginationConfig(v *types.SAPODataPaginationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxPageSize != nil {
+		ok := object.Key("maxPageSize")
+		ok.Integer(*v.MaxPageSize)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSAPODataParallelismConfig(v *types.SAPODataParallelismConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxParallelism != nil {
+		ok := object.Key("maxParallelism")
+		ok.Integer(*v.MaxParallelism)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSAPODataSourceProperties(v *types.SAPODataSourceProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4197,6 +4221,20 @@ func awsRestjson1_serializeDocumentSAPODataSourceProperties(v *types.SAPODataSou
 	if v.ObjectPath != nil {
 		ok := object.Key("objectPath")
 		ok.String(*v.ObjectPath)
+	}
+
+	if v.PaginationConfig != nil {
+		ok := object.Key("paginationConfig")
+		if err := awsRestjson1_serializeDocumentSAPODataPaginationConfig(v.PaginationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParallelismConfig != nil {
+		ok := object.Key("parallelismConfig")
+		if err := awsRestjson1_serializeDocumentSAPODataParallelismConfig(v.ParallelismConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

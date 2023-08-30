@@ -39,6 +39,10 @@ type UpdateMembershipInput struct {
 	// This member is required.
 	MembershipIdentifier *string
 
+	// The default protected query result configuration as specified by the member who
+	// can receive results.
+	DefaultResultConfiguration *types.MembershipProtectedQueryResultConfiguration
+
 	// An indicator as to whether query logging has been enabled or disabled for the
 	// collaboration.
 	QueryLogStatus types.MembershipQueryLogStatus

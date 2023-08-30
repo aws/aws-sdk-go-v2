@@ -37459,6 +37459,11 @@ func awsAwsjson11_deserializeDocumentCanvasAppSettings(v **types.CanvasAppSettin
 
 	for key, value := range shape {
 		switch key {
+		case "IdentityProviderOAuthSettings":
+			if err := awsAwsjson11_deserializeDocumentIdentityProviderOAuthSettings(&sv.IdentityProviderOAuthSettings, value); err != nil {
+				return err
+			}
+
 		case "ModelRegisterSettings":
 			if err := awsAwsjson11_deserializeDocumentModelRegisterSettings(&sv.ModelRegisterSettings, value); err != nil {
 				return err
@@ -49378,6 +49383,98 @@ func awsAwsjson11_deserializeDocumentIamIdentity(v **types.IamIdentity, value in
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIdentityProviderOAuthSetting(v **types.IdentityProviderOAuthSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdentityProviderOAuthSetting
+	if *v == nil {
+		sv = &types.IdentityProviderOAuthSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceName to be of type string, got %T instead", value)
+				}
+				sv.DataSourceName = types.DataSourceName(jtv)
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.FeatureStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIdentityProviderOAuthSettings(v *[]types.IdentityProviderOAuthSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IdentityProviderOAuthSetting
+	if *v == nil {
+		cv = []types.IdentityProviderOAuthSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IdentityProviderOAuthSetting
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentIdentityProviderOAuthSetting(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

@@ -3756,6 +3756,89 @@ func awsAwsjson11_serializeDocumentQopConfiguration(v *types.QopConfiguration, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentReportDestination(v *types.ReportDestination, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3 != nil {
+		ok := object.Key("S3")
+		if err := awsAwsjson11_serializeDocumentReportDestinationS3(v.S3, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentReportDestinationS3(v *types.ReportDestinationS3, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketAccessRoleArn != nil {
+		ok := object.Key("BucketAccessRoleArn")
+		ok.String(*v.BucketAccessRoleArn)
+	}
+
+	if v.S3BucketArn != nil {
+		ok := object.Key("S3BucketArn")
+		ok.String(*v.S3BucketArn)
+	}
+
+	if v.Subdirectory != nil {
+		ok := object.Key("Subdirectory")
+		ok.String(*v.Subdirectory)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentReportOverride(v *types.ReportOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ReportLevel) > 0 {
+		ok := object.Key("ReportLevel")
+		ok.String(string(v.ReportLevel))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentReportOverrides(v *types.ReportOverrides, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Deleted != nil {
+		ok := object.Key("Deleted")
+		if err := awsAwsjson11_serializeDocumentReportOverride(v.Deleted, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Skipped != nil {
+		ok := object.Key("Skipped")
+		if err := awsAwsjson11_serializeDocumentReportOverride(v.Skipped, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Transferred != nil {
+		ok := object.Key("Transferred")
+		if err := awsAwsjson11_serializeDocumentReportOverride(v.Transferred, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Verified != nil {
+		ok := object.Key("Verified")
+		if err := awsAwsjson11_serializeDocumentReportOverride(v.Verified, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentResourceFilters(v map[string][]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3869,6 +3952,42 @@ func awsAwsjson11_serializeDocumentTaskFilters(v []types.TaskFilter, value smith
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTaskReportConfig(v *types.TaskReportConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destination != nil {
+		ok := object.Key("Destination")
+		if err := awsAwsjson11_serializeDocumentReportDestination(v.Destination, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ObjectVersionIds) > 0 {
+		ok := object.Key("ObjectVersionIds")
+		ok.String(string(v.ObjectVersionIds))
+	}
+
+	if len(v.OutputType) > 0 {
+		ok := object.Key("OutputType")
+		ok.String(string(v.OutputType))
+	}
+
+	if v.Overrides != nil {
+		ok := object.Key("Overrides")
+		if err := awsAwsjson11_serializeDocumentReportOverrides(v.Overrides, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ReportLevel) > 0 {
+		ok := object.Key("ReportLevel")
+		ok.String(string(v.ReportLevel))
+	}
+
 	return nil
 }
 
@@ -4580,6 +4699,13 @@ func awsAwsjson11_serializeOpDocumentCreateTaskInput(v *CreateTaskInput, value s
 		}
 	}
 
+	if v.TaskReportConfig != nil {
+		ok := object.Key("TaskReportConfig")
+		if err := awsAwsjson11_serializeDocumentTaskReportConfig(v.TaskReportConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5144,6 +5270,13 @@ func awsAwsjson11_serializeOpDocumentStartTaskExecutionInput(v *StartTaskExecuti
 		ok.String(*v.TaskArn)
 	}
 
+	if v.TaskReportConfig != nil {
+		ok := object.Key("TaskReportConfig")
+		if err := awsAwsjson11_serializeDocumentTaskReportConfig(v.TaskReportConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5588,6 +5721,13 @@ func awsAwsjson11_serializeOpDocumentUpdateTaskInput(v *UpdateTaskInput, value s
 	if v.TaskArn != nil {
 		ok := object.Key("TaskArn")
 		ok.String(*v.TaskArn)
+	}
+
+	if v.TaskReportConfig != nil {
+		ok := object.Key("TaskReportConfig")
+		if err := awsAwsjson11_serializeDocumentTaskReportConfig(v.TaskReportConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

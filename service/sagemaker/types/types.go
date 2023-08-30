@@ -2020,6 +2020,9 @@ type CandidateProperties struct {
 // The SageMaker Canvas application settings.
 type CanvasAppSettings struct {
 
+	// The settings for connecting to an external data source with OAuth.
+	IdentityProviderOAuthSettings []IdentityProviderOAuthSetting
+
 	// The model registry settings for the SageMaker Canvas application.
 	ModelRegisterSettings *ModelRegisterSettings
 
@@ -6508,6 +6511,26 @@ type IamIdentity struct {
 
 	// The person or application which assumes the IAM identity.
 	SourceIdentity *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon SageMaker Canvas app setting where you configure OAuth for
+// connecting to an external data source, such as Snowflake.
+type IdentityProviderOAuthSetting struct {
+
+	// The name of the data source that you're connecting to. Canvas currently
+	// supports OAuth for Snowflake and Salesforce Data Cloud.
+	DataSourceName DataSourceName
+
+	// The ARN of an Amazon Web Services Secrets Manager secret that stores the
+	// credentials from your identity provider, such as the client ID and secret,
+	// authorization URL, and token URL.
+	SecretArn *string
+
+	// Describes whether OAuth for a data source is enabled or disabled in the Canvas
+	// application.
+	Status FeatureStatus
 
 	noSmithyDocumentSerde
 }
@@ -11779,7 +11802,7 @@ type RecommendationJobInputConfig struct {
 	Endpoints []EndpointInfo
 
 	// Specifies the maximum duration of the job, in seconds. The maximum value is
-	// 7200.
+	// 18,000 seconds.
 	JobDurationInSeconds *int32
 
 	// The name of the created model.
