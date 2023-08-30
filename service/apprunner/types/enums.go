@@ -242,7 +242,8 @@ type ProviderType string
 
 // Enum values for ProviderType
 const (
-	ProviderTypeGithub ProviderType = "GITHUB"
+	ProviderTypeGithub    ProviderType = "GITHUB"
+	ProviderTypeBitbucket ProviderType = "BITBUCKET"
 )
 
 // Values returns all known values for ProviderType. Note that this can be
@@ -251,6 +252,7 @@ const (
 func (ProviderType) Values() []ProviderType {
 	return []ProviderType{
 		"GITHUB",
+		"BITBUCKET",
 	}
 }
 

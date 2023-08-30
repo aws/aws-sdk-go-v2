@@ -1117,6 +1117,45 @@ type Membership struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	// The default protected query result configuration as specified by the member who
+	// can receive results.
+	DefaultResultConfiguration *MembershipProtectedQueryResultConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for protected query results.
+//
+// The following types satisfy this interface:
+//
+//	MembershipProtectedQueryOutputConfigurationMemberS3
+type MembershipProtectedQueryOutputConfiguration interface {
+	isMembershipProtectedQueryOutputConfiguration()
+}
+
+// Contains the configuration to write the query results to S3.
+type MembershipProtectedQueryOutputConfigurationMemberS3 struct {
+	Value ProtectedQueryS3OutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*MembershipProtectedQueryOutputConfigurationMemberS3) isMembershipProtectedQueryOutputConfiguration() {
+}
+
+// Contains configurations for protected query results.
+type MembershipProtectedQueryResultConfiguration struct {
+
+	// Configuration for protected query results.
+	//
+	// This member is required.
+	OutputConfiguration MembershipProtectedQueryOutputConfiguration
+
+	// The unique ARN for an IAM role that is used by Clean Rooms to write protected
+	// query results to the result location, given by the member who can receive
+	// results.
+	RoleArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1272,16 +1311,6 @@ type ProtectedQuery struct {
 	// This member is required.
 	MembershipId *string
 
-	// Contains any details needed to write the query results.
-	//
-	// This member is required.
-	ResultConfiguration *ProtectedQueryResultConfiguration
-
-	// The protected query SQL parameters.
-	//
-	// This member is required.
-	SqlParameters *ProtectedQuerySQLParameters
-
 	// The status of the query.
 	//
 	// This member is required.
@@ -1292,6 +1321,12 @@ type ProtectedQuery struct {
 
 	// The result of the protected query.
 	Result *ProtectedQueryResult
+
+	// Contains any details needed to write the query results.
+	ResultConfiguration *ProtectedQueryResultConfiguration
+
+	// The protected query SQL parameters.
+	SqlParameters *ProtectedQuerySQLParameters
 
 	// Statistics about protected query execution.
 	Statistics *ProtectedQueryStatistics
@@ -1319,10 +1354,21 @@ type ProtectedQueryError struct {
 //
 // The following types satisfy this interface:
 //
+//	ProtectedQueryOutputMemberMemberList
 //	ProtectedQueryOutputMemberS3
 type ProtectedQueryOutput interface {
 	isProtectedQueryOutput()
 }
+
+// The list of member Amazon Web Services account(s) that received the results of
+// the query.
+type ProtectedQueryOutputMemberMemberList struct {
+	Value []ProtectedQuerySingleMemberOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProtectedQueryOutputMemberMemberList) isProtectedQueryOutput() {}
 
 // If present, the output for a protected query with an `S3` output type.
 type ProtectedQueryOutputMemberS3 struct {
@@ -1399,6 +1445,18 @@ type ProtectedQueryS3OutputConfiguration struct {
 
 	// The S3 prefix to unload the protected query results.
 	KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the member who received the query result.
+type ProtectedQuerySingleMemberOutput struct {
+
+	// The Amazon Web Services account ID of the member in the collaboration who can
+	// receive results for the query.
+	//
+	// This member is required.
+	AccountId *string
 
 	noSmithyDocumentSerde
 }
@@ -1623,11 +1681,12 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAnalysisRulePolicy()                  {}
-func (*UnknownUnionMember) isAnalysisRulePolicyV1()                {}
-func (*UnknownUnionMember) isAnalysisSource()                      {}
-func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()   {}
-func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicyV1() {}
-func (*UnknownUnionMember) isProtectedQueryOutput()                {}
-func (*UnknownUnionMember) isProtectedQueryOutputConfiguration()   {}
-func (*UnknownUnionMember) isTableReference()                      {}
+func (*UnknownUnionMember) isAnalysisRulePolicy()                          {}
+func (*UnknownUnionMember) isAnalysisRulePolicyV1()                        {}
+func (*UnknownUnionMember) isAnalysisSource()                              {}
+func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()           {}
+func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicyV1()         {}
+func (*UnknownUnionMember) isMembershipProtectedQueryOutputConfiguration() {}
+func (*UnknownUnionMember) isProtectedQueryOutput()                        {}
+func (*UnknownUnionMember) isProtectedQueryOutputConfiguration()           {}
+func (*UnknownUnionMember) isTableReference()                              {}

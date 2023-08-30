@@ -114,6 +114,11 @@ type DescribeTaskOutput struct {
 	// The Amazon Resource Name (ARN) of the task that was described.
 	TaskArn *string
 
+	// The configuration of your task report. For more information, see Creating a
+	// task report (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+	// .
+	TaskReportConfig *types.TaskReportConfig
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

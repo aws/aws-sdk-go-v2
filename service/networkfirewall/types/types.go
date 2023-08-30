@@ -921,12 +921,19 @@ type RuleGroupResponse struct {
 // configuration.
 type RuleOption struct {
 
-	//
+	// The keyword for the Suricata compatible rule option. You must include a sid
+	// (signature ID), and can optionally include other keywords. For information about
+	// Suricata compatible keywords, see Rule options (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html#rule-options)
+	// in the Suricata documentation.
 	//
 	// This member is required.
 	Keyword *string
 
-	//
+	// The settings of the Suricata compatible rule option. Rule options have zero or
+	// more setting values, and the number of possible and required settings depends on
+	// the Keyword . For more information about the settings for specific options, see
+	// Rule options (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html#rule-options)
+	// .
 	Settings []string
 
 	noSmithyDocumentSerde
@@ -951,7 +958,7 @@ type RulesSource struct {
 	// An array of individual stateful rules inspection criteria to be used together
 	// in a stateful rule group. Use this option to specify simple Suricata rules with
 	// protocol, source and destination, ports, direction, and rule options. For
-	// information about the Suricata Rules format, see Rules Format (https://suricata.readthedocs.iorules/intro.html#)
+	// information about the Suricata Rules format, see Rules Format (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html)
 	// .
 	StatefulRules []StatefulRule
 
@@ -1138,7 +1145,7 @@ type StatefulEngineOptions struct {
 // A single Suricata rules specification, for use in a stateful rule group. Use
 // this option to specify a simple Suricata rule with protocol, source and
 // destination, ports, direction, and rule options. For information about the
-// Suricata Rules format, see Rules Format (https://suricata.readthedocs.iorules/intro.html#)
+// Suricata Rules format, see Rules Format (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html)
 // .
 type StatefulRule struct {
 
@@ -1156,12 +1163,6 @@ type StatefulRule struct {
 	//   to use to drop traffic. You can enable the rule with ALERT action, verify in
 	//   the logs that the rule is filtering as you want, then change the action to
 	//   DROP .
-	//   - REJECT - Drops TCP traffic that matches the conditions of the stateful
-	//   rule, and sends a TCP reset packet back to sender of the packet. A TCP reset
-	//   packet is a packet with no payload and a RST bit contained in the TCP header
-	//   flags. Also sends an alert log mesage if alert logging is configured in the
-	//   Firewall LoggingConfiguration . REJECT isn't currently available for use with
-	//   IMAP and FTP protocols.
 	//
 	// This member is required.
 	Action StatefulAction
@@ -1414,12 +1415,12 @@ type TlsCertificateData struct {
 // DescribeTLSInspectionConfiguration . Network Firewall uses a TLS inspection
 // configuration to decrypt traffic. Network Firewall re-encrypts the traffic
 // before sending it to its destination. To use a TLS inspection configuration, you
-// add it to a Network Firewall firewall policy, then you apply the firewall policy
-// to a firewall. Network Firewall acts as a proxy service to decrypt and inspect
-// inbound traffic. You can reference a TLS inspection configuration from more than
-// one firewall policy, and you can use a firewall policy in more than one
-// firewall. For more information about using TLS inspection configurations, see
-// Decrypting SSL/TLS traffic with TLS inspection configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
+// add it to a new Network Firewall firewall policy, then you apply the firewall
+// policy to a firewall. Network Firewall acts as a proxy service to decrypt and
+// inspect inbound traffic. You can reference a TLS inspection configuration from
+// more than one firewall policy, and you can use a firewall policy in more than
+// one firewall. For more information about using TLS inspection configurations,
+// see Decrypting SSL/TLS traffic with TLS inspection configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
 // in the Network Firewall Developer Guide.
 type TLSInspectionConfiguration struct {
 

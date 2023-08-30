@@ -1,0 +1,8 @@
+{
+    "id": "56b3ef14-bfec-40df-bc78-cddc57c07abb",
+    "type": "feature",
+    "description": "Allows customers to execute data plane actions like bulk loading graphs, issuing graph queries using Gremlin and openCypher directly from the SDK.",
+    "modules": [
+        "service/neptunedata"
+    ]
+}

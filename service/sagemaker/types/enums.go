@@ -1406,6 +1406,24 @@ func (DataDistributionType) Values() []DataDistributionType {
 	}
 }
 
+type DataSourceName string
+
+// Enum values for DataSourceName
+const (
+	DataSourceNameSalesforceGenie DataSourceName = "SalesforceGenie"
+	DataSourceNameSnowflake       DataSourceName = "Snowflake"
+)
+
+// Values returns all known values for DataSourceName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceName) Values() []DataSourceName {
+	return []DataSourceName{
+		"SalesforceGenie",
+		"Snowflake",
+	}
+}
+
 type DetailedAlgorithmStatus string
 
 // Enum values for DetailedAlgorithmStatus

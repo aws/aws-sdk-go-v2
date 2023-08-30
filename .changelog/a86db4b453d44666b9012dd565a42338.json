@@ -1,0 +1,8 @@
+{
+    "id": "a86db4b4-53d4-4666-b901-2dd565a42338",
+    "type": "feature",
+    "description": "App Runner adds support for Bitbucket. You can now create App Runner connection that connects to your Bitbucket repositories and deploy App Runner service with the source code stored in a Bitbucket repository.",
+    "modules": [
+        "service/apprunner"
+    ]
+}

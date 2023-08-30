@@ -34,7 +34,10 @@ func (c *Client) UpdateFirewallPolicy(ctx context.Context, params *UpdateFirewal
 
 type UpdateFirewallPolicyInput struct {
 
-	// The updated firewall policy to use for the firewall.
+	// The updated firewall policy to use for the firewall. You can't add or remove a
+	// TLSInspectionConfiguration after you create a firewall policy. However, you can
+	// replace an existing TLS inspection configuration with another
+	// TLSInspectionConfiguration .
 	//
 	// This member is required.
 	FirewallPolicy *types.FirewallPolicy

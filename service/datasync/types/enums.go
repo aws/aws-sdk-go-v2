@@ -424,6 +424,24 @@ func (ObjectTags) Values() []ObjectTags {
 	}
 }
 
+type ObjectVersionIds string
+
+// Enum values for ObjectVersionIds
+const (
+	ObjectVersionIdsInclude ObjectVersionIds = "INCLUDE"
+	ObjectVersionIdsNone    ObjectVersionIds = "NONE"
+)
+
+// Values returns all known values for ObjectVersionIds. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ObjectVersionIds) Values() []ObjectVersionIds {
+	return []ObjectVersionIds{
+		"INCLUDE",
+		"NONE",
+	}
+}
+
 type Operator string
 
 // Enum values for Operator
@@ -569,6 +587,42 @@ func (RecommendationStatus) Values() []RecommendationStatus {
 		"IN_PROGRESS",
 		"COMPLETED",
 		"FAILED",
+	}
+}
+
+type ReportLevel string
+
+// Enum values for ReportLevel
+const (
+	ReportLevelErrorsOnly         ReportLevel = "ERRORS_ONLY"
+	ReportLevelSuccessesAndErrors ReportLevel = "SUCCESSES_AND_ERRORS"
+)
+
+// Values returns all known values for ReportLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReportLevel) Values() []ReportLevel {
+	return []ReportLevel{
+		"ERRORS_ONLY",
+		"SUCCESSES_AND_ERRORS",
+	}
+}
+
+type ReportOutputType string
+
+// Enum values for ReportOutputType
+const (
+	ReportOutputTypeSummaryOnly ReportOutputType = "SUMMARY_ONLY"
+	ReportOutputTypeStandard    ReportOutputType = "STANDARD"
+)
+
+// Values returns all known values for ReportOutputType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportOutputType) Values() []ReportOutputType {
+	return []ReportOutputType{
+		"SUMMARY_ONLY",
+		"STANDARD",
 	}
 }
 

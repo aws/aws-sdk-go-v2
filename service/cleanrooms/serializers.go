@@ -814,6 +814,13 @@ func awsRestjson1_serializeOpDocumentCreateMembershipInput(v *CreateMembershipIn
 		ok.String(*v.CollaborationIdentifier)
 	}
 
+	if v.DefaultResultConfiguration != nil {
+		ok := object.Key("defaultResultConfiguration")
+		if err := awsRestjson1_serializeDocumentMembershipProtectedQueryResultConfiguration(v.DefaultResultConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.QueryLogStatus) > 0 {
 		ok := object.Key("queryLogStatus")
 		ok.String(string(v.QueryLogStatus))
@@ -3580,6 +3587,13 @@ func awsRestjson1_serializeOpDocumentUpdateMembershipInput(v *UpdateMembershipIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.DefaultResultConfiguration != nil {
+		ok := object.Key("defaultResultConfiguration")
+		if err := awsRestjson1_serializeDocumentMembershipProtectedQueryResultConfiguration(v.DefaultResultConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.QueryLogStatus) > 0 {
 		ok := object.Key("queryLogStatus")
 		ok.String(string(v.QueryLogStatus))
@@ -4096,6 +4110,43 @@ func awsRestjson1_serializeDocumentMemberList(v []types.MemberSpecification, val
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMembershipProtectedQueryOutputConfiguration(v types.MembershipProtectedQueryOutputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.MembershipProtectedQueryOutputConfigurationMemberS3:
+		av := object.Key("s3")
+		if err := awsRestjson1_serializeDocumentProtectedQueryS3OutputConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMembershipProtectedQueryResultConfiguration(v *types.MembershipProtectedQueryResultConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OutputConfiguration != nil {
+		ok := object.Key("outputConfiguration")
+		if err := awsRestjson1_serializeDocumentMembershipProtectedQueryOutputConfiguration(v.OutputConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
 	return nil
 }
 

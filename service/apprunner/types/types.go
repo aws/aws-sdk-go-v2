@@ -630,11 +630,10 @@ type Service struct {
 
 	// The current state of the App Runner service. These particular values mean the
 	// following.
-	//   - CREATE_FAILED – The service failed to create. To troubleshoot this failure,
-	//   read the failure events and logs, change any parameters that need to be fixed,
-	//   and retry the call to create the service. The failed service isn't usable, and
-	//   still counts towards your service quota. When you're done analyzing the failure,
-	//   delete the service.
+	//   - CREATE_FAILED – The service failed to create. The failed service isn't
+	//   usable, and still counts towards your service quota. To troubleshoot this
+	//   failure, read the failure events and logs, change any parameters that need to be
+	//   fixed, and rebuild your service using UpdateService .
 	//   - DELETE_FAILED – The service failed to delete and can't be successfully
 	//   recovered. Retry the service deletion call to ensure that all related resources
 	//   are removed.
@@ -725,10 +724,10 @@ type ServiceSummary struct {
 
 	// The current state of the App Runner service. These particular values mean the
 	// following.
-	//   - CREATE_FAILED – The service failed to create. Read the failure events and
-	//   logs, change any parameters that need to be fixed, and retry the call to create
-	//   the service. The failed service isn't usable, and still counts towards your
-	//   service quota. When you're done analyzing the failure, delete the service.
+	//   - CREATE_FAILED – The service failed to create. The failed service isn't
+	//   usable, and still counts towards your service quota. To troubleshoot this
+	//   failure, read the failure events and logs, change any parameters that need to be
+	//   fixed, and rebuild your service using UpdateService .
 	//   - DELETE_FAILED – The service failed to delete and can't be successfully
 	//   recovered. Retry the service deletion call to ensure that all related resources
 	//   are removed.

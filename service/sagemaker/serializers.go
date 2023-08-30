@@ -17820,6 +17820,13 @@ func awsAwsjson11_serializeDocumentCanvasAppSettings(v *types.CanvasAppSettings,
 	object := value.Object()
 	defer object.Close()
 
+	if v.IdentityProviderOAuthSettings != nil {
+		ok := object.Key("IdentityProviderOAuthSettings")
+		if err := awsAwsjson11_serializeDocumentIdentityProviderOAuthSettings(v.IdentityProviderOAuthSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelRegisterSettings != nil {
 		ok := object.Key("ModelRegisterSettings")
 		if err := awsAwsjson11_serializeDocumentModelRegisterSettings(v.ModelRegisterSettings, ok); err != nil {
@@ -20732,6 +20739,41 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningResourceConfig(v *types.H
 		ok.Integer(v.VolumeSizeInGB)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIdentityProviderOAuthSetting(v *types.IdentityProviderOAuthSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataSourceName) > 0 {
+		ok := object.Key("DataSourceName")
+		ok.String(string(v.DataSourceName))
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIdentityProviderOAuthSettings(v []types.IdentityProviderOAuthSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentIdentityProviderOAuthSetting(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -113,10 +113,31 @@ var _ *types.AnalysisRuleAggregation
 var _ *types.AnalysisRuleCustom
 var _ *types.AnalysisRuleList
 
+func ExampleMembershipProtectedQueryOutputConfiguration_outputUsage() {
+	var union types.MembershipProtectedQueryOutputConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MembershipProtectedQueryOutputConfigurationMemberS3:
+		_ = v.Value // Value is types.ProtectedQueryS3OutputConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ProtectedQueryS3OutputConfiguration
+
 func ExampleProtectedQueryOutput_outputUsage() {
 	var union types.ProtectedQueryOutput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProtectedQueryOutputMemberMemberList:
+		_ = v.Value // Value is []types.ProtectedQuerySingleMemberOutput
+
 	case *types.ProtectedQueryOutputMemberS3:
 		_ = v.Value // Value is types.ProtectedQueryS3Output
 
@@ -129,6 +150,7 @@ func ExampleProtectedQueryOutput_outputUsage() {
 	}
 }
 
+var _ []types.ProtectedQuerySingleMemberOutput
 var _ *types.ProtectedQueryS3Output
 
 func ExampleProtectedQueryOutputConfiguration_outputUsage() {

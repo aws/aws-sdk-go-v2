@@ -1510,6 +1510,58 @@ func validateSAPODataDestinationProperties(v *types.SAPODataDestinationPropertie
 	}
 }
 
+func validateSAPODataPaginationConfig(v *types.SAPODataPaginationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SAPODataPaginationConfig"}
+	if v.MaxPageSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxPageSize"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSAPODataParallelismConfig(v *types.SAPODataParallelismConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SAPODataParallelismConfig"}
+	if v.MaxParallelism == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxParallelism"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSAPODataSourceProperties(v *types.SAPODataSourceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SAPODataSourceProperties"}
+	if v.ParallelismConfig != nil {
+		if err := validateSAPODataParallelismConfig(v.ParallelismConfig); err != nil {
+			invalidParams.AddNested("ParallelismConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PaginationConfig != nil {
+		if err := validateSAPODataPaginationConfig(v.PaginationConfig); err != nil {
+			invalidParams.AddNested("PaginationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateScheduledTriggerProperties(v *types.ScheduledTriggerProperties) error {
 	if v == nil {
 		return nil
@@ -1781,6 +1833,11 @@ func validateSourceConnectorProperties(v *types.SourceConnectorProperties) error
 	if v.Zendesk != nil {
 		if err := validateZendeskSourceProperties(v.Zendesk); err != nil {
 			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SAPOData != nil {
+		if err := validateSAPODataSourceProperties(v.SAPOData); err != nil {
+			invalidParams.AddNested("SAPOData", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CustomConnector != nil {

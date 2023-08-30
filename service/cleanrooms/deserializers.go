@@ -10355,6 +10355,11 @@ func awsRestjson1_deserializeDocumentMembership(v **types.Membership, value inte
 				}
 			}
 
+		case "defaultResultConfiguration":
+			if err := awsRestjson1_deserializeDocumentMembershipProtectedQueryResultConfiguration(&sv.DefaultResultConfiguration, value); err != nil {
+				return err
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10401,6 +10406,91 @@ func awsRestjson1_deserializeDocumentMembership(v **types.Membership, value inte
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMembershipProtectedQueryOutputConfiguration(v *types.MembershipProtectedQueryOutputConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.MembershipProtectedQueryOutputConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "s3":
+			var mv types.ProtectedQueryS3OutputConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentProtectedQueryS3OutputConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.MembershipProtectedQueryOutputConfigurationMemberS3{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMembershipProtectedQueryResultConfiguration(v **types.MembershipProtectedQueryResultConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MembershipProtectedQueryResultConfiguration
+	if *v == nil {
+		sv = &types.MembershipProtectedQueryResultConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "outputConfiguration":
+			if err := awsRestjson1_deserializeDocumentMembershipProtectedQueryOutputConfiguration(&sv.OutputConfiguration, value); err != nil {
+				return err
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
 			}
 
 		default:
@@ -10926,6 +11016,40 @@ func awsRestjson1_deserializeDocumentProtectedQueryError(v **types.ProtectedQuer
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentProtectedQueryMemberOutputList(v *[]types.ProtectedQuerySingleMemberOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ProtectedQuerySingleMemberOutput
+	if *v == nil {
+		cv = []types.ProtectedQuerySingleMemberOutput{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ProtectedQuerySingleMemberOutput
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentProtectedQuerySingleMemberOutput(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentProtectedQueryOutput(v *types.ProtectedQueryOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10946,6 +11070,14 @@ loop:
 			continue
 		}
 		switch key {
+		case "memberList":
+			var mv []types.ProtectedQuerySingleMemberOutput
+			if err := awsRestjson1_deserializeDocumentProtectedQueryMemberOutputList(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.ProtectedQueryOutputMemberMemberList{Value: mv}
+			break loop
+
 		case "s3":
 			var mv types.ProtectedQueryS3Output
 			destAddr := &mv
@@ -11165,6 +11297,46 @@ func awsRestjson1_deserializeDocumentProtectedQueryS3OutputConfiguration(v **typ
 					return fmt.Errorf("expected ResultFormat to be of type string, got %T instead", value)
 				}
 				sv.ResultFormat = types.ResultFormat(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProtectedQuerySingleMemberOutput(v **types.ProtectedQuerySingleMemberOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProtectedQuerySingleMemberOutput
+	if *v == nil {
+		sv = &types.ProtectedQuerySingleMemberOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		default:

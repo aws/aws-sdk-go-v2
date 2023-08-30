@@ -17,7 +17,9 @@ import (
 	"time"
 )
 
-// Provides information about an DataSync transfer task that's running.
+// Provides information about an execution of your DataSync task. You can use this
+// operation to help monitor the progress of an ongoing transfer or check the
+// results of the transfer.
 func (c *Client) DescribeTaskExecution(ctx context.Context, params *DescribeTaskExecutionInput, optFns ...func(*Options)) (*DescribeTaskExecutionOutput, error) {
 	if params == nil {
 		params = &DescribeTaskExecutionInput{}
@@ -36,7 +38,8 @@ func (c *Client) DescribeTaskExecution(ctx context.Context, params *DescribeTask
 // DescribeTaskExecutionRequest
 type DescribeTaskExecutionInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) of the transfer task that's running.
+	// Specifies the Amazon Resource Name (ARN) of the task execution that you want
+	// information about.
 	//
 	// This member is required.
 	TaskExecutionArn *string
@@ -56,19 +59,23 @@ type DescribeTaskExecutionOutput struct {
 	// bytes sent over the network, see BytesCompressed .
 	BytesTransferred int64
 
-	// The number of logical bytes written to the destination Amazon Web Services
-	// storage resource.
+	// The number of logical bytes written to the destination location.
 	BytesWritten int64
 
-	// The estimated physical number of bytes that is to be transferred over the
-	// network.
+	// The estimated physical number of bytes that will transfer over the network.
 	EstimatedBytesToTransfer int64
 
-	// The expected number of files that is to be transferred over the network. This
-	// value is calculated during the PREPARING phase before the TRANSFERRING phase of
-	// the task execution. This value is the expected number of files to be
-	// transferred. It's calculated based on comparing the content of the source and
-	// destination locations and finding the delta that needs to be transferred.
+	// The expected number of files, objects, and directories that DataSync will
+	// delete in your destination location. If you don't configure your task (https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html)
+	// to delete data in the destination that isn't in the source, the value is always
+	// 0 .
+	EstimatedFilesToDelete int64
+
+	// The expected number of files, objects, and directories that DataSync will
+	// transfer over the network. This value is calculated during the task execution's
+	// PREPARING phase before the TRANSFERRING phase. The calculation is based on
+	// comparing the content of the source and destination locations and finding the
+	// difference that needs to be transferred.
 	EstimatedFilesToTransfer int64
 
 	// A list of filter rules that exclude specific data during your transfer. For
@@ -76,45 +83,67 @@ type DescribeTaskExecutionOutput struct {
 	// .
 	Excludes []types.FilterRule
 
-	// The actual number of files that was transferred over the network. This value is
-	// calculated and updated on an ongoing basis during the TRANSFERRING phase of the
-	// task execution. It's updated periodically when each file is read from the source
-	// and sent over the network. If failures occur during a transfer, this value can
-	// be less than EstimatedFilesToTransfer . In some cases, this value can also be
-	// greater than EstimatedFilesToTransfer . This element is implementation-specific
-	// for some location types, so don't use it as an indicator for a correct file
-	// number or to monitor your task execution.
+	// The number of files, objects, and directories that DataSync deleted in your
+	// destination location. If you don't configure your task (https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html)
+	// to delete data in the destination that isn't in the source, the value is always
+	// 0 .
+	FilesDeleted int64
+
+	// The number of files, objects, and directories that DataSync skipped during your
+	// transfer.
+	FilesSkipped int64
+
+	// The actual number of files, objects, and directories that DataSync transferred
+	// over the network. This value is updated periodically during the task execution's
+	// TRANSFERRING phase when something is read from the source and sent over the
+	// network. If DataSync fails to transfer something, this value can be less than
+	// EstimatedFilesToTransfer . In some cases, this value can also be greater than
+	// EstimatedFilesToTransfer . This element is implementation-specific for some
+	// location types, so don't use it as an exact indication of what transferred or to
+	// monitor your task execution.
 	FilesTransferred int64
+
+	// The number of files, objects, and directories that DataSync verified during
+	// your transfer.
+	FilesVerified int64
 
 	// A list of filter rules that include specific data during your transfer. For
 	// more information and examples, see Filtering data transferred by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
 	// .
 	Includes []types.FilterRule
 
-	// Configures your DataSync task settings. These options include how DataSync
-	// handles files, objects, and their associated metadata. You also can specify how
-	// DataSync verifies data integrity, set bandwidth limits for your task, among
-	// other options. Each task setting has a default value. Unless you need to, you
-	// don't have to configure any of these Options before starting your task.
+	// Indicates how your transfer task is configured. These options include how
+	// DataSync handles files, objects, and their associated metadata during your
+	// transfer. You also can specify how to verify data integrity, set bandwidth
+	// limits for your task, among other options. Each option has a default value.
+	// Unless you need to, you don't have to configure any of these options before
+	// starting your task.
 	Options *types.Options
+
+	// Indicates whether DataSync generated a complete task report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+	// for your transfer.
+	ReportResult *types.ReportResult
 
 	// The result of the task execution.
 	Result *types.TaskExecutionResultDetail
 
-	// The time that the task execution was started.
+	// The time when the task execution started.
 	StartTime *time.Time
 
-	// The status of the task execution. For detailed information about task execution
-	// statuses, see Understanding Task Statuses in the DataSync User Guide.
+	// The status of the task execution.
 	Status types.TaskExecutionStatus
 
-	// The Amazon Resource Name (ARN) of the task execution that was described.
+	// The ARN of the task execution that you wanted information about.
 	// TaskExecutionArn is hierarchical and includes TaskArn for the task that was
 	// executed. For example, a TaskExecution value with the ARN
 	// arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b
 	// executed the task with the ARN
 	// arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2 .
 	TaskExecutionArn *string
+
+	// The configuration of your task report, which provides detailed information
+	// about for your DataSync transfer.
+	TaskReportConfig *types.TaskReportConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -1560,6 +1560,41 @@ func validateOnPremConfig(v *types.OnPremConfig) error {
 	}
 }
 
+func validateReportDestination(v *types.ReportDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReportDestination"}
+	if v.S3 != nil {
+		if err := validateReportDestinationS3(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReportDestinationS3(v *types.ReportDestinationS3) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReportDestinationS3"}
+	if v.S3BucketArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketArn"))
+	}
+	if v.BucketAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketAccessRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3Config(v *types.S3Config) error {
 	if v == nil {
 		return nil
@@ -1619,6 +1654,23 @@ func validateTaskFilters(v []types.TaskFilter) error {
 	for i := range v {
 		if err := validateTaskFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTaskReportConfig(v *types.TaskReportConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TaskReportConfig"}
+	if v.Destination != nil {
+		if err := validateReportDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2052,6 +2104,11 @@ func validateOpCreateTaskInput(v *CreateTaskInput) error {
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TaskReportConfig != nil {
+		if err := validateTaskReportConfig(v.TaskReportConfig); err != nil {
+			invalidParams.AddNested("TaskReportConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2509,6 +2566,11 @@ func validateOpStartTaskExecutionInput(v *StartTaskExecutionInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TaskReportConfig != nil {
+		if err := validateTaskReportConfig(v.TaskReportConfig); err != nil {
+			invalidParams.AddNested("TaskReportConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2748,6 +2810,11 @@ func validateOpUpdateTaskInput(v *UpdateTaskInput) error {
 	if v.Schedule != nil {
 		if err := validateTaskSchedule(v.Schedule); err != nil {
 			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TaskReportConfig != nil {
+		if err := validateTaskReportConfig(v.TaskReportConfig); err != nil {
+			invalidParams.AddNested("TaskReportConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -30,10 +30,9 @@ type AgentListEntry struct {
 // for accessing your Azure Blob Storage.
 type AzureBlobSasConfiguration struct {
 
-	// Specifies a SAS token that provides permissions at the Azure storage account,
-	// container, or folder level. The token is part of the SAS URI string that comes
-	// after the storage resource URI and a question mark. A token looks something like
-	// this:
+	// Specifies a SAS token that provides permissions to access your Azure Blob
+	// Storage. The token is part of the SAS URI string that comes after the storage
+	// resource URI and a question mark. A token looks something like this:
 	// sp=r&st=2023-12-20T14:54:52Z&se=2023-12-20T22:54:52Z&spr=https&sv=2021-06-08&sr=c&sig=aBBKDWQvyuVcTPH9EBp%2FXTI9E%2F%2Fmq171%2BZU178wcwqU%3D
 	//
 	// This member is required.
@@ -568,11 +567,12 @@ type OnPremConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Configures your DataSync task settings. These options include how DataSync
-// handles files, objects, and their associated metadata. You also can specify how
-// DataSync verifies data integrity, set bandwidth limits for your task, among
-// other options. Each task setting has a default value. Unless you need to, you
-// don't have to configure any of these Options before starting your task.
+// Indicates how your transfer task is configured. These options include how
+// DataSync handles files, objects, and their associated metadata during your
+// transfer. You also can specify how to verify data integrity, set bandwidth
+// limits for your task, among other options. Each option has a default value.
+// Unless you need to, you don't have to configure any of these options before
+// starting your task.
 type Options struct {
 
 	// Specifies whether to preserve metadata indicating the last time a file was read
@@ -807,6 +807,101 @@ type Recommendation struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies where DataSync uploads your task report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// .
+type ReportDestination struct {
+
+	// Specifies the Amazon S3 bucket where DataSync uploads your task report.
+	S3 *ReportDestinationS3
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the Amazon S3 bucket where DataSync uploads your task report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// .
+type ReportDestinationS3 struct {
+
+	// Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync
+	// to upload a task report to your S3 bucket. For more information, see Allowing
+	// DataSync to upload a task report to an Amazon S3 bucket (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+	// .
+	//
+	// This member is required.
+	BucketAccessRoleArn *string
+
+	// Specifies the ARN of the S3 bucket where DataSync uploads your report.
+	//
+	// This member is required.
+	S3BucketArn *string
+
+	// Specifies a bucket prefix for your report.
+	Subdirectory *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the level of detail for a particular aspect of your DataSync task
+// report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// .
+type ReportOverride struct {
+
+	// Specifies whether your task report includes errors only or successes and
+	// errors. For example, your report might mostly include only what didn't go well
+	// in your transfer ( ERRORS_ONLY ). At the same time, you want to verify that your
+	// task filter (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
+	// is working correctly. In this situation, you can get a list of what files
+	// DataSync successfully skipped and if something transferred that you didn't to
+	// transfer ( SUCCESSES_AND_ERRORS ).
+	ReportLevel ReportLevel
+
+	noSmithyDocumentSerde
+}
+
+// The level of detail included in each aspect of your DataSync task report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// .
+type ReportOverrides struct {
+
+	// Specifies the level of reporting for the files, objects, and directories that
+	// DataSync attempted to delete in your destination location. This only applies if
+	// you configure your task (https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html)
+	// to delete data in the destination that isn't in the source.
+	Deleted *ReportOverride
+
+	// Specifies the level of reporting for the files, objects, and directories that
+	// DataSync attempted to skip during your transfer.
+	Skipped *ReportOverride
+
+	// Specifies the level of reporting for the files, objects, and directories that
+	// DataSync attempted to transfer.
+	Transferred *ReportOverride
+
+	// Specifies the level of reporting for the files, objects, and directories that
+	// DataSync attempted to verify at the end of your transfer. This only applies if
+	// you configure your task (https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html)
+	// to verify data during and after the transfer (which DataSync does by default).
+	Verified *ReportOverride
+
+	noSmithyDocumentSerde
+}
+
+// Indicates whether DataSync created a complete task report (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// for your transfer.
+type ReportResult struct {
+
+	// Indicates the code associated with the error if DataSync can't create a
+	// complete report.
+	ErrorCode *string
+
+	// Provides details about issues creating a report.
+	ErrorDetail *string
+
+	// Indicates whether DataSync is still working on your report, created a report,
+	// or can't create a complete report.
+	Status PhaseStatus
+
+	noSmithyDocumentSerde
+}
+
 // Information provided by DataSync Discovery about the resources in your
 // on-premises storage system.
 type ResourceDetails struct {
@@ -1011,6 +1106,49 @@ type TaskListEntry struct {
 
 	// The Amazon Resource Name (ARN) of the task.
 	TaskArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies how you want to configure a task report, which provides detailed
+// information about for your DataSync transfer. For more information, see Task
+// reports (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html)
+// .
+type TaskReportConfig struct {
+
+	// Specifies the Amazon S3 bucket where DataSync uploads your task report. For
+	// more information, see Task reports (https://docs.aws.amazon.com/datasync/latest/userguide/creating-task-reports.html#task-report-access)
+	// .
+	Destination *ReportDestination
+
+	// Specifies whether your task report includes the new version of each object
+	// transferred into an S3 bucket. This only applies if you enable versioning on
+	// your bucket (https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html)
+	// . Keep in mind that setting this to INCLUDE can increase the duration of your
+	// task execution.
+	ObjectVersionIds ObjectVersionIds
+
+	// Specifies the type of task report that you want:
+	//   - SUMMARY_ONLY : Provides necessary details about your task, including the
+	//   number of files, objects, and directories transferred and transfer duration.
+	//   - STANDARD : Provides complete details about your task, including a full list
+	//   of files, objects, and directories that were transferred, skipped, verified, and
+	//   more.
+	OutputType ReportOutputType
+
+	// Customizes the reporting level for aspects of your task report. For example,
+	// your report might generally only include errors, but you could specify that you
+	// want a list of successes and errors just for the files that DataSync attempted
+	// to delete in your destination location.
+	Overrides *ReportOverrides
+
+	// Specifies whether you want your task report to include only what went wrong
+	// with your transfer or a list of what succeeded and didn't.
+	//   - ERRORS_ONLY : A report shows what DataSync was unable to transfer, skip,
+	//   verify, and delete.
+	//   - SUCCESSES_AND_ERRORS : A report shows what DataSync was able and unable to
+	//   transfer, skip, verify, and delete.
+	ReportLevel ReportLevel
 
 	noSmithyDocumentSerde
 }

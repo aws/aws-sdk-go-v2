@@ -16,7 +16,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a protected query that is started by Clean Rooms .
+// Creates a protected query that is started by Clean Rooms.
 func (c *Client) StartProtectedQuery(ctx context.Context, params *StartProtectedQueryInput, optFns ...func(*Options)) (*StartProtectedQueryOutput, error) {
 	if params == nil {
 		params = &StartProtectedQueryInput{}
@@ -40,11 +40,6 @@ type StartProtectedQueryInput struct {
 	// This member is required.
 	MembershipIdentifier *string
 
-	// The details needed to write the query results.
-	//
-	// This member is required.
-	ResultConfiguration *types.ProtectedQueryResultConfiguration
-
 	// The protected SQL query parameters.
 	//
 	// This member is required.
@@ -54,6 +49,9 @@ type StartProtectedQueryInput struct {
 	//
 	// This member is required.
 	Type types.ProtectedQueryType
+
+	// The details needed to write the query results.
+	ResultConfiguration *types.ProtectedQueryResultConfiguration
 
 	noSmithyDocumentSerde
 }
