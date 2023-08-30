@@ -4256,6 +4256,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The workspace settings for the SageMaker Canvas application.</p>"
                     }
+                },
+                "IdentityProviderOAuthSettings": {
+                    "target": "com.amazonaws.sagemaker#IdentityProviderOAuthSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for connecting to an external data source with OAuth.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11604,6 +11610,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the location of the channel data.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DataSourceName": {
+            "type": "enum",
+            "members": {
+                "SalesforceGenie": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SalesforceGenie"
+                    }
+                },
+                "Snowflake": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Snowflake"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#Database": {
@@ -27260,6 +27283,44 @@
                 "smithy.api#length": {
                     "min": 32,
                     "max": 128
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#IdentityProviderOAuthSetting": {
+            "type": "structure",
+            "members": {
+                "DataSourceName": {
+                    "target": "com.amazonaws.sagemaker#DataSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data source that you're connecting to. Canvas currently supports OAuth for Snowflake and Salesforce Data Cloud.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether OAuth for a data source is enabled or disabled in the Canvas\n      application.</p>"
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.sagemaker#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an Amazon Web Services Secrets Manager secret that stores the credentials from your\n      identity provider, such as the client ID and secret, authorization URL, and token URL. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon SageMaker Canvas app setting where you configure OAuth for connecting to an external\n      data source, such as Snowflake.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#IdentityProviderOAuthSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#IdentityProviderOAuthSetting"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
                 }
             }
         },
@@ -47147,7 +47208,7 @@
                 "JobDurationInSeconds": {
                     "target": "com.amazonaws.sagemaker#JobDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the maximum duration of the job, in seconds. The maximum value is 7200.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum duration of the job, in seconds. The maximum value is 18,000 seconds.</p>"
                     }
                 },
                 "TrafficPattern": {
