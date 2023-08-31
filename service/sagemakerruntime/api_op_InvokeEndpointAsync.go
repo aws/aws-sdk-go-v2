@@ -47,7 +47,7 @@ func (c *Client) InvokeEndpointAsync(ctx context.Context, params *InvokeEndpoint
 type InvokeEndpointAsyncInput struct {
 
 	// The name of the endpoint that you specified when you created the endpoint using
-	// the CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html)
+	// the CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
 	// API.
 	//
 	// This member is required.
@@ -58,7 +58,7 @@ type InvokeEndpointAsyncInput struct {
 	// This member is required.
 	InputLocation *string
 
-	// The desired MIME type of the inference in the response.
+	// The desired MIME type of the inference response from the model container.
 	Accept *string
 
 	// The MIME type of the input data in the request body.
@@ -75,7 +75,7 @@ type InvokeEndpointAsyncInput struct {
 	// responsible for setting or updating any custom attributes in the response. If
 	// your code does not set this value in the response, an empty value is returned.
 	// For example, if a custom attribute represents the trace ID, your model can
-	// prepend the custom attribute with Trace ID : in your post-processing function.
+	// prepend the custom attribute with Trace ID: in your post-processing function.
 	// This feature is currently supported in the Amazon Web Services SDKs but not in
 	// the Amazon SageMaker Python SDK.
 	CustomAttributes *string

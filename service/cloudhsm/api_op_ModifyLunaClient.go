@@ -24,6 +24,8 @@ import (
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Modifies the certificate used by the client. This action can potentially start
 // a workflow to install the new certificate on the client's HSMs.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) ModifyLunaClient(ctx context.Context, params *ModifyLunaClientInput, optFns ...func(*Options)) (*ModifyLunaClientOutput, error) {
 	if params == nil {
 		params = &ModifyLunaClientInput{}

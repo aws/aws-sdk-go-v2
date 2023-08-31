@@ -26,6 +26,8 @@ import (
 // the NextToken member. If more results are available, the NextToken member of
 // the response contains a token that you pass in the next call to ListLunaClients
 // to retrieve the next set of items.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) ListLunaClients(ctx context.Context, params *ListLunaClientsInput, optFns ...func(*Options)) (*ListLunaClientsOutput, error) {
 	if params == nil {
 		params = &ListLunaClientsInput{}

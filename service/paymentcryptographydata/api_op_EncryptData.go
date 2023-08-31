@@ -96,8 +96,6 @@ type EncryptDataOutput struct {
 	// standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and
 	// then truncating the result to the first 3 bytes, or 6 hex digits, of the
 	// resulting cryptogram.
-	//
-	// This member is required.
 	KeyCheckValue *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,6 +11,7 @@
         "api_client_test.go",
         "api_op_CompleteAttachmentUpload.go",
         "api_op_CreateParticipantConnection.go",
+        "api_op_DescribeView.go",
         "api_op_DisconnectParticipant.go",
         "api_op_GetAttachment.go",
         "api_op_GetTranscript.go",

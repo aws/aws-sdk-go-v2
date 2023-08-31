@@ -27,6 +27,8 @@ import (
 // a production HSM, you should ensure that your AWS CloudHSM service is configured
 // for high availability, and consider executing this operation during a
 // maintenance window.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) ModifyHsm(ctx context.Context, params *ModifyHsmInput, optFns ...func(*Options)) (*ModifyHsmOutput, error) {
 	if params == nil {
 		params = &ModifyHsmInput{}

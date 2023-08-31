@@ -7,6 +7,23 @@ import (
 	"time"
 )
 
+// The number of entities in an account that are impacted by a specific event
+// aggregated by the entity status codes.
+type AccountEntityAggregate struct {
+
+	// The 12-digit Amazon Web Services account numbers that contains the affected
+	// entities.
+	AccountId *string
+
+	// The number of entities that match the filter criteria for the specified events.
+	Count int32
+
+	// The number of affected entities aggregated by the entity status codes.
+	Statuses map[string]int32
+
+	noSmithyDocumentSerde
+}
+
 // Information about an entity that is affected by a Health event.
 type AffectedEntity struct {
 
@@ -63,6 +80,28 @@ type DateTimeRange struct {
 	noSmithyDocumentSerde
 }
 
+// A JSON set of elements including the awsAccountId , eventArn and a set of
+// statusCodes .
+type EntityAccountFilter struct {
+
+	// The unique identifier for the event. The event ARN has the
+	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// format. For example, an event ARN might look like the following:
+	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	//
+	// This member is required.
+	EventArn *string
+
+	// The 12-digit Amazon Web Services account numbers that contains the affected
+	// entities.
+	AwsAccountId *string
+
+	// A list of entity status codes.
+	StatusCodes []EntityStatusCode
+
+	noSmithyDocumentSerde
+}
+
 // The number of entities that are affected by one or more events. Returned by the
 // DescribeEntityAggregates (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEntityAggregates.html)
 // operation.
@@ -76,6 +115,9 @@ type EntityAggregate struct {
 	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
+
+	// The number of affected entities aggregated by the entity status codes.
+	Statuses map[string]int32
 
 	noSmithyDocumentSerde
 }
@@ -384,6 +426,31 @@ type OrganizationAffectedEntitiesErrorItem struct {
 	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The aggregate results of entities affected by the specified event in your
+// organization. The results are aggregated by the entity status codes for the
+// specified set of accountsIDs.
+type OrganizationEntityAggregate struct {
+
+	// A list of entity aggregates for each of the specified accounts in your
+	// organization that are affected by a specific event. If there are no
+	// awsAccountIds provided in the request, this field will be empty in the response.
+	Accounts []AccountEntityAggregate
+
+	// The number of entities for the organization that match the filter criteria for
+	// the specified events.
+	Count int32
+
+	// A list of event ARNs (unique identifiers). For example:
+	// "arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
+	// "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"
+	EventArn *string
+
+	// The number of affected entities aggregated by the entitiy status codes.
+	Statuses map[string]int32
 
 	noSmithyDocumentSerde
 }

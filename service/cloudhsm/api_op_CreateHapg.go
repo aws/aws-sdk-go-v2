@@ -24,6 +24,8 @@ import (
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Creates a high-availability partition group. A high-availability partition
 // group is a group of partitions that spans multiple physical HSMs.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) CreateHapg(ctx context.Context, params *CreateHapgInput, optFns ...func(*Options)) (*CreateHapgOutput, error) {
 	if params == nil {
 		params = &CreateHapgInput{}

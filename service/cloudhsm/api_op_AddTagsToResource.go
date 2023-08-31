@@ -26,6 +26,8 @@ import (
 // . Adds or overwrites one or more tags for the specified AWS CloudHSM resource.
 // Each tag consists of a key and a value. Tag keys must be unique to each
 // resource.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddTagsToResourceInput{}

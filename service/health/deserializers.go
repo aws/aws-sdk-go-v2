@@ -467,6 +467,114 @@ func awsAwsjson11_deserializeOpErrorDescribeEntityAggregates(response *smithyhtt
 	}
 }
 
+type awsAwsjson11_deserializeOpDescribeEntityAggregatesForOrganization struct {
+}
+
+func (*awsAwsjson11_deserializeOpDescribeEntityAggregatesForOrganization) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDescribeEntityAggregatesForOrganization) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeEntityAggregatesForOrganization(response, &metadata)
+	}
+	output := &DescribeEntityAggregatesForOrganizationOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDescribeEntityAggregatesForOrganizationOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDescribeEntityAggregatesForOrganization(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpDescribeEventAggregates struct {
 }
 
@@ -1533,6 +1641,98 @@ func awsAwsjson11_deserializeErrorUnsupportedLocale(response *smithyhttp.Respons
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentAccountEntityAggregate(v **types.AccountEntityAggregate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccountEntityAggregate
+	if *v == nil {
+		sv = &types.AccountEntityAggregate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected eventArn to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected count to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = int32(i64)
+			}
+
+		case "statuses":
+			if err := awsAwsjson11_deserializeDocumentEntityStatuses(&sv.Statuses, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAccountEntityAggregatesList(v *[]types.AccountEntityAggregate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AccountEntityAggregate
+	if *v == nil {
+		cv = []types.AccountEntityAggregate{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AccountEntityAggregate
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAccountEntityAggregate(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAffectedAccountsList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1929,6 +2129,11 @@ func awsAwsjson11_deserializeDocumentEntityAggregate(v **types.EntityAggregate, 
 				sv.EventArn = ptr.String(jtv)
 			}
 
+		case "statuses":
+			if err := awsAwsjson11_deserializeDocumentEntityStatuses(&sv.Statuses, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -2003,6 +2208,46 @@ func awsAwsjson11_deserializeDocumentEntityList(v *[]types.AffectedEntity, value
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEntityStatuses(v *map[string]int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]int32
+	if *v == nil {
+		mv = map[string]int32{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected count to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			parsedVal = int32(i64)
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -2657,6 +2902,103 @@ func awsAwsjson11_deserializeDocumentOrganizationAffectedEntitiesErrorItem(v **t
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOrganizationEntityAggregate(v **types.OrganizationEntityAggregate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OrganizationEntityAggregate
+	if *v == nil {
+		sv = &types.OrganizationEntityAggregate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accounts":
+			if err := awsAwsjson11_deserializeDocumentAccountEntityAggregatesList(&sv.Accounts, value); err != nil {
+				return err
+			}
+
+		case "count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected count to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = int32(i64)
+			}
+
+		case "eventArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected eventArn to be of type string, got %T instead", value)
+				}
+				sv.EventArn = ptr.String(jtv)
+			}
+
+		case "statuses":
+			if err := awsAwsjson11_deserializeDocumentEntityStatuses(&sv.Statuses, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOrganizationEntityAggregatesList(v *[]types.OrganizationEntityAggregate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OrganizationEntityAggregate
+	if *v == nil {
+		cv = []types.OrganizationEntityAggregate{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OrganizationEntityAggregate
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentOrganizationEntityAggregate(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3169,6 +3511,42 @@ func awsAwsjson11_deserializeOpDocumentDescribeAffectedEntitiesOutput(v **Descri
 					return fmt.Errorf("expected nextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDescribeEntityAggregatesForOrganizationOutput(v **DescribeEntityAggregatesForOrganizationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeEntityAggregatesForOrganizationOutput
+	if *v == nil {
+		sv = &DescribeEntityAggregatesForOrganizationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "organizationEntityAggregates":
+			if err := awsAwsjson11_deserializeDocumentOrganizationEntityAggregatesList(&sv.OrganizationEntityAggregates, value); err != nil {
+				return err
 			}
 
 		default:

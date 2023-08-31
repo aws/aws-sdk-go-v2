@@ -23,6 +23,8 @@ import (
 // , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Retrieves information about an HSM client.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) DescribeLunaClient(ctx context.Context, params *DescribeLunaClientInput, optFns ...func(*Options)) (*DescribeLunaClientOutput, error) {
 	if params == nil {
 		params = &DescribeLunaClientInput{}

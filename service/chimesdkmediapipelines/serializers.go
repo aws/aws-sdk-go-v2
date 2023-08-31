@@ -2482,6 +2482,13 @@ func awsRestjson1_serializeDocumentMediaInsightsPipelineConfigurationElement(v *
 		}
 	}
 
+	if v.VoiceEnhancementSinkConfiguration != nil {
+		ok := object.Key("VoiceEnhancementSinkConfiguration")
+		if err := awsRestjson1_serializeDocumentVoiceEnhancementSinkConfiguration(v.VoiceEnhancementSinkConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2998,6 +3005,18 @@ func awsRestjson1_serializeDocumentVoiceAnalyticsProcessorConfiguration(v *types
 	if len(v.VoiceToneAnalysisStatus) > 0 {
 		ok := object.Key("VoiceToneAnalysisStatus")
 		ok.String(string(v.VoiceToneAnalysisStatus))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVoiceEnhancementSinkConfiguration(v *types.VoiceEnhancementSinkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Disabled {
+		ok := object.Key("Disabled")
+		ok.Boolean(v.Disabled)
 	}
 
 	return nil

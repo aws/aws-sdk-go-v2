@@ -82,9 +82,10 @@ type ParticipantRole string
 
 // Enum values for ParticipantRole
 const (
-	ParticipantRoleAgent    ParticipantRole = "AGENT"
-	ParticipantRoleCustomer ParticipantRole = "CUSTOMER"
-	ParticipantRoleSystem   ParticipantRole = "SYSTEM"
+	ParticipantRoleAgent     ParticipantRole = "AGENT"
+	ParticipantRoleCustomer  ParticipantRole = "CUSTOMER"
+	ParticipantRoleSystem    ParticipantRole = "SYSTEM"
+	ParticipantRoleCustomBot ParticipantRole = "CUSTOM_BOT"
 )
 
 // Values returns all known values for ParticipantRole. Note that this can be
@@ -95,6 +96,35 @@ func (ParticipantRole) Values() []ParticipantRole {
 		"AGENT",
 		"CUSTOMER",
 		"SYSTEM",
+		"CUSTOM_BOT",
+	}
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeContact        ResourceType = "CONTACT"
+	ResourceTypeContactFlow    ResourceType = "CONTACT_FLOW"
+	ResourceTypeInstance       ResourceType = "INSTANCE"
+	ResourceTypeParticipant    ResourceType = "PARTICIPANT"
+	ResourceTypeHierarchyLevel ResourceType = "HIERARCHY_LEVEL"
+	ResourceTypeHierarchyGroup ResourceType = "HIERARCHY_GROUP"
+	ResourceTypeUser           ResourceType = "USER"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"CONTACT",
+		"CONTACT_FLOW",
+		"INSTANCE",
+		"PARTICIPANT",
+		"HIERARCHY_LEVEL",
+		"HIERARCHY_GROUP",
+		"USER",
 	}
 }
 

@@ -1680,6 +1680,31 @@ func awsRestjson1_serializeOpDocumentUpdateCampaignOutboundCallConfigInput(v *Up
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAgentlessDialerConfig(v *types.AgentlessDialerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DialingCapacity != nil {
+		ok := object.Key("dialingCapacity")
+		switch {
+		case math.IsNaN(*v.DialingCapacity):
+			ok.String("NaN")
+
+		case math.IsInf(*v.DialingCapacity, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.DialingCapacity, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.DialingCapacity)
+
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAnswerMachineDetectionConfig(v *types.AnswerMachineDetectionConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1733,6 +1758,12 @@ func awsRestjson1_serializeDocumentDialerConfig(v types.DialerConfig, value smit
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.DialerConfigMemberAgentlessDialerConfig:
+		av := object.Key("agentlessDialerConfig")
+		if err := awsRestjson1_serializeDocumentAgentlessDialerConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.DialerConfigMemberPredictiveDialerConfig:
 		av := object.Key("predictiveDialerConfig")
 		if err := awsRestjson1_serializeDocumentPredictiveDialerConfig(&uv.Value, av); err != nil {
@@ -1884,6 +1915,24 @@ func awsRestjson1_serializeDocumentPredictiveDialerConfig(v *types.PredictiveDia
 		}
 	}
 
+	if v.DialingCapacity != nil {
+		ok := object.Key("dialingCapacity")
+		switch {
+		case math.IsNaN(*v.DialingCapacity):
+			ok.String("NaN")
+
+		case math.IsInf(*v.DialingCapacity, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.DialingCapacity, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.DialingCapacity)
+
+		}
+	}
+
 	return nil
 }
 
@@ -1905,6 +1954,24 @@ func awsRestjson1_serializeDocumentProgressiveDialerConfig(v *types.ProgressiveD
 
 		default:
 			ok.Double(*v.BandwidthAllocation)
+
+		}
+	}
+
+	if v.DialingCapacity != nil {
+		ok := object.Key("dialingCapacity")
+		switch {
+		case math.IsNaN(*v.DialingCapacity):
+			ok.String("NaN")
+
+		case math.IsInf(*v.DialingCapacity, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.DialingCapacity, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.DialingCapacity)
 
 		}
 	}

@@ -83,7 +83,7 @@ type AutoScalingGroupProvider struct {
 	// This member is required.
 	AutoScalingGroupArn *string
 
-	// he managed scaling settings for the Auto Scaling group capacity provider.
+	// The managed scaling settings for the Auto Scaling group capacity provider.
 	ManagedScaling *ManagedScaling
 
 	// The managed termination protection setting to use for the Auto Scaling group
@@ -997,12 +997,17 @@ type ContainerDefinition struct {
 	// maps to Sysctls in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
 	// and the --sysctl option to docker run (https://docs.docker.com/engine/reference/run/#security-configuration)
-	// . We don't recommended that you specify network-related systemControls
-	// parameters for multiple containers in a single task that also uses either the
-	// awsvpc or host network modes. For tasks that use the awsvpc network mode, the
-	// container that's started last determines which systemControls parameters take
-	// effect. For tasks that use the host network mode, it changes the container
-	// instance's namespaced kernel parameters as well as the containers.
+	// . For example, you can configure net.ipv4.tcp_keepalive_time setting to
+	// maintain longer lived connections. We don't recommended that you specify
+	// network-related systemControls parameters for multiple containers in a single
+	// task that also uses either the awsvpc or host network modes. For tasks that use
+	// the awsvpc network mode, the container that's started last determines which
+	// systemControls parameters take effect. For tasks that use the host network
+	// mode, it changes the container instance's namespaced kernel parameters as well
+	// as the containers. This parameter is not supported for Windows containers. This
+	// parameter is only supported for tasks that are hosted on Fargate if the tasks
+	// are using platform version 1.4.0 or later (Linux). This isn't supported for
+	// Windows containers on Fargate.
 	SystemControls []SystemControl
 
 	// A list of ulimits to set in the container. If a ulimit value is specified in a
@@ -1164,7 +1169,8 @@ type ContainerInstance struct {
 	// new tasks.
 	RemainingResources []Resource
 
-	// The number of tasks on the container instance that are in the RUNNING status.
+	// The number of tasks on the container instance that have a desired status (
+	// desiredStatus ) of RUNNING .
 	RunningTasksCount int32
 
 	// The status of the container instance. The valid values are REGISTERING ,
@@ -3322,7 +3328,11 @@ type SystemControl struct {
 	// The namespaced kernel parameter to set a value for.
 	Namespace *string
 
-	// The value for the namespaced kernel parameter that's specified in namespace .
+	// The namespaced kernel parameter to set a value for. Valid IPC namespace values:
+	// "kernel.msgmax" | "kernel.msgmnb" | "kernel.msgmni" | "kernel.sem" |
+	// "kernel.shmall" | "kernel.shmmax" | "kernel.shmmni" | "kernel.shm_rmid_forced" ,
+	// and Sysctls that start with "fs.mqueue.*" Valid network namespace values:
+	// Sysctls that start with "net.*" All of these values are supported by Fargate.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -3715,17 +3725,20 @@ type TaskDefinition struct {
 	NetworkMode NetworkMode
 
 	// The process namespace to use for the containers in the task. The valid values
-	// are host or task . If host is specified, then all containers within the tasks
-	// that specified the host PID mode on the same container instance share the same
-	// process namespace with the host Amazon EC2 instance. If task is specified, all
-	// containers within the specified task share the same process namespace. If no
-	// value is specified, the default is a private namespace. For more information,
-	// see PID settings (https://docs.docker.com/engine/reference/run/#pid-settings---pid)
-	// in the Docker run reference. If the host PID mode is used, be aware that there
-	// is a heightened risk of undesired process namespace expose. For more
-	// information, see Docker security (https://docs.docker.com/engine/security/security/)
-	// . This parameter is not supported for Windows containers or tasks run on
-	// Fargate.
+	// are host or task . On Fargate for Linux containers, the only valid value is task
+	// . For example, monitoring sidecars might need pidMode to access information
+	// about other containers running in the same task. If host is specified, all
+	// containers within the tasks that specified the host PID mode on the same
+	// container instance share the same process namespace with the host Amazon EC2
+	// instance. If task is specified, all containers within the specified task share
+	// the same process namespace. If no value is specified, the default is a private
+	// namespace for each container. For more information, see PID settings (https://docs.docker.com/engine/reference/run/#pid-settings---pid)
+	// in the Docker run reference. If the host PID mode is used, there's a heightened
+	// risk of undesired process namespace exposure. For more information, see Docker
+	// security (https://docs.docker.com/engine/security/security/) . This parameter is
+	// not supported for Windows containers. This parameter is only supported for tasks
+	// that are hosted on Fargate if the tasks are using platform version 1.4.0 or
+	// later (Linux). This isn't supported for Windows containers on Fargate.
 	PidMode PidMode
 
 	// An array of placement constraint objects to use for tasks. This parameter isn't

@@ -31,6 +31,8 @@ import (
 // 20 minutes to create and provision an HSM. You can monitor the status of the HSM
 // with the DescribeHsm operation. The HSM is ready to be initialized when the
 // status changes to RUNNING .
+//
+// Deprecated: This API is deprecated.
 func (c *Client) CreateHsm(ctx context.Context, params *CreateHsmInput, optFns ...func(*Options)) (*CreateHsmOutput, error) {
 	if params == nil {
 		params = &CreateHsmInput{}

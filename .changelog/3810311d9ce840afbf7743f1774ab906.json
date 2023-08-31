@@ -1,0 +1,8 @@
+{
+    "id": "3810311d-9ce8-40af-bf77-43f1774ab906",
+    "type": "feature",
+    "description": "This release adds support for feature Voice Enhancement for Call Recording as part of Amazon Chime SDK call analytics.",
+    "modules": [
+        "service/chimesdkmediapipelines"
+    ]
+}

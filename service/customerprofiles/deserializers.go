@@ -4411,7 +4411,7 @@ func awsRestjson1_deserializeOpDocumentGetProfileObjectTypeOutput(v **GetProfile
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected text to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveText to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -8272,7 +8272,7 @@ func awsRestjson1_deserializeOpDocumentPutProfileObjectTypeOutput(v **PutProfile
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected text to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveText to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
 			}
@@ -12798,7 +12798,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.AccountNumber = ptr.String(jtv)
 			}
@@ -12807,7 +12807,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To1000 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To1000 to be of type string, got %T instead", value)
 				}
 				sv.AdditionalInformation = ptr.String(jtv)
 			}
@@ -12831,7 +12831,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.BirthDate = ptr.String(jtv)
 			}
@@ -12840,7 +12840,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.BusinessEmailAddress = ptr.String(jtv)
 			}
@@ -12849,7 +12849,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.BusinessName = ptr.String(jtv)
 			}
@@ -12858,7 +12858,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.BusinessPhoneNumber = ptr.String(jtv)
 			}
@@ -12867,7 +12867,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.EmailAddress = ptr.String(jtv)
 			}
@@ -12876,7 +12876,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.FirstName = ptr.String(jtv)
 			}
@@ -12899,7 +12899,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.GenderString = ptr.String(jtv)
 			}
@@ -12908,7 +12908,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.HomePhoneNumber = ptr.String(jtv)
 			}
@@ -12917,7 +12917,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.LastName = ptr.String(jtv)
 			}
@@ -12931,7 +12931,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.MiddleName = ptr.String(jtv)
 			}
@@ -12940,7 +12940,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.MobilePhoneNumber = ptr.String(jtv)
 			}
@@ -12958,7 +12958,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.PartyTypeString = ptr.String(jtv)
 			}
@@ -12967,7 +12967,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.PersonalEmailAddress = ptr.String(jtv)
 			}
@@ -12976,7 +12976,7 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected sensitiveString1To255 to be of type string, got %T instead", value)
 				}
 				sv.PhoneNumber = ptr.String(jtv)
 			}

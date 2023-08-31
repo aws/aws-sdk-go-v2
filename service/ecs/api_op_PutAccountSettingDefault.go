@@ -36,29 +36,44 @@ func (c *Client) PutAccountSettingDefault(ctx context.Context, params *PutAccoun
 
 type PutAccountSettingDefaultInput struct {
 
-	// The resource name for which to modify the account setting. If
-	// serviceLongArnFormat is specified, the ARN for your Amazon ECS services is
-	// affected. If taskLongArnFormat is specified, the ARN and resource ID for your
-	// Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified,
-	// the ARN and resource ID for your Amazon ECS container instances is affected. If
-	// awsvpcTrunking is specified, the ENI limit for your Amazon ECS container
-	// instances is affected. If containerInsights is specified, the default setting
-	// for Amazon Web Services CloudWatch Container Insights for your clusters is
-	// affected. If tagResourceAuthorization is specified, the opt-in option for
-	// tagging resources on creation is affected. For information about the opt-in
-	// timeline, see Tagging authorization timeline (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources)
-	// in the Amazon ECS Developer Guide. When you specify fargateFIPSMode for the name
-	// and enabled for the value , Fargate uses FIPS-140 compliant cryptographic
-	// algorithms on your tasks. For more information about FIPS-140 compliance with
-	// Fargate, see Amazon Web Services Fargate Federal Information Processing
-	// Standard (FIPS) 140-2 compliance (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// The resource name for which to modify the account setting. If you specify
+	// serviceLongArnFormat , the ARN for your Amazon ECS services is affected. If you
+	// specify taskLongArnFormat , the ARN and resource ID for your Amazon ECS tasks is
+	// affected. If you specify containerInstanceLongArnFormat , the ARN and resource
+	// ID for your Amazon ECS container instances is affected. If you specify
+	// awsvpcTrunking , the ENI limit for your Amazon ECS container instances is
+	// affected. If you specify containerInsights , the default setting for Amazon Web
+	// Services CloudWatch Container Insights for your clusters is affected. If you
+	// specify tagResourceAuthorization , the opt-in option for tagging resources on
+	// creation is affected. For information about the opt-in timeline, see Tagging
+	// authorization timeline (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources)
+	// in the Amazon ECS Developer Guide. If you specify
+	// fargateTaskRetirementWaitPeriod , the default wait time to retire a Fargate task
+	// due to required maintenance is affected. When you specify fargateFIPSMode for
+	// the name and enabled for the value , Fargate uses FIPS-140 compliant
+	// cryptographic algorithms on your tasks. For more information about FIPS-140
+	// compliance with Fargate, see Amazon Web Services Fargate Federal Information
+	// Processing Standard (FIPS) 140-2 compliance (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html)
+	// in the Amazon Elastic Container Service Developer Guide. When Amazon Web
+	// Services determines that a security or infrastructure update is needed for an
+	// Amazon ECS task hosted on Fargate, the tasks need to be stopped and new tasks
+	// launched to replace them. Use fargateTaskRetirementWaitPeriod to set the wait
+	// time to retire a Fargate task to the default. For information about the Fargate
+	// tasks maintenance, see Amazon Web Services Fargate task maintenance (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html)
+	// in the Amazon ECS Developer Guide.
 	//
 	// This member is required.
 	Name types.SettingName
 
 	// The account setting value for the specified principal ARN. Accepted values are
-	// enabled , disabled , on , and off .
+	// enabled , disabled , on , and off . When you specify
+	// fargateTaskRetirementWaitPeriod for the name , the following are the valid
+	// values:
+	//   - 0 - immediately retire the tasks and patch Fargate There is no advanced
+	//   notification. Your tasks are retired immediately, and Fargate is patched without
+	//   any notification.
+	//   - 7 -wait 7 calendar days to retire the tasks and patch Fargate
+	//   - 14 - wait 14 calendar days to retire the tasks and patch Fargate
 	//
 	// This member is required.
 	Value *string

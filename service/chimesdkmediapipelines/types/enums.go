@@ -479,6 +479,7 @@ const (
 	MediaInsightsPipelineConfigurationElementTypeSqsQueueSink                           MediaInsightsPipelineConfigurationElementType = "SqsQueueSink"
 	MediaInsightsPipelineConfigurationElementTypeSnsTopicSink                           MediaInsightsPipelineConfigurationElementType = "SnsTopicSink"
 	MediaInsightsPipelineConfigurationElementTypeS3RecordingSink                        MediaInsightsPipelineConfigurationElementType = "S3RecordingSink"
+	MediaInsightsPipelineConfigurationElementTypeVoiceEnhancementSink                   MediaInsightsPipelineConfigurationElementType = "VoiceEnhancementSink"
 )
 
 // Values returns all known values for
@@ -495,6 +496,37 @@ func (MediaInsightsPipelineConfigurationElementType) Values() []MediaInsightsPip
 		"SqsQueueSink",
 		"SnsTopicSink",
 		"S3RecordingSink",
+		"VoiceEnhancementSink",
+	}
+}
+
+type MediaPipelineElementStatus string
+
+// Enum values for MediaPipelineElementStatus
+const (
+	MediaPipelineElementStatusNotStarted   MediaPipelineElementStatus = "NotStarted"
+	MediaPipelineElementStatusNotSupported MediaPipelineElementStatus = "NotSupported"
+	MediaPipelineElementStatusInitializing MediaPipelineElementStatus = "Initializing"
+	MediaPipelineElementStatusInProgress   MediaPipelineElementStatus = "InProgress"
+	MediaPipelineElementStatusFailed       MediaPipelineElementStatus = "Failed"
+	MediaPipelineElementStatusStopping     MediaPipelineElementStatus = "Stopping"
+	MediaPipelineElementStatusStopped      MediaPipelineElementStatus = "Stopped"
+	MediaPipelineElementStatusPaused       MediaPipelineElementStatus = "Paused"
+)
+
+// Values returns all known values for MediaPipelineElementStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaPipelineElementStatus) Values() []MediaPipelineElementStatus {
+	return []MediaPipelineElementStatus{
+		"NotStarted",
+		"NotSupported",
+		"Initializing",
+		"InProgress",
+		"Failed",
+		"Stopping",
+		"Stopped",
+		"Paused",
 	}
 }
 
@@ -540,6 +572,7 @@ const (
 	MediaPipelineStatusStopping     MediaPipelineStatus = "Stopping"
 	MediaPipelineStatusStopped      MediaPipelineStatus = "Stopped"
 	MediaPipelineStatusPaused       MediaPipelineStatus = "Paused"
+	MediaPipelineStatusNotStarted   MediaPipelineStatus = "NotStarted"
 )
 
 // Values returns all known values for MediaPipelineStatus. Note that this can be
@@ -553,6 +586,7 @@ func (MediaPipelineStatus) Values() []MediaPipelineStatus {
 		"Stopping",
 		"Stopped",
 		"Paused",
+		"NotStarted",
 	}
 }
 

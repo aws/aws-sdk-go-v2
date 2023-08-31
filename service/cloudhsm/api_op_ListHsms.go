@@ -27,6 +27,8 @@ import (
 // member. If more results are available, the NextToken member of the response
 // contains a token that you pass in the next call to ListHsms to retrieve the
 // next set of items.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) ListHsms(ctx context.Context, params *ListHsmsInput, optFns ...func(*Options)) (*ListHsmsOutput, error) {
 	if params == nil {
 		params = &ListHsmsInput{}

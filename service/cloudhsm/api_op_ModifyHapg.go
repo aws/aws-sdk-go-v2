@@ -23,6 +23,8 @@ import (
 // , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Modifies an existing high-availability partition group.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) ModifyHapg(ctx context.Context, params *ModifyHapgInput, optFns ...func(*Options)) (*ModifyHapgOutput, error) {
 	if params == nil {
 		params = &ModifyHapgInput{}

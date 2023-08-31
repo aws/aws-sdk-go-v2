@@ -150,6 +150,46 @@ type UploadMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// A view resource object. Contains metadata and content necessary to render the
+// view.
+type View struct {
+
+	// The Amazon Resource Name (ARN) of the view.
+	Arn *string
+
+	// View content containing all content necessary to render a view except for
+	// runtime input data.
+	Content *ViewContent
+
+	// The identifier of the view.
+	Id *string
+
+	// The name of the view.
+	Name *string
+
+	// The current version of the view.
+	Version *int32
+
+	noSmithyDocumentSerde
+}
+
+// View content containing all content necessary to render a view except for
+// runtime input data.
+type ViewContent struct {
+
+	// A list of actions possible from the view
+	Actions []string
+
+	// The schema representing the input data that the view template must be supplied
+	// to render.
+	InputSchema *string
+
+	// The view template representing the structure of the view.
+	Template *string
+
+	noSmithyDocumentSerde
+}
+
 // The websocket for the participant's connection.
 type Websocket struct {
 

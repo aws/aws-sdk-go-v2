@@ -49,6 +49,26 @@ func (m *validateOpCreateParticipantConnection) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeView struct {
+}
+
+func (*validateOpDescribeView) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeView) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeViewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeViewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisconnectParticipant struct {
 }
 
@@ -177,6 +197,10 @@ func addOpCreateParticipantConnectionValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpCreateParticipantConnection{}, middleware.After)
 }
 
+func addOpDescribeViewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeView{}, middleware.After)
+}
+
 func addOpDisconnectParticipantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisconnectParticipant{}, middleware.After)
 }
@@ -229,6 +253,24 @@ func validateOpCreateParticipantConnectionInput(v *CreateParticipantConnectionIn
 	invalidParams := smithy.InvalidParamsError{Context: "CreateParticipantConnectionInput"}
 	if v.ParticipantToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParticipantToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeViewInput(v *DescribeViewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeViewInput"}
+	if v.ViewToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewToken"))
+	}
+	if v.ConnectionToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

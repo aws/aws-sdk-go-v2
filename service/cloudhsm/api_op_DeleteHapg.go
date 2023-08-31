@@ -23,6 +23,8 @@ import (
 // , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Deletes a high-availability partition group.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) DeleteHapg(ctx context.Context, params *DeleteHapgInput, optFns ...func(*Options)) (*DeleteHapgOutput, error) {
 	if params == nil {
 		params = &DeleteHapgInput{}

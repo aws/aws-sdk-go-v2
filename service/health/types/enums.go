@@ -9,6 +9,8 @@ const (
 	EntityStatusCodeImpaired   EntityStatusCode = "IMPAIRED"
 	EntityStatusCodeUnimpaired EntityStatusCode = "UNIMPAIRED"
 	EntityStatusCodeUnknown    EntityStatusCode = "UNKNOWN"
+	EntityStatusCodePending    EntityStatusCode = "PENDING"
+	EntityStatusCodeResolved   EntityStatusCode = "RESOLVED"
 )
 
 // Values returns all known values for EntityStatusCode. Note that this can be
@@ -19,6 +21,8 @@ func (EntityStatusCode) Values() []EntityStatusCode {
 		"IMPAIRED",
 		"UNIMPAIRED",
 		"UNKNOWN",
+		"PENDING",
+		"RESOLVED",
 	}
 }
 

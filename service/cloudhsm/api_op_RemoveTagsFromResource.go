@@ -25,6 +25,8 @@ import (
 // . Removes one or more tags from the specified AWS CloudHSM resource. To remove a
 // tag, specify only the tag key to remove (not the value). To overwrite the value
 // for an existing tag, use AddTagsToResource .
+//
+// Deprecated: This API is deprecated.
 func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsFromResourceInput, optFns ...func(*Options)) (*RemoveTagsFromResourceOutput, error) {
 	if params == nil {
 		params = &RemoveTagsFromResourceInput{}

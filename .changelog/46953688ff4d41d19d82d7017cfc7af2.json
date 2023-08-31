@@ -1,0 +1,8 @@
+{
+    "id": "46953688-ff4d-41d1-9d82-d7017cfc7af2",
+    "type": "feature",
+    "description": "Documentation updates for CloudWatch Events.",
+    "modules": [
+        "service/cloudwatchevents"
+    ]
+}

@@ -65,8 +65,9 @@ type CreateParticipantConnectionInput struct {
 	// participant in non-streaming chats.
 	ConnectParticipant *bool
 
-	// Type of connection information required. This can be omitted if
-	// ConnectParticipant is true .
+	// Type of connection information required. If you need CONNECTION_CREDENTIALS
+	// along with marking participant as connected, pass CONNECTION_CREDENTIALS in Type
+	// .
 	Type []types.ConnectionType
 
 	noSmithyDocumentSerde

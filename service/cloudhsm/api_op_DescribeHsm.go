@@ -25,6 +25,8 @@ import (
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Retrieves information about an HSM. You can identify the HSM by its ARN or its
 // serial number.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) DescribeHsm(ctx context.Context, params *DescribeHsmInput, optFns ...func(*Options)) (*DescribeHsmOutput, error) {
 	if params == nil {
 		params = &DescribeHsmInput{}

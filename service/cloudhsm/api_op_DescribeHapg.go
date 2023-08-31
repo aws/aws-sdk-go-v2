@@ -24,6 +24,8 @@ import (
 // , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Retrieves information about a high-availability partition group.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) DescribeHapg(ctx context.Context, params *DescribeHapgInput, optFns ...func(*Options)) (*DescribeHapgOutput, error) {
 	if params == nil {
 		params = &DescribeHapgInput{}

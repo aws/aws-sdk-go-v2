@@ -11,6 +11,9 @@ func ExampleDialerConfig_outputUsage() {
 	var union types.DialerConfig
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.DialerConfigMemberAgentlessDialerConfig:
+		_ = v.Value // Value is types.AgentlessDialerConfig
+
 	case *types.DialerConfigMemberPredictiveDialerConfig:
 		_ = v.Value // Value is types.PredictiveDialerConfig
 
@@ -27,4 +30,5 @@ func ExampleDialerConfig_outputUsage() {
 }
 
 var _ *types.PredictiveDialerConfig
+var _ *types.AgentlessDialerConfig
 var _ *types.ProgressiveDialerConfig

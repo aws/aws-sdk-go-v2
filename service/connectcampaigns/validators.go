@@ -673,9 +673,6 @@ func validateOutboundCallConfig(v *types.OutboundCallConfig) error {
 	if v.ConnectContactFlowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectContactFlowId"))
 	}
-	if v.ConnectQueueId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectQueueId"))
-	}
 	if v.AnswerMachineDetectionConfig != nil {
 		if err := validateAnswerMachineDetectionConfig(v.AnswerMachineDetectionConfig); err != nil {
 			invalidParams.AddNested("AnswerMachineDetectionConfig", err.(smithy.InvalidParamsError))

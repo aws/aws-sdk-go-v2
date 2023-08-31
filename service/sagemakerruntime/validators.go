@@ -49,12 +49,36 @@ func (m *validateOpInvokeEndpoint) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeEndpointWithResponseStream struct {
+}
+
+func (*validateOpInvokeEndpointWithResponseStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeEndpointWithResponseStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeEndpointWithResponseStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeEndpointWithResponseStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpInvokeEndpointAsyncValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeEndpointAsync{}, middleware.After)
 }
 
 func addOpInvokeEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeEndpoint{}, middleware.After)
+}
+
+func addOpInvokeEndpointWithResponseStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeEndpointWithResponseStream{}, middleware.After)
 }
 
 func validateOpInvokeEndpointAsyncInput(v *InvokeEndpointAsyncInput) error {
@@ -80,6 +104,24 @@ func validateOpInvokeEndpointInput(v *InvokeEndpointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeEndpointInput"}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeEndpointWithResponseStreamInput(v *InvokeEndpointWithResponseStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeEndpointWithResponseStreamInput"}
 	if v.EndpointName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
 	}

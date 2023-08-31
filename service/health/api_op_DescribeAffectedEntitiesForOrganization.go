@@ -47,11 +47,6 @@ func (c *Client) DescribeAffectedEntitiesForOrganization(ctx context.Context, pa
 
 type DescribeAffectedEntitiesForOrganizationInput struct {
 
-	// A JSON set of elements including the awsAccountId and the eventArn .
-	//
-	// This member is required.
-	OrganizationEntityFilters []types.EventAccountFilter
-
 	// The locale (language) to return information in. English (en) is the default and
 	// the only supported value at this time.
 	Locale *string
@@ -66,6 +61,16 @@ type DescribeAffectedEntitiesForOrganizationInput struct {
 	// returned token. When all results have been returned, the response does not
 	// contain a pagination token value.
 	NextToken *string
+
+	// A JSON set of elements including the awsAccountId , eventArn and a set of
+	// statusCodes .
+	OrganizationEntityAccountFilters []types.EntityAccountFilter
+
+	// A JSON set of elements including the awsAccountId and the eventArn .
+	//
+	// Deprecated: This property is deprecated, use organizationEntityAccountFilters
+	// instead.
+	OrganizationEntityFilters []types.EventAccountFilter
 
 	noSmithyDocumentSerde
 }

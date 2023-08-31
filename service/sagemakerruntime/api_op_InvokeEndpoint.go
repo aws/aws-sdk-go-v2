@@ -65,7 +65,7 @@ type InvokeEndpointInput struct {
 	// This member is required.
 	EndpointName *string
 
-	// The desired MIME type of the inference in the response.
+	// The desired MIME type of the inference response from the model container.
 	Accept *string
 
 	// The MIME type of the input data in the request body.
@@ -77,14 +77,14 @@ type InvokeEndpointInput struct {
 	// ID that you can use to track a request or to provide other metadata that a
 	// service endpoint was programmed to process. The value must consist of no more
 	// than 1024 visible US-ASCII characters as specified in Section 3.3.6. Field
-	// Value Components (https://tools.ietf.org/html/rfc7230#section-3.2.6) of the
-	// Hypertext Transfer Protocol (HTTP/1.1). The code in your model is responsible
-	// for setting or updating any custom attributes in the response. If your code does
-	// not set this value in the response, an empty value is returned. For example, if
-	// a custom attribute represents the trace ID, your model can prepend the custom
-	// attribute with Trace ID: in your post-processing function. This feature is
-	// currently supported in the Amazon Web Services SDKs but not in the Amazon
-	// SageMaker Python SDK.
+	// Value Components (https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6)
+	// of the Hypertext Transfer Protocol (HTTP/1.1). The code in your model is
+	// responsible for setting or updating any custom attributes in the response. If
+	// your code does not set this value in the response, an empty value is returned.
+	// For example, if a custom attribute represents the trace ID, your model can
+	// prepend the custom attribute with Trace ID: in your post-processing function.
+	// This feature is currently supported in the Amazon Web Services SDKs but not in
+	// the Amazon SageMaker Python SDK.
 	CustomAttributes *string
 
 	// An optional JMESPath expression used to override the EnableExplanations
@@ -126,7 +126,7 @@ type InvokeEndpointOutput struct {
 	// This member is required.
 	Body []byte
 
-	// The MIME type of the inference returned in the response body.
+	// The MIME type of the inference returned from the model container.
 	ContentType *string
 
 	// Provides additional information in the response about the inference returned by

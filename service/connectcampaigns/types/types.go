@@ -7,6 +7,15 @@ import (
 	"time"
 )
 
+// Agentless Dialer config
+type AgentlessDialerConfig struct {
+
+	// Allocates dialing capacity for this campaign between multiple active campaigns
+	DialingCapacity *float64
+
+	noSmithyDocumentSerde
+}
+
 // Answering Machine Detection config
 type AnswerMachineDetectionConfig struct {
 
@@ -96,11 +105,21 @@ type CampaignSummary struct {
 //
 // The following types satisfy this interface:
 //
+//	DialerConfigMemberAgentlessDialerConfig
 //	DialerConfigMemberPredictiveDialerConfig
 //	DialerConfigMemberProgressiveDialerConfig
 type DialerConfig interface {
 	isDialerConfig()
 }
+
+// Agentless Dialer config
+type DialerConfigMemberAgentlessDialerConfig struct {
+	Value AgentlessDialerConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*DialerConfigMemberAgentlessDialerConfig) isDialerConfig() {}
 
 // Predictive Dialer config
 type DialerConfigMemberPredictiveDialerConfig struct {
@@ -265,16 +284,14 @@ type OutboundCallConfig struct {
 	// This member is required.
 	ConnectContactFlowId *string
 
+	// Answering Machine Detection config
+	AnswerMachineDetectionConfig *AnswerMachineDetectionConfig
+
 	// The queue for the call. If you specify a queue, the phone displayed for caller
 	// ID is the phone number specified in the queue. If you do not specify a queue,
 	// the queue defined in the contact flow is used. If you do not specify a queue,
 	// you must specify a source phone number.
-	//
-	// This member is required.
 	ConnectQueueId *string
-
-	// Answering Machine Detection config
-	AnswerMachineDetectionConfig *AnswerMachineDetectionConfig
 
 	// The phone number associated with the Amazon Connect instance, in E.164 format.
 	// If you do not specify a source phone number, you must specify a queue.
@@ -291,6 +308,9 @@ type PredictiveDialerConfig struct {
 	// This member is required.
 	BandwidthAllocation *float64
 
+	// Allocates dialing capacity for this campaign between multiple active campaigns
+	DialingCapacity *float64
+
 	noSmithyDocumentSerde
 }
 
@@ -301,6 +321,9 @@ type ProgressiveDialerConfig struct {
 	//
 	// This member is required.
 	BandwidthAllocation *float64
+
+	// Allocates dialing capacity for this campaign between multiple active campaigns
+	DialingCapacity *float64
 
 	noSmithyDocumentSerde
 }

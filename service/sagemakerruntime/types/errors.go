@@ -60,6 +60,33 @@ func (e *InternalFailure) ErrorCode() string {
 }
 func (e *InternalFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The stream processing failed because of an unknown error, exception or failure.
+// Try your request again.
+type InternalStreamFailure struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InternalStreamFailure) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InternalStreamFailure) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InternalStreamFailure) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InternalStreamFailure"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InternalStreamFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // Model (owned by the customer in the container) returned 4xx or 5xx error code.
 type ModelError struct {
 	Message *string
@@ -117,6 +144,38 @@ func (e *ModelNotReadyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ModelNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An error occurred while streaming the response body. This error can have the
+// following error codes: ModelInvocationTimeExceeded The model failed to finish
+// sending the response within the timeout period allowed by Amazon SageMaker.
+// StreamBroken The Transmission Control Protocol (TCP) connection between the
+// client and the model was reset or closed.
+type ModelStreamError struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ErrorCode_ *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ModelStreamError) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ModelStreamError) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ModelStreamError) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ModelStreamError"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ModelStreamError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is unavailable. Try your call again.
 type ServiceUnavailable struct {

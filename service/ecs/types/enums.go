@@ -888,13 +888,14 @@ type SettingName string
 
 // Enum values for SettingName
 const (
-	SettingNameServiceLongArnFormat           SettingName = "serviceLongArnFormat"
-	SettingNameTaskLongArnFormat              SettingName = "taskLongArnFormat"
-	SettingNameContainerInstanceLongArnFormat SettingName = "containerInstanceLongArnFormat"
-	SettingNameAwsvpcTrunking                 SettingName = "awsvpcTrunking"
-	SettingNameContainerInsights              SettingName = "containerInsights"
-	SettingNameFargateFipsMode                SettingName = "fargateFIPSMode"
-	SettingNameTagResourceAuthorization       SettingName = "tagResourceAuthorization"
+	SettingNameServiceLongArnFormat            SettingName = "serviceLongArnFormat"
+	SettingNameTaskLongArnFormat               SettingName = "taskLongArnFormat"
+	SettingNameContainerInstanceLongArnFormat  SettingName = "containerInstanceLongArnFormat"
+	SettingNameAwsvpcTrunking                  SettingName = "awsvpcTrunking"
+	SettingNameContainerInsights               SettingName = "containerInsights"
+	SettingNameFargateFipsMode                 SettingName = "fargateFIPSMode"
+	SettingNameTagResourceAuthorization        SettingName = "tagResourceAuthorization"
+	SettingNameFargateTaskRetirementWaitPeriod SettingName = "fargateTaskRetirementWaitPeriod"
 )
 
 // Values returns all known values for SettingName. Note that this can be expanded
@@ -909,6 +910,7 @@ func (SettingName) Values() []SettingName {
 		"containerInsights",
 		"fargateFIPSMode",
 		"tagResourceAuthorization",
+		"fargateTaskRetirementWaitPeriod",
 	}
 }
 

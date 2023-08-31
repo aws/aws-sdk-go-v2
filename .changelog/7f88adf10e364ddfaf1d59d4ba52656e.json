@@ -1,0 +1,8 @@
+{
+    "id": "7f88adf1-0e36-4ddf-af1d-59d4ba52656e",
+    "type": "feature",
+    "description": "Minor model changes for Kafka Connect as well as endpoint updates.",
+    "modules": [
+        "service/kafkaconnect"
+    ]
+}

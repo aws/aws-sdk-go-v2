@@ -23,6 +23,8 @@ import (
 // , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Deletes a client.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) DeleteLunaClient(ctx context.Context, params *DeleteLunaClientInput, optFns ...func(*Options)) (*DeleteLunaClientOutput, error) {
 	if params == nil {
 		params = &DeleteLunaClientInput{}

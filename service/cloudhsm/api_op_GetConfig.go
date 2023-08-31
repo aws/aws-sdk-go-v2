@@ -25,6 +25,8 @@ import (
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Gets the configuration files necessary to connect to all high availability
 // partition groups the client is associated with.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) GetConfig(ctx context.Context, params *GetConfigInput, optFns ...func(*Options)) (*GetConfigOutput, error) {
 	if params == nil {
 		params = &GetConfigInput{}

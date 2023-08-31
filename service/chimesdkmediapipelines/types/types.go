@@ -790,6 +790,10 @@ type MediaInsightsPipeline struct {
 	// The time at which the media insights pipeline was created.
 	CreatedTimestamp *time.Time
 
+	// The statuses that the elements in a media insights pipeline can have during
+	// data processing.
+	ElementStatuses []MediaInsightsPipelineElementStatus
+
 	// The runtime configuration settings for a Kinesis recording video stream in a
 	// media insights pipeline.
 	KinesisVideoStreamRecordingSourceRuntimeConfiguration *KinesisVideoStreamRecordingSourceRuntimeConfiguration
@@ -891,6 +895,9 @@ type MediaInsightsPipelineConfigurationElement struct {
 	// configuration element.
 	VoiceAnalyticsProcessorConfiguration *VoiceAnalyticsProcessorConfiguration
 
+	// The configuration settings for the VoiceEnhancementSinkConfiguration element.
+	VoiceEnhancementSinkConfiguration *VoiceEnhancementSinkConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -905,6 +912,18 @@ type MediaInsightsPipelineConfigurationSummary struct {
 
 	// The name of the media insights pipeline configuration.
 	MediaInsightsPipelineConfigurationName *string
+
+	noSmithyDocumentSerde
+}
+
+// The status of the pipeline element.
+type MediaInsightsPipelineElementStatus struct {
+
+	// The element's status.
+	Status MediaPipelineElementStatus
+
+	// The type of status.
+	Type MediaInsightsPipelineConfigurationElementType
 
 	noSmithyDocumentSerde
 }
@@ -1242,7 +1261,7 @@ type TranscriptionMessagesConcatenationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the configuration settings for a vertial layout.
+// Defines the configuration settings for a vertical layout.
 type VerticalLayoutConfiguration struct {
 
 	// Sets the aspect ratio of the video tiles, such as 16:9.
@@ -1311,6 +1330,16 @@ type VoiceAnalyticsProcessorConfiguration struct {
 
 	// The status of the voice tone analysis task.
 	VoiceToneAnalysisStatus VoiceAnalyticsConfigurationStatus
+
+	noSmithyDocumentSerde
+}
+
+// A static structure that contains the configuration data for a
+// VoiceEnhancementSinkConfiguration element.
+type VoiceEnhancementSinkConfiguration struct {
+
+	// Disables the VoiceEnhancementSinkConfiguration element.
+	Disabled bool
 
 	noSmithyDocumentSerde
 }

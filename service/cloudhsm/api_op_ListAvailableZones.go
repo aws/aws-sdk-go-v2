@@ -23,6 +23,8 @@ import (
 // , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Lists the Availability Zones that have available AWS CloudHSM capacity.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) ListAvailableZones(ctx context.Context, params *ListAvailableZonesInput, optFns ...func(*Options)) (*ListAvailableZonesOutput, error) {
 	if params == nil {
 		params = &ListAvailableZonesInput{}

@@ -655,7 +655,7 @@ type InputTransformer struct {
 	//     "InputPathsMap": {"instance": "$.detail.instance","status":
 	//     "$.detail.status"},
 	//
-	//     "InputTemplate": " is in state """
+	//     "InputTemplate": " is in state \"\""
 	// } The InputTemplate can also be valid JSON with varibles in quotes or out, as
 	// in the following example: "InputTransformer":
 	//     {
@@ -663,7 +663,7 @@ type InputTransformer struct {
 	//     "InputPathsMap": {"instance": "$.detail.instance","status":
 	//     "$.detail.status"},
 	//
-	//     "InputTemplate": '{"myInstance": ,"myStatus": " is in state """}'
+	//     "InputTemplate": '{"myInstance": ,"myStatus": " is in state \"\""}'
 	//
 	//     }
 	//

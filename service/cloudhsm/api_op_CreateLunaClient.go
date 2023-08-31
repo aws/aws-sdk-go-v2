@@ -23,6 +23,8 @@ import (
 // , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Creates an HSM client.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) CreateLunaClient(ctx context.Context, params *CreateLunaClientInput, optFns ...func(*Options)) (*CreateLunaClientOutput, error) {
 	if params == nil {
 		params = &CreateLunaClientInput{}

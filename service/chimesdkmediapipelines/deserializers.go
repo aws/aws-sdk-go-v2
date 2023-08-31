@@ -5705,6 +5705,11 @@ func awsRestjson1_deserializeDocumentMediaInsightsPipeline(v **types.MediaInsigh
 				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
+		case "ElementStatuses":
+			if err := awsRestjson1_deserializeDocumentMediaInsightsPipelineElementStatuses(&sv.ElementStatuses, value); err != nil {
+				return err
+			}
+
 		case "KinesisVideoStreamRecordingSourceRuntimeConfiguration":
 			if err := awsRestjson1_deserializeDocumentKinesisVideoStreamRecordingSourceRuntimeConfiguration(&sv.KinesisVideoStreamRecordingSourceRuntimeConfiguration, value); err != nil {
 				return err
@@ -5944,6 +5949,11 @@ func awsRestjson1_deserializeDocumentMediaInsightsPipelineConfigurationElement(v
 				return err
 			}
 
+		case "VoiceEnhancementSinkConfiguration":
+			if err := awsRestjson1_deserializeDocumentVoiceEnhancementSinkConfiguration(&sv.VoiceEnhancementSinkConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6069,6 +6079,89 @@ func awsRestjson1_deserializeDocumentMediaInsightsPipelineConfigurationSummaryLi
 		var col types.MediaInsightsPipelineConfigurationSummary
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentMediaInsightsPipelineConfigurationSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaInsightsPipelineElementStatus(v **types.MediaInsightsPipelineElementStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaInsightsPipelineElementStatus
+	if *v == nil {
+		sv = &types.MediaInsightsPipelineElementStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaPipelineElementStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.MediaPipelineElementStatus(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaInsightsPipelineConfigurationElementType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.MediaInsightsPipelineConfigurationElementType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaInsightsPipelineElementStatuses(v *[]types.MediaInsightsPipelineElementStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MediaInsightsPipelineElementStatus
+	if *v == nil {
+		cv = []types.MediaInsightsPipelineElementStatus{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MediaInsightsPipelineElementStatus
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMediaInsightsPipelineElementStatus(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -7999,6 +8092,46 @@ func awsRestjson1_deserializeDocumentVoiceAnalyticsProcessorConfiguration(v **ty
 					return fmt.Errorf("expected VoiceAnalyticsConfigurationStatus to be of type string, got %T instead", value)
 				}
 				sv.VoiceToneAnalysisStatus = types.VoiceAnalyticsConfigurationStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVoiceEnhancementSinkConfiguration(v **types.VoiceEnhancementSinkConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VoiceEnhancementSinkConfiguration
+	if *v == nil {
+		sv = &types.VoiceEnhancementSinkConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Disabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Disabled = jtv
 			}
 
 		default:

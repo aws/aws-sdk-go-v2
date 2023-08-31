@@ -1,0 +1,8 @@
+{
+    "id": "85135832-37a5-4fb7-a365-554649a6ab90",
+    "type": "feature",
+    "description": "This release adds support for an account-level setting that you can use to configure the number of days for AWS Fargate task retirement.",
+    "modules": [
+        "service/ecs"
+    ]
+}

@@ -20,21 +20,21 @@ import (
 // you change the root user account setting, the default settings are reset for
 // users and roles that do not have specified individual account settings. For more
 // information, see Account Settings (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html)
-// in the Amazon Elastic Container Service Developer Guide. When
-// serviceLongArnFormat , taskLongArnFormat , or containerInstanceLongArnFormat
-// are specified, the Amazon Resource Name (ARN) and resource ID format of the
-// resource type for a specified user, role, or the root user for an account is
-// affected. The opt-in and opt-out account setting must be set for each Amazon ECS
-// resource separately. The ARN and resource ID format of a resource is defined by
-// the opt-in status of the user or role that created the resource. You must turn
-// on this setting to use Amazon ECS features such as resource tagging. When
-// awsvpcTrunking is specified, the elastic network interface (ENI) limit for any
-// new container instances that support the feature is changed. If awsvpcTrunking
-// is turned on, any new container instances that support the feature are launched
-// have the increased ENI limits available to them. For more information, see
-// Elastic Network Interface Trunking (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html)
-// in the Amazon Elastic Container Service Developer Guide. When containerInsights
-// is specified, the default setting indicating whether Amazon Web Services
+// in the Amazon Elastic Container Service Developer Guide. When you specify
+// serviceLongArnFormat , taskLongArnFormat , or containerInstanceLongArnFormat ,
+// the Amazon Resource Name (ARN) and resource ID format of the resource type for a
+// specified user, role, or the root user for an account is affected. The opt-in
+// and opt-out account setting must be set for each Amazon ECS resource separately.
+// The ARN and resource ID format of a resource is defined by the opt-in status of
+// the user or role that created the resource. You must turn on this setting to use
+// Amazon ECS features such as resource tagging. When you specify awsvpcTrunking ,
+// the elastic network interface (ENI) limit for any new container instances that
+// support the feature is changed. If awsvpcTrunking is turned on, any new
+// container instances that support the feature are launched have the increased ENI
+// limits available to them. For more information, see Elastic Network Interface
+// Trunking (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html)
+// in the Amazon Elastic Container Service Developer Guide. When you specify
+// containerInsights , the default setting indicating whether Amazon Web Services
 // CloudWatch Container Insights is turned on for your clusters is changed. If
 // containerInsights is turned on, any new clusters that are created will have
 // Container Insights turned on unless you disable it during cluster creation. For
@@ -46,6 +46,12 @@ import (
 // additional authorization to verify if users or roles have permissions to create
 // tags. Therefore, you must grant explicit permissions to use the ecs:TagResource
 // action. For more information, see Grant permission to tag resources on creation (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html)
+// in the Amazon ECS Developer Guide. When Amazon Web Services determines that a
+// security or infrastructure update is needed for an Amazon ECS task hosted on
+// Fargate, the tasks need to be stopped and new tasks launched to replace them.
+// Use fargateTaskRetirementWaitPeriod to configure the wait time to retire a
+// Fargate task. For information about the Fargate tasks maintenance, see Amazon
+// Web Services Fargate task maintenance (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html)
 // in the Amazon ECS Developer Guide.
 func (c *Client) PutAccountSetting(ctx context.Context, params *PutAccountSettingInput, optFns ...func(*Options)) (*PutAccountSettingOutput, error) {
 	if params == nil {
@@ -64,25 +70,34 @@ func (c *Client) PutAccountSetting(ctx context.Context, params *PutAccountSettin
 
 type PutAccountSettingInput struct {
 
-	// The Amazon ECS resource name for which to modify the account setting. If
-	// serviceLongArnFormat is specified, the ARN for your Amazon ECS services is
-	// affected. If taskLongArnFormat is specified, the ARN and resource ID for your
-	// Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified,
-	// the ARN and resource ID for your Amazon ECS container instances is affected. If
-	// awsvpcTrunking is specified, the elastic network interface (ENI) limit for your
-	// Amazon ECS container instances is affected. If containerInsights is specified,
-	// the default setting for Amazon Web Services CloudWatch Container Insights for
-	// your clusters is affected. If fargateFIPSMode is specified, Fargate FIPS 140
-	// compliance is affected. If tagResourceAuthorization is specified, the opt-in
-	// option for tagging resources on creation is affected. For information about the
-	// opt-in timeline, see Tagging authorization timeline (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources)
-	// in the Amazon ECS Developer Guide.
+	// The Amazon ECS resource name for which to modify the account setting. If you
+	// specify serviceLongArnFormat , the ARN for your Amazon ECS services is affected.
+	// If you specify taskLongArnFormat , the ARN and resource ID for your Amazon ECS
+	// tasks is affected. If you specify containerInstanceLongArnFormat , the ARN and
+	// resource ID for your Amazon ECS container instances is affected. If you specify
+	// awsvpcTrunking , the elastic network interface (ENI) limit for your Amazon ECS
+	// container instances is affected. If you specify containerInsights , the default
+	// setting for Amazon Web Services CloudWatch Container Insights for your clusters
+	// is affected. If you specify fargateFIPSMode , Fargate FIPS 140 compliance is
+	// affected. If you specify tagResourceAuthorization , the opt-in option for
+	// tagging resources on creation is affected. For information about the opt-in
+	// timeline, see Tagging authorization timeline (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources)
+	// in the Amazon ECS Developer Guide. If you specify
+	// fargateTaskRetirementWaitPeriod , the wait time to retire a Fargate task is
+	// affected.
 	//
 	// This member is required.
 	Name types.SettingName
 
 	// The account setting value for the specified principal ARN. Accepted values are
-	// enabled , disabled , on , and off .
+	// enabled , disabled , on , and off . When you specify
+	// fargateTaskRetirementWaitPeriod for the name , the following are the valid
+	// values:
+	//   - 0 - immediately retire the tasks and patch Fargate There is no advanced
+	//   notification. Your tasks are retired immediately, and Fargate is patched without
+	//   any notification.
+	//   - 7 -wait 7 calendar days to retire the tasks and patch Fargate
+	//   - 14 - wait 14 calendar days to retire the tasks and patch Fargate
 	//
 	// This member is required.
 	Value *string
@@ -91,8 +106,9 @@ type PutAccountSettingInput struct {
 	// specify the root user, it modifies the account setting for all users, roles, and
 	// the root user of the account unless a user or role explicitly overrides these
 	// settings. If this field is omitted, the setting is changed only for the
-	// authenticated user. Federated users assume the account setting of the root user
-	// and can't have explicit account settings set for them.
+	// authenticated user. You must use the root user when you set the Fargate wait
+	// time ( fargateTaskRetirementWaitPeriod ). Federated users assume the account
+	// setting of the root user and can't have explicit account settings set for them.
 	PrincipalArn *string
 
 	noSmithyDocumentSerde

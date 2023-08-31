@@ -24,6 +24,8 @@ import (
 // , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
 // . Deletes an HSM. After completion, this operation cannot be undone and your key
 // material cannot be recovered.
+//
+// Deprecated: This API is deprecated.
 func (c *Client) DeleteHsm(ctx context.Context, params *DeleteHsmInput, optFns ...func(*Options)) (*DeleteHsmOutput, error) {
 	if params == nil {
 		params = &DeleteHsmInput{}

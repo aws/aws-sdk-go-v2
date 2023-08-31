@@ -70,6 +70,26 @@ func (m *validateOpDescribeAffectedEntities) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeEntityAggregatesForOrganization struct {
+}
+
+func (*validateOpDescribeEntityAggregatesForOrganization) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeEntityAggregatesForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeEntityAggregatesForOrganizationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeEntityAggregatesForOrganizationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeEventAggregates struct {
 }
 
@@ -142,6 +162,10 @@ func addOpDescribeAffectedEntitiesValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDescribeAffectedEntities{}, middleware.After)
 }
 
+func addOpDescribeEntityAggregatesForOrganizationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeEntityAggregatesForOrganization{}, middleware.After)
+}
+
 func addOpDescribeEventAggregatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEventAggregates{}, middleware.After)
 }
@@ -152,6 +176,21 @@ func addOpDescribeEventDetailsForOrganizationValidationMiddleware(stack *middlew
 
 func addOpDescribeEventDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEventDetails{}, middleware.After)
+}
+
+func validateEntityAccountFilter(v *types.EntityAccountFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntityAccountFilter"}
+	if v.EventArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateEntityFilter(v *types.EntityFilter) error {
@@ -176,6 +215,23 @@ func validateEventAccountFilter(v *types.EventAccountFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EventAccountFilter"}
 	if v.EventArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrganizationEntityAccountFiltersList(v []types.EntityAccountFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrganizationEntityAccountFiltersList"}
+	for i := range v {
+		if err := validateEntityAccountFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -238,11 +294,14 @@ func validateOpDescribeAffectedEntitiesForOrganizationInput(v *DescribeAffectedE
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAffectedEntitiesForOrganizationInput"}
-	if v.OrganizationEntityFilters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationEntityFilters"))
-	} else if v.OrganizationEntityFilters != nil {
+	if v.OrganizationEntityFilters != nil {
 		if err := validateOrganizationEntityFiltersList(v.OrganizationEntityFilters); err != nil {
 			invalidParams.AddNested("OrganizationEntityFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrganizationEntityAccountFilters != nil {
+		if err := validateOrganizationEntityAccountFiltersList(v.OrganizationEntityAccountFilters); err != nil {
+			invalidParams.AddNested("OrganizationEntityAccountFilters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -263,6 +322,21 @@ func validateOpDescribeAffectedEntitiesInput(v *DescribeAffectedEntitiesInput) e
 		if err := validateEntityFilter(v.Filter); err != nil {
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeEntityAggregatesForOrganizationInput(v *DescribeEntityAggregatesForOrganizationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeEntityAggregatesForOrganizationInput"}
+	if v.EventArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

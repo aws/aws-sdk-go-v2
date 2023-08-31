@@ -3404,6 +3404,71 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAgentlessDialerConfig(v **types.AgentlessDialerConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AgentlessDialerConfig
+	if *v == nil {
+		sv = &types.AgentlessDialerConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dialingCapacity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DialingCapacity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DialingCapacity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected DialingCapacity to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAnswerMachineDetectionConfig(v **types.AnswerMachineDetectionConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3696,6 +3761,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "agentlessDialerConfig":
+			var mv types.AgentlessDialerConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAgentlessDialerConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DialerConfigMemberAgentlessDialerConfig{Value: mv}
+			break loop
+
 		case "predictiveDialerConfig":
 			var mv types.PredictiveDialerConfig
 			destAddr := &mv
@@ -4346,6 +4421,40 @@ func awsRestjson1_deserializeDocumentPredictiveDialerConfig(v **types.Predictive
 				}
 			}
 
+		case "dialingCapacity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DialingCapacity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DialingCapacity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected DialingCapacity to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4407,6 +4516,40 @@ func awsRestjson1_deserializeDocumentProgressiveDialerConfig(v **types.Progressi
 
 				default:
 					return fmt.Errorf("expected BandwidthAllocation to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "dialingCapacity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DialingCapacity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DialingCapacity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected DialingCapacity to be a JSON Number, got %T instead", value)
 
 				}
 			}

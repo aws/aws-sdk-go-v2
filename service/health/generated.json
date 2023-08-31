@@ -13,6 +13,7 @@
         "api_op_DescribeAffectedEntities.go",
         "api_op_DescribeAffectedEntitiesForOrganization.go",
         "api_op_DescribeEntityAggregates.go",
+        "api_op_DescribeEntityAggregatesForOrganization.go",
         "api_op_DescribeEventAggregates.go",
         "api_op_DescribeEventDetails.go",
         "api_op_DescribeEventDetailsForOrganization.go",
