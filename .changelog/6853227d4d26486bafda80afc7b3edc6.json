@@ -1,8 +1,0 @@
-{
-    "id": "6853227d-4d26-486b-afda-80afc7b3edc6",
-    "type": "feature",
-    "description": "Deprecating CloudHSM Classic API Service.",
-    "modules": [
-        "service/cloudhsm"
-    ]
-}

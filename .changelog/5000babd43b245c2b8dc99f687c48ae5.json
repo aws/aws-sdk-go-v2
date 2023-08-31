@@ -1,8 +1,0 @@
-{
-    "id": "5000babd-43b2-45c2-b8dc-99f687c48ae5",
-    "type": "feature",
-    "description": "Make KeyCheckValue field optional when using asymmetric keys as Key Check Values typically only apply to symmetric keys",
-    "modules": [
-        "service/paymentcryptographydata"
-    ]
-}

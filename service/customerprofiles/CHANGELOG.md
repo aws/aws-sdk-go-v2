@@ -1,3 +1,7 @@
+# v1.28.0 (2023-08-31)
+
+* **Feature**: Adds sensitive trait to various shapes in Customer Profiles API model.
+
 # v1.27.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

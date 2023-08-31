@@ -1,8 +1,0 @@
-{
-    "id": "82f3d6a2-d869-4c0b-8fbf-8470cc6864cc",
-    "type": "feature",
-    "description": "Updated \"type\" description for CreateChannel, UpdateChannel, Channel, and ChannelSummary.",
-    "modules": [
-        "service/ivs"
-    ]
-}

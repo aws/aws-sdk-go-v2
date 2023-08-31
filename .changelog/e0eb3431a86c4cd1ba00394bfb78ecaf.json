@@ -1,8 +1,0 @@
-{
-    "id": "e0eb3431-a86c-4cd1-ba00-394bfb78ecaf",
-    "type": "feature",
-    "description": "Adds new API DescribeEntityAggregatesForOrganization that retrieves entity aggregates across your organization. Also adds support for resource status filtering in DescribeAffectedEntitiesForOrganization, resource status aggregates in the DescribeEntityAggregates response, and new resource statuses.",
-    "modules": [
-        "service/health"
-    ]
-}

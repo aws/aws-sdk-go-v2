@@ -1,3 +1,7 @@
+# v1.7.0 (2023-08-31)
+
+* **Feature**: This release adds support for feature Voice Enhancement for Call Recording as part of Amazon Chime SDK call analytics.
+
 # v1.6.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

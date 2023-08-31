@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.21.0
-	github.com/aws/aws-sdk-go-v2/config v1.18.37
+	github.com/aws/aws-sdk-go-v2/config v1.18.38
 	github.com/aws/aws-sdk-go-v2/service/acm v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.22.5
@@ -22,7 +22,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.14.5
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.26.0
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.36.3
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.30.4
@@ -33,7 +33,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.115.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.19.5
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.29.6
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.6
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.29.3
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.16.5
@@ -47,7 +47,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/glue v1.62.0
-	github.com/aws/aws-sdk-go-v2/service/health v1.18.5
+	github.com/aws/aws-sdk-go-v2/service/health v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/iam v1.22.5
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/iot v1.39.5

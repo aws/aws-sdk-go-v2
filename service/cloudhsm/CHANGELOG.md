@@ -1,3 +1,7 @@
+# v1.15.0 (2023-08-31)
+
+* **Feature**: Deprecating CloudHSM Classic API Service.
+
 # v1.14.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

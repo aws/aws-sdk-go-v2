@@ -1,3 +1,7 @@
+# v1.30.0 (2023-08-31)
+
+* **Feature**: This release adds support for an account-level setting that you can use to configure the number of days for AWS Fargate task retirement.
+
 # v1.29.6 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

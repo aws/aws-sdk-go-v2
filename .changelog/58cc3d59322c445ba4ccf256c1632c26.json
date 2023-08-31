@@ -1,8 +1,0 @@
-{
-    "id": "58cc3d59-322c-445b-a4cc-f256c1632c26",
-    "type": "feature",
-    "description": "Marking SAML RoleValues attribute as sensitive and updating VpcConfiguration attributes to match documentation.",
-    "modules": [
-        "service/grafana"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.17.0 (2023-08-31)
+
+* **Feature**: Documentation updates for CloudWatch Events.
+
 # v1.16.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

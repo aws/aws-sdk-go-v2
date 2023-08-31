@@ -1,3 +1,7 @@
+# v1.21.0 (2023-08-31)
+
+* **Feature**: This release adds a new InvokeEndpointWithResponseStream API to support streaming of model responses.
+
 # v1.20.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

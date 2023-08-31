@@ -1,3 +1,7 @@
+# v1.26.1 (2023-08-31)
+
+* No change notes available for this release.
+
 # v1.26.0 (2023-08-29)
 
 * **Feature**: Added API example requests and responses for several operations. Fixed the validation regex for user pools Identity Provider name.

@@ -1,3 +1,7 @@
+# v1.2.0 (2023-08-31)
+
+* **Feature**: Make KeyCheckValue field optional when using asymmetric keys as Key Check Values typically only apply to symmetric keys
+
 # v1.1.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

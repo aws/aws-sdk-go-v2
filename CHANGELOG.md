@@ -1,3 +1,34 @@
+# Release (2023-08-31)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.7.0](service/chimesdkmediapipelines/CHANGELOG.md#v170-2023-08-31)
+  * **Feature**: This release adds support for feature Voice Enhancement for Call Recording as part of Amazon Chime SDK call analytics.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsm`: [v1.15.0](service/cloudhsm/CHANGELOG.md#v1150-2023-08-31)
+  * **Feature**: Deprecating CloudHSM Classic API Service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.17.0](service/cloudwatchevents/CHANGELOG.md#v1170-2023-08-31)
+  * **Feature**: Documentation updates for CloudWatch Events.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.4.0](service/connectcampaigns/CHANGELOG.md#v140-2023-08-31)
+  * **Feature**: Amazon Connect outbound campaigns has launched agentless dialing mode which enables customers to make automated outbound calls without agent engagement. This release updates three of the campaign management API's to support the new agentless dialing mode and the new dialing capacity field.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.17.0](service/connectparticipant/CHANGELOG.md#v1170-2023-08-31)
+  * **Feature**: Amazon Connect Participant Service adds the ability to get a view resource using a view token, which is provided in a participant message, with the release of the DescribeView API.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.28.0](service/customerprofiles/CHANGELOG.md#v1280-2023-08-31)
+  * **Feature**: Adds sensitive trait to various shapes in Customer Profiles API model.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.30.0](service/ecs/CHANGELOG.md#v1300-2023-08-31)
+  * **Feature**: This release adds support for an account-level setting that you can use to configure the number of days for AWS Fargate task retirement.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.19.0](service/health/CHANGELOG.md#v1190-2023-08-31)
+  * **Feature**: Adds new API DescribeEntityAggregatesForOrganization that retrieves entity aggregates across your organization. Also adds support for resource status filtering in DescribeAffectedEntitiesForOrganization, resource status aggregates in the DescribeEntityAggregates response, and new resource statuses.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.26.0](service/ivs/CHANGELOG.md#v1260-2023-08-31)
+  * **Feature**: Updated "type" description for CreateChannel, UpdateChannel, Channel, and ChannelSummary.
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.11.0](service/kafkaconnect/CHANGELOG.md#v1110-2023-08-31)
+  * **Feature**: Minor model changes for Kafka Connect as well as endpoint updates.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.2.0](service/paymentcryptographydata/CHANGELOG.md#v120-2023-08-31)
+  * **Feature**: Make KeyCheckValue field optional when using asymmetric keys as Key Check Values typically only apply to symmetric keys
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.21.0](service/sagemakerruntime/CHANGELOG.md#v1210-2023-08-31)
+  * **Feature**: This release adds a new InvokeEndpointWithResponseStream API to support streaming of model responses.
+
 # Release (2023-08-30)
 
 ## Module Highlights
