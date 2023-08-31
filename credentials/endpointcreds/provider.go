@@ -163,23 +163,30 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 }
 
 func (p *Provider) getCredentials(ctx context.Context) (*client.GetCredentialsOutput, error) {
+	authToken, err := p.resolveAuthToken()
+	if err != nil {
+		return nil, fmt.Errorf("resolve auth token: %v", err)
+	}
+
+	return p.client.GetCredentials(ctx, &client.GetCredentialsInput{
+		AuthorizationToken: authToken,
+	})
+}
+
+func (p *Provider) resolveAuthToken() (string, error) {
 	authToken := p.options.AuthorizationToken
 
 	var err error
 	if p.options.AuthorizationTokenProvider != nil {
 		authToken, err = p.options.AuthorizationTokenProvider.GetToken()
 		if err != nil {
-			return nil, fmt.Errorf("get authorization token: %v", err)
+			return "", err
 		}
 	}
 
 	if strings.ContainsAny(authToken, "\r\n") {
-		return nil, fmt.Errorf("authorization token contains invalid newline sequence")
+		return "", fmt.Errorf("authorization token contains invalid newline sequence")
 	}
 
-	input := &client.GetCredentialsInput{}
-	if authToken != "" {
-		input.AuthorizationToken = authToken
-	}
-	return p.client.GetCredentials(ctx, input)
+	return authToken, nil
 }
