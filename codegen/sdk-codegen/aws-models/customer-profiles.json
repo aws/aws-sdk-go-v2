@@ -220,7 +220,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A generic address associated with the customer that is not mailing, shipping, or\n         billing.</p>"
+                "smithy.api#documentation": "<p>A generic address associated with the customer that is not mailing, shipping, or\n         billing.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#AddressList": {
@@ -399,7 +400,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that expression.</p>"
+                "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that expression.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#AttributeItem": {
@@ -495,6 +497,9 @@
             },
             "value": {
                 "target": "com.amazonaws.customerprofiles#string1To255"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#AutoMerging": {
@@ -626,7 +631,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#ConflictResolution": {
@@ -1285,13 +1291,13 @@
                     }
                 },
                 "AccountNumber": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique account number that you have given to the customer.</p>"
                     }
                 },
                 "AdditionalInformation": {
-                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To1000",
                     "traits": {
                         "smithy.api#documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
                     }
@@ -1303,31 +1309,31 @@
                     }
                 },
                 "BusinessName": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the customer’s business.</p>"
                     }
                 },
                 "FirstName": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s first name.</p>"
                     }
                 },
                 "MiddleName": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s middle name.</p>"
                     }
                 },
                 "LastName": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s last name.</p>"
                     }
                 },
                 "BirthDate": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s birth date. </p>"
                     }
@@ -1339,43 +1345,43 @@
                     }
                 },
                 "PhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s phone number, which has not been specified as a mobile, home, or business\n         number. </p>"
                     }
                 },
                 "MobilePhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s mobile phone number.</p>"
                     }
                 },
                 "HomePhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s home phone number.</p>"
                     }
                 },
                 "BusinessPhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s business phone number.</p>"
                     }
                 },
                 "EmailAddress": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s email address, which has not been specified as a personal or business\n         address. </p>"
                     }
                 },
                 "PersonalEmailAddress": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s personal email address.</p>"
                     }
                 },
                 "BusinessEmailAddress": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s business email address.</p>"
                     }
@@ -1411,13 +1417,13 @@
                     }
                 },
                 "PartyTypeString": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>An alternative to <code>PartyType</code> which accepts any string as input.</p>"
                     }
                 },
                 "GenderString": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>An alternative to <code>Gender</code> which accepts any string as input.</p>"
                     }
@@ -1674,9 +1680,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://profile-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://profile-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -1689,15 +1874,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://profile.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://profile.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -1709,258 +1929,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://profile-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://profile-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://profile.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://profile.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -3376,6 +3346,9 @@
             },
             "value": {
                 "target": "com.amazonaws.customerprofiles#ObjectTypeField"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#FieldNameList": {
@@ -3564,7 +3537,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configurations that control how Customer Profiles retrieves data from the source,\n         Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of\n         customers.</p>"
+                "smithy.api#documentation": "<p>The configurations that control how Customer Profiles retrieves data from the source,\n         Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of\n         customers.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#FlowDescription": {
@@ -3630,7 +3604,8 @@
                 }
             },
             "traits": {
-                "smithy.api#deprecated": {}
+                "smithy.api#deprecated": {},
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#GetAutoMergingPreview": {
@@ -4611,7 +4586,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.customerprofiles#text",
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the profile object type.</p>",
                         "smithy.api#required": {}
@@ -5402,6 +5377,9 @@
             },
             "value": {
                 "target": "com.amazonaws.customerprofiles#ObjectTypeKeyList"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#KmsArn": {
@@ -7495,7 +7473,8 @@
                 }
             },
             "traits": {
-                "smithy.api#deprecated": {}
+                "smithy.api#deprecated": {},
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#PhoneNumberList": {
@@ -7520,13 +7499,13 @@
                     }
                 },
                 "AccountNumber": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique account number that you have given to the customer.</p>"
                     }
                 },
                 "AdditionalInformation": {
-                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To1000",
                     "traits": {
                         "smithy.api#documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
                     }
@@ -7538,31 +7517,31 @@
                     }
                 },
                 "BusinessName": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the customer’s business.</p>"
                     }
                 },
                 "FirstName": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s first name.</p>"
                     }
                 },
                 "MiddleName": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s middle name.</p>"
                     }
                 },
                 "LastName": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s last name.</p>"
                     }
                 },
                 "BirthDate": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s birth date. </p>"
                     }
@@ -7574,43 +7553,43 @@
                     }
                 },
                 "PhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business\n         number.</p>"
                     }
                 },
                 "MobilePhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s mobile phone number.</p>"
                     }
                 },
                 "HomePhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s home phone number.</p>"
                     }
                 },
                 "BusinessPhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s home phone number.</p>"
                     }
                 },
                 "EmailAddress": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s email address, which has not been specified as a personal or business\n         address. </p>"
                     }
                 },
                 "PersonalEmailAddress": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s personal email address.</p>"
                     }
                 },
                 "BusinessEmailAddress": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s business email address.</p>"
                     }
@@ -7652,13 +7631,13 @@
                     }
                 },
                 "PartyTypeString": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>An alternative to PartyType which accepts any string as input.</p>"
                     }
                 },
                 "GenderString": {
-                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>An alternative to Gender which accepts any string as input.</p>"
                     }
@@ -7702,6 +7681,9 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#ListProfileObjectTypeItem"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#ProfileObjectTypeTemplateList": {
@@ -7998,7 +7980,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.customerprofiles#text",
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
                     "traits": {
                         "smithy.api#documentation": "<p>Description of the profile object type.</p>",
                         "smithy.api#required": {}
@@ -8069,7 +8051,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.customerprofiles#text",
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
                     "traits": {
                         "smithy.api#documentation": "<p>Description of the profile object type.</p>",
                         "smithy.api#required": {}
@@ -9212,6 +9194,9 @@
                         "smithy.api#enumValue": "MAX_OCCURRENCE"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#Status": {
@@ -9715,7 +9700,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates associated with the address properties of a customer profile.</p>"
+                "smithy.api#documentation": "<p>Updates associated with the address properties of a customer profile.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#UpdateAttributes": {
@@ -9725,6 +9711,9 @@
             },
             "value": {
                 "target": "com.amazonaws.customerprofiles#string0To255"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#UpdateCalculatedAttributeDefinition": {
@@ -10069,13 +10058,13 @@
                     }
                 },
                 "AdditionalInformation": {
-                    "target": "com.amazonaws.customerprofiles#string0To1000",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To1000",
                     "traits": {
                         "smithy.api#documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
                     }
                 },
                 "AccountNumber": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique account number that you have given to the customer.</p>"
                     }
@@ -10087,31 +10076,31 @@
                     }
                 },
                 "BusinessName": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the customer’s business.</p>"
                     }
                 },
                 "FirstName": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s first name.</p>"
                     }
                 },
                 "MiddleName": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s middle name.</p>"
                     }
                 },
                 "LastName": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s last name.</p>"
                     }
                 },
                 "BirthDate": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s birth date. </p>"
                     }
@@ -10123,43 +10112,43 @@
                     }
                 },
                 "PhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s phone number, which has not been specified as a mobile, home, or business\n         number. </p>"
                     }
                 },
                 "MobilePhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s mobile phone number.</p>"
                     }
                 },
                 "HomePhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s home phone number.</p>"
                     }
                 },
                 "BusinessPhoneNumber": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s business phone number.</p>"
                     }
                 },
                 "EmailAddress": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s email address, which has not been specified as a personal or business\n         address. </p>"
                     }
                 },
                 "PersonalEmailAddress": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s personal email address.</p>"
                     }
                 },
                 "BusinessEmailAddress": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer’s business email address.</p>"
                     }
@@ -10195,13 +10184,13 @@
                     }
                 },
                 "PartyTypeString": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>An alternative to <code>PartyType</code> which accepts any string as input.</p>"
                     }
                 },
                 "GenderString": {
-                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
                         "smithy.api#documentation": "<p>An alternative to <code>Gender</code> which accepts any string as input.</p>"
                     }
@@ -10565,21 +10554,62 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.customerprofiles#sensitiveString0To1000": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#sensitiveString0To255": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#sensitiveString1To1000": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#sensitiveString1To255": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#sensitiveText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.customerprofiles#sqsQueueUrl": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
-                }
-            }
-        },
-        "com.amazonaws.customerprofiles#string0To1000": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 1000
                 }
             }
         },
@@ -10626,7 +10656,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256000
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#text": {

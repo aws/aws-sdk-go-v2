@@ -46,6 +46,9 @@
                     "target": "com.amazonaws.health#DescribeEntityAggregates"
                 },
                 {
+                    "target": "com.amazonaws.health#DescribeEntityAggregatesForOrganization"
+                },
+                {
                     "target": "com.amazonaws.health#DescribeEventAggregates"
                 },
                 {
@@ -147,9 +150,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://health-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://health-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -162,15 +344,104 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://health.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "aws-global"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://global.health.amazonaws.com",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingName": "health",
+                                                            "signingRegion": "us-east-1"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "aws-cn-global"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://global.health.amazonaws.com.cn",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingName": "health",
+                                                            "signingRegion": "cn-northwest-1"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://health.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -182,312 +453,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://health-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://health-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://health.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "aws-global"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://global.health.amazonaws.com",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "health",
-                                                                            "signingRegion": "us-east-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "aws-cn-global"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://global.health.amazonaws.com.cn",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "health",
-                                                                            "signingRegion": "cn-northwest-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://health.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -851,6 +818,39 @@
                 }
             }
         },
+        "com.amazonaws.health#AccountEntityAggregate": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.health#eventArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"
+                    }
+                },
+                "count": {
+                    "target": "com.amazonaws.health#count",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of entities that match the filter criteria for the specified events.</p>"
+                    }
+                },
+                "statuses": {
+                    "target": "com.amazonaws.health#entityStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of affected entities aggregated by the entity status codes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of entities in an account that are impacted by a specific event aggregated by the entity status codes.</p>"
+            }
+        },
+        "com.amazonaws.health#AccountEntityAggregatesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#AccountEntityAggregate"
+            }
+        },
         "com.amazonaws.health#AffectedEntity": {
             "type": "structure",
             "members": {
@@ -1082,8 +1082,10 @@
                 "organizationEntityFilters": {
                     "target": "com.amazonaws.health#OrganizationEntityFiltersList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON set of elements including the <code>awsAccountId</code> and the\n            <code>eventArn</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "This property is deprecated, use organizationEntityAccountFilters instead."
+                        },
+                        "smithy.api#documentation": "<p>A JSON set of elements including the <code>awsAccountId</code> and the\n            <code>eventArn</code>.</p>"
                     }
                 },
                 "locale": {
@@ -1102,6 +1104,12 @@
                     "target": "com.amazonaws.health#maxResultsLowerRange",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
+                    }
+                },
+                "organizationEntityAccountFilters": {
+                    "target": "com.amazonaws.health#OrganizationEntityAccountFiltersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON set of elements including the <code>awsAccountId</code>, <code>eventArn</code> and a set of <code>statusCodes</code>.</p>"
                     }
                 }
             },
@@ -1199,6 +1207,54 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns the number of entities that are affected by each of the specified events.</p>",
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.health#DescribeEntityAggregatesForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.health#DescribeEntityAggregatesForOrganizationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.health#DescribeEntityAggregatesForOrganizationResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of entity aggregates for your Organizations that are affected by each of the specified events.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.health#DescribeEntityAggregatesForOrganizationRequest": {
+            "type": "structure",
+            "members": {
+                "eventArns": {
+                    "target": "com.amazonaws.health#OrganizationEventArnsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of event ARNs (unique identifiers). For example: <code>\"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456\", \"arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101\"</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awsAccountIds": {
+                    "target": "com.amazonaws.health#OrganizationAccountIdsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.health#DescribeEntityAggregatesForOrganizationResponse": {
+            "type": "structure",
+            "members": {
+                "organizationEntityAggregates": {
+                    "target": "com.amazonaws.health#OrganizationEntityAggregatesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of entity aggregates for each of the specified accounts that are affected by each of the specified events.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.health#DescribeEntityAggregatesRequest": {
@@ -1748,6 +1804,33 @@
                 "smithy.api#idempotent": {}
             }
         },
+        "com.amazonaws.health#EntityAccountFilter": {
+            "type": "structure",
+            "members": {
+                "eventArn": {
+                    "target": "com.amazonaws.health#eventArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the event. The event ARN has the\n<code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>\n            </code>\nformat.</p>\n         <p>For example, an event ARN might look like the following:</p>\n         <p>\n            <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awsAccountId": {
+                    "target": "com.amazonaws.health#accountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"
+                    }
+                },
+                "statusCodes": {
+                    "target": "com.amazonaws.health#entityStatusCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entity status codes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A JSON set of elements including the <code>awsAccountId</code>, <code>eventArn</code> and a set of <code>statusCodes</code>.</p>"
+            }
+        },
         "com.amazonaws.health#EntityAggregate": {
             "type": "structure",
             "members": {
@@ -1762,6 +1845,12 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of entities that match the criteria for the specified events.</p>"
+                    }
+                },
+                "statuses": {
+                    "target": "com.amazonaws.health#entityStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of affected entities aggregated by the entity status codes.</p>"
                     }
                 }
             },
@@ -2225,6 +2314,18 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.health#OrganizationAccountIdsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#accountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.health#OrganizationAffectedEntitiesErrorItem": {
             "type": "structure",
             "members": {
@@ -2255,6 +2356,57 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Error information returned when a <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html\">DescribeAffectedEntitiesForOrganization</a> operation can't find or process a\n         specific entity.</p>"
+            }
+        },
+        "com.amazonaws.health#OrganizationEntityAccountFiltersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#EntityAccountFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.health#OrganizationEntityAggregate": {
+            "type": "structure",
+            "members": {
+                "eventArn": {
+                    "target": "com.amazonaws.health#eventArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of event ARNs (unique identifiers). For example: <code>\"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456\", \"arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101\"</code>\n         </p>"
+                    }
+                },
+                "count": {
+                    "target": "com.amazonaws.health#count",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of entities for the organization that match the filter criteria for the specified events.</p>"
+                    }
+                },
+                "statuses": {
+                    "target": "com.amazonaws.health#entityStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of affected entities aggregated by the entitiy status codes.</p>"
+                    }
+                },
+                "accounts": {
+                    "target": "com.amazonaws.health#AccountEntityAggregatesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entity aggregates for each of the specified accounts in your organization that are affected by\n         a specific event. If there are no <code>awsAccountIds</code> provided in the request, this field will be empty in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The aggregate results of entities affected by the specified event in your organization.\n         The results are aggregated by the entity status codes for the specified set of accountsIDs.</p>"
+            }
+        },
+        "com.amazonaws.health#OrganizationEntityAggregatesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#OrganizationEntityAggregate"
             }
         },
         "com.amazonaws.health#OrganizationEntityFiltersList": {
@@ -2335,6 +2487,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Summary information about an event, returned by the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html\">DescribeEventsForOrganization</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.health#OrganizationEventArnsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#eventArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.health#OrganizationEventDetailFiltersList": {
@@ -2597,6 +2761,18 @@
                     "traits": {
                         "smithy.api#enumValue": "UNKNOWN"
                     }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "RESOLVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOLVED"
+                    }
                 }
             }
         },
@@ -2608,8 +2784,17 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 3
+                    "max": 5
                 }
+            }
+        },
+        "com.amazonaws.health#entityStatuses": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.health#entityStatusCode"
+            },
+            "value": {
+                "target": "com.amazonaws.health#count"
             }
         },
         "com.amazonaws.health#entityUrl": {
