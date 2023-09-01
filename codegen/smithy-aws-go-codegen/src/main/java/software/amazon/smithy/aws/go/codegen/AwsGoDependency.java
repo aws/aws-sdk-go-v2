@@ -39,7 +39,7 @@ public class AwsGoDependency {
     public static final GoDependency SERVICE_INTERNAL_EVENTSTREAMAPI = awsModuleDep("aws/protocol/eventstream",
             "eventstreamapi", Versions.AWS_PROTOCOL_EVENTSTREAM, "eventstreamapi");
 
-    public static final GoDependency AWS_ENDPOINT_RULESFN = aws("internal/endpoints/awsrulesfn");
+    public static final GoDependency AWS_ENDPOINT_RULESFN = awsModuleDep("internal/endpoints/awsrulesfn", null, Versions.INTERNAL_AWSRULESFN, "awsrulesfn");
     public static final GoDependency INTERNAL_ENDPOINTS = aws("internal/endpoints");
     public static final GoDependency INTERNAL_AUTH = aws("internal/auth", "internalauth");
 
@@ -112,5 +112,6 @@ public class AwsGoDependency {
         private static final String AWS_PROTOCOL_EVENTSTREAM = "v0.0.0-00010101000000-000000000000";
         private static final String SERVICE_INTERNAL_CHECKSUM = "v0.0.0-00010101000000-000000000000";
         private static final String INTERNAL_SIGV4A = "v0.0.0-00010101000000-000000000000";
+        private static final String INTERNAL_AWSRULESFN = "v0.0.0-00010101000000-000000000000";
     }
 }
