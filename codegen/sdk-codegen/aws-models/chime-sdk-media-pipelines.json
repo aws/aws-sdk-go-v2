@@ -778,6 +778,12 @@
                     "target": "com.amazonaws.chimesdkmediapipelines#GetMediaPipeline"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GetSpeakerSearchTask"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GetVoiceToneAnalysisTask"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmediapipelines#ListMediaCapturePipelines"
                 },
                 {
@@ -788,6 +794,18 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkmediapipelines#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#StartSpeakerSearchTask"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#StartVoiceToneAnalysisTask"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#StopSpeakerSearchTask"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#StopVoiceToneAnalysisTask"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmediapipelines#TagResource"
@@ -2490,6 +2508,9 @@
                     "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
                 },
                 {
@@ -2639,7 +2660,7 @@
                 "FragmentSelectorType": {
                     "target": "com.amazonaws.chimesdkmediapipelines#FragmentSelectorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origin of the timestamps to use, <code>Server</code> or <code>Producer</code>. For more information, see \n         <a href=\"kinesisvideostreams/latest/dg/API_dataplane_StartSelector.html#KinesisVideo-Type-dataplane_StartSelector-StartSelectorType\">StartSelectorType</a> in the <i>Amazon Kinesis Video Streams Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The origin of the timestamps to use, <code>Server</code> or <code>Producer</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_StartSelector.html\">StartSelectorType</a> in the <i>Amazon Kinesis Video Streams Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2875,6 +2896,162 @@
                     "target": "com.amazonaws.chimesdkmediapipelines#MediaPipeline",
                     "traits": {
                         "smithy.api#documentation": "<p>The media pipeline object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#GetSpeakerSearchTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#GetSpeakerSearchTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmediapipelines#GetSpeakerSearchTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of the specified speaker search task.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/media-insights-pipelines/{Identifier}/speaker-search-tasks/{SpeakerSearchTaskId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#GetSpeakerSearchTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpeakerSearchTaskId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the speaker search task.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#GetSpeakerSearchTaskResponse": {
+            "type": "structure",
+            "members": {
+                "SpeakerSearchTask": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#SpeakerSearchTask",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the speaker search task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#GetVoiceToneAnalysisTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#GetVoiceToneAnalysisTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmediapipelines#GetVoiceToneAnalysisTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a voice tone analysis task.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/media-insights-pipelines/{Identifier}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#GetVoiceToneAnalysisTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VoiceToneAnalysisTaskId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the voice tone anlysis task.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#GetVoiceToneAnalysisTaskResponse": {
+            "type": "structure",
+            "members": {
+                "VoiceToneAnalysisTask": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#VoiceToneAnalysisTask",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the voice tone analysis task.</p>"
                     }
                 }
             },
@@ -3178,6 +3355,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The runtime configuration settings for the Kinesis video stream source.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#KinesisVideoStreamSourceTaskConfiguration": {
+            "type": "structure",
+            "members": {
+                "StreamArn": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#KinesisVideoStreamArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ChannelId",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The channel ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FragmentNumber": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#FragmentNumberString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the fragment to begin processing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The task configuration settings for the Kinesis video stream source.</p>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#LambdaFunctionSinkConfiguration": {
@@ -4042,7 +4248,7 @@
                 "VoiceEnhancementSinkConfiguration": {
                     "target": "com.amazonaws.chimesdkmediapipelines#VoiceEnhancementSinkConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for the <code>VoiceEnhancementSinkConfiguration</code> element.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings for voice enhancement sink in a media insights pipeline configuration element.</p>"
                     }
                 }
             },
@@ -4440,6 +4646,47 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The summary of the media pipeline.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#MediaPipelineTaskStatus": {
+            "type": "enum",
+            "members": {
+                "NotStarted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotStarted"
+                    }
+                },
+                "Initializing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Initializing"
+                    }
+                },
+                "InProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Stopping": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopping"
+                    }
+                },
+                "Stopped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                }
             }
         },
         "com.amazonaws.chimesdkmediapipelines#MediaSampleRateHertz": {
@@ -5044,6 +5291,38 @@
                 "smithy.api#documentation": "<p>Source configuration for a specified media pipeline.</p>"
             }
         },
+        "com.amazonaws.chimesdkmediapipelines#SpeakerSearchTask": {
+            "type": "structure",
+            "members": {
+                "SpeakerSearchTaskId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker search task ID.</p>"
+                    }
+                },
+                "SpeakerSearchTaskStatus": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#MediaPipelineTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the speaker search task.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which a speaker search task was created.</p>"
+                    }
+                },
+                "UpdatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which a speaker search task was updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A representation of an asynchronous request to perform speaker search analysis on a\n         media insights pipeline.</p>"
+            }
+        },
         "com.amazonaws.chimesdkmediapipelines#SqsQueueSinkConfiguration": {
             "type": "structure",
             "members": {
@@ -5056,6 +5335,326 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration settings for the SQS sink.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#StartSpeakerSearchTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#StartSpeakerSearchTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmediapipelines#StartSpeakerSearchTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a speaker search task.</p>\n         <important>\n            <p>Before starting any speaker search tasks, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the\n         <a href=\"https://aws.amazon.com/service-terms/\">AWS service terms</a> for the Amazon Chime SDK.</p>\n         </important>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/media-insights-pipelines/{Identifier}/speaker-search-tasks?operation=start",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#StartSpeakerSearchTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VoiceProfileDomainArn": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the voice profile domain that will store the voice profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KinesisVideoStreamSourceTaskConfiguration": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#KinesisVideoStreamSourceTaskConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task configuration for the Kinesis video stream source of the media insights\n         pipeline.</p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the client request. Use a different token for different speaker search tasks.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#StartSpeakerSearchTaskResponse": {
+            "type": "structure",
+            "members": {
+                "SpeakerSearchTask": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#SpeakerSearchTask",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the speaker search task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#StartVoiceToneAnalysisTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#StartVoiceToneAnalysisTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmediapipelines#StartVoiceToneAnalysisTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a voice tone analysis task. For more information about voice tone analysis, see\n         <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/dg/voice-analytics.html\">Using Amazon Chime SDK voice analytics</a>\n         in the <i>Amazon Chime SDK Developer Guide</i>.</p>\n         <important>\n            <p>Before starting any voice tone analysis tasks, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the\n         <a href=\"https://aws.amazon.com/service-terms/\">AWS service terms</a> for the Amazon Chime SDK.</p>\n         </important>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/media-insights-pipelines/{Identifier}/voice-tone-analysis-tasks?operation=start",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#StartVoiceToneAnalysisTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#VoiceAnalyticsLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KinesisVideoStreamSourceTaskConfiguration": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#KinesisVideoStreamSourceTaskConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task configuration for the Kinesis video stream source of the media insights\n         pipeline.</p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the client request. Use a different token for different voice tone analysis tasks.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#StartVoiceToneAnalysisTaskResponse": {
+            "type": "structure",
+            "members": {
+                "VoiceToneAnalysisTask": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#VoiceToneAnalysisTask",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the voice tone analysis task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#StopSpeakerSearchTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#StopSpeakerSearchTaskRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a speaker search task.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/media-insights-pipelines/{Identifier}/speaker-search-tasks/{SpeakerSearchTaskId}?operation=stop",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#StopSpeakerSearchTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpeakerSearchTaskId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker search task ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#StopVoiceToneAnalysisTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#StopVoiceToneAnalysisTaskRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a voice tone analysis task.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/media-insights-pipelines/{Identifier}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}?operation=stop",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#StopVoiceToneAnalysisTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VoiceToneAnalysisTaskId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the voice tone analysis task.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.chimesdkmediapipelines#StreamChannelDefinition": {
@@ -5814,6 +6413,17 @@
                 }
             }
         },
+        "com.amazonaws.chimesdkmediapipelines#VoiceAnalyticsLanguageCode": {
+            "type": "enum",
+            "members": {
+                "EN_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-US"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmediapipelines#VoiceAnalyticsProcessorConfiguration": {
             "type": "structure",
             "members": {
@@ -5847,6 +6457,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A static structure that contains the configuration data for a <code>VoiceEnhancementSinkConfiguration</code> element.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#VoiceToneAnalysisTask": {
+            "type": "structure",
+            "members": {
+                "VoiceToneAnalysisTaskId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the voice tone analysis task.</p>"
+                    }
+                },
+                "VoiceToneAnalysisTaskStatus": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#MediaPipelineTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a voice tone analysis task.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which a voice tone analysis task was created.</p>"
+                    }
+                },
+                "UpdatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which a voice tone analysis task was updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A representation of an asynchronous request to perform voice tone analysis on a media insights pipeline.</p>"
             }
         }
     }

@@ -694,6 +694,12 @@
                     "target": "com.amazonaws.connect#CreateUserHierarchyGroup"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateView"
+                },
+                {
+                    "target": "com.amazonaws.connect#CreateViewVersion"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateVocabulary"
                 },
                 {
@@ -752,6 +758,12 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteUserHierarchyGroup"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeleteView"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeleteViewVersion"
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteVocabulary"
@@ -818,6 +830,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeUserHierarchyStructure"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeView"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeVocabulary"
@@ -989,6 +1004,12 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ListUsers"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListViews"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListViewVersions"
                 },
                 {
                     "target": "com.amazonaws.connect#MonitorContact"
@@ -1196,6 +1217,12 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateUserSecurityProfiles"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateViewContent"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateViewMetadata"
                 }
             ],
             "traits": {
@@ -3908,7 +3935,7 @@
                     "code": "ContactNotFoundException",
                     "httpResponseCode": 410
                 },
-                "smithy.api#documentation": "<p>The contact with the specified ID is not active or does not exist. Applies to Voice calls\n   only, not to Chat, Task, or Voice Callback.</p>",
+                "smithy.api#documentation": "<p>The contact with the specified ID is not active or does not exist. Applies to Voice calls\n   only, not to Chat or Task contacts.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 410
             }
@@ -5014,7 +5041,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Creates a new queue for the specified Amazon Connect instance.</p>\n         <important>\n            <p>If the number being used in the input is claimed to a traffic distribution group, and you are calling this API\n    using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use\n    either a full phone number ARN or UUID value for the <code>OutboundCallerIdNumberId</code> value\n    of the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig\">OutboundCallerConfig</a> request body parameter. However, if the number is claimed to a\n    traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region\n    associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided\n    in\n    this scenario, you will receive a\n    <code>ResourceNotFoundException</code>.</p>\n            <p>Only use the phone number ARN format that doesn't contain <code>instance</code> in the\n    path, for example, <code>arn:aws:connect:us-east-1:1234567890:phone-number/uuid</code>. This is\n    the same ARN format that is returned when you call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a>\n    API.</p>\n         </important>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Creates a new queue for the specified Amazon Connect instance.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>If the phone number is claimed to a traffic distribution group that was created in the\n      same Region as the Amazon Connect instance where you are calling this API, then you can use a\n      full phone number ARN or a UUID for <code>OutboundCallerIdNumberId</code>. However, if the phone number is claimed\n      to a traffic distribution group that is in one Region, and you are calling this API from an instance in another Amazon Web Services Region that is associated with the traffic distribution group, you must provide a full phone number ARN. If a\n      UUID is provided in this scenario, you will receive a\n      <code>ResourceNotFoundException</code>.</p>\n               </li>\n               <li>\n                  <p>Only use the phone number ARN format that doesn't contain <code>instance</code> in the\n      path, for example, <code>arn:aws:connect:us-east-1:1234567890:phone-number/uuid</code>. This\n      is the same ARN format that is returned when you call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a>\n      API.</p>\n               </li>\n               <li>\n                  <p>If you plan to use IAM policies to allow/deny access to this API for phone\n      number resources claimed to a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_resource-level-policy-examples.html#allow-deny-queue-actions-replica-region\">Allow or Deny queue API actions for phone numbers in a replica Region</a>.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/queues/{InstanceId}",
@@ -5731,7 +5758,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a traffic distribution group given an Amazon Connect instance that has been replicated. </p>\n         <p>For more information about creating traffic distribution groups, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html\">Set up traffic distribution groups</a> in\n   the <i>Amazon Connect Administrator Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Creates a traffic distribution group given an Amazon Connect instance that has been replicated. </p>\n         <note>\n            <p>You can change the <code>SignInConfig</code> distribution only for a \ndefault <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the \n<a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html\">TrafficDistributionGroup</a>\n data type). If you call\n    <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,\n    an <code>InvalidRequestException</code> is returned.</p>\n         </note>\n         <p>For more information about creating traffic distribution groups, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html\">Set up traffic distribution groups</a> in\n   the <i>Amazon Connect Administrator Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/traffic-distribution-group",
@@ -6113,6 +6140,216 @@
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#CreateView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateViewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateViewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new view with the possible status of <code>SAVED</code> or <code>PUBLISHED</code>.</p>\n         <p>The views will have a unique name for each connect instance.</p>\n         <p>It performs basic content validation if the status is <code>SAVED</code> or full content validation if the status \n   is set to <code>PUBLISHED</code>. An error is returned if validation fails. It associates either \n   the <code>$SAVED</code> qualifier or both of the <code>$SAVED</code> and <code>$LATEST</code> qualifiers with the \n   provided view content based on the status. The view is idempotent if ClientToken is provided.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/views/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connect#CreateViewRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#ViewsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of \n   the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ViewsClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique Id for each create view request to avoid duplicate view creation. For example, the view \n   is idempotent ClientToken is provided.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#ViewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#ViewInputContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>\n         <p>The total uncompressed content has a maximum file size of 400kB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#ViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the view.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ViewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the view.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the view resource (not specific to view version).These tags can be used \n   to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateViewResponse": {
+            "type": "structure",
+            "members": {
+                "View": {
+                    "target": "com.amazonaws.connect#View",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A view resource object. Contains metadata and content necessary to render the view.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#CreateViewVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateViewVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateViewVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Publishes a new version of the view identifier.</p>\n         <p>Versions are immutable and monotonically increasing.</p>\n         <p>It returns the highest version if there is no change in content compared to that version. An error \n   is displayed if the supplied ViewContentSha256 is different from the ViewContentSha256 of the \n   <code>$LATEST</code> alias.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/views/{InstanceId}/{ViewId}/versions",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connect#CreateViewVersionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#ViewsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ViewId": {
+                    "target": "com.amazonaws.connect#ViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionDescription": {
+                    "target": "com.amazonaws.connect#ViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the version being published.</p>"
+                    }
+                },
+                "ViewContentSha256": {
+                    "target": "com.amazonaws.connect#ViewContentSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the checksum value of the latest published view content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateViewVersionResponse": {
+            "type": "structure",
+            "members": {
+                "View": {
+                    "target": "com.amazonaws.connect#View",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All view data is contained within the View object.</p>"
                     }
                 }
             },
@@ -7727,6 +7964,157 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#DeleteView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteViewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteViewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the view entirely. It deletes the view and all associated qualifiers (versions and aliases).</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/views/{InstanceId}/{ViewId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteViewRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#ViewsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ViewId": {
+                    "target": "com.amazonaws.connect#ViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteViewResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteViewVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteViewVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteViewVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the particular version specified in <code>ViewVersion</code> identifier.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/views/{InstanceId}/{ViewId}/versions/{ViewVersion}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteViewVersionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#ViewsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ViewId": {
+                    "target": "com.amazonaws.connect#ViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ViewVersion": {
+                    "target": "com.amazonaws.connect#ViewVersion",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The version number of the view.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteViewVersionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#DeleteVocabulary": {
             "type": "operation",
             "input": {
@@ -9309,6 +9697,81 @@
                     "target": "com.amazonaws.connect#User",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the user account and configuration settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeViewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeViewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the view for the specified Amazon Connect instance and view identifier.</p>\n         <p>The view identifier can be supplied as a ViewId or ARN.</p>\n         <p>\n            <code>$SAVED</code> needs to be supplied if a view is unpublished.</p>\n         <p>The view identifier can contain an optional qualifier, for example, <code><view-id>:$SAVED</code>, which \n   is either an actual version number or an Amazon Connect managed qualifier <code>$SAVED | $LATEST</code>. \n   If it is not supplied, then <code>$LATEST</code> is assumed for customer managed views and an error is \n   returned if there is no published content available. Version 1 is assumed for Amazon Web Services managed views.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/views/{InstanceId}/{ViewId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeViewRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#ViewsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ViewId": {
+                    "target": "com.amazonaws.connect#ViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ViewId of the view. This must be an ARN for Amazon Web Services managed views.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeViewResponse": {
+            "type": "structure",
+            "members": {
+                "View": {
+                    "target": "com.amazonaws.connect#View",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All view data is contained within the View object.</p>"
                     }
                 }
             },
@@ -16054,7 +16517,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n    Contact Center</a> in the <i>Amazon Connect Administrator\n   Guide</i>.</p>\n         <important>\n            <p>The phone number <code>Arn</code> value that is returned from each of the items in the\n     <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList\">PhoneNumberSummaryList</a> cannot be used to tag phone number resources. It will fail with\n    a <code>ResourceNotFoundException</code>. Instead, use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> API.\n    It returns the new phone number ARN that can be used to tag phone number resources.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n    Contact Center</a> in the <i>Amazon Connect Administrator\n   Guide</i>.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>We recommend using <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> to\n      return phone number types. ListPhoneNumbers doesn't support number types <code>UIFN</code>,\n      <code>SHARED</code>, <code>THIRD_PARTY_TF</code>, and <code>THIRD_PARTY_DID</code>. While it returns\n      numbers of those types, it incorrectly lists them as <code>TOLL_FREE</code> or <code>DID</code>. </p>\n               </li>\n               <li>\n                  <p>The phone number <code>Arn</code> value that is returned from each of the items in the\n       <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList\">PhoneNumberSummaryList</a> cannot be used to tag phone number resources. It will fail\n      with a <code>ResourceNotFoundException</code>. Instead, use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> API.\n      It returns the new phone number ARN that can be used to tag phone number resources.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/phone-numbers-summary/{InstanceId}",
@@ -17877,6 +18340,209 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#ListViewVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListViewVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListViewVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all the available versions for the specified Amazon Connect instance and view identifier.</p>\n         <p>Results will be sorted from highest to lowest.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/views/{InstanceId}/{ViewId}/versions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ViewVersionSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListViewVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#ViewsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ViewId": {
+                    "target": "com.amazonaws.connect#ViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#ViewsNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListViewVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "ViewVersionSummaryList": {
+                    "target": "com.amazonaws.connect#ViewVersionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of view version summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#ViewsNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListViews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListViewsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListViewsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns views in the given instance.</p>\n         <p>Results are sorted primarily by type, and secondarily by name.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/views/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ViewsSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListViewsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#ViewsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#ViewType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the view.</p>",
+                        "smithy.api#httpQuery": "type"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#ViewsNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListViewsResponse": {
+            "type": "structure",
+            "members": {
+                "ViewsSummaryList": {
+                    "target": "com.amazonaws.connect#ViewsSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of view summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#ViewsNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to \n   retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#Long": {
             "type": "long"
         },
@@ -17947,6 +18613,16 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 7
+                }
+            }
+        },
+        "com.amazonaws.connect#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -24797,7 +25473,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for the following initiation\n   methods:</p>\n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for voice contacts that use the\n   following initiation methods:</p>\n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>\n         <p>Chat and task contacts, however, can be terminated in any state, regardless of initiation\n   method.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/stop",
@@ -25990,6 +26666,19 @@
         "com.amazonaws.connect#Timestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.connect#TooManyRequestsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connect#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Displayed when rate-related API limits are exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
         "com.amazonaws.connect#TrafficDistributionGroup": {
             "type": "structure",
             "members": {
@@ -26039,7 +26728,7 @@
                     "target": "com.amazonaws.connect#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Whether this is the default traffic distribution group created during instance\n   replication. The default traffic distribution group cannot be deleted by the\n   <code>DeleteTrafficDistributionGroup</code> API. The default traffic distribution group is deleted as\n   part of the process for deleting a replica.</p>\n         <note>\n            <p>You can change the <code>SignInConfig</code> only for a default <code>TrafficDistributionGroup</code>. If you call\n    <code>UpdateTrafficDistribution</code>  with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,\n    an <code>InvalidRequestException</code> is returned.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Whether this is the default traffic distribution group created during instance\n   replication. The default traffic distribution group cannot be deleted by the\n   <code>DeleteTrafficDistributionGroup</code> API. The default traffic distribution group is deleted as\n   part of the process for deleting a replica.</p>\n         <note>\n            <p>You can change the <code>SignInConfig</code> distribution only for a \ndefault <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the \n<a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html\">TrafficDistributionGroup</a>\n data type). If you call\n    <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,\n    an <code>InvalidRequestException</code> is returned.</p>\n         </note>"
                     }
                 }
             },
@@ -28100,7 +28789,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Updates the outbound caller ID name, number, and outbound whisper flow for a specified\n   queue.</p>\n         <important>\n            <p>If the number being used in the input is claimed to a traffic distribution group, and you are calling this API\n    using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use\n    either a full phone number ARN or UUID value for the <code>OutboundCallerIdNumberId</code> value\n    of the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig\">OutboundCallerConfig</a> request body parameter. However, if the number is claimed to a\n    traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region\n    associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided\n    in\n    this scenario, you will receive a\n    <code>ResourceNotFoundException</code>.</p>\n            <p>Only use the phone number ARN format that doesn't contain <code>instance</code> in the\n    path, for example, <code>arn:aws:connect:us-east-1:1234567890:phone-number/uuid</code>. This is\n    the same ARN format that is returned when you call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a>\n    API.</p>\n         </important>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Updates the outbound caller ID name, number, and outbound whisper flow for a specified\n   queue.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>If the phone number is claimed to a traffic distribution group that was created in the\n      same Region as the Amazon Connect instance where you are calling this API, then you can use a\n      full phone number ARN or a UUID for <code>OutboundCallerIdNumberId</code>. However, if the phone number is claimed\n      to a traffic distribution group that is in one Region, and you are calling this API from an instance in another Amazon Web Services Region that is associated with the traffic distribution group, you must provide a full phone number ARN. If a\n      UUID is provided in this scenario, you will receive a\n      <code>ResourceNotFoundException</code>.</p>\n               </li>\n               <li>\n                  <p>Only use the phone number ARN format that doesn't contain <code>instance</code> in the\n      path, for example, <code>arn:aws:connect:us-east-1:1234567890:phone-number/uuid</code>. This\n      is the same ARN format that is returned when you call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a>\n      API.</p>\n               </li>\n               <li>\n                  <p>If you plan to use IAM policies to allow/deny access to this API for phone\n      number resources claimed to a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_resource-level-policy-examples.html#allow-deny-queue-actions-replica-region\">Allow or Deny queue API actions for phone numbers in a replica Region</a>.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/queues/{InstanceId}/{QueueId}/outbound-caller-config",
@@ -29064,7 +29753,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n         <note>\n            <p>You can change the <code>SignInConfig</code> only for a default <code>TrafficDistributionGroup</code>. If you call\n    <code>UpdateTrafficDistribution</code>  with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,\n    an <code>InvalidRequestException</code> is returned.</p>\n         </note>\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony\n    traffic distribution across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n         <note>\n            <p>You can change the <code>SignInConfig</code> distribution only for a \ndefault <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the \n<a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html\">TrafficDistributionGroup</a>\n data type). If you call\n    <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,\n    an <code>InvalidRequestException</code> is returned.</p>\n         </note>\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony\n    traffic distribution across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/traffic-distribution/{Id}",
@@ -29563,6 +30252,184 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateViewContent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateViewContentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateViewContentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the view content of the given view identifier in the specified Amazon Connect instance.</p>\n         <p>It performs content validation if <code>Status</code> is set to <code>SAVED</code> and performs full content validation if \n   <code>Status</code> is <code>PUBLISHED</code>. Note that the <code>$SAVED</code> alias' content will always be updated, \n   but the <code>$LATEST</code> alias' content will only be updated if <code>Status</code> is <code>PUBLISHED</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/views/{InstanceId}/{ViewId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateViewContentRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#ViewsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ViewId": {
+                    "target": "com.amazonaws.connect#ViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#ViewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#ViewInputContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data \n   and the runtime input schema, which is auto-generated by this operation.</p>\n         <p>The total uncompressed content has a maximum file size of 400kB.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateViewContentResponse": {
+            "type": "structure",
+            "members": {
+                "View": {
+                    "target": "com.amazonaws.connect#View",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A view resource object. Contains metadata and content necessary to render the view.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateViewMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateViewMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateViewMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the view metadata. Note that either <code>Name</code> or <code>Description</code> \n   must be provided.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/views/{InstanceId}/{ViewId}/metadata",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateViewMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#ViewsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ViewId": {
+                    "target": "com.amazonaws.connect#ViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the view. Both <code>ViewArn</code> and <code>ViewId</code> can be used.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ViewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the view.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#ViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the view.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateViewMetadataResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connect#Url": {
@@ -30159,6 +31026,383 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.connect#View": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#ViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the view.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the view.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ViewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the view.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#ViewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#ViewType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the view - <code>CUSTOMER_MANAGED</code>.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#ViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the view.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.connect#ViewVersion",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Current version of the view.</p>"
+                    }
+                },
+                "VersionDescription": {
+                    "target": "com.amazonaws.connect#ViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the version.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#ViewContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the view resource (not specific to view version).</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the view was created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Latest timestamp of the <code>UpdateViewContent</code> or <code>CreateViewVersion</code> operations.</p>"
+                    }
+                },
+                "ViewContentSha256": {
+                    "target": "com.amazonaws.connect#ViewContentSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the checksum value of the latest published view content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A view resource object. Contains metadata and content necessary to render the view.</p>"
+            }
+        },
+        "com.amazonaws.connect#ViewAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@()']*)$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#ViewActions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ViewAction"
+            }
+        },
+        "com.amazonaws.connect#ViewContent": {
+            "type": "structure",
+            "members": {
+                "InputSchema": {
+                    "target": "com.amazonaws.connect#ViewInputSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data schema matching data that the view template must be provided to render.</p>"
+                    }
+                },
+                "Template": {
+                    "target": "com.amazonaws.connect#ViewTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The view template representing the structure of the view.</p>"
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.connect#ViewActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of possible actions from the view.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>"
+            }
+        },
+        "com.amazonaws.connect#ViewContentSha256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.connect#ViewDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@,()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,()']*)$"
+            }
+        },
+        "com.amazonaws.connect#ViewId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\_\\-:\\/$]+$"
+            }
+        },
+        "com.amazonaws.connect#ViewInputContent": {
+            "type": "structure",
+            "members": {
+                "Template": {
+                    "target": "com.amazonaws.connect#ViewTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The view template representing the structure of the view.</p>"
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.connect#ViewActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of possible actions from the view.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except \n   for runtime input data and the runtime input schema, which is auto-generated \n   by this operation.</p>"
+            }
+        },
+        "com.amazonaws.connect#ViewInputSchema": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#ViewName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@()']*)$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#ViewStatus": {
+            "type": "enum",
+            "members": {
+                "PUBLISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHED"
+                    }
+                },
+                "SAVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAVED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ViewSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#ViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the view.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the view.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ViewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the view.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#ViewType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the view.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#ViewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the view status as either <code>SAVED</code> or <code>PUBLISHED</code>. The \n   <code>PUBLISHED</code> status will initiate validation on the content.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#ViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the view.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a view's metadata.</p>"
+            }
+        },
+        "com.amazonaws.connect#ViewTemplate": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#ViewType": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED"
+                    }
+                },
+                "AWS_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_MANAGED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ViewVersion": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.connect#ViewVersionSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#ViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the view version.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the view version.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#ViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the view version.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ViewName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the view version.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#ViewType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the view version.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.connect#ViewVersion",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The sequentially incremented version of the view version.</p>"
+                    }
+                },
+                "VersionDescription": {
+                    "target": "com.amazonaws.connect#ViewDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the view version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a view version's metadata.</p>"
+            }
+        },
+        "com.amazonaws.connect#ViewVersionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ViewVersionSummary"
+            }
+        },
+        "com.amazonaws.connect#ViewsClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.connect#ViewsInstanceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\_\\-:\\/]+$"
+            }
+        },
+        "com.amazonaws.connect#ViewsNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9=\\/+_.-]+$"
+            }
+        },
+        "com.amazonaws.connect#ViewsSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ViewSummary"
             }
         },
         "com.amazonaws.connect#Vocabulary": {
