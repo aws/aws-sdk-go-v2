@@ -1,8 +1,0 @@
-{
-    "id": "023a744e-372f-418c-a464-680b7177cc26",
-    "type": "feature",
-    "description": "Amazon Connect adds the ability to read, create, update, delete, and list view resources, and adds the ability to read, create, delete, and list view versions.",
-    "modules": [
-        "service/connect"
-    ]
-}

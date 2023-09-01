@@ -1,3 +1,15 @@
+# Release (2023-09-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.8.0](service/chimesdkmediapipelines/CHANGELOG.md#v180-2023-09-01)
+  * **Feature**: This release adds support for the Voice Analytics feature for customer-owned KVS streams as part of the Amazon Chime SDK call analytics.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.66.0](service/connect/CHANGELOG.md#v1660-2023-09-01)
+  * **Feature**: Amazon Connect adds the ability to read, create, update, delete, and list view resources, and adds the ability to read, create, delete, and list view versions.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.18.0](service/identitystore/CHANGELOG.md#v1180-2023-09-01)
+  * **Feature**: New Identity Store content for China Region launch
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.0.1](service/neptunedata/CHANGELOG.md#v101-2023-09-01)
+  * **Documentation**: Removed the descriptive text in the introduction.
+
 # Release (2023-08-31)
 
 ## General Highlights

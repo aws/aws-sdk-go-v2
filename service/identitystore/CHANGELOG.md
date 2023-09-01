@@ -1,3 +1,7 @@
+# v1.18.0 (2023-09-01)
+
+* **Feature**: New Identity Store content for China Region launch
+
 # v1.17.6 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
