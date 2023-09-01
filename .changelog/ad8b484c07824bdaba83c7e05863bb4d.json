@@ -1,0 +1,8 @@
+{
+    "id": "ad8b484c-0782-4bda-ba83-c7e05863bb4d",
+    "type": "feature",
+    "description": "New Identity Store content for China Region launch",
+    "modules": [
+        "service/identitystore"
+    ]
+}

@@ -650,6 +650,46 @@ func (m *validateOpCreateUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateView struct {
+}
+
+func (*validateOpCreateView) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateView) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateViewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateViewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateViewVersion struct {
+}
+
+func (*validateOpCreateViewVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateViewVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateViewVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateViewVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateVocabulary struct {
 }
 
@@ -1045,6 +1085,46 @@ func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteView struct {
+}
+
+func (*validateOpDeleteView) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteView) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteViewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteViewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteViewVersion struct {
+}
+
+func (*validateOpDeleteViewVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteViewVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteViewVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteViewVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1485,6 +1565,26 @@ func (m *validateOpDescribeUser) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeView struct {
+}
+
+func (*validateOpDescribeView) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeView) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeViewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeViewInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2565,6 +2665,46 @@ func (m *validateOpListUsers) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListUsersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListViews struct {
+}
+
+func (*validateOpListViews) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListViews) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListViewsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListViewsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListViewVersions struct {
+}
+
+func (*validateOpListViewVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListViewVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListViewVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListViewVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3930,6 +4070,46 @@ func (m *validateOpUpdateUserSecurityProfiles) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateViewContent struct {
+}
+
+func (*validateOpUpdateViewContent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateViewContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateViewContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateViewContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateViewMetadata struct {
+}
+
+func (*validateOpUpdateViewMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateViewMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateViewMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateViewMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpActivateEvaluationFormValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpActivateEvaluationForm{}, middleware.After)
 }
@@ -4058,6 +4238,14 @@ func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
 }
 
+func addOpCreateViewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateView{}, middleware.After)
+}
+
+func addOpCreateViewVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateViewVersion{}, middleware.After)
+}
+
 func addOpCreateVocabularyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVocabulary{}, middleware.After)
 }
@@ -4136,6 +4324,14 @@ func addOpDeleteUserHierarchyGroupValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
+}
+
+func addOpDeleteViewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteView{}, middleware.After)
+}
+
+func addOpDeleteViewVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteViewVersion{}, middleware.After)
 }
 
 func addOpDeleteVocabularyValidationMiddleware(stack *middleware.Stack) error {
@@ -4224,6 +4420,10 @@ func addOpDescribeUserHierarchyStructureValidationMiddleware(stack *middleware.S
 
 func addOpDescribeUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeUser{}, middleware.After)
+}
+
+func addOpDescribeViewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeView{}, middleware.After)
 }
 
 func addOpDescribeVocabularyValidationMiddleware(stack *middleware.Stack) error {
@@ -4440,6 +4640,14 @@ func addOpListUserHierarchyGroupsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUsers{}, middleware.After)
+}
+
+func addOpListViewsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListViews{}, middleware.After)
+}
+
+func addOpListViewVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListViewVersions{}, middleware.After)
 }
 
 func addOpMonitorContactValidationMiddleware(stack *middleware.Stack) error {
@@ -4712,6 +4920,14 @@ func addOpUpdateUserRoutingProfileValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateUserSecurityProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUserSecurityProfiles{}, middleware.After)
+}
+
+func addOpUpdateViewContentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateViewContent{}, middleware.After)
+}
+
+func addOpUpdateViewMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateViewMetadata{}, middleware.After)
 }
 
 func validateAgentConfig(v *types.AgentConfig) error {
@@ -6717,6 +6933,48 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 	}
 }
 
+func validateOpCreateViewInput(v *CreateViewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateViewInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateViewVersionInput(v *CreateViewVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateViewVersionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ViewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateVocabularyInput(v *CreateVocabularyInput) error {
 	if v == nil {
 		return nil
@@ -7075,6 +7333,42 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteViewInput(v *DeleteViewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteViewInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ViewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteViewVersionInput(v *DeleteViewVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteViewVersionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ViewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7462,6 +7756,24 @@ func validateOpDescribeUserInput(v *DescribeUserInput) error {
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeViewInput(v *DescribeViewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeViewInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ViewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8404,6 +8716,39 @@ func validateOpListUsersInput(v *ListUsersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListUsersInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListViewsInput(v *ListViewsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListViewsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListViewVersionsInput(v *ListViewVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListViewVersionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ViewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9819,6 +10164,48 @@ func validateOpUpdateUserSecurityProfilesInput(v *UpdateUserSecurityProfilesInpu
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateViewContentInput(v *UpdateViewContentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateViewContentInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ViewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateViewMetadataInput(v *UpdateViewMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateViewMetadataInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ViewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

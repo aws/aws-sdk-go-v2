@@ -1932,6 +1932,42 @@ func (UseCaseType) Values() []UseCaseType {
 	}
 }
 
+type ViewStatus string
+
+// Enum values for ViewStatus
+const (
+	ViewStatusPublished ViewStatus = "PUBLISHED"
+	ViewStatusSaved     ViewStatus = "SAVED"
+)
+
+// Values returns all known values for ViewStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ViewStatus) Values() []ViewStatus {
+	return []ViewStatus{
+		"PUBLISHED",
+		"SAVED",
+	}
+}
+
+type ViewType string
+
+// Enum values for ViewType
+const (
+	ViewTypeCustomerManaged ViewType = "CUSTOMER_MANAGED"
+	ViewTypeAwsManaged      ViewType = "AWS_MANAGED"
+)
+
+// Values returns all known values for ViewType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ViewType) Values() []ViewType {
+	return []ViewType{
+		"CUSTOMER_MANAGED",
+		"AWS_MANAGED",
+	}
+}
+
 type VocabularyLanguageCode string
 
 // Enum values for VocabularyLanguageCode

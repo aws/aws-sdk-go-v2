@@ -17,7 +17,9 @@ import (
 )
 
 // Retrieves membership metadata and attributes from MembershipId in an identity
-// store.
+// store. If you have administrator access to a member account, you can use this
+// API from the member account. Read about member accounts (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html)
+// in the Organizations User Guide.
 func (c *Client) DescribeGroupMembership(ctx context.Context, params *DescribeGroupMembershipInput, optFns ...func(*Options)) (*DescribeGroupMembershipOutput, error) {
 	if params == nil {
 		params = &DescribeGroupMembershipInput{}

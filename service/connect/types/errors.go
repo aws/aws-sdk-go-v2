@@ -60,7 +60,7 @@ func (e *ContactFlowNotPublishedException) ErrorCode() string {
 func (e *ContactFlowNotPublishedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The contact with the specified ID is not active or does not exist. Applies to
-// Voice calls only, not to Chat, Task, or Voice Callback.
+// Voice calls only, not to Chat or Task contacts.
 type ContactNotFoundException struct {
 	Message *string
 
@@ -565,6 +565,32 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Displayed when rate-related API limits are exceeded.
+type TooManyRequestsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyRequestsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyRequestsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No user with the specified credentials was found in the Amazon Connect instance.
 type UserNotFoundException struct {

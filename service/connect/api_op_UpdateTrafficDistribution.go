@@ -17,11 +17,13 @@ import (
 )
 
 // Updates the traffic distribution for a given traffic distribution group. You
-// can change the SignInConfig only for a default TrafficDistributionGroup . If you
-// call UpdateTrafficDistribution with a modified SignInConfig and a non-default
-// TrafficDistributionGroup , an InvalidRequestException is returned. For more
-// information about updating a traffic distribution group, see Update telephony
-// traffic distribution across Amazon Web Services Regions  (https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html)
+// can change the SignInConfig distribution only for a default
+// TrafficDistributionGroup (see the IsDefault parameter in the
+// TrafficDistributionGroup (https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html)
+// data type). If you call UpdateTrafficDistribution with a modified SignInConfig
+// and a non-default TrafficDistributionGroup , an InvalidRequestException is
+// returned. For more information about updating a traffic distribution group, see
+// Update telephony traffic distribution across Amazon Web Services Regions  (https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) UpdateTrafficDistribution(ctx context.Context, params *UpdateTrafficDistributionInput, optFns ...func(*Options)) (*UpdateTrafficDistributionOutput, error) {
 	if params == nil {

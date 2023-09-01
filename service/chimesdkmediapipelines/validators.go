@@ -230,6 +230,46 @@ func (m *validateOpGetMediaPipeline) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSpeakerSearchTask struct {
+}
+
+func (*validateOpGetSpeakerSearchTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSpeakerSearchTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSpeakerSearchTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSpeakerSearchTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetVoiceToneAnalysisTask struct {
+}
+
+func (*validateOpGetVoiceToneAnalysisTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVoiceToneAnalysisTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVoiceToneAnalysisTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVoiceToneAnalysisTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -245,6 +285,86 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartSpeakerSearchTask struct {
+}
+
+func (*validateOpStartSpeakerSearchTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSpeakerSearchTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSpeakerSearchTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSpeakerSearchTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartVoiceToneAnalysisTask struct {
+}
+
+func (*validateOpStartVoiceToneAnalysisTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartVoiceToneAnalysisTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartVoiceToneAnalysisTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartVoiceToneAnalysisTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopSpeakerSearchTask struct {
+}
+
+func (*validateOpStopSpeakerSearchTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopSpeakerSearchTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopSpeakerSearchTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopSpeakerSearchTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopVoiceToneAnalysisTask struct {
+}
+
+func (*validateOpStopVoiceToneAnalysisTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopVoiceToneAnalysisTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopVoiceToneAnalysisTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopVoiceToneAnalysisTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -374,8 +494,32 @@ func addOpGetMediaPipelineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMediaPipeline{}, middleware.After)
 }
 
+func addOpGetSpeakerSearchTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSpeakerSearchTask{}, middleware.After)
+}
+
+func addOpGetVoiceToneAnalysisTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVoiceToneAnalysisTask{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpStartSpeakerSearchTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSpeakerSearchTask{}, middleware.After)
+}
+
+func addOpStartVoiceToneAnalysisTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartVoiceToneAnalysisTask{}, middleware.After)
+}
+
+func addOpStopSpeakerSearchTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopSpeakerSearchTask{}, middleware.After)
+}
+
+func addOpStopVoiceToneAnalysisTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopVoiceToneAnalysisTask{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -897,6 +1041,21 @@ func validateKinesisVideoStreamSourceRuntimeConfiguration(v *types.KinesisVideoS
 	}
 	if v.MediaSampleRate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MediaSampleRate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKinesisVideoStreamSourceTaskConfiguration(v *types.KinesisVideoStreamSourceTaskConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KinesisVideoStreamSourceTaskConfiguration"}
+	if v.StreamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1618,6 +1777,42 @@ func validateOpGetMediaPipelineInput(v *GetMediaPipelineInput) error {
 	}
 }
 
+func validateOpGetSpeakerSearchTaskInput(v *GetSpeakerSearchTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSpeakerSearchTaskInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.SpeakerSearchTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpeakerSearchTaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetVoiceToneAnalysisTaskInput(v *GetVoiceToneAnalysisTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVoiceToneAnalysisTaskInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.VoiceToneAnalysisTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceToneAnalysisTaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1625,6 +1820,88 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartSpeakerSearchTaskInput(v *StartSpeakerSearchTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSpeakerSearchTaskInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.VoiceProfileDomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceProfileDomainArn"))
+	}
+	if v.KinesisVideoStreamSourceTaskConfiguration != nil {
+		if err := validateKinesisVideoStreamSourceTaskConfiguration(v.KinesisVideoStreamSourceTaskConfiguration); err != nil {
+			invalidParams.AddNested("KinesisVideoStreamSourceTaskConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartVoiceToneAnalysisTaskInput(v *StartVoiceToneAnalysisTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartVoiceToneAnalysisTaskInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if v.KinesisVideoStreamSourceTaskConfiguration != nil {
+		if err := validateKinesisVideoStreamSourceTaskConfiguration(v.KinesisVideoStreamSourceTaskConfiguration); err != nil {
+			invalidParams.AddNested("KinesisVideoStreamSourceTaskConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopSpeakerSearchTaskInput(v *StopSpeakerSearchTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopSpeakerSearchTaskInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.SpeakerSearchTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpeakerSearchTaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopVoiceToneAnalysisTaskInput(v *StopVoiceToneAnalysisTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopVoiceToneAnalysisTaskInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.VoiceToneAnalysisTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceToneAnalysisTaskId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

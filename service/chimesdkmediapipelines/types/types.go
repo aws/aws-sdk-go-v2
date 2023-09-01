@@ -480,7 +480,8 @@ type DataChannelConcatenationConfiguration struct {
 type FragmentSelector struct {
 
 	// The origin of the timestamps to use, Server or Producer . For more information,
-	// see StartSelectorType in the Amazon Kinesis Video Streams Developer Guide.
+	// see StartSelectorType (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_StartSelector.html)
+	// in the Amazon Kinesis Video Streams Developer Guide.
 	//
 	// This member is required.
 	FragmentSelectorType FragmentSelectorType
@@ -625,6 +626,25 @@ type KinesisVideoStreamSourceRuntimeConfiguration struct {
 	//
 	// This member is required.
 	Streams []StreamConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The task configuration settings for the Kinesis video stream source.
+type KinesisVideoStreamSourceTaskConfiguration struct {
+
+	// The channel ID.
+	//
+	// This member is required.
+	ChannelId int32
+
+	// The ARN of the stream.
+	//
+	// This member is required.
+	StreamArn *string
+
+	// The unique identifier of the fragment to begin processing.
+	FragmentNumber *string
 
 	noSmithyDocumentSerde
 }
@@ -895,7 +915,8 @@ type MediaInsightsPipelineConfigurationElement struct {
 	// configuration element.
 	VoiceAnalyticsProcessorConfiguration *VoiceAnalyticsProcessorConfiguration
 
-	// The configuration settings for the VoiceEnhancementSinkConfiguration element.
+	// The configuration settings for voice enhancement sink in a media insights
+	// pipeline configuration element.
 	VoiceEnhancementSinkConfiguration *VoiceEnhancementSinkConfiguration
 
 	noSmithyDocumentSerde
@@ -1176,6 +1197,25 @@ type SourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A representation of an asynchronous request to perform speaker search analysis
+// on a media insights pipeline.
+type SpeakerSearchTask struct {
+
+	// The time at which a speaker search task was created.
+	CreatedTimestamp *time.Time
+
+	// The speaker search task ID.
+	SpeakerSearchTaskId *string
+
+	// The status of the speaker search task.
+	SpeakerSearchTaskStatus MediaPipelineTaskStatus
+
+	// The time at which a speaker search task was updated.
+	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The configuration settings for the SQS sink.
 type SqsQueueSinkConfiguration struct {
 
@@ -1340,6 +1380,25 @@ type VoiceEnhancementSinkConfiguration struct {
 
 	// Disables the VoiceEnhancementSinkConfiguration element.
 	Disabled bool
+
+	noSmithyDocumentSerde
+}
+
+// A representation of an asynchronous request to perform voice tone analysis on a
+// media insights pipeline.
+type VoiceToneAnalysisTask struct {
+
+	// The time at which a voice tone analysis task was created.
+	CreatedTimestamp *time.Time
+
+	// The time at which a voice tone analysis task was updated.
+	UpdatedTimestamp *time.Time
+
+	// The ID of the voice tone analysis task.
+	VoiceToneAnalysisTaskId *string
+
+	// The status of a voice tone analysis task.
+	VoiceToneAnalysisTaskStatus MediaPipelineTaskStatus
 
 	noSmithyDocumentSerde
 }

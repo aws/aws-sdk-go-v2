@@ -16,7 +16,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the user metadata and attributes from the UserId in an identity store.
+// Retrieves the user metadata and attributes from the UserId in an identity
+// store. If you have administrator access to a member account, you can use this
+// API from the member account. Read about member accounts (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html)
+// in the Organizations User Guide.
 func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, optFns ...func(*Options)) (*DescribeUserOutput, error) {
 	if params == nil {
 		params = &DescribeUserInput{}

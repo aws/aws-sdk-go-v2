@@ -79,7 +79,7 @@ type AttributeOperation struct {
 	AttributePath *string
 
 	// The value of the attribute. This is a Document type. This type is not supported
-	// by Java V1, Go V1, and older versions of the AWS CLI.
+	// by Java V1, Go V1, and older versions of the CLI.
 	AttributeValue document.Interface
 
 	noSmithyDocumentSerde
@@ -277,7 +277,7 @@ type UniqueAttribute struct {
 	AttributePath *string
 
 	// The value of the attribute. This is a Document type. This type is not supported
-	// by Java V1, Go V1, and older versions of the AWS CLI.
+	// by Java V1, Go V1, and older versions of the CLI.
 	//
 	// This member is required.
 	AttributeValue document.Interface

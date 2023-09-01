@@ -608,6 +608,32 @@ func (MediaPipelineStatusUpdate) Values() []MediaPipelineStatusUpdate {
 	}
 }
 
+type MediaPipelineTaskStatus string
+
+// Enum values for MediaPipelineTaskStatus
+const (
+	MediaPipelineTaskStatusNotStarted   MediaPipelineTaskStatus = "NotStarted"
+	MediaPipelineTaskStatusInitializing MediaPipelineTaskStatus = "Initializing"
+	MediaPipelineTaskStatusInProgress   MediaPipelineTaskStatus = "InProgress"
+	MediaPipelineTaskStatusFailed       MediaPipelineTaskStatus = "Failed"
+	MediaPipelineTaskStatusStopping     MediaPipelineTaskStatus = "Stopping"
+	MediaPipelineTaskStatusStopped      MediaPipelineTaskStatus = "Stopped"
+)
+
+// Values returns all known values for MediaPipelineTaskStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MediaPipelineTaskStatus) Values() []MediaPipelineTaskStatus {
+	return []MediaPipelineTaskStatus{
+		"NotStarted",
+		"Initializing",
+		"InProgress",
+		"Failed",
+		"Stopping",
+		"Stopped",
+	}
+}
+
 type PartialResultsStability string
 
 // Enum values for PartialResultsStability
@@ -828,5 +854,21 @@ func (VoiceAnalyticsConfigurationStatus) Values() []VoiceAnalyticsConfigurationS
 	return []VoiceAnalyticsConfigurationStatus{
 		"Enabled",
 		"Disabled",
+	}
+}
+
+type VoiceAnalyticsLanguageCode string
+
+// Enum values for VoiceAnalyticsLanguageCode
+const (
+	VoiceAnalyticsLanguageCodeEnUs VoiceAnalyticsLanguageCode = "en-US"
+)
+
+// Values returns all known values for VoiceAnalyticsLanguageCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VoiceAnalyticsLanguageCode) Values() []VoiceAnalyticsLanguageCode {
+	return []VoiceAnalyticsLanguageCode{
+		"en-US",
 	}
 }

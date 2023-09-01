@@ -1,0 +1,8 @@
+{
+    "id": "ae32353d-aa16-4705-b9c7-eea56d19ccb7",
+    "type": "feature",
+    "description": "This release adds support for the Voice Analytics feature for customer-owned KVS streams as part of the Amazon Chime SDK call analytics.",
+    "modules": [
+        "service/chimesdkmediapipelines"
+    ]
+}
