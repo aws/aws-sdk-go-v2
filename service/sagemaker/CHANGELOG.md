@@ -1,3 +1,7 @@
+# v1.104.0 (2023-09-05)
+
+* **Feature**: SageMaker Neo now supports data input shape derivation for Pytorch 2.0  and XGBoost compilation job for cloud instance targets. You can skip DataInputConfig field during compilation job creation. You can also access derived information from model in DescribeCompilationJob response.
+
 # v1.103.0 (2023-08-30)
 
 * **Feature**: Amazon SageMaker Canvas adds IdentityProviderOAuthSettings support for CanvasAppSettings

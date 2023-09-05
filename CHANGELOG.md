@@ -1,3 +1,28 @@
+# Release (2023-09-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.9.0](service/billingconductor/CHANGELOG.md#v190-2023-09-05)
+  * **Feature**: This release adds support for line item filtering in for the custom line item resource.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.18.7](service/cloud9/CHANGELOG.md#v1187-2023-09-05)
+  * **Documentation**: Added support for Ubuntu 22.04 that was not picked up in a previous Trebuchet request. Doc-only update.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.27.0](service/computeoptimizer/CHANGELOG.md#v1270-2023-09-05)
+  * **Feature**: This release adds support to provide recommendations for G4dn and P3 instances that use NVIDIA GPUs.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.116.0](service/ec2/CHANGELOG.md#v11160-2023-09-05)
+  * **Feature**: Introducing Amazon EC2 C7gd, M7gd, and R7gd Instances with up to 3.8 TB of local NVMe-based SSD block-level storage. These instances are powered by AWS Graviton3 processors, delivering up to 25% better performance over Graviton2-based instances.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.30.1](service/ecs/CHANGELOG.md#v1301-2023-09-05)
+  * **Documentation**: Documentation only update for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.21.0](service/eventbridge/CHANGELOG.md#v1210-2023-09-05)
+  * **Feature**: Improve Endpoint Ruleset test coverage.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.54.0](service/rds/CHANGELOG.md#v1540-2023-09-05)
+  * **Feature**: Add support for feature integration with AWS Backup.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.104.0](service/sagemaker/CHANGELOG.md#v11040-2023-09-05)
+  * **Feature**: SageMaker Neo now supports data input shape derivation for Pytorch 2.0  and XGBoost compilation job for cloud instance targets. You can skip DataInputConfig field during compilation job creation. You can also access derived information from model in DescribeCompilationJob response.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.2.0](service/vpclattice/CHANGELOG.md#v120-2023-09-05)
+  * **Feature**: This release adds Lambda event structure version config support for LAMBDA target groups. It also adds newline support for auth policies.
+
 # Release (2023-09-01)
 
 ## Module Highlights

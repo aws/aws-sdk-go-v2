@@ -1,3 +1,7 @@
+# v1.21.0 (2023-09-05)
+
+* **Feature**: Improve Endpoint Ruleset test coverage.
+
 # v1.20.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

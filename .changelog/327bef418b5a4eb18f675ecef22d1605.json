@@ -1,8 +1,0 @@
-{
-    "id": "327bef41-8b5a-4eb1-8f67-5ecef22d1605",
-    "type": "feature",
-    "description": "Add support for feature integration with AWS Backup.",
-    "modules": [
-        "service/rds"
-    ]
-}

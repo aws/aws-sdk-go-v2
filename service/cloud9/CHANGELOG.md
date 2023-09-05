@@ -1,3 +1,7 @@
+# v1.18.7 (2023-09-05)
+
+* **Documentation**: Added support for Ubuntu 22.04 that was not picked up in a previous Trebuchet request. Doc-only update.
+
 # v1.18.6 (2023-08-21)
 
 * **Documentation**: Doc only update to add Ubuntu 22.04 as an Image ID option for Cloud9

@@ -1,3 +1,7 @@
+# v1.54.0 (2023-09-05)
+
+* **Feature**: Add support for feature integration with AWS Backup.
+
 # v1.53.0 (2023-08-24)
 
 * **Feature**: This release updates the supported versions for Percona XtraBackup in Aurora MySQL.

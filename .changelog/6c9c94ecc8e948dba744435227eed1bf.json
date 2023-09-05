@@ -1,8 +1,0 @@
-{
-    "id": "6c9c94ec-c8e9-48db-a744-435227eed1bf",
-    "type": "feature",
-    "description": "This release adds Lambda event structure version config support for LAMBDA target groups. It also adds newline support for auth policies.",
-    "modules": [
-        "service/vpclattice"
-    ]
-}
