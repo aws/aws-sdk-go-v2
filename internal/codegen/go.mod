@@ -4,4 +4,4 @@ go 1.15
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
 
-require golang.org/x/net v0.1.0
+require golang.org/x/net v0.7.0
