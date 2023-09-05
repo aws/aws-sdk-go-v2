@@ -182,8 +182,7 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 10000
-                },
-                "smithy.api#pattern": "^.*\\S.*$"
+                }
             }
         },
         "com.amazonaws.vpclattice#AuthType": {
@@ -889,6 +888,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.vpclattice#ConflictException"
                 },
                 {
@@ -1022,7 +1024,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a VPC with a service network. When you associate a VPC with the service network,\n   it enables all the resources within that VPC to be clients and communicate with other services in\n   the service network. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations\">Manage VPC associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>\n         <p>You can't use this operation if there is a disassociation in progress. If the association\n   fails, retry by deleting the association and recreating it.</p>\n         <p>As a result of this operation, the association gets created in the service network account\n   and the VPC owner account.</p>\n         <p>If you add a security group to the service network and VPC association, the association must\n   continue to always have at least one security group. You can add or edit security groups at any\n   time. However, to remove all security groups, you must first delete the association and recreate\n   it without security groups.</p>",
+                "smithy.api#documentation": "<p>Associates a VPC with a service network. When you associate a VPC with the service network,\n   it enables all the resources within that VPC to be clients and communicate with other services in\n   the service network. For more information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations\">Manage VPC associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>\n         <p>You can't use this operation if there is a disassociation in progress. If the association\n   fails, retry by deleting the association and recreating it.</p>\n         <p>As a result of this operation, the association gets created in the service network account\n   and the VPC owner account.</p>\n         <p>Once a security group is added to the VPC association it cannot be removed. You can add or\n   update the security groups being used for the VPC association once a security group is attached.\n   To remove all security groups you must reassociate the VPC.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/servicenetworkvpcassociations",
@@ -1402,7 +1404,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified auth policy. If an auth is set to <code>AWS_IAM</code>\n   and the auth policy is deleted, all requests will be denied by default. If you are trying to\n   remove the auth policy completely, you must set the auth_type to <code>NONE</code>. If auth is\n   enabled on the resource, but no auth policy is set, all requests will be denied.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified auth policy. If an auth is set to <code>Amazon Web Services_IAM</code>\n   and the auth policy is deleted, all requests will be denied by default. If you are trying to\n   remove the auth policy completely, you must set the auth_type to <code>NONE</code>. If auth is\n   enabled on the resource, but no auth policy is set, all requests will be denied.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -2265,7 +2267,7 @@
                 "state": {
                     "target": "com.amazonaws.vpclattice#AuthPolicyState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the auth policy. The auth policy is only active when the auth type is set to\n     <code>AWS_IAM</code>. If you provide a policy, then authentication and\n   authorization decisions are made based on this policy and the client's IAM policy. If the auth\n   type is <code>NONE</code>, then any auth policy you provide will remain inactive. For more\n   information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network\">Create a service\n    network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The state of the auth policy. The auth policy is only active when the auth type is set to\n     <code>Amazon Web Services_IAM</code>. If you provide a policy, then authentication and\n   authorization decisions are made based on this policy and the client's IAM policy. If the auth\n   type is <code>NONE</code>, then any auth policy you provide will remain inactive. For more\n   information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network\">Create a service\n    network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>"
                     }
                 },
                 "createdAt": {
@@ -2429,7 +2431,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the resource policy. The resource policy is an IAM policy\n   created on behalf of the resource owner when they share a resource.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the resource policy. The resource policy is an IAM policy\n   created by AWS RAM on behalf of the resource owner when they share a resource.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2444,7 +2446,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.vpclattice#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service network or service.</p>",
+                        "smithy.api#documentation": "<p>An IAM policy.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2457,7 +2459,7 @@
                 "policy": {
                     "target": "com.amazonaws.vpclattice#PolicyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM policy.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service network or service.</p>"
                     }
                 }
             }
@@ -3095,6 +3097,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.vpclattice#InternalServerException"
                 },
                 {
@@ -3528,6 +3533,23 @@
                 ]
             }
         },
+        "com.amazonaws.vpclattice#LambdaEventStructureVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "V1",
+                        "value": "V1",
+                        "documentation": "This is the default lambda event structure version"
+                    },
+                    {
+                        "name": "V2",
+                        "value": "V2",
+                        "documentation": "Indicates use of lambda event structure version 2"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.vpclattice#ListAccessLogSubscriptions": {
             "type": "operation",
             "input": {
@@ -3537,6 +3559,9 @@
                 "target": "com.amazonaws.vpclattice#ListAccessLogSubscriptionsResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.vpclattice#InternalServerException"
                 },
@@ -4124,6 +4149,9 @@
                 "target": "com.amazonaws.vpclattice#ListTagsForResourceResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.vpclattice#InternalServerException"
                 },
@@ -4955,158 +4983,6 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpc-lattice-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpc-lattice-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpc-lattice.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpc-lattice.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpc-lattice-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "cn-north-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpc-lattice-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "cn-north-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpc-lattice.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "cn-north-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpc-lattice.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "cn-north-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpc-lattice-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://vpc-lattice.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false
-                            }
-                        },
-                        {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
@@ -5114,9 +4990,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5127,9 +5003,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -5140,9 +5016,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5153,9 +5029,161 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpc-lattice-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpc-lattice-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpc-lattice.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpc-lattice.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpc-lattice-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpc-lattice-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpc-lattice.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpc-lattice.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpc-lattice-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://vpc-lattice.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -5164,9 +5192,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5177,9 +5205,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -5188,9 +5216,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5201,22 +5229,35 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5226,9 +5267,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5238,10 +5279,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -5364,7 +5411,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates the auth policy. The policy string in JSON must not contain newlines or\n   blank lines.</p>",
+                "smithy.api#documentation": "<p>Creates or updates the auth policy.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -5386,7 +5433,7 @@
                 "policy": {
                     "target": "com.amazonaws.vpclattice#AuthPolicyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The auth policy. The policy string in JSON must not contain newlines or blank lines.</p>",
+                        "smithy.api#documentation": "<p>The auth policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5398,13 +5445,13 @@
                 "policy": {
                     "target": "com.amazonaws.vpclattice#AuthPolicyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The auth policy. The policy string in JSON must not contain newlines or blank lines.</p>"
+                        "smithy.api#documentation": "<p>The auth policy.</p>"
                     }
                 },
                 "state": {
                     "target": "com.amazonaws.vpclattice#AuthPolicyState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the auth policy. The auth policy is only active when the auth type is set to\n     <code>AWS_IAM</code>. If you provide a policy, then authentication and\n   authorization decisions are made based on this policy and the client's IAM policy. If the Auth\n   type is <code>NONE</code>, then, any auth policy you provide will remain inactive. For more\n   information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network\">Create a service\n    network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The state of the auth policy. The auth policy is only active when the auth type is set to\n     <code>Amazon Web Services_IAM</code>. If you provide a policy, then authentication and\n   authorization decisions are made based on this policy and the client's IAM policy. If the Auth\n   type is <code>NONE</code>, then, any auth policy you provide will remain inactive. For more\n   information, see <a href=\"https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network\">Create a service\n    network</a> in the <i>Amazon VPC Lattice User Guide</i>.</p>"
                     }
                 }
             }
@@ -5458,7 +5505,7 @@
                 "policy": {
                     "target": "com.amazonaws.vpclattice#PolicyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM policy. The policy string in JSON must not contain newlines or\n   blank lines.</p>",
+                        "smithy.api#documentation": "<p>An IAM policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6050,7 +6097,7 @@
                     "min": 32,
                     "max": 32
                 },
-                "smithy.api#pattern": "^servicenetwork-[0-9a-z]{17}$"
+                "smithy.api#pattern": "^sn-[0-9a-z]{17}$"
             }
         },
         "com.amazonaws.vpclattice#ServiceNetworkIdentifier": {
@@ -6076,7 +6123,7 @@
                     "min": 3,
                     "max": 63
                 },
-                "smithy.api#pattern": "^(?!servicenetwork-)(?![-])(?!.*[-]$)(?!.*[-]{2})[a-z0-9-]+$"
+                "smithy.api#pattern": "^(?![-])(?!.*[-]$)(?!.*[-]{2})[a-z0-9-]+$"
             }
         },
         "com.amazonaws.vpclattice#ServiceNetworkServiceAssociation": {
@@ -6813,15 +6860,13 @@
                 "port": {
                     "target": "com.amazonaws.vpclattice#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port on which the targets are listening. For HTTP, the default is <code>80</code>. For\n   HTTPS, the default is <code>443</code>\n         </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The port on which the targets are listening. For HTTP, the default is <code>80</code>. For\n   HTTPS, the default is <code>443</code>\n         </p>"
                     }
                 },
                 "protocol": {
                     "target": "com.amazonaws.vpclattice#TargetGroupProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol to use for routing traffic to the targets. Default is the protocol of a target\n   group.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The protocol to use for routing traffic to the targets. Default is the protocol of a target\n   group.</p>"
                     }
                 },
                 "protocolVersion": {
@@ -6839,14 +6884,19 @@
                 "vpcIdentifier": {
                     "target": "com.amazonaws.vpclattice#VpcId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the VPC.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the VPC.</p>"
                     }
                 },
                 "healthCheck": {
                     "target": "com.amazonaws.vpclattice#HealthCheckConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The health check configuration.</p>"
+                    }
+                },
+                "lambdaEventStructureVersion": {
+                    "target": "com.amazonaws.vpclattice#LambdaEventStructureVersion",
+                    "traits": {
+                        "smithy.api#documentation": "Lambda event structure version"
                     }
                 }
             },
@@ -7035,6 +7085,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of Amazon Resource Names (ARNs) of the service.</p>"
                     }
+                },
+                "lambdaEventStructureVersion": {
+                    "target": "com.amazonaws.vpclattice#LambdaEventStructureVersion",
+                    "traits": {
+                        "smithy.api#documentation": "Lambda event structure version"
+                    }
                 }
             },
             "traits": {
@@ -7220,6 +7276,9 @@
                 "target": "com.amazonaws.vpclattice#UntagResourceResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.vpclattice#InternalServerException"
                 },
@@ -7766,7 +7825,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the service network and VPC association. If you add a security group to the service\n   network and VPC association, the association must continue to always have at least one security\n   group. You can add or edit security groups at any time. However, to remove all security groups,\n   you must first delete the association and recreate it without security groups.</p>",
+                "smithy.api#documentation": "<p>Updates the service network and VPC association. Once you add a security group, it cannot be\n   removed.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "uri": "/servicenetworkvpcassociations/{serviceNetworkVpcAssociationIdentifier}",
@@ -7789,7 +7848,7 @@
                 "securityGroupIds": {
                     "target": "com.amazonaws.vpclattice#SecurityGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the security groups. </p>",
+                        "smithy.api#documentation": "<p>The IDs of the security groups. Once you add a security group, it cannot be removed.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 5
@@ -7909,6 +7968,9 @@
                 "target": "com.amazonaws.vpclattice#UpdateTargetGroupResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.vpclattice#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.vpclattice#ConflictException"
                 },

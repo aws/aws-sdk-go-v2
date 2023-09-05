@@ -228,6 +228,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The applications that might be running on the instances in the Auto Scaling group\n            as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instances:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Kafka</code> - Infers that Kafka might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SQLServer</code> - Infers that SQLServer might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "currentInstanceGpuInfo": {
+                    "target": "com.amazonaws.computeoptimizer#GpuInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the current instance type of the Auto Scaling group.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -273,6 +279,12 @@
                     "target": "com.amazonaws.computeoptimizer#MigrationEffort",
                     "traits": {
                         "smithy.api#documentation": "<p>The level of effort required to migrate from the current instance type to the\n            recommended instance type.</p>\n         <p>For example, the migration effort is <code>Low</code> if Amazon EMR is the\n            inferred workload type and an Amazon Web Services Graviton instance type is recommended.\n            The migration effort is <code>Medium</code> if a workload type couldn't be inferred but\n            an Amazon Web Services Graviton instance type is recommended. The migration effort is\n                <code>VeryLow</code> if both the current and recommended instance types are of the\n            same CPU architecture.</p>"
+                    }
+                },
+                "instanceGpuInfo": {
+                    "target": "com.amazonaws.computeoptimizer#GpuInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the recommended instance type of the Auto Scaling group.\n        </p>"
                     }
                 }
             },
@@ -3200,6 +3212,42 @@
                     "traits": {
                         "smithy.api#enumValue": "RecommendationOptionsMigrationEffort"
                     }
+                },
+                "CURRENT_INSTANCE_GPU_INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentInstanceGpuInfo"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsInstanceGpuInfo"
+                    }
+                },
+                "UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsGpuPercentageMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsGpuMemoryPercentageMaximum"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum"
+                    }
                 }
             }
         },
@@ -3708,6 +3756,48 @@
                     "traits": {
                         "smithy.api#enumValue": "ExternalMetricStatusReason"
                     }
+                },
+                "CURRENT_INSTANCE_GPU_INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentInstanceGpuInfo"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsInstanceGpuInfo"
+                    }
+                },
+                "UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsGpuPercentageMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsGpuMemoryPercentageMaximum"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum"
+                    }
+                },
+                "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum"
+                    }
+                },
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Idle"
+                    }
                 }
             }
         },
@@ -4208,6 +4298,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Tags"
+                    }
+                },
+                "CURRENT_CONFIGURATION_ROOT_VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentConfigurationRootVolume"
                     }
                 }
             }
@@ -5758,6 +5854,60 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.computeoptimizer#Gpu": {
+            "type": "structure",
+            "members": {
+                "gpuCount": {
+                    "target": "com.amazonaws.computeoptimizer#GpuCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The number of GPUs for the instance type.\n        </p>"
+                    }
+                },
+                "gpuMemorySizeInMiB": {
+                    "target": "com.amazonaws.computeoptimizer#GpuMemorySizeInMiB",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The total size of the memory for the GPU accelerators for the instance type, in MiB.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the GPU accelerators for the instance type.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GpuCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.computeoptimizer#GpuInfo": {
+            "type": "structure",
+            "members": {
+                "gpus": {
+                    "target": "com.amazonaws.computeoptimizer#Gpus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerators for the instance type.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the instance type.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GpuMemorySizeInMiB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.computeoptimizer#Gpus": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#Gpu"
+            }
+        },
         "com.amazonaws.computeoptimizer#High": {
             "type": "long",
             "traits": {
@@ -5890,6 +6040,23 @@
                 "target": "com.amazonaws.computeoptimizer#InstanceArn"
             }
         },
+        "com.amazonaws.computeoptimizer#InstanceIdle": {
+            "type": "enum",
+            "members": {
+                "TRUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "True"
+                    }
+                },
+                "FALSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "False"
+                    }
+                }
+            }
+        },
         "com.amazonaws.computeoptimizer#InstanceName": {
             "type": "string"
         },
@@ -5998,6 +6165,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            An object that describes Compute Optimizer's integration status with your external metrics provider.\n        </p>"
                     }
+                },
+                "currentInstanceGpuInfo": {
+                    "target": "com.amazonaws.computeoptimizer#GpuInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the current instance type.\n        </p>"
+                    }
+                },
+                "idle": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceIdle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes if an Amazon EC2 instance is idle.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -6102,6 +6281,30 @@
                     "traits": {
                         "smithy.api#enumValue": "DiskThroughputUnderprovisioned"
                     }
+                },
+                "GPU_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GPUUnderprovisioned"
+                    }
+                },
+                "GPU_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GPUOverprovisioned"
+                    }
+                },
+                "GPU_MEMORY_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GPUMemoryUnderprovisioned"
+                    }
+                },
+                "GPU_MEMORY_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GPUMemoryOverprovisioned"
+                    }
                 }
             }
         },
@@ -6156,6 +6359,12 @@
                     "target": "com.amazonaws.computeoptimizer#MigrationEffort",
                     "traits": {
                         "smithy.api#documentation": "<p>The level of effort required to migrate from the current instance type to the\n            recommended instance type.</p>\n         <p>For example, the migration effort is <code>Low</code> if Amazon EMR is the\n            inferred workload type and an Amazon Web Services Graviton instance type is recommended.\n            The migration effort is <code>Medium</code> if a workload type couldn't be inferred but\n            an Amazon Web Services Graviton instance type is recommended. The migration effort is\n                <code>VeryLow</code> if both the current and recommended instance types are of the\n            same CPU architecture.</p>"
+                    }
+                },
+                "instanceGpuInfo": {
+                    "target": "com.amazonaws.computeoptimizer#GpuInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the recommended instance type.\n        </p>"
                     }
                 }
             },
@@ -7207,6 +7416,18 @@
                     "traits": {
                         "smithy.api#enumValue": "NETWORK_PACKETS_OUT_PER_SECOND"
                     }
+                },
+                "GPU_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GPU_PERCENTAGE"
+                    }
+                },
+                "GPU_MEMORY_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GPU_MEMORY_PERCENTAGE"
+                    }
                 }
             }
         },
@@ -7439,7 +7660,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the projected utilization metric.</p>\n         <p>The following projected utilization metrics are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Cpu</code> - The projected percentage of allocated EC2 compute units\n                    that would be in use on the recommendation option had you used that resource\n                    during the analyzed period. This metric identifies the processing power required\n                    to run an application on the recommendation option.</p>\n               <p>Depending on the instance type, tools in your operating system can show a\n                    lower percentage than CloudWatch when the instance is not allocated a full\n                    processor core.</p>\n               <p>Units: Percent</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memory</code> - The percentage of memory that would be in use on the\n                    recommendation option had you used that resource during the analyzed period.\n                    This metric identifies the amount of memory required to run an application on\n                    the recommendation option.</p>\n               <p>Units: Percent</p>\n               <note>\n                  <p>The <code>Memory</code> metric is returned only for resources that have\n                        the unified CloudWatch agent installed on them. For more information,\n                        see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                            Utilization with the CloudWatch Agent</a>.</p>\n               </note>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the projected utilization metric.</p>\n         <p>The following projected utilization metrics are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Cpu</code> - The projected percentage of allocated EC2 compute units\n                    that would be in use on the recommendation option had you used that resource\n                    during the analyzed period. This metric identifies the processing power required\n                    to run an application on the recommendation option.</p>\n               <p>Depending on the instance type, tools in your operating system can show a\n                    lower percentage than CloudWatch when the instance is not allocated a full\n                    processor core.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memory</code> - The percentage of memory that would be in use on the\n                    recommendation option had you used that resource during the analyzed period.\n                    This metric identifies the amount of memory required to run an application on\n                    the recommendation option.</p>\n               <p>Units: Percent</p>\n               <note>\n                  <p>The <code>Memory</code> metric is only returned for resources with\n                        the unified CloudWatch agent installed on them. For more information,\n                        see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                            Utilization with the CloudWatch Agent</a>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>GPU</code> - The projected percentage of allocated GPUs if you adjust your\n                    configurations to Compute Optimizer's recommendation option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GPU_MEMORY</code> - The projected percentage of total GPU memory if you adjust your\n                    configurations to Compute Optimizer's recommendation option.</p>\n               <note>\n                  <p>The <code>GPU</code> and <code>GPU_MEMORY</code> metrics are only returned for resources \n                        with the unified CloudWatch Agent installed on them. For more information, see \n                        <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent\">Enabling NVIDIA GPU \n                            utilization with the CloudWatch Agent</a>.</p>\n               </note>\n            </li>\n         </ul>"
                     }
                 },
                 "timestamps": {
@@ -7456,7 +7677,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a projected utilization metric of a recommendation option, such as an\n                Amazon EC2 instance. This represents the projected utilization of a\n            recommendation option had you used that resource during the analyzed period.</p>\n         <p>Compare the utilization metric data of your resource against its projected utilization\n            metric data to determine the performance difference between your current resource and\n            the recommended option.</p>\n         <note>\n            <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected\n                utilization metrics returned when you run the <a>GetEC2RecommendationProjectedMetrics</a> action. Additionally, the\n                    <code>Memory</code> metric is returned only for resources that have the unified\n                    CloudWatch agent installed on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory Utilization with the CloudWatch Agent</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes a projected utilization metric of a recommendation option, such as an\n                Amazon EC2 instance. This represents the projected utilization of a\n            recommendation option had you used that resource during the analyzed period.</p>\n         <p>Compare the utilization metric data of your resource against its projected utilization\n            metric data to determine the performance difference between your current resource and\n            the recommended option.</p>\n         <note>\n            <p>The <code>Cpu</code>, <code>Memory</code>, <code>GPU</code>, and <code>GPU_MEMORY</code> metrics \n                are the only projected utilization metrics returned when you run the <a>GetEC2RecommendationProjectedMetrics</a> action. Additionally, these\n                    metrics are only returned for resources with the unified\n                    CloudWatch agent installed on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory Utilization with the CloudWatch Agent</a> and\n                    <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent\">Enabling NVIDIA GPU \n                        utilization with the CloudWatch Agent</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.computeoptimizer#ProjectedMetrics": {
@@ -7849,7 +8070,7 @@
                 "inferredWorkloadSavings": {
                     "target": "com.amazonaws.computeoptimizer#InferredWorkloadSavings",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            An array of objects that describes the estimated monthly saving amounts for the instances running on the specified \n            <code>inferredWorkloadTypes</code>. The array contains the top three savings opportunites for the instances running \n            inferred workload types.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            An array of objects that describes the estimated monthly saving amounts for the instances running on the specified \n            <code>inferredWorkloadTypes</code>. The array contains the top five savings opportunites for the instances that run \n            inferred workload types.\n        </p>"
                     }
                 }
             },
@@ -8361,7 +8582,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the utilization metric.</p>\n         <p>The following utilization metrics are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Cpu</code> - The percentage of allocated EC2 compute units that are\n                    currently in use on the instance. This metric identifies the processing power\n                    required to run an application on the instance.</p>\n               <p>Depending on the instance type, tools in your operating system can show a\n                    lower percentage than CloudWatch when the instance is not allocated a full\n                    processor core.</p>\n               <p>Units: Percent</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memory</code> - The percentage of memory that is currently in use on the\n                    instance. This metric identifies the amount of memory required to run an\n                    application on the instance.</p>\n               <p>Units: Percent</p>\n               <note>\n                  <p>The <code>Memory</code> metric is returned only for resources that have\n                        the unified CloudWatch agent installed on them. For more information,\n                        see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                            Utilization with the CloudWatch Agent</a>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>EBS_READ_OPS_PER_SECOND</code> - The completed read operations from all\n                    EBS volumes attached to the instance in a specified period of time.</p>\n               <p>Unit: Count</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS_WRITE_OPS_PER_SECOND</code> - The completed write operations to all\n                    EBS volumes attached to the instance in a specified period of time.</p>\n               <p>Unit: Count</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS_READ_BYTES_PER_SECOND</code> - The bytes read from all EBS volumes\n                    attached to the instance in a specified period of time.</p>\n               <p>Unit: Bytes</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS_WRITE_BYTES_PER_SECOND</code> - The bytes written to all EBS volumes\n                    attached to the instance in a specified period of time.</p>\n               <p>Unit: Bytes</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISK_READ_OPS_PER_SECOND</code> - The completed read operations from all\n                    instance store volumes available to the instance in a specified period of\n                    time.</p>\n               <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISK_WRITE_OPS_PER_SECOND</code> - The completed write operations from\n                    all instance store volumes available to the instance in a specified period of\n                    time.</p>\n               <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISK_READ_BYTES_PER_SECOND</code> - The bytes read from all instance\n                    store volumes available to the instance. This metric is used to determine the\n                    volume of the data the application reads from the disk of the instance. This can\n                    be used to determine the speed of the application.</p>\n               <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISK_WRITE_BYTES_PER_SECOND</code> - The bytes written to all instance\n                    store volumes available to the instance. This metric is used to determine the\n                    volume of the data the application writes onto the disk of the instance. This\n                    can be used to determine the speed of the application.</p>\n               <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_IN_BYTES_PER_SECOND</code> - The number of bytes received by the\n                    instance on all network interfaces. This metric identifies the volume of\n                    incoming network traffic to a single instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_OUT_BYTES_PER_SECOND</code> - The number of bytes sent out by\n                    the instance on all network interfaces. This metric identifies the volume of\n                    outgoing network traffic from a single instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_PACKETS_IN_PER_SECOND</code> - The number of packets received by\n                    the instance on all network interfaces. This metric identifies the volume of\n                    incoming traffic in terms of the number of packets on a single instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_PACKETS_OUT_PER_SECOND</code> - The number of packets sent out\n                    by the instance on all network interfaces. This metric identifies the volume of\n                    outgoing traffic in terms of the number of packets on a single instance.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the utilization metric.</p>\n         <p>The following utilization metrics are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Cpu</code> - The percentage of allocated EC2 compute units that are\n                    currently in use on the instance. This metric identifies the processing power\n                    required to run an application on the instance.</p>\n               <p>Depending on the instance type, tools in your operating system can show a\n                    lower percentage than CloudWatch when the instance is not allocated a full\n                    processor core.</p>\n               <p>Units: Percent</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memory</code> - The percentage of memory that is currently in use on the\n                    instance. This metric identifies the amount of memory required to run an\n                    application on the instance.</p>\n               <p>Units: Percent</p>\n               <note>\n                  <p>The <code>Memory</code> metric is returned only for resources that have\n                        the unified CloudWatch agent installed on them. For more information,\n                        see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                            Utilization with the CloudWatch Agent</a>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>GPU</code> - The percentage of allocated GPUs that currently run on \n                    the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GPU_MEMORY</code> - The percentage of total GPU memory that currently runs on \n                    the instance.</p>\n               <note>\n                  <p>The <code>GPU</code> and <code>GPU_MEMORY</code> metrics are only returned for resources \n                        with the unified CloudWatch Agent installed on them. For more information, see \n                        <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent\">Enabling NVIDIA GPU \n                            utilization with the CloudWatch Agent</a>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>EBS_READ_OPS_PER_SECOND</code> - The completed read operations from all\n                    EBS volumes attached to the instance in a specified period of time.</p>\n               <p>Unit: Count</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS_WRITE_OPS_PER_SECOND</code> - The completed write operations to all\n                    EBS volumes attached to the instance in a specified period of time.</p>\n               <p>Unit: Count</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS_READ_BYTES_PER_SECOND</code> - The bytes read from all EBS volumes\n                    attached to the instance in a specified period of time.</p>\n               <p>Unit: Bytes</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS_WRITE_BYTES_PER_SECOND</code> - The bytes written to all EBS volumes\n                    attached to the instance in a specified period of time.</p>\n               <p>Unit: Bytes</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISK_READ_OPS_PER_SECOND</code> - The completed read operations from all\n                    instance store volumes available to the instance in a specified period of\n                    time.</p>\n               <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISK_WRITE_OPS_PER_SECOND</code> - The completed write operations from\n                    all instance store volumes available to the instance in a specified period of\n                    time.</p>\n               <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISK_READ_BYTES_PER_SECOND</code> - The bytes read from all instance\n                    store volumes available to the instance. This metric is used to determine the\n                    volume of the data the application reads from the disk of the instance. This can\n                    be used to determine the speed of the application.</p>\n               <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISK_WRITE_BYTES_PER_SECOND</code> - The bytes written to all instance\n                    store volumes available to the instance. This metric is used to determine the\n                    volume of the data the application writes onto the disk of the instance. This\n                    can be used to determine the speed of the application.</p>\n               <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_IN_BYTES_PER_SECOND</code> - The number of bytes received by the\n                    instance on all network interfaces. This metric identifies the volume of\n                    incoming network traffic to a single instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_OUT_BYTES_PER_SECOND</code> - The number of bytes sent out by\n                    the instance on all network interfaces. This metric identifies the volume of\n                    outgoing network traffic from a single instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_PACKETS_IN_PER_SECOND</code> - The number of packets received by\n                    the instance on all network interfaces. This metric identifies the volume of\n                    incoming traffic in terms of the number of packets on a single instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK_PACKETS_OUT_PER_SECOND</code> - The number of packets sent out\n                    by the instance on all network interfaces. This metric identifies the volume of\n                    outgoing traffic in terms of the number of packets on a single instance.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "statistic": {
