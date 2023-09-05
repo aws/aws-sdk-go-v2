@@ -17,8 +17,8 @@ import (
 // For region af-south-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase0(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("af-south-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -56,8 +56,8 @@ func TestEndpointCase0(t *testing.T) {
 // For region ap-east-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase1(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("ap-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -95,8 +95,8 @@ func TestEndpointCase1(t *testing.T) {
 // For region ap-northeast-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase2(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("ap-northeast-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -134,8 +134,8 @@ func TestEndpointCase2(t *testing.T) {
 // For region ap-northeast-2 with FIPS disabled and DualStack disabled
 func TestEndpointCase3(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("ap-northeast-2"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -173,8 +173,8 @@ func TestEndpointCase3(t *testing.T) {
 // For region ap-northeast-3 with FIPS disabled and DualStack disabled
 func TestEndpointCase4(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("ap-northeast-3"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -212,8 +212,8 @@ func TestEndpointCase4(t *testing.T) {
 // For region ap-south-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase5(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("ap-south-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -251,8 +251,8 @@ func TestEndpointCase5(t *testing.T) {
 // For region ap-southeast-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase6(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("ap-southeast-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -290,8 +290,8 @@ func TestEndpointCase6(t *testing.T) {
 // For region ap-southeast-2 with FIPS disabled and DualStack disabled
 func TestEndpointCase7(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("ap-southeast-2"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -329,8 +329,8 @@ func TestEndpointCase7(t *testing.T) {
 // For region ap-southeast-3 with FIPS disabled and DualStack disabled
 func TestEndpointCase8(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("ap-southeast-3"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -368,8 +368,8 @@ func TestEndpointCase8(t *testing.T) {
 // For region ca-central-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase9(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("ca-central-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -407,8 +407,8 @@ func TestEndpointCase9(t *testing.T) {
 // For region eu-central-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase10(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("eu-central-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -446,8 +446,8 @@ func TestEndpointCase10(t *testing.T) {
 // For region eu-north-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase11(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("eu-north-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -485,8 +485,8 @@ func TestEndpointCase11(t *testing.T) {
 // For region eu-south-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase12(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("eu-south-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -524,8 +524,8 @@ func TestEndpointCase12(t *testing.T) {
 // For region eu-west-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase13(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("eu-west-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -563,8 +563,8 @@ func TestEndpointCase13(t *testing.T) {
 // For region eu-west-2 with FIPS disabled and DualStack disabled
 func TestEndpointCase14(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("eu-west-2"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -602,8 +602,8 @@ func TestEndpointCase14(t *testing.T) {
 // For region eu-west-3 with FIPS disabled and DualStack disabled
 func TestEndpointCase15(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("eu-west-3"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -641,8 +641,8 @@ func TestEndpointCase15(t *testing.T) {
 // For region me-south-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase16(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("me-south-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -680,8 +680,8 @@ func TestEndpointCase16(t *testing.T) {
 // For region sa-east-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase17(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("sa-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -719,8 +719,8 @@ func TestEndpointCase17(t *testing.T) {
 // For region us-east-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase18(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -758,8 +758,8 @@ func TestEndpointCase18(t *testing.T) {
 // For region us-east-1 with FIPS enabled and DualStack disabled
 func TestEndpointCase19(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-east-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -797,8 +797,8 @@ func TestEndpointCase19(t *testing.T) {
 // For region us-east-2 with FIPS disabled and DualStack disabled
 func TestEndpointCase20(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-east-2"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -836,8 +836,8 @@ func TestEndpointCase20(t *testing.T) {
 // For region us-east-2 with FIPS enabled and DualStack disabled
 func TestEndpointCase21(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-east-2"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -875,8 +875,8 @@ func TestEndpointCase21(t *testing.T) {
 // For region us-west-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase22(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-west-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -914,8 +914,8 @@ func TestEndpointCase22(t *testing.T) {
 // For region us-west-1 with FIPS enabled and DualStack disabled
 func TestEndpointCase23(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-west-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -953,8 +953,8 @@ func TestEndpointCase23(t *testing.T) {
 // For region us-west-2 with FIPS disabled and DualStack disabled
 func TestEndpointCase24(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-west-2"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -992,8 +992,8 @@ func TestEndpointCase24(t *testing.T) {
 // For region us-west-2 with FIPS enabled and DualStack disabled
 func TestEndpointCase25(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-west-2"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1031,8 +1031,8 @@ func TestEndpointCase25(t *testing.T) {
 // For region us-east-1 with FIPS enabled and DualStack enabled
 func TestEndpointCase26(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-east-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(true),
 	}
 
@@ -1070,8 +1070,8 @@ func TestEndpointCase26(t *testing.T) {
 // For region us-east-1 with FIPS disabled and DualStack enabled
 func TestEndpointCase27(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(true),
 	}
 
@@ -1109,8 +1109,8 @@ func TestEndpointCase27(t *testing.T) {
 // For region cn-north-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase28(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("cn-north-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1148,8 +1148,8 @@ func TestEndpointCase28(t *testing.T) {
 // For region cn-northwest-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase29(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("cn-northwest-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1187,8 +1187,8 @@ func TestEndpointCase29(t *testing.T) {
 // For region cn-north-1 with FIPS enabled and DualStack enabled
 func TestEndpointCase30(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("cn-north-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(true),
 	}
 
@@ -1226,8 +1226,8 @@ func TestEndpointCase30(t *testing.T) {
 // For region cn-north-1 with FIPS enabled and DualStack disabled
 func TestEndpointCase31(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("cn-north-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1265,8 +1265,8 @@ func TestEndpointCase31(t *testing.T) {
 // For region cn-north-1 with FIPS disabled and DualStack enabled
 func TestEndpointCase32(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("cn-north-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(true),
 	}
 
@@ -1304,8 +1304,8 @@ func TestEndpointCase32(t *testing.T) {
 // For region us-gov-east-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase33(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-gov-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1343,8 +1343,8 @@ func TestEndpointCase33(t *testing.T) {
 // For region us-gov-east-1 with FIPS enabled and DualStack disabled
 func TestEndpointCase34(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-gov-east-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1382,8 +1382,8 @@ func TestEndpointCase34(t *testing.T) {
 // For region us-gov-west-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase35(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-gov-west-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1421,8 +1421,8 @@ func TestEndpointCase35(t *testing.T) {
 // For region us-gov-west-1 with FIPS enabled and DualStack disabled
 func TestEndpointCase36(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-gov-west-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1460,8 +1460,8 @@ func TestEndpointCase36(t *testing.T) {
 // For region us-gov-east-1 with FIPS enabled and DualStack enabled
 func TestEndpointCase37(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-gov-east-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(true),
 	}
 
@@ -1499,8 +1499,8 @@ func TestEndpointCase37(t *testing.T) {
 // For region us-gov-east-1 with FIPS disabled and DualStack enabled
 func TestEndpointCase38(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-gov-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(true),
 	}
 
@@ -1538,8 +1538,8 @@ func TestEndpointCase38(t *testing.T) {
 // For region us-iso-east-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase39(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-iso-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1577,8 +1577,8 @@ func TestEndpointCase39(t *testing.T) {
 // For region us-iso-west-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase40(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-iso-west-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1616,8 +1616,8 @@ func TestEndpointCase40(t *testing.T) {
 // For region us-iso-east-1 with FIPS enabled and DualStack enabled
 func TestEndpointCase41(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-iso-east-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(true),
 	}
 
@@ -1636,8 +1636,8 @@ func TestEndpointCase41(t *testing.T) {
 // For region us-iso-east-1 with FIPS enabled and DualStack disabled
 func TestEndpointCase42(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-iso-east-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1675,8 +1675,8 @@ func TestEndpointCase42(t *testing.T) {
 // For region us-iso-east-1 with FIPS disabled and DualStack enabled
 func TestEndpointCase43(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-iso-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(true),
 	}
 
@@ -1695,8 +1695,8 @@ func TestEndpointCase43(t *testing.T) {
 // For region us-isob-east-1 with FIPS disabled and DualStack disabled
 func TestEndpointCase44(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-isob-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1734,8 +1734,8 @@ func TestEndpointCase44(t *testing.T) {
 // For region us-isob-east-1 with FIPS enabled and DualStack enabled
 func TestEndpointCase45(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-isob-east-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(true),
 	}
 
@@ -1754,8 +1754,8 @@ func TestEndpointCase45(t *testing.T) {
 // For region us-isob-east-1 with FIPS enabled and DualStack disabled
 func TestEndpointCase46(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-isob-east-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(false),
 	}
 
@@ -1793,8 +1793,8 @@ func TestEndpointCase46(t *testing.T) {
 // For region us-isob-east-1 with FIPS disabled and DualStack enabled
 func TestEndpointCase47(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-isob-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(true),
 	}
 
@@ -1813,8 +1813,8 @@ func TestEndpointCase47(t *testing.T) {
 // For custom endpoint with region set and fips disabled and dualstack disabled
 func TestEndpointCase48(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
 		Endpoint:     ptr.String("https://example.com"),
 	}
@@ -1892,8 +1892,8 @@ func TestEndpointCase49(t *testing.T) {
 // For custom endpoint with fips enabled and dualstack disabled
 func TestEndpointCase50(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(true),
 		Region:       ptr.String("us-east-1"),
+		UseFIPS:      ptr.Bool(true),
 		UseDualStack: ptr.Bool(false),
 		Endpoint:     ptr.String("https://example.com"),
 	}
@@ -1913,8 +1913,8 @@ func TestEndpointCase50(t *testing.T) {
 // For custom endpoint with fips disabled and dualstack enabled
 func TestEndpointCase51(t *testing.T) {
 	var params = EndpointParameters{
-		UseFIPS:      ptr.Bool(false),
 		Region:       ptr.String("us-east-1"),
+		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(true),
 		Endpoint:     ptr.String("https://example.com"),
 	}
@@ -2185,5 +2185,26 @@ func TestEndpointCase59(t *testing.T) {
 		cmp.AllowUnexported(smithy.Properties{}),
 	); diff != "" {
 		t.Errorf("expect properties to match\n%s", diff)
+	}
+}
+
+// Valid EndpointId with DualStack enabled and partition does not support DualStack
+func TestEndpointCase60(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(true),
+		UseFIPS:      ptr.Bool(false),
+		Region:       ptr.String("us-isob-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
 	}
 }

@@ -1344,27 +1344,6 @@ func validateTarget(v *types.Target) error {
 	}
 }
 
-func validateTargetGroupConfig(v *types.TargetGroupConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TargetGroupConfig"}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
-	}
-	if len(v.Protocol) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
-	}
-	if v.VpcIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VpcIdentifier"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateTargetList(v []types.Target) error {
 	if v == nil {
 		return nil
@@ -1599,11 +1578,6 @@ func validateOpCreateTargetGroupInput(v *CreateTargetGroupInput) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.Config != nil {
-		if err := validateTargetGroupConfig(v.Config); err != nil {
-			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

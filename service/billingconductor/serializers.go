@@ -3030,6 +3030,13 @@ func awsRestjson1_serializeDocumentCustomLineItemChargeDetails(v *types.CustomLi
 		}
 	}
 
+	if v.LineItemFilters != nil {
+		ok := object.Key("LineItemFilters")
+		if err := awsRestjson1_serializeDocumentLineItemFiltersList(v.LineItemFilters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Percentage != nil {
 		ok := object.Key("Percentage")
 		if err := awsRestjson1_serializeDocumentCustomLineItemPercentageChargeDetails(v.Percentage, ok); err != nil {
@@ -3110,6 +3117,54 @@ func awsRestjson1_serializeDocumentCustomLineItemPercentageChargeDetails(v *type
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLineItemFilter(v *types.LineItemFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Attribute) > 0 {
+		ok := object.Key("Attribute")
+		ok.String(string(v.Attribute))
+	}
+
+	if len(v.MatchOption) > 0 {
+		ok := object.Key("MatchOption")
+		ok.String(string(v.MatchOption))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsRestjson1_serializeDocumentLineItemFilterValuesList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLineItemFiltersList(v []types.LineItemFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLineItemFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLineItemFilterValuesList(v []types.LineItemFilterValue, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -3355,6 +3410,13 @@ func awsRestjson1_serializeDocumentUpdateCustomLineItemChargeDetails(v *types.Up
 	if v.Flat != nil {
 		ok := object.Key("Flat")
 		if err := awsRestjson1_serializeDocumentUpdateCustomLineItemFlatChargeDetails(v.Flat, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LineItemFilters != nil {
+		ok := object.Key("LineItemFilters")
+		if err := awsRestjson1_serializeDocumentLineItemFiltersList(v.LineItemFilters, ok); err != nil {
 			return err
 		}
 	}

@@ -78,6 +78,26 @@ func (IpAddressType) Values() []IpAddressType {
 	}
 }
 
+type LambdaEventStructureVersion string
+
+// Enum values for LambdaEventStructureVersion
+const (
+	// This is the default lambda event structure version
+	LambdaEventStructureVersionV1 LambdaEventStructureVersion = "V1"
+	// Indicates use of lambda event structure version 2
+	LambdaEventStructureVersionV2 LambdaEventStructureVersion = "V2"
+)
+
+// Values returns all known values for LambdaEventStructureVersion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LambdaEventStructureVersion) Values() []LambdaEventStructureVersion {
+	return []LambdaEventStructureVersion{
+		"V1",
+		"V2",
+	}
+}
+
 type ListenerProtocol string
 
 // Enum values for ListenerProtocol

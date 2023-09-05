@@ -124,6 +124,9 @@ type DescribeCompilationJobOutput struct {
 	// job, which depends on the size of the compilation job container.
 	CompilationStartTime *time.Time
 
+	// Information that SageMaker Neo automatically derived about the model.
+	DerivedInformation *types.DerivedInformation
+
 	// The inference image to use when compiling a model. Specify an image only if the
 	// target device is a cloud instance.
 	InferenceImage *string

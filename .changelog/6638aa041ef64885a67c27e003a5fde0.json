@@ -1,0 +1,8 @@
+{
+    "id": "6638aa04-1ef6-4885-a67c-27e003a5fde0",
+    "type": "feature",
+    "description": "This release adds support for line item filtering in for the custom line item resource.",
+    "modules": [
+        "service/billingconductor"
+    ]
+}

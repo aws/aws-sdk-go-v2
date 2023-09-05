@@ -13447,6 +13447,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.Boolean(*v.AutoMinorVersionUpgrade)
 	}
 
+	if v.AwsBackupRecoveryPointArn != nil {
+		objectKey := object.Key("AwsBackupRecoveryPointArn")
+		objectKey.String(*v.AwsBackupRecoveryPointArn)
+	}
+
 	if v.BacktrackWindow != nil {
 		objectKey := object.Key("BacktrackWindow")
 		objectKey.Long(*v.BacktrackWindow)

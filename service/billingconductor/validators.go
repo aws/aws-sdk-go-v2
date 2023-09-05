@@ -707,6 +707,11 @@ func validateCustomLineItemChargeDetails(v *types.CustomLineItemChargeDetails) e
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if v.LineItemFilters != nil {
+		if err := validateLineItemFiltersList(v.LineItemFilters); err != nil {
+			invalidParams.AddNested("LineItemFilters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -744,6 +749,44 @@ func validateCustomLineItemPercentageChargeDetails(v *types.CustomLineItemPercen
 	}
 }
 
+func validateLineItemFilter(v *types.LineItemFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LineItemFilter"}
+	if len(v.Attribute) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if len(v.MatchOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchOption"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLineItemFiltersList(v []types.LineItemFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LineItemFiltersList"}
+	for i := range v {
+		if err := validateLineItemFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateCustomLineItemChargeDetails(v *types.UpdateCustomLineItemChargeDetails) error {
 	if v == nil {
 		return nil
@@ -757,6 +800,11 @@ func validateUpdateCustomLineItemChargeDetails(v *types.UpdateCustomLineItemChar
 	if v.Percentage != nil {
 		if err := validateUpdateCustomLineItemPercentageChargeDetails(v.Percentage); err != nil {
 			invalidParams.AddNested("Percentage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LineItemFilters != nil {
+		if err := validateLineItemFiltersList(v.LineItemFilters); err != nil {
+			invalidParams.AddNested("LineItemFilters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

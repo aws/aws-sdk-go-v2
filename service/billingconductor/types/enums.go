@@ -123,6 +123,54 @@ func (CustomLineItemType) Values() []CustomLineItemType {
 	}
 }
 
+type LineItemFilterAttributeName string
+
+// Enum values for LineItemFilterAttributeName
+const (
+	LineItemFilterAttributeNameLineItemType LineItemFilterAttributeName = "LINE_ITEM_TYPE"
+)
+
+// Values returns all known values for LineItemFilterAttributeName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LineItemFilterAttributeName) Values() []LineItemFilterAttributeName {
+	return []LineItemFilterAttributeName{
+		"LINE_ITEM_TYPE",
+	}
+}
+
+type LineItemFilterValue string
+
+// Enum values for LineItemFilterValue
+const (
+	LineItemFilterValueSavingsPlanNegation LineItemFilterValue = "SAVINGS_PLAN_NEGATION"
+)
+
+// Values returns all known values for LineItemFilterValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LineItemFilterValue) Values() []LineItemFilterValue {
+	return []LineItemFilterValue{
+		"SAVINGS_PLAN_NEGATION",
+	}
+}
+
+type MatchOption string
+
+// Enum values for MatchOption
+const (
+	MatchOptionNotEqual MatchOption = "NOT_EQUAL"
+)
+
+// Values returns all known values for MatchOption. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MatchOption) Values() []MatchOption {
+	return []MatchOption{
+		"NOT_EQUAL",
+	}
+}
+
 type PricingRuleScope string
 
 // Enum values for PricingRuleScope

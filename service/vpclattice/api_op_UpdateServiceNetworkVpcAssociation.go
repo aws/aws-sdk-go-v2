@@ -16,11 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the service network and VPC association. If you add a security group to
-// the service network and VPC association, the association must continue to always
-// have at least one security group. You can add or edit security groups at any
-// time. However, to remove all security groups, you must first delete the
-// association and recreate it without security groups.
+// Updates the service network and VPC association. Once you add a security group,
+// it cannot be removed.
 func (c *Client) UpdateServiceNetworkVpcAssociation(ctx context.Context, params *UpdateServiceNetworkVpcAssociationInput, optFns ...func(*Options)) (*UpdateServiceNetworkVpcAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateServiceNetworkVpcAssociationInput{}
@@ -38,7 +35,8 @@ func (c *Client) UpdateServiceNetworkVpcAssociation(ctx context.Context, params 
 
 type UpdateServiceNetworkVpcAssociationInput struct {
 
-	// The IDs of the security groups.
+	// The IDs of the security groups. Once you add a security group, it cannot be
+	// removed.
 	//
 	// This member is required.
 	SecurityGroupIds []string

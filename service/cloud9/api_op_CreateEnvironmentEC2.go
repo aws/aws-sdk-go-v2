@@ -85,11 +85,13 @@ type CreateEnvironmentEC2Input struct {
 	//   - Amazon Linux (default): amazonlinux-1-x86_64
 	//   - Amazon Linux 2: amazonlinux-2-x86_64
 	//   - Ubuntu 18.04: ubuntu-18.04-x86_64
+	//   - Ubuntu 22.04: ubuntu-22.04-x86_64
 	// SSM paths
 	//   - Amazon Linux (default):
 	//   resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64
 	//   - Amazon Linux 2: resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64
 	//   - Ubuntu 18.04: resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64
+	//   - Ubuntu 22.04: resolve:ssm:/aws/service/cloud9/amis/ubuntu-22.04-x86_64
 	ImageId *string
 
 	// The Amazon Resource Name (ARN) of the environment owner. This ARN can be the

@@ -16,7 +16,8 @@ import (
 )
 
 // Retrieves information about the resource policy. The resource policy is an IAM
-// policy created on behalf of the resource owner when they share a resource.
+// policy created by AWS RAM on behalf of the resource owner when they share a
+// resource.
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
 		params = &GetResourcePolicyInput{}
@@ -34,7 +35,7 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 
 type GetResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the service network or service.
+	// An IAM policy.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -44,7 +45,7 @@ type GetResourcePolicyInput struct {
 
 type GetResourcePolicyOutput struct {
 
-	// An IAM policy.
+	// The Amazon Resource Name (ARN) of the service network or service.
 	Policy *string
 
 	// Metadata pertaining to the operation's result.

@@ -471,6 +471,10 @@ type DBCluster struct {
 	// created.
 	AvailabilityZones []string
 
+	// The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services
+	// Backup.
+	AwsBackupRecoveryPointArn *string
+
 	// The number of change records stored for Backtrack.
 	BacktrackConsumedChangeRecords *int64
 
@@ -769,6 +773,10 @@ type DBClusterAutomatedBackup struct {
 	// and Availability Zones (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)
 	// .
 	AvailabilityZones []string
+
+	// The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services
+	// Backup.
+	AwsBackupRecoveryPointArn *string
 
 	// The retention period for the automated backups.
 	BackupRetentionPeriod *int32
@@ -1683,6 +1691,10 @@ type DBInstanceAutomatedBackup struct {
 	// Availability Zones (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
 	// .
 	AvailabilityZone *string
+
+	// The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services
+	// Backup.
+	AwsBackupRecoveryPointArn *string
 
 	// The retention period for the automated backups.
 	BackupRetentionPeriod *int32

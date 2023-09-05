@@ -3632,6 +3632,11 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				return err
 			}
 
+		case "currentInstanceGpuInfo":
+			if err := awsAwsjson10_deserializeDocumentGpuInfo(&sv.CurrentInstanceGpuInfo, value); err != nil {
+				return err
+			}
+
 		case "currentPerformanceRisk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3753,6 +3758,11 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(v **ty
 		switch key {
 		case "configuration":
 			if err := awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "instanceGpuInfo":
+			if err := awsAwsjson10_deserializeDocumentGpuInfo(&sv.InstanceGpuInfo, value); err != nil {
 				return err
 			}
 
@@ -5449,6 +5459,133 @@ func awsAwsjson10_deserializeDocumentGetRecommendationErrors(v *[]types.GetRecom
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentGpu(v **types.Gpu, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Gpu
+	if *v == nil {
+		sv = &types.Gpu{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "gpuCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GpuCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GpuCount = int32(i64)
+			}
+
+		case "gpuMemorySizeInMiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GpuMemorySizeInMiB to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GpuMemorySizeInMiB = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentGpuInfo(v **types.GpuInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GpuInfo
+	if *v == nil {
+		sv = &types.GpuInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "gpus":
+			if err := awsAwsjson10_deserializeDocumentGpus(&sv.Gpus, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentGpus(v *[]types.Gpu, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Gpu
+	if *v == nil {
+		cv = []types.Gpu{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Gpu
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentGpu(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInferredWorkloadSaving(v **types.InferredWorkloadSaving, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5591,6 +5728,11 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				sv.AccountId = ptr.String(jtv)
 			}
 
+		case "currentInstanceGpuInfo":
+			if err := awsAwsjson10_deserializeDocumentGpuInfo(&sv.CurrentInstanceGpuInfo, value); err != nil {
+				return err
+			}
+
 		case "currentInstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5631,6 +5773,15 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 		case "findingReasonCodes":
 			if err := awsAwsjson10_deserializeDocumentInstanceRecommendationFindingReasonCodes(&sv.FindingReasonCodes, value); err != nil {
 				return err
+			}
+
+		case "idle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceIdle to be of type string, got %T instead", value)
+				}
+				sv.Idle = types.InstanceIdle(jtv)
 			}
 
 		case "inferredWorkloadTypes":
@@ -5802,6 +5953,11 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 
 	for key, value := range shape {
 		switch key {
+		case "instanceGpuInfo":
+			if err := awsAwsjson10_deserializeDocumentGpuInfo(&sv.InstanceGpuInfo, value); err != nil {
+				return err
+			}
+
 		case "instanceType":
 			if value != nil {
 				jtv, ok := value.(string)

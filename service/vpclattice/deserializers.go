@@ -1353,6 +1353,9 @@ func awsRestjson1_deserializeOpErrorCreateServiceNetworkServiceAssociation(respo
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
@@ -5608,6 +5611,9 @@ func awsRestjson1_deserializeOpErrorGetTargetGroup(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -5858,6 +5864,9 @@ func awsRestjson1_deserializeOpErrorListAccessLogSubscriptions(response *smithyh
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -7016,6 +7025,9 @@ func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -8006,6 +8018,9 @@ func awsRestjson1_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -9372,6 +9387,9 @@ func awsRestjson1_deserializeOpErrorUpdateTargetGroup(response *smithyhttp.Respo
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
@@ -12320,6 +12338,15 @@ func awsRestjson1_deserializeDocumentTargetGroupConfig(v **types.TargetGroupConf
 				sv.IpAddressType = types.IpAddressType(jtv)
 			}
 
+		case "lambdaEventStructureVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaEventStructureVersion to be of type string, got %T instead", value)
+				}
+				sv.LambdaEventStructureVersion = types.LambdaEventStructureVersion(jtv)
+			}
+
 		case "port":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12463,6 +12490,15 @@ func awsRestjson1_deserializeDocumentTargetGroupSummary(v **types.TargetGroupSum
 					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
 				}
 				sv.IpAddressType = types.IpAddressType(jtv)
+			}
+
+		case "lambdaEventStructureVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaEventStructureVersion to be of type string, got %T instead", value)
+				}
+				sv.LambdaEventStructureVersion = types.LambdaEventStructureVersion(jtv)
 			}
 
 		case "lastUpdatedAt":

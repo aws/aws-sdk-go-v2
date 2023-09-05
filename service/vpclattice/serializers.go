@@ -4571,6 +4571,11 @@ func awsRestjson1_serializeDocumentTargetGroupConfig(v *types.TargetGroupConfig,
 		ok.String(string(v.IpAddressType))
 	}
 
+	if len(v.LambdaEventStructureVersion) > 0 {
+		ok := object.Key("lambdaEventStructureVersion")
+		ok.String(string(v.LambdaEventStructureVersion))
+	}
+
 	if v.Port != nil {
 		ok := object.Key("port")
 		ok.Integer(*v.Port)

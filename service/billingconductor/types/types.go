@@ -198,6 +198,9 @@ type CustomLineItemChargeDetails struct {
 	// custom line item.
 	Flat *CustomLineItemFlatChargeDetails
 
+	// A representation of the line item filter.
+	LineItemFilters []LineItemFilter
+
 	// A CustomLineItemPercentageChargeDetails that describes the charge details of a
 	// percentage custom line item.
 	Percentage *CustomLineItemPercentageChargeDetails
@@ -342,6 +345,34 @@ type FreeTierConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A representation of the line item filter for your custom line item. You can use
+// line item filters to include or exclude specific resource values from the
+// billing group's total cost. For example, if you create a custom line item and
+// you want to filter out a value, such as Savings Plan discounts, you can update
+// LineItemFilter to exclude it.
+type LineItemFilter struct {
+
+	// The attribute of the line item filter. This specifies what attribute that you
+	// can filter on.
+	//
+	// This member is required.
+	Attribute LineItemFilterAttributeName
+
+	// The match criteria of the line item filter. This parameter specifies whether
+	// not to include the resource value from the billing group total cost.
+	//
+	// This member is required.
+	MatchOption MatchOption
+
+	// The values of the line item filter. This specifies the values to filter on.
+	// Currently, you can only exclude Savings Plan discounts.
+	//
+	// This member is required.
+	Values []LineItemFilterValue
+
+	noSmithyDocumentSerde
+}
+
 // The filter on the account ID of the linked account, or any of the following:
 // MONITORED : linked accounts that are associated to billing groups. UNMONITORED :
 // linked accounts that are not associated to billing groups. Billing Group Arn :
@@ -416,6 +447,9 @@ type ListCustomLineItemChargeDetails struct {
 	// A ListCustomLineItemFlatChargeDetails that describes the charge details of a
 	// flat custom line item.
 	Flat *ListCustomLineItemFlatChargeDetails
+
+	// A representation of the line item filter.
+	LineItemFilters []LineItemFilter
 
 	// A ListCustomLineItemPercentageChargeDetails that describes the charge details
 	// of a percentage custom line item.
@@ -651,6 +685,9 @@ type UpdateCustomLineItemChargeDetails struct {
 	// An UpdateCustomLineItemFlatChargeDetails that describes the new charge details
 	// of a flat custom line item.
 	Flat *UpdateCustomLineItemFlatChargeDetails
+
+	// A representation of the line item filter.
+	LineItemFilters []LineItemFilter
 
 	// An UpdateCustomLineItemPercentageChargeDetails that describes the new charge
 	// details of a percentage custom line item.

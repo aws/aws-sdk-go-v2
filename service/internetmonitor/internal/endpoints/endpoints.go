@@ -203,7 +203,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "ca-central-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "internetmonitor-fips.ca-central-1.api.aws",
+				Hostname: "internetmonitor-fips.ca-central-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-central-1",
@@ -274,7 +274,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-east-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "internetmonitor-fips.us-east-1.api.aws",
+				Hostname: "internetmonitor-fips.us-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-2",
@@ -285,7 +285,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-east-2",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "internetmonitor-fips.us-east-2.api.aws",
+				Hostname: "internetmonitor-fips.us-east-2.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-1",
@@ -296,7 +296,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-west-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "internetmonitor-fips.us-west-1.api.aws",
+				Hostname: "internetmonitor-fips.us-west-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-2",
@@ -307,7 +307,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-west-2",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "internetmonitor-fips.us-west-2.api.aws",
+				Hostname: "internetmonitor-fips.us-west-2.amazonaws.com",
 			},
 		},
 	},

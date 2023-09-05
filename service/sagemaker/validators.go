@@ -8323,9 +8323,6 @@ func validateInputConfig(v *types.InputConfig) error {
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
-	if v.DataInputConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataInputConfig"))
-	}
 	if len(v.Framework) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Framework"))
 	}

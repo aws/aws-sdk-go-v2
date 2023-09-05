@@ -635,23 +635,6 @@ type TargetFailure struct {
 // target group configuration.
 type TargetGroupConfig struct {
 
-	// The port on which the targets are listening. For HTTP, the default is 80 . For
-	// HTTPS, the default is 443
-	//
-	// This member is required.
-	Port *int32
-
-	// The protocol to use for routing traffic to the targets. Default is the protocol
-	// of a target group.
-	//
-	// This member is required.
-	Protocol TargetGroupProtocol
-
-	// The ID of the VPC.
-	//
-	// This member is required.
-	VpcIdentifier *string
-
 	// The health check configuration.
 	HealthCheck *HealthCheckConfig
 
@@ -660,8 +643,22 @@ type TargetGroupConfig struct {
 	// defaults to ipv4 .
 	IpAddressType IpAddressType
 
+	// Lambda event structure version
+	LambdaEventStructureVersion LambdaEventStructureVersion
+
+	// The port on which the targets are listening. For HTTP, the default is 80 . For
+	// HTTPS, the default is 443
+	Port *int32
+
+	// The protocol to use for routing traffic to the targets. Default is the protocol
+	// of a target group.
+	Protocol TargetGroupProtocol
+
 	// The protocol version. Default value is HTTP1 .
 	ProtocolVersion TargetGroupProtocolVersion
+
+	// The ID of the VPC.
+	VpcIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -683,6 +680,9 @@ type TargetGroupSummary struct {
 	// and ipv6 . This is an optional parameter. If not specified, the IP address type
 	// defaults to ipv4 .
 	IpAddressType IpAddressType
+
+	// Lambda event structure version
+	LambdaEventStructureVersion LambdaEventStructureVersion
 
 	// The date and time that the target group was last updated, specified in ISO-8601
 	// format.

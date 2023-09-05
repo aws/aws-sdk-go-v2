@@ -1,0 +1,8 @@
+{
+    "id": "ce02de89-f39d-4c88-ab89-5e190dfed9cf",
+    "type": "feature",
+    "description": "This release adds support to provide recommendations for G4dn and P3 instances that use NVIDIA GPUs.",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

@@ -41540,6 +41540,46 @@ func awsAwsjson11_deserializeDocumentDeploymentStageStatusSummary(v **types.Depl
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDerivedInformation(v **types.DerivedInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DerivedInformation
+	if *v == nil {
+		sv = &types.DerivedInformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DerivedDataInputConfig":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataInputConfig to be of type string, got %T instead", value)
+				}
+				sv.DerivedDataInputConfig = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDeviceDeploymentSummaries(v *[]types.DeviceDeploymentSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -78239,6 +78279,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeCompilationJobOutput(v **Describe
 					return fmt.Errorf("expected CreationTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "DerivedInformation":
+			if err := awsAwsjson11_deserializeDocumentDerivedInformation(&sv.DerivedInformation, value); err != nil {
+				return err
 			}
 
 		case "FailureReason":

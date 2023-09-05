@@ -3329,6 +3329,17 @@ type DeploymentStageStatusSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information that SageMaker Neo automatically derived about the model.
+type DerivedInformation struct {
+
+	// The data input configuration that SageMaker Neo automatically derived for the
+	// model. When SageMaker Neo derives this information, you don't need to specify
+	// the data input configuration when you create a compilation job.
+	DerivedDataInputConfig *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies weight and capacity values for a production variant.
 type DesiredWeightAndCapacity struct {
 
@@ -6918,6 +6929,19 @@ type InferenceSpecification struct {
 // trained.
 type InputConfig struct {
 
+	// Identifies the framework in which the model was trained. For example:
+	// TENSORFLOW.
+	//
+	// This member is required.
+	Framework Framework
+
+	// The S3 path where the model artifacts, which result from model training, are
+	// stored. This path must point to a single gzip compressed tar archive (.tar.gz
+	// suffix).
+	//
+	// This member is required.
+	S3Uri *string
+
 	// Specifies the name and shape of the expected data inputs for your trained model
 	// with a JSON dictionary form. The data inputs are Framework specific.
 	//   - TensorFlow : You must specify the name and shape (NHWC format) of the
@@ -7018,22 +7042,7 @@ type InputConfig struct {
 	//   . For example:
 	//   - "DataInputConfig": {"input_tensor:0": [1, 224, 224, 3]}
 	//   - "CompilerOptions": {"output_names": ["output_tensor:0"]}
-	//
-	// This member is required.
 	DataInputConfig *string
-
-	// Identifies the framework in which the model was trained. For example:
-	// TENSORFLOW.
-	//
-	// This member is required.
-	Framework Framework
-
-	// The S3 path where the model artifacts, which result from model training, are
-	// stored. This path must point to a single gzip compressed tar archive (.tar.gz
-	// suffix).
-	//
-	// This member is required.
-	S3Uri *string
 
 	// Specifies the framework version to use. This API field is only supported for
 	// the MXNet, PyTorch, TensorFlow and TensorFlow Lite frameworks. For information
@@ -8377,8 +8386,8 @@ type ModelInput struct {
 // The model latency threshold.
 type ModelLatencyThreshold struct {
 
-	// The model latency percentile threshold. For custom load tests, specify the
-	// value as P95 .
+	// The model latency percentile threshold. Acceptable values are P95 and P99 . For
+	// custom load tests, specify the value as P95 .
 	Percentile *string
 
 	// The model latency percentile value in milliseconds.

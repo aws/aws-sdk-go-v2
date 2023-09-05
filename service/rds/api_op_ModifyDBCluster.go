@@ -82,6 +82,10 @@ type ModifyDBClusterInput struct {
 	// applied automatically. Valid for Cluster Type: Multi-AZ DB clusters only
 	AutoMinorVersionUpgrade *bool
 
+	// The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services
+	// Backup.
+	AwsBackupRecoveryPointArn *string
+
 	// The target backtrack window, in seconds. To disable backtracking, set this
 	// value to 0 . Valid for Cluster Type: Aurora MySQL DB clusters only Default: 0
 	// Constraints:

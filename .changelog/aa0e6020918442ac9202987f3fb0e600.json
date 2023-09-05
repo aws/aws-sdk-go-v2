@@ -1,0 +1,8 @@
+{
+    "id": "aa0e6020-9184-42ac-9202-987f3fb0e600",
+    "type": "documentation",
+    "description": "Added support for Ubuntu 22.04 that was not picked up in a previous Trebuchet request. Doc-only update.",
+    "modules": [
+        "service/cloud9"
+    ]
+}

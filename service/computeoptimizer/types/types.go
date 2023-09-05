@@ -63,6 +63,10 @@ type AutoScalingGroupRecommendation struct {
 	// group.
 	CurrentConfiguration *AutoScalingGroupConfiguration
 
+	// Describes the GPU accelerator settings for the current instance type of the
+	// Auto Scaling group.
+	CurrentInstanceGpuInfo *GpuInfo
+
 	// The risk of the current Auto Scaling group not meeting the performance needs of
 	// its workloads. The higher the risk, the more likely the current Auto Scaling
 	// group configuration has insufficient capacity and cannot meet workload
@@ -122,6 +126,10 @@ type AutoScalingGroupRecommendationOption struct {
 
 	// An array of objects that describe an Auto Scaling group configuration.
 	Configuration *AutoScalingGroupConfiguration
+
+	// Describes the GPU accelerator settings for the recommended instance type of the
+	// Auto Scaling group.
+	InstanceGpuInfo *GpuInfo
 
 	// The level of effort required to migrate from the current instance type to the
 	// recommended instance type. For example, the migration effort is Low if Amazon
@@ -746,6 +754,28 @@ type GetRecommendationError struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the GPU accelerators for the instance type.
+type Gpu struct {
+
+	// The number of GPUs for the instance type.
+	GpuCount int32
+
+	// The total size of the memory for the GPU accelerators for the instance type, in
+	// MiB.
+	GpuMemorySizeInMiB int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the GPU accelerator settings for the instance type.
+type GpuInfo struct {
+
+	// Describes the GPU accelerators for the instance type.
+	Gpus []Gpu
+
+	noSmithyDocumentSerde
+}
+
 // The estimated monthly savings after you adjust the configurations of your
 // instances running on the inferred workload types to the recommended
 // configurations. If the inferredWorkloadTypes list contains multiple entries,
@@ -781,6 +811,9 @@ type InstanceRecommendation struct {
 
 	// The Amazon Web Services account ID of the instance.
 	AccountId *string
+
+	// Describes the GPU accelerator settings for the current instance type.
+	CurrentInstanceGpuInfo *GpuInfo
 
 	// The instance type of the current instance.
 	CurrentInstanceType *string
@@ -904,6 +937,9 @@ type InstanceRecommendation struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	FindingReasonCodes []InstanceRecommendationFindingReasonCode
 
+	// Describes if an Amazon EC2 instance is idle.
+	Idle InstanceIdle
+
 	// The applications that might be running on the instance as inferred by Compute
 	// Optimizer. Compute Optimizer can infer if one of the following applications
 	// might be running on the instance:
@@ -951,6 +987,9 @@ type InstanceRecommendation struct {
 
 // Describes a recommendation option for an Amazon EC2 instance.
 type InstanceRecommendationOption struct {
+
+	// Describes the GPU accelerator settings for the recommended instance type.
+	InstanceGpuInfo *GpuInfo
 
 	// The instance type of the instance recommendation.
 	InstanceType *string
@@ -1452,12 +1491,13 @@ type MetricSource struct {
 // recommendation option had you used that resource during the analyzed period.
 // Compare the utilization metric data of your resource against its projected
 // utilization metric data to determine the performance difference between your
-// current resource and the recommended option. The Cpu and Memory metrics are the
-// only projected utilization metrics returned when you run the
-// GetEC2RecommendationProjectedMetrics action. Additionally, the Memory metric is
-// returned only for resources that have the unified CloudWatch agent installed on
-// them. For more information, see Enabling Memory Utilization with the CloudWatch
-// Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
+// current resource and the recommended option. The Cpu , Memory , GPU , and
+// GPU_MEMORY metrics are the only projected utilization metrics returned when you
+// run the GetEC2RecommendationProjectedMetrics action. Additionally, these
+// metrics are only returned for resources with the unified CloudWatch agent
+// installed on them. For more information, see Enabling Memory Utilization with
+// the CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
+// and Enabling NVIDIA GPU utilization with the CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent)
 // .
 type ProjectedMetric struct {
 
@@ -1468,13 +1508,21 @@ type ProjectedMetric struct {
 	//   analyzed period. This metric identifies the processing power required to run an
 	//   application on the recommendation option. Depending on the instance type, tools
 	//   in your operating system can show a lower percentage than CloudWatch when the
-	//   instance is not allocated a full processor core. Units: Percent
+	//   instance is not allocated a full processor core.
 	//   - Memory - The percentage of memory that would be in use on the recommendation
 	//   option had you used that resource during the analyzed period. This metric
 	//   identifies the amount of memory required to run an application on the
-	//   recommendation option. Units: Percent The Memory metric is returned only for
-	//   resources that have the unified CloudWatch agent installed on them. For more
+	//   recommendation option. Units: Percent The Memory metric is only returned for
+	//   resources with the unified CloudWatch agent installed on them. For more
 	//   information, see Enabling Memory Utilization with the CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
+	//   .
+	//   - GPU - The projected percentage of allocated GPUs if you adjust your
+	//   configurations to Compute Optimizer's recommendation option.
+	//   - GPU_MEMORY - The projected percentage of total GPU memory if you adjust your
+	//   configurations to Compute Optimizer's recommendation option. The GPU and
+	//   GPU_MEMORY metrics are only returned for resources with the unified CloudWatch
+	//   Agent installed on them. For more information, see Enabling NVIDIA GPU
+	//   utilization with the CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent)
 	//   .
 	Name MetricName
 
@@ -1612,7 +1660,7 @@ type RecommendationSummary struct {
 
 	// An array of objects that describes the estimated monthly saving amounts for the
 	// instances running on the specified inferredWorkloadTypes . The array contains
-	// the top three savings opportunites for the instances running inferred workload
+	// the top five savings opportunites for the instances that run inferred workload
 	// types.
 	InferredWorkloadSavings []InferredWorkloadSaving
 
@@ -1837,6 +1885,12 @@ type UtilizationMetric struct {
 	//   the instance. Units: Percent The Memory metric is returned only for resources
 	//   that have the unified CloudWatch agent installed on them. For more information,
 	//   see Enabling Memory Utilization with the CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
+	//   .
+	//   - GPU - The percentage of allocated GPUs that currently run on the instance.
+	//   - GPU_MEMORY - The percentage of total GPU memory that currently runs on the
+	//   instance. The GPU and GPU_MEMORY metrics are only returned for resources with
+	//   the unified CloudWatch Agent installed on them. For more information, see
+	//   Enabling NVIDIA GPU utilization with the CloudWatch Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent)
 	//   .
 	//   - EBS_READ_OPS_PER_SECOND - The completed read operations from all EBS volumes
 	//   attached to the instance in a specified period of time. Unit: Count

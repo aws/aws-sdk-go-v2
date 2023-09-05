@@ -1,0 +1,8 @@
+{
+    "id": "b1828e5d-91a2-44f6-a293-1a3814137532",
+    "type": "feature",
+    "description": "Improve Endpoint Ruleset test coverage.",
+    "modules": [
+        "service/eventbridge"
+    ]
+}
