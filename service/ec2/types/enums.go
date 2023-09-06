@@ -5113,6 +5113,7 @@ const (
 	LocationTypeRegion             LocationType = "region"
 	LocationTypeAvailabilityZone   LocationType = "availability-zone"
 	LocationTypeAvailabilityZoneId LocationType = "availability-zone-id"
+	LocationTypeOutpost            LocationType = "outpost"
 )
 
 // Values returns all known values for LocationType. Note that this can be
@@ -5123,6 +5124,7 @@ func (LocationType) Values() []LocationType {
 		"region",
 		"availability-zone",
 		"availability-zone-id",
+		"outpost",
 	}
 }
 

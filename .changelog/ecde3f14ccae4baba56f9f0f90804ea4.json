@@ -1,0 +1,8 @@
+{
+    "id": "ecde3f14-ccae-4bab-a56f-9f0f90804ea4",
+    "type": "documentation",
+    "description": "This release enables default UDP connection termination and disabling unhealthy target connection termination for Network Load Balancers.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

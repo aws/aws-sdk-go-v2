@@ -7802,6 +7802,15 @@ func awsAwsjson11_deserializeDocumentAWSManagedRulesBotControlRuleSet(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "EnableMachineLearning":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableMachineLearning = jtv
+			}
+
 		case "InspectionLevel":
 			if value != nil {
 				jtv, ok := value.(string)

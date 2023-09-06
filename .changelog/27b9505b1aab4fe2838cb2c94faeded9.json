@@ -1,0 +1,8 @@
+{
+    "id": "27b9505b-1aab-4fe2-838c-b2c94faeded9",
+    "type": "feature",
+    "description": "Adds advanced Output Locking options for Epoch Locking: Custom Epoch and Jam Sync Time",
+    "modules": [
+        "service/medialive"
+    ]
+}

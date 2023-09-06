@@ -1,0 +1,8 @@
+{
+    "id": "5bdfec31-5e11-4b55-94e3-99078974a75d",
+    "type": "feature",
+    "description": "This release adds 'outpost' location type to the DescribeInstanceTypeOfferings API, allowing customers that have been allowlisted for outpost to query their offerings in the API.",
+    "modules": [
+        "service/ec2"
+    ]
+}

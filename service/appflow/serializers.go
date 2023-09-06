@@ -4291,6 +4291,13 @@ func awsRestjson1_serializeDocumentServiceNowConnectorProfileCredentials(v *type
 	object := value.Object()
 	defer object.Close()
 
+	if v.OAuth2Credentials != nil {
+		ok := object.Key("oAuth2Credentials")
+		if err := awsRestjson1_serializeDocumentOAuth2Credentials(v.OAuth2Credentials, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Password != nil {
 		ok := object.Key("password")
 		ok.String(*v.Password)

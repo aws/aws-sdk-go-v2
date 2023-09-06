@@ -591,11 +591,6 @@ func validateConnectorProfileCredentials(v *types.ConnectorProfileCredentials) e
 			invalidParams.AddNested("Marketo", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ServiceNow != nil {
-		if err := validateServiceNowConnectorProfileCredentials(v.ServiceNow); err != nil {
-			invalidParams.AddNested("ServiceNow", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Singular != nil {
 		if err := validateSingularConnectorProfileCredentials(v.Singular); err != nil {
 			invalidParams.AddNested("Singular", err.(smithy.InvalidParamsError))
@@ -1569,24 +1564,6 @@ func validateScheduledTriggerProperties(v *types.ScheduledTriggerProperties) err
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduledTriggerProperties"}
 	if v.ScheduleExpression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateServiceNowConnectorProfileCredentials(v *types.ServiceNowConnectorProfileCredentials) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ServiceNowConnectorProfileCredentials"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

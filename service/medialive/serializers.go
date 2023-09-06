@@ -7231,6 +7231,23 @@ func awsRestjson1_serializeDocumentEncoderSettings(v *types.EncoderSettings, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEpochLockingSettings(v *types.EpochLockingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomEpoch != nil {
+		ok := object.Key("customEpoch")
+		ok.String(*v.CustomEpoch)
+	}
+
+	if v.JamSyncTime != nil {
+		ok := object.Key("jamSyncTime")
+		ok.String(*v.JamSyncTime)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEsam(v *types.Esam, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7509,6 +7526,13 @@ func awsRestjson1_serializeDocumentGlobalConfiguration(v *types.GlobalConfigurat
 	if len(v.OutputLockingMode) > 0 {
 		ok := object.Key("outputLockingMode")
 		ok.String(string(v.OutputLockingMode))
+	}
+
+	if v.OutputLockingSettings != nil {
+		ok := object.Key("outputLockingSettings")
+		if err := awsRestjson1_serializeDocumentOutputLockingSettings(v.OutputLockingSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.OutputTimingSource) > 0 {
@@ -10344,6 +10368,27 @@ func awsRestjson1_serializeDocumentOutputLocationRef(v *types.OutputLocationRef,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOutputLockingSettings(v *types.OutputLockingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EpochLockingSettings != nil {
+		ok := object.Key("epochLockingSettings")
+		if err := awsRestjson1_serializeDocumentEpochLockingSettings(v.EpochLockingSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PipelineLockingSettings != nil {
+		ok := object.Key("pipelineLockingSettings")
+		if err := awsRestjson1_serializeDocumentPipelineLockingSettings(v.PipelineLockingSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOutputSettings(v *types.OutputSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10424,6 +10469,13 @@ func awsRestjson1_serializeDocumentPauseStateScheduleActionSettings(v *types.Pau
 			return err
 		}
 	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPipelineLockingSettings(v *types.PipelineLockingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }

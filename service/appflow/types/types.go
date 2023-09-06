@@ -2435,14 +2435,13 @@ type ScheduledTriggerProperties struct {
 // The connector-specific profile credentials required when using ServiceNow.
 type ServiceNowConnectorProfileCredentials struct {
 
+	// The OAuth 2.0 credentials required to authenticate the user.
+	OAuth2Credentials *OAuth2Credentials
+
 	// The password that corresponds to the user name.
-	//
-	// This member is required.
 	Password *string
 
 	// The name of the user.
-	//
-	// This member is required.
 	Username *string
 
 	noSmithyDocumentSerde

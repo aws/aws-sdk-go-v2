@@ -17833,6 +17833,55 @@ func awsRestjson1_deserializeDocumentEncoderSettings(v **types.EncoderSettings, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEpochLockingSettings(v **types.EpochLockingSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EpochLockingSettings
+	if *v == nil {
+		sv = &types.EpochLockingSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customEpoch":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.CustomEpoch = ptr.String(jtv)
+			}
+
+		case "jamSyncTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.JamSyncTime = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEsam(v **types.Esam, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18639,6 +18688,11 @@ func awsRestjson1_deserializeDocumentGlobalConfiguration(v **types.GlobalConfigu
 					return fmt.Errorf("expected GlobalConfigurationOutputLockingMode to be of type string, got %T instead", value)
 				}
 				sv.OutputLockingMode = types.GlobalConfigurationOutputLockingMode(jtv)
+			}
+
+		case "outputLockingSettings":
+			if err := awsRestjson1_deserializeDocumentOutputLockingSettings(&sv.OutputLockingSettings, value); err != nil {
+				return err
 			}
 
 		case "outputTimingSource":
@@ -26479,6 +26533,47 @@ func awsRestjson1_deserializeDocumentOutputLocationRef(v **types.OutputLocationR
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOutputLockingSettings(v **types.OutputLockingSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OutputLockingSettings
+	if *v == nil {
+		sv = &types.OutputLockingSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "epochLockingSettings":
+			if err := awsRestjson1_deserializeDocumentEpochLockingSettings(&sv.EpochLockingSettings, value); err != nil {
+				return err
+			}
+
+		case "pipelineLockingSettings":
+			if err := awsRestjson1_deserializeDocumentPipelineLockingSettings(&sv.PipelineLockingSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOutputSettings(v **types.OutputSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26684,6 +26779,37 @@ func awsRestjson1_deserializeDocumentPipelineDetail(v **types.PipelineDetail, va
 				sv.PipelineId = ptr.String(jtv)
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPipelineLockingSettings(v **types.PipelineLockingSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipelineLockingSettings
+	if *v == nil {
+		sv = &types.PipelineLockingSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 
