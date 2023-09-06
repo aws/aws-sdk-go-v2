@@ -8518,6 +8518,28 @@
                 "smithy.api#documentation": "Encoder Settings"
             }
         },
+        "com.amazonaws.medialive#EpochLockingSettings": {
+            "type": "structure",
+            "members": {
+                "CustomEpoch": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Enter a value here to use a custom epoch, instead of the standard epoch (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be 2000-01-01T00:00:00 or later. Always set the MM:SS portion to 00:00.",
+                        "smithy.api#jsonName": "customEpoch"
+                    }
+                },
+                "JamSyncTime": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Enter a time for the jam sync. The default is midnight UTC. When epoch locking is enabled, MediaLive performs a daily jam sync on every output encode to ensure timecodes don’t diverge from the wall clock. The jam sync applies only to encodes with frame rate of 29.97 or 59.94 FPS. To override, enter a time in HH:MM:SS in UTC. Always set the MM:SS portion to 00:00.",
+                        "smithy.api#jsonName": "jamSyncTime"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Epoch Locking Settings"
+            }
+        },
         "com.amazonaws.medialive#Esam": {
             "type": "structure",
             "members": {
@@ -9099,6 +9121,13 @@
                     "traits": {
                         "smithy.api#documentation": "Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.",
                         "smithy.api#jsonName": "supportLowFramerateInputs"
+                    }
+                },
+                "OutputLockingSettings": {
+                    "target": "com.amazonaws.medialive#OutputLockingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Advanced output locking settings",
+                        "smithy.api#jsonName": "outputLockingSettings"
                     }
                 }
             },
@@ -19022,6 +19051,26 @@
                 "smithy.api#documentation": "Reference to an OutputDestination ID defined in the channel"
             }
         },
+        "com.amazonaws.medialive#OutputLockingSettings": {
+            "type": "structure",
+            "members": {
+                "EpochLockingSettings": {
+                    "target": "com.amazonaws.medialive#EpochLockingSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "epochLockingSettings"
+                    }
+                },
+                "PipelineLockingSettings": {
+                    "target": "com.amazonaws.medialive#PipelineLockingSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "pipelineLockingSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output Locking Settings"
+            }
+        },
         "com.amazonaws.medialive#OutputSettings": {
             "type": "structure",
             "members": {
@@ -19160,6 +19209,13 @@
             },
             "traits": {
                 "smithy.api#documentation": "Pipeline ID"
+            }
+        },
+        "com.amazonaws.medialive#PipelineLockingSettings": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Pipeline Locking Settings"
             }
         },
         "com.amazonaws.medialive#PipelinePauseStateSettings": {
