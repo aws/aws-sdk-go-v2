@@ -1,3 +1,7 @@
+# v1.117.0 (2023-09-06)
+
+* **Feature**: This release adds 'outpost' location type to the DescribeInstanceTypeOfferings API, allowing customers that have been allowlisted for outpost to query their offerings in the API.
+
 # v1.116.0 (2023-09-05)
 
 * **Feature**: Introducing Amazon EC2 C7gd, M7gd, and R7gd Instances with up to 3.8 TB of local NVMe-based SSD block-level storage. These instances are powered by AWS Graviton3 processors, delivering up to 25% better performance over Graviton2-based instances.

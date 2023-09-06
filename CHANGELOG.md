@@ -1,3 +1,17 @@
+# Release (2023-09-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.35.0](service/appflow/CHANGELOG.md#v1350-2023-09-06)
+  * **Feature**: Adding OAuth2.0 support for servicenow connector.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.117.0](service/ec2/CHANGELOG.md#v11170-2023-09-06)
+  * **Feature**: This release adds 'outpost' location type to the DescribeInstanceTypeOfferings API, allowing customers that have been allowlisted for outpost to query their offerings in the API.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.21.4](service/elasticloadbalancingv2/CHANGELOG.md#v1214-2023-09-06)
+  * **Documentation**: This release enables default UDP connection termination and disabling unhealthy target connection termination for Network Load Balancers.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.36.0](service/medialive/CHANGELOG.md#v1360-2023-09-06)
+  * **Feature**: Adds advanced Output Locking options for Epoch Locking: Custom Epoch and Jam Sync Time
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.38.0](service/wafv2/CHANGELOG.md#v1380-2023-09-06)
+  * **Feature**: The targeted protection level of the Bot Control managed rule group now provides optional, machine-learning analysis of traffic statistics to detect some bot-related activity. You can enable or disable the machine learning functionality through the API.
+
 # Release (2023-09-05)
 
 ## General Highlights

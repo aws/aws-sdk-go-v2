@@ -1,3 +1,7 @@
+# v1.38.0 (2023-09-06)
+
+* **Feature**: The targeted protection level of the Bot Control managed rule group now provides optional, machine-learning analysis of traffic statistics to detect some bot-related activity. You can enable or disable the machine learning functionality through the API.
+
 # v1.37.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

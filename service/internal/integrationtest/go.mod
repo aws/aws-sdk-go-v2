@@ -31,15 +31,15 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.21.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.116.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.117.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.21.6
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.29.3
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.16.5
-	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.21.3
-	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.20.5
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.21.4
+	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.20.6
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/emr v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.21.0
@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.10.5
 	github.com/aws/aws-sdk-go-v2/service/waf v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.14.5
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.37.5
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.29.5
 	github.com/aws/smithy-go v1.14.2
 	github.com/google/go-cmp v0.5.8

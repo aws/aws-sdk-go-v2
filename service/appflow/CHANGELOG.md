@@ -1,3 +1,7 @@
+# v1.35.0 (2023-09-06)
+
+* **Feature**: Adding OAuth2.0 support for servicenow connector.
+
 # v1.34.0 (2023-08-30)
 
 * **Feature**: Add SAP source connector parallel and pagination feature

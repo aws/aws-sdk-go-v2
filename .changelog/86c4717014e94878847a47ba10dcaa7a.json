@@ -1,8 +1,0 @@
-{
-    "id": "86c47170-14e9-4878-847a-47ba10dcaa7a",
-    "type": "feature",
-    "description": "Adding OAuth2.0 support for servicenow connector.",
-    "modules": [
-        "service/appflow"
-    ]
-}
