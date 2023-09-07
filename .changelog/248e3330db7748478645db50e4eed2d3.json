@@ -1,0 +1,8 @@
+{
+    "id": "248e3330-db77-4847-8645-db50e4eed2d3",
+    "type": "feature",
+    "description": "Minor changes to send unsigned requests to Neptune clusters",
+    "modules": [
+        "service/neptunedata"
+    ]
+}

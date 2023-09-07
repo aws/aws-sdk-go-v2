@@ -5,6 +5,7 @@ package simspaceweaver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -369,6 +370,39 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func validateS3Destination(v *types.S3Destination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Destination"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3Location(v *types.S3Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Location"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.ObjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateSnapshotInput(v *CreateSnapshotInput) error {
 	if v == nil {
 		return nil
@@ -379,6 +413,10 @@ func validateOpCreateSnapshotInput(v *CreateSnapshotInput) error {
 	}
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateS3Destination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -535,6 +573,16 @@ func validateOpStartSimulationInput(v *StartSimulationInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.SchemaS3Location != nil {
+		if err := validateS3Location(v.SchemaS3Location); err != nil {
+			invalidParams.AddNested("SchemaS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SnapshotS3Location != nil {
+		if err := validateS3Location(v.SnapshotS3Location); err != nil {
+			invalidParams.AddNested("SnapshotS3Location", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

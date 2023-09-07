@@ -96,6 +96,8 @@ type S3Destination struct {
 	// The name of an Amazon S3 bucket. For more information about buckets, see
 	// Creating, configuring, and working with Amazon S3 buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html)
 	// in the Amazon Simple Storage Service User Guide.
+	//
+	// This member is required.
 	BucketName *string
 
 	// A string prefix for an Amazon S3 object key. It's usually a folder name. For
@@ -116,12 +118,16 @@ type S3Location struct {
 	// The name of an Amazon S3 bucket. For more information about buckets, see
 	// Creating, configuring, and working with Amazon S3 buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html)
 	// in the Amazon Simple Storage Service User Guide.
+	//
+	// This member is required.
 	BucketName *string
 
 	// The key name of an object in Amazon S3. For more information about Amazon S3
 	// objects and object keys, see Uploading, downloading, and working with objects
 	// in Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-downloading-objects.html)
 	// in the Amazon Simple Storage Service User Guide.
+	//
+	// This member is required.
 	ObjectKey *string
 
 	noSmithyDocumentSerde

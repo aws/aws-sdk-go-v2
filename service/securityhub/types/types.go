@@ -322,25 +322,30 @@ type AutomationRulesFindingFieldsUpdate struct {
 // The criteria that determine which findings a rule applies to.
 type AutomationRulesFindingFilters struct {
 
-	// The Amazon Web Services account ID in which a finding was generated.
+	// The Amazon Web Services account ID in which a finding was generated. Array
+	// Members: Minimum number of 1 item. Maximum number of 100 items.
 	AwsAccountId []StringFilter
 
 	// The name of the company for the product that generated the finding. For
-	// control-based findings, the company is Amazon Web Services.
+	// control-based findings, the company is Amazon Web Services. Array Members:
+	// Minimum number of 1 item. Maximum number of 20 items.
 	CompanyName []StringFilter
 
 	// The unique identifier of a standard in which a control is enabled. This field
 	// consists of the resource portion of the Amazon Resource Name (ARN) returned for
 	// a standard in the DescribeStandards (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html)
-	// API response.
+	// API response. Array Members: Minimum number of 1 item. Maximum number of 20
+	// items.
 	ComplianceAssociatedStandardsId []StringFilter
 
 	// The security control ID for which a finding was generated. Security control IDs
-	// are the same across standards.
+	// are the same across standards. Array Members: Minimum number of 1 item. Maximum
+	// number of 20 items.
 	ComplianceSecurityControlId []StringFilter
 
 	// The result of a security check. This field is only used for findings generated
-	// from controls.
+	// from controls. Array Members: Minimum number of 1 item. Maximum number of 20
+	// items.
 	ComplianceStatus []StringFilter
 
 	// The likelihood that a finding accurately identifies the behavior or issue that
@@ -349,12 +354,14 @@ type AutomationRulesFindingFilters struct {
 	// 100 percent confidence. For example, a data exfiltration detection based on a
 	// statistical deviation of network traffic has low confidence because an actual
 	// exfiltration hasn't been verified. For more information, see Confidence (https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence)
-	// in the Security Hub User Guide.
+	// in the Security Hub User Guide. Array Members: Minimum number of 1 item. Maximum
+	// number of 20 items.
 	Confidence []NumberFilter
 
 	// A timestamp that indicates when this finding record was created. Uses the
 	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
-	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z . Array
+	// Members: Minimum number of 1 item. Maximum number of 20 items.
 	CreatedAt []DateFilter
 
 	// The level of importance that is assigned to the resources that are associated
@@ -362,59 +369,74 @@ type AutomationRulesFindingFilters struct {
 	// that supports only full integers. A score of 0 means that the underlying
 	// resources have no criticality, and a score of 100 is reserved for the most
 	// critical resources. For more information, see Criticality (https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality)
-	// in the Security Hub User Guide.
+	// in the Security Hub User Guide. Array Members: Minimum number of 1 item. Maximum
+	// number of 20 items.
 	Criticality []NumberFilter
 
-	// A finding's description.
+	// A finding's description. Array Members: Minimum number of 1 item. Maximum
+	// number of 20 items.
 	Description []StringFilter
 
 	// A timestamp that indicates when the potential security issue captured by a
 	// finding was first observed by the security findings product. Uses the date-time
 	// format specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
-	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z . Array
+	// Members: Minimum number of 1 item. Maximum number of 20 items.
 	FirstObservedAt []DateFilter
 
 	// The identifier for the solution-specific component that generated a finding.
+	// Array Members: Minimum number of 1 item. Maximum number of 100 items.
 	GeneratorId []StringFilter
 
-	// The product-specific identifier for a finding.
+	// The product-specific identifier for a finding. Array Members: Minimum number of
+	// 1 item. Maximum number of 20 items.
 	Id []StringFilter
 
 	// A timestamp that indicates when the potential security issue captured by a
 	// finding was most recently observed by the security findings product. Uses the
 	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
-	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z . Array
+	// Members: Minimum number of 1 item. Maximum number of 20 items.
 	LastObservedAt []DateFilter
 
-	// The text of a user-defined note that's added to a finding.
+	// The text of a user-defined note that's added to a finding. Array Members:
+	// Minimum number of 1 item. Maximum number of 20 items.
 	NoteText []StringFilter
 
 	// The timestamp of when the note was updated. Uses the date-time format specified
 	// in RFC 3339 section 5.6, Internet Date/Time Format (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z . Array
+	// Members: Minimum number of 1 item. Maximum number of 20 items.
 	NoteUpdatedAt []DateFilter
 
-	// The principal that created a note.
+	// The principal that created a note. Array Members: Minimum number of 1 item.
+	// Maximum number of 20 items.
 	NoteUpdatedBy []StringFilter
 
 	// The Amazon Resource Name (ARN) for a third-party product that generated a
-	// finding in Security Hub.
+	// finding in Security Hub. Array Members: Minimum number of 1 item. Maximum number
+	// of 20 items.
 	ProductArn []StringFilter
 
 	// Provides the name of the product that generated the finding. For control-based
-	// findings, the product name is Security Hub.
+	// findings, the product name is Security Hub. Array Members: Minimum number of 1
+	// item. Maximum number of 20 items.
 	ProductName []StringFilter
 
-	// Provides the current state of a finding.
+	// Provides the current state of a finding. Array Members: Minimum number of 1
+	// item. Maximum number of 20 items.
 	RecordState []StringFilter
 
-	// The product-generated identifier for a related finding.
+	// The product-generated identifier for a related finding. Array Members: Minimum
+	// number of 1 item. Maximum number of 20 items.
 	RelatedFindingsId []StringFilter
 
-	// The ARN for the product that generated a related finding.
+	// The ARN for the product that generated a related finding. Array Members:
+	// Minimum number of 1 item. Maximum number of 20 items.
 	RelatedFindingsProductArn []StringFilter
 
-	// Custom fields and values about the resource that a finding pertains to.
+	// Custom fields and values about the resource that a finding pertains to. Array
+	// Members: Minimum number of 1 item. Maximum number of 20 items.
 	ResourceDetailsOther []MapFilter
 
 	// The identifier for the given resource type. For Amazon Web Services resources
@@ -422,53 +444,64 @@ type AutomationRulesFindingFilters struct {
 	// Web Services resources that lack ARNs, this is the identifier as defined by the
 	// Amazon Web Service that created the resource. For non-Amazon Web Services
 	// resources, this is a unique identifier that is associated with the resource.
+	// Array Members: Minimum number of 1 item. Maximum number of 100 items.
 	ResourceId []StringFilter
 
 	// The partition in which the resource that the finding pertains to is located. A
 	// partition is a group of Amazon Web Services Regions. Each Amazon Web Services
-	// account is scoped to one partition.
+	// account is scoped to one partition. Array Members: Minimum number of 1 item.
+	// Maximum number of 20 items.
 	ResourcePartition []StringFilter
 
 	// The Amazon Web Services Region where the resource that a finding pertains to is
-	// located.
+	// located. Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	ResourceRegion []StringFilter
 
 	// A list of Amazon Web Services tags associated with a resource at the time the
-	// finding was processed.
+	// finding was processed. Array Members: Minimum number of 1 item. Maximum number
+	// of 20 items.
 	ResourceTags []MapFilter
 
-	// The type of resource that the finding pertains to.
+	// The type of resource that the finding pertains to. Array Members: Minimum
+	// number of 1 item. Maximum number of 20 items.
 	ResourceType []StringFilter
 
-	// The severity value of the finding.
+	// The severity value of the finding. Array Members: Minimum number of 1 item.
+	// Maximum number of 20 items.
 	SeverityLabel []StringFilter
 
 	// Provides a URL that links to a page about the current finding in the finding
-	// product.
+	// product. Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	SourceUrl []StringFilter
 
-	// A finding's title.
+	// A finding's title. Array Members: Minimum number of 1 item. Maximum number of
+	// 100 items.
 	Title []StringFilter
 
 	// One or more finding types in the format of namespace/category/classifier that
 	// classify a finding. For a list of namespaces, classifiers, and categories, see
 	// Types taxonomy for ASFF (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html)
-	// in the Security Hub User Guide.
+	// in the Security Hub User Guide. Array Members: Minimum number of 1 item. Maximum
+	// number of 20 items.
 	Type []StringFilter
 
 	// A timestamp that indicates when the finding record was most recently updated.
 	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
 	// Format (https://tools.ietf.org/html/rfc3339#section-5.6) . The value cannot
-	// contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	// contain spaces. For example, 2020-03-22T13:22:13.933Z . Array Members: Minimum
+	// number of 1 item. Maximum number of 20 items.
 	UpdatedAt []DateFilter
 
-	// A list of user-defined name and value string pairs added to a finding.
+	// A list of user-defined name and value string pairs added to a finding. Array
+	// Members: Minimum number of 1 item. Maximum number of 20 items.
 	UserDefinedFields []MapFilter
 
-	// Provides the veracity of a finding.
+	// Provides the veracity of a finding. Array Members: Minimum number of 1 item.
+	// Maximum number of 20 items.
 	VerificationState []StringFilter
 
 	// Provides information about the status of the investigation into a finding.
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	WorkflowStatus []StringFilter
 
 	noSmithyDocumentSerde
