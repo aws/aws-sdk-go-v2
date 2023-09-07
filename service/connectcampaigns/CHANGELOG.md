@@ -1,3 +1,7 @@
+# v1.4.1 (2023-09-07)
+
+* No change notes available for this release.
+
 # v1.4.0 (2023-08-31)
 
 * **Feature**: Amazon Connect outbound campaigns has launched agentless dialing mode which enables customers to make automated outbound calls without agent engagement. This release updates three of the campaign management API's to support the new agentless dialing mode and the new dialing capacity field.

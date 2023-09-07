@@ -1,3 +1,11 @@
+# Release (2023-09-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.36.2](service/securityhub/CHANGELOG.md#v1362-2023-09-07)
+  * **Documentation**: Documentation updates for AWS Security Hub
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.5.0](service/simspaceweaver/CHANGELOG.md#v150-2023-09-07)
+  * **Feature**: BucketName and ObjectKey are now required for the S3Location data type. BucketName is now required for the S3Destination data type.
+
 # Release (2023-09-06)
 
 ## Module Highlights

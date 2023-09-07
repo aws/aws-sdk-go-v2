@@ -1,3 +1,7 @@
+# v1.5.0 (2023-09-07)
+
+* **Feature**: BucketName and ObjectKey are now required for the S3Location data type. BucketName is now required for the S3Destination data type.
+
 # v1.4.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
