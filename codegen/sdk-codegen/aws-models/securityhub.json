@@ -795,211 +795,211 @@
                 "ProductArn": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) for a third-party product that generated a finding in \n         Security Hub.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) for a third-party product that generated a finding in \n         Security Hub.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "AwsAccountId": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services account ID in which a finding was generated. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID in which a finding was generated. </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 100 items.\n   \t</p>"
                     }
                 },
                 "Id": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The product-specific identifier for a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The product-specific identifier for a finding.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "GeneratorId": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The identifier for the solution-specific component that \n         generated a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The identifier for the solution-specific component that \n         generated a finding.\n      </p>\n         <p>\n      \t\tArray Members: Minimum number of 1 item. Maximum number of 100 items.\n      \t</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p> One or more finding types in the format of namespace/category/classifier that classify\n         a finding. For a list of namespaces, classifiers, and categories, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html\">Types\n            taxonomy for ASFF</a> in the <i>Security Hub User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p> One or more finding types in the format of namespace/category/classifier that classify\n         a finding. For a list of namespaces, classifiers, and categories, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html\">Types\n            taxonomy for ASFF</a> in the <i>Security Hub User Guide</i>.</p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "FirstObservedAt": {
                     "target": "com.amazonaws.securityhub#DateFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A timestamp that indicates when the potential security issue captured by a \n         finding was first observed by the security findings product.\n      </p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                        "smithy.api#documentation": "<p>\n         A timestamp that indicates when the potential security issue captured by a \n         finding was first observed by the security findings product.\n      </p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "LastObservedAt": {
                     "target": "com.amazonaws.securityhub#DateFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A timestamp that indicates when the potential security issue captured by a finding \n         was most recently observed by the security findings product.\n      </p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                        "smithy.api#documentation": "<p>\n         A timestamp that indicates when the potential security issue captured by a finding \n         was most recently observed by the security findings product.\n      </p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.securityhub#DateFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A timestamp that indicates when this finding record was created.\n      </p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                        "smithy.api#documentation": "<p>\n         A timestamp that indicates when this finding record was created.\n      </p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.securityhub#DateFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A timestamp that indicates when the finding record was most recently updated. \n      </p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                        "smithy.api#documentation": "<p>\n         A timestamp that indicates when the finding record was most recently updated. \n      </p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "Confidence": {
                     "target": "com.amazonaws.securityhub#NumberFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The likelihood that a finding accurately identifies the behavior or issue that it was\n         intended to identify. <code>Confidence</code> is scored on a 0–100 basis using a ratio\n         scale. A value of <code>0</code> means 0 percent confidence, and a value of\n            <code>100</code> means 100 percent confidence. For example, a data exfiltration\n         detection based on a statistical deviation of network traffic has low confidence because an\n         actual exfiltration hasn't been verified. For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence\">Confidence</a> in the <i>Security Hub User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The likelihood that a finding accurately identifies the behavior or issue that it was\n         intended to identify. <code>Confidence</code> is scored on a 0–100 basis using a ratio\n         scale. A value of <code>0</code> means 0 percent confidence, and a value of\n            <code>100</code> means 100 percent confidence. For example, a data exfiltration\n         detection based on a statistical deviation of network traffic has low confidence because an\n         actual exfiltration hasn't been verified. For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence\">Confidence</a> in the <i>Security Hub User Guide</i>.</p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "Criticality": {
                     "target": "com.amazonaws.securityhub#NumberFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The level of importance that is assigned to the resources that are associated with a \n         finding. <code>Criticality</code> is scored on a 0–100 basis, using a ratio scale that supports \n         only full integers. A score of <code>0</code> means that the underlying resources have no \n         criticality, and a score of <code>100</code> is reserved for the most critical resources. For \n      more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality\">Criticality</a> in the <i>Security Hub User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>\n         The level of importance that is assigned to the resources that are associated with a \n         finding. <code>Criticality</code> is scored on a 0–100 basis, using a ratio scale that supports \n         only full integers. A score of <code>0</code> means that the underlying resources have no \n         criticality, and a score of <code>100</code> is reserved for the most critical resources. For \n      more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality\">Criticality</a> in the <i>Security Hub User Guide</i>.</p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "Title": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A finding's title. \n      </p>"
+                        "smithy.api#documentation": "<p>\n         A finding's title.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 100 items.\n   \t</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A finding's description. \n      </p>"
+                        "smithy.api#documentation": "<p>\n         A finding's description. \n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "SourceUrl": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Provides a URL that links to a page about the current finding in the finding product.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Provides a URL that links to a page about the current finding in the finding product.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "ProductName": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Provides the name of the product that generated the finding. For \n         control-based findings, the product name is Security Hub.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Provides the name of the product that generated the finding. For \n         control-based findings, the product name is Security Hub.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "CompanyName": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the company for the product that generated the finding. \n         For control-based findings, the company is Amazon Web Services.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The name of the company for the product that generated the finding. \n         For control-based findings, the company is Amazon Web Services.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "SeverityLabel": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The severity value of the finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The severity value of the finding.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The type of resource that the finding pertains to.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The type of resource that the finding pertains to.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "ResourceId": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The identifier for the given resource type. For Amazon Web Services resources that are identified by \n         Amazon Resource Names (ARNs), this is the ARN. For Amazon Web Services resources that lack ARNs, \n         this is the identifier as defined by the Amazon Web Service that created the resource. \n         For non-Amazon Web Services resources, this is a unique identifier that is associated with the \n         resource.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The identifier for the given resource type. For Amazon Web Services resources that are identified by \n         Amazon Resource Names (ARNs), this is the ARN. For Amazon Web Services resources that lack ARNs, \n         this is the identifier as defined by the Amazon Web Service that created the resource. \n         For non-Amazon Web Services resources, this is a unique identifier that is associated with the \n         resource.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 100 items.\n   \t</p>"
                     }
                 },
                 "ResourcePartition": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The partition in which the resource that the finding pertains to is located. \n         A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The partition in which the resource that the finding pertains to is located. \n         A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "ResourceRegion": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Web Services Region where the resource that a finding pertains to is located.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Web Services Region where the resource that a finding pertains to is located.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "ResourceTags": {
                     "target": "com.amazonaws.securityhub#MapFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A list of Amazon Web Services tags associated with a resource at the time the finding was processed.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         A list of Amazon Web Services tags associated with a resource at the time the finding was processed.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "ResourceDetailsOther": {
                     "target": "com.amazonaws.securityhub#MapFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Custom fields and values about the resource that a finding pertains to.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Custom fields and values about the resource that a finding pertains to.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "ComplianceStatus": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The result of a security check. This field is only used for findings generated \n         from controls.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The result of a security check. This field is only used for findings generated \n         from controls.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "ComplianceSecurityControlId": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The security control ID for which a finding was generated. Security control IDs are the same across standards.</p>"
+                        "smithy.api#documentation": "<p> The security control ID for which a finding was generated. Security control IDs are the same across standards.</p>\n         <p>\n    \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n    \t</p>"
                     }
                 },
                 "ComplianceAssociatedStandardsId": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of a standard in which a control is enabled. This field consists of the resource portion of \n            the Amazon Resource Name (ARN) returned for a standard in the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html\">DescribeStandards</a> API response.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of a standard in which a control is enabled. This field consists of the resource portion of \n            the Amazon Resource Name (ARN) returned for a standard in the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html\">DescribeStandards</a> API response.</p>\n         <p>\n    \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n    \t</p>"
                     }
                 },
                 "VerificationState": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Provides the veracity of a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Provides the veracity of a finding.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "WorkflowStatus": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Provides information about the status of the investigation into a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Provides information about the status of the investigation into a finding.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "RecordState": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Provides the current state of a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Provides the current state of a finding.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "RelatedFindingsProductArn": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The ARN for the product that generated a related finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The ARN for the product that generated a related finding.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "RelatedFindingsId": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The product-generated identifier for a related finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The product-generated identifier for a related finding.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "NoteText": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The text of a user-defined note that's added to a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The text of a user-defined note that's added to a finding.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "NoteUpdatedAt": {
                     "target": "com.amazonaws.securityhub#DateFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The timestamp of when the note was updated. Uses the date-time format specified in \n         <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. \n         For example, <code>2020-03-22T13:22:13.933Z</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The timestamp of when the note was updated. Uses the date-time format specified in \n         <a href=\"https://www.rfc-editor.org/rfc/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. \n         For example, <code>2020-03-22T13:22:13.933Z</code>.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "NoteUpdatedBy": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The principal that created a note.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The principal that created a note.\n      </p>\n         <p>\n   \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n   \t</p>"
                     }
                 },
                 "UserDefinedFields": {
                     "target": "com.amazonaws.securityhub#MapFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of user-defined name and value string pairs added to a finding.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            A list of user-defined name and value string pairs added to a finding.\n        </p>\n         <p>\n    \t\tArray Members: Minimum number of 1 item. Maximum number of 20 items.\n    \t</p>"
                     }
                 }
             },

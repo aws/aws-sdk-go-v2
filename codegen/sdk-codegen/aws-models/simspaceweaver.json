@@ -1004,7 +1004,8 @@
                 "BucketName": {
                     "target": "com.amazonaws.simspaceweaver#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an Amazon S3 bucket. For more information about buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html\">Creating,\n            configuring, and working with Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of an Amazon S3 bucket. For more information about buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html\">Creating,\n            configuring, and working with Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User\n            Guide</i>.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "ObjectKeyPrefix": {
@@ -1024,13 +1025,15 @@
                 "BucketName": {
                     "target": "com.amazonaws.simspaceweaver#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an Amazon S3 bucket. For more information about buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html\">Creating,\n            configuring, and working with Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of an Amazon S3 bucket. For more information about buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html\">Creating,\n            configuring, and working with Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User\n            Guide</i>.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "ObjectKey": {
                     "target": "com.amazonaws.simspaceweaver#ObjectKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key name of an object in Amazon S3. For more information about Amazon S3 objects and object\n         keys, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-downloading-objects.html\">Uploading,\n            downloading, and working with objects in Amazon S3</a> in the <i>Amazon Simple Storage Service User\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The key name of an object in Amazon S3. For more information about Amazon S3 objects and object\n         keys, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-downloading-objects.html\">Uploading,\n            downloading, and working with objects in Amazon S3</a> in the <i>Amazon Simple Storage Service User\n            Guide</i>.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1465,158 +1468,6 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://simspaceweaver-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://simspaceweaver-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://simspaceweaver.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://simspaceweaver.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://simspaceweaver-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://simspaceweaver-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://simspaceweaver.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://simspaceweaver.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://simspaceweaver-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://simspaceweaver.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
@@ -1624,9 +1475,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1637,9 +1488,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1650,9 +1501,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1663,9 +1514,161 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1674,9 +1677,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1687,9 +1690,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1698,9 +1701,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1711,22 +1714,35 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1736,9 +1752,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1748,10 +1764,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
