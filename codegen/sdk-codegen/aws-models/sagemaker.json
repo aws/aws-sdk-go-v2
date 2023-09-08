@@ -3316,7 +3316,7 @@
                 "TimeSeriesForecastingJobConfig": {
                     "target": "com.amazonaws.sagemaker#TimeSeriesForecastingJobConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings used to configure an AutoML job V2 for a time-series forecasting problem\n         type.</p>\n         <note>\n            <p>The <code>TimeSeriesForecastingJobConfig</code> problem type is only available in\n            private beta. Contact Amazon Web Services Support or your account manager to learn more\n            about access privileges.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Settings used to configure an AutoML job V2 for a time-series forecasting problem\n         type.</p>"
                     }
                 }
             },
@@ -6453,6 +6453,16 @@
                 "smithy.api#documentation": "<p>A flag to indicating that automatic model tuning (AMT) has detected model convergence,\n            defined as a lack of significant improvement (1% or less) against an objective\n            metric.</p>"
             }
         },
+        "com.amazonaws.sagemaker#CountryCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "smithy.api#pattern": "^[A-Z]{2}$"
+            }
+        },
         "com.amazonaws.sagemaker#CreateAction": {
             "type": "operation",
             "input": {
@@ -6856,7 +6866,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.</p>\n         <note>\n            <p>We recommend using the new versions <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a>, which offer backward compatibility.</p>\n            <p>\n               <code>CreateAutoMLJobV2</code> can manage tabular problem types identical to those of\n            its previous version <code>CreateAutoMLJob</code>, as well as non-tabular problem types\n            such as image or text classification.</p>\n            <p>Find guidelines about how to migrate a <code>CreateAutoMLJob</code> to\n               <code>CreateAutoMLJobV2</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2\">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p>\n         </note>\n         <p>You can find the best-performing model after you run an AutoML job by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a> (recommended) or <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.</p>\n         <note>\n            <p>We recommend using the new versions <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a>, which offer backward compatibility.</p>\n            <p>\n               <code>CreateAutoMLJobV2</code> can manage tabular problem types identical to those of\n            its previous version <code>CreateAutoMLJob</code>, as well as time-series forecasting,\n            and non-tabular problem types such as image or text classification.</p>\n            <p>Find guidelines about how to migrate a <code>CreateAutoMLJob</code> to\n               <code>CreateAutoMLJobV2</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2\">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p>\n         </note>\n         <p>You can find the best-performing model after you run an AutoML job by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a> (recommended) or <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateAutoMLJobRequest": {
@@ -6964,7 +6974,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.</p>\n         <note>\n            <p>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a> are new versions of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html\">CreateAutoMLJob</a>\n            and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a> which offer backward compatibility.</p>\n            <p>\n               <code>CreateAutoMLJobV2</code> can manage tabular problem types identical to those of\n            its previous version <code>CreateAutoMLJob</code>, as well as non-tabular problem types\n            such as image or text classification.</p>\n            <p>Find guidelines about how to migrate a <code>CreateAutoMLJob</code> to\n               <code>CreateAutoMLJobV2</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2\">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p>\n         </note>\n         <p>For the list of available problem types supported by <code>CreateAutoMLJobV2</code>, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html\">AutoMLProblemTypeConfig</a>.</p>\n         <p>You can find the best-performing model after you run an AutoML job V2 by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.</p>\n         <note>\n            <p>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a> are new versions of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html\">CreateAutoMLJob</a>\n            and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a> which offer backward compatibility.</p>\n            <p>\n               <code>CreateAutoMLJobV2</code> can manage tabular problem types identical to those of\n            its previous version <code>CreateAutoMLJob</code>, as well as time-series forecasting,\n            and non-tabular problem types such as image or text classification.</p>\n            <p>Find guidelines about how to migrate a <code>CreateAutoMLJob</code> to\n               <code>CreateAutoMLJobV2</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2\">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p>\n         </note>\n         <p>For the list of available problem types supported by <code>CreateAutoMLJobV2</code>, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html\">AutoMLProblemTypeConfig</a>.</p>\n         <p>You can find the best-performing model after you run an AutoML job V2 by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateAutoMLJobV2Request": {
@@ -25443,6 +25453,32 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#HolidayConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#HolidayConfigAttributes"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#HolidayConfigAttributes": {
+            "type": "structure",
+            "members": {
+                "CountryCode": {
+                    "target": "com.amazonaws.sagemaker#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country code for the holiday calendar.</p>\n         <p>For the list of public holiday calendars supported by AutoML job V2, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/holidays.html#holidays-country-codes\">Country Codes</a>. Use the country code corresponding to the country of your\n         choice.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores the holiday featurization attributes applicable to each item of time-series\n         datasets during the training of a forecasting model. This allows the model to identify\n         patterns associated with specific holidays.</p>"
             }
         },
         "com.amazonaws.sagemaker#HookParameters": {
@@ -54427,7 +54463,7 @@
                 "ForecastQuantiles": {
                     "target": "com.amazonaws.sagemaker#ForecastQuantiles",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quantiles used to train the model for forecasts at a specified quantile. You can\n         specify quantiles from <code>0.01</code> (p1) to <code>0.99</code> (p99), by increments of\n         0.01 or higher. Up to five forecast quantiles can be specified. When\n            <code>ForecastQuantiles</code> is not provided, the AutoML job uses the quantiles\n            p10, p50, and p90 as default.</p>"
+                        "smithy.api#documentation": "<p>The quantiles used to train the model for forecasts at a specified quantile. You can\n         specify quantiles from <code>0.01</code> (p1) to <code>0.99</code> (p99), by increments of\n         0.01 or higher. Up to five forecast quantiles can be specified. When\n            <code>ForecastQuantiles</code> is not provided, the AutoML job uses the quantiles p10,\n         p50, and p90 as default.</p>"
                     }
                 },
                 "Transformations": {
@@ -54442,10 +54478,16 @@
                         "smithy.api#documentation": "<p>The collection of components that defines the time-series.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "HolidayConfig": {
+                    "target": "com.amazonaws.sagemaker#HolidayConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of holiday featurization attributes used to incorporate national holiday\n         information into your forecasting model.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The collection of settings used by an AutoML job V2 for the time-series forecasting\n         problem type.</p>\n         <note>\n            <p>The <code>TimeSeriesForecastingJobConfig</code> problem type is only available in\n            private beta. Contact Amazon Web Services Support or your account manager to learn more\n            about access privileges.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The collection of settings used by an AutoML job V2 for the time-series forecasting\n         problem type.</p>"
             }
         },
         "com.amazonaws.sagemaker#TimeSeriesForecastingSettings": {

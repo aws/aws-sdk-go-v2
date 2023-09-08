@@ -1,33 +1,5 @@
 {
     "smithy": "2.0",
-    "metadata": {
-        "suppressions": [
-            {
-                "id": "HttpMethodSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpResponseCodeSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "PaginatedTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpHeaderTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpUriConflict",
-                "namespace": "*"
-            },
-            {
-                "id": "Service",
-                "namespace": "*"
-            }
-        ]
-    },
     "shapes": {
         "com.amazonaws.ssoadmin#AccessControlAttribute": {
             "type": "structure",
@@ -48,7 +20,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are IAM Identity Center identity store attributes that you can configure for use in\n      attributes-based access control (ABAC). You can create permissions policies that determine who\n      can access your AWS resources based upon the configured attribute values. When you enable\n      ABAC and specify <code>AccessControlAttributes</code>, IAM Identity Center passes the attribute values of\n      the authenticated user into IAM for use in policy evaluation.</p>"
+                "smithy.api#documentation": "<p>These are IAM Identity Center identity store attributes that you can configure for use in\n      attributes-based access control (ABAC). You can create permissions policies that determine who\n      can access your Amazon Web Services resources based upon the configured attribute values. When you enable\n      ABAC and specify <code>AccessControlAttributes</code>, IAM Identity Center passes the attribute values of\n      the authenticated user into IAM for use in policy evaluation.</p>"
             }
         },
         "com.amazonaws.ssoadmin#AccessControlAttributeKey": {
@@ -132,13 +104,13 @@
                 "AccountId": {
                     "target": "com.amazonaws.ssoadmin#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account.</p>"
                     }
                 },
                 "PermissionSetArn": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
                     }
                 },
                 "PrincipalType": {
@@ -155,7 +127,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The assignment that indicates a principal's limited access to a specified AWS account\n      with a specified permission set.</p>\n         <note>\n            <p>The term <i>principal</i> here refers to a user or group that is defined\n        in IAM Identity Center.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The assignment that indicates a principal's limited access to a specified Amazon Web Services account\n      with a specified permission set.</p>\n         <note>\n            <p>The term <i>principal</i> here refers to a user or group that is defined\n        in IAM Identity Center.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#AccountAssignmentList": {
@@ -188,7 +160,7 @@
                 "TargetId": {
                     "target": "com.amazonaws.ssoadmin#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
+                        "smithy.api#documentation": "<p>TargetID is an Amazon Web Services account identifier, (For example, 123456789012).</p>"
                     }
                 },
                 "TargetType": {
@@ -200,7 +172,7 @@
                 "PermissionSetArn": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
                     }
                 },
                 "PrincipalType": {
@@ -329,7 +301,7 @@
                 "CustomerManagedPolicyReference": {
                     "target": "com.amazonaws.ssoadmin#CustomerManagedPolicyReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>",
+                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -377,7 +349,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches an AWS managed policy ARN to a permission set.</p>\n         <note>\n            <p>If the permission set is already referenced by one or more account assignments, you will\n        need to call <code>\n                  <a>ProvisionPermissionSet</a>\n               </code> after this operation.\n        Calling <code>ProvisionPermissionSet</code> applies the corresponding IAM policy updates\n        to all assigned accounts.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Attaches an Amazon Web Services managed policy ARN to a permission set.</p>\n         <note>\n            <p>If the permission set is already referenced by one or more account assignments, you will\n        need to call <code>\n                  <a>ProvisionPermissionSet</a>\n               </code> after this operation.\n        Calling <code>ProvisionPermissionSet</code> applies the corresponding IAM policy updates\n        to all assigned accounts.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#AttachManagedPolicyToPermissionSetRequest": {
@@ -386,7 +358,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -400,7 +372,7 @@
                 "ManagedPolicyArn": {
                     "target": "com.amazonaws.ssoadmin#ManagedPolicyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS managed policy ARN to be attached to a permission set.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services managed policy ARN to be attached to a permission set.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -422,18 +394,18 @@
                 "Name": {
                     "target": "com.amazonaws.ssoadmin#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the AWS managed policy.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services managed policy.</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.ssoadmin#ManagedPolicyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS managed policy. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services managed policy. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that stores the details of the AWS managed policy.</p>"
+                "smithy.api#documentation": "<p>A structure that stores the details of the Amazon Web Services managed policy.</p>"
             }
         },
         "com.amazonaws.ssoadmin#AttachedManagedPolicyList": {
@@ -490,7 +462,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns access to a principal for a specified AWS account using a specified\n      permission set.</p>\n         <note>\n            <p>The term <i>principal</i> here refers to a user or group that is defined\n        in IAM Identity Center.</p>\n         </note>\n         <note>\n            <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified\n        permission set will automatically be provisioned to the account in the form of an IAM\n        policy. That policy is attached to the IAM role created in IAM Identity Center. If the permission set\n        is subsequently updated, the corresponding IAM policies attached to roles in your accounts\n        will not be updated automatically. In this case, you must call <code>\n                  <a>ProvisionPermissionSet</a>\n               </code> to make these updates.</p>\n         </note>\n         <note>\n            <p>\n        After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment creation request.\n      </p>\n         </note>"
+                "smithy.api#documentation": "<p>Assigns access to a principal for a specified Amazon Web Services account using a specified\n      permission set.</p>\n         <note>\n            <p>The term <i>principal</i> here refers to a user or group that is defined\n        in IAM Identity Center.</p>\n         </note>\n         <note>\n            <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified\n        permission set will automatically be provisioned to the account in the form of an IAM\n        policy. That policy is attached to the IAM role created in IAM Identity Center. If the permission set\n        is subsequently updated, the corresponding IAM policies attached to roles in your accounts\n        will not be updated automatically. In this case, you must call <code>\n                  <a>ProvisionPermissionSet</a>\n               </code> to make these updates.</p>\n         </note>\n         <note>\n            <p>\n        After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment creation request.\n      </p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#CreateAccountAssignmentRequest": {
@@ -499,14 +471,14 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetId": {
                     "target": "com.amazonaws.ssoadmin#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>",
+                        "smithy.api#documentation": "<p>TargetID is an Amazon Web Services account identifier, (For example, 123456789012).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -650,7 +622,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a permission set within a specified IAM Identity Center instance.</p>\n         <note>\n            <p>To grant users and groups access to AWS account resources, use <code>\n                  <a>CreateAccountAssignment</a>\n               </code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a permission set within a specified IAM Identity Center instance.</p>\n         <note>\n            <p>To grant users and groups access to Amazon Web Services account resources, use <code>\n                  <a>CreateAccountAssignment</a>\n               </code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#CreatePermissionSetRequest": {
@@ -672,7 +644,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -705,7 +677,7 @@
                 "PermissionSet": {
                     "target": "com.amazonaws.ssoadmin#PermissionSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the level of access on an AWS account.</p>"
+                        "smithy.api#documentation": "<p>Defines the level of access on an Amazon Web Services account.</p>"
                     }
                 }
             },
@@ -731,7 +703,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>"
+                "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>"
             }
         },
         "com.amazonaws.ssoadmin#CustomerManagedPolicyReferenceList": {
@@ -772,7 +744,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a principal's access from a specified AWS account using a specified permission\n      set.</p>\n         <note>\n            <p>After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment deletion request.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes a principal's access from a specified Amazon Web Services account using a specified permission\n      set.</p>\n         <note>\n            <p>After a successful response, call <code>DescribeAccountAssignmentDeletionStatus</code> to\n        describe the status of an assignment deletion request.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#DeleteAccountAssignmentRequest": {
@@ -781,14 +753,14 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetId": {
                     "target": "com.amazonaws.ssoadmin#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>",
+                        "smithy.api#documentation": "<p>TargetID is an Amazon Web Services account identifier, (For example, 123456789012).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -877,7 +849,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -992,7 +964,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1108,7 +1080,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1173,7 +1145,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1337,7 +1309,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1373,7 +1345,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1395,7 +1367,7 @@
                 "PermissionSet": {
                     "target": "com.amazonaws.ssoadmin#PermissionSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the level of access on an AWS account.</p>"
+                        "smithy.api#documentation": "<p>Describes the level of access on an Amazon Web Services account.</p>"
                     }
                 }
             },
@@ -1455,7 +1427,7 @@
                 "CustomerManagedPolicyReference": {
                     "target": "com.amazonaws.ssoadmin#CustomerManagedPolicyReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>",
+                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1500,7 +1472,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detaches the attached AWS managed policy ARN from the specified permission set.</p>"
+                "smithy.api#documentation": "<p>Detaches the attached Amazon Web Services managed policy ARN from the specified permission set.</p>"
             }
         },
         "com.amazonaws.ssoadmin#DetachManagedPolicyFromPermissionSetRequest": {
@@ -1509,7 +1481,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1523,7 +1495,7 @@
                 "ManagedPolicyArn": {
                     "target": "com.amazonaws.ssoadmin#ManagedPolicyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS managed policy ARN to be detached from a permission set.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services managed policy ARN to be detached from a permission set.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1584,7 +1556,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1606,7 +1578,7 @@
                 "InlinePolicy": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetPolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The inline policy that is attached to the permission set.</p>"
+                        "smithy.api#documentation": "<p>The inline policy that is attached to the permission set.</p>\n         <note>\n            <p>For <code>Length Constraints</code>, if a valid ARN is provided for a permission set, it is possible for an empty inline policy to be returned.</p>\n         </note>"
                     }
                 }
             },
@@ -1752,7 +1724,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
                     }
                 },
                 "IdentityStoreId": {
@@ -1808,12 +1780,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the status of the AWS account assignment creation requests for a specified IAM Identity Center\n      instance.</p>",
+                "smithy.api#documentation": "<p>Lists the status of the Amazon Web Services account assignment creation requests for a specified IAM Identity Center\n      instance.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "AccountAssignmentsCreationStatus",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "AccountAssignmentsCreationStatus"
                 }
             }
         },
@@ -1823,7 +1795,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1896,12 +1868,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the status of the AWS account assignment deletion requests for a specified IAM Identity Center\n      instance.</p>",
+                "smithy.api#documentation": "<p>Lists the status of the Amazon Web Services account assignment deletion requests for a specified IAM Identity Center\n      instance.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "AccountAssignmentsDeletionStatus",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "AccountAssignmentsDeletionStatus"
                 }
             }
         },
@@ -1911,7 +1883,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1984,12 +1956,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the assignee of the specified AWS account with the specified permission set.</p>",
+                "smithy.api#documentation": "<p>Lists the assignee of the specified Amazon Web Services account with the specified permission set.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "AccountAssignments",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "AccountAssignments"
                 }
             }
         },
@@ -1999,14 +1971,14 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AccountId": {
                     "target": "com.amazonaws.ssoadmin#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account from which to list the assignments.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account from which to list the assignments.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2040,7 +2012,7 @@
                 "AccountAssignments": {
                     "target": "com.amazonaws.ssoadmin#AccountAssignmentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of assignments that match the input AWS account and permission set.</p>"
+                        "smithy.api#documentation": "<p>The list of assignments that match the input Amazon Web Services account and permission set.</p>"
                     }
                 },
                 "NextToken": {
@@ -2080,12 +2052,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the AWS accounts where the specified permission set is provisioned.</p>",
+                "smithy.api#documentation": "<p>Lists all the Amazon Web Services accounts where the specified permission set is provisioned.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "AccountIds",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "AccountIds"
                 }
             }
         },
@@ -2095,21 +2067,21 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PermissionSetArn": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the <a>PermissionSet</a> from which the associated AWS accounts\n      will be listed.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the <a>PermissionSet</a> from which the associated Amazon Web Services accounts\n      will be listed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ProvisioningStatus": {
                     "target": "com.amazonaws.ssoadmin#ProvisioningStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permission set provisioning status for an AWS account.</p>"
+                        "smithy.api#documentation": "<p>The permission set provisioning status for an Amazon Web Services account.</p>"
                     }
                 },
                 "MaxResults": {
@@ -2135,7 +2107,7 @@
                 "AccountIds": {
                     "target": "com.amazonaws.ssoadmin#AccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of AWS <code>AccountIds</code>.</p>"
+                        "smithy.api#documentation": "<p>The list of Amazon Web Services <code>AccountIds</code>.</p>"
                     }
                 },
                 "NextToken": {
@@ -2179,8 +2151,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "CustomerManagedPolicyReferences",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "CustomerManagedPolicyReferences"
                 }
             }
         },
@@ -2265,8 +2237,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Instances",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "Instances"
                 }
             }
         },
@@ -2336,12 +2308,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the AWS managed policy that is attached to a specified permission set.</p>",
+                "smithy.api#documentation": "<p>Lists the Amazon Web Services managed policy that is attached to a specified permission set.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "AttachedManagedPolicies",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "AttachedManagedPolicies"
                 }
             }
         },
@@ -2351,7 +2323,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2429,8 +2401,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "PermissionSetsProvisioningStatus",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "PermissionSetsProvisioningStatus"
                 }
             }
         },
@@ -2440,7 +2412,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2517,8 +2489,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "PermissionSets",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "PermissionSets"
                 }
             }
         },
@@ -2548,12 +2520,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the permission sets that are provisioned to a specified AWS account.</p>",
+                "smithy.api#documentation": "<p>Lists all the permission sets that are provisioned to a specified Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "PermissionSets",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "PermissionSets"
                 }
             }
         },
@@ -2563,14 +2535,14 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AccountId": {
                     "target": "com.amazonaws.ssoadmin#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account from which to list the assignments.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account from which to list the assignments.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2609,7 +2581,7 @@
                 "PermissionSets": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the level of access that an AWS account has.</p>"
+                        "smithy.api#documentation": "<p>Defines the level of access that an Amazon Web Services account has.</p>"
                     }
                 }
             },
@@ -2623,7 +2595,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2650,7 +2622,7 @@
                 "PermissionSets": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the level of access on an AWS account.</p>"
+                        "smithy.api#documentation": "<p>Defines the level of access on an Amazon Web Services account.</p>"
                     }
                 },
                 "NextToken": {
@@ -2704,7 +2676,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2820,7 +2792,7 @@
                 "PermissionSetArn": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
                     }
                 },
                 "Description": {
@@ -2869,7 +2841,7 @@
                     "min": 1,
                     "max": 700
                 },
-                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A0-\\u00FF]*$"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"
             }
         },
         "com.amazonaws.ssoadmin#PermissionSetList": {
@@ -2893,7 +2865,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 10240
+                    "max": 32768
                 },
                 "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
             }
@@ -2916,13 +2888,13 @@
                 "AccountId": {
                     "target": "com.amazonaws.ssoadmin#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account from which to list the assignments.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account from which to list the assignments.</p>"
                     }
                 },
                 "PermissionSetArn": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission set that is being provisioned. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the permission set that is being provisioned. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
                     }
                 },
                 "FailureReason": {
@@ -2980,18 +2952,18 @@
                 "CustomerManagedPolicyReference": {
                     "target": "com.amazonaws.ssoadmin#CustomerManagedPolicyReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>"
                     }
                 },
                 "ManagedPolicyArn": {
                     "target": "com.amazonaws.ssoadmin#ManagedPolicyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS managed policy ARN that you want to attach to a permission set as a permissions\n      boundary.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services managed policy ARN that you want to attach to a permission set as a permissions\n      boundary.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration of the AWS managed or customer managed policy that you want\n      to set as a permissions boundary. Specify either <code>CustomerManagedPolicyReference</code>\n      to use the name and path of a customer managed policy, or <code>ManagedPolicyArn</code> to use\n      the ARN of an AWS managed policy. A permissions boundary represents the maximum permissions\n      that any policy can grant your role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions boundaries for IAM\n        entities</a> in the <i>IAM User Guide</i>.</p>\n         <important>\n            <p>Policies used as permissions boundaries don't provide permissions. You must also attach\n        an IAM policy to the role. To learn how the effective permissions for a role are\n        evaluated, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html\">IAM JSON policy\n          evaluation logic</a> in the <i>IAM User Guide</i>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Specifies the configuration of the Amazon Web Services managed or customer managed policy that you want\n      to set as a permissions boundary. Specify either <code>CustomerManagedPolicyReference</code>\n      to use the name and path of a customer managed policy, or <code>ManagedPolicyArn</code> to use\n      the ARN of an Amazon Web Services managed policy. A permissions boundary represents the maximum permissions\n      that any policy can grant your role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions boundaries for IAM\n        entities</a> in the <i>IAM User Guide</i>.</p>\n         <important>\n            <p>Policies used as permissions boundaries don't provide permissions. You must also attach\n        an IAM policy to the role. To learn how the effective permissions for a role are\n        evaluated, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html\">IAM JSON policy\n          evaluation logic</a> in the <i>IAM User Guide</i>.</p>\n         </important>"
             }
         },
         "com.amazonaws.ssoadmin#PrincipalId": {
@@ -3059,7 +3031,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3073,7 +3045,7 @@
                 "TargetId": {
                     "target": "com.amazonaws.ssoadmin#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
+                        "smithy.api#documentation": "<p>TargetID is an Amazon Web Services account identifier, (For example, 123456789012).</p>"
                     }
                 },
                 "TargetType": {
@@ -3177,7 +3149,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3236,7 +3208,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches an AWS managed or customer managed policy to the specified <a>PermissionSet</a> as a permissions boundary.</p>"
+                "smithy.api#documentation": "<p>Attaches an Amazon Web Services managed or customer managed policy to the specified <a>PermissionSet</a> as a permissions boundary.</p>"
             }
         },
         "com.amazonaws.ssoadmin#PutPermissionsBoundaryToPermissionSetRequest": {
@@ -3427,15 +3399,15 @@
                 "aws.api#service": {
                     "sdkId": "SSO Admin",
                     "arnNamespace": "sso",
-                    "cloudFormationName": "SSOAdmin",
-                    "cloudTrailEventSource": "ssoadmin.amazonaws.com",
+                    "cloudFormationName": "SSO",
+                    "cloudTrailEventSource": "sso.amazonaws.com",
                     "endpointPrefix": "sso"
                 },
                 "aws.auth#sigv4": {
                     "name": "sso"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>AWS IAM Identity Center (successor to AWS Single Sign-On) helps you securely create, or connect, your workforce identities and manage their\n      access centrally across AWS accounts and applications. IAM Identity Center is the recommended\n      approach for workforce authentication and authorization in AWS, for organizations of any size\n      and type.</p>\n         <note>\n            <p>Although AWS Single Sign-On was renamed, the <code>sso</code> and\n        <code>identitystore</code> API namespaces will continue to retain their original name for\n        backward compatibility purposes. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed\">IAM Identity Center rename</a>.</p>\n         </note>\n         <p>This reference guide provides information on single sign-on operations which could be used for\n      access management of AWS accounts. For information about IAM Identity Center features, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center User\n        Guide</a>.</p>\n         <p>Many operations in the IAM Identity Center APIs rely on identifiers for users and groups, known as\n      principals. For more information about how to work with principals and principal IDs in IAM Identity Center,\n      see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Identity Store API\n        Reference</a>.</p>\n         <note>\n            <p>AWS provides SDKs that consist of libraries and sample code for various programming\n        languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The SDKs provide a\n        convenient way to create programmatic access to IAM Identity Center and other AWS services. For more\n        information about the AWS SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>IAM Identity Center (successor to Single Sign-On) helps you securely create, or connect, your workforce identities and manage their\n      access centrally across Amazon Web Services accounts and applications. IAM Identity Center is the recommended\n      approach for workforce authentication and authorization in Amazon Web Services, for organizations of any size\n      and type.</p>\n         <note>\n            <p>IAM Identity Center uses the <code>sso</code> and <code>identitystore</code> API namespaces.</p>\n         </note>\n         <p>This reference guide provides information on single sign-on operations which could be used for\n      access management of Amazon Web Services accounts. For information about IAM Identity Center features, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center User\n        Guide</a>.</p>\n         <p>Many operations in the IAM Identity Center APIs rely on identifiers for users and groups, known as\n      principals. For more information about how to work with principals and principal IDs in IAM Identity Center,\n      see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Identity Store API\n        Reference</a>.</p>\n         <note>\n            <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various programming\n        languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The SDKs provide a\n        convenient way to create programmatic access to IAM Identity Center and other Amazon Web Services services. For more\n        information about the Amazon Web Services SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p>\n         </note>",
                 "smithy.api#title": "AWS Single Sign-On Admin",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3497,9 +3469,213 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://sso-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://sso.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://sso-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -3512,15 +3688,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://sso.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://sso.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -3532,321 +3743,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://sso-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        "aws-us-gov",
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": [
-                                                                                                {
-                                                                                                    "ref": "PartitionResult"
-                                                                                                },
-                                                                                                "name"
-                                                                                            ]
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://sso.{Region}.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://sso-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://sso.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-east-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://sso.us-gov-east-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-west-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://sso.us-gov-west-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://sso.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -3861,8 +3759,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3874,8 +3772,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3887,8 +3785,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3900,8 +3798,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3913,8 +3811,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3926,8 +3824,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3939,8 +3837,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3952,8 +3850,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3965,8 +3863,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3978,8 +3876,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3991,8 +3889,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4004,8 +3902,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4017,8 +3915,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4030,8 +3928,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4043,8 +3941,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4056,8 +3954,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4069,8 +3967,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4082,8 +3980,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4095,8 +3993,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4108,8 +4006,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4121,8 +4019,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4134,8 +4032,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4147,8 +4045,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4160,8 +4058,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4173,8 +4071,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4186,8 +4084,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4199,8 +4097,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4212,8 +4110,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4225,8 +4123,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4238,8 +4136,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4251,8 +4149,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4264,8 +4162,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4277,8 +4186,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4290,8 +4210,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4303,8 +4234,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4316,8 +4258,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4329,8 +4271,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4342,8 +4284,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4354,8 +4296,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4366,9 +4308,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -4434,7 +4382,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A set of key-value pairs that are used to manage the resource. Tags can only be applied to\n      permission sets and cannot be applied to corresponding roles that IAM Identity Center creates in AWS\n      accounts.</p>"
+                "smithy.api#documentation": "<p>A set of key-value pairs that are used to manage the resource. Tags can only be applied to\n      permission sets and cannot be applied to corresponding roles that IAM Identity Center creates in Amazon Web Services\n      accounts.</p>"
             }
         },
         "com.amazonaws.ssoadmin#TagKey": {
@@ -4512,7 +4460,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4657,7 +4605,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4786,7 +4734,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
