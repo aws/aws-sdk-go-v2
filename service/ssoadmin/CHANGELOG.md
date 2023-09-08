@@ -1,3 +1,7 @@
+# v1.18.0 (2023-09-08)
+
+* **Feature**: Content updates to IAM Identity Center API for China Regions.
+
 # v1.17.6 (2023-09-01)
 
 * No change notes available for this release.

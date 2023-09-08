@@ -1,3 +1,15 @@
+# Release (2023-09-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.32.6](service/fsx/CHANGELOG.md#v1326-2023-09-08)
+  * **Documentation**: Amazon FSx documentation fixes
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.105.0](service/sagemaker/CHANGELOG.md#v11050-2023-09-08)
+  * **Feature**: Autopilot APIs will now support holiday featurization for Timeseries models. The models will now hold holiday metadata and should be able to accommodate holiday effect during inference.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.18.0](service/ssoadmin/CHANGELOG.md#v1180-2023-09-08)
+  * **Feature**: Content updates to IAM Identity Center API for China Regions.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.30.0](service/workspaces/CHANGELOG.md#v1300-2023-09-08)
+  * **Feature**: A new field "ErrorDetails" will be added to the output of "DescribeWorkspaceImages" API call. This field provides in-depth details about the error occurred during image import process. These details include the possible causes of the errors and troubleshooting information.
+
 # Release (2023-09-07)
 
 ## Module Highlights

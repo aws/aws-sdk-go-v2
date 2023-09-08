@@ -1,3 +1,7 @@
+# v1.105.0 (2023-09-08)
+
+* **Feature**: Autopilot APIs will now support holiday featurization for Timeseries models. The models will now hold holiday metadata and should be able to accommodate holiday effect during inference.
+
 # v1.104.0 (2023-09-05)
 
 * **Feature**: SageMaker Neo now supports data input shape derivation for Pytorch 2.0  and XGBoost compilation job for cloud instance targets. You can skip DataInputConfig field during compilation job creation. You can also access derived information from model in DescribeCompilationJob response.

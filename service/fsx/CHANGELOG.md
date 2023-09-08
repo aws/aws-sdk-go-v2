@@ -1,3 +1,7 @@
+# v1.32.6 (2023-09-08)
+
+* **Documentation**: Amazon FSx documentation fixes
+
 # v1.32.5 (2023-08-29)
 
 * **Documentation**: Documentation updates for project quotas.
