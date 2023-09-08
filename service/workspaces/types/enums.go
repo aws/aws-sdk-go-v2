@@ -573,6 +573,73 @@ func (WorkspaceDirectoryType) Values() []WorkspaceDirectoryType {
 	}
 }
 
+type WorkspaceImageErrorDetailCode string
+
+// Enum values for WorkspaceImageErrorDetailCode
+const (
+	WorkspaceImageErrorDetailCodeOutdatedPowershellVersion     WorkspaceImageErrorDetailCode = "OutdatedPowershellVersion"
+	WorkspaceImageErrorDetailCodeOfficeInstalled               WorkspaceImageErrorDetailCode = "OfficeInstalled"
+	WorkspaceImageErrorDetailCodePcoipAgentInstalled           WorkspaceImageErrorDetailCode = "PCoIPAgentInstalled"
+	WorkspaceImageErrorDetailCodeWindowsUpdatesEnabled         WorkspaceImageErrorDetailCode = "WindowsUpdatesEnabled"
+	WorkspaceImageErrorDetailCodeAutoMountDisabled             WorkspaceImageErrorDetailCode = "AutoMountDisabled"
+	WorkspaceImageErrorDetailCodeWorkspacesByolAccountNotFound WorkspaceImageErrorDetailCode = "WorkspacesBYOLAccountNotFound"
+	WorkspaceImageErrorDetailCodeWorkspacesByolAccountDisabled WorkspaceImageErrorDetailCode = "WorkspacesBYOLAccountDisabled"
+	WorkspaceImageErrorDetailCodeDhcpDisabled                  WorkspaceImageErrorDetailCode = "DHCPDisabled"
+	WorkspaceImageErrorDetailCodeDiskFreeSpace                 WorkspaceImageErrorDetailCode = "DiskFreeSpace"
+	WorkspaceImageErrorDetailCodeAdditionalDrivesAttached      WorkspaceImageErrorDetailCode = "AdditionalDrivesAttached"
+	WorkspaceImageErrorDetailCodeOsNotSupported                WorkspaceImageErrorDetailCode = "OSNotSupported"
+	WorkspaceImageErrorDetailCodeDomainJoined                  WorkspaceImageErrorDetailCode = "DomainJoined"
+	WorkspaceImageErrorDetailCodeAzureDomainJoined             WorkspaceImageErrorDetailCode = "AzureDomainJoined"
+	WorkspaceImageErrorDetailCodeFirewallEnabled               WorkspaceImageErrorDetailCode = "FirewallEnabled"
+	WorkspaceImageErrorDetailCodeVmwareToolsInstalled          WorkspaceImageErrorDetailCode = "VMWareToolsInstalled"
+	WorkspaceImageErrorDetailCodeDiskSizeExceeded              WorkspaceImageErrorDetailCode = "DiskSizeExceeded"
+	WorkspaceImageErrorDetailCodeIncompatiblePartitioning      WorkspaceImageErrorDetailCode = "IncompatiblePartitioning"
+	WorkspaceImageErrorDetailCodePendingReboot                 WorkspaceImageErrorDetailCode = "PendingReboot"
+	WorkspaceImageErrorDetailCodeAutoLogonEnabled              WorkspaceImageErrorDetailCode = "AutoLogonEnabled"
+	WorkspaceImageErrorDetailCodeRealtimeUniversalDisabled     WorkspaceImageErrorDetailCode = "RealTimeUniversalDisabled"
+	WorkspaceImageErrorDetailCodeMultipleBootPartition         WorkspaceImageErrorDetailCode = "MultipleBootPartition"
+	WorkspaceImageErrorDetailCodeSixtyFourBitOs                WorkspaceImageErrorDetailCode = "Requires64BitOS"
+	WorkspaceImageErrorDetailCodeZeroRearmCount                WorkspaceImageErrorDetailCode = "ZeroRearmCount"
+	WorkspaceImageErrorDetailCodeInPlaceUpgrade                WorkspaceImageErrorDetailCode = "InPlaceUpgrade"
+	WorkspaceImageErrorDetailCodeAntiVirusInstalled            WorkspaceImageErrorDetailCode = "AntiVirusInstalled"
+	WorkspaceImageErrorDetailCodeUefiNotSupported              WorkspaceImageErrorDetailCode = "UEFINotSupported"
+)
+
+// Values returns all known values for WorkspaceImageErrorDetailCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (WorkspaceImageErrorDetailCode) Values() []WorkspaceImageErrorDetailCode {
+	return []WorkspaceImageErrorDetailCode{
+		"OutdatedPowershellVersion",
+		"OfficeInstalled",
+		"PCoIPAgentInstalled",
+		"WindowsUpdatesEnabled",
+		"AutoMountDisabled",
+		"WorkspacesBYOLAccountNotFound",
+		"WorkspacesBYOLAccountDisabled",
+		"DHCPDisabled",
+		"DiskFreeSpace",
+		"AdditionalDrivesAttached",
+		"OSNotSupported",
+		"DomainJoined",
+		"AzureDomainJoined",
+		"FirewallEnabled",
+		"VMWareToolsInstalled",
+		"DiskSizeExceeded",
+		"IncompatiblePartitioning",
+		"PendingReboot",
+		"AutoLogonEnabled",
+		"RealTimeUniversalDisabled",
+		"MultipleBootPartition",
+		"Requires64BitOS",
+		"ZeroRearmCount",
+		"InPlaceUpgrade",
+		"AntiVirusInstalled",
+		"UEFINotSupported",
+	}
+}
+
 type WorkspaceImageIngestionProcess string
 
 // Enum values for WorkspaceImageIngestionProcess

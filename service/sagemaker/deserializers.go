@@ -46807,6 +46807,80 @@ func awsAwsjson11_deserializeDocumentGroups(v *[]string, value interface{}) erro
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentHolidayConfig(v *[]types.HolidayConfigAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.HolidayConfigAttributes
+	if *v == nil {
+		cv = []types.HolidayConfigAttributes{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.HolidayConfigAttributes
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentHolidayConfigAttributes(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHolidayConfigAttributes(v **types.HolidayConfigAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HolidayConfigAttributes
+	if *v == nil {
+		sv = &types.HolidayConfigAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CountryCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CountryCode to be of type string, got %T instead", value)
+				}
+				sv.CountryCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentHookParameters(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -69389,6 +69463,11 @@ func awsAwsjson11_deserializeDocumentTimeSeriesForecastingJobConfig(v **types.Ti
 
 		case "ForecastQuantiles":
 			if err := awsAwsjson11_deserializeDocumentForecastQuantiles(&sv.ForecastQuantiles, value); err != nil {
+				return err
+			}
+
+		case "HolidayConfig":
+			if err := awsAwsjson11_deserializeDocumentHolidayConfig(&sv.HolidayConfig, value); err != nil {
 				return err
 			}
 

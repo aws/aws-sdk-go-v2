@@ -1334,8 +1334,8 @@ type DataRepositoryFailureDetails struct {
 //   - You use import and export data repository tasks to perform bulk transfer
 //     operations between an Amazon FSx for Lustre file system and a linked data
 //     repository.
-//   - You use release data repository tasks to release have been exported to a
-//     linked S3 bucketed files from your Amazon FSx for Lustre file system.
+//   - You use release data repository tasks to release files that have been
+//     exported to a linked S3 bucket from your Amazon FSx for Lustre file system.
 //   - An Amazon File Cache resource uses a task to automatically release files
 //     from the cache.
 //
@@ -2001,7 +2001,7 @@ type FileSystem struct {
 	// OPENZFS .
 	FileSystemType FileSystemType
 
-	// The Lustre version of the Amazon FSx for Lustre file system, which is 2.10 ,
+	// The Lustre version of the Amazon FSx for Lustre file system, which can be 2.10 ,
 	// 2.12 , or 2.15 .
 	FileSystemTypeVersion *string
 

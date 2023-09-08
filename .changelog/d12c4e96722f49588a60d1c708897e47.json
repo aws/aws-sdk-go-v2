@@ -1,0 +1,8 @@
+{
+    "id": "d12c4e96-722f-4958-8a60-d1c708897e47",
+    "type": "feature",
+    "description": "Autopilot APIs will now support holiday featurization for Timeseries models. The models will now hold holiday metadata and should be able to accommodate holiday effect during inference.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

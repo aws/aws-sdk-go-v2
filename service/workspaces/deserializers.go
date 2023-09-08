@@ -9317,6 +9317,89 @@ func awsAwsjson11_deserializeDocumentDnsIpAddresses(v *[]string, value interface
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentErrorDetails(v **types.ErrorDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ErrorDetails
+	if *v == nil {
+		sv = &types.ErrorDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceImageErrorDetailCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.WorkspaceImageErrorDetailCode(jtv)
+			}
+
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentErrorDetailsList(v *[]types.ErrorDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ErrorDetails
+	if *v == nil {
+		cv = []types.ErrorDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ErrorDetails
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentErrorDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentFailedCreateStandbyWorkspacesRequest(v **types.FailedCreateStandbyWorkspacesRequest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12171,6 +12254,11 @@ func awsAwsjson11_deserializeDocumentWorkspaceImage(v **types.WorkspaceImage, va
 					return fmt.Errorf("expected WorkspaceImageErrorCode to be of type string, got %T instead", value)
 				}
 				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "ErrorDetails":
+			if err := awsAwsjson11_deserializeDocumentErrorDetailsList(&sv.ErrorDetails, value); err != nil {
+				return err
 			}
 
 		case "ErrorMessage":

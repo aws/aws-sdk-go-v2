@@ -292,6 +292,19 @@ type DefaultWorkspaceCreationProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Provides in-depth details about the error. These details include the possible
+// causes of the errors and troubleshooting information.
+type ErrorDetails struct {
+
+	// Indicates the error code returned.
+	ErrorCode WorkspaceImageErrorDetailCode
+
+	// The text of the error message related the error code.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the standby WorkSpace that could not be created.
 type FailedCreateStandbyWorkspacesRequest struct {
 
@@ -1020,6 +1033,9 @@ type WorkspaceImage struct {
 
 	// The error code that is returned for the image.
 	ErrorCode *string
+
+	// The details of the error returned for the image.
+	ErrorDetails []ErrorDetails
 
 	// The text of the error message that is returned for the image.
 	ErrorMessage *string

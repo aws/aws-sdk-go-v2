@@ -16,7 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the AWS accounts where the specified permission set is provisioned.
+// Lists all the Amazon Web Services accounts where the specified permission set
+// is provisioned.
 func (c *Client) ListAccountsForProvisionedPermissionSet(ctx context.Context, params *ListAccountsForProvisionedPermissionSetInput, optFns ...func(*Options)) (*ListAccountsForProvisionedPermissionSetOutput, error) {
 	if params == nil {
 		params = &ListAccountsForProvisionedPermissionSetInput{}
@@ -36,13 +37,14 @@ type ListAccountsForProvisionedPermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
 	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string
 
-	// The ARN of the PermissionSet from which the associated AWS accounts will be
-	// listed.
+	// The ARN of the PermissionSet from which the associated Amazon Web Services
+	// accounts will be listed.
 	//
 	// This member is required.
 	PermissionSetArn *string
@@ -54,7 +56,7 @@ type ListAccountsForProvisionedPermissionSetInput struct {
 	// output of previous API calls to make subsequent calls.
 	NextToken *string
 
-	// The permission set provisioning status for an AWS account.
+	// The permission set provisioning status for an Amazon Web Services account.
 	ProvisioningStatus types.ProvisioningStatus
 
 	noSmithyDocumentSerde
@@ -62,7 +64,7 @@ type ListAccountsForProvisionedPermissionSetInput struct {
 
 type ListAccountsForProvisionedPermissionSetOutput struct {
 
-	// The list of AWS AccountIds .
+	// The list of Amazon Web Services AccountIds .
 	AccountIds []string
 
 	// The pagination token for the list API. Initially the value is null. Use the

@@ -16,8 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the status of the AWS account assignment creation requests for a
-// specified IAM Identity Center instance.
+// Lists the status of the Amazon Web Services account assignment creation
+// requests for a specified IAM Identity Center instance.
 func (c *Client) ListAccountAssignmentCreationStatus(ctx context.Context, params *ListAccountAssignmentCreationStatusInput, optFns ...func(*Options)) (*ListAccountAssignmentCreationStatusOutput, error) {
 	if params == nil {
 		params = &ListAccountAssignmentCreationStatusInput{}
@@ -37,7 +37,8 @@ type ListAccountAssignmentCreationStatusInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
 	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string

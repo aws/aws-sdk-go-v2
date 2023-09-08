@@ -35,7 +35,8 @@ type GetInlinePolicyForPermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
 	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -50,7 +51,9 @@ type GetInlinePolicyForPermissionSetInput struct {
 
 type GetInlinePolicyForPermissionSetOutput struct {
 
-	// The inline policy that is attached to the permission set.
+	// The inline policy that is attached to the permission set. For Length Constraints
+	// , if a valid ARN is provided for a permission set, it is possible for an empty
+	// inline policy to be returned.
 	InlinePolicy *string
 
 	// Metadata pertaining to the operation's result.

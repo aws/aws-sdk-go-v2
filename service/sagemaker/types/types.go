@@ -1585,9 +1585,7 @@ type AutoMLProblemTypeConfigMemberTextClassificationJobConfig struct {
 func (*AutoMLProblemTypeConfigMemberTextClassificationJobConfig) isAutoMLProblemTypeConfig() {}
 
 // Settings used to configure an AutoML job V2 for a time-series forecasting
-// problem type. The TimeSeriesForecastingJobConfig problem type is only available
-// in private beta. Contact Amazon Web Services Support or your account manager to
-// learn more about access privileges.
+// problem type.
 type AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig struct {
 	Value TimeSeriesForecastingJobConfig
 
@@ -4883,6 +4881,19 @@ type GitConfigForUpdate struct {
 	// secret must have a staging label of AWSCURRENT and must be in the following
 	// format: {"username": UserName, "password": Password}
 	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Stores the holiday featurization attributes applicable to each item of
+// time-series datasets during the training of a forecasting model. This allows the
+// model to identify patterns associated with specific holidays.
+type HolidayConfigAttributes struct {
+
+	// The country code for the holiday calendar. For the list of public holiday
+	// calendars supported by AutoML job V2, see Country Codes (https://docs.aws.amazon.com/forecast/latest/dg/holidays.html#holidays-country-codes)
+	// . Use the country code corresponding to the country of your choice.
+	CountryCode *string
 
 	noSmithyDocumentSerde
 }
@@ -13410,9 +13421,7 @@ type TimeSeriesConfig struct {
 }
 
 // The collection of settings used by an AutoML job V2 for the time-series
-// forecasting problem type. The TimeSeriesForecastingJobConfig problem type is
-// only available in private beta. Contact Amazon Web Services Support or your
-// account manager to learn more about access privileges.
+// forecasting problem type.
 type TimeSeriesForecastingJobConfig struct {
 
 	// The frequency of predictions in a forecast. Valid intervals are an integer
@@ -13467,6 +13476,10 @@ type TimeSeriesForecastingJobConfig struct {
 	// ForecastQuantiles is not provided, the AutoML job uses the quantiles p10, p50,
 	// and p90 as default.
 	ForecastQuantiles []string
+
+	// The collection of holiday featurization attributes used to incorporate national
+	// holiday information into your forecasting model.
+	HolidayConfig []HolidayConfigAttributes
 
 	// The transformations modifying specific attributes of the time-series, such as
 	// filling strategies for missing values.

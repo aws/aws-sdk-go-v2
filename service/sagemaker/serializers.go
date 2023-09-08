@@ -20073,6 +20073,31 @@ func awsAwsjson11_serializeDocumentGroups(v []string, value smithyjson.Value) er
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentHolidayConfig(v []types.HolidayConfigAttributes, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentHolidayConfigAttributes(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHolidayConfigAttributes(v *types.HolidayConfigAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CountryCode != nil {
+		ok := object.Key("CountryCode")
+		ok.String(*v.CountryCode)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentHookParameters(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25326,6 +25351,13 @@ func awsAwsjson11_serializeDocumentTimeSeriesForecastingJobConfig(v *types.TimeS
 	if v.ForecastQuantiles != nil {
 		ok := object.Key("ForecastQuantiles")
 		if err := awsAwsjson11_serializeDocumentForecastQuantiles(v.ForecastQuantiles, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HolidayConfig != nil {
+		ok := object.Key("HolidayConfig")
+		if err := awsAwsjson11_serializeDocumentHolidayConfig(v.HolidayConfig, ok); err != nil {
 			return err
 		}
 	}

@@ -16,7 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the permission sets that are provisioned to a specified AWS account.
+// Lists all the permission sets that are provisioned to a specified Amazon Web
+// Services account.
 func (c *Client) ListPermissionSetsProvisionedToAccount(ctx context.Context, params *ListPermissionSetsProvisionedToAccountInput, optFns ...func(*Options)) (*ListPermissionSetsProvisionedToAccountOutput, error) {
 	if params == nil {
 		params = &ListPermissionSetsProvisionedToAccountInput{}
@@ -34,14 +35,16 @@ func (c *Client) ListPermissionSetsProvisionedToAccount(ctx context.Context, par
 
 type ListPermissionSetsProvisionedToAccountInput struct {
 
-	// The identifier of the AWS account from which to list the assignments.
+	// The identifier of the Amazon Web Services account from which to list the
+	// assignments.
 	//
 	// This member is required.
 	AccountId *string
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
 	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -65,7 +68,7 @@ type ListPermissionSetsProvisionedToAccountOutput struct {
 	// output of previous API calls to make subsequent calls.
 	NextToken *string
 
-	// Defines the level of access that an AWS account has.
+	// Defines the level of access that an Amazon Web Services account has.
 	PermissionSets []string
 
 	// Metadata pertaining to the operation's result.

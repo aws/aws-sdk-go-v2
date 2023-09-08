@@ -9,8 +9,8 @@ import (
 
 // These are IAM Identity Center identity store attributes that you can configure
 // for use in attributes-based access control (ABAC). You can create permissions
-// policies that determine who can access your AWS resources based upon the
-// configured attribute values. When you enable ABAC and specify
+// policies that determine who can access your Amazon Web Services resources based
+// upon the configured attribute values. When you enable ABAC and specify
 // AccessControlAttributes , IAM Identity Center passes the attribute values of the
 // authenticated user into IAM for use in policy evaluation.
 type AccessControlAttribute struct {
@@ -44,16 +44,17 @@ type AccessControlAttributeValue struct {
 	noSmithyDocumentSerde
 }
 
-// The assignment that indicates a principal's limited access to a specified AWS
-// account with a specified permission set. The term principal here refers to a
-// user or group that is defined in IAM Identity Center.
+// The assignment that indicates a principal's limited access to a specified
+// Amazon Web Services account with a specified permission set. The term principal
+// here refers to a user or group that is defined in IAM Identity Center.
 type AccountAssignment struct {
 
-	// The identifier of the AWS account.
+	// The identifier of the Amazon Web Services account.
 	AccountId *string
 
 	// The ARN of the permission set. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
+	// Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
+	// Web Services General Reference.
 	PermissionSetArn *string
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
@@ -79,7 +80,8 @@ type AccountAssignmentOperationStatus struct {
 	FailureReason *string
 
 	// The ARN of the permission set. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
+	// Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
+	// Web Services General Reference.
 	PermissionSetArn *string
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
@@ -98,8 +100,8 @@ type AccountAssignmentOperationStatus struct {
 	// The status of the permission set provisioning process.
 	Status StatusValues
 
-	// TargetID is an AWS account identifier, typically a 10-12 digit string (For
-	// example, 123456789012).
+	// TargetID is an Amazon Web Services account identifier, (For example,
+	// 123456789012).
 	TargetId *string
 
 	// The entity type for which the assignment will be created.
@@ -124,22 +126,23 @@ type AccountAssignmentOperationStatusMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that stores the details of the AWS managed policy.
+// A structure that stores the details of the Amazon Web Services managed policy.
 type AttachedManagedPolicy struct {
 
-	// The ARN of the AWS managed policy. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
+	// The ARN of the Amazon Web Services managed policy. For more information about
+	// ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces in the Amazon Web Services General Reference.
 	Arn *string
 
-	// The name of the AWS managed policy.
+	// The name of the Amazon Web Services managed policy.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
 // Specifies the name and path of a customer managed policy. You must have an IAM
-// policy that matches the name and path in each AWS account where you want to
-// deploy your permission set.
+// policy that matches the name and path in each Amazon Web Services account where
+// you want to deploy your permission set.
 type CustomerManagedPolicyReference struct {
 
 	// The name of the IAM policy that you have configured in each account where you
@@ -179,7 +182,8 @@ type InstanceMetadata struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
 	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	InstanceArn *string
 
 	noSmithyDocumentSerde
@@ -194,13 +198,13 @@ type OperationStatusFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the configuration of the AWS managed or customer managed policy that
-// you want to set as a permissions boundary. Specify either
+// Specifies the configuration of the Amazon Web Services managed or customer
+// managed policy that you want to set as a permissions boundary. Specify either
 // CustomerManagedPolicyReference to use the name and path of a customer managed
-// policy, or ManagedPolicyArn to use the ARN of an AWS managed policy. A
-// permissions boundary represents the maximum permissions that any policy can
-// grant your role. For more information, see Permissions boundaries for IAM
-// entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+// policy, or ManagedPolicyArn to use the ARN of an Amazon Web Services managed
+// policy. A permissions boundary represents the maximum permissions that any
+// policy can grant your role. For more information, see Permissions boundaries
+// for IAM entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 // in the IAM User Guide. Policies used as permissions boundaries don't provide
 // permissions. You must also attach an IAM policy to the role. To learn how the
 // effective permissions for a role are evaluated, see IAM JSON policy evaluation
@@ -209,12 +213,12 @@ type OperationStatusFilter struct {
 type PermissionsBoundary struct {
 
 	// Specifies the name and path of a customer managed policy. You must have an IAM
-	// policy that matches the name and path in each AWS account where you want to
-	// deploy your permission set.
+	// policy that matches the name and path in each Amazon Web Services account where
+	// you want to deploy your permission set.
 	CustomerManagedPolicyReference *CustomerManagedPolicyReference
 
-	// The AWS managed policy ARN that you want to attach to a permission set as a
-	// permissions boundary.
+	// The Amazon Web Services managed policy ARN that you want to attach to a
+	// permission set as a permissions boundary.
 	ManagedPolicyArn *string
 
 	noSmithyDocumentSerde
@@ -233,7 +237,8 @@ type PermissionSet struct {
 	Name *string
 
 	// The ARN of the permission set. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
+	// Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
+	// Web Services General Reference.
 	PermissionSetArn *string
 
 	// Used to redirect users within the application during the federation
@@ -251,7 +256,8 @@ type PermissionSet struct {
 // for a specified permission set.
 type PermissionSetProvisioningStatus struct {
 
-	// The identifier of the AWS account from which to list the assignments.
+	// The identifier of the Amazon Web Services account from which to list the
+	// assignments.
 	AccountId *string
 
 	// The date that the permission set was created.
@@ -261,8 +267,8 @@ type PermissionSetProvisioningStatus struct {
 	FailureReason *string
 
 	// The ARN of the permission set that is being provisioned. For more information
-	// about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the
-	// AWS General Reference.
+	// about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces in the Amazon Web Services General Reference.
 	PermissionSetArn *string
 
 	// The identifier for tracking the request operation that is generated by the
@@ -293,7 +299,7 @@ type PermissionSetProvisioningStatusMetadata struct {
 
 // A set of key-value pairs that are used to manage the resource. Tags can only be
 // applied to permission sets and cannot be applied to corresponding roles that IAM
-// Identity Center creates in AWS accounts.
+// Identity Center creates in Amazon Web Services accounts.
 type Tag struct {
 
 	// The key for the tag.

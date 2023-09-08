@@ -1,0 +1,8 @@
+{
+    "id": "44ae507a-cbaa-4b6e-b895-abee44799ee0",
+    "type": "feature",
+    "description": "Content updates to IAM Identity Center API for China Regions.",
+    "modules": [
+        "service/ssoadmin"
+    ]
+}

@@ -16,9 +16,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a principal's access from a specified AWS account using a specified
-// permission set. After a successful response, call
-// DescribeAccountAssignmentCreationStatus to describe the status of an assignment
+// Deletes a principal's access from a specified Amazon Web Services account using
+// a specified permission set. After a successful response, call
+// DescribeAccountAssignmentDeletionStatus to describe the status of an assignment
 // deletion request.
 func (c *Client) DeleteAccountAssignment(ctx context.Context, params *DeleteAccountAssignmentInput, optFns ...func(*Options)) (*DeleteAccountAssignmentOutput, error) {
 	if params == nil {
@@ -39,7 +39,8 @@ type DeleteAccountAssignmentInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
 	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -62,8 +63,8 @@ type DeleteAccountAssignmentInput struct {
 	// This member is required.
 	PrincipalType types.PrincipalType
 
-	// TargetID is an AWS account identifier, typically a 10-12 digit string (For
-	// example, 123456789012).
+	// TargetID is an Amazon Web Services account identifier, (For example,
+	// 123456789012).
 	//
 	// This member is required.
 	TargetId *string

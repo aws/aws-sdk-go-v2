@@ -16,8 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the assignee of the specified AWS account with the specified permission
-// set.
+// Lists the assignee of the specified Amazon Web Services account with the
+// specified permission set.
 func (c *Client) ListAccountAssignments(ctx context.Context, params *ListAccountAssignmentsInput, optFns ...func(*Options)) (*ListAccountAssignmentsOutput, error) {
 	if params == nil {
 		params = &ListAccountAssignmentsInput{}
@@ -35,14 +35,16 @@ func (c *Client) ListAccountAssignments(ctx context.Context, params *ListAccount
 
 type ListAccountAssignmentsInput struct {
 
-	// The identifier of the AWS account from which to list the assignments.
+	// The identifier of the Amazon Web Services account from which to list the
+	// assignments.
 	//
 	// This member is required.
 	AccountId *string
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
 	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -64,7 +66,8 @@ type ListAccountAssignmentsInput struct {
 
 type ListAccountAssignmentsOutput struct {
 
-	// The list of assignments that match the input AWS account and permission set.
+	// The list of assignments that match the input Amazon Web Services account and
+	// permission set.
 	AccountAssignments []types.AccountAssignment
 
 	// The pagination token for the list API. Initially the value is null. Use the

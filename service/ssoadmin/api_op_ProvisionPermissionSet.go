@@ -37,7 +37,8 @@ type ProvisionPermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
 	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces in the AWS General Reference.
+	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -52,8 +53,8 @@ type ProvisionPermissionSetInput struct {
 	// This member is required.
 	TargetType types.ProvisionTargetType
 
-	// TargetID is an AWS account identifier, typically a 10-12 digit string (For
-	// example, 123456789012).
+	// TargetID is an Amazon Web Services account identifier, (For example,
+	// 123456789012).
 	TargetId *string
 
 	noSmithyDocumentSerde
