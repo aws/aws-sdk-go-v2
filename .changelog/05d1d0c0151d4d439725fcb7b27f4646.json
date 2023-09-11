@@ -1,8 +1,0 @@
-{
-    "id": "05d1d0c0-151d-4d43-9725-fcb7b27f4646",
-    "type": "feature",
-    "description": "This release will have ValidationException be thrown from ECR LifecyclePolicy APIs in regions LifecyclePolicy is not supported, this includes existing Amazon Dedicated Cloud (ADC) regions. This release will also change Tag: TagValue and Tag: TagKey to required.",
-    "modules": [
-        "service/ecr"
-    ]
-}

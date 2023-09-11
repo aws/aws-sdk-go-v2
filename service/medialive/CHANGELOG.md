@@ -1,3 +1,7 @@
+# v1.37.0 (2023-09-11)
+
+* **Feature**: AWS Elemental Link now supports attaching a Link UHD device to a MediaConnect flow.
+
 # v1.36.0 (2023-09-06)
 
 * **Feature**: Adds advanced Output Locking options for Epoch Locking: Custom Epoch and Jam Sync Time

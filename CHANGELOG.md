@@ -1,3 +1,13 @@
+# Release (2023-09-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.20.0](service/ecr/CHANGELOG.md#v1200-2023-09-11)
+  * **Feature**: This release will have ValidationException be thrown from ECR LifecyclePolicy APIs in regions LifecyclePolicy is not supported, this includes existing Amazon Dedicated Cloud (ADC) regions. This release will also change Tag: TagValue and Tag: TagKey to required.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.37.0](service/medialive/CHANGELOG.md#v1370-2023-09-11)
+  * **Feature**: AWS Elemental Link now supports attaching a Link UHD device to a MediaConnect flow.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.43.0](service/quicksight/CHANGELOG.md#v1430-2023-09-11)
+  * **Feature**: This release launches new updates to QuickSight KPI visuals - support for sparklines, new templated layout and new targets for conditional formatting rules.
+
 # Release (2023-09-08)
 
 ## Module Highlights

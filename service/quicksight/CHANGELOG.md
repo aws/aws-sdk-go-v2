@@ -1,3 +1,7 @@
+# v1.43.0 (2023-09-11)
+
+* **Feature**: This release launches new updates to QuickSight KPI visuals - support for sparklines, new templated layout and new targets for conditional formatting rules.
+
 # v1.42.0 (2023-08-24)
 
 * **Feature**: Excel support in Snapshot Export APIs. Removed Required trait for some insight Computations. Namespace-shared Folders support. Global Filters support. Table pin Column support.

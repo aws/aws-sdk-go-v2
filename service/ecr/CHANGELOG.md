@@ -1,3 +1,7 @@
+# v1.20.0 (2023-09-11)
+
+* **Feature**: This release will have ValidationException be thrown from ECR LifecyclePolicy APIs in regions LifecyclePolicy is not supported, this includes existing Amazon Dedicated Cloud (ADC) regions. This release will also change Tag: TagValue and Tag: TagKey to required.
+
 # v1.19.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
