@@ -6,7 +6,6 @@ LINT_IGNORE_AWSRULESFN_ARN='internal/endpoints/awsrulesfn/arn.go'
 LINT_IGNORE_AWSRULESFN_PARTITION='internal/endpoints/awsrulesfn/partition.go'
 
 UNIT_TEST_TAGS=
-
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 
 SMITHY_GO_SRC ?= $(shell pwd)/../smithy-go
