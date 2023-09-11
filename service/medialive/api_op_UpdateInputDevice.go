@@ -86,11 +86,20 @@ type UpdateInputDeviceOutput struct {
 	// The network MAC address of the input device.
 	MacAddress *string
 
+	// An array of the ARNs for the MediaLive inputs attached to the device. Returned
+	// only if the outputType is MEDIALIVE_INPUT.
+	MedialiveInputArns []string
+
 	// A name that you specify for the input device.
 	Name *string
 
 	// The network settings for the input device.
 	NetworkSettings *types.InputDeviceNetworkSettings
+
+	// The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if
+	// this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if
+	// this device is the source for a MediaLive input.
+	OutputType types.InputDeviceOutputType
 
 	// The unique serial number of the input device.
 	SerialNumber *string

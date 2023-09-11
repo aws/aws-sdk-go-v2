@@ -6959,6 +6959,30 @@ type JoinKeyProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The conditional formatting for the actual value of a KPI visual.
+type KPIActualValueConditionalFormatting struct {
+
+	// The conditional formatting of the actual value's icon.
+	Icon *ConditionalFormattingIcon
+
+	// The conditional formatting of the actual value's text color.
+	TextColor *ConditionalFormattingColor
+
+	noSmithyDocumentSerde
+}
+
+// The conditional formatting for the comparison value of a KPI visual.
+type KPIComparisonValueConditionalFormatting struct {
+
+	// The conditional formatting of the comparison value's icon.
+	Icon *ConditionalFormattingIcon
+
+	// The conditional formatting of the comparison value's text color.
+	TextColor *ConditionalFormattingColor
+
+	noSmithyDocumentSerde
+}
+
 // The conditional formatting of a KPI visual.
 type KPIConditionalFormatting struct {
 
@@ -6970,6 +6994,12 @@ type KPIConditionalFormatting struct {
 
 // The conditional formatting options of a KPI visual.
 type KPIConditionalFormattingOption struct {
+
+	// The conditional formatting for the actual value of a KPI visual.
+	ActualValue *KPIActualValueConditionalFormatting
+
+	// The conditional formatting for the comparison value of a KPI visual.
+	ComparisonValue *KPIComparisonValueConditionalFormatting
 
 	// The conditional formatting for the primary value of a KPI visual.
 	PrimaryValue *KPIPrimaryValueConditionalFormatting
@@ -7032,8 +7062,15 @@ type KPIOptions struct {
 	// The options that determine the secondary value font configuration.
 	SecondaryValueFontConfiguration *FontConfiguration
 
+	// The options that determine the visibility, color, type, and tooltip visibility
+	// of the sparkline of a KPI visual.
+	Sparkline *KPISparklineOptions
+
 	// The options that determine the presentation of trend arrows in a KPI visual.
 	TrendArrows *TrendArrowOptions
+
+	// The options that determine the layout a KPI visual.
+	VisualLayoutOptions *KPIVisualLayoutOptions
 
 	noSmithyDocumentSerde
 }
@@ -7068,6 +7105,27 @@ type KPISortConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The options that determine the visibility, color, type, and tooltip visibility
+// of the sparkline of a KPI visual.
+type KPISparklineOptions struct {
+
+	// The type of the sparkline.
+	//
+	// This member is required.
+	Type KPISparklineType
+
+	// The color of the sparkline.
+	Color *string
+
+	// The tooltip visibility of the sparkline.
+	TooltipVisibility Visibility
+
+	// The visibility of the sparkline.
+	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
 // A key performance indicator (KPI). For more information, see Using KPIs (https://docs.aws.amazon.com/quicksight/latest/user/kpi.html)
 // in the Amazon QuickSight User Guide.
 type KPIVisual struct {
@@ -7096,6 +7154,26 @@ type KPIVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	noSmithyDocumentSerde
+}
+
+// The options that determine the layout a KPI visual.
+type KPIVisualLayoutOptions struct {
+
+	// The standard layout of the KPI visual.
+	StandardLayout *KPIVisualStandardLayout
+
+	noSmithyDocumentSerde
+}
+
+// The standard layout of the KPI visual.
+type KPIVisualStandardLayout struct {
+
+	// The standard layout type.
+	//
+	// This member is required.
+	Type KPIVisualStandardLayoutType
 
 	noSmithyDocumentSerde
 }

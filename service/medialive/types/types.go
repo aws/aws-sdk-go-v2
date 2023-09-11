@@ -2903,6 +2903,10 @@ type InputDestinationVpc struct {
 // Configurable settings for the input device.
 type InputDeviceConfigurableSettings struct {
 
+	// Choose the codec for the video that the device produces. Only UHD devices can
+	// specify this parameter.
+	Codec InputDeviceCodec
+
 	// The input source that you want to use. If the device has a source connected to
 	// only one of its input ports, or if you don't care which source the device sends,
 	// specify Auto. If the device has sources connected to both its input ports, and
@@ -2915,6 +2919,11 @@ type InputDeviceConfigurableSettings struct {
 	// The maximum bitrate in bits per second. Set a value here to throttle the
 	// bitrate of the source video.
 	MaxBitrate int32
+
+	// To attach this device to a MediaConnect flow, specify these parameters. To
+	// detach an existing flow, enter {} for the value of mediaconnectSettings. Only
+	// UHD devices can specify this parameter.
+	MediaconnectSettings *InputDeviceMediaConnectConfigurableSettings
 
 	noSmithyDocumentSerde
 }
@@ -2953,6 +2962,46 @@ type InputDeviceHdSettings struct {
 
 	// The width of the video source, in pixels.
 	Width int32
+
+	noSmithyDocumentSerde
+}
+
+// Parameters required to attach a MediaConnect flow to the device.
+type InputDeviceMediaConnectConfigurableSettings struct {
+
+	// The ARN of the MediaConnect flow to attach this device to.
+	FlowArn *string
+
+	// The ARN for the role that MediaLive assumes to access the attached flow and
+	// secret. For more information about how to create this role, see the MediaLive
+	// user guide.
+	RoleArn *string
+
+	// The ARN for the secret that holds the encryption key to encrypt the content
+	// output by the device.
+	SecretArn *string
+
+	// The name of the MediaConnect Flow source to stream to.
+	SourceName *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the MediaConnect flow attached to the device.
+type InputDeviceMediaConnectSettings struct {
+
+	// The ARN of the MediaConnect flow.
+	FlowArn *string
+
+	// The ARN for the role that MediaLive assumes to access the attached flow and
+	// secret.
+	RoleArn *string
+
+	// The ARN of the secret used to encrypt the stream.
+	SecretArn *string
+
+	// The name of the MediaConnect flow source.
+	SourceName *string
 
 	noSmithyDocumentSerde
 }
@@ -3028,11 +3077,20 @@ type InputDeviceSummary struct {
 	// The network MAC address of the input device.
 	MacAddress *string
 
+	// An array of the ARNs for the MediaLive inputs attached to the device. Returned
+	// only if the outputType is MEDIALIVE_INPUT.
+	MedialiveInputArns []string
+
 	// A name that you specify for the input device.
 	Name *string
 
 	// Network settings for the input device.
 	NetworkSettings *InputDeviceNetworkSettings
+
+	// The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if
+	// this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if
+	// this device is the source for a MediaLive input.
+	OutputType InputDeviceOutputType
 
 	// The unique serial number of the input device.
 	SerialNumber *string
@@ -3057,6 +3115,9 @@ type InputDeviceUhdSettings struct {
 	// is currently active (SDI or HDMI).
 	ActiveInput InputDeviceActiveInput
 
+	// The codec for the video that the device produces.
+	Codec InputDeviceCodec
+
 	// The source at the input device that is currently active. You can specify this
 	// source.
 	ConfiguredInput InputDeviceConfiguredInput
@@ -3077,6 +3138,10 @@ type InputDeviceUhdSettings struct {
 	// The current maximum bitrate for ingesting this source, in bits per second. You
 	// can specify this maximum.
 	MaxBitrate int32
+
+	// Information about the MediaConnect flow attached to the device. Returned only
+	// if the outputType is MEDIACONNECT_FLOW.
+	MediaconnectSettings *InputDeviceMediaConnectSettings
 
 	// The scan type of the video source.
 	ScanType InputDeviceScanType

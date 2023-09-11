@@ -2154,6 +2154,42 @@ func (JoinType) Values() []JoinType {
 	}
 }
 
+type KPISparklineType string
+
+// Enum values for KPISparklineType
+const (
+	KPISparklineTypeLine KPISparklineType = "LINE"
+	KPISparklineTypeArea KPISparklineType = "AREA"
+)
+
+// Values returns all known values for KPISparklineType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KPISparklineType) Values() []KPISparklineType {
+	return []KPISparklineType{
+		"LINE",
+		"AREA",
+	}
+}
+
+type KPIVisualStandardLayoutType string
+
+// Enum values for KPIVisualStandardLayoutType
+const (
+	KPIVisualStandardLayoutTypeClassic  KPIVisualStandardLayoutType = "CLASSIC"
+	KPIVisualStandardLayoutTypeVertical KPIVisualStandardLayoutType = "VERTICAL"
+)
+
+// Values returns all known values for KPIVisualStandardLayoutType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KPIVisualStandardLayoutType) Values() []KPIVisualStandardLayoutType {
+	return []KPIVisualStandardLayoutType{
+		"CLASSIC",
+		"VERTICAL",
+	}
+}
+
 type LayoutElementType string
 
 // Enum values for LayoutElementType

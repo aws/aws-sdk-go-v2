@@ -4573,6 +4573,11 @@ func awsRestjson1_deserializeOpDocumentDescribeInputDeviceOutput(v **DescribeInp
 				sv.MacAddress = ptr.String(jtv)
 			}
 
+		case "medialiveInputArns":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.MedialiveInputArns, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4585,6 +4590,15 @@ func awsRestjson1_deserializeOpDocumentDescribeInputDeviceOutput(v **DescribeInp
 		case "networkSettings":
 			if err := awsRestjson1_deserializeDocumentInputDeviceNetworkSettings(&sv.NetworkSettings, value); err != nil {
 				return err
+			}
+
+		case "outputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputDeviceOutputType to be of type string, got %T instead", value)
+				}
+				sv.OutputType = types.InputDeviceOutputType(jtv)
 			}
 
 		case "serialNumber":
@@ -8813,6 +8827,110 @@ func awsRestjson1_deserializeOpDocumentStartChannelOutput(v **StartChannelOutput
 	return nil
 }
 
+type awsRestjson1_deserializeOpStartInputDevice struct {
+}
+
+func (*awsRestjson1_deserializeOpStartInputDevice) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStartInputDevice) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStartInputDevice(response, &metadata)
+	}
+	output := &StartInputDeviceOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStartInputDevice(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadGatewayException", errorCode):
+		return awsRestjson1_deserializeErrorBadGatewayException(response, errorBody)
+
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("GatewayTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorGatewayTimeoutException(response, errorBody)
+
+	case strings.EqualFold("InternalServerErrorException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerErrorException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("UnprocessableEntityException", errorCode):
+		return awsRestjson1_deserializeErrorUnprocessableEntityException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestjson1_deserializeOpStartInputDeviceMaintenanceWindow struct {
 }
 
@@ -9449,6 +9567,110 @@ func awsRestjson1_deserializeOpDocumentStopChannelOutput(v **StopChannelOutput, 
 	}
 	*v = sv
 	return nil
+}
+
+type awsRestjson1_deserializeOpStopInputDevice struct {
+}
+
+func (*awsRestjson1_deserializeOpStopInputDevice) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStopInputDevice) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStopInputDevice(response, &metadata)
+	}
+	output := &StopInputDeviceOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStopInputDevice(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadGatewayException", errorCode):
+		return awsRestjson1_deserializeErrorBadGatewayException(response, errorBody)
+
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("GatewayTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorGatewayTimeoutException(response, errorBody)
+
+	case strings.EqualFold("InternalServerErrorException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerErrorException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("UnprocessableEntityException", errorCode):
+		return awsRestjson1_deserializeErrorUnprocessableEntityException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
 }
 
 type awsRestjson1_deserializeOpStopMultiplex struct {
@@ -10691,6 +10913,11 @@ func awsRestjson1_deserializeOpDocumentUpdateInputDeviceOutput(v **UpdateInputDe
 				sv.MacAddress = ptr.String(jtv)
 			}
 
+		case "medialiveInputArns":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.MedialiveInputArns, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10703,6 +10930,15 @@ func awsRestjson1_deserializeOpDocumentUpdateInputDeviceOutput(v **UpdateInputDe
 		case "networkSettings":
 			if err := awsRestjson1_deserializeDocumentInputDeviceNetworkSettings(&sv.NetworkSettings, value); err != nil {
 				return err
+			}
+
+		case "outputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputDeviceOutputType to be of type string, got %T instead", value)
+				}
+				sv.OutputType = types.InputDeviceOutputType(jtv)
 			}
 
 		case "serialNumber":
@@ -21627,6 +21863,73 @@ func awsRestjson1_deserializeDocumentInputDeviceHdSettings(v **types.InputDevice
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInputDeviceMediaConnectSettings(v **types.InputDeviceMediaConnectSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InputDeviceMediaConnectSettings
+	if *v == nil {
+		sv = &types.InputDeviceMediaConnectSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "flowArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.FlowArn = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "secretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "sourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SourceName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInputDeviceNetworkSettings(v **types.InputDeviceNetworkSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21829,6 +22132,11 @@ func awsRestjson1_deserializeDocumentInputDeviceSummary(v **types.InputDeviceSum
 				sv.MacAddress = ptr.String(jtv)
 			}
 
+		case "medialiveInputArns":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.MedialiveInputArns, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21841,6 +22149,15 @@ func awsRestjson1_deserializeDocumentInputDeviceSummary(v **types.InputDeviceSum
 		case "networkSettings":
 			if err := awsRestjson1_deserializeDocumentInputDeviceNetworkSettings(&sv.NetworkSettings, value); err != nil {
 				return err
+			}
+
+		case "outputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputDeviceOutputType to be of type string, got %T instead", value)
+				}
+				sv.OutputType = types.InputDeviceOutputType(jtv)
 			}
 
 		case "serialNumber":
@@ -21909,6 +22226,15 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 					return fmt.Errorf("expected InputDeviceActiveInput to be of type string, got %T instead", value)
 				}
 				sv.ActiveInput = types.InputDeviceActiveInput(jtv)
+			}
+
+		case "codec":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputDeviceCodec to be of type string, got %T instead", value)
+				}
+				sv.Codec = types.InputDeviceCodec(jtv)
 			}
 
 		case "configuredInput":
@@ -22000,6 +22326,11 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 					return err
 				}
 				sv.MaxBitrate = int32(i64)
+			}
+
+		case "mediaconnectSettings":
+			if err := awsRestjson1_deserializeDocumentInputDeviceMediaConnectSettings(&sv.MediaconnectSettings, value); err != nil {
+				return err
 			}
 
 		case "scanType":

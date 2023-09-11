@@ -2999,6 +2999,24 @@ func (InputDeviceActiveInput) Values() []InputDeviceActiveInput {
 	}
 }
 
+type InputDeviceCodec string
+
+// Enum values for InputDeviceCodec
+const (
+	InputDeviceCodecHevc InputDeviceCodec = "HEVC"
+	InputDeviceCodecAvc  InputDeviceCodec = "AVC"
+)
+
+// Values returns all known values for InputDeviceCodec. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputDeviceCodec) Values() []InputDeviceCodec {
+	return []InputDeviceCodec{
+		"HEVC",
+		"AVC",
+	}
+}
+
 type InputDeviceConfiguredInput string
 
 // Enum values for InputDeviceConfiguredInput
@@ -3052,6 +3070,26 @@ func (InputDeviceIpScheme) Values() []InputDeviceIpScheme {
 	return []InputDeviceIpScheme{
 		"STATIC",
 		"DHCP",
+	}
+}
+
+type InputDeviceOutputType string
+
+// Enum values for InputDeviceOutputType
+const (
+	InputDeviceOutputTypeNone             InputDeviceOutputType = "NONE"
+	InputDeviceOutputTypeMedialiveInput   InputDeviceOutputType = "MEDIALIVE_INPUT"
+	InputDeviceOutputTypeMediaconnectFlow InputDeviceOutputType = "MEDIACONNECT_FLOW"
+)
+
+// Values returns all known values for InputDeviceOutputType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputDeviceOutputType) Values() []InputDeviceOutputType {
+	return []InputDeviceOutputType{
+		"NONE",
+		"MEDIALIVE_INPUT",
+		"MEDIACONNECT_FLOW",
 	}
 }
 

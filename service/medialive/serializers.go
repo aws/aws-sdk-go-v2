@@ -3741,6 +3741,71 @@ func awsRestjson1_serializeOpHttpBindingsStartChannelInput(v *StartChannelInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpStartInputDevice struct {
+}
+
+func (*awsRestjson1_serializeOpStartInputDevice) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartInputDevice) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartInputDeviceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prod/inputDevices/{InputDeviceId}/start")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartInputDeviceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartInputDeviceInput(v *StartInputDeviceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.InputDeviceId == nil || len(*v.InputDeviceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InputDeviceId must not be empty")}
+	}
+	if v.InputDeviceId != nil {
+		if err := encoder.SetURI("InputDeviceId").String(*v.InputDeviceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStartInputDeviceMaintenanceWindow struct {
 }
 
@@ -3929,6 +3994,71 @@ func awsRestjson1_serializeOpHttpBindingsStopChannelInput(v *StopChannelInput, e
 	}
 	if v.ChannelId != nil {
 		if err := encoder.SetURI("ChannelId").String(*v.ChannelId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStopInputDevice struct {
+}
+
+func (*awsRestjson1_serializeOpStopInputDevice) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStopInputDevice) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopInputDeviceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prod/inputDevices/{InputDeviceId}/stop")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStopInputDeviceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStopInputDeviceInput(v *StopInputDeviceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.InputDeviceId == nil || len(*v.InputDeviceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InputDeviceId must not be empty")}
+	}
+	if v.InputDeviceId != nil {
+		if err := encoder.SetURI("InputDeviceId").String(*v.InputDeviceId); err != nil {
 			return err
 		}
 	}
@@ -8723,6 +8853,11 @@ func awsRestjson1_serializeDocumentInputDeviceConfigurableSettings(v *types.Inpu
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.Codec) > 0 {
+		ok := object.Key("codec")
+		ok.String(string(v.Codec))
+	}
+
 	if len(v.ConfiguredInput) > 0 {
 		ok := object.Key("configuredInput")
 		ok.String(string(v.ConfiguredInput))
@@ -8736,6 +8871,40 @@ func awsRestjson1_serializeDocumentInputDeviceConfigurableSettings(v *types.Inpu
 	if v.MaxBitrate != 0 {
 		ok := object.Key("maxBitrate")
 		ok.Integer(v.MaxBitrate)
+	}
+
+	if v.MediaconnectSettings != nil {
+		ok := object.Key("mediaconnectSettings")
+		if err := awsRestjson1_serializeDocumentInputDeviceMediaConnectConfigurableSettings(v.MediaconnectSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInputDeviceMediaConnectConfigurableSettings(v *types.InputDeviceMediaConnectConfigurableSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FlowArn != nil {
+		ok := object.Key("flowArn")
+		ok.String(*v.FlowArn)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("secretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if v.SourceName != nil {
+		ok := object.Key("sourceName")
+		ok.String(*v.SourceName)
 	}
 
 	return nil

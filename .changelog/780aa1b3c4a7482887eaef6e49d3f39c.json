@@ -1,0 +1,8 @@
+{
+    "id": "780aa1b3-c4a7-4828-87ea-ef6e49d3f39c",
+    "type": "feature",
+    "description": "AWS Elemental Link now supports attaching a Link UHD device to a MediaConnect flow.",
+    "modules": [
+        "service/medialive"
+    ]
+}

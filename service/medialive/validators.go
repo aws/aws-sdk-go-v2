@@ -710,6 +710,26 @@ func (m *validateOpStartChannel) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartInputDevice struct {
+}
+
+func (*validateOpStartInputDevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartInputDevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartInputDeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartInputDeviceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartInputDeviceMaintenanceWindow struct {
 }
 
@@ -765,6 +785,26 @@ func (m *validateOpStopChannel) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopInputDevice struct {
+}
+
+func (*validateOpStopInputDevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopInputDevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopInputDeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopInputDeviceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1110,6 +1150,10 @@ func addOpStartChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartChannel{}, middleware.After)
 }
 
+func addOpStartInputDeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartInputDevice{}, middleware.After)
+}
+
 func addOpStartInputDeviceMaintenanceWindowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartInputDeviceMaintenanceWindow{}, middleware.After)
 }
@@ -1120,6 +1164,10 @@ func addOpStartMultiplexValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopChannel{}, middleware.After)
+}
+
+func addOpStopInputDeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopInputDevice{}, middleware.After)
 }
 
 func addOpStopMultiplexValidationMiddleware(stack *middleware.Stack) error {
@@ -3963,6 +4011,21 @@ func validateOpStartChannelInput(v *StartChannelInput) error {
 	}
 }
 
+func validateOpStartInputDeviceInput(v *StartInputDeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartInputDeviceInput"}
+	if v.InputDeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartInputDeviceMaintenanceWindowInput(v *StartInputDeviceMaintenanceWindowInput) error {
 	if v == nil {
 		return nil
@@ -4000,6 +4063,21 @@ func validateOpStopChannelInput(v *StopChannelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopChannelInput"}
 	if v.ChannelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopInputDeviceInput(v *StopInputDeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopInputDeviceInput"}
+	if v.InputDeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDeviceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

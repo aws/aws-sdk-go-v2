@@ -56878,6 +56878,88 @@ func awsRestjson1_deserializeDocumentJoinKeyProperties(v **types.JoinKeyProperti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKPIActualValueConditionalFormatting(v **types.KPIActualValueConditionalFormatting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KPIActualValueConditionalFormatting
+	if *v == nil {
+		sv = &types.KPIActualValueConditionalFormatting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Icon":
+			if err := awsRestjson1_deserializeDocumentConditionalFormattingIcon(&sv.Icon, value); err != nil {
+				return err
+			}
+
+		case "TextColor":
+			if err := awsRestjson1_deserializeDocumentConditionalFormattingColor(&sv.TextColor, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKPIComparisonValueConditionalFormatting(v **types.KPIComparisonValueConditionalFormatting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KPIComparisonValueConditionalFormatting
+	if *v == nil {
+		sv = &types.KPIComparisonValueConditionalFormatting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Icon":
+			if err := awsRestjson1_deserializeDocumentConditionalFormattingIcon(&sv.Icon, value); err != nil {
+				return err
+			}
+
+		case "TextColor":
+			if err := awsRestjson1_deserializeDocumentConditionalFormattingColor(&sv.TextColor, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentKPIConditionalFormatting(v **types.KPIConditionalFormatting, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -56936,6 +57018,16 @@ func awsRestjson1_deserializeDocumentKPIConditionalFormattingOption(v **types.KP
 
 	for key, value := range shape {
 		switch key {
+		case "ActualValue":
+			if err := awsRestjson1_deserializeDocumentKPIActualValueConditionalFormatting(&sv.ActualValue, value); err != nil {
+				return err
+			}
+
+		case "ComparisonValue":
+			if err := awsRestjson1_deserializeDocumentKPIComparisonValueConditionalFormatting(&sv.ComparisonValue, value); err != nil {
+				return err
+			}
+
 		case "PrimaryValue":
 			if err := awsRestjson1_deserializeDocumentKPIPrimaryValueConditionalFormatting(&sv.PrimaryValue, value); err != nil {
 				return err
@@ -57137,8 +57229,18 @@ func awsRestjson1_deserializeDocumentKPIOptions(v **types.KPIOptions, value inte
 				return err
 			}
 
+		case "Sparkline":
+			if err := awsRestjson1_deserializeDocumentKPISparklineOptions(&sv.Sparkline, value); err != nil {
+				return err
+			}
+
 		case "TrendArrows":
 			if err := awsRestjson1_deserializeDocumentTrendArrowOptions(&sv.TrendArrows, value); err != nil {
+				return err
+			}
+
+		case "VisualLayoutOptions":
+			if err := awsRestjson1_deserializeDocumentKPIVisualLayoutOptions(&sv.VisualLayoutOptions, value); err != nil {
 				return err
 			}
 
@@ -57264,6 +57366,73 @@ func awsRestjson1_deserializeDocumentKPISortConfiguration(v **types.KPISortConfi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKPISparklineOptions(v **types.KPISparklineOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KPISparklineOptions
+	if *v == nil {
+		sv = &types.KPISparklineOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "TooltipVisibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.TooltipVisibility = types.Visibility(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KPISparklineType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.KPISparklineType(jtv)
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentKPIVisual(v **types.KPIVisual, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -57323,6 +57492,82 @@ func awsRestjson1_deserializeDocumentKPIVisual(v **types.KPIVisual, value interf
 					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
 				}
 				sv.VisualId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKPIVisualLayoutOptions(v **types.KPIVisualLayoutOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KPIVisualLayoutOptions
+	if *v == nil {
+		sv = &types.KPIVisualLayoutOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StandardLayout":
+			if err := awsRestjson1_deserializeDocumentKPIVisualStandardLayout(&sv.StandardLayout, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKPIVisualStandardLayout(v **types.KPIVisualStandardLayout, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KPIVisualStandardLayout
+	if *v == nil {
+		sv = &types.KPIVisualStandardLayout{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KPIVisualStandardLayoutType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.KPIVisualStandardLayoutType(jtv)
 			}
 
 		default:

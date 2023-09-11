@@ -10248,6 +10248,50 @@ func validateJoinInstruction(v *types.JoinInstruction) error {
 	}
 }
 
+func validateKPIActualValueConditionalFormatting(v *types.KPIActualValueConditionalFormatting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KPIActualValueConditionalFormatting"}
+	if v.TextColor != nil {
+		if err := validateConditionalFormattingColor(v.TextColor); err != nil {
+			invalidParams.AddNested("TextColor", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Icon != nil {
+		if err := validateConditionalFormattingIcon(v.Icon); err != nil {
+			invalidParams.AddNested("Icon", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKPIComparisonValueConditionalFormatting(v *types.KPIComparisonValueConditionalFormatting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KPIComparisonValueConditionalFormatting"}
+	if v.TextColor != nil {
+		if err := validateConditionalFormattingColor(v.TextColor); err != nil {
+			invalidParams.AddNested("TextColor", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Icon != nil {
+		if err := validateConditionalFormattingIcon(v.Icon); err != nil {
+			invalidParams.AddNested("Icon", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKPIConditionalFormatting(v *types.KPIConditionalFormatting) error {
 	if v == nil {
 		return nil
@@ -10278,6 +10322,16 @@ func validateKPIConditionalFormattingOption(v *types.KPIConditionalFormattingOpt
 	if v.ProgressBar != nil {
 		if err := validateKPIProgressBarConditionalFormatting(v.ProgressBar); err != nil {
 			invalidParams.AddNested("ProgressBar", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ActualValue != nil {
+		if err := validateKPIActualValueConditionalFormatting(v.ActualValue); err != nil {
+			invalidParams.AddNested("ActualValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComparisonValue != nil {
+		if err := validateKPIComparisonValueConditionalFormatting(v.ComparisonValue); err != nil {
+			invalidParams.AddNested("ComparisonValue", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -10368,6 +10422,16 @@ func validateKPIOptions(v *types.KPIOptions) error {
 			invalidParams.AddNested("Comparison", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Sparkline != nil {
+		if err := validateKPISparklineOptions(v.Sparkline); err != nil {
+			invalidParams.AddNested("Sparkline", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VisualLayoutOptions != nil {
+		if err := validateKPIVisualLayoutOptions(v.VisualLayoutOptions); err != nil {
+			invalidParams.AddNested("VisualLayoutOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10431,6 +10495,21 @@ func validateKPISortConfiguration(v *types.KPISortConfiguration) error {
 	}
 }
 
+func validateKPISparklineOptions(v *types.KPISparklineOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KPISparklineOptions"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKPIVisual(v *types.KPIVisual) error {
 	if v == nil {
 		return nil
@@ -10458,6 +10537,38 @@ func validateKPIVisual(v *types.KPIVisual) error {
 		if err := validateColumnHierarchyList(v.ColumnHierarchies); err != nil {
 			invalidParams.AddNested("ColumnHierarchies", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKPIVisualLayoutOptions(v *types.KPIVisualLayoutOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KPIVisualLayoutOptions"}
+	if v.StandardLayout != nil {
+		if err := validateKPIVisualStandardLayout(v.StandardLayout); err != nil {
+			invalidParams.AddNested("StandardLayout", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKPIVisualStandardLayout(v *types.KPIVisualStandardLayout) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KPIVisualStandardLayout"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

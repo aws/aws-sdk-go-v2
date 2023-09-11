@@ -24774,6 +24774,48 @@ func awsRestjson1_serializeDocumentJoinKeyProperties(v *types.JoinKeyProperties,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKPIActualValueConditionalFormatting(v *types.KPIActualValueConditionalFormatting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Icon != nil {
+		ok := object.Key("Icon")
+		if err := awsRestjson1_serializeDocumentConditionalFormattingIcon(v.Icon, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TextColor != nil {
+		ok := object.Key("TextColor")
+		if err := awsRestjson1_serializeDocumentConditionalFormattingColor(v.TextColor, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKPIComparisonValueConditionalFormatting(v *types.KPIComparisonValueConditionalFormatting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Icon != nil {
+		ok := object.Key("Icon")
+		if err := awsRestjson1_serializeDocumentConditionalFormattingIcon(v.Icon, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TextColor != nil {
+		ok := object.Key("TextColor")
+		if err := awsRestjson1_serializeDocumentConditionalFormattingColor(v.TextColor, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKPIConditionalFormatting(v *types.KPIConditionalFormatting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24791,6 +24833,20 @@ func awsRestjson1_serializeDocumentKPIConditionalFormatting(v *types.KPIConditio
 func awsRestjson1_serializeDocumentKPIConditionalFormattingOption(v *types.KPIConditionalFormattingOption, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ActualValue != nil {
+		ok := object.Key("ActualValue")
+		if err := awsRestjson1_serializeDocumentKPIActualValueConditionalFormatting(v.ActualValue, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ComparisonValue != nil {
+		ok := object.Key("ComparisonValue")
+		if err := awsRestjson1_serializeDocumentKPIComparisonValueConditionalFormatting(v.ComparisonValue, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.PrimaryValue != nil {
 		ok := object.Key("PrimaryValue")
@@ -24922,9 +24978,23 @@ func awsRestjson1_serializeDocumentKPIOptions(v *types.KPIOptions, value smithyj
 		}
 	}
 
+	if v.Sparkline != nil {
+		ok := object.Key("Sparkline")
+		if err := awsRestjson1_serializeDocumentKPISparklineOptions(v.Sparkline, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TrendArrows != nil {
 		ok := object.Key("TrendArrows")
 		if err := awsRestjson1_serializeDocumentTrendArrowOptions(v.TrendArrows, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VisualLayoutOptions != nil {
+		ok := object.Key("VisualLayoutOptions")
+		if err := awsRestjson1_serializeDocumentKPIVisualLayoutOptions(v.VisualLayoutOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -24981,6 +25051,33 @@ func awsRestjson1_serializeDocumentKPISortConfiguration(v *types.KPISortConfigur
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKPISparklineOptions(v *types.KPISparklineOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Color != nil {
+		ok := object.Key("Color")
+		ok.String(*v.Color)
+	}
+
+	if len(v.TooltipVisibility) > 0 {
+		ok := object.Key("TooltipVisibility")
+		ok.String(string(v.TooltipVisibility))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if len(v.Visibility) > 0 {
+		ok := object.Key("Visibility")
+		ok.String(string(v.Visibility))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKPIVisual(v *types.KPIVisual, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25030,6 +25127,32 @@ func awsRestjson1_serializeDocumentKPIVisual(v *types.KPIVisual, value smithyjso
 	if v.VisualId != nil {
 		ok := object.Key("VisualId")
 		ok.String(*v.VisualId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKPIVisualLayoutOptions(v *types.KPIVisualLayoutOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StandardLayout != nil {
+		ok := object.Key("StandardLayout")
+		if err := awsRestjson1_serializeDocumentKPIVisualStandardLayout(v.StandardLayout, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKPIVisualStandardLayout(v *types.KPIVisualStandardLayout, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
