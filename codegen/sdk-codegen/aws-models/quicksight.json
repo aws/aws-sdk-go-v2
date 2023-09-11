@@ -176,7 +176,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 16
+                    "max": 20
                 }
             }
         },
@@ -25463,6 +25463,46 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#KPIActualValueConditionalFormatting": {
+            "type": "structure",
+            "members": {
+                "TextColor": {
+                    "target": "com.amazonaws.quicksight#ConditionalFormattingColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditional formatting of the actual value's text color.</p>"
+                    }
+                },
+                "Icon": {
+                    "target": "com.amazonaws.quicksight#ConditionalFormattingIcon",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditional formatting of the actual value's icon.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The conditional formatting for the actual value of a KPI visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#KPIComparisonValueConditionalFormatting": {
+            "type": "structure",
+            "members": {
+                "TextColor": {
+                    "target": "com.amazonaws.quicksight#ConditionalFormattingColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditional formatting of the comparison value's text color.</p>"
+                    }
+                },
+                "Icon": {
+                    "target": "com.amazonaws.quicksight#ConditionalFormattingIcon",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditional formatting of the comparison value's icon.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The conditional formatting for the comparison value of a KPI visual.</p>"
+            }
+        },
         "com.amazonaws.quicksight#KPIConditionalFormatting": {
             "type": "structure",
             "members": {
@@ -25490,6 +25530,18 @@
                     "target": "com.amazonaws.quicksight#KPIProgressBarConditionalFormatting",
                     "traits": {
                         "smithy.api#documentation": "<p>The conditional formatting for the progress bar of a KPI visual.</p>"
+                    }
+                },
+                "ActualValue": {
+                    "target": "com.amazonaws.quicksight#KPIActualValueConditionalFormatting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditional formatting for the actual value of a KPI visual.</p>"
+                    }
+                },
+                "ComparisonValue": {
+                    "target": "com.amazonaws.quicksight#KPIComparisonValueConditionalFormatting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditional formatting for the comparison value of a KPI visual.</p>"
                     }
                 }
             },
@@ -25605,6 +25657,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The options that determine the secondary value font configuration.</p>"
                     }
+                },
+                "Sparkline": {
+                    "target": "com.amazonaws.quicksight#KPISparklineOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options that determine the visibility, color, type, and tooltip visibility of the sparkline of a KPI visual.</p>"
+                    }
+                },
+                "VisualLayoutOptions": {
+                    "target": "com.amazonaws.quicksight#KPIVisualLayoutOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options that determine the layout a KPI visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -25659,6 +25723,56 @@
                 "smithy.api#documentation": "<p>The sort configuration of a KPI visual.</p>"
             }
         },
+        "com.amazonaws.quicksight#KPISparklineOptions": {
+            "type": "structure",
+            "members": {
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility of the sparkline.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#KPISparklineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the sparkline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Color": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color of the sparkline.</p>"
+                    }
+                },
+                "TooltipVisibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tooltip visibility of the sparkline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The options that determine the visibility, color, type, and tooltip visibility of the sparkline of a KPI visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#KPISparklineType": {
+            "type": "enum",
+            "members": {
+                "LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINE"
+                    }
+                },
+                "AREA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AREA"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#KPIVisual": {
             "type": "structure",
             "members": {
@@ -25708,6 +25822,52 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A key performance indicator (KPI).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/kpi.html\">Using KPIs</a> in the <i>Amazon QuickSight User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#KPIVisualLayoutOptions": {
+            "type": "structure",
+            "members": {
+                "StandardLayout": {
+                    "target": "com.amazonaws.quicksight#KPIVisualStandardLayout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The standard layout of the KPI visual.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The options that determine the layout a KPI visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#KPIVisualStandardLayout": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.quicksight#KPIVisualStandardLayoutType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The standard layout type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The standard layout of the KPI visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#KPIVisualStandardLayoutType": {
+            "type": "enum",
+            "members": {
+                "CLASSIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLASSIC"
+                    }
+                },
+                "VERTICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERTICAL"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#LabelOptions": {

@@ -5671,6 +5671,20 @@
                         "smithy.api#documentation": "The Availability Zone associated with this input device.",
                         "smithy.api#jsonName": "availabilityZone"
                     }
+                },
+                "MedialiveInputArns": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "An array of the ARNs for the MediaLive inputs attached to the device. Returned only if the outputType is MEDIALIVE_INPUT.",
+                        "smithy.api#jsonName": "medialiveInputArns"
+                    }
+                },
+                "OutputType": {
+                    "target": "com.amazonaws.medialive#InputDeviceOutputType",
+                    "traits": {
+                        "smithy.api#documentation": "The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.",
+                        "smithy.api#jsonName": "outputType"
+                    }
                 }
             },
             "traits": {
@@ -12505,6 +12519,26 @@
                 "smithy.api#documentation": "The source at the input device that is currently active."
             }
         },
+        "com.amazonaws.medialive#InputDeviceCodec": {
+            "type": "enum",
+            "members": {
+                "HEVC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEVC"
+                    }
+                },
+                "AVC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The codec to use on the video that the device produces."
+            }
+        },
         "com.amazonaws.medialive#InputDeviceConfigurableSettings": {
             "type": "structure",
             "members": {
@@ -12527,6 +12561,20 @@
                     "traits": {
                         "smithy.api#documentation": "The Link device's buffer size (latency) in milliseconds (ms).",
                         "smithy.api#jsonName": "latencyMs"
+                    }
+                },
+                "Codec": {
+                    "target": "com.amazonaws.medialive#InputDeviceCodec",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the codec for the video that the device produces. Only UHD devices can specify this parameter.",
+                        "smithy.api#jsonName": "codec"
+                    }
+                },
+                "MediaconnectSettings": {
+                    "target": "com.amazonaws.medialive#InputDeviceMediaConnectConfigurableSettings",
+                    "traits": {
+                        "smithy.api#documentation": "To attach this device to a MediaConnect flow, specify these parameters. To detach an existing flow, enter {} for the value of mediaconnectSettings. Only UHD devices can specify this parameter.",
+                        "smithy.api#jsonName": "mediaconnectSettings"
                     }
                 }
             },
@@ -12671,6 +12719,78 @@
                 "smithy.api#documentation": "Specifies whether the input device has been configured (outside of MediaLive) to use a dynamic IP address assignment (DHCP) or a static IP address."
             }
         },
+        "com.amazonaws.medialive#InputDeviceMediaConnectConfigurableSettings": {
+            "type": "structure",
+            "members": {
+                "FlowArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MediaConnect flow to attach this device to.",
+                        "smithy.api#jsonName": "flowArn"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN for the role that MediaLive assumes to access the attached flow and secret. For more information about how to create this role, see the MediaLive user guide.",
+                        "smithy.api#jsonName": "roleArn"
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN for the secret that holds the encryption key to encrypt the content output by the device.",
+                        "smithy.api#jsonName": "secretArn"
+                    }
+                },
+                "SourceName": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the MediaConnect Flow source to stream to.",
+                        "smithy.api#jsonName": "sourceName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Parameters required to attach a MediaConnect flow to the device."
+            }
+        },
+        "com.amazonaws.medialive#InputDeviceMediaConnectSettings": {
+            "type": "structure",
+            "members": {
+                "FlowArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MediaConnect flow.",
+                        "smithy.api#jsonName": "flowArn"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN for the role that MediaLive assumes to access the attached flow and secret.",
+                        "smithy.api#jsonName": "roleArn"
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the secret used to encrypt the stream.",
+                        "smithy.api#jsonName": "secretArn"
+                    }
+                },
+                "SourceName": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the MediaConnect flow source.",
+                        "smithy.api#jsonName": "sourceName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Information about the MediaConnect flow attached to the device."
+            }
+        },
         "com.amazonaws.medialive#InputDeviceNetworkSettings": {
             "type": "structure",
             "members": {
@@ -12712,6 +12832,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "The network settings for the input device."
+            }
+        },
+        "com.amazonaws.medialive#InputDeviceOutputType": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "MEDIALIVE_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIALIVE_INPUT"
+                    }
+                },
+                "MEDIACONNECT_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIACONNECT_FLOW"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The output attachment type of the input device."
             }
         },
         "com.amazonaws.medialive#InputDeviceRequest": {
@@ -12884,6 +13030,20 @@
                         "smithy.api#documentation": "The Availability Zone associated with this input device.",
                         "smithy.api#jsonName": "availabilityZone"
                     }
+                },
+                "MedialiveInputArns": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "An array of the ARNs for the MediaLive inputs attached to the device. Returned only if the outputType is MEDIALIVE_INPUT.",
+                        "smithy.api#jsonName": "medialiveInputArns"
+                    }
+                },
+                "OutputType": {
+                    "target": "com.amazonaws.medialive#InputDeviceOutputType",
+                    "traits": {
+                        "smithy.api#documentation": "The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.",
+                        "smithy.api#jsonName": "outputType"
+                    }
                 }
             },
             "traits": {
@@ -13001,6 +13161,20 @@
                     "traits": {
                         "smithy.api#documentation": "The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.",
                         "smithy.api#jsonName": "latencyMs"
+                    }
+                },
+                "Codec": {
+                    "target": "com.amazonaws.medialive#InputDeviceCodec",
+                    "traits": {
+                        "smithy.api#documentation": "The codec for the video that the device produces.",
+                        "smithy.api#jsonName": "codec"
+                    }
+                },
+                "MediaconnectSettings": {
+                    "target": "com.amazonaws.medialive#InputDeviceMediaConnectSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Information about the MediaConnect flow attached to the device. Returned only if the outputType is MEDIACONNECT_FLOW.",
+                        "smithy.api#jsonName": "mediaconnectSettings"
                     }
                 }
             },
@@ -16226,6 +16400,9 @@
                     "target": "com.amazonaws.medialive#StartChannel"
                 },
                 {
+                    "target": "com.amazonaws.medialive#StartInputDevice"
+                },
+                {
                     "target": "com.amazonaws.medialive#StartInputDeviceMaintenanceWindow"
                 },
                 {
@@ -16233,6 +16410,9 @@
                 },
                 {
                     "target": "com.amazonaws.medialive#StopChannel"
+                },
+                {
+                    "target": "com.amazonaws.medialive#StopInputDevice"
                 },
                 {
                     "target": "com.amazonaws.medialive#StopMultiplex"
@@ -21510,6 +21690,49 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.medialive#StartInputDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#StartInputDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#StartInputDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#UnprocessableEntityException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Start an input device that is attached to a MediaConnect flow. (There is no need to start a device that is attached to a MediaLive input; MediaLive starts the device when the channel starts.)",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/prod/inputDevices/{InputDeviceId}/start",
+                    "code": 200
+                }
+            }
+        },
         "com.amazonaws.medialive#StartInputDeviceMaintenanceWindow": {
             "type": "operation",
             "input": {
@@ -21575,6 +21798,31 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for StartInputDeviceMaintenanceWindowResponse",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#StartInputDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "InputDeviceId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique ID of the input device to reboot. For example, hd-123456789abcdef.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for StartInputDeviceRequest",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#StartInputDeviceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for StartInputDeviceResponse",
                 "smithy.api#output": {}
             }
         },
@@ -22046,6 +22294,74 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for StopChannelResponse",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#StopInputDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#StopInputDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#StopInputDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#UnprocessableEntityException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Stop an input device that is attached to a MediaConnect flow. (There is no need to stop a device that is attached to a MediaLive input; MediaLive automatically stops the device when the channel stops.)",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/prod/inputDevices/{InputDeviceId}/stop",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.medialive#StopInputDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "InputDeviceId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique ID of the input device to reboot. For example, hd-123456789abcdef.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for StopInputDeviceRequest",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#StopInputDeviceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for StopInputDeviceResponse",
                 "smithy.api#output": {}
             }
         },
@@ -23530,6 +23846,20 @@
                     "traits": {
                         "smithy.api#documentation": "The Availability Zone associated with this input device.",
                         "smithy.api#jsonName": "availabilityZone"
+                    }
+                },
+                "MedialiveInputArns": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "An array of the ARNs for the MediaLive inputs attached to the device. Returned only if the outputType is MEDIALIVE_INPUT.",
+                        "smithy.api#jsonName": "medialiveInputArns"
+                    }
+                },
+                "OutputType": {
+                    "target": "com.amazonaws.medialive#InputDeviceOutputType",
+                    "traits": {
+                        "smithy.api#documentation": "The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.",
+                        "smithy.api#jsonName": "outputType"
                     }
                 }
             },
