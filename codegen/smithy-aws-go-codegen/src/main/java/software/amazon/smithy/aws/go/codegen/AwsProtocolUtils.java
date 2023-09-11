@@ -105,7 +105,7 @@ final class AwsProtocolUtils {
                 })
                 .build());
 
-                // skip request compression tests, not yet implemented in the SDK
+        // skip request compression tests, not yet implemented in the SDK
         Set<HttpProtocolUnitTestGenerator.SkipTest> inputSkipTests = new TreeSet<>(SetUtils.of(
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
