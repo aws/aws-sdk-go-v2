@@ -5,8 +5,7 @@ LINT_IGNORE_S3MANAGER_INPUT='feature/s3/manager/upload.go:.+struct field SSEKMSK
 LINT_IGNORE_AWSRULESFN_ARN='internal/endpoints/awsrulesfn/arn.go'
 LINT_IGNORE_AWSRULESFN_PARTITION='internal/endpoints/awsrulesfn/partition.go'
 
-# TODO: remove this skip flag when request compression is added
-UNIT_TEST_TAGS=-skip "TestClient_PutWithContentEncoding*"
+UNIT_TEST_TAGS=
 
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 
