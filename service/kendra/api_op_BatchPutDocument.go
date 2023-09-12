@@ -23,8 +23,9 @@ import (
 // documents added to the index. The documents are indexed asynchronously. You can
 // see the progress of the batch using Amazon Web Services CloudWatch. Any error
 // messages related to processing the batch are sent to your Amazon Web Services
-// CloudWatch log. For an example of ingesting inline documents using Python and
-// Java SDKs, see Adding files directly to an index (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-binary-doc.html)
+// CloudWatch log. You can also use the BatchGetDocumentStatus API to monitor the
+// progress of indexing your documents. For an example of ingesting inline
+// documents using Python and Java SDKs, see Adding files directly to an index (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-binary-doc.html)
 // .
 func (c *Client) BatchPutDocument(ctx context.Context, params *BatchPutDocumentInput, optFns ...func(*Options)) (*BatchPutDocumentOutput, error) {
 	if params == nil {
@@ -82,7 +83,8 @@ type BatchPutDocumentOutput struct {
 	// indicates why the document couldn't be added to the index. If there was an error
 	// adding a document to an index the error is reported in your Amazon Web Services
 	// CloudWatch log. For more information, see Monitoring Amazon Kendra with Amazon
-	// CloudWatch Logs (https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html)
+	// CloudWatch logs (https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html)
+	// .
 	FailedDocuments []types.BatchPutDocumentResponseFailedDocument
 
 	// Metadata pertaining to the operation's result.

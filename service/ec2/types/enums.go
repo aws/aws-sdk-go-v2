@@ -2385,6 +2385,40 @@ func (ImageAttributeName) Values() []ImageAttributeName {
 	}
 }
 
+type ImageBlockPublicAccessDisabledState string
+
+// Enum values for ImageBlockPublicAccessDisabledState
+const (
+	ImageBlockPublicAccessDisabledStateUnblocked ImageBlockPublicAccessDisabledState = "unblocked"
+)
+
+// Values returns all known values for ImageBlockPublicAccessDisabledState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ImageBlockPublicAccessDisabledState) Values() []ImageBlockPublicAccessDisabledState {
+	return []ImageBlockPublicAccessDisabledState{
+		"unblocked",
+	}
+}
+
+type ImageBlockPublicAccessEnabledState string
+
+// Enum values for ImageBlockPublicAccessEnabledState
+const (
+	ImageBlockPublicAccessEnabledStateBlockNewSharing ImageBlockPublicAccessEnabledState = "block-new-sharing"
+)
+
+// Values returns all known values for ImageBlockPublicAccessEnabledState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ImageBlockPublicAccessEnabledState) Values() []ImageBlockPublicAccessEnabledState {
+	return []ImageBlockPublicAccessEnabledState{
+		"block-new-sharing",
+	}
+}
+
 type ImageState string
 
 // Enum values for ImageState

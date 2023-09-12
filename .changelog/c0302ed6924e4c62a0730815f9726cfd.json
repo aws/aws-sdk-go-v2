@@ -1,0 +1,8 @@
+{
+    "id": "c0302ed6-924e-4c62-a073-0815f9726cfd",
+    "type": "feature",
+    "description": "Amazon Kendra now supports confidence score buckets for retrieved passage results using the Retrieve API.",
+    "modules": [
+        "service/kendra"
+    ]
+}

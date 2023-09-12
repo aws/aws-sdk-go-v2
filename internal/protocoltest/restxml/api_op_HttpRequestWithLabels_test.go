@@ -52,6 +52,25 @@ func TestClient_HttpRequestWithLabels_awsRestxmlSerialize(t *testing.T) {
 				return smithytesting.CompareReaderEmpty(actual)
 			},
 		},
+		// Sends a GET request that uses URI label bindings
+		"HttpRequestLabelEscaping": {
+			Params: &HttpRequestWithLabelsInput{
+				String_:   ptr.String(" %:/?#[]@!$&'()*+,;=😹"),
+				Short:     ptr.Int16(1),
+				Integer:   ptr.Int32(2),
+				Long:      ptr.Int64(3),
+				Float:     ptr.Float32(4.1),
+				Double:    ptr.Float64(5.1),
+				Boolean:   ptr.Bool(true),
+				Timestamp: ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/HttpRequestWithLabels/%20%25%3A%2F%3F%23%5B%5D%40%21%24%26%27%28%29%2A%2B%2C%3B%3D%F0%9F%98%B9/1/2/3/4.1/5.1/true/2019-12-16T23%3A48%3A18Z",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

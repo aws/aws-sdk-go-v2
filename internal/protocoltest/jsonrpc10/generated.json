@@ -25,6 +25,8 @@
         "api_op_NoInputAndNoOutput_test.go",
         "api_op_NoInputAndOutput.go",
         "api_op_NoInputAndOutput_test.go",
+        "api_op_PutWithContentEncoding.go",
+        "api_op_PutWithContentEncoding_test.go",
         "api_op_SimpleScalarProperties.go",
         "api_op_SimpleScalarProperties_test.go",
         "deserializers.go",

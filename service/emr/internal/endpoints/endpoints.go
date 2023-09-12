@@ -365,13 +365,44 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "fips-us-iso-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "elasticmapreduce.us-iso-east-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-us-iso-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "elasticmapreduce.us-iso-west-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-iso-east-1",
 			}: endpoints.Endpoint{
 				Protocols: []string{"https"},
 			},
 			endpoints.EndpointKey{
+				Region:  "us-iso-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:  "elasticmapreduce.us-iso-east-1.c2s.ic.gov",
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
 				Region: "us-iso-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-iso-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "elasticmapreduce.us-iso-west-1.c2s.ic.gov",
+			},
 		},
 	},
 	{
@@ -396,8 +427,23 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "fips-us-isob-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "elasticmapreduce.us-isob-east-1.sc2s.sgov.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-isob-east-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-isob-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "elasticmapreduce.us-isob-east-1.sc2s.sgov.gov",
+			},
 		},
 	},
 	{

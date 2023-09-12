@@ -4890,6 +4890,26 @@ func (m *validateOpEnableFastSnapshotRestores) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpEnableImageBlockPublicAccess struct {
+}
+
+func (*validateOpEnableImageBlockPublicAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableImageBlockPublicAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableImageBlockPublicAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableImageBlockPublicAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableImageDeprecation struct {
 }
 
@@ -9384,6 +9404,10 @@ func addOpEnableFastLaunchValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpEnableFastSnapshotRestoresValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableFastSnapshotRestores{}, middleware.After)
+}
+
+func addOpEnableImageBlockPublicAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableImageBlockPublicAccess{}, middleware.After)
 }
 
 func addOpEnableImageDeprecationValidationMiddleware(stack *middleware.Stack) error {
@@ -15052,6 +15076,21 @@ func validateOpEnableFastSnapshotRestoresInput(v *EnableFastSnapshotRestoresInpu
 	}
 	if v.SourceSnapshotIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceSnapshotIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableImageBlockPublicAccessInput(v *EnableImageBlockPublicAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableImageBlockPublicAccessInput"}
+	if len(v.ImageBlockPublicAccessState) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageBlockPublicAccessState"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

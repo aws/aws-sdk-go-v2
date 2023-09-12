@@ -886,7 +886,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 				"Content-Type": []string{"application/x-amz-json-1.1"},
 			},
 			BodyMediaType: "application/json",
-			Body:          []byte(`{"Iso8601Timestamp":"2000-01-02T20:34:56.000Z"}`),
+			Body:          []byte(`{"Iso8601Timestamp":"2000-01-02T20:34:56Z"}`),
 			ExpectResult: &KitchenSinkOperationOutput{
 				Iso8601Timestamp: ptr.Time(smithytime.ParseEpochSeconds(946845296)),
 			},
@@ -898,7 +898,7 @@ func TestClient_KitchenSinkOperation_awsAwsjson11Deserialize(t *testing.T) {
 				"Content-Type": []string{"application/x-amz-json-1.1"},
 			},
 			BodyMediaType: "application/json",
-			Body:          []byte(`{"HttpdateTimestamp":"Sun, 02 Jan 2000 20:34:56.000 GMT"}`),
+			Body:          []byte(`{"HttpdateTimestamp":"Sun, 02 Jan 2000 20:34:56 GMT"}`),
 			ExpectResult: &KitchenSinkOperationOutput{
 				HttpdateTimestamp: ptr.Time(smithytime.ParseEpochSeconds(946845296)),
 			},

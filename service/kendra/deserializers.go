@@ -16656,6 +16656,11 @@ func awsAwsjson11_deserializeDocumentRetrieveResultItem(v **types.RetrieveResult
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "ScoreAttributes":
+			if err := awsAwsjson11_deserializeDocumentScoreAttributes(&sv.ScoreAttributes, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

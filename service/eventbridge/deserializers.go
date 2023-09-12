@@ -7736,7 +7736,7 @@ func awsAwsjson11_deserializeDocumentConnectionBodyParameter(v **types.Connectio
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Value = ptr.String(jtv)
 			}
@@ -7828,7 +7828,7 @@ func awsAwsjson11_deserializeDocumentConnectionHeaderParameter(v **types.Connect
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected HeaderValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected HeaderValueSensitive to be of type string, got %T instead", value)
 				}
 				sv.Value = ptr.String(jtv)
 			}
@@ -8065,7 +8065,7 @@ func awsAwsjson11_deserializeDocumentConnectionQueryStringParameter(v **types.Co
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected QueryStringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected QueryStringValueSensitive to be of type string, got %T instead", value)
 				}
 				sv.Value = ptr.String(jtv)
 			}

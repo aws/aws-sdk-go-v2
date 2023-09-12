@@ -1,0 +1,8 @@
+{
+    "id": "2fdabcd8-e7d3-43df-9e99-5fd25b44833f",
+    "type": "feature",
+    "description": "Adds sensitive trait to various shapes in Jetstream Connections API model.",
+    "modules": [
+        "service/eventbridge"
+    ]
+}

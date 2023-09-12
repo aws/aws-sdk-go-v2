@@ -247,17 +247,17 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 		// Handles escaping all required characters in the query string.
 		"RestJsonQueryStringEscaping": {
 			Params: &AllQueryStringTypesInput{
-				QueryString: ptr.String("%:/?#[]@!$&'()*+,;=😹"),
+				QueryString: ptr.String(" %:/?#[]@!$&'()*+,;=😹"),
 				QueryParamsMapOfStringList: map[string][]string{
 					"String": {
-						"%:/?#[]@!$&'()*+,;=😹",
+						" %:/?#[]@!$&'()*+,;=😹",
 					},
 				},
 			},
 			ExpectMethod:  "GET",
 			ExpectURIPath: "/AllQueryStringTypesInput",
 			ExpectQuery: []smithytesting.QueryItem{
-				{Key: "String", Value: "%25%3A%2F%3F%23%5B%5D%40%21%24%26%27%28%29%2A%2B%2C%3B%3D%F0%9F%98%B9"},
+				{Key: "String", Value: "%20%25%3A%2F%3F%23%5B%5D%40%21%24%26%27%28%29%2A%2B%2C%3B%3D%F0%9F%98%B9"},
 			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)

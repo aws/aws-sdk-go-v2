@@ -24,14 +24,18 @@ import (
 // include question-answer or FAQ type responses from your index. The passages are
 // text excerpts that can be semantically extracted from multiple documents and
 // multiple parts of the same document. If in extreme cases your documents produce
-// no relevant passages using the Retrieve API, you can alternatively use the Query
-// API. You can also do the following:
+// zero passages using the Retrieve API, you can alternatively use the Query API
+// and its types of responses. You can also do the following:
 //   - Override boosting at the index level
 //   - Filter based on document fields or attributes
 //   - Filter based on the user or their group access to documents
 //
 // You can also include certain fields in the response that might provide useful
-// additional information.
+// additional information. The Retrieve API shares the number of query capacity
+// units (https://docs.aws.amazon.com/kendra/latest/APIReference/API_CapacityUnitsConfiguration.html)
+// that you set for your index. For more information on what's included in a single
+// capacity unit and the default base capacity for an index, see Adjusting capacity (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html)
+// .
 func (c *Client) Retrieve(ctx context.Context, params *RetrieveInput, optFns ...func(*Options)) (*RetrieveOutput, error) {
 	if params == nil {
 		params = &RetrieveInput{}
