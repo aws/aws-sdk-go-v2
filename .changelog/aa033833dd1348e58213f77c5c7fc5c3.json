@@ -1,8 +1,0 @@
-{
-    "id": "aa033833-dd13-48e5-8213-f77c5c7fc5c3",
-    "type": "feature",
-    "description": "This release adds support for restricting public sharing of AMIs through AMI Block Public Access",
-    "modules": [
-        "service/ec2"
-    ]
-}

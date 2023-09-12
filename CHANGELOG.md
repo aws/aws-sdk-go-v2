@@ -1,3 +1,13 @@
+# Release (2023-09-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.118.0](service/ec2/CHANGELOG.md#v11180-2023-09-12)
+  * **Feature**: This release adds support for restricting public sharing of AMIs through AMI Block Public Access
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.22.0](service/eventbridge/CHANGELOG.md#v1220-2023-09-12)
+  * **Feature**: Adds sensitive trait to various shapes in Jetstream Connections API model.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.43.0](service/kendra/CHANGELOG.md#v1430-2023-09-12)
+  * **Feature**: Amazon Kendra now supports confidence score buckets for retrieved passage results using the Retrieve API.
+
 # Release (2023-09-11)
 
 ## Module Highlights

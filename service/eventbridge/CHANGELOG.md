@@ -1,3 +1,7 @@
+# v1.22.0 (2023-09-12)
+
+* **Feature**: Adds sensitive trait to various shapes in Jetstream Connections API model.
+
 # v1.21.0 (2023-09-05)
 
 * **Feature**: Improve Endpoint Ruleset test coverage.
