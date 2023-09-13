@@ -59,9 +59,11 @@ func (l *iniLexer) Tokenize(r io.Reader) ([]Token, error) {
 
 func (l *iniLexer) tokenize(b []byte) ([]Token, error) {
 	runes := bytes.Runes(b)
-	var err error
 	n := 0
-	tokenAmount := countTokens(runes)
+	tokenAmount, err := countTokens(runes)
+	if err != nil {
+		return nil, err
+	}
 	tokens := make([]Token, tokenAmount)
 	count := 0
 
@@ -95,7 +97,7 @@ func (l *iniLexer) tokenize(b []byte) ([]Token, error) {
 	return tokens[:count], nil
 }
 
-func countTokens(runes []rune) int {
+func countTokens(runes []rune) (int, error) {
 	count, n := 0, 0
 	var err error
 
@@ -118,14 +120,14 @@ func countTokens(runes []rune) int {
 		}
 
 		if err != nil {
-			return 0
+			return 0, err
 		}
 
 		count++
 		runes = runes[n:]
 	}
 
-	return count + 1
+	return count + 1, nil
 }
 
 // Token indicates a metadata about a given value.
