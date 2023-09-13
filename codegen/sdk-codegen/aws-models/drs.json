@@ -181,7 +181,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|sa|af|me)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9][a-z]$"
+                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|sa|af|me|il)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9][a-z]$"
             }
         },
         "com.amazonaws.drs#AwsRegion": {
@@ -191,7 +191,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|sa|af|me)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$"
+                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|sa|af|me|il)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$"
             }
         },
         "com.amazonaws.drs#BoundedString": {
@@ -471,6 +471,12 @@
                     "target": "com.amazonaws.drs#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>S3 bucket ARN to export Source Network templates.</p>"
+                    }
+                },
+                "postLaunchEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether we want to activate post-launch actions.</p>"
                     }
                 }
             }
@@ -1138,6 +1144,67 @@
         "com.amazonaws.drs#DeleteJobResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.drs#DeleteLaunchAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#DeleteLaunchActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#DeleteLaunchActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a resource launch action.</p>",
+                "smithy.api#http": {
+                    "uri": "/DeleteLaunchAction",
+                    "method": "POST",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.drs#DeleteLaunchActionRequest": {
+            "type": "structure",
+            "members": {
+                "resourceId": {
+                    "target": "com.amazonaws.drs#LaunchActionResourceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "actionId": {
+                    "target": "com.amazonaws.drs#LaunchActionId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#DeleteLaunchActionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.drs#DeleteLaunchConfigurationTemplate": {
             "type": "operation",
@@ -2432,16 +2499,25 @@
                     "target": "com.amazonaws.drs#CreateExtendedSourceServer"
                 },
                 {
+                    "target": "com.amazonaws.drs#DeleteLaunchAction"
+                },
+                {
                     "target": "com.amazonaws.drs#InitializeService"
                 },
                 {
                     "target": "com.amazonaws.drs#ListExtensibleSourceServers"
                 },
                 {
+                    "target": "com.amazonaws.drs#ListLaunchActions"
+                },
+                {
                     "target": "com.amazonaws.drs#ListStagingAccounts"
                 },
                 {
                     "target": "com.amazonaws.drs#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.drs#PutLaunchAction"
                 },
                 {
                     "target": "com.amazonaws.drs#TagResource"
@@ -2566,9 +2642,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://drs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://drs-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2581,15 +2836,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://drs.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://drs.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2601,258 +2891,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://drs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://drs-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://drs.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://drs.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -3677,6 +3717,16 @@
                 ]
             }
         },
+        "com.amazonaws.drs#FailureReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z ():/.,'-_#*;]*$"
+            }
+        },
         "com.amazonaws.drs#GetFailbackReplicationConfiguration": {
             "type": "operation",
             "input": {
@@ -4401,6 +4451,363 @@
                 ]
             }
         },
+        "com.amazonaws.drs#LaunchAction": {
+            "type": "structure",
+            "members": {
+                "actionId": {
+                    "target": "com.amazonaws.drs#LaunchActionId"
+                },
+                "actionCode": {
+                    "target": "com.amazonaws.drs#SsmDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch action code.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.drs#LaunchActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch action type.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.drs#LaunchActionName"
+                },
+                "active": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the launch action is active.</p>"
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.drs#LaunchActionOrder",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
+                },
+                "actionVersion": {
+                    "target": "com.amazonaws.drs#LaunchActionVersion"
+                },
+                "optional": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the launch will not be marked as failed if this action fails.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.drs#LaunchActionParameters"
+                },
+                "description": {
+                    "target": "com.amazonaws.drs#LaunchActionDescription"
+                },
+                "category": {
+                    "target": "com.amazonaws.drs#LaunchActionCategory"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Launch action.</p>"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionCategory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Launch action category.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "MONITORING",
+                        "name": "MONITORING"
+                    },
+                    {
+                        "value": "VALIDATION",
+                        "name": "VALIDATION"
+                    },
+                    {
+                        "value": "CONFIGURATION",
+                        "name": "CONFIGURATION"
+                    },
+                    {
+                        "value": "SECURITY",
+                        "name": "SECURITY"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#LaunchActionDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Launch action description.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z ():/.,'-_#*;\n]*$"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Launch action Id.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#LaunchActionId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.drs#LaunchActionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Launch action name.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9 /_-]*$"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionOrder": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#documentation": "<p>Launch action order.</p>",
+                "smithy.api#range": {
+                    "min": 2,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.drs#LaunchActionParameter": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.drs#LaunchActionParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.drs#LaunchActionParameterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Launch action parameter.</p>"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9])+$"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionParameterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SSM_STORE",
+                        "name": "SSM_STORE"
+                    },
+                    {
+                        "value": "DYNAMIC",
+                        "name": "DYNAMIC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#LaunchActionParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9.-]+$"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionParameters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.drs#LaunchActionParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.drs#LaunchActionParameter"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Launch action parameters.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.drs#LaunchActionResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Launch configuration template Id or Source Server Id</p>",
+                "smithy.api#pattern": "^(s-[0-9a-zA-Z]{17}$|lct-[0-9a-zA-Z]{17})$"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionRun": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "com.amazonaws.drs#LaunchAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Action.</p>"
+                    }
+                },
+                "runId": {
+                    "target": "com.amazonaws.drs#LaunchActionRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run Id.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.drs#LaunchActionRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run status.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.drs#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Failure reason.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Launch action run.</p>"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionRunId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionRunStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#LaunchActionRuns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#LaunchActionRun"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SSM_AUTOMATION",
+                        "name": "SSM_AUTOMATION"
+                    },
+                    {
+                        "value": "SSM_COMMAND",
+                        "name": "SSM_COMMAND"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#LaunchActionVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Launch action version.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^(\\$DEFAULT|\\$LATEST|[0-9]+)$"
+            }
+        },
+        "com.amazonaws.drs#LaunchActions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#LaunchAction"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#LaunchActionsRequestFilters": {
+            "type": "structure",
+            "members": {
+                "actionIds": {
+                    "target": "com.amazonaws.drs#LaunchActionIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch actions Ids.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resource launch actions filter.</p>"
+            }
+        },
+        "com.amazonaws.drs#LaunchActionsStatus": {
+            "type": "structure",
+            "members": {
+                "ssmAgentDiscoveryDatetime": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time where the AWS Systems Manager was detected as running on the launched instance.</p>"
+                    }
+                },
+                "runs": {
+                    "target": "com.amazonaws.drs#LaunchActionRuns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of post launch action status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Launch actions status.</p>"
+            }
+        },
         "com.amazonaws.drs#LaunchConfiguration": {
             "type": "structure",
             "members": {
@@ -4450,6 +4857,12 @@
                     "target": "com.amazonaws.drs#Licensing",
                     "traits": {
                         "smithy.api#documentation": "<p>The licensing configuration to be used for this launch configuration.</p>"
+                    }
+                },
+                "postLaunchEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether we want to activate post-launch actions for the Source Server.</p>"
                     }
                 }
             }
@@ -4509,6 +4922,12 @@
                     "target": "com.amazonaws.drs#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>S3 bucket ARN to export Source Network templates.</p>"
+                    }
+                },
+                "postLaunchEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Post-launch actions activated.</p>"
                     }
                 }
             },
@@ -4796,6 +5215,100 @@
                         "smithy.api#documentation": "<p>The token of the next extensible source server to retrieve.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.drs#ListLaunchActions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#ListLaunchActionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#ListLaunchActionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists resource launch actions.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListLaunchActions",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#ListLaunchActionsRequest": {
+            "type": "structure",
+            "members": {
+                "resourceId": {
+                    "target": "com.amazonaws.drs#LaunchActionResourceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.drs#LaunchActionsRequestFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to apply when listing resource launch actions.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.drs#MaxResultsType",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Maximum amount of items to return when listing resource launch actions.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Next token to use when listing resource launch actions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#ListLaunchActionsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.drs#LaunchActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of resource launch actions.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Next token returned when listing resource launch actions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.drs#ListStagingAccounts": {
@@ -5168,6 +5681,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The launch status of a participating server.</p>"
                     }
+                },
+                "launchActionsStatus": {
+                    "target": "com.amazonaws.drs#LaunchActionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The post-launch action runs of a participating server.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5187,6 +5706,174 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.drs#PutLaunchAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#PutLaunchActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#PutLaunchActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Puts a resource launch action.</p>",
+                "smithy.api#http": {
+                    "uri": "/PutLaunchAction",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#PutLaunchActionRequest": {
+            "type": "structure",
+            "members": {
+                "resourceId": {
+                    "target": "com.amazonaws.drs#LaunchActionResourceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "actionCode": {
+                    "target": "com.amazonaws.drs#SsmDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch action code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.drs#LaunchActionOrder",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#required": {}
+                    }
+                },
+                "actionId": {
+                    "target": "com.amazonaws.drs#LaunchActionId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "optional": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the launch will not be marked as failed if this action fails.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "active": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the launch action is active.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.drs#LaunchActionName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "actionVersion": {
+                    "target": "com.amazonaws.drs#LaunchActionVersion",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "category": {
+                    "target": "com.amazonaws.drs#LaunchActionCategory",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.drs#LaunchActionParameters"
+                },
+                "description": {
+                    "target": "com.amazonaws.drs#LaunchActionDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#PutLaunchActionResponse": {
+            "type": "structure",
+            "members": {
+                "resourceId": {
+                    "target": "com.amazonaws.drs#LaunchActionResourceId"
+                },
+                "actionId": {
+                    "target": "com.amazonaws.drs#LaunchActionId"
+                },
+                "actionCode": {
+                    "target": "com.amazonaws.drs#SsmDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch action code.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.drs#LaunchActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch action type.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.drs#LaunchActionName"
+                },
+                "active": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the launch action is active.</p>"
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.drs#LaunchActionOrder",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
+                },
+                "actionVersion": {
+                    "target": "com.amazonaws.drs#LaunchActionVersion"
+                },
+                "optional": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the launch will not be marked as failed if this action fails.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.drs#LaunchActionParameters"
+                },
+                "description": {
+                    "target": "com.amazonaws.drs#LaunchActionDescription"
+                },
+                "category": {
+                    "target": "com.amazonaws.drs#LaunchActionCategory"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.drs#RecoveryInstance": {
@@ -7121,6 +7808,16 @@
                 "target": "com.amazonaws.drs#SourceServer"
             }
         },
+        "com.amazonaws.drs#SsmDocumentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9-])+$"
+            }
+        },
         "com.amazonaws.drs#StagingArea": {
             "type": "structure",
             "members": {
@@ -8269,6 +8966,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The licensing configuration to be used for this launch configuration.</p>"
                     }
+                },
+                "postLaunchEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether we want to enable post-launch actions for the Source Server.</p>"
+                    }
                 }
             }
         },
@@ -8353,6 +9056,12 @@
                     "target": "com.amazonaws.drs#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>S3 bucket ARN to export Source Network templates.</p>"
+                    }
+                },
+                "postLaunchEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether we want to activate post-launch actions.</p>"
                     }
                 }
             }

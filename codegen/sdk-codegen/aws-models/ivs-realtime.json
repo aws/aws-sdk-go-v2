@@ -1080,7 +1080,7 @@
                 "errorCode": {
                     "target": "com.amazonaws.ivsrealtime#EventErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the event is an error event, the error code is provided to give insight into the\n         specific error that occurred. If the event is not an error event, this field is null.\n         <code>INSUFFICIENT_CAPABILITIES</code> indicates that the participant tried to take an action that the\n         participant’s token is not allowed to do. For more information about participant\n         capabilities, see the <code>capabilities</code> field in <a>CreateParticipantToken</a>. \n\t\t <code>QUOTA_EXCEEDED</code> indicates that the number of participants who want to publish/subscribe to a \n\t\t stage exceeds the quota; for more information, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">Service Quotas</a>.\n\t\t <code>PUBLISHER_NOT_FOUND</code> indicates that the participant tried to subscribe to a publisher\n\t\t that doesn’t exist.  \n</p>"
+                        "smithy.api#documentation": "<p>If the event is an error event, the error code is provided to give insight into the\n         specific error that occurred. If the event is not an error event, this field is null.\n            <code>INSUFFICIENT_CAPABILITIES</code> indicates that the participant tried to take an\n         action that the participant’s token is not allowed to do. For more information about\n         participant capabilities, see the <code>capabilities</code> field in <a>CreateParticipantToken</a>. <code>QUOTA_EXCEEDED</code> indicates that the\n         number of participants who want to publish/subscribe to a stage exceeds the quota; for more\n         information, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">Service Quotas</a>.\n            <code>PUBLISHER_NOT_FOUND</code> indicates that the participant tried to subscribe to a\n         publisher that doesn’t exist. </p>"
                     }
                 }
             },
@@ -1955,7 +1955,7 @@
                     "target": "com.amazonaws.ivsrealtime#ParticipantTokenDurationMinutes",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Duration (in minutes), after which the participant token expires. Default:  720 (12 hours).</p>"
+                        "smithy.api#documentation": "<p>Duration (in minutes), after which the participant token expires. Default: 720 (12\n         hours).</p>"
                     }
                 },
                 "capabilities": {
@@ -1972,7 +1972,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object specifying a participant token in a stage.</p>"
+                "smithy.api#documentation": "<p>Object specifying a participant token in a stage.</p>\n         <p>\n            <b>Important</b>: Treat tokens as opaque; i.e., do not build functionality\n         based on token contents. The format of tokens could change in the future.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantTokenAttributes": {

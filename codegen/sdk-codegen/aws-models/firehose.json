@@ -154,7 +154,7 @@
                 "RoleARN": {
                     "target": "com.amazonaws.firehose#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS credentials.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials.</p>"
                     }
                 },
                 "CollectionEndpoint": {
@@ -422,6 +422,12 @@
                 },
                 "VpcConfiguration": {
                     "target": "com.amazonaws.firehose#VpcConfiguration"
+                },
+                "DocumentIdOptions": {
+                    "target": "com.amazonaws.firehose#DocumentIdOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the method for setting up document ID. The supported methods are Kinesis Data\n         Firehose generated document ID and OpenSearch Service generated document ID.</p>"
+                    }
                 }
             },
             "traits": {
@@ -496,6 +502,12 @@
                 },
                 "VpcConfigurationDescription": {
                     "target": "com.amazonaws.firehose#VpcConfigurationDescription"
+                },
+                "DocumentIdOptions": {
+                    "target": "com.amazonaws.firehose#DocumentIdOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the method for setting up document ID. The supported methods are Kinesis Data\n         Firehose generated document ID and OpenSearch Service generated document ID.</p>"
+                    }
                 }
             },
             "traits": {
@@ -561,6 +573,12 @@
                 },
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions"
+                },
+                "DocumentIdOptions": {
+                    "target": "com.amazonaws.firehose#DocumentIdOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the method for setting up document ID. The supported methods are Kinesis Data\n         Firehose generated document ID and OpenSearch Service generated document ID.</p>"
+                    }
                 }
             },
             "traits": {
@@ -885,7 +903,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Kinesis Data Firehose delivery stream.</p>\n\n         <p>By default, you can create up to 50 delivery streams per Amazon Web Services\n         Region.</p>\n         <p>This is an asynchronous operation that immediately returns. The initial status of the\n         delivery stream is <code>CREATING</code>. After the delivery stream is created, its status\n         is <code>ACTIVE</code> and it now accepts data. If the delivery stream creation fails, the\n         status transitions to <code>CREATING_FAILED</code>. Attempts to send data to a delivery\n         stream that is not in the <code>ACTIVE</code> state cause an exception. To check the state\n         of a delivery stream, use <a>DescribeDeliveryStream</a>.</p>\n         <p>If the status of a delivery stream is <code>CREATING_FAILED</code>, this status\n         doesn't change, and you can't invoke <code>CreateDeliveryStream</code> again on it.\n         However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete\n         it.</p>\n         <p>A Kinesis Data Firehose delivery stream can be configured to receive records directly\n         from providers using <a>PutRecord</a> or <a>PutRecordBatch</a>, or it\n         can be configured to use an existing Kinesis stream as its source. To specify a Kinesis\n         data stream as input, set the <code>DeliveryStreamType</code> parameter to\n            <code>KinesisStreamAsSource</code>, and provide the Kinesis stream Amazon Resource Name\n         (ARN) and role ARN in the <code>KinesisStreamSourceConfiguration</code>\n         parameter.</p>\n         <p>To create a delivery stream with server-side encryption (SSE) enabled, include <a>DeliveryStreamEncryptionConfigurationInput</a> in your request. This is\n         optional. You can also invoke <a>StartDeliveryStreamEncryption</a> to turn on\n         SSE for an existing delivery stream that doesn't have SSE enabled.</p>\n         <p>A delivery stream is configured with a single destination: Amazon S3, Amazon ES,\n         Amazon Redshift, or Splunk. You must specify only one of the following destination\n         configuration parameters: <code>ExtendedS3DestinationConfiguration</code>,\n            <code>S3DestinationConfiguration</code>,\n            <code>ElasticsearchDestinationConfiguration</code>,\n            <code>RedshiftDestinationConfiguration</code>, or\n            <code>SplunkDestinationConfiguration</code>.</p>\n         <p>When you specify <code>S3DestinationConfiguration</code>, you can also provide the\n         following optional values: BufferingHints, <code>EncryptionConfiguration</code>, and\n            <code>CompressionFormat</code>. By default, if no <code>BufferingHints</code> value is\n         provided, Kinesis Data Firehose buffers data up to 5 MB or for 5 minutes, whichever\n         condition is satisfied first. <code>BufferingHints</code> is a hint, so there are some\n         cases where the service cannot adhere to these conditions strictly. For example, record\n         boundaries might be such that the size is a little over or under the configured buffering\n         size. By default, no encryption is performed. We strongly recommend that you enable\n         encryption to ensure secure data storage in Amazon S3.</p>\n\n         <p>A few notes about Amazon Redshift as a destination:</p>\n         <ul>\n            <li>\n               <p>An Amazon Redshift destination requires an S3 bucket as intermediate location.\n               Kinesis Data Firehose first delivers data to Amazon S3 and then uses\n                  <code>COPY</code> syntax to load data into an Amazon Redshift table. This is\n               specified in the <code>RedshiftDestinationConfiguration.S3Configuration</code>\n               parameter.</p>\n\n            </li>\n            <li>\n               <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be\n               specified in <code>RedshiftDestinationConfiguration.S3Configuration</code> because\n               the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't\n               support these compression formats.</p>\n            </li>\n            <li>\n               <p>We strongly recommend that you use the user name and password you provide\n               exclusively with Kinesis Data Firehose, and that the permissions for the account are\n               restricted for Amazon Redshift <code>INSERT</code> permissions.</p>\n\n            </li>\n         </ul>\n         <p>Kinesis Data Firehose assumes the IAM role that is configured as part of the\n         destination. The role should allow the Kinesis Data Firehose principal to assume the role,\n         and the role should have permissions that allow the service to deliver the data. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Kinesis Data\n            Firehose Access to an Amazon S3 Destination</a> in the <i>Amazon Kinesis Data\n            Firehose Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a Kinesis Data Firehose delivery stream.</p>\n         <p>By default, you can create up to 50 delivery streams per Amazon Web Services\n         Region.</p>\n         <p>This is an asynchronous operation that immediately returns. The initial status of the\n         delivery stream is <code>CREATING</code>. After the delivery stream is created, its status\n         is <code>ACTIVE</code> and it now accepts data. If the delivery stream creation fails, the\n         status transitions to <code>CREATING_FAILED</code>. Attempts to send data to a delivery\n         stream that is not in the <code>ACTIVE</code> state cause an exception. To check the state\n         of a delivery stream, use <a>DescribeDeliveryStream</a>.</p>\n         <p>If the status of a delivery stream is <code>CREATING_FAILED</code>, this status\n         doesn't change, and you can't invoke <code>CreateDeliveryStream</code> again on it.\n         However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete\n         it.</p>\n         <p>A Kinesis Data Firehose delivery stream can be configured to receive records directly\n         from providers using <a>PutRecord</a> or <a>PutRecordBatch</a>, or it\n         can be configured to use an existing Kinesis stream as its source. To specify a Kinesis\n         data stream as input, set the <code>DeliveryStreamType</code> parameter to\n            <code>KinesisStreamAsSource</code>, and provide the Kinesis stream Amazon Resource Name\n         (ARN) and role ARN in the <code>KinesisStreamSourceConfiguration</code>\n         parameter.</p>\n         <p>To create a delivery stream with server-side encryption (SSE) enabled, include <a>DeliveryStreamEncryptionConfigurationInput</a> in your request. This is\n         optional. You can also invoke <a>StartDeliveryStreamEncryption</a> to turn on\n         SSE for an existing delivery stream that doesn't have SSE enabled.</p>\n         <p>A delivery stream is configured with a single destination, such as Amazon Simple\n         Storage Service (Amazon S3), Amazon Redshift, Amazon OpenSearch Service, Amazon OpenSearch\n         Serverless, Splunk, and any custom HTTP endpoint or HTTP endpoints owned by or supported by\n         third-party service providers, including Datadog, Dynatrace, LogicMonitor, MongoDB, New\n         Relic, and Sumo Logic. You must specify only one of the following destination configuration\n         parameters: <code>ExtendedS3DestinationConfiguration</code>,\n            <code>S3DestinationConfiguration</code>,\n            <code>ElasticsearchDestinationConfiguration</code>,\n            <code>RedshiftDestinationConfiguration</code>, or\n            <code>SplunkDestinationConfiguration</code>.</p>\n         <p>When you specify <code>S3DestinationConfiguration</code>, you can also provide the\n         following optional values: BufferingHints, <code>EncryptionConfiguration</code>, and\n            <code>CompressionFormat</code>. By default, if no <code>BufferingHints</code> value is\n         provided, Kinesis Data Firehose buffers data up to 5 MB or for 5 minutes, whichever\n         condition is satisfied first. <code>BufferingHints</code> is a hint, so there are some\n         cases where the service cannot adhere to these conditions strictly. For example, record\n         boundaries might be such that the size is a little over or under the configured buffering\n         size. By default, no encryption is performed. We strongly recommend that you enable\n         encryption to ensure secure data storage in Amazon S3.</p>\n         <p>A few notes about Amazon Redshift as a destination:</p>\n         <ul>\n            <li>\n               <p>An Amazon Redshift destination requires an S3 bucket as intermediate location.\n               Kinesis Data Firehose first delivers data to Amazon S3 and then uses\n                  <code>COPY</code> syntax to load data into an Amazon Redshift table. This is\n               specified in the <code>RedshiftDestinationConfiguration.S3Configuration</code>\n               parameter.</p>\n            </li>\n            <li>\n               <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be\n               specified in <code>RedshiftDestinationConfiguration.S3Configuration</code> because\n               the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't\n               support these compression formats.</p>\n            </li>\n            <li>\n               <p>We strongly recommend that you use the user name and password you provide\n               exclusively with Kinesis Data Firehose, and that the permissions for the account are\n               restricted for Amazon Redshift <code>INSERT</code> permissions.</p>\n            </li>\n         </ul>\n         <p>Kinesis Data Firehose assumes the IAM role that is configured as part of the\n         destination. The role should allow the Kinesis Data Firehose principal to assume the role,\n         and the role should have permissions that allow the service to deliver the data. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Kinesis Data\n            Firehose Access to an Amazon S3 Destination</a> in the <i>Amazon Kinesis Data\n            Firehose Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.firehose#CreateDeliveryStreamInput": {
@@ -962,7 +980,7 @@
                 "Tags": {
                     "target": "com.amazonaws.firehose#TagDeliveryStreamInputTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of tags to assign to the delivery stream. A tag is a key-value pair that you can\n         define and assign to Amazon Web Services resources. Tags are metadata. For example, you can\n         add friendly names and descriptions or other types of information that can help you\n         distinguish the delivery stream. For more information about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n            Cost Allocation Tags</a> in the Amazon Web Services Billing and Cost Management User\n         Guide.</p>\n\n         <p>You can specify up to 50 tags when creating a delivery stream.</p>"
+                        "smithy.api#documentation": "<p>A set of tags to assign to the delivery stream. A tag is a key-value pair that you can\n         define and assign to Amazon Web Services resources. Tags are metadata. For example, you can\n         add friendly names and descriptions or other types of information that can help you\n         distinguish the delivery stream. For more information about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n            Cost Allocation Tags</a> in the Amazon Web Services Billing and Cost Management User\n         Guide.</p>\n         <p>You can specify up to 50 tags when creating a delivery stream.</p>"
                     }
                 },
                 "AmazonOpenSearchServerlessDestinationConfiguration": {
@@ -971,6 +989,9 @@
                         "smithy.api#documentation": "<p>The destination in the Serverless offering for Amazon OpenSearch Service. You can\n         specify only one destination.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#CreateDeliveryStreamOutput": {
@@ -982,6 +1003,9 @@
                         "smithy.api#documentation": "<p>The ARN of the delivery stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.firehose#Data": {
@@ -1045,6 +1069,23 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.firehose#DefaultDocumentIdFormat": {
+            "type": "enum",
+            "members": {
+                "FIREHOSE_DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIREHOSE_DEFAULT"
+                    }
+                },
+                "NO_DOCUMENT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_DOCUMENT_ID"
+                    }
+                }
+            }
+        },
         "com.amazonaws.firehose#DeleteDeliveryStream": {
             "type": "operation",
             "input": {
@@ -1081,11 +1122,17 @@
                         "smithy.api#documentation": "<p>Set this to true if you want to delete the delivery stream even if Kinesis Data Firehose\n         is unable to retire the grant for the CMK. Kinesis Data Firehose might be unable to retire\n         the grant due to a customer error, such as when the CMK or the grant are in an invalid\n         state. If you force deletion, you can then use the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html\">RevokeGrant</a> operation to\n         revoke the grant you gave to Kinesis Data Firehose. If a failure to retire the grant\n         happens due to an Amazon Web Services KMS issue, Kinesis Data Firehose keeps retrying the\n         delete operation.</p>\n         <p>The default value is false.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#DeleteDeliveryStreamOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.firehose#DeliveryStartTimestamp": {
             "type": "timestamp"
@@ -1493,6 +1540,9 @@
                         "smithy.api#documentation": "<p>The ID of the destination to start returning the destination information. Kinesis\n         Data Firehose supports one destination per delivery stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#DescribeDeliveryStreamInputLimit": {
@@ -1514,6 +1564,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.firehose#Deserializer": {
@@ -1615,6 +1668,21 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
+        "com.amazonaws.firehose#DocumentIdOptions": {
+            "type": "structure",
+            "members": {
+                "DefaultDocumentIdFormat": {
+                    "target": "com.amazonaws.firehose#DefaultDocumentIdFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the <code>FIREHOSE_DEFAULT</code> option is chosen, Kinesis Data Firehose generates\n         a unique document ID for each record based on a unique internal identifier. The generated\n         document ID is stable across multiple delivery attempts, which helps prevent the same\n         record from being indexed multiple times with different document IDs.</p>\n         <p>When the <code>NO_DOCUMENT_ID</code> option is chosen, Kinesis Data Firehose does not\n         include any document IDs in the requests it sends to the Amazon OpenSearch Service. This\n         causes the Amazon OpenSearch Service domain to generate document IDs. In case of multiple\n         delivery attempts, this may cause the same record to be indexed more than once with\n         different document IDs. This option enables write-heavy operations, such as the ingestion\n         of logs and observability data, to consume less resources in the Amazon OpenSearch Service\n         domain, resulting in improved performance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the method for setting up document ID. The supported methods are Kinesis Data\n         Firehose generated document ID and OpenSearch Service generated document ID.</p>\n         <p></p>"
+            }
+        },
         "com.amazonaws.firehose#DynamicPartitioningConfiguration": {
             "type": "structure",
             "members": {
@@ -1696,7 +1764,7 @@
                 "DomainARN": {
                     "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. The IAM role must have permissions\n            for <code>DescribeDomain</code>, <code>DescribeDomains</code>, and\n            <code>DescribeDomainConfig</code> after assuming the role specified in <b>RoleARN</b>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>\n\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. The IAM role must have permissions\n            for <code>DescribeDomain</code>, <code>DescribeDomains</code>, and\n            <code>DescribeDomainConfig</code> after assuming the role specified in <b>RoleARN</b>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
                     }
                 },
                 "ClusterEndpoint": {
@@ -1715,7 +1783,7 @@
                 "TypeName": {
                     "target": "com.amazonaws.firehose#ElasticsearchTypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per\n         index. If you try to specify a new type for an existing index that already has another\n         type, Kinesis Data Firehose returns an error during run time.</p>\n\n         <p>For Elasticsearch 7.x, don't specify a <code>TypeName</code>.</p>"
+                        "smithy.api#documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per\n         index. If you try to specify a new type for an existing index that already has another\n         type, Kinesis Data Firehose returns an error during run time.</p>\n         <p>For Elasticsearch 7.x, don't specify a <code>TypeName</code>.</p>"
                     }
                 },
                 "IndexRotationPeriod": {
@@ -1764,7 +1832,13 @@
                 "VpcConfiguration": {
                     "target": "com.amazonaws.firehose#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
+                        "smithy.api#documentation": "<p>The details of the VPC of the Amazon destination.</p>"
+                    }
+                },
+                "DocumentIdOptions": {
+                    "target": "com.amazonaws.firehose#DocumentIdOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the method for setting up document ID. The supported methods are Kinesis Data\n         Firehose generated document ID and OpenSearch Service generated document ID.</p>"
                     }
                 }
             },
@@ -1784,7 +1858,7 @@
                 "DomainARN": {
                     "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>\n\n         <p>Kinesis Data Firehose uses either <code>ClusterEndpoint</code> or <code>DomainARN</code>\n         to send data to Amazon ES.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>\n         <p>Kinesis Data Firehose uses either <code>ClusterEndpoint</code> or <code>DomainARN</code>\n         to send data to Amazon ES.</p>"
                     }
                 },
                 "ClusterEndpoint": {
@@ -1850,7 +1924,13 @@
                 "VpcConfigurationDescription": {
                     "target": "com.amazonaws.firehose#VpcConfigurationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
+                        "smithy.api#documentation": "<p>The details of the VPC of the Amazon OpenSearch or the Amazon OpenSearch Serverless\n         destination.</p>"
+                    }
+                },
+                "DocumentIdOptions": {
+                    "target": "com.amazonaws.firehose#DocumentIdOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the method for setting up document ID. The supported methods are Kinesis Data\n         Firehose generated document ID and OpenSearch Service generated document ID.</p>"
                     }
                 }
             },
@@ -1870,7 +1950,7 @@
                 "DomainARN": {
                     "target": "com.amazonaws.firehose#ElasticsearchDomainARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. The IAM role must have permissions\n            for <code>DescribeDomain</code>, <code>DescribeDomains</code>, and\n            <code>DescribeDomainConfig</code> after assuming the IAM role specified in\n            <code>RoleARN</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>\n\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon ES domain. The IAM role must have permissions\n            for <code>DescribeDomain</code>, <code>DescribeDomains</code>, and\n            <code>DescribeDomainConfig</code> after assuming the IAM role specified in\n            <code>RoleARN</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and\n               Amazon Web Services Service Namespaces</a>.</p>\n         <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>"
                     }
                 },
                 "ClusterEndpoint": {
@@ -1888,7 +1968,7 @@
                 "TypeName": {
                     "target": "com.amazonaws.firehose#ElasticsearchTypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per\n         index. If you try to specify a new type for an existing index that already has another\n         type, Kinesis Data Firehose returns an error during runtime.</p>\n\n         <p>If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream,\n         Kinesis Data Firehose still delivers data to Elasticsearch with the old index name and type\n         name. If you want to update your delivery stream with a new index name, provide an empty\n         string for <code>TypeName</code>. </p>"
+                        "smithy.api#documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per\n         index. If you try to specify a new type for an existing index that already has another\n         type, Kinesis Data Firehose returns an error during runtime.</p>\n         <p>If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream,\n         Kinesis Data Firehose still delivers data to Elasticsearch with the old index name and type\n         name. If you want to update your delivery stream with a new index name, provide an empty\n         string for <code>TypeName</code>. </p>"
                     }
                 },
                 "IndexRotationPeriod": {
@@ -1925,6 +2005,12 @@
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
+                    }
+                },
+                "DocumentIdOptions": {
+                    "target": "com.amazonaws.firehose#DocumentIdOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the method for setting up document ID. The supported methods are Kinesis Data\n         Firehose generated document ID and OpenSearch Service generated document ID.</p>"
                     }
                 }
             },
@@ -2478,9 +2564,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://firehose-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://firehose-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2493,15 +2758,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://firehose.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://firehose.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2513,258 +2813,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://firehose-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://firehose-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://firehose.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://firehose.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -2779,8 +2829,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2792,8 +2842,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2805,8 +2855,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2818,8 +2868,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2831,8 +2881,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2844,8 +2894,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2857,8 +2907,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2870,8 +2920,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2883,8 +2933,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2896,8 +2946,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2909,8 +2959,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2922,8 +2972,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2935,8 +2985,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2948,8 +2998,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2961,8 +3011,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2974,8 +3024,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2987,8 +3037,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3000,8 +3050,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3013,8 +3063,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3026,8 +3076,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3039,8 +3089,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3052,8 +3102,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3065,8 +3115,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3078,8 +3128,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3091,8 +3141,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3104,8 +3154,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3117,8 +3167,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3130,8 +3180,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3143,8 +3193,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3156,8 +3206,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3169,8 +3219,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3182,8 +3232,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3195,8 +3245,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3208,8 +3258,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3221,8 +3271,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3234,8 +3284,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3247,8 +3297,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3260,8 +3310,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3273,8 +3323,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3286,8 +3336,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3299,8 +3360,30 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3312,8 +3395,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3325,8 +3419,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3338,8 +3432,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3351,8 +3445,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3363,8 +3457,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3375,9 +3469,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -4032,6 +4132,9 @@
                         "smithy.api#documentation": "<p>The list of delivery streams returned by this call to\n            <code>ListDeliveryStreams</code> will start with the delivery stream whose name comes\n         alphabetically immediately after the name you specify in\n            <code>ExclusiveStartDeliveryStreamName</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#ListDeliveryStreamsInputLimit": {
@@ -4060,6 +4163,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.firehose#ListOfNonEmptyStrings": {
@@ -4119,6 +4225,9 @@
                         "smithy.api#documentation": "<p>The number of tags to return. If this number is less than the total number of tags\n         associated with the delivery stream, <code>HasMoreTags</code> is set to <code>true</code>\n         in the response. To list additional tags, set <code>ExclusiveStartTagKey</code> to the last\n         key in the response. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#ListTagsForDeliveryStreamInputLimit": {
@@ -4147,6 +4256,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.firehose#ListTagsForDeliveryStreamOutputTagList": {
@@ -4702,7 +4814,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Writes a single data record into an Amazon Kinesis Data Firehose delivery stream. To\n         write multiple data records into a delivery stream, use <a>PutRecordBatch</a>.\n         Applications using these operations are referred to as producers.</p>\n         <p>By default, each delivery stream can take in up to 2,000 transactions per second,\n         5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and\n            <a>PutRecordBatch</a>, the limits are an aggregate across these two\n         operations for each delivery stream. For more information about limits and how to request\n         an increase, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon\n            Kinesis Data Firehose Limits</a>. </p>\n         <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000\n         KiB in size, and any kind of data. For example, it can be a segment from a log file,\n         geographic location data, website clickstream data, and so on.</p>\n         <p>Kinesis Data Firehose buffers records before delivering them to the destination. To\n         disambiguate the data blobs at the destination, a common solution is to use delimiters in\n         the data, such as a newline (<code>\\n</code>) or some other character unique within the\n         data. This allows the consumer application to parse individual data items when reading the\n         data from the destination.</p>\n         <p>The <code>PutRecord</code> operation returns a <code>RecordId</code>, which is a\n         unique string assigned to each record. Producer applications can use this ID for purposes\n         such as auditability and investigation.</p>\n         <p>If the <code>PutRecord</code> operation throws a\n            <code>ServiceUnavailableException</code>, back off and retry. If the exception persists,\n         it is possible that the throughput limits have been exceeded for the delivery stream. </p>\n         <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they\n         are added to a delivery stream as it tries to send the records to the destination. If the\n         destination is unreachable for more than 24 hours, the data is no longer\n         available.</p>\n\n         <important>\n            <p>Don't concatenate two or more base64 strings to form the data fields of your records.\n            Instead, concatenate the raw data, then perform base64 encoding.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Writes a single data record into an Amazon Kinesis Data Firehose delivery stream. To\n         write multiple data records into a delivery stream, use <a>PutRecordBatch</a>.\n         Applications using these operations are referred to as producers.</p>\n         <p>By default, each delivery stream can take in up to 2,000 transactions per second,\n         5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and\n            <a>PutRecordBatch</a>, the limits are an aggregate across these two\n         operations for each delivery stream. For more information about limits and how to request\n         an increase, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon\n            Kinesis Data Firehose Limits</a>. </p>\n         <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000\n         KiB in size, and any kind of data. For example, it can be a segment from a log file,\n         geographic location data, website clickstream data, and so on.</p>\n         <p>Kinesis Data Firehose buffers records before delivering them to the destination. To\n         disambiguate the data blobs at the destination, a common solution is to use delimiters in\n         the data, such as a newline (<code>\\n</code>) or some other character unique within the\n         data. This allows the consumer application to parse individual data items when reading the\n         data from the destination.</p>\n         <p>The <code>PutRecord</code> operation returns a <code>RecordId</code>, which is a\n         unique string assigned to each record. Producer applications can use this ID for purposes\n         such as auditability and investigation.</p>\n         <p>If the <code>PutRecord</code> operation throws a\n            <code>ServiceUnavailableException</code>, back off and retry. If the exception persists,\n         it is possible that the throughput limits have been exceeded for the delivery stream. </p>\n         <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they\n         are added to a delivery stream as it tries to send the records to the destination. If the\n         destination is unreachable for more than 24 hours, the data is no longer\n         available.</p>\n         <important>\n            <p>Don't concatenate two or more base64 strings to form the data fields of your records.\n            Instead, concatenate the raw data, then perform base64 encoding.</p>\n         </important>"
             }
         },
         "com.amazonaws.firehose#PutRecordBatch": {
@@ -4728,7 +4840,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Writes multiple data records into a delivery stream in a single call, which can\n         achieve higher throughput per producer than when writing single records. To write single\n         data records into a delivery stream, use <a>PutRecord</a>. Applications using\n         these operations are referred to as producers.</p>\n         <p>For information about service quota, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon Kinesis Data Firehose\n         Quota</a>.</p>\n         <p>Each <a>PutRecordBatch</a> request supports up to 500 records. Each record\n         in the request can be as large as 1,000 KB (before base64 encoding), up to a limit of 4 MB\n         for the entire request. These limits cannot be changed.</p>\n         <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000\n         KB in size, and any kind of data. For example, it could be a segment from a log file,\n         geographic location data, website clickstream data, and so on.</p>\n         <p>Kinesis Data Firehose buffers records before delivering them to the destination. To\n         disambiguate the data blobs at the destination, a common solution is to use delimiters in\n         the data, such as a newline (<code>\\n</code>) or some other character unique within the\n         data. This allows the consumer application to parse individual data items when reading the\n         data from the destination.</p>\n         <p>The <a>PutRecordBatch</a> response includes a count of failed records,\n            <code>FailedPutCount</code>, and an array of responses, <code>RequestResponses</code>.\n         Even if the <a>PutRecordBatch</a> call succeeds, the value of\n            <code>FailedPutCount</code> may be greater than 0, indicating that there are records for\n         which the operation didn't succeed. Each entry in the <code>RequestResponses</code> array\n         provides additional information about the processed record. It directly correlates with a\n         record in the request array using the same ordering, from the top to the bottom. The\n         response array always includes the same number of records as the request array.\n            <code>RequestResponses</code> includes both successfully and unsuccessfully processed\n         records. Kinesis Data Firehose tries to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing\n         of subsequent records. </p>\n         <p>A successfully processed record includes a <code>RecordId</code> value, which is\n         unique for the record. An unsuccessfully processed record includes <code>ErrorCode</code>\n         and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error,\n         and is one of the following values: <code>ServiceUnavailableException</code> or\n            <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed\n         information about the error.</p>\n         <p>If there is an internal server error or a timeout, the write might have completed or\n         it might have failed. If <code>FailedPutCount</code> is greater than 0, retry the request,\n         resending only those records that might have failed processing. This minimizes the possible\n         duplicate records and also reduces the total bytes sent (and corresponding charges). We\n         recommend that you handle any duplicates at the destination.</p>\n         <p>If <a>PutRecordBatch</a> throws <code>ServiceUnavailableException</code>,\n         back off and retry. If the exception persists, it is possible that the throughput limits\n         have been exceeded for the delivery stream.</p>\n\n         <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they\n         are added to a delivery stream as it attempts to send the records to the destination. If\n         the destination is unreachable for more than 24 hours, the data is no longer\n         available.</p>\n         <important>\n            <p>Don't concatenate two or more base64 strings to form the data fields of your records.\n            Instead, concatenate the raw data, then perform base64 encoding.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Writes multiple data records into a delivery stream in a single call, which can\n         achieve higher throughput per producer than when writing single records. To write single\n         data records into a delivery stream, use <a>PutRecord</a>. Applications using\n         these operations are referred to as producers.</p>\n         <p>For information about service quota, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon Kinesis Data Firehose\n         Quota</a>.</p>\n         <p>Each <a>PutRecordBatch</a> request supports up to 500 records. Each record\n         in the request can be as large as 1,000 KB (before base64 encoding), up to a limit of 4 MB\n         for the entire request. These limits cannot be changed.</p>\n         <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000\n         KB in size, and any kind of data. For example, it could be a segment from a log file,\n         geographic location data, website clickstream data, and so on.</p>\n         <p>Kinesis Data Firehose buffers records before delivering them to the destination. To\n         disambiguate the data blobs at the destination, a common solution is to use delimiters in\n         the data, such as a newline (<code>\\n</code>) or some other character unique within the\n         data. This allows the consumer application to parse individual data items when reading the\n         data from the destination.</p>\n         <p>The <a>PutRecordBatch</a> response includes a count of failed records,\n            <code>FailedPutCount</code>, and an array of responses, <code>RequestResponses</code>.\n         Even if the <a>PutRecordBatch</a> call succeeds, the value of\n            <code>FailedPutCount</code> may be greater than 0, indicating that there are records for\n         which the operation didn't succeed. Each entry in the <code>RequestResponses</code> array\n         provides additional information about the processed record. It directly correlates with a\n         record in the request array using the same ordering, from the top to the bottom. The\n         response array always includes the same number of records as the request array.\n            <code>RequestResponses</code> includes both successfully and unsuccessfully processed\n         records. Kinesis Data Firehose tries to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing\n         of subsequent records. </p>\n         <p>A successfully processed record includes a <code>RecordId</code> value, which is\n         unique for the record. An unsuccessfully processed record includes <code>ErrorCode</code>\n         and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error,\n         and is one of the following values: <code>ServiceUnavailableException</code> or\n            <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed\n         information about the error.</p>\n         <p>If there is an internal server error or a timeout, the write might have completed or\n         it might have failed. If <code>FailedPutCount</code> is greater than 0, retry the request,\n         resending only those records that might have failed processing. This minimizes the possible\n         duplicate records and also reduces the total bytes sent (and corresponding charges). We\n         recommend that you handle any duplicates at the destination.</p>\n         <p>If <a>PutRecordBatch</a> throws <code>ServiceUnavailableException</code>,\n         back off and retry. If the exception persists, it is possible that the throughput limits\n         have been exceeded for the delivery stream.</p>\n         <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they\n         are added to a delivery stream as it attempts to send the records to the destination. If\n         the destination is unreachable for more than 24 hours, the data is no longer\n         available.</p>\n         <important>\n            <p>Don't concatenate two or more base64 strings to form the data fields of your records.\n            Instead, concatenate the raw data, then perform base64 encoding.</p>\n         </important>"
             }
         },
         "com.amazonaws.firehose#PutRecordBatchInput": {
@@ -4748,6 +4860,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#PutRecordBatchOutput": {
@@ -4773,6 +4888,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.firehose#PutRecordBatchRequestEntryList": {
@@ -4842,6 +4960,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#PutRecordOutput": {
@@ -4860,6 +4981,9 @@
                         "smithy.api#documentation": "<p>Indicates whether server-side encryption (SSE) was enabled during this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.firehose#PutResponseRecordId": {
@@ -5797,11 +5921,17 @@
                         "smithy.api#documentation": "<p>Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed for\n         Server-Side Encryption (SSE).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#StartDeliveryStreamEncryptionOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.firehose#StopDeliveryStreamEncryption": {
             "type": "operation",
@@ -5839,11 +5969,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#StopDeliveryStreamEncryptionOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.firehose#SubnetIdList": {
             "type": "list",
@@ -5921,6 +6057,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#TagDeliveryStreamInputTagList": {
@@ -5937,7 +6076,10 @@
         },
         "com.amazonaws.firehose#TagDeliveryStreamOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.firehose#TagKey": {
             "type": "string",
@@ -6017,11 +6159,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#UntagDeliveryStreamOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.firehose#UpdateDestination": {
             "type": "operation",
@@ -6046,7 +6194,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified destination of the specified delivery stream.</p>\n\n         <p>Use this operation to change the destination type (for example, to replace the Amazon\n         S3 destination with Amazon Redshift) or change the parameters associated with a destination\n         (for example, to change the bucket name of the Amazon S3 destination). The update might not\n         occur immediately. The target delivery stream remains active while the configurations are\n         updated, so data writes to the delivery stream can continue during this process. The\n         updated configurations are usually effective within a few minutes.</p>\n         <p>Switching between Amazon ES and other services is not supported. For an Amazon ES\n         destination, you can only update to another Amazon ES destination.</p>\n         <p>If the destination type is the same, Kinesis Data Firehose merges the configuration\n         parameters specified with the destination configuration that already exists on the delivery\n         stream. If any of the parameters are not specified in the call, the existing values are\n         retained. For example, in the Amazon S3 destination, if <a>EncryptionConfiguration</a> is not specified, then the existing\n            <code>EncryptionConfiguration</code> is maintained on the destination.</p>\n         <p>If the destination type is not the same, for example, changing the destination from\n         Amazon S3 to Amazon Redshift, Kinesis Data Firehose does not merge any parameters. In this\n         case, all parameters must be specified.</p>\n\n         <p>Kinesis Data Firehose uses <code>CurrentDeliveryStreamVersionId</code> to avoid race\n         conditions and conflicting merges. This is a required field, and the service updates the\n         configuration only if the existing configuration has a version ID that matches. After the\n         update is applied successfully, the version ID is updated, and can be retrieved using <a>DescribeDeliveryStream</a>. Use the new version ID to set\n            <code>CurrentDeliveryStreamVersionId</code> in the next call.</p>"
+                "smithy.api#documentation": "<p>Updates the specified destination of the specified delivery stream.</p>\n         <p>Use this operation to change the destination type (for example, to replace the Amazon\n         S3 destination with Amazon Redshift) or change the parameters associated with a destination\n         (for example, to change the bucket name of the Amazon S3 destination). The update might not\n         occur immediately. The target delivery stream remains active while the configurations are\n         updated, so data writes to the delivery stream can continue during this process. The\n         updated configurations are usually effective within a few minutes.</p>\n         <p>Switching between Amazon OpenSearch Service and other services is not supported. For\n         an Amazon OpenSearch Service destination, you can only update to another Amazon OpenSearch\n         Service destination.</p>\n         <p>If the destination type is the same, Kinesis Data Firehose merges the configuration\n         parameters specified with the destination configuration that already exists on the delivery\n         stream. If any of the parameters are not specified in the call, the existing values are\n         retained. For example, in the Amazon S3 destination, if <a>EncryptionConfiguration</a> is not specified, then the existing\n            <code>EncryptionConfiguration</code> is maintained on the destination.</p>\n         <p>If the destination type is not the same, for example, changing the destination from\n         Amazon S3 to Amazon Redshift, Kinesis Data Firehose does not merge any parameters. In this\n         case, all parameters must be specified.</p>\n         <p>Kinesis Data Firehose uses <code>CurrentDeliveryStreamVersionId</code> to avoid race\n         conditions and conflicting merges. This is a required field, and the service updates the\n         configuration only if the existing configuration has a version ID that matches. After the\n         update is applied successfully, the version ID is updated, and can be retrieved using <a>DescribeDeliveryStream</a>. Use the new version ID to set\n            <code>CurrentDeliveryStreamVersionId</code> in the next call.</p>"
             }
         },
         "com.amazonaws.firehose#UpdateDestinationInput": {
@@ -6122,11 +6270,17 @@
                         "smithy.api#documentation": "<p>Describes an update for a destination in the Serverless offering for Amazon OpenSearch\n         Service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.firehose#UpdateDestinationOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.firehose#Username": {
             "type": "string",
@@ -6165,7 +6319,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
+                "smithy.api#documentation": "<p>The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch Serverless\n         destination.</p>"
             }
         },
         "com.amazonaws.firehose#VpcConfigurationDescription": {
