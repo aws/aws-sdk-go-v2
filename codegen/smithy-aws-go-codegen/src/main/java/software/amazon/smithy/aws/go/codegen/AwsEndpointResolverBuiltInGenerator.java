@@ -30,6 +30,7 @@ import software.amazon.smithy.utils.StringUtils;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.stream.StreamSupport;
 
 public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
 
@@ -60,6 +61,9 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
             return;
         }
         Parameters parameters = ruleset.get().getParameters();
+        var paramList = StreamSupport
+            .stream(parameters.spliterator(), false);
+            .collect(Collectors.toList());
 
         var content = new GoWriter.ChainWritable()
                 .add(generatePseudoRegionUtility())
@@ -68,7 +72,7 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
                 .add(generateBuiltInResolverMethod(parameters))
                 .compose();
 
-        for (Parameter parameter : parameters.toList()) {
+        for (Parameter parameter : paramList) {
             if (parameter.getBuiltIn().isPresent()) {
                 writerFactory.accept("endpoints.go", settings.getModuleName(), writer -> {
                     writer.write("$W", content);
@@ -144,8 +148,10 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
     }
 
     private GoWriter.Writable generateBuiltInResolverMembers(Parameters parameters) {
+        var paramStream = StreamSupport
+            .stream(parameters.spliterator(), false);
         return (GoWriter w) -> {
-            parameters.toList().stream().filter(
+            paramStream.filter(
                     p -> p.getBuiltIn().isPresent())
                     .forEach(parameter -> {
                         String template = """
@@ -196,8 +202,9 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
                                     """),
                     AwsEndpointResolverBuiltInGenerator.BUILTIN_RESOLVER_IMPLEMENTATION_TYPE,
                     EndpointResolutionGenerator.PARAMETERS_TYPE_NAME);
-
-            parameters.toList().stream().filter(
+            var paramStream = StreamSupport
+                    .stream(parameters.spliterator(), false);
+            paramStream.filter(
                     p -> p.getBuiltIn().isPresent())
                     .forEach(parameter -> {
                         if (parameter.getBuiltIn().get().equals("SDK::Endpoint")) {
@@ -242,7 +249,7 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
                             params.$L = b.Endpoint
 
                             """,
-                    parameter.getName().asString());
+                    parameter.getName().getName().getValue());
         };
     }
 
@@ -260,14 +267,14 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
 
 
                             """,
-                    parameter.getName().asString(),
+                    parameter.getName().getName().getValue(),
                     SymbolUtils.createValueSymbolBuilder("String", AwsGoDependency.AWS_CORE).build());
         };
     }
 
     private GoWriter.Writable generateAwsFipsBuiltInResolver(Parameter parameter) {
         return (GoWriter writer) -> {
-            String paramName = parameter.getName().asString();
+            String paramName = parameter.getName().getName().getValue();
             writer.write(
                     """
                                 if b.UseFIPS == $T {
@@ -287,7 +294,7 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
 
     private GoWriter.Writable generateAwsDualStackBuiltInResolver(Parameter parameter) {
         return (GoWriter writer) -> {
-            String paramName = parameter.getName().asString();
+            String paramName = parameter.getName().getName().getValue();
             writer.write(
                     """
                                 if b.UseDualStack == $T {
@@ -340,8 +347,10 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
         }
 
         private GoWriter.Writable generateBuiltInInitializeFieldMembers(Parameters parameters) {
+            var paramStream = StreamSupport
+                .stream(parameters.spliterator(), false);
             return (GoWriter writer) -> {
-                parameters.toList().stream().filter(
+                paramStream.filter(
                         p -> p.getBuiltIn().isPresent())
                         .forEach(parameter -> {
                             if (parameter.getBuiltIn().get().equals("SDK::Endpoint")) {
@@ -389,7 +398,7 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
     }
 
     public static String getExportedParameterName(Parameter parameter) {
-        return StringUtils.capitalize(parameter.getName().asString());
+        return StringUtils.capitalize(parameter.getName().getName().getValue());
     }
 
     public static Symbol parameterAsSymbol(Parameter parameter) {
