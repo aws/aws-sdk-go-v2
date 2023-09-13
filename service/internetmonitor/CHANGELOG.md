@@ -1,3 +1,7 @@
+# v1.6.0 (2023-09-13)
+
+* **Feature**: This release updates the Amazon CloudWatch Internet Monitor API domain name.
+
 # v1.5.5 (2023-09-05)
 
 * No change notes available for this release.

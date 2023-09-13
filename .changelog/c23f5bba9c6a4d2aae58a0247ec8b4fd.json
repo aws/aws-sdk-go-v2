@@ -1,8 +1,0 @@
-{
-    "id": "c23f5bba-9c6a-4d2a-ae58-a0247ec8b4fd",
-    "type": "feature",
-    "description": "Add StartTime field in GetTraceSummaries API response for each TraceSummary.",
-    "modules": [
-        "service/xray"
-    ]
-}

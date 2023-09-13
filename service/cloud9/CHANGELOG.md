@@ -1,3 +1,7 @@
+# v1.18.8 (2023-09-13)
+
+* **Documentation**: Update to include information on Ubuntu 18 deprecation.
+
 # v1.18.7 (2023-09-05)
 
 * **Documentation**: Added support for Ubuntu 22.04 that was not picked up in a previous Trebuchet request. Doc-only update.

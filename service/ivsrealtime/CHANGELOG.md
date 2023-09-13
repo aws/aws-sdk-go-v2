@@ -1,3 +1,7 @@
+# v1.4.4 (2023-09-13)
+
+* **Documentation**: Doc only update that changes description for ParticipantToken.
+
 # v1.4.3 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

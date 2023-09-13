@@ -1,3 +1,23 @@
+# Release (2023-09-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.18.8](service/cloud9/CHANGELOG.md#v1188-2023-09-13)
+  * **Documentation**: Update to include information on Ubuntu 18 deprecation.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.16.0](service/drs/CHANGELOG.md#v1160-2023-09-13)
+  * **Feature**: Updated existing APIs and added new ones to support using AWS Elastic Disaster Recovery post-launch actions. Added support for new regions.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.18.0](service/firehose/CHANGELOG.md#v1180-2023-09-13)
+  * **Feature**: DocumentIdOptions has been added for the Amazon OpenSearch destination.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.27.0](service/guardduty/CHANGELOG.md#v1270-2023-09-13)
+  * **Feature**: Add `managementType` field to ListCoverage API response.
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.6.0](service/internetmonitor/CHANGELOG.md#v160-2023-09-13)
+  * **Feature**: This release updates the Amazon CloudWatch Internet Monitor API domain name.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.4.4](service/ivsrealtime/CHANGELOG.md#v144-2023-09-13)
+  * **Documentation**: Doc only update that changes description for ParticipantToken.
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.5.1](service/simspaceweaver/CHANGELOG.md#v151-2023-09-13)
+  * **Documentation**: Edited the introductory text for the API reference.
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.18.0](service/xray/CHANGELOG.md#v1180-2023-09-13)
+  * **Feature**: Add StartTime field in GetTraceSummaries API response for each TraceSummary.
+
 # Release (2023-09-12)
 
 ## Module Highlights

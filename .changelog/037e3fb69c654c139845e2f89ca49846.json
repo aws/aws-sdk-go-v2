@@ -1,8 +1,0 @@
-{
-    "id": "037e3fb6-9c65-4c13-9845-e2f89ca49846",
-    "type": "documentation",
-    "description": "Update to include information on Ubuntu 18 deprecation.",
-    "modules": [
-        "service/cloud9"
-    ]
-}

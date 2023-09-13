@@ -1,8 +1,0 @@
-{
-    "id": "ef4586a4-d401-4c9d-8fcb-6fc97708cc22",
-    "type": "feature",
-    "description": "This release updates the Amazon CloudWatch Internet Monitor API domain name.",
-    "modules": [
-        "service/internetmonitor"
-    ]
-}

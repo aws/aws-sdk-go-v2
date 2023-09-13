@@ -1,8 +1,0 @@
-{
-    "id": "2c67d0a8-6a39-4bcf-b3fd-4fd9de27ca6c",
-    "type": "feature",
-    "description": "Updated existing APIs and added new ones to support using AWS Elastic Disaster Recovery post-launch actions. Added support for new regions.",
-    "modules": [
-        "service/drs"
-    ]
-}

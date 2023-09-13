@@ -1,3 +1,7 @@
+# v1.5.1 (2023-09-13)
+
+* **Documentation**: Edited the introductory text for the API reference.
+
 # v1.5.0 (2023-09-07)
 
 * **Feature**: BucketName and ObjectKey are now required for the S3Location data type. BucketName is now required for the S3Destination data type.
