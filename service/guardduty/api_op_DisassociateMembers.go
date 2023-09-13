@@ -27,7 +27,7 @@ import (
 // invoke the DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
 // API. With autoEnableOrganizationMembers configuration for your organization set
 // to ALL , you'll receive an error if you attempt to disassociate a member account
-// before removing them from your Amazon Web Services organization.
+// before removing them from your organization.
 func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMembersInput, optFns ...func(*Options)) (*DisassociateMembersOutput, error) {
 	if params == nil {
 		params = &DisassociateMembersInput{}

@@ -110,6 +110,26 @@ func (m *validateOpDeleteJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteLaunchAction struct {
+}
+
+func (*validateOpDeleteLaunchAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLaunchAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLaunchActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLaunchActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteLaunchConfigurationTemplate struct {
 }
 
@@ -390,6 +410,26 @@ func (m *validateOpListExtensibleSourceServers) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListLaunchActions struct {
+}
+
+func (*validateOpListLaunchActions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLaunchActions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLaunchActionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLaunchActionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -405,6 +445,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutLaunchAction struct {
+}
+
+func (*validateOpPutLaunchAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutLaunchAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutLaunchActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutLaunchActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,6 +850,10 @@ func addOpDeleteJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteJob{}, middleware.After)
 }
 
+func addOpDeleteLaunchActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLaunchAction{}, middleware.After)
+}
+
 func addOpDeleteLaunchConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLaunchConfigurationTemplate{}, middleware.After)
 }
@@ -846,8 +910,16 @@ func addOpListExtensibleSourceServersValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpListExtensibleSourceServers{}, middleware.After)
 }
 
+func addOpListLaunchActionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLaunchActions{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutLaunchActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutLaunchAction{}, middleware.After)
 }
 
 func addOpRetryDataReplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -1136,6 +1208,24 @@ func validateOpDeleteJobInput(v *DeleteJobInput) error {
 	}
 }
 
+func validateOpDeleteLaunchActionInput(v *DeleteLaunchActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLaunchActionInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.ActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteLaunchConfigurationTemplateInput(v *DeleteLaunchConfigurationTemplateInput) error {
 	if v == nil {
 		return nil
@@ -1346,6 +1436,21 @@ func validateOpListExtensibleSourceServersInput(v *ListExtensibleSourceServersIn
 	}
 }
 
+func validateOpListLaunchActionsInput(v *ListLaunchActionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLaunchActionsInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1353,6 +1458,42 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutLaunchActionInput(v *PutLaunchActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutLaunchActionInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.ActionCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionCode"))
+	}
+	if v.ActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionId"))
+	}
+	if v.Optional == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Optional"))
+	}
+	if v.Active == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Active"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ActionVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionVersion"))
+	}
+	if len(v.Category) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Category"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

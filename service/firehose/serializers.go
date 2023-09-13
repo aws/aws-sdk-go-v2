@@ -870,6 +870,13 @@ func awsAwsjson11_serializeDocumentAmazonopensearchserviceDestinationConfigurati
 		ok.String(*v.ClusterEndpoint)
 	}
 
+	if v.DocumentIdOptions != nil {
+		ok := object.Key("DocumentIdOptions")
+		if err := awsAwsjson11_serializeDocumentDocumentIdOptions(v.DocumentIdOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DomainARN != nil {
 		ok := object.Key("DomainARN")
 		ok.String(*v.DomainARN)
@@ -952,6 +959,13 @@ func awsAwsjson11_serializeDocumentAmazonopensearchserviceDestinationUpdate(v *t
 	if v.ClusterEndpoint != nil {
 		ok := object.Key("ClusterEndpoint")
 		ok.String(*v.ClusterEndpoint)
+	}
+
+	if v.DocumentIdOptions != nil {
+		ok := object.Key("DocumentIdOptions")
+		if err := awsAwsjson11_serializeDocumentDocumentIdOptions(v.DocumentIdOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.DomainARN != nil {
@@ -1158,6 +1172,18 @@ func awsAwsjson11_serializeDocumentDeserializer(v *types.Deserializer, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDocumentIdOptions(v *types.DocumentIdOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DefaultDocumentIdFormat) > 0 {
+		ok := object.Key("DefaultDocumentIdFormat")
+		ok.String(string(v.DefaultDocumentIdFormat))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDynamicPartitioningConfiguration(v *types.DynamicPartitioningConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1215,6 +1241,13 @@ func awsAwsjson11_serializeDocumentElasticsearchDestinationConfiguration(v *type
 	if v.ClusterEndpoint != nil {
 		ok := object.Key("ClusterEndpoint")
 		ok.String(*v.ClusterEndpoint)
+	}
+
+	if v.DocumentIdOptions != nil {
+		ok := object.Key("DocumentIdOptions")
+		if err := awsAwsjson11_serializeDocumentDocumentIdOptions(v.DocumentIdOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.DomainARN != nil {
@@ -1299,6 +1332,13 @@ func awsAwsjson11_serializeDocumentElasticsearchDestinationUpdate(v *types.Elast
 	if v.ClusterEndpoint != nil {
 		ok := object.Key("ClusterEndpoint")
 		ok.String(*v.ClusterEndpoint)
+	}
+
+	if v.DocumentIdOptions != nil {
+		ok := object.Key("DocumentIdOptions")
+		if err := awsAwsjson11_serializeDocumentDocumentIdOptions(v.DocumentIdOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.DomainARN != nil {

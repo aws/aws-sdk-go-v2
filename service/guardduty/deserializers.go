@@ -10862,6 +10862,15 @@ func awsRestjson1_deserializeDocumentCoverageEksClusterDetails(v **types.Coverag
 				sv.CoveredNodes = i64
 			}
 
+		case "managementType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagementType to be of type string, got %T instead", value)
+				}
+				sv.ManagementType = types.ManagementType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

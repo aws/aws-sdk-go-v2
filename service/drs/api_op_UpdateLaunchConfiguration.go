@@ -56,6 +56,9 @@ type UpdateLaunchConfigurationInput struct {
 	// The name of the launch configuration.
 	Name *string
 
+	// Whether we want to enable post-launch actions for the Source Server.
+	PostLaunchEnabled *bool
+
 	// Whether Elastic Disaster Recovery should try to automatically choose the
 	// instance type that best matches the OS, CPU, and RAM of your Source Server.
 	TargetInstanceTypeRightSizingMethod types.TargetInstanceTypeRightSizingMethod
@@ -84,6 +87,9 @@ type UpdateLaunchConfigurationOutput struct {
 
 	// The name of the launch configuration.
 	Name *string
+
+	// Whether we want to activate post-launch actions for the Source Server.
+	PostLaunchEnabled *bool
 
 	// The ID of the Source Server for this launch configuration.
 	SourceServerID *string

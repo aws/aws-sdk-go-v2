@@ -321,9 +321,10 @@ func addGetMonitorResolveEndpointMiddleware(stack *middleware.Stack, options Opt
 	return stack.Serialize.Insert(&opGetMonitorResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
-			Region:   options.Region,
-			UseFIPS:  options.EndpointOptions.UseFIPSEndpoint,
-			Endpoint: options.BaseEndpoint,
+			Region:       options.Region,
+			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
+			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
+			Endpoint:     options.BaseEndpoint,
 		},
 	}, "ResolveEndpoint", middleware.After)
 }

@@ -359,6 +359,11 @@ func validateAmazonopensearchserviceDestinationConfiguration(v *types.Amazonopen
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DocumentIdOptions != nil {
+		if err := validateDocumentIdOptions(v.DocumentIdOptions); err != nil {
+			invalidParams.AddNested("DocumentIdOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -379,6 +384,11 @@ func validateAmazonopensearchserviceDestinationUpdate(v *types.Amazonopensearchs
 	if v.ProcessingConfiguration != nil {
 		if err := validateProcessingConfiguration(v.ProcessingConfiguration); err != nil {
 			invalidParams.AddNested("ProcessingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DocumentIdOptions != nil {
+		if err := validateDocumentIdOptions(v.DocumentIdOptions); err != nil {
+			invalidParams.AddNested("DocumentIdOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -418,6 +428,21 @@ func validateDeliveryStreamEncryptionConfigurationInput(v *types.DeliveryStreamE
 	}
 }
 
+func validateDocumentIdOptions(v *types.DocumentIdOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentIdOptions"}
+	if len(v.DefaultDocumentIdFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultDocumentIdFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateElasticsearchDestinationConfiguration(v *types.ElasticsearchDestinationConfiguration) error {
 	if v == nil {
 		return nil
@@ -446,6 +471,11 @@ func validateElasticsearchDestinationConfiguration(v *types.ElasticsearchDestina
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DocumentIdOptions != nil {
+		if err := validateDocumentIdOptions(v.DocumentIdOptions); err != nil {
+			invalidParams.AddNested("DocumentIdOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -466,6 +496,11 @@ func validateElasticsearchDestinationUpdate(v *types.ElasticsearchDestinationUpd
 	if v.ProcessingConfiguration != nil {
 		if err := validateProcessingConfiguration(v.ProcessingConfiguration); err != nil {
 			invalidParams.AddNested("ProcessingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DocumentIdOptions != nil {
+		if err := validateDocumentIdOptions(v.DocumentIdOptions); err != nil {
+			invalidParams.AddNested("DocumentIdOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

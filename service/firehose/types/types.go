@@ -74,7 +74,8 @@ type AmazonOpenSearchServerlessDestinationConfiguration struct {
 	// to the prefix.
 	S3BackupMode AmazonOpenSearchServerlessS3BackupMode
 
-	// The details of the VPC of the Amazon ES destination.
+	// The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch Serverless
+	// destination.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -103,7 +104,7 @@ type AmazonOpenSearchServerlessDestinationDescription struct {
 	// The Serverless offering for Amazon OpenSearch Service retry options.
 	RetryOptions *AmazonOpenSearchServerlessRetryOptions
 
-	// The Amazon Resource Name (ARN) of the AWS credentials.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials.
 	RoleARN *string
 
 	// The Amazon S3 backup mode.
@@ -218,6 +219,11 @@ type AmazonopensearchserviceDestinationConfiguration struct {
 	// ClusterEndpoint or the DomainARN field.
 	ClusterEndpoint *string
 
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions
+
 	// The ARN of the Amazon OpenSearch Service domain. The IAM role must have
 	// permissions for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and
 	// DescribeElasticsearchDomainConfig after assuming the role specified in RoleARN.
@@ -249,7 +255,8 @@ type AmazonopensearchserviceDestinationConfiguration struct {
 	// time.
 	TypeName *string
 
-	// The details of the VPC of the Amazon ES destination.
+	// The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch Serverless
+	// destination.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -268,6 +275,11 @@ type AmazonopensearchserviceDestinationDescription struct {
 	// uses either this ClusterEndpoint or the DomainARN field to send data to Amazon
 	// OpenSearch Service.
 	ClusterEndpoint *string
+
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions
 
 	// The ARN of the Amazon OpenSearch Service domain.
 	DomainARN *string
@@ -317,6 +329,11 @@ type AmazonopensearchserviceDestinationUpdate struct {
 	// The endpoint to use when communicating with the cluster. Specify either this
 	// ClusterEndpoint or the DomainARN field.
 	ClusterEndpoint *string
+
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions
 
 	// The ARN of the Amazon OpenSearch Service domain. The IAM role must have
 	// permissions for DescribeDomain, DescribeDomains, and DescribeDomainConfig after
@@ -667,6 +684,30 @@ type DestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Indicates the method for setting up document ID. The supported methods are
+// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+// document ID.
+type DocumentIdOptions struct {
+
+	// When the FIREHOSE_DEFAULT option is chosen, Kinesis Data Firehose generates a
+	// unique document ID for each record based on a unique internal identifier. The
+	// generated document ID is stable across multiple delivery attempts, which helps
+	// prevent the same record from being indexed multiple times with different
+	// document IDs. When the NO_DOCUMENT_ID option is chosen, Kinesis Data Firehose
+	// does not include any document IDs in the requests it sends to the Amazon
+	// OpenSearch Service. This causes the Amazon OpenSearch Service domain to generate
+	// document IDs. In case of multiple delivery attempts, this may cause the same
+	// record to be indexed more than once with different document IDs. This option
+	// enables write-heavy operations, such as the ingestion of logs and observability
+	// data, to consume less resources in the Amazon OpenSearch Service domain,
+	// resulting in improved performance.
+	//
+	// This member is required.
+	DefaultDocumentIdFormat DefaultDocumentIdFormat
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of the dynamic partitioning mechanism that creates smaller
 // data sets from the streaming data by partitioning it based on partition keys.
 // Currently, dynamic partitioning is only supported for Amazon S3 destinations.
@@ -735,6 +776,11 @@ type ElasticsearchDestinationConfiguration struct {
 	// ClusterEndpoint or the DomainARN field.
 	ClusterEndpoint *string
 
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions
+
 	// The ARN of the Amazon ES domain. The IAM role must have permissions for
 	// DescribeDomain , DescribeDomains , and DescribeDomainConfig after assuming the
 	// role specified in RoleARN. For more information, see Amazon Resource Names
@@ -773,7 +819,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// Elasticsearch 7.x, don't specify a TypeName .
 	TypeName *string
 
-	// The details of the VPC of the Amazon ES destination.
+	// The details of the VPC of the Amazon destination.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -792,6 +838,11 @@ type ElasticsearchDestinationDescription struct {
 	// uses either this ClusterEndpoint or the DomainARN field to send data to Amazon
 	// ES.
 	ClusterEndpoint *string
+
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions
 
 	// The ARN of the Amazon ES domain. For more information, see Amazon Resource
 	// Names (ARNs) and Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
@@ -828,7 +879,8 @@ type ElasticsearchDestinationDescription struct {
 	// TypeName .
 	TypeName *string
 
-	// The details of the VPC of the Amazon ES destination.
+	// The details of the VPC of the Amazon OpenSearch or the Amazon OpenSearch
+	// Serverless destination.
 	VpcConfigurationDescription *VpcConfigurationDescription
 
 	noSmithyDocumentSerde
@@ -847,6 +899,11 @@ type ElasticsearchDestinationUpdate struct {
 	// The endpoint to use when communicating with the cluster. Specify either this
 	// ClusterEndpoint or the DomainARN field.
 	ClusterEndpoint *string
+
+	// Indicates the method for setting up document ID. The supported methods are
+	// Kinesis Data Firehose generated document ID and OpenSearch Service generated
+	// document ID.
+	DocumentIdOptions *DocumentIdOptions
 
 	// The ARN of the Amazon ES domain. The IAM role must have permissions for
 	// DescribeDomain , DescribeDomains , and DescribeDomainConfig after assuming the
@@ -2254,7 +2311,8 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// The details of the VPC of the Amazon ES destination.
+// The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch Serverless
+// destination.
 type VpcConfiguration struct {
 
 	// The ARN of the IAM role that you want the delivery stream to use to create

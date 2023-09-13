@@ -16,7 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the accounts configured as GuardDuty delegated administrators.
+// Lists the accounts configured as GuardDuty delegated administrators. Only the
+// organization's management account can run this API operation.
 func (c *Client) ListOrganizationAdminAccounts(ctx context.Context, params *ListOrganizationAdminAccountsInput, optFns ...func(*Options)) (*ListOrganizationAdminAccountsOutput, error) {
 	if params == nil {
 		params = &ListOrganizationAdminAccountsInput{}

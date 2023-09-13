@@ -365,9 +365,10 @@ func addListHealthEventsResolveEndpointMiddleware(stack *middleware.Stack, optio
 	return stack.Serialize.Insert(&opListHealthEventsResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
-			Region:   options.Region,
-			UseFIPS:  options.EndpointOptions.UseFIPSEndpoint,
-			Endpoint: options.BaseEndpoint,
+			Region:       options.Region,
+			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
+			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
+			Endpoint:     options.BaseEndpoint,
 		},
 	}, "ResolveEndpoint", middleware.After)
 }

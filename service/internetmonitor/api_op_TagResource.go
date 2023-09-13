@@ -257,9 +257,10 @@ func addTagResourceResolveEndpointMiddleware(stack *middleware.Stack, options Op
 	return stack.Serialize.Insert(&opTagResourceResolveEndpointMiddleware{
 		EndpointResolver: options.EndpointResolverV2,
 		BuiltInResolver: &builtInResolver{
-			Region:   options.Region,
-			UseFIPS:  options.EndpointOptions.UseFIPSEndpoint,
-			Endpoint: options.BaseEndpoint,
+			Region:       options.Region,
+			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
+			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
+			Endpoint:     options.BaseEndpoint,
 		},
 	}, "ResolveEndpoint", middleware.After)
 }

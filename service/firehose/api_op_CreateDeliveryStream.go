@@ -37,9 +37,13 @@ import (
 // DeliveryStreamEncryptionConfigurationInput in your request. This is optional.
 // You can also invoke StartDeliveryStreamEncryption to turn on SSE for an
 // existing delivery stream that doesn't have SSE enabled. A delivery stream is
-// configured with a single destination: Amazon S3, Amazon ES, Amazon Redshift, or
-// Splunk. You must specify only one of the following destination configuration
-// parameters: ExtendedS3DestinationConfiguration , S3DestinationConfiguration ,
+// configured with a single destination, such as Amazon Simple Storage Service
+// (Amazon S3), Amazon Redshift, Amazon OpenSearch Service, Amazon OpenSearch
+// Serverless, Splunk, and any custom HTTP endpoint or HTTP endpoints owned by or
+// supported by third-party service providers, including Datadog, Dynatrace,
+// LogicMonitor, MongoDB, New Relic, and Sumo Logic. You must specify only one of
+// the following destination configuration parameters:
+// ExtendedS3DestinationConfiguration , S3DestinationConfiguration ,
 // ElasticsearchDestinationConfiguration , RedshiftDestinationConfiguration , or
 // SplunkDestinationConfiguration . When you specify S3DestinationConfiguration ,
 // you can also provide the following optional values: BufferingHints,

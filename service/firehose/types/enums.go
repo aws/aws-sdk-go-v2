@@ -107,6 +107,24 @@ func (ContentEncoding) Values() []ContentEncoding {
 	}
 }
 
+type DefaultDocumentIdFormat string
+
+// Enum values for DefaultDocumentIdFormat
+const (
+	DefaultDocumentIdFormatFirehoseDefault DefaultDocumentIdFormat = "FIREHOSE_DEFAULT"
+	DefaultDocumentIdFormatNoDocumentId    DefaultDocumentIdFormat = "NO_DOCUMENT_ID"
+)
+
+// Values returns all known values for DefaultDocumentIdFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultDocumentIdFormat) Values() []DefaultDocumentIdFormat {
+	return []DefaultDocumentIdFormat{
+		"FIREHOSE_DEFAULT",
+		"NO_DOCUMENT_ID",
+	}
+}
+
 type DeliveryStreamEncryptionStatus string
 
 // Enum values for DeliveryStreamEncryptionStatus

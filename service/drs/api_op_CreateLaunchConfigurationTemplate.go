@@ -49,6 +49,9 @@ type CreateLaunchConfigurationTemplateInput struct {
 	// Licensing.
 	Licensing *types.Licensing
 
+	// Whether we want to activate post-launch actions.
+	PostLaunchEnabled *bool
+
 	// Request to associate tags during creation of a Launch Configuration Template.
 	Tags map[string]string
 

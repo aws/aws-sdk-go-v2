@@ -336,6 +336,97 @@ type JobLogEventData struct {
 	noSmithyDocumentSerde
 }
 
+// Launch action.
+type LaunchAction struct {
+
+	// Launch action code.
+	ActionCode *string
+
+	// Launch action Id.
+	ActionId *string
+
+	// Launch action version.
+	ActionVersion *string
+
+	// Whether the launch action is active.
+	Active *bool
+
+	// Launch action category.
+	Category LaunchActionCategory
+
+	// Launch action description.
+	Description *string
+
+	// Launch action name.
+	Name *string
+
+	// Whether the launch will not be marked as failed if this action fails.
+	Optional *bool
+
+	// Launch action order.
+	Order int32
+
+	// Launch action parameters.
+	Parameters map[string]LaunchActionParameter
+
+	// Launch action type.
+	Type LaunchActionType
+
+	noSmithyDocumentSerde
+}
+
+// Launch action parameter.
+type LaunchActionParameter struct {
+
+	// Type.
+	Type LaunchActionParameterType
+
+	// Value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Launch action run.
+type LaunchActionRun struct {
+
+	// Action.
+	Action *LaunchAction
+
+	// Failure reason.
+	FailureReason *string
+
+	// Run Id.
+	RunId *string
+
+	// Run status.
+	Status LaunchActionRunStatus
+
+	noSmithyDocumentSerde
+}
+
+// Resource launch actions filter.
+type LaunchActionsRequestFilters struct {
+
+	// Launch actions Ids.
+	ActionIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Launch actions status.
+type LaunchActionsStatus struct {
+
+	// List of post launch action status.
+	Runs []LaunchActionRun
+
+	// Time where the AWS Systems Manager was detected as running on the launched
+	// instance.
+	SsmAgentDiscoveryDatetime *string
+
+	noSmithyDocumentSerde
+}
+
 // Account level Launch Configuration Template.
 type LaunchConfigurationTemplate struct {
 
@@ -359,6 +450,9 @@ type LaunchConfigurationTemplate struct {
 
 	// Licensing.
 	Licensing *Licensing
+
+	// Post-launch actions activated.
+	PostLaunchEnabled *bool
 
 	// Tags of the Launch Configuration Template.
 	Tags map[string]string
@@ -484,6 +578,9 @@ func (*ParticipatingResourceIDMemberSourceNetworkID) isParticipatingResourceID()
 
 // Represents a server participating in an asynchronous Job.
 type ParticipatingServer struct {
+
+	// The post-launch action runs of a participating server.
+	LaunchActionsStatus *LaunchActionsStatus
 
 	// The launch status of a participating server.
 	LaunchStatus LaunchStatus

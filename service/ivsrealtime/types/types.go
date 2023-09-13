@@ -96,7 +96,9 @@ type ParticipantSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Object specifying a participant token in a stage.
+// Object specifying a participant token in a stage. Important: Treat tokens as
+// opaque; i.e., do not build functionality based on token contents. The format of
+// tokens could change in the future.
 type ParticipantToken struct {
 
 	// Application-provided attributes to encode into the token and attach to a stage.

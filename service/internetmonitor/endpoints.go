@@ -227,6 +227,9 @@ type builtInResolver struct {
 	Region string
 
 	// Sourced BuiltIn value in a historical enabled or disabled state.
+	UseDualStack aws.DualStackEndpointState
+
+	// Sourced BuiltIn value in a historical enabled or disabled state.
 	UseFIPS aws.FIPSEndpointState
 
 	// Base endpoint that can potentially be modified during Endpoint resolution.
@@ -242,6 +245,11 @@ func (b *builtInResolver) ResolveBuiltIns(params *EndpointParameters) error {
 		return fmt.Errorf("Could not resolve AWS::Region")
 	} else {
 		params.Region = aws.String(region)
+	}
+	if b.UseDualStack == aws.DualStackEndpointStateEnabled {
+		params.UseDualStack = aws.Bool(true)
+	} else {
+		params.UseDualStack = aws.Bool(false)
 	}
 	if b.UseFIPS == aws.FIPSEndpointStateEnabled {
 		params.UseFIPS = aws.Bool(true)
@@ -262,6 +270,15 @@ type EndpointParameters struct {
 	//
 	// AWS::Region
 	Region *string
+
+	// When true, use the dual-stack endpoint. If the configured endpoint does not
+	// support dual-stack, dispatching the request MAY return an error.
+	//
+	// Defaults to
+	// false if no value is provided.
+	//
+	// AWS::UseDualStack
+	UseDualStack *bool
 
 	// When true, send this request to the FIPS-compliant regional endpoint. If the
 	// configured endpoint does not have a FIPS compliant endpoint, dispatching the
@@ -284,6 +301,10 @@ type EndpointParameters struct {
 
 // ValidateRequired validates required parameters are set.
 func (p EndpointParameters) ValidateRequired() error {
+	if p.UseDualStack == nil {
+		return fmt.Errorf("parameter UseDualStack is required")
+	}
+
 	if p.UseFIPS == nil {
 		return fmt.Errorf("parameter UseFIPS is required")
 	}
@@ -294,6 +315,10 @@ func (p EndpointParameters) ValidateRequired() error {
 // WithDefaults returns a shallow copy of EndpointParameterswith default values
 // applied to members where applicable.
 func (p EndpointParameters) WithDefaults() EndpointParameters {
+	if p.UseDualStack == nil {
+		p.UseDualStack = ptr.Bool(false)
+	}
+
 	if p.UseFIPS == nil {
 		p.UseFIPS = ptr.Bool(false)
 	}
@@ -327,6 +352,7 @@ func (r *resolver) ResolveEndpoint(
 	if err = params.ValidateRequired(); err != nil {
 		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
 	}
+	_UseDualStack := *params.UseDualStack
 	_UseFIPS := *params.UseFIPS
 
 	if exprVal := params.Endpoint; exprVal != nil {
@@ -334,6 +360,9 @@ func (r *resolver) ResolveEndpoint(
 		_ = _Endpoint
 		if _UseFIPS == true {
 			return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS and custom endpoint are not supported")
+		}
+		if _UseDualStack == true {
+			return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Dualstack and custom endpoint are not supported")
 		}
 		uriString := _Endpoint
 
@@ -353,48 +382,32 @@ func (r *resolver) ResolveEndpoint(
 		if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
 			_PartitionResult := *exprVal
 			_ = _PartitionResult
-			if true == _PartitionResult.SupportsDualStack {
-				if _UseFIPS == true {
+			if _UseFIPS == true {
+				if _UseDualStack == true {
 					if true == _PartitionResult.SupportsFIPS {
-						uriString := func() string {
-							var out strings.Builder
-							out.WriteString("https://internetmonitor-fips.")
-							out.WriteString(_Region)
-							out.WriteString(".")
-							out.WriteString(_PartitionResult.DualStackDnsSuffix)
-							return out.String()
-						}()
+						if true == _PartitionResult.SupportsDualStack {
+							uriString := func() string {
+								var out strings.Builder
+								out.WriteString("https://internetmonitor-fips.")
+								out.WriteString(_Region)
+								out.WriteString(".")
+								out.WriteString(_PartitionResult.DualStackDnsSuffix)
+								return out.String()
+							}()
 
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+							uri, err := url.Parse(uriString)
+							if err != nil {
+								return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+							}
+
+							return smithyendpoints.Endpoint{
+								URI:     *uri,
+								Headers: http.Header{},
+							}, nil
 						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
 					}
-					return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
+					return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS and DualStack are enabled, but this partition does not support one or both")
 				}
-				uriString := func() string {
-					var out strings.Builder
-					out.WriteString("https://internetmonitor.")
-					out.WriteString(_Region)
-					out.WriteString(".")
-					out.WriteString(_PartitionResult.DualStackDnsSuffix)
-					return out.String()
-				}()
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-				}, nil
 			}
 			if _UseFIPS == true {
 				if true == _PartitionResult.SupportsFIPS {
@@ -418,6 +431,29 @@ func (r *resolver) ResolveEndpoint(
 					}, nil
 				}
 				return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
+			}
+			if _UseDualStack == true {
+				if true == _PartitionResult.SupportsDualStack {
+					uriString := func() string {
+						var out strings.Builder
+						out.WriteString("https://internetmonitor.")
+						out.WriteString(_Region)
+						out.WriteString(".")
+						out.WriteString(_PartitionResult.DualStackDnsSuffix)
+						return out.String()
+					}()
+
+					uri, err := url.Parse(uriString)
+					if err != nil {
+						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+					}
+
+					return smithyendpoints.Endpoint{
+						URI:     *uri,
+						Headers: http.Header{},
+					}, nil
+				}
+				return endpoint, fmt.Errorf("endpoint rule error, %s", "DualStack is enabled but this partition does not support DualStack")
 			}
 			uriString := func() string {
 				var out strings.Builder

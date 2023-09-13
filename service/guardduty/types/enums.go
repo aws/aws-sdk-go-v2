@@ -49,6 +49,7 @@ const (
 	CoverageFilterCriterionKeyResourceType   CoverageFilterCriterionKey = "RESOURCE_TYPE"
 	CoverageFilterCriterionKeyCoverageStatus CoverageFilterCriterionKey = "COVERAGE_STATUS"
 	CoverageFilterCriterionKeyAddonVersion   CoverageFilterCriterionKey = "ADDON_VERSION"
+	CoverageFilterCriterionKeyManagementType CoverageFilterCriterionKey = "MANAGEMENT_TYPE"
 )
 
 // Values returns all known values for CoverageFilterCriterionKey. Note that this
@@ -61,6 +62,7 @@ func (CoverageFilterCriterionKey) Values() []CoverageFilterCriterionKey {
 		"RESOURCE_TYPE",
 		"COVERAGE_STATUS",
 		"ADDON_VERSION",
+		"MANAGEMENT_TYPE",
 	}
 }
 
@@ -498,6 +500,24 @@ func (IpSetStatus) Values() []IpSetStatus {
 		"ERROR",
 		"DELETE_PENDING",
 		"DELETED",
+	}
+}
+
+type ManagementType string
+
+// Enum values for ManagementType
+const (
+	ManagementTypeAutoManaged ManagementType = "AUTO_MANAGED"
+	ManagementTypeManual      ManagementType = "MANUAL"
+)
+
+// Values returns all known values for ManagementType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ManagementType) Values() []ManagementType {
+	return []ManagementType{
+		"AUTO_MANAGED",
+		"MANUAL",
 	}
 }
 

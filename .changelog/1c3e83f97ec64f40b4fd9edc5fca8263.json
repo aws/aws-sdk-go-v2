@@ -1,0 +1,8 @@
+{
+    "id": "1c3e83f9-7ec6-4f40-b4fd-9edc5fca8263",
+    "type": "documentation",
+    "description": "Doc only update that changes description for ParticipantToken.",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

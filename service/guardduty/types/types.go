@@ -382,6 +382,12 @@ type CoverageEksClusterDetails struct {
 	// Represents the nodes within the EKS cluster that have a HEALTHY coverage status.
 	CoveredNodes int64
 
+	// Indicates how the Amazon EKS add-on GuardDuty agent is managed for this EKS
+	// cluster. AUTO_MANAGED indicates GuardDuty deploys and manages updates for this
+	// resource. MANUAL indicates that you are responsible to deploy, update, and
+	// manage the Amazon EKS add-on GuardDuty agent for this resource.
+	ManagementType ManagementType
+
 	noSmithyDocumentSerde
 }
 
@@ -1665,7 +1671,18 @@ type Organization struct {
 type OrganizationAdditionalConfiguration struct {
 
 	// The status of the additional configuration that will be configured for the
-	// organization.
+	// organization. Use one of the following values to configure the feature status
+	// for the entire organization:
+	//   - NEW : Indicates that when a new account joins the organization, they will
+	//   have the additional configuration enabled automatically.
+	//   - ALL : Indicates that all accounts in the organization have the additional
+	//   configuration enabled automatically. This includes NEW accounts that join the
+	//   organization and accounts that may have been suspended or removed from the
+	//   organization in GuardDuty. It may take up to 24 hours to update the
+	//   configuration for all the member accounts.
+	//   - NONE : Indicates that the additional configuration will not be automatically
+	//   enabled for any account in the organization. The administrator must manage the
+	//   additional configuration for each account individually.
 	AutoEnable OrgFeatureStatus
 
 	// The name of the additional configuration that will be configured for the
@@ -1679,11 +1696,19 @@ type OrganizationAdditionalConfiguration struct {
 // organization.
 type OrganizationAdditionalConfigurationResult struct {
 
-	// Describes how The status of the additional configuration that are configured
-	// for the member accounts within the organization. If you set AutoEnable to NEW ,
-	// a feature will be configured for only the new accounts when they join the
-	// organization. If you set AutoEnable to NONE , no feature will be configured for
-	// the accounts when they join the organization.
+	// Describes the status of the additional configuration that is configured for the
+	// member accounts within the organization. One of the following values is the
+	// status for the entire organization:
+	//   - NEW : Indicates that when a new account joins the organization, they will
+	//   have the additional configuration enabled automatically.
+	//   - ALL : Indicates that all accounts in the organization have the additional
+	//   configuration enabled automatically. This includes NEW accounts that join the
+	//   organization and accounts that may have been suspended or removed from the
+	//   organization in GuardDuty. It may take up to 24 hours to update the
+	//   configuration for all the member accounts.
+	//   - NONE : Indicates that the additional configuration will not be automatically
+	//   enabled for any account in the organization. The administrator must manage the
+	//   additional configuration for each account individually.
 	AutoEnable OrgFeatureStatus
 
 	// The name of the additional configuration that is configured for the member
@@ -1758,7 +1783,19 @@ type OrganizationFeatureConfiguration struct {
 	// The additional information that will be configured for the organization.
 	AdditionalConfiguration []OrganizationAdditionalConfiguration
 
-	// The status of the feature that will be configured for the organization.
+	// The status of the feature that will be configured for the organization. Use one
+	// of the following values to configure the feature status for the entire
+	// organization:
+	//   - NEW : Indicates that when a new account joins the organization, they will
+	//   have the feature enabled automatically.
+	//   - ALL : Indicates that all accounts in the organization have the feature
+	//   enabled automatically. This includes NEW accounts that join the organization
+	//   and accounts that may have been suspended or removed from the organization in
+	//   GuardDuty. It may take up to 24 hours to update the configuration for all the
+	//   member accounts.
+	//   - NONE : Indicates that the feature will not be automatically enabled for any
+	//   account in the organization. The administrator must manage the feature for each
+	//   account individually.
 	AutoEnable OrgFeatureStatus
 
 	// The name of the feature that will be configured for the organization.
@@ -1774,11 +1811,17 @@ type OrganizationFeatureConfigurationResult struct {
 	// the organization.
 	AdditionalConfiguration []OrganizationAdditionalConfigurationResult
 
-	// Describes how The status of the feature that are configured for the member
-	// accounts within the organization. If you set AutoEnable to NEW , a feature will
-	// be configured for only the new accounts when they join the organization. If you
-	// set AutoEnable to NONE , no feature will be configured for the accounts when
-	// they join the organization.
+	// Describes the status of the feature that is configured for the member accounts
+	// within the organization.
+	//   - NEW : Indicates that when a new account joins the organization, they will
+	//   have the feature enabled automatically.
+	//   - ALL : Indicates that all accounts in the organization have the feature
+	//   enabled automatically. This includes NEW accounts that join the organization
+	//   and accounts that may have been suspended or removed from the organization in
+	//   GuardDuty.
+	//   - NONE : Indicates that the feature will not be automatically enabled for any
+	//   account in the organization. In this case, each account will be managed
+	//   individually by the administrator.
 	AutoEnable OrgFeatureStatus
 
 	// The name of the feature that is configured for the member accounts within the

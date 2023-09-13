@@ -64,6 +64,9 @@ type GetLaunchConfigurationOutput struct {
 	// The name of the launch configuration.
 	Name *string
 
+	// Whether we want to activate post-launch actions for the Source Server.
+	PostLaunchEnabled *bool
+
 	// The ID of the Source Server for this launch configuration.
 	SourceServerID *string
 

@@ -54,6 +54,9 @@ type UpdateLaunchConfigurationTemplateInput struct {
 	// Licensing.
 	Licensing *types.Licensing
 
+	// Whether we want to activate post-launch actions.
+	PostLaunchEnabled *bool
+
 	// Target instance type right-sizing method.
 	TargetInstanceTypeRightSizingMethod types.TargetInstanceTypeRightSizingMethod
 

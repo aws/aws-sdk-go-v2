@@ -15,8 +15,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables an Amazon Web Services account within the organization as the GuardDuty
-// delegated administrator.
+// Designates an Amazon Web Services account within the organization as your
+// GuardDuty delegated administrator. Only the organization's management account
+// can run this API operation.
 func (c *Client) EnableOrganizationAdminAccount(ctx context.Context, params *EnableOrganizationAdminAccountInput, optFns ...func(*Options)) (*EnableOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &EnableOrganizationAdminAccountInput{}

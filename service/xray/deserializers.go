@@ -10116,6 +10116,22 @@ func awsRestjson1_deserializeDocumentTraceSummary(v **types.TraceSummary, value 
 				return err
 			}
 
+		case "StartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "Users":
 			if err := awsRestjson1_deserializeDocumentTraceUsers(&sv.Users, value); err != nil {
 				return err

@@ -81,7 +81,8 @@ type CreateEnvironmentEC2Input struct {
 	// through 2023. From December 31, 2023, the parameter for Amazon Linux will no
 	// longer be available when you specify an AMI for your instance. Amazon Linux 2
 	// will then become the default AMI, which is used to launch your instance if no
-	// parameter is explicitly defined. AMI aliases
+	// parameter is explicitly defined. Since Ubuntu 18.04 has ended standard support
+	// as of May 31, 2023, we recommend you choose Ubuntu 22.04. AMI aliases
 	//   - Amazon Linux (default): amazonlinux-1-x86_64
 	//   - Amazon Linux 2: amazonlinux-2-x86_64
 	//   - Ubuntu 18.04: ubuntu-18.04-x86_64

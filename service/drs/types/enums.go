@@ -470,6 +470,86 @@ func (LastLaunchType) Values() []LastLaunchType {
 	}
 }
 
+type LaunchActionCategory string
+
+// Enum values for LaunchActionCategory
+const (
+	LaunchActionCategoryMonitoring    LaunchActionCategory = "MONITORING"
+	LaunchActionCategoryValidation    LaunchActionCategory = "VALIDATION"
+	LaunchActionCategoryConfiguration LaunchActionCategory = "CONFIGURATION"
+	LaunchActionCategorySecurity      LaunchActionCategory = "SECURITY"
+	LaunchActionCategoryOther         LaunchActionCategory = "OTHER"
+)
+
+// Values returns all known values for LaunchActionCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LaunchActionCategory) Values() []LaunchActionCategory {
+	return []LaunchActionCategory{
+		"MONITORING",
+		"VALIDATION",
+		"CONFIGURATION",
+		"SECURITY",
+		"OTHER",
+	}
+}
+
+type LaunchActionParameterType string
+
+// Enum values for LaunchActionParameterType
+const (
+	LaunchActionParameterTypeSsmStore LaunchActionParameterType = "SSM_STORE"
+	LaunchActionParameterTypeDynamic  LaunchActionParameterType = "DYNAMIC"
+)
+
+// Values returns all known values for LaunchActionParameterType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LaunchActionParameterType) Values() []LaunchActionParameterType {
+	return []LaunchActionParameterType{
+		"SSM_STORE",
+		"DYNAMIC",
+	}
+}
+
+type LaunchActionRunStatus string
+
+// Enum values for LaunchActionRunStatus
+const (
+	LaunchActionRunStatusInProgress LaunchActionRunStatus = "IN_PROGRESS"
+	LaunchActionRunStatusSucceeded  LaunchActionRunStatus = "SUCCEEDED"
+	LaunchActionRunStatusFailed     LaunchActionRunStatus = "FAILED"
+)
+
+// Values returns all known values for LaunchActionRunStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LaunchActionRunStatus) Values() []LaunchActionRunStatus {
+	return []LaunchActionRunStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type LaunchActionType string
+
+// Enum values for LaunchActionType
+const (
+	LaunchActionTypeSsmAutomation LaunchActionType = "SSM_AUTOMATION"
+	LaunchActionTypeSsmCommand    LaunchActionType = "SSM_COMMAND"
+)
+
+// Values returns all known values for LaunchActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LaunchActionType) Values() []LaunchActionType {
+	return []LaunchActionType{
+		"SSM_AUTOMATION",
+		"SSM_COMMAND",
+	}
+}
+
 type LaunchDisposition string
 
 // Enum values for LaunchDisposition

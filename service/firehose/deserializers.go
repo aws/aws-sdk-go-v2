@@ -1974,6 +1974,11 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescripti
 				sv.ClusterEndpoint = ptr.String(jtv)
 			}
 
+		case "DocumentIdOptions":
+			if err := awsAwsjson11_deserializeDocumentDocumentIdOptions(&sv.DocumentIdOptions, value); err != nil {
+				return err
+			}
+
 		case "DomainARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2796,6 +2801,46 @@ func awsAwsjson11_deserializeDocumentDestinationDescriptionList(v *[]types.Desti
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDocumentIdOptions(v **types.DocumentIdOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DocumentIdOptions
+	if *v == nil {
+		sv = &types.DocumentIdOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultDocumentIdFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DefaultDocumentIdFormat to be of type string, got %T instead", value)
+				}
+				sv.DefaultDocumentIdFormat = types.DefaultDocumentIdFormat(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDynamicPartitioningConfiguration(v **types.DynamicPartitioningConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2937,6 +2982,11 @@ func awsAwsjson11_deserializeDocumentElasticsearchDestinationDescription(v **typ
 					return fmt.Errorf("expected ElasticsearchClusterEndpoint to be of type string, got %T instead", value)
 				}
 				sv.ClusterEndpoint = ptr.String(jtv)
+			}
+
+		case "DocumentIdOptions":
+			if err := awsAwsjson11_deserializeDocumentDocumentIdOptions(&sv.DocumentIdOptions, value); err != nil {
+				return err
 			}
 
 		case "DomainARN":

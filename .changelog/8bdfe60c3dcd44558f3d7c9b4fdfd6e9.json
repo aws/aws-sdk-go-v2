@@ -1,0 +1,8 @@
+{
+    "id": "8bdfe60c-3dcd-4455-8f3d-7c9b4fdfd6e9",
+    "type": "feature",
+    "description": "DocumentIdOptions has been added for the Amazon OpenSearch destination.",
+    "modules": [
+        "service/firehose"
+    ]
+}

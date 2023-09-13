@@ -1,0 +1,8 @@
+{
+    "id": "820656a7-ef12-40c5-a007-b4534f5ae916",
+    "type": "feature",
+    "description": "Add `managementType` field to ListCoverage API response.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

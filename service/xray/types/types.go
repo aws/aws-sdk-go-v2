@@ -1201,6 +1201,9 @@ type TraceSummary struct {
 	// Service IDs from the trace's segment documents.
 	ServiceIds []ServiceId
 
+	// The start time of a trace, based on the earliest trace segment start time.
+	StartTime *time.Time
+
 	// Users from the trace's segment documents.
 	Users []TraceUser
 
