@@ -457,6 +457,9 @@ func validateResolutionTechniques(v *types.ResolutionTechniques) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResolutionTechniques"}
+	if len(v.ResolutionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolutionType"))
+	}
 	if v.RuleBasedProperties != nil {
 		if err := validateRuleBasedProperties(v.RuleBasedProperties); err != nil {
 			invalidParams.AddNested("RuleBasedProperties", err.(smithy.InvalidParamsError))
@@ -608,7 +611,9 @@ func validateOpCreateSchemaMappingInput(v *CreateSchemaMappingInput) error {
 	if v.SchemaName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
 	}
-	if v.MappedInputFields != nil {
+	if v.MappedInputFields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MappedInputFields"))
+	} else if v.MappedInputFields != nil {
 		if err := validateSchemaInputAttributes(v.MappedInputFields); err != nil {
 			invalidParams.AddNested("MappedInputFields", err.(smithy.InvalidParamsError))
 		}

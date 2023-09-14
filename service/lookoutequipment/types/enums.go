@@ -2,6 +2,30 @@
 
 package types
 
+type AutoPromotionResult string
+
+// Enum values for AutoPromotionResult
+const (
+	AutoPromotionResultModelPromoted           AutoPromotionResult = "MODEL_PROMOTED"
+	AutoPromotionResultModelNotPromoted        AutoPromotionResult = "MODEL_NOT_PROMOTED"
+	AutoPromotionResultRetrainingInternalError AutoPromotionResult = "RETRAINING_INTERNAL_ERROR"
+	AutoPromotionResultRetrainingCustomerError AutoPromotionResult = "RETRAINING_CUSTOMER_ERROR"
+	AutoPromotionResultRetrainingCancelled     AutoPromotionResult = "RETRAINING_CANCELLED"
+)
+
+// Values returns all known values for AutoPromotionResult. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoPromotionResult) Values() []AutoPromotionResult {
+	return []AutoPromotionResult{
+		"MODEL_PROMOTED",
+		"MODEL_NOT_PROMOTED",
+		"RETRAINING_INTERNAL_ERROR",
+		"RETRAINING_CUSTOMER_ERROR",
+		"RETRAINING_CANCELLED",
+	}
+}
+
 type DatasetStatus string
 
 // Enum values for DatasetStatus
@@ -45,6 +69,26 @@ func (DataUploadFrequency) Values() []DataUploadFrequency {
 		"PT15M",
 		"PT30M",
 		"PT1H",
+	}
+}
+
+type InferenceDataImportStrategy string
+
+// Enum values for InferenceDataImportStrategy
+const (
+	InferenceDataImportStrategyNoImport     InferenceDataImportStrategy = "NO_IMPORT"
+	InferenceDataImportStrategyAddWhenEmpty InferenceDataImportStrategy = "ADD_WHEN_EMPTY"
+	InferenceDataImportStrategyOverwrite    InferenceDataImportStrategy = "OVERWRITE"
+)
+
+// Values returns all known values for InferenceDataImportStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceDataImportStrategy) Values() []InferenceDataImportStrategy {
+	return []InferenceDataImportStrategy{
+		"NO_IMPORT",
+		"ADD_WHEN_EMPTY",
+		"OVERWRITE",
 	}
 }
 
@@ -150,6 +194,24 @@ func (LatestInferenceResult) Values() []LatestInferenceResult {
 	}
 }
 
+type ModelPromoteMode string
+
+// Enum values for ModelPromoteMode
+const (
+	ModelPromoteModeManaged ModelPromoteMode = "MANAGED"
+	ModelPromoteModeManual  ModelPromoteMode = "MANUAL"
+)
+
+// Values returns all known values for ModelPromoteMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelPromoteMode) Values() []ModelPromoteMode {
+	return []ModelPromoteMode{
+		"MANAGED",
+		"MANUAL",
+	}
+}
+
 type ModelStatus string
 
 // Enum values for ModelStatus
@@ -233,6 +295,28 @@ func (Monotonicity) Values() []Monotonicity {
 		"DECREASING",
 		"INCREASING",
 		"STATIC",
+	}
+}
+
+type RetrainingSchedulerStatus string
+
+// Enum values for RetrainingSchedulerStatus
+const (
+	RetrainingSchedulerStatusPending  RetrainingSchedulerStatus = "PENDING"
+	RetrainingSchedulerStatusRunning  RetrainingSchedulerStatus = "RUNNING"
+	RetrainingSchedulerStatusStopping RetrainingSchedulerStatus = "STOPPING"
+	RetrainingSchedulerStatusStopped  RetrainingSchedulerStatus = "STOPPED"
+)
+
+// Values returns all known values for RetrainingSchedulerStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetrainingSchedulerStatus) Values() []RetrainingSchedulerStatus {
+	return []RetrainingSchedulerStatus{
+		"PENDING",
+		"RUNNING",
+		"STOPPING",
+		"STOPPED",
 	}
 }
 

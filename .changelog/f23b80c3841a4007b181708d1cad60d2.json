@@ -1,0 +1,8 @@
+{
+    "id": "f23b80c3-841a-4007-b181-708d1cad60d2",
+    "type": "documentation",
+    "description": "Documentation updates for AWS CloudFormation",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

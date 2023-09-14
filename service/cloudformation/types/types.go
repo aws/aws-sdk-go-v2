@@ -835,12 +835,9 @@ type Stack struct {
 	// in the CloudFormation User Guide.
 	ParentId *string
 
-	// This deletion policy deletes newly created resources, but retains existing
-	// resources, when a stack operation is rolled back. This ensures new, empty, and
-	// unused resources are deleted, while critical resources and their data are
-	// retained. RetainExceptOnCreate can be specified for any resource that supports
-	// the DeletionPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html)
-	// attribute.
+	// When set to true , newly created resources are deleted when the operation rolls
+	// back. This includes newly created resources marked with a deletion policy of
+	// Retain . Default: false
 	RetainExceptOnCreate *bool
 
 	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
@@ -1559,7 +1556,7 @@ type StackSet struct {
 	// The Amazon Resource Name (ARN) of the IAM role used to create or update the
 	// stack set. Use customized administrator roles to control which users or groups
 	// can manage specific stack sets within the same administrator account. For more
-	// information, see Prerequisites: Granting Permissions for Stack Set Operations (https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html)
+	// information, see Prerequisites: Granting Permissions for Stack Set Operations (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html)
 	// in the CloudFormation User Guide.
 	AdministrationRoleARN *string
 
@@ -1718,7 +1715,7 @@ type StackSetOperation struct {
 	// The Amazon Resource Name (ARN) of the IAM role used to perform this stack set
 	// operation. Use customized administrator roles to control which users or groups
 	// can manage specific stack sets within the same administrator account. For more
-	// information, see Define Permissions for Multiple Administrators (https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html)
+	// information, see Define Permissions for Multiple Administrators (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html)
 	// in the CloudFormation User Guide.
 	AdministrationRoleARN *string
 

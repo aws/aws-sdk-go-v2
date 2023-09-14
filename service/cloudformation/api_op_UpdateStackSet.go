@@ -62,7 +62,7 @@ type UpdateStackSetInput struct {
 	// Specify an IAM role only if you are using customized administrator roles to
 	// control which users or groups can manage specific stack sets within the same
 	// administrator account. For more information, see Granting Permissions for Stack
-	// Set Operations (https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html)
+	// Set Operations (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html)
 	// in the CloudFormation User Guide. If you specified a customized administrator
 	// role when you created the stack set, you must specify a customized administrator
 	// role, even if it is the same customized administrator role used with this stack
@@ -111,17 +111,17 @@ type UpdateStackSetInput struct {
 	//   - AWS::IAM::User (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
 	//   - AWS::IAM::UserToGroupAddition (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
 	//   For more information, see Acknowledging IAM Resources in CloudFormation
-	//   Templates (https://docs.aws.amazon.com/AWSCloudFormation/using-iam-template.html#capabilities)
+	//   Templates (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
 	//   .
 	//   - CAPABILITY_AUTO_EXPAND Some templates reference macros. If your stack set
 	//   template references one or more macros, you must update the stack set directly
 	//   from the processed template, without first reviewing the resulting changes in a
 	//   change set. To update the stack set directly, you must acknowledge this
 	//   capability. For more information, see Using CloudFormation Macros to Perform
-	//   Custom Processing on Templates (https://docs.aws.amazon.com/AWSCloudFormation/template-macros.html)
+	//   Custom Processing on Templates (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html)
 	//   . Stack sets with service-managed permissions do not currently support the use
-	//   of macros in templates. (This includes the AWS::Include (https://docs.aws.amazon.com/AWSCloudFormation/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
-	//   and AWS::Serverless (https://docs.aws.amazon.com/AWSCloudFormation/transform-aws-serverless.html)
+	//   of macros in templates. (This includes the AWS::Include (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
+	//   and AWS::Serverless (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
 	//   transforms, which are macros hosted by CloudFormation.) Even if you specify this
 	//   capability for a stack set with service-managed permissions, if you reference a
 	//   macro in your template the stack set operation will fail.

@@ -15,7 +15,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags from the specified AWS Entity Resolution resource. In
+// Removes one or more tags from the specified Entity Resolution resource. In
 // Entity Resolution, SchemaMapping , and MatchingWorkflow can be tagged.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {

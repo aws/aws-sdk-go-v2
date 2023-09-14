@@ -37,6 +37,13 @@ func (c *Client) CreateSchemaMapping(ctx context.Context, params *CreateSchemaMa
 
 type CreateSchemaMappingInput struct {
 
+	// A list of MappedInputFields . Each MappedInputField corresponds to a column the
+	// source data table, and contains column name plus additional information that
+	// Entity Resolution uses for matching.
+	//
+	// This member is required.
+	MappedInputFields []types.SchemaInputAttribute
+
 	// The name of the schema. There cannot be multiple SchemaMappings with the same
 	// name.
 	//
@@ -45,11 +52,6 @@ type CreateSchemaMappingInput struct {
 
 	// A description of the schema.
 	Description *string
-
-	// A list of MappedInputFields . Each MappedInputField corresponds to a column the
-	// source data table, and contains column name plus additional information that
-	// Entity Resolution uses for matching.
-	MappedInputFields []types.SchemaInputAttribute
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

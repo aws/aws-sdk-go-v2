@@ -50,6 +50,15 @@ type ImportModelVersionInput struct {
 	// This member is required.
 	SourceModelVersionArn *string
 
+	// Indicates how to import the accumulated inference data when a model version is
+	// imported. The possible values are as follows:
+	//   - NO_IMPORT – Don't import the data.
+	//   - ADD_WHEN_EMPTY – Only import the data from the source model if there is no
+	//   existing data in the target model.
+	//   - OVERWRITE – Import the data from the source model and overwrite the
+	//   existing data in the target model.
+	InferenceDataImportStrategy types.InferenceDataImportStrategy
+
 	// Contains the configuration information for the S3 location being used to hold
 	// label data.
 	LabelsInputConfiguration *types.LabelsInputConfiguration

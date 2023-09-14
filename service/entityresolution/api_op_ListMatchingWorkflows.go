@@ -16,8 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all the MatchingWorkflows that have been created for an AWS
-// account.
+// Returns a list of all the MatchingWorkflows that have been created for an
+// Amazon Web Services account.
 func (c *Client) ListMatchingWorkflows(ctx context.Context, params *ListMatchingWorkflowsInput, optFns ...func(*Options)) (*ListMatchingWorkflowsOutput, error) {
 	if params == nil {
 		params = &ListMatchingWorkflowsInput{}

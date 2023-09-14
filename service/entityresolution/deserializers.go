@@ -3190,6 +3190,28 @@ func awsRestjson1_deserializeDocumentExceedsLimitException(v **types.ExceedsLimi
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "quotaName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuotaName = ptr.String(jtv)
+			}
+
+		case "quotaValue":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.QuotaValue = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3852,7 +3874,7 @@ func awsRestjson1_deserializeDocumentOutputSource(v **types.OutputSource, value 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected S3Path to be of type string, got %T instead", value)
 				}
 				sv.OutputS3Path = ptr.String(jtv)
 			}

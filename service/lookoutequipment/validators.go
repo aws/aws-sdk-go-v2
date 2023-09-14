@@ -110,6 +110,26 @@ func (m *validateOpCreateModel) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRetrainingScheduler struct {
+}
+
+func (*validateOpCreateRetrainingScheduler) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRetrainingScheduler) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRetrainingSchedulerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRetrainingSchedulerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataset struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRetrainingScheduler struct {
+}
+
+func (*validateOpDeleteRetrainingScheduler) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRetrainingScheduler) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRetrainingSchedulerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRetrainingSchedulerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -385,6 +425,26 @@ func (m *validateOpDescribeResourcePolicy) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRetrainingScheduler struct {
+}
+
+func (*validateOpDescribeRetrainingScheduler) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRetrainingScheduler) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRetrainingSchedulerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRetrainingSchedulerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +670,26 @@ func (m *validateOpStartInferenceScheduler) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartRetrainingScheduler struct {
+}
+
+func (*validateOpStartRetrainingScheduler) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRetrainingScheduler) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRetrainingSchedulerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRetrainingSchedulerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopInferenceScheduler struct {
 }
 
@@ -625,6 +705,26 @@ func (m *validateOpStopInferenceScheduler) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopInferenceSchedulerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopRetrainingScheduler struct {
+}
+
+func (*validateOpStopRetrainingScheduler) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopRetrainingScheduler) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopRetrainingSchedulerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopRetrainingSchedulerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +830,46 @@ func (m *validateOpUpdateLabelGroup) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateModel struct {
+}
+
+func (*validateOpUpdateModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRetrainingScheduler struct {
+}
+
+func (*validateOpUpdateRetrainingScheduler) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRetrainingScheduler) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRetrainingSchedulerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRetrainingSchedulerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataset{}, middleware.After)
 }
@@ -748,6 +888,10 @@ func addOpCreateLabelValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateModel{}, middleware.After)
+}
+
+func addOpCreateRetrainingSchedulerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRetrainingScheduler{}, middleware.After)
 }
 
 func addOpDeleteDatasetValidationMiddleware(stack *middleware.Stack) error {
@@ -772,6 +916,10 @@ func addOpDeleteModelValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
+func addOpDeleteRetrainingSchedulerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRetrainingScheduler{}, middleware.After)
 }
 
 func addOpDescribeDataIngestionJobValidationMiddleware(stack *middleware.Stack) error {
@@ -804,6 +952,10 @@ func addOpDescribeModelVersionValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDescribeResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeResourcePolicy{}, middleware.After)
+}
+
+func addOpDescribeRetrainingSchedulerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRetrainingScheduler{}, middleware.After)
 }
 
 func addOpImportDatasetValidationMiddleware(stack *middleware.Stack) error {
@@ -850,8 +1002,16 @@ func addOpStartInferenceSchedulerValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpStartInferenceScheduler{}, middleware.After)
 }
 
+func addOpStartRetrainingSchedulerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRetrainingScheduler{}, middleware.After)
+}
+
 func addOpStopInferenceSchedulerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopInferenceScheduler{}, middleware.After)
+}
+
+func addOpStopRetrainingSchedulerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopRetrainingScheduler{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -872,6 +1032,14 @@ func addOpUpdateInferenceSchedulerValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateLabelGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLabelGroup{}, middleware.After)
+}
+
+func addOpUpdateModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateModel{}, middleware.After)
+}
+
+func addOpUpdateRetrainingSchedulerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRetrainingScheduler{}, middleware.After)
 }
 
 func validateInferenceInputConfiguration(v *types.InferenceInputConfiguration) error {
@@ -1191,6 +1359,30 @@ func validateOpCreateModelInput(v *CreateModelInput) error {
 	}
 }
 
+func validateOpCreateRetrainingSchedulerInput(v *CreateRetrainingSchedulerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRetrainingSchedulerInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
+	}
+	if v.RetrainingFrequency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrainingFrequency"))
+	}
+	if v.LookbackWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LookbackWindow"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDatasetInput(v *DeleteDatasetInput) error {
 	if v == nil {
 		return nil
@@ -1276,6 +1468,21 @@ func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRetrainingSchedulerInput(v *DeleteRetrainingSchedulerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRetrainingSchedulerInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1402,6 +1609,21 @@ func validateOpDescribeResourcePolicyInput(v *DescribeResourcePolicyInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeResourcePolicyInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRetrainingSchedulerInput(v *DescribeRetrainingSchedulerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRetrainingSchedulerInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1624,6 +1846,21 @@ func validateOpStartInferenceSchedulerInput(v *StartInferenceSchedulerInput) err
 	}
 }
 
+func validateOpStartRetrainingSchedulerInput(v *StartRetrainingSchedulerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRetrainingSchedulerInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopInferenceSchedulerInput(v *StopInferenceSchedulerInput) error {
 	if v == nil {
 		return nil
@@ -1631,6 +1868,21 @@ func validateOpStopInferenceSchedulerInput(v *StopInferenceSchedulerInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "StopInferenceSchedulerInput"}
 	if v.InferenceSchedulerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InferenceSchedulerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopRetrainingSchedulerInput(v *StopRetrainingSchedulerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopRetrainingSchedulerInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1729,6 +1981,41 @@ func validateOpUpdateLabelGroupInput(v *UpdateLabelGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLabelGroupInput"}
 	if v.LabelGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LabelGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateModelInput(v *UpdateModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateModelInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
+	}
+	if v.LabelsInputConfiguration != nil {
+		if err := validateLabelsInputConfiguration(v.LabelsInputConfiguration); err != nil {
+			invalidParams.AddNested("LabelsInputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRetrainingSchedulerInput(v *UpdateRetrainingSchedulerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRetrainingSchedulerInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

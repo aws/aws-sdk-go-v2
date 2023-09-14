@@ -10383,6 +10383,32 @@ func awsAwsjson11_deserializeDocumentComputeCapacityStatus(v **types.ComputeCapa
 
 	for key, value := range shape {
 		switch key {
+		case "ActiveUserSessions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ActiveUserSessions = ptr.Int32(int32(i64))
+			}
+
+		case "ActualUserSessions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ActualUserSessions = ptr.Int32(int32(i64))
+			}
+
 		case "Available":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10396,6 +10422,19 @@ func awsAwsjson11_deserializeDocumentComputeCapacityStatus(v **types.ComputeCapa
 				sv.Available = ptr.Int32(int32(i64))
 			}
 
+		case "AvailableUserSessions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AvailableUserSessions = ptr.Int32(int32(i64))
+			}
+
 		case "Desired":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10407,6 +10446,19 @@ func awsAwsjson11_deserializeDocumentComputeCapacityStatus(v **types.ComputeCapa
 					return err
 				}
 				sv.Desired = ptr.Int32(int32(i64))
+			}
+
+		case "DesiredUserSessions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DesiredUserSessions = ptr.Int32(int32(i64))
 			}
 
 		case "InUse":
@@ -11339,6 +11391,19 @@ func awsAwsjson11_deserializeDocumentFleet(v **types.Fleet, value interface{}) e
 					return err
 				}
 				sv.MaxConcurrentSessions = ptr.Int32(int32(i64))
+			}
+
+		case "MaxSessionsPerInstance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxSessionsPerInstance = ptr.Int32(int32(i64))
 			}
 
 		case "MaxUserDurationInSeconds":
@@ -13140,6 +13205,15 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "InstanceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.InstanceId = ptr.String(jtv)
 			}
 
 		case "MaxExpirationTime":

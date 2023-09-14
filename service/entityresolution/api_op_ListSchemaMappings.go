@@ -16,8 +16,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all the SchemaMappings that have been created for an AWS
-// account.
+// Returns a list of all the SchemaMappings that have been created for an Amazon
+// Web Services account.
 func (c *Client) ListSchemaMappings(ctx context.Context, params *ListSchemaMappingsInput, optFns ...func(*Options)) (*ListSchemaMappingsOutput, error) {
 	if params == nil {
 		params = &ListSchemaMappingsInput{}

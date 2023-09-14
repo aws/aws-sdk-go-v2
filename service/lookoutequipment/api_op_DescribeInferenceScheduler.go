@@ -85,11 +85,12 @@ type DescribeInferenceSchedulerOutput struct {
 	// Anomalous (anomalous events found) or Normal (no anomalous events found).
 	LatestInferenceResult types.LatestInferenceResult
 
-	// The Amazon Resource Name (ARN) of the ML model of the inference scheduler being
-	// described.
+	// The Amazon Resource Name (ARN) of the machine learning model of the inference
+	// scheduler being described.
 	ModelArn *string
 
-	// The name of the ML model of the inference scheduler being described.
+	// The name of the machine learning model of the inference scheduler being
+	// described.
 	ModelName *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data

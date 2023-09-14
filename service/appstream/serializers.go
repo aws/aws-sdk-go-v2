@@ -4256,6 +4256,11 @@ func awsAwsjson11_serializeDocumentComputeCapacity(v *types.ComputeCapacity, val
 		ok.Integer(*v.DesiredInstances)
 	}
 
+	if v.DesiredSessions != nil {
+		ok := object.Key("DesiredSessions")
+		ok.Integer(*v.DesiredSessions)
+	}
+
 	return nil
 }
 
@@ -5142,6 +5147,11 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 		ok.Integer(*v.MaxConcurrentSessions)
 	}
 
+	if v.MaxSessionsPerInstance != nil {
+		ok := object.Key("MaxSessionsPerInstance")
+		ok.Integer(*v.MaxSessionsPerInstance)
+	}
+
 	if v.MaxUserDurationInSeconds != nil {
 		ok := object.Key("MaxUserDurationInSeconds")
 		ok.Integer(*v.MaxUserDurationInSeconds)
@@ -5939,6 +5949,11 @@ func awsAwsjson11_serializeOpDocumentDescribeSessionsInput(v *DescribeSessionsIn
 		ok.String(*v.FleetName)
 	}
 
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
 	if v.Limit != nil {
 		ok := object.Key("Limit")
 		ok.Integer(*v.Limit)
@@ -6623,6 +6638,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 	if v.MaxConcurrentSessions != nil {
 		ok := object.Key("MaxConcurrentSessions")
 		ok.Integer(*v.MaxConcurrentSessions)
+	}
+
+	if v.MaxSessionsPerInstance != nil {
+		ok := object.Key("MaxSessionsPerInstance")
+		ok.Integer(*v.MaxSessionsPerInstance)
 	}
 
 	if v.MaxUserDurationInSeconds != nil {

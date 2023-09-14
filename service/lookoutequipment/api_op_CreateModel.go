@@ -17,15 +17,15 @@ import (
 	"time"
 )
 
-// Creates an ML model for data inference. A machine-learning (ML) model is a
-// mathematical model that finds patterns in your data. In Amazon Lookout for
-// Equipment, the model learns the patterns of normal behavior and detects abnormal
-// behavior that could be potential equipment failure (or maintenance events). The
-// models are made by analyzing normal data and abnormalities in machine behavior
-// that have already occurred. Your model is trained using a portion of the data
-// from your dataset and uses that data to learn patterns of normal behavior and
-// abnormal patterns that lead to equipment failure. Another portion of the data is
-// used to evaluate the model's accuracy.
+// Creates a machine learning model for data inference. A machine-learning (ML)
+// model is a mathematical model that finds patterns in your data. In Amazon
+// Lookout for Equipment, the model learns the patterns of normal behavior and
+// detects abnormal behavior that could be potential equipment failure (or
+// maintenance events). The models are made by analyzing normal data and
+// abnormalities in machine behavior that have already occurred. Your model is
+// trained using a portion of the data from your dataset and uses that data to
+// learn patterns of normal behavior and abnormal patterns that lead to equipment
+// failure. Another portion of the data is used to evaluate the model's accuracy.
 func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optFns ...func(*Options)) (*CreateModelOutput, error) {
 	if params == nil {
 		params = &CreateModelInput{}
@@ -49,12 +49,12 @@ type CreateModelInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The name of the dataset for the ML model being created.
+	// The name of the dataset for the machine learning model being created.
 	//
 	// This member is required.
 	DatasetName *string
 
-	// The name for the ML model to be created.
+	// The name for the machine learning model to be created.
 	//
 	// This member is required.
 	ModelName *string
@@ -69,19 +69,19 @@ type CreateModelInput struct {
 	// is PT1H
 	DataPreProcessingConfiguration *types.DataPreProcessingConfiguration
 
-	// The data schema for the ML model being created.
+	// The data schema for the machine learning model being created.
 	DatasetSchema *types.DatasetSchema
 
 	// Indicates the time reference in the dataset that should be used to end the
-	// subset of evaluation data for the ML model.
+	// subset of evaluation data for the machine learning model.
 	EvaluationDataEndTime *time.Time
 
 	// Indicates the time reference in the dataset that should be used to begin the
-	// subset of evaluation data for the ML model.
+	// subset of evaluation data for the machine learning model.
 	EvaluationDataStartTime *time.Time
 
-	// The input configuration for the labels being used for the ML model that's being
-	// created.
+	// The input configuration for the labels being used for the machine learning
+	// model that's being created.
 	LabelsInputConfiguration *types.LabelsInputConfiguration
 
 	// Indicates that the asset associated with this sensor has been shut off. As long
@@ -90,22 +90,22 @@ type CreateModelInput struct {
 	OffCondition *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
-	// source being used to create the ML model.
+	// source being used to create the machine learning model.
 	RoleArn *string
 
 	// Provides the identifier of the KMS key used to encrypt model data by Amazon
 	// Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
-	// Any tags associated with the ML model being created.
+	// Any tags associated with the machine learning model being created.
 	Tags []types.Tag
 
 	// Indicates the time reference in the dataset that should be used to end the
-	// subset of training data for the ML model.
+	// subset of training data for the machine learning model.
 	TrainingDataEndTime *time.Time
 
 	// Indicates the time reference in the dataset that should be used to begin the
-	// subset of training data for the ML model.
+	// subset of training data for the machine learning model.
 	TrainingDataStartTime *time.Time
 
 	noSmithyDocumentSerde

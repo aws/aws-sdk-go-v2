@@ -50,11 +50,12 @@ type StopInferenceSchedulerOutput struct {
 	// The name of the inference scheduler being stopped.
 	InferenceSchedulerName *string
 
-	// The Amazon Resource Name (ARN) of the ML model used by the inference scheduler
-	// being stopped.
+	// The Amazon Resource Name (ARN) of the machine learning model used by the
+	// inference scheduler being stopped.
 	ModelArn *string
 
-	// The name of the ML model used by the inference scheduler being stopped.
+	// The name of the machine learning model used by the inference scheduler being
+	// stopped.
 	ModelName *string
 
 	// Indicates the status of the inference scheduler.

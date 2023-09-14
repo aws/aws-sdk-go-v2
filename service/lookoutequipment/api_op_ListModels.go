@@ -35,20 +35,21 @@ func (c *Client) ListModels(ctx context.Context, params *ListModelsInput, optFns
 
 type ListModelsInput struct {
 
-	// The beginning of the name of the dataset of the ML models to be listed.
+	// The beginning of the name of the dataset of the machine learning models to be
+	// listed.
 	DatasetNameBeginsWith *string
 
-	// Specifies the maximum number of ML models to list.
+	// Specifies the maximum number of machine learning models to list.
 	MaxResults *int32
 
-	// The beginning of the name of the ML models being listed.
+	// The beginning of the name of the machine learning models being listed.
 	ModelNameBeginsWith *string
 
-	// An opaque pagination token indicating where to continue the listing of ML
-	// models.
+	// An opaque pagination token indicating where to continue the listing of machine
+	// learning models.
 	NextToken *string
 
-	// The status of the ML model.
+	// The status of the machine learning model.
 	Status types.ModelStatus
 
 	noSmithyDocumentSerde
@@ -60,8 +61,8 @@ type ListModelsOutput struct {
 	// dataset ARNs, and status.
 	ModelSummaries []types.ModelSummary
 
-	// An opaque pagination token indicating where to continue the listing of ML
-	// models.
+	// An opaque pagination token indicating where to continue the listing of machine
+	// learning models.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -151,7 +152,7 @@ var _ ListModelsAPIClient = (*Client)(nil)
 
 // ListModelsPaginatorOptions is the paginator options for ListModels
 type ListModelsPaginatorOptions struct {
-	// Specifies the maximum number of ML models to list.
+	// Specifies the maximum number of machine learning models to list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

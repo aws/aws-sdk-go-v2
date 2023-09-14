@@ -15,8 +15,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an inference scheduler that has been set up. Already processed output
-// results are not affected.
+// Deletes an inference scheduler that has been set up. Prior inference results
+// will not be deleted.
 func (c *Client) DeleteInferenceScheduler(ctx context.Context, params *DeleteInferenceSchedulerInput, optFns ...func(*Options)) (*DeleteInferenceSchedulerOutput, error) {
 	if params == nil {
 		params = &DeleteInferenceSchedulerInput{}

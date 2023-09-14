@@ -58,7 +58,7 @@ type JobMetrics struct {
 	// The total number of matchID s generated.
 	MatchIDs *int32
 
-	// The total number of records that did not get processed,
+	// The total number of records that did not get processed.
 	RecordsNotProcessed *int32
 
 	// The total number of records processed.
@@ -80,7 +80,7 @@ type JobSummary struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The current status of the job. Either running , succeeded , queued , or failed .
+	// The current status of the job.
 	//
 	// This member is required.
 	Status JobStatus
@@ -119,9 +119,9 @@ type MatchingWorkflowSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A list of OutputAttribute objects, each of which have the fields Name and
-// Hashed. Each of these objects selects a column to be included in the output
-// table, and whether the values of the column should be hashed.
+// A list of OutputAttribute objects, each of which have the fields Name and Hashed
+// . Each of these objects selects a column to be included in the output table, and
+// whether the values of the column should be hashed.
 type OutputAttribute struct {
 
 	// A name of a column to be written to the output. This must be an InputField name
@@ -136,14 +136,14 @@ type OutputAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// A list of OutputAttribute objects, each of which have the fields Name and
-// Hashed. Each of these objects selects a column to be included in the output
-// table, and whether the values of the column should be hashed.
+// A list of OutputAttribute objects, each of which have the fields Name and Hashed
+// . Each of these objects selects a column to be included in the output table, and
+// whether the values of the column should be hashed.
 type OutputSource struct {
 
-	// A list of OutputAttribute objects, each of which have the fields Name and
-	// Hashed. Each of these objects selects a column to be included in the output
-	// table, and whether the values of the column should be hashed.
+	// A list of OutputAttribute objects, each of which have the fields Name and Hashed
+	// . Each of these objects selects a column to be included in the output table, and
+	// whether the values of the column should be hashed.
 	//
 	// This member is required.
 	Output []OutputAttribute
@@ -166,10 +166,13 @@ type OutputSource struct {
 	noSmithyDocumentSerde
 }
 
-// An object which defines the resolutionType and the ruleBasedProperties
+// An object which defines the resolutionType and the ruleBasedProperties .
 type ResolutionTechniques struct {
 
-	// There are two types of matching, RULE_MATCHING and ML_MATCHING
+	// The type of matching. There are two types of matching: RULE_MATCHING and
+	// ML_MATCHING .
+	//
+	// This member is required.
 	ResolutionType ResolutionType
 
 	// An object which defines the list of matching rules to run and has a field Rules
@@ -201,14 +204,15 @@ type Rule struct {
 // , which is a list of rule objects.
 type RuleBasedProperties struct {
 
-	// You can either choose ONE_TO_ONE or MANY_TO_MANY as the AttributeMatchingModel.
-	// When choosing MANY_TO_MANY , the system can match attribute across the sub-types
-	// of an attribute type. For example, if the value of the Email field of Profile A
-	// and the value of BusinessEmail field of Profile B matches, the two profiles are
-	// matched on the Email type. When choosing ONE_TO_ONE the system can only match
-	// if the sub-types are exact matches. For example, only when the value of the
-	// Email field of Profile A and the value of the Email field of Profile B matches,
-	// the two profiles are matched on the Email type.
+	// The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the
+	// AttributeMatchingModel. When choosing MANY_TO_MANY , the system can match
+	// attributes across the sub-types of an attribute type. For example, if the value
+	// of the Email field of Profile A and the value of BusinessEmail field of Profile
+	// B matches, the two profiles are matched on the Email type. When choosing
+	// ONE_TO_ONE ,the system can only match if the sub-types are exact matches. For
+	// example, only when the value of the Email field of Profile A and the value of
+	// the Email field of Profile B matches, the two profiles are matched on the Email
+	// type.
 	//
 	// This member is required.
 	AttributeMatchingModel AttributeMatchingModel
@@ -243,7 +247,7 @@ type SchemaInputAttribute struct {
 	// A key that allows grouping of multiple input attributes into a unified matching
 	// group. For example, let's consider a scenario where the source table contains
 	// various addresses, such as business_address and shipping_address. By assigning
-	// the MatchKey Address' to both attributes, Entity Resolution will match records
+	// the MatchKey Address to both attributes, Entity Resolution will match records
 	// across these fields to create a consolidated matching group. If no MatchKey is
 	// specified for a column, it won't be utilized for matching purposes but will
 	// still be included in the output table.

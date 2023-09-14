@@ -15,7 +15,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays the tags associated with an AWS Entity Resolution resource. In Entity
+// Displays the tags associated with an Entity Resolution resource. In Entity
 // Resolution, SchemaMapping , and MatchingWorkflow can be tagged.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {

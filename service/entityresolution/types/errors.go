@@ -62,12 +62,15 @@ func (e *ConflictException) ErrorCode() string {
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create resources beyond the
-// current AWS Entity Resolution account limits. The error message describes the
-// limit exceeded. HTTP Status Code: 402
+// current Entity Resolution account limits. The error message describes the limit
+// exceeded. HTTP Status Code: 402
 type ExceedsLimitException struct {
 	Message *string
 
 	ErrorCodeOverride *string
+
+	QuotaName  *string
+	QuotaValue *int32
 
 	noSmithyDocumentSerde
 }
@@ -89,7 +92,7 @@ func (e *ExceedsLimitException) ErrorCode() string {
 }
 func (e *ExceedsLimitException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception occurs when there is an internal failure in the AWS Entity
+// This exception occurs when there is an internal failure in the Entity
 // Resolution service. HTTP Status Code: 500
 type InternalServerException struct {
 	Message *string
@@ -168,8 +171,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The input fails to satisfy the constraints specified by AWS Entity Resolution.
-// HTTP Status Code: 400
+// The input fails to satisfy the constraints specified by Entity Resolution. HTTP
+// Status Code: 400
 type ValidationException struct {
 	Message *string
 

@@ -50,11 +50,11 @@ type StartInferenceSchedulerOutput struct {
 	// The name of the inference scheduler being started.
 	InferenceSchedulerName *string
 
-	// The Amazon Resource Name (ARN) of the ML model being used by the inference
-	// scheduler.
+	// The Amazon Resource Name (ARN) of the machine learning model being used by the
+	// inference scheduler.
 	ModelArn *string
 
-	// The name of the ML model being used by the inference scheduler.
+	// The name of the machine learning model being used by the inference scheduler.
 	ModelName *string
 
 	// Indicates the status of the inference scheduler.

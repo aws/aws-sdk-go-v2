@@ -50,6 +50,17 @@ type DescribeModelVersionInput struct {
 
 type DescribeModelVersionOutput struct {
 
+	// Indicates whether the model version was promoted to be the active version after
+	// retraining or if there was an error with or cancellation of the retraining.
+	AutoPromotionResult types.AutoPromotionResult
+
+	// Indicates the reason for the AutoPromotionResult . For example, a model might
+	// not be promoted if its performance was worse than the active version, if there
+	// was an error during training, or if the retraining scheduler was using MANUAL
+	// promote mode. The model will be promoted in MANAGED promote mode if the
+	// performance is better than the previous model.
+	AutoPromotionResultReason *string
+
 	// Indicates the time and date at which the machine learning model version was
 	// created.
 	CreatedAt *time.Time
@@ -123,6 +134,16 @@ type DescribeModelVersionOutput struct {
 	// as this condition is met, Lookout for Equipment will not use data from this
 	// asset for training, evaluation, or inference.
 	OffCondition *string
+
+	// If the model version was retrained, this field shows a summary of the
+	// performance of the prior model on the new training range. You can use the
+	// information in this JSON-formatted object to compare the new model version and
+	// the prior model version.
+	PriorModelMetrics *string
+
+	// Indicates the number of days of data used in the most recent scheduled
+	// retraining run.
+	RetrainingAvailableDataInDays *int32
 
 	// The Amazon Resource Name (ARN) of the role that was used to train the model
 	// version.

@@ -289,7 +289,7 @@ func fleetStartedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}
 
-		expectedValue := "RUNNING"
+		expectedValue := "ACTIVE"
 		var match = true
 		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
@@ -321,7 +321,7 @@ func fleetStartedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}
 
-		expectedValue := "STOPPING"
+		expectedValue := "PENDING_DEACTIVATE"
 		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
 			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
@@ -345,7 +345,7 @@ func fleetStartedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}
 
-		expectedValue := "STOPPED"
+		expectedValue := "INACTIVE"
 		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
 			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
@@ -511,7 +511,7 @@ func fleetStoppedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}
 
-		expectedValue := "STOPPED"
+		expectedValue := "INACTIVE"
 		var match = true
 		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
@@ -543,7 +543,7 @@ func fleetStoppedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}
 
-		expectedValue := "STARTING"
+		expectedValue := "PENDING_ACTIVATE"
 		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
 			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
@@ -567,7 +567,7 @@ func fleetStoppedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}
 
-		expectedValue := "RUNNING"
+		expectedValue := "ACTIVE"
 		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
 			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)

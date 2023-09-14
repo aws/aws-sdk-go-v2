@@ -15,9 +15,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an ML model currently available for Amazon Lookout for Equipment. This
-// will prevent it from being used with an inference scheduler, even one that is
-// already set up.
+// Deletes a machine learning model currently available for Amazon Lookout for
+// Equipment. This will prevent it from being used with an inference scheduler,
+// even one that is already set up.
 func (c *Client) DeleteModel(ctx context.Context, params *DeleteModelInput, optFns ...func(*Options)) (*DeleteModelOutput, error) {
 	if params == nil {
 		params = &DeleteModelInput{}
@@ -35,7 +35,7 @@ func (c *Client) DeleteModel(ctx context.Context, params *DeleteModelInput, optF
 
 type DeleteModelInput struct {
 
-	// The name of the ML model to be deleted.
+	// The name of the machine learning model to be deleted.
 	//
 	// This member is required.
 	ModelName *string

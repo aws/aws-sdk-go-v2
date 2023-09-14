@@ -1,0 +1,8 @@
+{
+    "id": "37bc8377-733a-4574-91dc-3f72ab031ceb",
+    "type": "feature",
+    "description": "Changed \"ResolutionTechniques\" and \"MappedInputFields\" in workflow and schema mapping operations to be required fields.",
+    "modules": [
+        "service/entityresolution"
+    ]
+}

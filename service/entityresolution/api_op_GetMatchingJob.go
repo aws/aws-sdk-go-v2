@@ -61,7 +61,7 @@ type GetMatchingJobOutput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The current status of the job. Either running , succeeded , queued , or failed .
+	// The current status of the job.
 	//
 	// This member is required.
 	Status types.JobStatus

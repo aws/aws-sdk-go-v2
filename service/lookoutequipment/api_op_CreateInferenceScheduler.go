@@ -73,8 +73,8 @@ type CreateInferenceSchedulerInput struct {
 	// This member is required.
 	InferenceSchedulerName *string
 
-	// The name of the previously trained ML model being used to create the inference
-	// scheduler.
+	// The name of the previously trained machine learning model being used to create
+	// the inference scheduler.
 	//
 	// This member is required.
 	ModelName *string

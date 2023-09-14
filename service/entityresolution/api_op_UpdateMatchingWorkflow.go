@@ -48,13 +48,13 @@ type UpdateMatchingWorkflowInput struct {
 	// This member is required.
 	OutputSourceConfig []types.OutputSource
 
-	// An object which defines the resolutionType and the ruleBasedProperties
+	// An object which defines the resolutionType and the ruleBasedProperties .
 	//
 	// This member is required.
 	ResolutionTechniques *types.ResolutionTechniques
 
-	// The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes
-	// this role to create resources on your behalf as part of workflow execution.
+	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
+	// role to create resources on your behalf as part of workflow execution.
 	//
 	// This member is required.
 	RoleArn *string
@@ -93,8 +93,8 @@ type UpdateMatchingWorkflowOutput struct {
 	// This member is required.
 	ResolutionTechniques *types.ResolutionTechniques
 
-	// The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes
-	// this role to create resources on your behalf as part of workflow execution.
+	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
+	// role to create resources on your behalf as part of workflow execution.
 	//
 	// This member is required.
 	RoleArn *string

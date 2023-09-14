@@ -1518,21 +1518,6 @@ func validateApplicationSettings(v *types.ApplicationSettings) error {
 	}
 }
 
-func validateComputeCapacity(v *types.ComputeCapacity) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ComputeCapacity"}
-	if v.DesiredInstances == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DesiredInstances"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateEntitlementAttribute(v *types.EntitlementAttribute) error {
 	if v == nil {
 		return nil
@@ -2036,11 +2021,6 @@ func validateOpCreateFleetInput(v *CreateFleetInput) error {
 	}
 	if v.InstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
-	if v.ComputeCapacity != nil {
-		if err := validateComputeCapacity(v.ComputeCapacity); err != nil {
-			invalidParams.AddNested("ComputeCapacity", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.SessionScriptS3Location != nil {
 		if err := validateS3Location(v.SessionScriptS3Location); err != nil {
@@ -2824,11 +2804,6 @@ func validateOpUpdateFleetInput(v *UpdateFleetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFleetInput"}
-	if v.ComputeCapacity != nil {
-		if err := validateComputeCapacity(v.ComputeCapacity); err != nil {
-			invalidParams.AddNested("ComputeCapacity", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.SessionScriptS3Location != nil {
 		if err := validateS3Location(v.SessionScriptS3Location); err != nil {
 			invalidParams.AddNested("SessionScriptS3Location", err.(smithy.InvalidParamsError))

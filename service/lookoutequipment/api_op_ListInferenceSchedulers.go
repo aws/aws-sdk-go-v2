@@ -41,7 +41,8 @@ type ListInferenceSchedulersInput struct {
 	// Specifies the maximum number of inference schedulers to list.
 	MaxResults *int32
 
-	// The name of the ML model used by the inference scheduler to be listed.
+	// The name of the machine learning model used by the inference scheduler to be
+	// listed.
 	ModelName *string
 
 	// An opaque pagination token indicating where to continue the listing of
