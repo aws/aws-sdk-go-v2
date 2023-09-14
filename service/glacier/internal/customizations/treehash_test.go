@@ -3,6 +3,8 @@ package customizations
 import (
 	"bytes"
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -124,4 +126,58 @@ func TestTreeHashMiddleware(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestComputeHashes(t *testing.T) {
+
+	t.Run("no hash", func(t *testing.T) {
+		var hashes [][]byte
+		treeHash := computeTreeHash(hashes)
+		if treeHash != nil {
+			t.Fatalf("expected []byte(nil), got %v", treeHash)
+		}
+	})
+
+	t.Run("one hash", func(t *testing.T) {
+		hash := sha256.Sum256([]byte("hash"))
+		treeHash := computeTreeHash([][]byte{hash[:]})
+
+		expected, actual := hex.EncodeToString(hash[:]), hex.EncodeToString(treeHash)
+		if expected != actual {
+			t.Fatalf("expected %v, got %v", expected, actual)
+		}
+	})
+
+	t.Run("even hashes", func(t *testing.T) {
+		h1 := sha256.Sum256([]byte("h1"))
+		h2 := sha256.Sum256([]byte("h2"))
+
+		hash := sha256.Sum256(append(h1[:], h2[:]...))
+		expected := hex.EncodeToString(hash[:])
+
+		treeHash := computeTreeHash([][]byte{h1[:], h2[:]})
+		actual := hex.EncodeToString(treeHash)
+
+		if expected != actual {
+			t.Fatalf("expected %v, got %v", expected, actual)
+		}
+	})
+
+	t.Run("odd hashes", func(t *testing.T) {
+		h1 := sha256.Sum256([]byte("h1"))
+		h2 := sha256.Sum256([]byte("h2"))
+		h3 := sha256.Sum256([]byte("h3"))
+
+		h12 := sha256.Sum256(append(h1[:], h2[:]...))
+		hash := sha256.Sum256(append(h12[:], h3[:]...))
+		expected := hex.EncodeToString(hash[:])
+
+		treeHash := computeTreeHash([][]byte{h1[:], h2[:], h3[:]})
+		actual := hex.EncodeToString(treeHash)
+
+		if expected != actual {
+			t.Fatalf("expected %v, got %v", expected, actual)
+		}
+	})
+
 }
