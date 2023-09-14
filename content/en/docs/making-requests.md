@@ -263,7 +263,7 @@ if err := decoder.Decode(&myStruct); err != nil {
 All service operation output structs include a `ResultMetadata` member of type 
 [middleware.Metadata]({{< apiref smithy="middleware#Metadata" >}}). `middleware.Metadata` is used by the SDK middleware
 to provide additional information from a service response that is not modeled by the service. This includes metadata
-like the `RequestID`. For example to retrieve the `RequestID` associated with a service response to assit AWS Support in
+like the `RequestID`. For example to retrieve the `RequestID` associated with a service response to assist AWS Support in
 troubleshooting a request:
 
 ```go
