@@ -49,6 +49,9 @@
                     "target": "com.amazonaws.lookoutequipment#CreateModel"
                 },
                 {
+                    "target": "com.amazonaws.lookoutequipment#CreateRetrainingScheduler"
+                },
+                {
                     "target": "com.amazonaws.lookoutequipment#DeleteDataset"
                 },
                 {
@@ -65,6 +68,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#DeleteResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DeleteRetrainingScheduler"
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#DescribeDataIngestionJob"
@@ -89,6 +95,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#DescribeResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DescribeRetrainingScheduler"
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#ImportDataset"
@@ -124,6 +133,9 @@
                     "target": "com.amazonaws.lookoutequipment#ListModelVersions"
                 },
                 {
+                    "target": "com.amazonaws.lookoutequipment#ListRetrainingSchedulers"
+                },
+                {
                     "target": "com.amazonaws.lookoutequipment#ListSensorStatistics"
                 },
                 {
@@ -139,7 +151,13 @@
                     "target": "com.amazonaws.lookoutequipment#StartInferenceScheduler"
                 },
                 {
+                    "target": "com.amazonaws.lookoutequipment#StartRetrainingScheduler"
+                },
+                {
                     "target": "com.amazonaws.lookoutequipment#StopInferenceScheduler"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#StopRetrainingScheduler"
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#TagResource"
@@ -155,6 +173,12 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#UpdateLabelGroup"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#UpdateModel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#UpdateRetrainingScheduler"
                 }
             ],
             "traits": {
@@ -852,6 +876,50 @@
                 }
             }
         },
+        "com.amazonaws.lookoutequipment#AutoPromotionResult": {
+            "type": "enum",
+            "members": {
+                "MODEL_PROMOTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODEL_PROMOTED"
+                    }
+                },
+                "MODEL_NOT_PROMOTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODEL_NOT_PROMOTED"
+                    }
+                },
+                "RETRAINING_INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETRAINING_INTERNAL_ERROR"
+                    }
+                },
+                "RETRAINING_CUSTOMER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETRAINING_CUSTOMER_ERROR"
+                    }
+                },
+                "RETRAINING_CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETRAINING_CANCELLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#AutoPromotionResultReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.lookoutequipment#Boolean": {
             "type": "boolean",
             "traits": {
@@ -1098,7 +1166,7 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the previously trained ML model being used to create the inference\n         scheduler. </p>",
+                        "smithy.api#documentation": "<p>The name of the previously trained machine learning model being used to create the\n         inference scheduler. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1112,13 +1180,13 @@
                 "DataDelayOffsetInMinutes": {
                     "target": "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The interval (in minutes) of planned delay at the start of each inference segment. For\n         example, if inference is set to run every ten minutes, the delay is set to five minutes and the time is 09:08. The inference scheduler will wake up at the\n         configured interval (which, without a delay configured, would be 09:10) plus the additional five minute delay time (so 09:15) to check your Amazon S3\n         bucket. The delay provides a buffer for you to upload data at the same frequency, so that you don't have to stop and\n         restart the scheduler when uploading new data.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html\">Understanding the inference process</a>.</p>"
+                        "smithy.api#documentation": "<p>The interval (in minutes) of planned delay at the start of each inference segment. For\n         example, if inference is set to run every ten minutes, the delay is set to five minutes and\n         the time is 09:08. The inference scheduler will wake up at the configured interval (which,\n         without a delay configured, would be 09:10) plus the additional five minute delay time (so\n         09:15) to check your Amazon S3 bucket. The delay provides a buffer for you to upload data at the\n         same frequency, so that you don't have to stop and restart the scheduler when uploading new\n         data.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html\">Understanding\n            the inference process</a>.</p>"
                     }
                 },
                 "DataUploadFrequency": {
                     "target": "com.amazonaws.lookoutequipment#DataUploadFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p> How often data is uploaded to the source Amazon S3 bucket for the input data. The value chosen\n         is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5\n         minutes. This frequency also determines how often Amazon Lookout for Equipment runs inference on your data.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html\">Understanding the inference process</a>.</p>",
+                        "smithy.api#documentation": "<p> How often data is uploaded to the source Amazon S3 bucket for the input data. The value\n         chosen is the length of time between data uploads. For instance, if you select 5 minutes,\n         Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This\n         frequency also determines how often Amazon Lookout for Equipment runs inference on your data.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html\">Understanding\n            the inference process</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1226,7 +1294,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Creates a label for an event.\n      </p>"
+                "smithy.api#documentation": "<p> Creates a label for an event. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#CreateLabelGroup": {
@@ -1258,7 +1326,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Creates a group of labels.\n      </p>"
+                "smithy.api#documentation": "<p> Creates a group of labels. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#CreateLabelGroupRequest": {
@@ -1267,20 +1335,20 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Names a group of labels.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n         </p>",
+                        "smithy.api#documentation": "<p> Names a group of labels.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FaultCodes": {
                     "target": "com.amazonaws.lookoutequipment#FaultCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The acceptable fault codes (indicating the type of anomaly associated with the label) that can be used with this label group.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p> The acceptable fault codes (indicating the type of anomaly associated with the label)\n         that can be used with this label group.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A unique identifier for the request to create a label group. If you do not set the client request token, Lookout for Equipment generates one.\n      </p>",
+                        "smithy.api#documentation": "<p> A unique identifier for the request to create a label group. If you do not set the\n         client request token, Lookout for Equipment generates one. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1288,7 +1356,7 @@
                 "Tags": {
                     "target": "com.amazonaws.lookoutequipment#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Tags that provide metadata about the label group you are creating.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p> Tags that provide metadata about the label group you are creating. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data.</p>"
                     }
                 }
             },
@@ -1302,13 +1370,13 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the label group that you have created. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n      </p>"
+                        "smithy.api#documentation": "<p> The name of the label group that you have created. Data in this field will be retained\n         for service usage. Follow best practices for the security of your data. </p>"
                     }
                 },
                 "LabelGroupArn": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the label group that you have created.\n      </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the label group that you have created. </p>"
                     }
                 }
             },
@@ -1322,53 +1390,53 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of a group of labels. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n         </p>",
+                        "smithy.api#documentation": "<p> The name of a group of labels. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "StartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The start time of the labeled event.\n      </p>",
+                        "smithy.api#documentation": "<p> The start time of the labeled event. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The end time of the labeled event.\n      </p>",
+                        "smithy.api#documentation": "<p> The end time of the labeled event. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Rating": {
                     "target": "com.amazonaws.lookoutequipment#LabelRating",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates whether a labeled event represents an anomaly.\n      </p>",
+                        "smithy.api#documentation": "<p> Indicates whether a labeled event represents an anomaly. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FaultCode": {
                     "target": "com.amazonaws.lookoutequipment#FaultCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Provides additional information about the label. The fault code must be defined in the FaultCodes attribute of the label group.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n      </p>"
+                        "smithy.api#documentation": "<p> Provides additional information about the label. The fault code must be defined in the\n         FaultCodes attribute of the label group.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data. </p>"
                     }
                 },
                 "Notes": {
                     "target": "com.amazonaws.lookoutequipment#Comments",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Metadata providing additional information about the label.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p> Metadata providing additional information about the label. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data.</p>"
                     }
                 },
                 "Equipment": {
                     "target": "com.amazonaws.lookoutequipment#Equipment",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates that a label pertains to a particular piece of equipment.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p> Indicates that a label pertains to a particular piece of equipment. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A unique identifier for the request to create a label. If you do not set the client request token, Lookout for Equipment generates one.\n      </p>",
+                        "smithy.api#documentation": "<p> A unique identifier for the request to create a label. If you do not set the client\n         request token, Lookout for Equipment generates one. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1384,7 +1452,7 @@
                 "LabelId": {
                     "target": "com.amazonaws.lookoutequipment#LabelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The ID of the label that you have created.\n      </p>"
+                        "smithy.api#documentation": "<p> The ID of the label that you have created. </p>"
                     }
                 }
             },
@@ -1424,7 +1492,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an ML model for data inference. </p>\n         <p>A machine-learning (ML) model is a mathematical model that finds patterns in your data.\n         In Amazon Lookout for Equipment, the model learns the patterns of normal behavior and\n         detects abnormal behavior that could be potential equipment failure (or maintenance\n         events). The models are made by analyzing normal data and abnormalities in machine behavior\n         that have already occurred.</p>\n         <p>Your model is trained using a portion of the data from your dataset and uses that data\n         to learn patterns of normal behavior and abnormal patterns that lead to equipment failure.\n         Another portion of the data is used to evaluate the model's accuracy. </p>"
+                "smithy.api#documentation": "<p>Creates a machine learning model for data inference. </p>\n         <p>A machine-learning (ML) model is a mathematical model that finds patterns in your data.\n         In Amazon Lookout for Equipment, the model learns the patterns of normal behavior and detects abnormal\n         behavior that could be potential equipment failure (or maintenance events). The models are\n         made by analyzing normal data and abnormalities in machine behavior that have already\n         occurred.</p>\n         <p>Your model is trained using a portion of the data from your dataset and uses that data\n         to learn patterns of normal behavior and abnormal patterns that lead to equipment failure.\n         Another portion of the data is used to evaluate the model's accuracy. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#CreateModelRequest": {
@@ -1433,27 +1501,27 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the ML model to be created.</p>",
+                        "smithy.api#documentation": "<p>The name for the machine learning model to be created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DatasetName": {
                     "target": "com.amazonaws.lookoutequipment#DatasetIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dataset for the ML model being created. </p>",
+                        "smithy.api#documentation": "<p>The name of the dataset for the machine learning model being created. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DatasetSchema": {
                     "target": "com.amazonaws.lookoutequipment#DatasetSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data schema for the ML model being created. </p>"
+                        "smithy.api#documentation": "<p>The data schema for the machine learning model being created. </p>"
                     }
                 },
                 "LabelsInputConfiguration": {
                     "target": "com.amazonaws.lookoutequipment#LabelsInputConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input configuration for the labels being used for the ML model that's being created.\n      </p>"
+                        "smithy.api#documentation": "<p>The input configuration for the labels being used for the machine learning model that's\n         being created. </p>"
                     }
                 },
                 "ClientToken": {
@@ -1467,37 +1535,37 @@
                 "TrainingDataStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset that should be used to begin the subset of\n         training data for the ML model. </p>"
+                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset that should be used to begin the subset of\n         training data for the machine learning model. </p>"
                     }
                 },
                 "TrainingDataEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset that should be used to end the subset of\n         training data for the ML model. </p>"
+                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset that should be used to end the subset of\n         training data for the machine learning model. </p>"
                     }
                 },
                 "EvaluationDataStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset that should be used to begin the subset of\n         evaluation data for the ML model. </p>"
+                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset that should be used to begin the subset of\n         evaluation data for the machine learning model. </p>"
                     }
                 },
                 "EvaluationDataEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that should be used to end the subset of\n         evaluation data for the ML model. </p>"
+                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that should be used to end the subset of\n         evaluation data for the machine learning model. </p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutequipment#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source\n         being used to create the ML model. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source\n         being used to create the machine learning model. </p>"
                     }
                 },
                 "DataPreProcessingConfiguration": {
                     "target": "com.amazonaws.lookoutequipment#DataPreProcessingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of\n         the data after post processing by Amazon Lookout for Equipment. For example, if you provide\n         data that has been collected at a 1 second level and you want the system to resample the\n         data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1\n         minute.</p>\n         <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the\n         prefix \"PT\" to the rate you want. The value for a 1 second rate is therefore\n            <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>,\n         and the value for a 1 hour rate is <i>PT1H</i>\n         </p>"
+                        "smithy.api#documentation": "<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of\n         the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been\n         collected at a 1 second level and you want the system to resample the data at a 1 minute\n         rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p>\n         <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the\n         prefix \"PT\" to the rate you want. The value for a 1 second rate is therefore\n            <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>,\n         and the value for a 1 hour rate is <i>PT1H</i>\n         </p>"
                     }
                 },
                 "ServerSideKmsKeyId": {
@@ -1509,7 +1577,7 @@
                 "Tags": {
                     "target": "com.amazonaws.lookoutequipment#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p> Any tags associated with the ML model being created. </p>"
+                        "smithy.api#documentation": "<p> Any tags associated with the machine learning model being created. </p>"
                     }
                 },
                 "OffCondition": {
@@ -1536,6 +1604,131 @@
                     "target": "com.amazonaws.lookoutequipment#ModelStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the status of the <code>CreateModel</code> operation. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateRetrainingScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#CreateRetrainingSchedulerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#CreateRetrainingSchedulerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a retraining scheduler on the specified model. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Creates a retraining scheduler with manual promote mode",
+                        "documentation": "",
+                        "input": {
+                            "ModelName": "sample-model",
+                            "RetrainingFrequency": "P1M",
+                            "LookbackWindow": "P360D",
+                            "PromoteMode": "MANUAL",
+                            "ClientToken": "sample-client-token"
+                        },
+                        "output": {
+                            "ModelName": "sample-model",
+                            "ModelArn": "arn:aws:lookoutequipment:us-east-1:123456789012:model/sample-model/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Status": "PENDING"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateRetrainingSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model to add the retraining scheduler to. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RetrainingStartDate": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date for the retraining scheduler. Lookout for Equipment truncates the time you provide to the\n         nearest UTC day.</p>"
+                    }
+                },
+                "RetrainingFrequency": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter uses the <a href=\"https://en.wikipedia.org/wiki/ISO_8601#Durations\">ISO 8601</a> standard to set the frequency at which you want retraining to occur in\n         terms of Years, Months, and/or Days (note: other parameters like Time are not currently\n         supported). The minimum value is 30 days (P30D) and the maximum value is 1 year (P1Y). For\n         example, the following values are valid:</p>\n         <ul>\n            <li>\n               <p>P3M15D – Every 3 months and 15 days</p>\n            </li>\n            <li>\n               <p>P2M – Every 2 months</p>\n            </li>\n            <li>\n               <p>P150D – Every 150 days</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LookbackWindow": {
+                    "target": "com.amazonaws.lookoutequipment#LookbackWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of past days of data that will be used for retraining.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PromoteMode": {
+                    "target": "com.amazonaws.lookoutequipment#ModelPromoteMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how the service will use new models. In <code>MANAGED</code> mode, new models\n         will automatically be used for inference if they have better performance than the current\n         model. In <code>MANUAL</code> mode, the new models will not be used <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation\">until they\n            are manually activated</a>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you do not set the client request token, Amazon\n         Lookout for Equipment generates one. </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateRetrainingSchedulerResponse": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model that you added the retraining scheduler to. </p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model that you added the retraining scheduler to. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the retraining scheduler. </p>"
                     }
                 }
             },
@@ -1602,12 +1795,12 @@
                 "TargetSamplingRate": {
                     "target": "com.amazonaws.lookoutequipment#TargetSamplingRate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sampling rate of the data after post processing by Amazon Lookout for Equipment. For\n         example, if you provide data that has been collected at a 1 second level and you want the\n         system to resample the data at a 1 minute rate before training, the\n            <code>TargetSamplingRate</code> is 1 minute.</p>\n         <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the\n         prefix \"PT\" to the rate you want. The value for a 1 second rate is therefore\n            <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>,\n         and the value for a 1 hour rate is <i>PT1H</i>\n         </p>"
+                        "smithy.api#documentation": "<p>The sampling rate of the data after post processing by Amazon Lookout for Equipment. For example, if you\n         provide data that has been collected at a 1 second level and you want the system to\n         resample the data at a 1 minute rate before training, the <code>TargetSamplingRate</code>\n         is 1 minute.</p>\n         <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the\n         prefix \"PT\" to the rate you want. The value for a 1 second rate is therefore\n            <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>,\n         and the value for a 1 hour rate is <i>PT1H</i>\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of\n         the data after post processing by Amazon Lookout for Equipment. For example, if you provide\n         data that has been collected at a 1 second level and you want the system to resample the\n         data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1\n         minute.</p>\n         <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the\n         prefix \"PT\" to the rate you want. The value for a 1 second rate is therefore\n            <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>,\n         and the value for a 1 hour rate is <i>PT1H</i>\n         </p>"
+                "smithy.api#documentation": "<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of\n         the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been\n         collected at a 1 second level and you want the system to resample the data at a 1 minute\n         rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p>\n         <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the\n         prefix \"PT\" to the rate you want. The value for a 1 second rate is therefore\n            <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>,\n         and the value for a 1 hour rate is <i>PT1H</i>\n         </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DataQualitySummary": {
@@ -1732,7 +1925,7 @@
                 "InlineDataSchema": {
                     "target": "com.amazonaws.lookoutequipment#SynthesizedJsonInlineDataSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>"
+                        "smithy.api#documentation": "<p>The data schema used within the given dataset.</p>"
                     }
                 }
             },
@@ -1883,7 +2076,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an inference scheduler that has been set up. Already processed output results\n         are not affected. </p>"
+                "smithy.api#documentation": "<p>Deletes an inference scheduler that has been set up. Prior inference results will not be\n         deleted.</p>"
             }
         },
         "com.amazonaws.lookoutequipment#DeleteInferenceSchedulerRequest": {
@@ -1930,7 +2123,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Deletes a label.\n      </p>"
+                "smithy.api#documentation": "<p> Deletes a label. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DeleteLabelGroup": {
@@ -1962,7 +2155,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Deletes a group of labels.\n      </p>"
+                "smithy.api#documentation": "<p> Deletes a group of labels. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DeleteLabelGroupRequest": {
@@ -1971,7 +2164,7 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the label group that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the label group that you want to delete. Data in this field will be\n         retained for service usage. Follow best practices for the security of your data. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1986,14 +2179,14 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the label group that contains the label that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the label group that contains the label that you want to delete. Data in\n         this field will be retained for service usage. Follow best practices for the security of\n         your data. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LabelId": {
                     "target": "com.amazonaws.lookoutequipment#LabelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The ID of the label that you want to delete.\n      </p>",
+                        "smithy.api#documentation": "<p> The ID of the label that you want to delete. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2031,7 +2224,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an ML model currently available for Amazon Lookout for Equipment. This will\n         prevent it from being used with an inference scheduler, even one that is already set up.\n      </p>"
+                "smithy.api#documentation": "<p>Deletes a machine learning model currently available for Amazon Lookout for Equipment. This will prevent it\n         from being used with an inference scheduler, even one that is already set up. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DeleteModelRequest": {
@@ -2040,7 +2233,7 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ML model to be deleted. </p>",
+                        "smithy.api#documentation": "<p>The name of the machine learning model to be deleted. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2087,7 +2280,63 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.lookoutequipment#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which the resource policy should be deleted.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which the resource policy should be\n         deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteRetrainingScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DeleteRetrainingSchedulerRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a retraining scheduler from a model. The retraining scheduler must be in the\n            <code>STOPPED</code> status. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Deletes a retraining scheduler",
+                        "documentation": "",
+                        "input": {
+                            "ModelName": "sample-model"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteRetrainingSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model whose retraining scheduler you want to delete. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2221,7 +2470,7 @@
                 "SourceDatasetArn": {
                     "target": "com.amazonaws.lookoutequipment#DatasetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source dataset from which the data \n         used for the data ingestion job was imported from.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source dataset from which the data used for the\n         data ingestion job was imported from.</p>"
                     }
                 }
             },
@@ -2357,7 +2606,7 @@
                 "SourceDatasetArn": {
                     "target": "com.amazonaws.lookoutequipment#DatasetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source dataset from which the \n         current data being described was imported from.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source dataset from which the current data being\n         described was imported from.</p>"
                     }
                 }
             },
@@ -2415,13 +2664,13 @@
                 "ModelArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML model of the inference scheduler being\n         described. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model of the inference scheduler\n         being described. </p>"
                     }
                 },
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ML model of the inference scheduler being described. </p>"
+                        "smithy.api#documentation": "<p>The name of the machine learning model of the inference scheduler being described.\n      </p>"
                     }
                 },
                 "InferenceSchedulerName": {
@@ -2451,7 +2700,7 @@
                 "DataUploadFrequency": {
                     "target": "com.amazonaws.lookoutequipment#DataUploadFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how often data is uploaded to the source S3 bucket for the input data. This\n         value is the length of time between data uploads. For instance, if you select 5 minutes,\n         Amazon Lookout for Equipment will upload the real-time data to the source bucket once every\n         5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a\n         scheduled inference on your data. In this example, it starts once every 5 minutes. </p>"
+                        "smithy.api#documentation": "<p>Specifies how often data is uploaded to the source S3 bucket for the input data. This\n         value is the length of time between data uploads. For instance, if you select 5 minutes,\n         Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This\n         frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In\n         this example, it starts once every 5 minutes. </p>"
                     }
                 },
                 "CreatedAt": {
@@ -2527,7 +2776,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Returns the name of the label.\n      </p>"
+                "smithy.api#documentation": "<p> Returns the name of the label. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DescribeLabelGroup": {
@@ -2556,7 +2805,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Returns information about the label group.\n      </p>"
+                "smithy.api#documentation": "<p> Returns information about the label group. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DescribeLabelGroupRequest": {
@@ -2565,7 +2814,7 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Returns the name of the label group.\n      </p>",
+                        "smithy.api#documentation": "<p> Returns the name of the label group. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2580,31 +2829,31 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the label group.\n      </p>"
+                        "smithy.api#documentation": "<p> The name of the label group. </p>"
                     }
                 },
                 "LabelGroupArn": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the label group.\n      </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the label group. </p>"
                     }
                 },
                 "FaultCodes": {
                     "target": "com.amazonaws.lookoutequipment#FaultCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Codes indicating the type of anomaly associated with the labels in the lagbel group.\n      </p>"
+                        "smithy.api#documentation": "<p> Codes indicating the type of anomaly associated with the labels in the lagbel group.\n      </p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The time at which the label group was created.\n      </p>"
+                        "smithy.api#documentation": "<p> The time at which the label group was created. </p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The time at which the label group was updated.\n      </p>"
+                        "smithy.api#documentation": "<p> The time at which the label group was updated. </p>"
                     }
                 }
             },
@@ -2618,14 +2867,14 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Returns the name of the group containing the label.\n      </p>",
+                        "smithy.api#documentation": "<p> Returns the name of the group containing the label. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LabelId": {
                     "target": "com.amazonaws.lookoutequipment#LabelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Returns the ID of the label.\n      </p>",
+                        "smithy.api#documentation": "<p> Returns the ID of the label. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2640,61 +2889,61 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the requested label group.\n      </p>"
+                        "smithy.api#documentation": "<p> The name of the requested label group. </p>"
                     }
                 },
                 "LabelGroupArn": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the requested label group.\n      </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the requested label group. </p>"
                     }
                 },
                 "LabelId": {
                     "target": "com.amazonaws.lookoutequipment#LabelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The ID of the requested label.\n      </p>"
+                        "smithy.api#documentation": "<p> The ID of the requested label. </p>"
                     }
                 },
                 "StartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The start time of the requested label.\n      </p>"
+                        "smithy.api#documentation": "<p> The start time of the requested label. </p>"
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The end time of the requested label.\n      </p>"
+                        "smithy.api#documentation": "<p> The end time of the requested label. </p>"
                     }
                 },
                 "Rating": {
                     "target": "com.amazonaws.lookoutequipment#LabelRating",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates whether a labeled event represents an anomaly.\n      </p>"
+                        "smithy.api#documentation": "<p> Indicates whether a labeled event represents an anomaly. </p>"
                     }
                 },
                 "FaultCode": {
                     "target": "com.amazonaws.lookoutequipment#FaultCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates the type of anomaly associated with the label.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p> Indicates the type of anomaly associated with the label. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data.</p>"
                     }
                 },
                 "Notes": {
                     "target": "com.amazonaws.lookoutequipment#Comments",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata providing additional information about the label.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p>Metadata providing additional information about the label.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data.</p>"
                     }
                 },
                 "Equipment": {
                     "target": "com.amazonaws.lookoutequipment#Equipment",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates that a label pertains to a particular piece of equipment.\n      </p>"
+                        "smithy.api#documentation": "<p> Indicates that a label pertains to a particular piece of equipment. </p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The time at which the label was created.\n      </p>"
+                        "smithy.api#documentation": "<p> The time at which the label was created. </p>"
                     }
                 }
             },
@@ -2728,7 +2977,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a JSON containing the overall information about a specific ML model, including\n         model name and ARN, dataset, training and evaluation information, status, and so on.\n      </p>"
+                "smithy.api#documentation": "<p>Provides a JSON containing the overall information about a specific machine learning\n         model, including model name and ARN, dataset, training and evaluation information, status,\n         and so on. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DescribeModelRequest": {
@@ -2737,7 +2986,7 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ML model to be described. </p>",
+                        "smithy.api#documentation": "<p>The name of the machine learning model to be described. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2752,25 +3001,25 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ML model being described. </p>"
+                        "smithy.api#documentation": "<p>The name of the machine learning model being described. </p>"
                     }
                 },
                 "ModelArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML model being described. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model being described. </p>"
                     }
                 },
                 "DatasetName": {
                     "target": "com.amazonaws.lookoutequipment#DatasetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dataset being used by the ML being described. </p>"
+                        "smithy.api#documentation": "<p>The name of the dataset being used by the machine learning being described. </p>"
                     }
                 },
                 "DatasetArn": {
                     "target": "com.amazonaws.lookoutequipment#DatasetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resouce Name (ARN) of the dataset used to create the ML model being\n         described. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resouce Name (ARN) of the dataset used to create the machine learning model\n         being described. </p>"
                     }
                 },
                 "Schema": {
@@ -2788,37 +3037,37 @@
                 "TrainingDataStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to begin the subset of\n         training data for the ML model. </p>"
+                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to begin the subset of\n         training data for the machine learning model. </p>"
                     }
                 },
                 "TrainingDataEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to end the subset of training\n         data for the ML model. </p>"
+                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to end the subset of training\n         data for the machine learning model. </p>"
                     }
                 },
                 "EvaluationDataStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to begin the subset of\n         evaluation data for the ML model. </p>"
+                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to begin the subset of\n         evaluation data for the machine learning model. </p>"
                     }
                 },
                 "EvaluationDataEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to end the subset of\n         evaluation data for the ML model. </p>"
+                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to end the subset of\n         evaluation data for the machine learning model. </p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutequipment#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source for\n         the ML model being described. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source for\n         the machine learning model being described. </p>"
                     }
                 },
                 "DataPreProcessingConfiguration": {
                     "target": "com.amazonaws.lookoutequipment#DataPreProcessingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of\n         the data after post processing by Amazon Lookout for Equipment. For example, if you provide\n         data that has been collected at a 1 second level and you want the system to resample the\n         data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1\n         minute.</p>\n         <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the\n         prefix \"PT\" to the rate you want. The value for a 1 second rate is therefore\n            <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>,\n         and the value for a 1 hour rate is <i>PT1H</i>\n         </p>"
+                        "smithy.api#documentation": "<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of\n         the data after post processing by Amazon Lookout for Equipment. For example, if you provide data that has been\n         collected at a 1 second level and you want the system to resample the data at a 1 minute\n         rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p>\n         <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach the\n         prefix \"PT\" to the rate you want. The value for a 1 second rate is therefore\n            <i>PT1S</i>, the value for a 15 minute rate is <i>PT15M</i>,\n         and the value for a 1 hour rate is <i>PT1H</i>\n         </p>"
                     }
                 },
                 "Status": {
@@ -2830,19 +3079,19 @@
                 "TrainingExecutionStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the time at which the training of the ML model began. </p>"
+                        "smithy.api#documentation": "<p>Indicates the time at which the training of the machine learning model began. </p>"
                     }
                 },
                 "TrainingExecutionEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the time at which the training of the ML model was completed. </p>"
+                        "smithy.api#documentation": "<p>Indicates the time at which the training of the machine learning model was completed.\n      </p>"
                     }
                 },
                 "FailedReason": {
                     "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the training of the ML model failed, this indicates the reason for that failure.\n      </p>"
+                        "smithy.api#documentation": "<p>If the training of the machine learning model failed, this indicates the reason for that\n         failure. </p>"
                     }
                 },
                 "ModelMetrics": {
@@ -2854,13 +3103,13 @@
                 "LastUpdatedTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the last time the ML model was updated. The type of update is not specified.\n      </p>"
+                        "smithy.api#documentation": "<p>Indicates the last time the machine learning model was updated. The type of update is\n         not specified. </p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the time and date at which the ML model was created. </p>"
+                        "smithy.api#documentation": "<p>Indicates the time and date at which the machine learning model was created. </p>"
                     }
                 },
                 "ServerSideKmsKeyId": {
@@ -2872,37 +3121,37 @@
                 "OffCondition": {
                     "target": "com.amazonaws.lookoutequipment#OffCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that the asset associated with this sensor has been shut off. As long as this\n         condition is met, Lookout for Equipment will not use data from this asset for training,\n         evaluation, or inference.</p>"
+                        "smithy.api#documentation": "<p>Indicates that the asset associated with this sensor has been shut off. As long as this\n         condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or\n         inference.</p>"
                     }
                 },
                 "SourceModelVersionArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source model version. This field appears if the active model version \n      was imported.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source model version. This field appears if the\n         active model version was imported.</p>"
                     }
                 },
                 "ImportJobStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time when the import job was started. \n      This field appears if the active model version was imported.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the import job was started. This field appears if the active\n         model version was imported.</p>"
                     }
                 },
                 "ImportJobEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time when the import job was completed. \n      This field appears if the active model version was imported.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the import job was completed. This field appears if the active\n         model version was imported.</p>"
                     }
                 },
                 "ActiveModelVersion": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model version used by the inference schedular when running a\n      scheduled inference execution.</p>"
+                        "smithy.api#documentation": "<p>The name of the model version used by the inference schedular when running a scheduled\n         inference execution.</p>"
                     }
                 },
                 "ActiveModelVersionArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version used by the\n      inference scheduler when running a scheduled inference execution.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version used by the inference scheduler when\n         running a scheduled inference execution.</p>"
                     }
                 },
                 "ModelVersionActivatedAt": {
@@ -2914,19 +3163,79 @@
                 "PreviousActiveModelVersion": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model version that was set as the active model version prior to the \n         current active model version.</p>"
+                        "smithy.api#documentation": "<p>The model version that was set as the active model version prior to the current active\n         model version.</p>"
                     }
                 },
                 "PreviousActiveModelVersionArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the model version that was set as the active model version prior to the \n         current active model version.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the model version that was set as the active model version prior to the\n         current active model version.</p>"
                     }
                 },
                 "PreviousModelVersionActivatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the previous active model version was activated.</p>"
+                    }
+                },
+                "PriorModelMetrics": {
+                    "target": "com.amazonaws.lookoutequipment#SynthesizedJsonModelMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the model version was retrained, this field shows a summary of the performance of the\n         prior model on the new training range. You can use the information in this JSON-formatted\n         object to compare the new model version and the prior model version.</p>"
+                    }
+                },
+                "LatestScheduledRetrainingFailedReason": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the model version was generated by retraining and the training failed, this indicates\n         the reason for that failure. </p>"
+                    }
+                },
+                "LatestScheduledRetrainingStatus": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the most recent scheduled retraining run. </p>"
+                    }
+                },
+                "LatestScheduledRetrainingModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the most recent model version that was generated by retraining. </p>"
+                    }
+                },
+                "LatestScheduledRetrainingStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the start time of the most recent scheduled retraining run. </p>"
+                    }
+                },
+                "LatestScheduledRetrainingAvailableDataInDays": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the number of days of data used in the most recent scheduled retraining run.\n      </p>"
+                    }
+                },
+                "NextScheduledRetrainingStartDate": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the date and time that the next scheduled retraining run will start on. Lookout for Equipment\n         truncates the time you provide to the nearest UTC day.</p>"
+                    }
+                },
+                "AccumulatedInferenceDataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the start time of the inference data that has been accumulated. </p>"
+                    }
+                },
+                "AccumulatedInferenceDataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the end time of the inference data that has been accumulated. </p>"
+                    }
+                },
+                "RetrainingSchedulerStatus": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the retraining scheduler. </p>"
                     }
                 }
             },
@@ -2997,7 +3306,7 @@
                 "ModelArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the parent machine learning model that this version belong to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the parent machine learning model that this version\n         belong to.</p>"
                     }
                 },
                 "ModelVersion": {
@@ -3048,31 +3357,31 @@
                 "TrainingDataStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date on which the training data began being gathered. If you imported\n      the version, this is the date that the training data in the source \n      version began being gathered.</p>"
+                        "smithy.api#documentation": "<p>The date on which the training data began being gathered. If you imported the version,\n         this is the date that the training data in the source version began being gathered.</p>"
                     }
                 },
                 "TrainingDataEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date on which the training data finished being gathered. \n      If you imported the version, this is the date that the training data in the\n      source version finished being gathered.</p>"
+                        "smithy.api#documentation": "<p>The date on which the training data finished being gathered. If you imported the\n         version, this is the date that the training data in the source version finished being\n         gathered.</p>"
                     }
                 },
                 "EvaluationDataStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date on which the data in the evaluation set began being gathered. \n      If you imported the version, this is the date that the evaluation set data in \n      the source version began being gathered.</p>"
+                        "smithy.api#documentation": "<p>The date on which the data in the evaluation set began being gathered. If you imported\n         the version, this is the date that the evaluation set data in the source version began\n         being gathered.</p>"
                     }
                 },
                 "EvaluationDataEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date on which the data in the evaluation set began being gathered. \n      If you imported the version, this is the date that the evaluation set data in the\n      source version finished being gathered.</p>"
+                        "smithy.api#documentation": "<p>The date on which the data in the evaluation set began being gathered. If you imported\n         the version, this is the date that the evaluation set data in the source version finished\n         being gathered.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutequipment#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that was used to train the model version.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that was used to train the model\n         version.</p>"
                     }
                 },
                 "DataPreProcessingConfiguration": {
@@ -3099,7 +3408,7 @@
                 "ModelMetrics": {
                     "target": "com.amazonaws.lookoutequipment#ModelMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows an aggregated summary, in JSON format, of the model's \n      performance within the evaluation time range. These metrics \n      are created when evaluating the model.</p>"
+                        "smithy.api#documentation": "<p>Shows an aggregated summary, in JSON format, of the model's performance within the\n         evaluation time range. These metrics are created when evaluating the model.</p>"
                     }
                 },
                 "LastUpdatedTime": {
@@ -3111,43 +3420,67 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the time and date at which the machine learning model version was created.</p>"
+                        "smithy.api#documentation": "<p>Indicates the time and date at which the machine learning model version was\n         created.</p>"
                     }
                 },
                 "ServerSideKmsKeyId": {
                     "target": "com.amazonaws.lookoutequipment#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the KMS key key used to encrypt model version data by \n      Amazon Lookout for Equipment.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMS key key used to encrypt model version data by\n         Amazon Lookout for Equipment.</p>"
                     }
                 },
                 "OffCondition": {
                     "target": "com.amazonaws.lookoutequipment#OffCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that the asset associated with this sensor has been \n      shut off. As long as this condition is met, Lookout for Equipment \n      will not use data from this asset for training, evaluation, or inference.</p>"
+                        "smithy.api#documentation": "<p>Indicates that the asset associated with this sensor has been shut off. As long as this\n         condition is met, Lookout for Equipment will not use data from this asset for training,\n         evaluation, or inference.</p>"
                     }
                 },
                 "SourceModelVersionArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>If model version was imported, then this field is the arn\n      of the source model version.</p>"
+                        "smithy.api#documentation": "<p>If model version was imported, then this field is the arn of the source model\n         version.</p>"
                     }
                 },
                 "ImportJobStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time when the import job began. \n      This field appears if the model version was imported.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the import job began. This field appears if the model version was\n         imported.</p>"
                     }
                 },
                 "ImportJobEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time when the import job completed. \n      This field appears if the model version was imported.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the import job completed. This field appears if the model version\n         was imported.</p>"
                     }
                 },
                 "ImportedDataSizeInBytes": {
                     "target": "com.amazonaws.lookoutequipment#DataSizeInBytes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size in bytes of the imported data. \n      This field appears if the model version was imported.</p>"
+                        "smithy.api#documentation": "<p>The size in bytes of the imported data. This field appears if the model version was\n         imported.</p>"
+                    }
+                },
+                "PriorModelMetrics": {
+                    "target": "com.amazonaws.lookoutequipment#ModelMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the model version was retrained, this field shows a summary of the performance of the\n         prior model on the new training range. You can use the information in this JSON-formatted\n         object to compare the new model version and the prior model version.</p>"
+                    }
+                },
+                "RetrainingAvailableDataInDays": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the number of days of data used in the most recent scheduled retraining run.\n      </p>"
+                    }
+                },
+                "AutoPromotionResult": {
+                    "target": "com.amazonaws.lookoutequipment#AutoPromotionResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the model version was promoted to be the active version after\n         retraining or if there was an error with or cancellation of the retraining. </p>"
+                    }
+                },
+                "AutoPromotionResultReason": {
+                    "target": "com.amazonaws.lookoutequipment#AutoPromotionResultReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the reason for the <code>AutoPromotionResult</code>. For example, a model\n         might not be promoted if its performance was worse than the active version, if there was an\n         error during training, or if the retraining scheduler was using <code>MANUAL</code> promote\n         mode. The model will be promoted in <code>MANAGED</code> promote mode if the performance is\n         better than the previous model. </p>"
                     }
                 }
             },
@@ -3190,7 +3523,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.lookoutequipment#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that is associated with the resource policy.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that is associated with the resource\n         policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3224,6 +3557,132 @@
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the resource policy was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeRetrainingScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DescribeRetrainingSchedulerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#DescribeRetrainingSchedulerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a description of the retraining scheduler, including information such as the\n         model name and retraining parameters. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describes a retraining scheduler",
+                        "documentation": "",
+                        "input": {
+                            "ModelName": "sample-model"
+                        },
+                        "output": {
+                            "ModelName": "sample-model",
+                            "ModelArn": "arn:aws:lookoutequipment:us-east-1:123456789012:model/sample-model/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "RetrainingStartDate": "2023-11-01T00:00:00Z",
+                            "RetrainingFrequency": "P1M",
+                            "LookbackWindow": "P360D",
+                            "Status": "RUNNING",
+                            "PromoteMode": "MANAGED",
+                            "CreatedAt": "2023-10-01T15:00:00Z",
+                            "UpdatedAt": "2023-10-01T15:00:00Z"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeRetrainingSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model that the retraining scheduler is attached to. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeRetrainingSchedulerResponse": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model that the retraining scheduler is attached to. </p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model that the retraining scheduler is attached to. </p>"
+                    }
+                },
+                "RetrainingStartDate": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date for the retraining scheduler. Lookout for Equipment truncates the time you provide to the\n         nearest UTC day.</p>"
+                    }
+                },
+                "RetrainingFrequency": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency at which the model retraining is set. This follows the <a href=\"https://en.wikipedia.org/wiki/ISO_8601#Durations\">ISO 8601</a>\n         guidelines.</p>"
+                    }
+                },
+                "LookbackWindow": {
+                    "target": "com.amazonaws.lookoutequipment#LookbackWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of past days of data used for retraining.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the retraining scheduler. </p>"
+                    }
+                },
+                "PromoteMode": {
+                    "target": "com.amazonaws.lookoutequipment#ModelPromoteMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how the service uses new models. In <code>MANAGED</code> mode, new models are\n         used for inference if they have better performance than the current model. In\n            <code>MANUAL</code> mode, the new models are not used until they are <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation\">manually\n            activated</a>.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time and date at which the retraining scheduler was created. </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time and date at which the retraining scheduler was updated. </p>"
                     }
                 }
             },
@@ -3366,13 +3825,13 @@
                 "DatasetName": {
                     "target": "com.amazonaws.lookoutequipment#DatasetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the machine learning dataset to be created. If the dataset already exists, Amazon Lookout for Equipment overwrites the existing dataset. If you don't specify this field, it is filled with the name of the source dataset.</p>"
+                        "smithy.api#documentation": "<p>The name of the machine learning dataset to be created. If the dataset already exists,\n         Amazon Lookout for Equipment overwrites the existing dataset. If you don't specify this field, it is filled\n         with the name of the source dataset.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the request. \n      If you do not set the client request token, \n      Amazon Lookout for Equipment generates one. </p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you do not set the client request token,\n         Amazon Lookout for Equipment generates one. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -3380,7 +3839,7 @@
                 "ServerSideKmsKeyId": {
                     "target": "com.amazonaws.lookoutequipment#NameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key key used to \n      encrypt model data by Amazon Lookout for Equipment. </p>"
+                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key key used to encrypt model data by Amazon Lookout for Equipment.\n      </p>"
                     }
                 },
                 "Tags": {
@@ -3474,7 +3933,7 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the machine learning model to be created.\n      If the model already exists, Amazon Lookout for Equipment creates a new version. \n      If you do not specify this field, it is filled with the name of the source model.</p>"
+                        "smithy.api#documentation": "<p>The name for the machine learning model to be created. If the model already exists,\n         Amazon Lookout for Equipment creates a new version. If you do not specify this field, it is filled with the\n         name of the source model.</p>"
                     }
                 },
                 "DatasetName": {
@@ -3490,7 +3949,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the request. If you do not set the client request\n      token, Amazon Lookout for Equipment generates one. </p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you do not set the client request token,\n         Amazon Lookout for Equipment generates one. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -3498,19 +3957,25 @@
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutequipment#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to \n      access the data source being used to create the machine learning model. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access the data source being\n         used to create the machine learning model. </p>"
                     }
                 },
                 "ServerSideKmsKeyId": {
                     "target": "com.amazonaws.lookoutequipment#NameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key key used to encrypt \n      model data by Amazon Lookout for Equipment. </p>"
+                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key key used to encrypt model data by Amazon Lookout for Equipment.\n      </p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.lookoutequipment#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the machine learning model to be created. </p>"
+                    }
+                },
+                "InferenceDataImportStrategy": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceDataImportStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how to import the accumulated inference data when a model version is imported.\n         The possible values are as follows:</p>\n         <ul>\n            <li>\n               <p>NO_IMPORT – Don't import the data.</p>\n            </li>\n            <li>\n               <p>ADD_WHEN_EMPTY – Only import the data from the source model if there is no\n               existing data in the target model.</p>\n            </li>\n            <li>\n               <p>OVERWRITE – Import the data from the source model and overwrite the\n               existing data in the target model.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3554,6 +4019,29 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceDataImportStrategy": {
+            "type": "enum",
+            "members": {
+                "NO_IMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_IMPORT"
+                    }
+                },
+                "ADD_WHEN_EMPTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADD_WHEN_EMPTY"
+                    }
+                },
+                "OVERWRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERWRITE"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#InferenceEventSummaries": {
@@ -3641,13 +4129,13 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ML model being used for the inference execution. </p>"
+                        "smithy.api#documentation": "<p>The name of the machine learning model being used for the inference execution. </p>"
                     }
                 },
                 "ModelArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML model used for the inference execution. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model used for the inference\n         execution. </p>"
                     }
                 },
                 "InferenceSchedulerName": {
@@ -3695,7 +4183,7 @@
                 "CustomerResultObject": {
                     "target": "com.amazonaws.lookoutequipment#S3Object",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      </p>"
+                        "smithy.api#documentation": "<p>The S3 object that the inference execution results were uploaded to.</p>"
                     }
                 },
                 "Status": {
@@ -3708,6 +4196,18 @@
                     "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
                     "traits": {
                         "smithy.api#documentation": "<p> Specifies the reason for failure when an inference execution has failed. </p>"
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model version used for the inference execution.</p>"
+                    }
+                },
+                "ModelVersionArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the model version used for the inference\n         execution.</p>"
                     }
                 }
             },
@@ -3895,13 +4395,13 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ML model used for the inference scheduler. </p>"
+                        "smithy.api#documentation": "<p>The name of the machine learning model used for the inference scheduler. </p>"
                     }
                 },
                 "ModelArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the ML model used by the inference scheduler. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the machine learning model used by the inference\n         scheduler. </p>"
                     }
                 },
                 "InferenceSchedulerName": {
@@ -3931,7 +4431,7 @@
                 "DataUploadFrequency": {
                     "target": "com.amazonaws.lookoutequipment#DataUploadFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>How often data is uploaded to the source S3 bucket for the input data. This value is the\n         length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout\n         for Equipment will upload the real-time data to the source bucket once every 5 minutes.\n         This frequency also determines how often Amazon Lookout for Equipment starts a scheduled\n         inference on your data. In this example, it starts once every 5 minutes. </p>"
+                        "smithy.api#documentation": "<p>How often data is uploaded to the source S3 bucket for the input data. This value is the\n         length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout\n         for Equipment will upload the real-time data to the source bucket once every 5 minutes.\n         This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your\n         data. In this example, it starts once every 5 minutes. </p>"
                     }
                 },
                 "LatestInferenceResult": {
@@ -4046,7 +4546,7 @@
                 "KeyPattern": {
                     "target": "com.amazonaws.lookoutequipment#KeyPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p> \n\t\t\t  The pattern for matching the Amazon S3 files that will be used for ingestion. If the schema was created previously without any KeyPattern, then the default KeyPattern {prefix}/{component_name}/* is used to download files from Amazon S3 according to the schema. This field is required when ingestion is being done for the first time.</p>\n         <p>Valid Values: {prefix}/{component_name}_* | {prefix}/{component_name}/* | {prefix}/{component_name}[DELIMITER]* (Allowed delimiters : space, dot, underscore, hyphen)</p>"
+                        "smithy.api#documentation": "<p> The pattern for matching the Amazon S3 files that will be used for ingestion.\n         If the schema was created previously without any KeyPattern, then the default KeyPattern\n         {prefix}/{component_name}/* is used to download files from Amazon S3 according to\n         the schema. This field is required when ingestion is being done for the first time.</p>\n         <p>Valid Values: {prefix}/{component_name}_* | {prefix}/{component_name}/* |\n         {prefix}/{component_name}[DELIMITER]* (Allowed delimiters : space, dot, underscore,\n         hyphen)</p>"
                     }
                 }
             },
@@ -4177,30 +4677,30 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the label group.\n      </p>"
+                        "smithy.api#documentation": "<p> The name of the label group. </p>"
                     }
                 },
                 "LabelGroupArn": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the label group.\n      </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the label group. </p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The time at which the label group was created.\n      </p>"
+                        "smithy.api#documentation": "<p> The time at which the label group was created. </p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The time at which the label group was updated.\n      </p>"
+                        "smithy.api#documentation": "<p> The time at which the label group was updated. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Contains information about the label group.\n      </p>"
+                "smithy.api#documentation": "<p> Contains information about the label group. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#LabelId": {
@@ -4248,60 +4748,60 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the label group.\n      </p>"
+                        "smithy.api#documentation": "<p> The name of the label group. </p>"
                     }
                 },
                 "LabelId": {
                     "target": "com.amazonaws.lookoutequipment#LabelId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The ID of the label.\n      </p>"
+                        "smithy.api#documentation": "<p> The ID of the label. </p>"
                     }
                 },
                 "LabelGroupArn": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the label group.\n      </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the label group. </p>"
                     }
                 },
                 "StartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The timestamp indicating the start of the label.\n      </p>"
+                        "smithy.api#documentation": "<p> The timestamp indicating the start of the label. </p>"
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The timestamp indicating the end of the label.\n      </p>"
+                        "smithy.api#documentation": "<p> The timestamp indicating the end of the label. </p>"
                     }
                 },
                 "Rating": {
                     "target": "com.amazonaws.lookoutequipment#LabelRating",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates whether a labeled event represents an anomaly.\n      </p>"
+                        "smithy.api#documentation": "<p> Indicates whether a labeled event represents an anomaly. </p>"
                     }
                 },
                 "FaultCode": {
                     "target": "com.amazonaws.lookoutequipment#FaultCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates the type of anomaly associated with the label.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p> Indicates the type of anomaly associated with the label. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data.</p>"
                     }
                 },
                 "Equipment": {
                     "target": "com.amazonaws.lookoutequipment#Equipment",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates that a label pertains to a particular piece of equipment.\n      </p>"
+                        "smithy.api#documentation": "<p> Indicates that a label pertains to a particular piece of equipment. </p>"
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The time at which the label was created.\n      </p>"
+                        "smithy.api#documentation": "<p> The time at which the label was created. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Information about the label.\n      </p>"
+                "smithy.api#documentation": "<p> Information about the label. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#LabelsInputConfiguration": {
@@ -4316,7 +4816,7 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the label group to be used for label data.\n      </p>"
+                        "smithy.api#documentation": "<p> The name of the label group to be used for label data. </p>"
                     }
                 }
             },
@@ -4608,14 +5108,14 @@
                 "IntervalStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Lookout for Equipment will return all the inference events with an end time equal to or greater than the\n         start time given.</p>",
+                        "smithy.api#documentation": "<p> Lookout for Equipment will return all the inference events with an end time equal to or greater than\n         the start time given.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IntervalEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns all the inference events with an end start time equal to or greater than less than the end time given.</p>",
+                        "smithy.api#documentation": "<p>Returns all the inference events with an end start time equal to or greater than less\n         than the end time given.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4703,13 +5203,13 @@
                 "DataStartTimeAfter": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time reference in the inferenced dataset after which Amazon Lookout for Equipment\n         started the inference execution. </p>"
+                        "smithy.api#documentation": "<p>The time reference in the inferenced dataset after which Amazon Lookout for Equipment started the inference\n         execution. </p>"
                     }
                 },
                 "DataEndTimeBefore": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time reference in the inferenced dataset before which Amazon Lookout for Equipment\n         stopped the inference execution. </p>"
+                        "smithy.api#documentation": "<p>The time reference in the inferenced dataset before which Amazon Lookout for Equipment stopped the\n         inference execution. </p>"
                     }
                 },
                 "Status": {
@@ -4798,7 +5298,7 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ML model used by the inference scheduler to be listed. </p>"
+                        "smithy.api#documentation": "<p>The name of the machine learning model used by the inference scheduler to be listed.\n      </p>"
                     }
                 },
                 "Status": {
@@ -4855,7 +5355,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Returns a list of the label groups.\n      </p>",
+                "smithy.api#documentation": "<p> Returns a list of the label groups. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4869,19 +5369,19 @@
                 "LabelGroupNameBeginsWith": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The beginning of the name of the label groups to be listed.\n      </p>"
+                        "smithy.api#documentation": "<p> The beginning of the name of the label groups to be listed. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         An opaque pagination token indicating where to continue the listing of label groups.\n      </p>"
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of label groups.\n      </p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.lookoutequipment#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Specifies the maximum number of label groups to list.\n      </p>"
+                        "smithy.api#documentation": "<p> Specifies the maximum number of label groups to list. </p>"
                     }
                 }
             },
@@ -4895,13 +5395,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         An opaque pagination token indicating where to continue the listing of label groups.\n      </p>"
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of label groups.\n      </p>"
                     }
                 },
                 "LabelGroupSummaries": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A summary of the label groups.\n      </p>"
+                        "smithy.api#documentation": "<p> A summary of the label groups. </p>"
                     }
                 }
             },
@@ -4932,7 +5432,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Provides a list of labels.\n      </p>",
+                "smithy.api#documentation": "<p> Provides a list of labels. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4946,44 +5446,44 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Retruns the name of the label group.\n      </p>",
+                        "smithy.api#documentation": "<p> Retruns the name of the label group. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IntervalStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Returns all the labels with a end time equal to or later than the start time given.\n      </p>"
+                        "smithy.api#documentation": "<p> Returns all the labels with a end time equal to or later than the start time given.\n      </p>"
                     }
                 },
                 "IntervalEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Returns all labels with a start time earlier than the end time given.\n      </p>"
+                        "smithy.api#documentation": "<p> Returns all labels with a start time earlier than the end time given. </p>"
                     }
                 },
                 "FaultCode": {
                     "target": "com.amazonaws.lookoutequipment#FaultCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Returns labels with a particular fault code.\n      </p>"
+                        "smithy.api#documentation": "<p> Returns labels with a particular fault code. </p>"
                     }
                 },
                 "Equipment": {
                     "target": "com.amazonaws.lookoutequipment#Equipment",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Lists the labels that pertain to a particular piece of equipment.\n      </p>"
+                        "smithy.api#documentation": "<p> Lists the labels that pertain to a particular piece of equipment. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         An opaque pagination token indicating where to continue the listing of label groups.\n      </p>"
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of label groups.\n      </p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.lookoutequipment#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Specifies the maximum number of labels to list.\n      </p>"
+                        "smithy.api#documentation": "<p> Specifies the maximum number of labels to list. </p>"
                     }
                 }
             },
@@ -4997,13 +5497,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         An opaque pagination token indicating where to continue the listing of datasets.\n      </p>"
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of datasets.\n      </p>"
                     }
                 },
                 "LabelSummaries": {
                     "target": "com.amazonaws.lookoutequipment#LabelSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A summary of the items in the label group.\n      </p>"
+                        "smithy.api#documentation": "<p> A summary of the items in the label group. </p>"
                     }
                 }
             },
@@ -5037,7 +5537,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a list of all model versions for a given model, \n      including the model version, model version ARN, and status. To list a \n      subset of versions, use the <code>MaxModelVersion</code> and <code>MinModelVersion</code> fields.</p>",
+                "smithy.api#documentation": "<p>Generates a list of all model versions for a given model, including the model version,\n         model version ARN, and status. To list a subset of versions, use the\n            <code>MaxModelVersion</code> and <code>MinModelVersion</code> fields.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5051,14 +5551,14 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Then name of the machine learning model for which the \n      model versions are to be listed.</p>",
+                        "smithy.api#documentation": "<p>Then name of the machine learning model for which the model versions are to be\n         listed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the total number of results exceeds the limit that the response can \n      display, the response returns an opaque pagination token indicating where to \n      continue the listing of machine learning model versions. Use this token in the <code>NextToken</code> \n      field in the request to list the next page of results.</p>"
+                        "smithy.api#documentation": "<p>If the total number of results exceeds the limit that the response can display, the\n         response returns an opaque pagination token indicating where to continue the listing of\n         machine learning model versions. Use this token in the <code>NextToken</code> field in the\n         request to list the next page of results.</p>"
                     }
                 },
                 "MaxResults": {
@@ -5114,13 +5614,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the total number of results exceeds the limit that the response can \n      display, the response returns an opaque pagination token indicating where to \n      continue the listing of machine learning model versions. Use this token in the <code>NextToken</code> \n      field in the request to list the next page of results.</p>"
+                        "smithy.api#documentation": "<p>If the total number of results exceeds the limit that the response can display, the\n         response returns an opaque pagination token indicating where to continue the listing of\n         machine learning model versions. Use this token in the <code>NextToken</code> field in the\n         request to list the next page of results.</p>"
                     }
                 },
                 "ModelVersionSummaries": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersionSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information on the specified model version, \n      including the created time, model and dataset ARNs, and status.</p>"
+                        "smithy.api#documentation": "<p>Provides information on the specified model version, including the created time, model\n         and dataset ARNs, and status.</p>"
                     }
                 }
             },
@@ -5165,31 +5665,31 @@
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of ML models.\n      </p>"
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of machine learning\n         models. </p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.lookoutequipment#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the maximum number of ML models to list. </p>"
+                        "smithy.api#documentation": "<p> Specifies the maximum number of machine learning models to list. </p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.lookoutequipment#ModelStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the ML model. </p>"
+                        "smithy.api#documentation": "<p>The status of the machine learning model. </p>"
                     }
                 },
                 "ModelNameBeginsWith": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The beginning of the name of the ML models being listed. </p>"
+                        "smithy.api#documentation": "<p>The beginning of the name of the machine learning models being listed. </p>"
                     }
                 },
                 "DatasetNameBeginsWith": {
                     "target": "com.amazonaws.lookoutequipment#DatasetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The beginning of the name of the dataset of the ML models to be listed. </p>"
+                        "smithy.api#documentation": "<p>The beginning of the name of the dataset of the machine learning models to be listed.\n      </p>"
                     }
                 }
             },
@@ -5203,7 +5703,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of ML models.\n      </p>"
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of machine learning\n         models. </p>"
                     }
                 },
                 "ModelSummaries": {
@@ -5226,6 +5726,126 @@
                 "smithy.api#length": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListRetrainingSchedulers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListRetrainingSchedulersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListRetrainingSchedulersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all retraining schedulers in your account, filtering by model name prefix and\n         status. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Listing retraining schedulers",
+                        "documentation": "",
+                        "input": {
+                            "MaxResults": 50
+                        },
+                        "output": {
+                            "RetrainingSchedulerSummaries": [
+                                {
+                                    "ModelName": "sample-model-1",
+                                    "ModelArn": "arn:aws:lookoutequipment:us-east-1:123456789012:model/sample-model-1/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                                    "Status": "RUNNING",
+                                    "RetrainingStartDate": "2023-06-01T00:00:00Z",
+                                    "RetrainingFrequency": "P1M",
+                                    "LookbackWindow": "P180D"
+                                },
+                                {
+                                    "ModelName": "sample-model-2",
+                                    "ModelArn": "arn:aws:lookoutequipment:us-east-1:123456789012:model/sample-model-2/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+                                    "Status": "RUNNING",
+                                    "RetrainingStartDate": "2023-08-15T00:00:00Z",
+                                    "RetrainingFrequency": "P30D",
+                                    "LookbackWindow": "P180D"
+                                },
+                                {
+                                    "ModelName": "sample-model-3",
+                                    "ModelArn": "arn:aws:lookoutequipment:us-east-1:123456789012:model/sample-model-3/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333",
+                                    "Status": "STOPPED",
+                                    "RetrainingStartDate": "2023-09-01T00:00:00Z",
+                                    "RetrainingFrequency": "P1M",
+                                    "LookbackWindow": "P360D"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListRetrainingSchedulersRequest": {
+            "type": "structure",
+            "members": {
+                "ModelNameBeginsWith": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify this field to only list retraining schedulers whose machine learning models\n         begin with the value you specify. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify this field to only list retraining schedulers whose status matches the value you\n         specify. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the number of results exceeds the maximum, a pagination token is returned. Use the\n         token in the request to show the next page of retraining schedulers.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutequipment#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of retraining schedulers to list. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListRetrainingSchedulersResponse": {
+            "type": "structure",
+            "members": {
+                "RetrainingSchedulerSummaries": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingSchedulerSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information on the specified retraining scheduler, including the model name,\n         model ARN, status, and start date. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the number of results exceeds the maximum, this pagination token is returned. Use\n         this token in the request to show the next page of retraining schedulers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lookoutequipment#ListSensorStatistics": {
@@ -5373,6 +5993,12 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lookoutequipment#LookbackWindow": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^P180D$|^P360D$|^P540D$|^P720D$"
+            }
+        },
         "com.amazonaws.lookoutequipment#MaxResults": {
             "type": "integer",
             "traits": {
@@ -5448,6 +6074,23 @@
                 "smithy.api#pattern": "^[0-9a-zA-Z_-]{1,200}$"
             }
         },
+        "com.amazonaws.lookoutequipment#ModelPromoteMode": {
+            "type": "enum",
+            "members": {
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lookoutequipment#ModelStatus": {
             "type": "enum",
             "members": {
@@ -5489,19 +6132,19 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ML model. </p>"
+                        "smithy.api#documentation": "<p>The name of the machine learning model. </p>"
                     }
                 },
                 "ModelArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the ML model. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the machine learning model. </p>"
                     }
                 },
                 "DatasetName": {
                     "target": "com.amazonaws.lookoutequipment#DatasetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dataset being used for the ML model. </p>"
+                        "smithy.api#documentation": "<p>The name of the dataset being used for the machine learning model. </p>"
                     }
                 },
                 "DatasetArn": {
@@ -5513,7 +6156,7 @@
                 "Status": {
                     "target": "com.amazonaws.lookoutequipment#ModelStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the status of the ML model. </p>"
+                        "smithy.api#documentation": "<p>Indicates the status of the machine learning model. </p>"
                     }
                 },
                 "CreatedAt": {
@@ -5531,12 +6174,42 @@
                 "ActiveModelVersionArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version that is set as active. The active model version \n         is the model version that the inference scheduler uses to run an inference\n         execution.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model version that is set as active. The active\n         model version is the model version that the inference scheduler uses to run an inference\n         execution.</p>"
+                    }
+                },
+                "LatestScheduledRetrainingStatus": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the most recent scheduled retraining run. </p>"
+                    }
+                },
+                "LatestScheduledRetrainingModelVersion": {
+                    "target": "com.amazonaws.lookoutequipment#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the most recent model version that was generated by retraining. </p>"
+                    }
+                },
+                "LatestScheduledRetrainingStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the start time of the most recent scheduled retraining run. </p>"
+                    }
+                },
+                "NextScheduledRetrainingStartDate": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the date that the next scheduled retraining run will start on. Lookout for Equipment truncates\n         the time you provide to <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp\">the nearest UTC day</a>.</p>"
+                    }
+                },
+                "RetrainingSchedulerStatus": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the retraining scheduler. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the specified ML model, including dataset and model names and\n         ARNs, as well as status. </p>"
+                "smithy.api#documentation": "<p>Provides information about the specified machine learning model, including dataset and\n         model names and ARNs, as well as status. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#ModelVersion": {
@@ -5633,7 +6306,7 @@
                 "ModelArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model that this model version is a version of.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model that this model version is a version\n         of.</p>"
                     }
                 },
                 "ModelVersion": {
@@ -5820,7 +6493,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.lookoutequipment#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which the \n      policy is being created.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which the policy is being\n         created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5840,7 +6513,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the request. \n      If you do not set the client request token, Amazon Lookout for Equipment \n      generates one. </p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you do not set the client request token,\n         Amazon Lookout for Equipment generates one. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -5856,7 +6529,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.lookoutequipment#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which the \n      policy was created.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which the policy was created.</p>"
                     }
                 },
                 "PolicyRevisionId": {
@@ -5894,6 +6567,95 @@
                 "smithy.api#documentation": "<p> The resource requested could not be found. Verify the resource ID and retry your\n         request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.lookoutequipment#RetrainingFrequency": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^P(\\dY)?(\\d{1,2}M)?(\\d{1,3}D)?$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#RetrainingSchedulerStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#RetrainingSchedulerSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#RetrainingSchedulerSummary"
+            }
+        },
+        "com.amazonaws.lookoutequipment#RetrainingSchedulerSummary": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model that the retraining scheduler is attached to. </p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model that the retraining scheduler is attached to. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the retraining scheduler. </p>"
+                    }
+                },
+                "RetrainingStartDate": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date for the retraining scheduler. Lookout for Equipment truncates the time you provide to the\n         nearest UTC day.</p>"
+                    }
+                },
+                "RetrainingFrequency": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency at which the model retraining is set. This follows the <a href=\"https://en.wikipedia.org/wiki/ISO_8601#Durations\">ISO 8601</a>\n         guidelines.</p>"
+                    }
+                },
+                "LookbackWindow": {
+                    "target": "com.amazonaws.lookoutequipment#LookbackWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of past days of data used for retraining.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the specified retraining scheduler, including model name,\n         status, start date, frequency, and lookback window. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#S3Bucket": {
@@ -6114,7 +6876,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a data ingestion job. Amazon Lookout for Equipment returns the job status.\n      </p>"
+                "smithy.api#documentation": "<p>Starts a data ingestion job. Amazon Lookout for Equipment returns the job status. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#StartDataIngestionJobRequest": {
@@ -6227,13 +6989,13 @@
                 "ModelArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML model being used by the inference scheduler.\n      </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model being used by the inference\n         scheduler. </p>"
                     }
                 },
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ML model being used by the inference scheduler. </p>"
+                        "smithy.api#documentation": "<p>The name of the machine learning model being used by the inference scheduler. </p>"
                     }
                 },
                 "InferenceSchedulerName": {
@@ -6252,6 +7014,93 @@
                     "target": "com.amazonaws.lookoutequipment#InferenceSchedulerStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the status of the inference scheduler. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#StartRetrainingScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#StartRetrainingSchedulerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#StartRetrainingSchedulerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a retraining scheduler. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Starts a retraining scheduler",
+                        "documentation": "",
+                        "input": {
+                            "ModelName": "sample-model"
+                        },
+                        "output": {
+                            "ModelName": "sample-model",
+                            "ModelArn": "arn:aws:lookoutequipment:us-east-1:123456789012:model/sample-model/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Status": "PENDING"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#StartRetrainingSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model whose retraining scheduler you want to start.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#StartRetrainingSchedulerResponse": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model whose retraining scheduler is being started. </p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model whose retraining scheduler is being started. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the retraining scheduler. </p>"
                     }
                 }
             },
@@ -6329,13 +7178,13 @@
                 "ModelArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML model used by the inference scheduler being\n         stopped. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model used by the inference\n         scheduler being stopped. </p>"
                     }
                 },
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ML model used by the inference scheduler being stopped. </p>"
+                        "smithy.api#documentation": "<p>The name of the machine learning model used by the inference scheduler being stopped.\n      </p>"
                     }
                 },
                 "InferenceSchedulerName": {
@@ -6354,6 +7203,93 @@
                     "target": "com.amazonaws.lookoutequipment#InferenceSchedulerStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the status of the inference scheduler. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#StopRetrainingScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#StopRetrainingSchedulerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#StopRetrainingSchedulerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a retraining scheduler. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Stops a retraining scheduler",
+                        "documentation": "",
+                        "input": {
+                            "ModelName": "sample-model"
+                        },
+                        "output": {
+                            "ModelName": "sample-model",
+                            "ModelArn": "arn:aws:lookoutequipment:us-east-1:123456789012:model/sample-model/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Status": "STOPPING"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#StopRetrainingSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model whose retraining scheduler you want to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#StopRetrainingSchedulerResponse": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model whose retraining scheduler is being stopped. </p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model whose retraining scheduler is being stopped. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the retraining scheduler. </p>"
                     }
                 }
             },
@@ -6466,7 +7402,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a given tag to a resource in your account. A tag is a key-value pair which\n         can be added to an Amazon Lookout for Equipment resource as metadata. Tags can be used for\n         organizing your resources as well as helping you to search and filter by tag. Multiple tags\n         can be added to a resource, either when you create it, or later. Up to 50 tags can be\n         associated with each resource. </p>"
+                "smithy.api#documentation": "<p>Associates a given tag to a resource in your account. A tag is a key-value pair which\n         can be added to an Amazon Lookout for Equipment resource as metadata. Tags can be used for organizing your\n         resources as well as helping you to search and filter by tag. Multiple tags can be added to\n         a resource, either when you create it, or later. Up to 50 tags can be associated with each\n         resource. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#TagResourceRequest": {
@@ -6715,14 +7651,14 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the machine learning model for which the active model version \n      is being set.</p>",
+                        "smithy.api#documentation": "<p>The name of the machine learning model for which the active model version is being\n         set.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ModelVersion": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the machine learning model for which the active model version \n      is being set.</p>",
+                        "smithy.api#documentation": "<p>The version of the machine learning model for which the active model version is being\n         set.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6737,37 +7673,37 @@
                 "ModelName": {
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the machine learning model for which the active model version was set.</p>"
+                        "smithy.api#documentation": "<p>The name of the machine learning model for which the active model version was\n         set.</p>"
                     }
                 },
                 "ModelArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model for which \n      the active model version was set.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model for which the active model\n         version was set.</p>"
                     }
                 },
                 "CurrentActiveVersion": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version that is currently active of the machine learning model \n      for which the active model version was set.</p>"
+                        "smithy.api#documentation": "<p>The version that is currently active of the machine learning model for which the active\n         model version was set.</p>"
                     }
                 },
                 "PreviousActiveVersion": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The previous version that was active of the machine learning model \n      for which the active model version was set.</p>"
+                        "smithy.api#documentation": "<p>The previous version that was active of the machine learning model for which the active\n         model version was set.</p>"
                     }
                 },
                 "CurrentActiveVersionArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model version that is the\n      current active model version.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model version that is the current\n         active model version.</p>"
                     }
                 },
                 "PreviousActiveVersionArn": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model version that was the\n      previous active model version.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the machine learning model version that was the\n         previous active model version.</p>"
                     }
                 }
             },
@@ -6826,7 +7762,7 @@
                 "DataUploadFrequency": {
                     "target": "com.amazonaws.lookoutequipment#DataUploadFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>How often data is uploaded to the source S3 bucket for the input data. The value chosen\n         is the length of time between data uploads. For instance, if you select 5 minutes, Amazon\n         Lookout for Equipment will upload the real-time data to the source bucket once every 5\n         minutes. This frequency also determines how often Amazon Lookout for Equipment starts a\n         scheduled inference on your data. In this example, it starts once every 5 minutes. </p>"
+                        "smithy.api#documentation": "<p>How often data is uploaded to the source S3 bucket for the input data. The value chosen\n         is the length of time between data uploads. For instance, if you select 5 minutes, Amazon\n         Lookout for Equipment will upload the real-time data to the source bucket once every 5\n         minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on\n         your data. In this example, it starts once every 5 minutes. </p>"
                     }
                 },
                 "DataInputConfiguration": {
@@ -6881,7 +7817,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Updates the label group.\n      </p>"
+                "smithy.api#documentation": "<p> Updates the label group. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#UpdateLabelGroupRequest": {
@@ -6890,14 +7826,164 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the label group to be updated.\n      </p>",
+                        "smithy.api#documentation": "<p> The name of the label group to be updated. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FaultCodes": {
                     "target": "com.amazonaws.lookoutequipment#FaultCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Updates the code indicating the type of anomaly associated with the label.\n      </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                        "smithy.api#documentation": "<p> Updates the code indicating the type of anomaly associated with the label. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the\n         security of your data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#UpdateModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#UpdateModelRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a model in the account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Updates a model",
+                        "documentation": "",
+                        "input": {
+                            "ModelName": "sample-model",
+                            "LabelsInputConfiguration": {
+                                "LabelGroupName": "sample-label-group"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#UpdateModelRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LabelsInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#LabelsInputConfiguration"
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model to update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lookoutequipment#UpdateRetrainingScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#UpdateRetrainingSchedulerRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a retraining scheduler. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Updates a retraining scheduler",
+                        "documentation": "",
+                        "input": {
+                            "ModelName": "sample-model",
+                            "RetrainingStartDate": "2024-01-01T00:00:00Z",
+                            "RetrainingFrequency": "P1Y"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#UpdateRetrainingSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model whose retraining scheduler you want to update. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RetrainingStartDate": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date for the retraining scheduler. Lookout for Equipment truncates the time you provide to the\n         nearest UTC day.</p>"
+                    }
+                },
+                "RetrainingFrequency": {
+                    "target": "com.amazonaws.lookoutequipment#RetrainingFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter uses the <a href=\"https://en.wikipedia.org/wiki/ISO_8601#Durations\">ISO 8601</a> standard to set the frequency at which you want retraining to occur in\n         terms of Years, Months, and/or Days (note: other parameters like Time are not currently\n         supported). The minimum value is 30 days (P30D) and the maximum value is 1 year (P1Y). For\n         example, the following values are valid:</p>\n         <ul>\n            <li>\n               <p>P3M15D – Every 3 months and 15 days</p>\n            </li>\n            <li>\n               <p>P2M – Every 2 months</p>\n            </li>\n            <li>\n               <p>P150D – Every 150 days</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "LookbackWindow": {
+                    "target": "com.amazonaws.lookoutequipment#LookbackWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of past days of data that will be used for retraining.</p>"
+                    }
+                },
+                "PromoteMode": {
+                    "target": "com.amazonaws.lookoutequipment#ModelPromoteMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how the service will use new models. In <code>MANAGED</code> mode, new models\n         will automatically be used for inference if they have better performance than the current\n         model. In <code>MANUAL</code> mode, the new models will not be used <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation\">until they\n            are manually activated</a>.</p>"
                     }
                 }
             },
@@ -6916,7 +8002,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a\n         related Amazon Web Services service that's being utilized. </p>",
+                "smithy.api#documentation": "<p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a related Amazon Web Services\n         service that's being utilized. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

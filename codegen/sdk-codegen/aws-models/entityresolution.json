@@ -80,7 +80,7 @@
                     ],
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<p>Welcome to the <i>AWS Entity Resolution API Reference</i>.</p>\n         <p>AWS Entity Resolution is an AWS service that provides pre-configured entity resolution capabilities \n         that enable developers and analysts at advertising and marketing companies to build an accurate and \n        complete view of their consumers.</p>\n         <p>\n         With AWS Entity Resolution, you have the ability to match source records containing consumer identifiers, \n         such as name, email address, and phone number. This holds true even when these records have incomplete or \n         conflicting identifiers. For example, AWS Entity Resolution can effectively match a source record from a \n         customer relationship management (CRM) system, which includes account information like first name, last name, \n         postal address, phone number, and email address, with a source record from a marketing system containing \n         campaign information, such as username and email address.</p>\n         <p>To learn more about AWS Entity Resolution concepts, procedures, and best practices, see the\n         <a href=\"https://docs.aws.amazon.com/entityresolution/latest/userguide/what-is-service.html\">AWS Entity Resolution \n            User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Welcome to the <i>Entity Resolution API Reference</i>.</p>\n         <p>Entity Resolution is an Amazon Web Services service that provides pre-configured entity resolution capabilities \n         that enable developers and analysts at advertising and marketing companies to build an accurate and \n        complete view of their consumers.</p>\n         <p>\n         With Entity Resolution, you can match source records containing consumer identifiers, such as name, email address, \n         and phone number. This is true even when these records have incomplete or conflicting identifiers. For example, \n         Entity Resolution can effectively match a source record from a customer relationship management (CRM) system \n         with a source record from a marketing system containing campaign information.</p>\n         <p>To learn more about Entity Resolution concepts, procedures, and best practices, see the\n         <a href=\"https://docs.aws.amazon.com/entityresolution/latest/userguide/what-is-service.html\">Entity Resolution \n            User Guide</a>.</p>",
                 "smithy.api#title": "AWS EntityResolution",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -435,158 +435,6 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://entityresolution-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://entityresolution-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://entityresolution.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://entityresolution.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://entityresolution-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://entityresolution-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://entityresolution.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://entityresolution.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://entityresolution-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://entityresolution.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
-                            }
-                        },
-                        {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
@@ -595,8 +443,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -608,8 +456,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -621,8 +469,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -634,8 +482,160 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entityresolution-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entityresolution-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entityresolution.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entityresolution.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entityresolution-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entityresolution-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entityresolution.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entityresolution.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entityresolution-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entityresolution.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -645,8 +645,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -658,8 +658,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -669,8 +669,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -682,12 +682,12 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
@@ -695,8 +695,21 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -707,8 +720,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -719,9 +732,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -851,7 +870,7 @@
                 "resolutionTechniques": {
                     "target": "com.amazonaws.entityresolution#ResolutionTechniques",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>\n         </p>",
+                        "smithy.api#documentation": "<p>An object which defines the <code>resolutionType</code> and the\n            <code>ruleBasedProperties</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -864,7 +883,7 @@
                 "roleArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role\n         to create resources on your behalf as part of workflow execution.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role\n         to create resources on your behalf as part of workflow execution.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -919,7 +938,7 @@
                 "resolutionTechniques": {
                     "target": "com.amazonaws.entityresolution#ResolutionTechniques",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>\n         </p>",
+                        "smithy.api#documentation": "<p>An object which defines the <code>resolutionType</code> and the\n            <code>ruleBasedProperties</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -932,7 +951,7 @@
                 "roleArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role\n         to create resources on your behalf as part of workflow execution.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role\n         to create resources on your behalf as part of workflow execution.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -997,7 +1016,8 @@
                 "mappedInputFields": {
                     "target": "com.amazonaws.entityresolution#SchemaInputAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>MappedInputFields</code>. Each <code>MappedInputField</code> corresponds\n         to a column the source data table, and contains column name plus additional information\n         that Entity Resolution uses for matching.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>MappedInputFields</code>. Each <code>MappedInputField</code> corresponds\n         to a column the source data table, and contains column name plus additional information\n         that Entity Resolution uses for matching.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "tags": {
@@ -1221,10 +1241,22 @@
             "members": {
                 "message": {
                     "target": "com.amazonaws.entityresolution#ErrorMessage"
+                },
+                "quotaName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quota that has been breached.</p>"
+                    }
+                },
+                "quotaValue": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current quota value for the customers.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request was rejected because it attempted to create resources beyond the current AWS Entity Resolution account limits. \n      The error message describes the limit exceeded. <code>HTTP Status Code: 402</code>\n         </p>",
+                "smithy.api#documentation": "<p>The request was rejected because it attempted to create resources beyond the current Entity Resolution account limits. \n      The error message describes the limit exceeded. <code>HTTP Status Code: 402</code>\n         </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -1373,7 +1405,7 @@
                 "status": {
                     "target": "com.amazonaws.entityresolution#JobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the job. Either <code>running</code>, <code>succeeded</code>, \n         <code>queued</code>, or <code>failed</code>.</p>",
+                        "smithy.api#documentation": "<p>The current status of the job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1498,7 +1530,7 @@
                 "resolutionTechniques": {
                     "target": "com.amazonaws.entityresolution#ResolutionTechniques",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>\n         </p>",
+                        "smithy.api#documentation": "<p>An object which defines the <code>resolutionType</code> and the\n            <code>ruleBasedProperties</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1525,7 +1557,7 @@
                 "roleArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to access \n      resources on your behalf.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access \n      resources on your behalf.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1720,7 +1752,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception occurs when there is an internal failure in the AWS Entity Resolution service. <code>HTTP Status Code: 500</code>\n         </p>",
+                "smithy.api#documentation": "<p>This exception occurs when there is an internal failure in the Entity Resolution service. <code>HTTP Status Code: 500</code>\n         </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
@@ -1753,16 +1785,16 @@
                         "smithy.api#documentation": "<p>The total number of records processed.</p>"
                     }
                 },
+                "recordsNotProcessed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of records that did not get processed.</p>"
+                    }
+                },
                 "matchIDs": {
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of <code>matchID</code>s generated.</p>"
-                    }
-                },
-                "recordsNotProcessed": {
-                    "target": "smithy.api#Integer",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The total number of records that did not get processed,</p>"
                     }
                 }
             },
@@ -1812,7 +1844,7 @@
                 "status": {
                     "target": "com.amazonaws.entityresolution#JobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the job. Either <code>running</code>, <code>succeeded</code>, \n         <code>queued</code>, or <code>failed</code>.</p>",
+                        "smithy.api#documentation": "<p>The current status of the job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1921,7 +1953,7 @@
                 "jobs": {
                     "target": "com.amazonaws.entityresolution#JobList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of JobSummary objects, each of which contain the ID, status, start time, and end time of a job.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>JobSummary</code> objects, each of which contain the ID, status, start time, and end time of a job.</p>"
                     }
                 },
                 "nextToken": {
@@ -1958,7 +1990,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all the <code>MatchingWorkflows</code> that have been created for an AWS account.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all the <code>MatchingWorkflows</code> that have been created for an Amazon Web Services account.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2041,7 +2073,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all the <code>SchemaMappings</code> that have been created for an AWS account.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all the <code>SchemaMappings</code> that have been created for an Amazon Web Services account.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -2121,7 +2153,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays the tags associated with an AWS Entity Resolution resource. In Entity\n         Resolution, <code>SchemaMapping</code>, and <code>MatchingWorkflow</code> can be\n         tagged.</p>",
+                "smithy.api#documentation": "<p>Displays the tags associated with an Entity Resolution resource. In Entity\n         Resolution, <code>SchemaMapping</code>, and <code>MatchingWorkflow</code> can be\n         tagged.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}"
@@ -2242,7 +2274,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of <code>OutputAttribute</code> objects, each of which have the fields Name and Hashed. Each of \n         these objects selects a column to be included in the output table, and whether the \n         values of the column should be hashed.</p>"
+                "smithy.api#documentation": "<p>A list of <code>OutputAttribute</code> objects, each of which have the fields\n            <code>Name</code> and <code>Hashed</code>. Each of these objects selects a column to be\n         included in the output table, and whether the values of the column should be hashed.</p>"
             }
         },
         "com.amazonaws.entityresolution#OutputAttributes": {
@@ -2255,20 +2287,9 @@
             "type": "structure",
             "members": {
                 "outputS3Path": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.entityresolution#S3Path",
                     "traits": {
                         "smithy.api#documentation": "<p>The S3 path to which Entity Resolution will write the output table.</p>",
-                        "smithy.api#pattern": "^s3://([^/]+)/?(.*?([^/]+)/?)$",
-                        "smithy.api#required": {}
-                    }
-                },
-                "output": {
-                    "target": "com.amazonaws.entityresolution#OutputAttributes",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>OutputAttribute</code> objects, each of which have the fields Name and Hashed. Each of \n         these objects selects a column to be included in the output table, and whether the \n         values of the column should be hashed.</p>",
-                        "smithy.api#length": {
-                            "max": 750
-                        },
                         "smithy.api#required": {}
                     }
                 },
@@ -2276,6 +2297,16 @@
                     "target": "com.amazonaws.entityresolution#KMSArn",
                     "traits": {
                         "smithy.api#documentation": "<p>Customer KMS ARN for encryption at rest. If not provided, system will use an \n         Entity Resolution managed KMS key.</p>"
+                    }
+                },
+                "output": {
+                    "target": "com.amazonaws.entityresolution#OutputAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>OutputAttribute</code> objects, each of which have the fields\n            <code>Name</code> and <code>Hashed</code>. Each of these objects selects a column to be\n         included in the output table, and whether the values of the column should be hashed.</p>",
+                        "smithy.api#length": {
+                            "max": 750
+                        },
+                        "smithy.api#required": {}
                     }
                 },
                 "applyNormalization": {
@@ -2286,7 +2317,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of <code>OutputAttribute</code> objects, each of which have the fields Name and Hashed. Each of \n         these objects selects a column to be included in the output table, and whether the \n         values of the column should be hashed.</p>"
+                "smithy.api#documentation": "<p>A list of <code>OutputAttribute</code> objects, each of which have the fields\n            <code>Name</code> and <code>Hashed</code>. Each of these objects selects a column to be\n         included in the output table, and whether the values of the column should be hashed.</p>"
             }
         },
         "com.amazonaws.entityresolution#OutputSourceConfig": {
@@ -2331,7 +2362,8 @@
                 "resolutionType": {
                     "target": "com.amazonaws.entityresolution#ResolutionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>There are two types of matching, <code>RULE_MATCHING</code> and <code>ML_MATCHING</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The type of matching. There are two types of matching: <code>RULE_MATCHING</code> and\n            <code>ML_MATCHING</code>.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "ruleBasedProperties": {
@@ -2342,7 +2374,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>\n         </p>"
+                "smithy.api#documentation": "<p>An object which defines the <code>resolutionType</code> and the\n            <code>ruleBasedProperties</code>.</p>"
             }
         },
         "com.amazonaws.entityresolution#ResolutionType": {
@@ -2411,7 +2443,7 @@
                 "rules": {
                     "target": "com.amazonaws.entityresolution#RuleList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Rule objects, each of which have fields <code>RuleName</code> and <code>MatchingKeys</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of <code>Rule</code> objects, each of which have fields <code>RuleName</code> and\n            <code>MatchingKeys</code>.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 15
@@ -2422,7 +2454,7 @@
                 "attributeMatchingModel": {
                     "target": "com.amazonaws.entityresolution#AttributeMatchingModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the AttributeMatchingModel. When \n         choosing <code>MANY_TO_MANY</code>, the system can match attribute across the sub-types of an attribute type. For \n         example, if the value of the Email field of Profile A and the value of BusinessEmail field of Profile B matches, \n         the two profiles are matched on the Email type. When choosing <code>ONE_TO_ONE</code> the system can only match if \n         the sub-types are exact matches. For example, only when the value of the Email field of Profile A and the value of \n         the Email field of Profile B matches, the two profiles are matched on the Email type.</p>",
+                        "smithy.api#documentation": "<p>The comparison type. You can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the AttributeMatchingModel. When \n         choosing <code>MANY_TO_MANY</code>, the system can match attributes across the sub-types of an attribute type. For \n         example, if the value of the <code>Email</code> field of Profile A and the value of <code>BusinessEmail</code> field of Profile B matches, \n         the two profiles are matched on the <code>Email</code> type. When choosing <code>ONE_TO_ONE</code> ,the system can only match if \n         the sub-types are exact matches. For example, only when the value of the <code>Email</code> field of Profile A and the value of \n         the <code>Email</code> field of Profile B matches, the two profiles are matched on the <code>Email</code> type.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2435,6 +2467,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.entityresolution#Rule"
+            }
+        },
+        "com.amazonaws.entityresolution#S3Path": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^s3://([^/]+)/?(.*?([^/]+)/?)$"
             }
         },
         "com.amazonaws.entityresolution#SchemaAttributeType": {
@@ -2582,7 +2620,7 @@
                 "matchKey": {
                     "target": "com.amazonaws.entityresolution#AttributeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key that allows grouping of multiple input attributes into a unified matching group.\n         For example, let's consider a scenario where the source table contains various addresses,\n         such as business_address and shipping_address. By assigning the <code>MatchKey</code>\n            <i>Address</i>' to both attributes, Entity Resolution will match records\n         across these fields to create a consolidated matching group. If no <code>MatchKey</code> is\n         specified for a column, it won't be utilized for matching purposes but will still be\n         included in the output table.</p>"
+                        "smithy.api#documentation": "<p>A key that allows grouping of multiple input attributes into a unified matching group.\n         For example, let's consider a scenario where the source table contains various addresses,\n         such as business_address and shipping_address. By assigning the <code>MatchKey</code>\n            <i>Address</i> to both attributes, Entity Resolution will match records across these\n         fields to create a consolidated matching group. If no <code>MatchKey</code> is specified\n         for a column, it won't be utilized for matching purposes but will still be included in the\n         output table.</p>"
                     }
                 }
             },
@@ -2777,7 +2815,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified AWS Entity Resolution\n         resource. Tags can help you organize and categorize your resources. You can also use them\n         to scope user permissions by granting a user permission to access or change only resources\n         with certain tag values. In Entity Resolution, <code>SchemaMapping</code>, and\n            <code>MatchingWorkflow</code> can be tagged. Tags don't have any semantic meaning to AWS\n         and are interpreted strictly as strings of characters. You can use the\n            <code>TagResource</code> action with a resource that already has tags. If you specify a\n         new tag key, this tag is appended to the list of tags associated with the resource. If you\n         specify a tag key that is already associated with the resource, the new tag value that you\n         specify replaces the previous value for that tag.</p>",
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Entity Resolution\n         resource. Tags can help you organize and categorize your resources. You can also use them\n         to scope user permissions by granting a user permission to access or change only resources\n         with certain tag values. In Entity Resolution, <code>SchemaMapping</code> and\n            <code>MatchingWorkflow</code> can be tagged. Tags don't have any semantic meaning to Amazon Web Services\n         and are interpreted strictly as strings of characters. You can use the\n            <code>TagResource</code> action with a resource that already has tags. If you specify a\n         new tag key, this tag is appended to the list of tags associated with the resource. If you\n         specify a tag key that is already associated with the resource, the new tag value that you\n         specify replaces the previous value for that tag.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}"
@@ -2856,7 +2894,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more tags from the specified AWS Entity Resolution resource. In Entity\n         Resolution, <code>SchemaMapping</code>, and <code>MatchingWorkflow</code> can be\n         tagged.</p>",
+                "smithy.api#documentation": "<p>Removes one or more tags from the specified Entity Resolution resource. In Entity\n         Resolution, <code>SchemaMapping</code>, and <code>MatchingWorkflow</code> can be\n         tagged.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}"
@@ -2964,7 +3002,7 @@
                 "resolutionTechniques": {
                     "target": "com.amazonaws.entityresolution#ResolutionTechniques",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>\n         </p>",
+                        "smithy.api#documentation": "<p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2977,7 +3015,7 @@
                 "roleArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role\n         to create resources on your behalf as part of workflow execution.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role\n         to create resources on your behalf as part of workflow execution.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3032,7 +3070,7 @@
                 "roleArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role\n         to create resources on your behalf as part of workflow execution.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role\n         to create resources on your behalf as part of workflow execution.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3049,7 +3087,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by AWS Entity Resolution. <code>HTTP Status Code: 400</code>\n         </p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by Entity Resolution. <code>HTTP Status Code: 400</code>\n         </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
