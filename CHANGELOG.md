@@ -1,3 +1,15 @@
+# Release (2023-09-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.23.0](service/appstream/CHANGELOG.md#v1230-2023-09-14)
+  * **Feature**: This release introduces multi-session fleets, allowing customers to provision more than one user session on a single fleet instance.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.34.6](service/cloudformation/CHANGELOG.md#v1346-2023-09-14)
+  * **Documentation**: Documentation updates for AWS CloudFormation
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.2.0](service/entityresolution/CHANGELOG.md#v120-2023-09-14)
+  * **Feature**: Changed "ResolutionTechniques" and "MappedInputFields" in workflow and schema mapping operations to be required fields.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.19.0](service/lookoutequipment/CHANGELOG.md#v1190-2023-09-14)
+  * **Feature**: This release adds APIs for the new scheduled retraining feature.
+
 # Release (2023-09-13)
 
 ## Module Highlights

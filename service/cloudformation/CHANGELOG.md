@@ -1,3 +1,7 @@
+# v1.34.6 (2023-09-14)
+
+* **Documentation**: Documentation updates for AWS CloudFormation
+
 # v1.34.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

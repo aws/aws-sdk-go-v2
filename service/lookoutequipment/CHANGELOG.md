@@ -1,3 +1,7 @@
+# v1.19.0 (2023-09-14)
+
+* **Feature**: This release adds APIs for the new scheduled retraining feature.
+
 # v1.18.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

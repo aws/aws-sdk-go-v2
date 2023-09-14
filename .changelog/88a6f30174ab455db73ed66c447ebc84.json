@@ -1,8 +1,0 @@
-{
-    "id": "88a6f301-74ab-455d-b73e-d66c447ebc84",
-    "type": "feature",
-    "description": "This release adds APIs for the new scheduled retraining feature.",
-    "modules": [
-        "service/lookoutequipment"
-    ]
-}

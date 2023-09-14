@@ -1,3 +1,7 @@
+# v1.23.0 (2023-09-14)
+
+* **Feature**: This release introduces multi-session fleets, allowing customers to provision more than one user session on a single fleet instance.
+
 # v1.22.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

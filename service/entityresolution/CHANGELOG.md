@@ -1,3 +1,7 @@
+# v1.2.0 (2023-09-14)
+
+* **Feature**: Changed "ResolutionTechniques" and "MappedInputFields" in workflow and schema mapping operations to be required fields.
+
 # v1.1.5 (2023-08-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
