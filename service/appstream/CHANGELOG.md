@@ -1,3 +1,7 @@
+# v1.24.0 (2023-09-15)
+
+* **Feature**: This release introduces app block builder, allowing customers to provision a resource to package applications into an app block
+
 # v1.23.0 (2023-09-14)
 
 * **Feature**: This release introduces multi-session fleets, allowing customers to provision more than one user session on a single fleet instance.

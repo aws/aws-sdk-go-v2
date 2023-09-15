@@ -1,8 +1,0 @@
-{
-    "id": "1e0cbc09-94ec-48f9-a69d-af6b36964ac9",
-    "type": "feature",
-    "description": "This release introduces app block builder, allowing customers to provision a resource to package applications into an app block",
-    "modules": [
-        "service/appstream"
-    ]
-}

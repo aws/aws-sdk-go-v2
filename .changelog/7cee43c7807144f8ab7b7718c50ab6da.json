@@ -1,8 +1,0 @@
-{
-    "id": "7cee43c7-8071-44f8-ab7b-7718c50ab6da",
-    "type": "feature",
-    "description": "New rule type (OnMetricDataUpdate) has been added",
-    "modules": [
-        "service/connect"
-    ]
-}

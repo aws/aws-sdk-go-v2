@@ -1,8 +1,0 @@
-{
-    "id": "7c86a814-e533-43e4-9361-7b78f7f65ad4",
-    "type": "documentation",
-    "description": "Documentation-only updates for AWS DataSync.",
-    "modules": [
-        "service/datasync"
-    ]
-}

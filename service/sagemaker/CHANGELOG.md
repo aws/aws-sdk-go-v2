@@ -1,3 +1,7 @@
+# v1.106.0 (2023-09-15)
+
+* **Feature**: This release introduces Skip Model Validation for Model Packages
+
 # v1.105.0 (2023-09-08)
 
 * **Feature**: Autopilot APIs will now support holiday featurization for Timeseries models. The models will now hold holiday metadata and should be able to accommodate holiday effect during inference.

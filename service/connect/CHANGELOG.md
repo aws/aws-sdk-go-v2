@@ -1,3 +1,7 @@
+# v1.67.0 (2023-09-15)
+
+* **Feature**: New rule type (OnMetricDataUpdate) has been added
+
 # v1.66.0 (2023-09-01)
 
 * **Feature**: Amazon Connect adds the ability to read, create, update, delete, and list view resources, and adds the ability to read, create, delete, and list view versions.

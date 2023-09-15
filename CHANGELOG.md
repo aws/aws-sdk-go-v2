@@ -1,3 +1,15 @@
+# Release (2023-09-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.24.0](service/appstream/CHANGELOG.md#v1240-2023-09-15)
+  * **Feature**: This release introduces app block builder, allowing customers to provision a resource to package applications into an app block
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.67.0](service/connect/CHANGELOG.md#v1670-2023-09-15)
+  * **Feature**: New rule type (OnMetricDataUpdate) has been added
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.29.1](service/datasync/CHANGELOG.md#v1291-2023-09-15)
+  * **Documentation**: Documentation-only updates for AWS DataSync.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.106.0](service/sagemaker/CHANGELOG.md#v11060-2023-09-15)
+  * **Feature**: This release introduces Skip Model Validation for Model Packages
+
 # Release (2023-09-14)
 
 ## Module Highlights
