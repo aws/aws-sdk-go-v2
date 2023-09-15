@@ -82,6 +82,9 @@
                         "smithy.api#documentation": "<p>The shared directory in the directory consumer account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#AccessDeniedException": {
@@ -174,7 +177,10 @@
         },
         "com.amazonaws.directoryservice#AddIpRoutesResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#AddRegion": {
             "type": "operation",
@@ -250,7 +256,10 @@
         },
         "com.amazonaws.directoryservice#AddRegionResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#AddTagsToResource": {
             "type": "operation",
@@ -305,7 +314,10 @@
         },
         "com.amazonaws.directoryservice#AddTagsToResourceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#AddedDateTime": {
             "type": "timestamp"
@@ -440,7 +452,10 @@
         },
         "com.amazonaws.directoryservice#CancelSchemaExtensionResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#Certificate": {
             "type": "structure",
@@ -970,7 +985,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>ConnectDirectory</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>ConnectDirectory</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#ConnectPassword": {
@@ -1058,7 +1074,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>CreateAlias</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>CreateAlias</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#CreateComputer": {
@@ -1152,7 +1169,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results for the <a>CreateComputer</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results for the <a>CreateComputer</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#CreateConditionalForwarder": {
@@ -1224,7 +1242,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The result of a CreateConditinalForwarder request.</p>"
+                "smithy.api#documentation": "<p>The result of a CreateConditinalForwarder request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#CreateDirectory": {
@@ -1318,7 +1337,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>CreateDirectory</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>CreateDirectory</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#CreateLogSubscription": {
@@ -1377,7 +1397,10 @@
         },
         "com.amazonaws.directoryservice#CreateLogSubscriptionResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#CreateMicrosoftAD": {
             "type": "operation",
@@ -1473,7 +1496,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Result of a CreateMicrosoftAD request.</p>"
+                "smithy.api#documentation": "<p>Result of a CreateMicrosoftAD request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#CreateSnapshot": {
@@ -1550,7 +1574,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>CreateSnapshot</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>CreateSnapshot</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#CreateTrust": {
@@ -1651,7 +1676,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a CreateTrust request.</p>"
+                "smithy.api#documentation": "<p>The result of a CreateTrust request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#CreatedDateTime": {
@@ -1738,7 +1764,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The result of a DeleteConditionalForwarder request.</p>"
+                "smithy.api#documentation": "<p>The result of a DeleteConditionalForwarder request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DeleteDirectory": {
@@ -1791,7 +1818,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>DeleteDirectory</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>DeleteDirectory</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DeleteLogSubscription": {
@@ -1837,7 +1865,10 @@
         },
         "com.amazonaws.directoryservice#DeleteLogSubscriptionResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#DeleteSnapshot": {
             "type": "operation",
@@ -1892,7 +1923,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>DeleteSnapshot</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>DeleteSnapshot</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DeleteTrust": {
@@ -1958,7 +1990,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a DeleteTrust request.</p>"
+                "smithy.api#documentation": "<p>The result of a DeleteTrust request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DeregisterCertificate": {
@@ -2023,7 +2056,10 @@
         },
         "com.amazonaws.directoryservice#DeregisterCertificateResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#DeregisterEventTopic": {
             "type": "operation",
@@ -2078,7 +2114,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The result of a DeregisterEventTopic request.</p>"
+                "smithy.api#documentation": "<p>The result of a DeregisterEventTopic request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeCertificate": {
@@ -2144,6 +2181,9 @@
                         "smithy.api#documentation": "<p>Information about the certificate, including registered date time, certificate state, the\n      reason for the state, expiration date time, and certificate common name.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeClientAuthenticationSettings": {
@@ -2232,6 +2272,9 @@
                         "smithy.api#documentation": "<p>The next token used to retrieve the client authentication settings if the number of setting types exceeds\n      page limit and there is another page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeConditionalForwarders": {
@@ -2299,7 +2342,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a DescribeConditionalForwarder request.</p>"
+                "smithy.api#documentation": "<p>The result of a DescribeConditionalForwarder request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeDirectories": {
@@ -2381,7 +2425,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>DescribeDirectories</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>DescribeDirectories</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeDomainControllers": {
@@ -2469,6 +2514,9 @@
                         "smithy.api#documentation": "<p>If not null, more results are available. Pass this value for the <code>NextToken</code>\n      parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the\n      next set of items.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeEventTopics": {
@@ -2529,7 +2577,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a DescribeEventTopic request.</p>"
+                "smithy.api#documentation": "<p>The result of a DescribeEventTopic request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeLDAPSSettings": {
@@ -2618,6 +2667,9 @@
                         "smithy.api#documentation": "<p>The next token used to retrieve the LDAPS settings if the number of setting types exceeds\n      page limit and there is another page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeRegions": {
@@ -2702,6 +2754,9 @@
                         "smithy.api#documentation": "<p>If not null, more results are available. Pass this value for the <code>NextToken</code>\n      parameter in a subsequent call to <a>DescribeRegions</a> to retrieve the next set\n      of items.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeSettings": {
@@ -2784,6 +2839,9 @@
                         "smithy.api#documentation": "<p>If not null, token that indicates that more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <code>DescribeSettings</code> to retrieve the next set of items. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeSharedDirectories": {
@@ -2872,6 +2930,9 @@
                         "smithy.api#documentation": "<p>If not null, token that indicates that more results are available. Pass this value for the\n        <code>NextToken</code> parameter in a subsequent call to <a>DescribeSharedDirectories</a> to retrieve the next set of items.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeSnapshots": {
@@ -2959,7 +3020,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>DescribeSnapshots</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>DescribeSnapshots</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeTrusts": {
@@ -3050,7 +3112,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a DescribeTrust request.</p>"
+                "smithy.api#documentation": "<p>The result of a DescribeTrust request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DescribeUpdateDirectory": {
@@ -3139,6 +3202,9 @@
                         "smithy.api#documentation": "<p>\n      If not null, more results are available. Pass this value for the <code>NextToken</code> parameter.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#Description": {
@@ -3902,6 +3968,7 @@
                     "arnNamespace": "ds",
                     "cloudFormationName": "DirectoryService",
                     "cloudTrailEventSource": "directoryservice.amazonaws.com",
+                    "docId": "ds-2015-04-16",
                     "endpointPrefix": "ds"
                 },
                 "aws.auth#sigv4": {
@@ -3973,9 +4040,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ds-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ds-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -3988,15 +4234,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ds.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://ds.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -4008,258 +4289,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ds-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ds-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://ds.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://ds.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -5178,7 +5209,10 @@
         },
         "com.amazonaws.directoryservice#DisableClientAuthenticationResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#DisableLDAPS": {
             "type": "operation",
@@ -5239,7 +5273,10 @@
         },
         "com.amazonaws.directoryservice#DisableLDAPSResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#DisableRadius": {
             "type": "operation",
@@ -5284,7 +5321,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>DisableRadius</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>DisableRadius</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DisableSso": {
@@ -5348,7 +5386,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>DisableSso</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>DisableSso</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#DnsIpAddrs": {
@@ -5567,7 +5606,10 @@
         },
         "com.amazonaws.directoryservice#EnableClientAuthenticationResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#EnableLDAPS": {
             "type": "operation",
@@ -5631,7 +5673,10 @@
         },
         "com.amazonaws.directoryservice#EnableLDAPSResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#EnableRadius": {
             "type": "operation",
@@ -5689,7 +5734,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>EnableRadius</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>EnableRadius</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#EnableSso": {
@@ -5753,7 +5799,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>EnableSso</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>EnableSso</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#EndDateTime": {
@@ -5881,7 +5928,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>GetDirectoryLimits</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>GetDirectoryLimits</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#GetSnapshotLimits": {
@@ -5934,7 +5982,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>GetSnapshotLimits</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>GetSnapshotLimits</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#IncompatibleSettingsException": {
@@ -6400,6 +6449,9 @@
                         "smithy.api#documentation": "<p>A list of certificates with basic details including certificate ID, certificate common\n      name, certificate state.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#ListIpRoutes": {
@@ -6479,6 +6531,9 @@
                         "smithy.api#documentation": "<p>If not null, more results are available. Pass this value for the\n            <i>NextToken</i> parameter in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#ListLogSubscriptions": {
@@ -6554,6 +6609,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#ListSchemaExtensions": {
@@ -6630,6 +6688,9 @@
                         "smithy.api#documentation": "<p>If not null, more results are available. Pass this value for the <code>NextToken</code>\n      parameter in a subsequent call to <code>ListSchemaExtensions</code> to retrieve the next set\n      of items.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#ListTagsForResource": {
@@ -6709,6 +6770,9 @@
                         "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#LogGroupName": {
@@ -7285,6 +7349,9 @@
                         "smithy.api#documentation": "<p>The identifier of the certificate.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#RegisterEventTopic": {
@@ -7340,7 +7407,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The result of a RegisterEventTopic request.</p>"
+                "smithy.api#documentation": "<p>The result of a RegisterEventTopic request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#RejectSharedDirectory": {
@@ -7396,6 +7464,9 @@
                         "smithy.api#documentation": "<p>Identifier of the shared directory in the directory consumer account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#RemoteDomainName": {
@@ -7467,7 +7538,10 @@
         },
         "com.amazonaws.directoryservice#RemoveIpRoutesResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#RemoveRegion": {
             "type": "operation",
@@ -7518,7 +7592,10 @@
         },
         "com.amazonaws.directoryservice#RemoveRegionResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#RemoveTagsFromResource": {
             "type": "operation",
@@ -7570,7 +7647,10 @@
         },
         "com.amazonaws.directoryservice#RemoveTagsFromResourceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#ReplicationScope": {
             "type": "enum",
@@ -7656,7 +7736,10 @@
         },
         "com.amazonaws.directoryservice#ResetUserPasswordResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#ResourceId": {
             "type": "string",
@@ -7710,7 +7793,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>RestoreFromSnapshot</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>RestoreFromSnapshot</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#SID": {
@@ -8096,6 +8180,9 @@
                         "smithy.api#documentation": "<p>Identifier of the directory that is stored in the directory consumer account that is\n      shared from the specified directory (<code>DirectoryId</code>).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#ShareLimitExceededException": {
@@ -8529,6 +8616,9 @@
                         "smithy.api#documentation": "<p>The identifier of the schema extension that will be applied.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#StartTime": {
@@ -8966,6 +9056,9 @@
                         "smithy.api#documentation": "<p>Identifier of the directory stored in the directory consumer account that is to be\n      unshared from the specified directory (<code>DirectoryId</code>).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#UnshareTarget": {
@@ -9092,7 +9185,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The result of an UpdateConditionalForwarder request.</p>"
+                "smithy.api#documentation": "<p>The result of an UpdateConditionalForwarder request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#UpdateDirectorySetup": {
@@ -9173,7 +9267,10 @@
         },
         "com.amazonaws.directoryservice#UpdateDirectorySetupResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#UpdateInfoEntry": {
             "type": "structure",
@@ -9291,7 +9388,10 @@
         },
         "com.amazonaws.directoryservice#UpdateNumberOfDomainControllersResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.directoryservice#UpdateRadius": {
             "type": "operation",
@@ -9346,7 +9446,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of the <a>UpdateRadius</a> operation.</p>"
+                "smithy.api#documentation": "<p>Contains the results of the <a>UpdateRadius</a> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#UpdateSecurityGroupForDirectoryControllers": {
@@ -9424,6 +9525,9 @@
                         "smithy.api#documentation": "<p>The identifier of the directory.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#UpdateStatus": {
@@ -9511,6 +9615,9 @@
                         "smithy.api#documentation": "<p>Identifier of the trust relationship.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#UpdateType": {
@@ -9634,7 +9741,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Result of a VerifyTrust request.</p>"
+                "smithy.api#documentation": "<p>Result of a VerifyTrust request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directoryservice#VpcId": {

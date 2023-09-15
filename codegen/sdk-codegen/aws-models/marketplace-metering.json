@@ -52,13 +52,14 @@
                     "arnNamespace": "aws-marketplace",
                     "cloudFormationName": "MarketplaceMetering",
                     "cloudTrailEventSource": "marketplacemetering.amazonaws.com",
+                    "docId": "meteringmarketplace-2016-01-14",
                     "endpointPrefix": "metering.marketplace"
                 },
                 "aws.auth#sigv4": {
                     "name": "aws-marketplace"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS Marketplace Metering Service</fullname>\n        <p>This reference provides descriptions of the low-level AWS Marketplace Metering Service\n            API.</p>\n        <p>AWS Marketplace sellers can use this API to submit usage data for custom usage\n            dimensions.</p>\n        <p>For information on the permissions you need to use this API, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/iam-user-policy-for-aws-marketplace-actions.html\">AWS Marketplace metering and entitlement API permissions</a> in the\n                <i>AWS Marketplace Seller Guide.</i>\n        </p>\n        <p>\n            <b>Submitting Metering Records</b>\n        </p>\n        <ul>\n            <li>\n                <p>\n                    <i>MeterUsage</i> - Submits the metering record for an AWS\n                    Marketplace product. <code>MeterUsage</code> is called from an EC2 instance or a\n                    container running on EKS or ECS.</p>\n            </li>\n            <li>\n                <p>\n                    <i>BatchMeterUsage</i> - Submits the metering record for a set of\n                    customers. <code>BatchMeterUsage</code> is called from a software-as-a-service\n                    (SaaS) application.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Accepting New Customers</b>\n        </p>\n        <ul>\n            <li>\n                <p>\n                    <i>ResolveCustomer</i> - Called by a SaaS application during the\n                    registration process. When a buyer visits your website during the registration\n                    process, the buyer submits a Registration Token through the browser. The\n                    Registration Token is resolved through this API to obtain a\n                        <code>CustomerIdentifier</code>\n                    \n                    along with the <code>CustomerAWSAccountId</code> and\n                    <code>ProductCode</code>.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Entitlement and Metering for Paid Container Products</b>\n        </p>\n        <ul>\n            <li>\n                <p>Paid container software products sold through AWS Marketplace must integrate\n                    with the AWS Marketplace Metering Service and call the\n                        <code>RegisterUsage</code> operation for software entitlement and metering.\n                    Free and BYOL products for Amazon ECS or Amazon EKS aren't required to call\n                        <code>RegisterUsage</code>, but you can do so if you want to receive usage\n                    data in your seller reports. For more information on using the\n                        <code>RegisterUsage</code> operation, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/container-based-products.html\">Container-Based Products</a>. </p>\n            </li>\n         </ul>\n        <p>\n            <code>BatchMeterUsage</code> API calls are captured by AWS CloudTrail. You can use\n            Cloudtrail to verify that the SaaS metering records that you sent are accurate by\n            searching for records with the <code>eventName</code> of <code>BatchMeterUsage</code>.\n            You can also use CloudTrail to audit records over time. For more information, see the\n                    <i>\n               <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html\">AWS CloudTrail User Guide</a>.</i>\n         </p>",
+                "smithy.api#documentation": "<fullname>AWS Marketplace Metering Service</fullname>\n         <p>This reference provides descriptions of the low-level AWS Marketplace Metering Service\n            API.</p>\n         <p>AWS Marketplace sellers can use this API to submit usage data for custom usage\n            dimensions.</p>\n         <p>For information on the permissions you need to use this API, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/iam-user-policy-for-aws-marketplace-actions.html\">AWS Marketplace metering and entitlement API permissions</a> in the\n                <i>AWS Marketplace Seller Guide.</i>\n         </p>\n         <p>\n            <b>Submitting Metering Records</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <i>MeterUsage</i> - Submits the metering record for an AWS\n                    Marketplace product. <code>MeterUsage</code> is called from an EC2 instance or a\n                    container running on EKS or ECS.</p>\n            </li>\n            <li>\n               <p>\n                  <i>BatchMeterUsage</i> - Submits the metering record for a set of\n                    customers. <code>BatchMeterUsage</code> is called from a software-as-a-service\n                    (SaaS) application.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Accepting New Customers</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <i>ResolveCustomer</i> - Called by a SaaS application during the\n                    registration process. When a buyer visits your website during the registration\n                    process, the buyer submits a Registration Token through the browser. The\n                    Registration Token is resolved through this API to obtain a\n                        <code>CustomerIdentifier</code>\n                    \n                    along with the <code>CustomerAWSAccountId</code> and\n                    <code>ProductCode</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Entitlement and Metering for Paid Container Products</b>\n         </p>\n         <ul>\n            <li>\n               <p>Paid container software products sold through AWS Marketplace must integrate\n                    with the AWS Marketplace Metering Service and call the\n                        <code>RegisterUsage</code> operation for software entitlement and metering.\n                    Free and BYOL products for Amazon ECS or Amazon EKS aren't required to call\n                        <code>RegisterUsage</code>, but you can do so if you want to receive usage\n                    data in your seller reports. For more information on using the\n                        <code>RegisterUsage</code> operation, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/container-based-products.html\">Container-Based Products</a>. </p>\n            </li>\n         </ul>\n         <p>\n            <code>BatchMeterUsage</code> API calls are captured by AWS CloudTrail. You can use\n            Cloudtrail to verify that the SaaS metering records that you sent are accurate by\n            searching for records with the <code>eventName</code> of <code>BatchMeterUsage</code>.\n            You can also use CloudTrail to audit records over time. For more information, see the\n                    <i>\n               <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html\">AWS CloudTrail User Guide</a>.</i>\n         </p>",
                 "smithy.api#title": "AWSMarketplace Metering",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -120,9 +121,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://metering.marketplace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://metering.marketplace-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -135,15 +315,100 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://metering.marketplace.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        "aws",
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://metering.marketplace.{Region}.amazonaws.com",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        "aws-us-gov",
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://metering.marketplace.{Region}.amazonaws.com",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://metering.marketplace.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -155,308 +420,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://metering.marketplace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://metering.marketplace-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://metering.marketplace.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        "aws",
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "name"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://metering.marketplace.{Region}.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        "aws-us-gov",
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "name"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://metering.marketplace.{Region}.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://metering.marketplace.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -471,8 +436,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -484,8 +449,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -497,8 +462,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -510,8 +475,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -523,8 +488,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -536,8 +501,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -549,8 +514,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -562,8 +527,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -575,8 +540,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -588,8 +553,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -601,8 +566,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -614,8 +579,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -627,8 +592,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -640,8 +605,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -653,8 +618,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -666,8 +631,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -679,8 +644,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -692,8 +657,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -705,8 +670,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -718,8 +683,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -731,8 +696,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -744,8 +709,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -757,8 +722,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -770,8 +735,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -783,8 +748,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -796,8 +761,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -809,8 +774,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -822,8 +787,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -835,8 +800,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -848,8 +813,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -861,8 +826,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -874,8 +839,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -887,8 +852,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -900,8 +865,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -913,8 +889,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -926,8 +913,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -939,8 +937,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -952,8 +961,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -965,8 +974,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -978,8 +987,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -990,8 +999,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1002,9 +1011,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1059,7 +1074,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <code>BatchMeterUsage</code> is called from a SaaS application listed on AWS\n            Marketplace to post metering records for a set of customers.</p>\n        <p>For identical requests, the API is idempotent; requests can be retried with the same\n            records or a subset of the input records.</p>\n        <p>Every request to <code>BatchMeterUsage</code> is for one product. If you need to meter\n            usage for multiple products, you must make multiple calls to\n                <code>BatchMeterUsage</code>.</p>\n        <p>Usage records are expected to be submitted as quickly as possible after the event that\n            is being recorded, and are not accepted more than 6 hours after the event.</p>\n        <p>\n            <code>BatchMeterUsage</code> can process up to 25 <code>UsageRecords</code> at a\n            time.</p>\n        <p>A <code>UsageRecord</code> can optionally include multiple usage allocations, to\n            provide customers with usage data split into buckets by tags that you define (or allow\n            the customer to define).</p>\n        <p>\n            <code>BatchMeterUsage</code> returns a list of <code>UsageRecordResult</code> objects,\n            showing the result for each <code>UsageRecord</code>, as well as a list of\n                <code>UnprocessedRecords</code>, indicating errors in the service side that you\n            should retry.</p>\n        <p>\n            <code>BatchMeterUsage</code> requests must be less than 1MB in size.</p>\n        <note>\n            <p>For an example of using <code>BatchMeterUsage</code>, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example\"> BatchMeterUsage code example</a> in the <i>AWS Marketplace Seller\n                    Guide</i>.</p>\n        </note>"
+                "smithy.api#documentation": "<p>\n            <code>BatchMeterUsage</code> is called from a SaaS application listed on AWS\n            Marketplace to post metering records for a set of customers.</p>\n         <p>For identical requests, the API is idempotent; requests can be retried with the same\n            records or a subset of the input records.</p>\n         <p>Every request to <code>BatchMeterUsage</code> is for one product. If you need to meter\n            usage for multiple products, you must make multiple calls to\n                <code>BatchMeterUsage</code>.</p>\n         <p>Usage records are expected to be submitted as quickly as possible after the event that\n            is being recorded, and are not accepted more than 6 hours after the event.</p>\n         <p>\n            <code>BatchMeterUsage</code> can process up to 25 <code>UsageRecords</code> at a\n            time.</p>\n         <p>A <code>UsageRecord</code> can optionally include multiple usage allocations, to\n            provide customers with usage data split into buckets by tags that you define (or allow\n            the customer to define).</p>\n         <p>\n            <code>BatchMeterUsage</code> returns a list of <code>UsageRecordResult</code> objects,\n            showing the result for each <code>UsageRecord</code>, as well as a list of\n                <code>UnprocessedRecords</code>, indicating errors in the service side that you\n            should retry.</p>\n         <p>\n            <code>BatchMeterUsage</code> requests must be less than 1MB in size.</p>\n         <note>\n            <p>For an example of using <code>BatchMeterUsage</code>, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example\"> BatchMeterUsage code example</a> in the <i>AWS Marketplace Seller\n                    Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.marketplacemetering#BatchMeterUsageRequest": {
@@ -1081,7 +1096,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A <code>BatchMeterUsageRequest</code> contains <code>UsageRecords</code>, which\n            indicate quantities of usage within your application.</p>"
+                "smithy.api#documentation": "<p>A <code>BatchMeterUsageRequest</code> contains <code>UsageRecords</code>, which\n            indicate quantities of usage within your application.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacemetering#BatchMeterUsageResult": {
@@ -1101,7 +1117,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the <code>UsageRecords</code> processed by <code>BatchMeterUsage</code> and\n            any records that have failed due to transient error.</p>"
+                "smithy.api#documentation": "<p>Contains the <code>UsageRecords</code> processed by <code>BatchMeterUsage</code> and\n            any records that have failed due to transient error.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacemetering#Boolean": {
@@ -1336,7 +1353,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>API to emit metering records. For identical requests, the API is idempotent. It simply\n            returns the metering record ID.</p>\n        <p>\n            <code>MeterUsage</code> is authenticated on the buyer's AWS account using credentials\n            from the EC2 instance, ECS task, or EKS pod.</p>\n        <p>\n            <code>MeterUsage</code> can optionally include multiple usage allocations, to provide\n            customers with usage data split into buckets by tags that you define (or allow the\n            customer to define).</p>\n        <p>Usage records are expected to be submitted as quickly as possible after the event that\n            is being recorded, and are not accepted more than 6 hours after the event.</p>"
+                "smithy.api#documentation": "<p>API to emit metering records. For identical requests, the API is idempotent. It simply\n            returns the metering record ID.</p>\n         <p>\n            <code>MeterUsage</code> is authenticated on the buyer's AWS account using credentials\n            from the EC2 instance, ECS task, or EKS pod.</p>\n         <p>\n            <code>MeterUsage</code> can optionally include multiple usage allocations, to provide\n            customers with usage data split into buckets by tags that you define (or allow the\n            customer to define).</p>\n         <p>Usage records are expected to be submitted as quickly as possible after the event that\n            is being recorded, and are not accepted more than 6 hours after the event.</p>"
             }
         },
         "com.amazonaws.marketplacemetering#MeterUsageRequest": {
@@ -1378,9 +1395,12 @@
                 "UsageAllocations": {
                     "target": "com.amazonaws.marketplacemetering#UsageAllocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of <code>UsageAllocations</code> to submit.</p>\n        <p>The sum of all <code>UsageAllocation</code> quantities must equal the\n                <code>UsageQuantity</code> of the <code>MeterUsage</code> request, and each\n                <code>UsageAllocation</code> must have a unique set of tags (include no\n            tags).</p>"
+                        "smithy.api#documentation": "<p>The set of <code>UsageAllocations</code> to submit.</p>\n         <p>The sum of all <code>UsageAllocation</code> quantities must equal the\n                <code>UsageQuantity</code> of the <code>MeterUsage</code> request, and each\n                <code>UsageAllocation</code> must have a unique set of tags (include no\n            tags).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacemetering#MeterUsageResult": {
@@ -1392,6 +1412,9 @@
                         "smithy.api#documentation": "<p>Metering record id.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacemetering#NonEmptyString": {
@@ -1467,7 +1490,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Paid container software products sold through AWS Marketplace must integrate with the\n            AWS Marketplace Metering Service and call the <code>RegisterUsage</code> operation for\n            software entitlement and metering. Free and BYOL products for Amazon ECS or Amazon EKS\n            aren't required to call <code>RegisterUsage</code>, but you may choose to do so if you\n            would like to receive usage data in your seller reports. The sections below explain the\n            behavior of <code>RegisterUsage</code>. <code>RegisterUsage</code> performs two primary\n            functions: metering and entitlement.</p>\n        <ul>\n            <li>\n                <p>\n                    <i>Entitlement</i>: <code>RegisterUsage</code> allows you to\n                    verify that the customer running your paid software is subscribed to your\n                    product on AWS Marketplace, enabling you to guard against unauthorized use. Your\n                    container image that integrates with <code>RegisterUsage</code> is only required\n                    to guard against unauthorized use at container startup, as such a\n                        <code>CustomerNotSubscribedException</code> or\n                        <code>PlatformNotSupportedException</code> will only be thrown on the\n                    initial call to <code>RegisterUsage</code>. Subsequent calls from the same\n                    Amazon ECS task instance (e.g. task-id) or Amazon EKS pod will not throw a\n                        <code>CustomerNotSubscribedException</code>, even if the customer\n                    unsubscribes while the Amazon ECS task or Amazon EKS pod is still\n                    running.</p>\n            </li>\n            <li>\n                <p>\n                    <i>Metering</i>: <code>RegisterUsage</code> meters software use\n                    per ECS task, per hour, or per pod for Amazon EKS with usage prorated to the\n                    second. A minimum of 1 minute of usage applies to tasks that are short lived.\n                    For example, if a customer has a 10 node Amazon ECS or Amazon EKS cluster and a\n                    service configured as a Daemon Set, then Amazon ECS or Amazon EKS will launch a\n                    task on all 10 cluster nodes and the customer will be charged: (10 *\n                    hourly_rate). Metering for software use is automatically handled by the AWS\n                    Marketplace Metering Control Plane -- your software is not required to perform\n                    any metering specific actions, other than call <code>RegisterUsage</code> once\n                    for metering of software use to commence. The AWS Marketplace Metering Control\n                    Plane will also continue to bill customers for running ECS tasks and Amazon EKS\n                    pods, regardless of the customers subscription state, removing the need for your\n                    software to perform entitlement checks at runtime.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Paid container software products sold through AWS Marketplace must integrate with the\n            AWS Marketplace Metering Service and call the <code>RegisterUsage</code> operation for\n            software entitlement and metering. Free and BYOL products for Amazon ECS or Amazon EKS\n            aren't required to call <code>RegisterUsage</code>, but you may choose to do so if you\n            would like to receive usage data in your seller reports. The sections below explain the\n            behavior of <code>RegisterUsage</code>. <code>RegisterUsage</code> performs two primary\n            functions: metering and entitlement.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Entitlement</i>: <code>RegisterUsage</code> allows you to\n                    verify that the customer running your paid software is subscribed to your\n                    product on AWS Marketplace, enabling you to guard against unauthorized use. Your\n                    container image that integrates with <code>RegisterUsage</code> is only required\n                    to guard against unauthorized use at container startup, as such a\n                        <code>CustomerNotSubscribedException</code> or\n                        <code>PlatformNotSupportedException</code> will only be thrown on the\n                    initial call to <code>RegisterUsage</code>. Subsequent calls from the same\n                    Amazon ECS task instance (e.g. task-id) or Amazon EKS pod will not throw a\n                        <code>CustomerNotSubscribedException</code>, even if the customer\n                    unsubscribes while the Amazon ECS task or Amazon EKS pod is still\n                    running.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Metering</i>: <code>RegisterUsage</code> meters software use\n                    per ECS task, per hour, or per pod for Amazon EKS with usage prorated to the\n                    second. A minimum of 1 minute of usage applies to tasks that are short lived.\n                    For example, if a customer has a 10 node Amazon ECS or Amazon EKS cluster and a\n                    service configured as a Daemon Set, then Amazon ECS or Amazon EKS will launch a\n                    task on all 10 cluster nodes and the customer will be charged: (10 *\n                    hourly_rate). Metering for software use is automatically handled by the AWS\n                    Marketplace Metering Control Plane -- your software is not required to perform\n                    any metering specific actions, other than call <code>RegisterUsage</code> once\n                    for metering of software use to commence. The AWS Marketplace Metering Control\n                    Plane will also continue to bill customers for running ECS tasks and Amazon EKS\n                    pods, regardless of the customers subscription state, removing the need for your\n                    software to perform entitlement checks at runtime.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.marketplacemetering#RegisterUsageRequest": {
@@ -1493,6 +1516,9 @@
                         "smithy.api#documentation": "<p>(Optional) To scope down the registration to a specific running software instance and\n            guard against replay attacks.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacemetering#RegisterUsageResult": {
@@ -1510,6 +1536,9 @@
                         "smithy.api#documentation": "<p>JWT Token</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacemetering#ResolveCustomer": {
@@ -1538,7 +1567,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <code>ResolveCustomer</code> is called by a SaaS application during the registration\n            process. When a buyer visits your website during the registration process, the buyer\n            submits a registration token through their browser. The registration token is resolved\n            through this API to obtain a <code>CustomerIdentifier</code>\n             along with the\n                <code>CustomerAWSAccountId</code> and\n            <code>ProductCode</code>.</p>\n        <note>\n            <p>The API needs to called from the seller account id used to publish the SaaS\n                application to successfully resolve the token.</p>\n            <p>For an example of using <code>ResolveCustomer</code>, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example\"> ResolveCustomer code example</a> in the <i>AWS Marketplace Seller\n                    Guide</i>.</p>\n        </note>"
+                "smithy.api#documentation": "<p>\n            <code>ResolveCustomer</code> is called by a SaaS application during the registration\n            process. When a buyer visits your website during the registration process, the buyer\n            submits a registration token through their browser. The registration token is resolved\n            through this API to obtain a <code>CustomerIdentifier</code>\n             along with the\n                <code>CustomerAWSAccountId</code> and\n            <code>ProductCode</code>.</p>\n         <note>\n            <p>The API needs to called from the seller account id used to publish the SaaS\n                application to successfully resolve the token.</p>\n            <p>For an example of using <code>ResolveCustomer</code>, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example\"> ResolveCustomer code example</a> in the <i>AWS Marketplace Seller\n                    Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.marketplacemetering#ResolveCustomerRequest": {
@@ -1553,7 +1582,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains input to the <code>ResolveCustomer</code> operation.</p>"
+                "smithy.api#documentation": "<p>Contains input to the <code>ResolveCustomer</code> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacemetering#ResolveCustomerResult": {
@@ -1579,7 +1609,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of the <code>ResolveCustomer</code> operation. Contains the\n                <code>CustomerIdentifier</code>\n            \n            along with the <code>CustomerAWSAccountId</code> and\n            <code>ProductCode</code>.</p>"
+                "smithy.api#documentation": "<p>The result of the <code>ResolveCustomer</code> operation. Contains the\n                <code>CustomerIdentifier</code>\n            \n            along with the <code>CustomerAWSAccountId</code> and\n            <code>ProductCode</code>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacemetering#String": {
@@ -1662,7 +1693,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>timestamp</code> value passed in the <code>UsageRecord</code> is out of\n            allowed range.</p>\n        <p>For <code>BatchMeterUsage</code>, if any of the records are outside of the allowed\n            range, the entire batch is not processed. You must remove invalid records and try\n            again.</p>",
+                "smithy.api#documentation": "<p>The <code>timestamp</code> value passed in the <code>UsageRecord</code> is out of\n            allowed range.</p>\n         <p>For <code>BatchMeterUsage</code>, if any of the records are outside of the allowed\n            range, the entire batch is not processed. You must remove invalid records and try\n            again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1684,7 +1715,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Usage allocations allow you to split usage into buckets by tags.</p>\n        <p>Each <code>UsageAllocation</code> indicates the usage quantity for a specific set of\n            tags.</p>"
+                "smithy.api#documentation": "<p>Usage allocations allow you to split usage into buckets by tags.</p>\n         <p>Each <code>UsageAllocation</code> indicates the usage quantity for a specific set of\n            tags.</p>"
             }
         },
         "com.amazonaws.marketplacemetering#UsageAllocations": {
@@ -1724,7 +1755,7 @@
                 "Timestamp": {
                     "target": "com.amazonaws.marketplacemetering#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Timestamp, in UTC, for which the usage is being reported.</p>\n        <p>Your application can meter usage for up to one hour in the past. Make sure the\n                <code>timestamp</code> value is not before the start of the software usage.</p>",
+                        "smithy.api#documentation": "<p>Timestamp, in UTC, for which the usage is being reported.</p>\n         <p>Your application can meter usage for up to one hour in the past. Make sure the\n                <code>timestamp</code> value is not before the start of the software usage.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1756,7 +1787,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A <code>UsageRecord</code> indicates a quantity of usage for a given product,\n            customer, dimension and time.</p>\n        <p>Multiple requests with the same <code>UsageRecords</code> as input will be\n            de-duplicated to prevent double charges.</p>"
+                "smithy.api#documentation": "<p>A <code>UsageRecord</code> indicates a quantity of usage for a given product,\n            customer, dimension and time.</p>\n         <p>Multiple requests with the same <code>UsageRecords</code> as input will be\n            de-duplicated to prevent double charges.</p>"
             }
         },
         "com.amazonaws.marketplacemetering#UsageRecordList": {
@@ -1789,7 +1820,7 @@
                 "Status": {
                     "target": "com.amazonaws.marketplacemetering#UsageRecordResultStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>UsageRecordResult</code>\n            <code>Status</code> indicates the status of an individual <code>UsageRecord</code>\n            processed by <code>BatchMeterUsage</code>.</p>\n        <ul>\n            <li>\n                <p>\n                    <i>Success</i>- The <code>UsageRecord</code> was accepted and\n                    honored by <code>BatchMeterUsage</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <i>CustomerNotSubscribed</i>- The <code>CustomerIdentifier</code>\n                    specified is not able to use your product. The <code>UsageRecord</code> was not\n                    honored. There are three causes for this result:</p>\n                <ul>\n                  <li>\n                        <p>The customer identifier is invalid.</p>\n                    </li>\n                  <li>\n                        <p>The customer identifier provided in the metering record does not have\n                            an active agreement or subscription with this product. Future\n                                <code>UsageRecords</code> for this customer will fail until the\n                            customer subscribes to your product.</p>\n                    </li>\n                  <li>\n                        <p>The customer's AWS account was suspended.</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>\n                    <i>DuplicateRecord</i>- Indicates that the\n                        <code>UsageRecord</code> was invalid and not honored. A previously metered\n                        <code>UsageRecord</code> had the same customer, dimension, and time, but a\n                    different quantity.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The <code>UsageRecordResult</code>\n            <code>Status</code> indicates the status of an individual <code>UsageRecord</code>\n            processed by <code>BatchMeterUsage</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Success</i>- The <code>UsageRecord</code> was accepted and\n                    honored by <code>BatchMeterUsage</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <i>CustomerNotSubscribed</i>- The <code>CustomerIdentifier</code>\n                    specified is not able to use your product. The <code>UsageRecord</code> was not\n                    honored. There are three causes for this result:</p>\n               <ul>\n                  <li>\n                     <p>The customer identifier is invalid.</p>\n                  </li>\n                  <li>\n                     <p>The customer identifier provided in the metering record does not have\n                            an active agreement or subscription with this product. Future\n                                <code>UsageRecords</code> for this customer will fail until the\n                            customer subscribes to your product.</p>\n                  </li>\n                  <li>\n                     <p>The customer's AWS account was suspended.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>DuplicateRecord</i>- Indicates that the\n                        <code>UsageRecord</code> was invalid and not honored. A previously metered\n                        <code>UsageRecord</code> had the same customer, dimension, and time, but a\n                    different quantity.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1804,22 +1835,26 @@
             }
         },
         "com.amazonaws.marketplacemetering#UsageRecordResultStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Success",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "CustomerNotSubscribed",
-                        "name": "CUSTOMER_NOT_SUBSCRIBED"
-                    },
-                    {
-                        "value": "DuplicateRecord",
-                        "name": "DUPLICATE_RECORD"
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
                     }
-                ]
+                },
+                "CUSTOMER_NOT_SUBSCRIBED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CustomerNotSubscribed"
+                    }
+                },
+                "DUPLICATE_RECORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DuplicateRecord"
+                    }
+                }
             }
         },
         "com.amazonaws.marketplacemetering#VersionInteger": {

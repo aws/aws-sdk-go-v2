@@ -148,7 +148,7 @@
                     "name": "iotanalytics"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>IoT Analytics allows you to collect large amounts of device data, process messages, and store them. \n        You can then query the data and run sophisticated analytics on it.  IoT Analytics enables advanced \n    data exploration through integration with Jupyter Notebooks and data visualization through integration \n    with Amazon QuickSight.</p>\n\n         <p>Traditional analytics and business intelligence tools are designed to process structured data. IoT data \n    often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result \n    the data from these devices can have significant gaps, corrupted messages, and false readings that must be \n    cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data \n    from external sources. </p>\n\n         <p>IoT Analytics automates the steps required to analyze data from IoT devices. IoT Analytics \n    filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You \n    can set up the service to collect only the data you need from your devices, apply mathematical transforms \n    to process the data, and enrich the data with device-specific metadata such as device type and location \n    before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, \n    or perform more complex analytics and machine learning inference. IoT Analytics includes pre-built models \n    for common IoT use cases so you can answer questions like which devices are about to fail or which customers \n    are at risk of abandoning their wearable devices.</p>",
+                "smithy.api#documentation": "<p>IoT Analytics allows you to collect large amounts of device data, process messages, and store them. \n        You can then query the data and run sophisticated analytics on it.  IoT Analytics enables advanced \n    data exploration through integration with Jupyter Notebooks and data visualization through integration \n    with Amazon QuickSight.</p>\n         <p>Traditional analytics and business intelligence tools are designed to process structured data. IoT data \n    often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result \n    the data from these devices can have significant gaps, corrupted messages, and false readings that must be \n    cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data \n    from external sources. </p>\n         <p>IoT Analytics automates the steps required to analyze data from IoT devices. IoT Analytics \n    filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You \n    can set up the service to collect only the data you need from your devices, apply mathematical transforms \n    to process the data, and enrich the data with device-specific metadata such as device type and location \n    before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, \n    or perform more complex analytics and machine learning inference. IoT Analytics includes pre-built models \n    for common IoT use cases so you can answer questions like which devices are about to fail or which customers \n    are at risk of abandoning their wearable devices.</p>",
                 "smithy.api#title": "AWS IoT Analytics",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -210,9 +210,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://iotanalytics-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://iotanalytics-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -225,15 +404,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://iotanalytics.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://iotanalytics.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -245,258 +459,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://iotanalytics-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://iotanalytics-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://iotanalytics.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://iotanalytics.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -511,8 +475,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -524,8 +488,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -537,8 +501,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -550,8 +514,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -563,8 +527,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -576,8 +540,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -589,8 +553,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -602,8 +566,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -615,8 +579,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -628,8 +592,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -641,8 +605,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -654,8 +618,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -667,8 +631,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -680,8 +644,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -693,8 +657,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -706,8 +670,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -719,8 +683,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -732,8 +696,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -745,8 +709,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -758,8 +733,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -771,8 +757,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -784,8 +781,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -797,8 +805,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -810,8 +818,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -823,8 +831,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -835,8 +843,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -847,9 +855,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1018,10 +1032,13 @@
                 "messages": {
                     "target": "com.amazonaws.iotanalytics#Messages",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of messages to be sent. Each message has the format: { \"messageId\": \"string\",\n         \"payload\": \"string\"}.</p>\n         <p>The field names of message payloads (data) that you send to IoT Analytics:</p>\n        <ul>\n            <li>\n               <p>Must contain only alphanumeric characters and undescores (_). No other special characters are\n               allowed.</p>\n            </li>\n            <li>\n               <p>Must begin with an alphabetic character or single underscore (_).</p>\n            </li>\n            <li>\n               <p>Cannot contain hyphens (-).</p>\n            </li>\n            <li>\n               <p>In regular expression terms: \"^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$\".\n            </p>\n            </li>\n            <li>\n               <p>Cannot be more than 255 characters.</p>\n            </li>\n            <li>\n               <p>Are case insensitive. (Fields named foo and FOO in the same payload are considered\n               duplicates.)</p>\n            </li>\n         </ul>\n         <p>For example, {\"temp_01\": 29} or {\"_temp_01\": 29} are valid, but {\"temp-01\": 29},\n {\"01_temp\": 29} or {\"__temp_01\": 29} are invalid in message payloads.  </p>",
+                        "smithy.api#documentation": "<p>The list of messages to be sent. Each message has the format: { \"messageId\": \"string\",\n         \"payload\": \"string\"}.</p>\n         <p>The field names of message payloads (data) that you send to IoT Analytics:</p>\n         <ul>\n            <li>\n               <p>Must contain only alphanumeric characters and undescores (_). No other special characters are\n               allowed.</p>\n            </li>\n            <li>\n               <p>Must begin with an alphabetic character or single underscore (_).</p>\n            </li>\n            <li>\n               <p>Cannot contain hyphens (-).</p>\n            </li>\n            <li>\n               <p>In regular expression terms: \"^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$\".\n            </p>\n            </li>\n            <li>\n               <p>Cannot be more than 255 characters.</p>\n            </li>\n            <li>\n               <p>Are case insensitive. (Fields named foo and FOO in the same payload are considered\n               duplicates.)</p>\n            </li>\n         </ul>\n         <p>For example, {\"temp_01\": 29} or {\"_temp_01\": 29} are valid, but {\"temp-01\": 29},\n {\"01_temp\": 29} or {\"__temp_01\": 29} are invalid in message payloads.  </p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#BatchPutMessageResponse": {
@@ -1033,6 +1050,9 @@
                         "smithy.api#documentation": "<p>A list of any errors encountered when sending the messages to the channel.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#BucketKeyExpression": {
@@ -1108,11 +1128,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#CancelPipelineReprocessingResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.iotanalytics#Channel": {
             "type": "structure",
@@ -1162,7 +1188,7 @@
                 "lastMessageArrivalTime": {
                     "target": "com.amazonaws.iotanalytics#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time when a new message arrived in the channel.</p> \n         <p>IoT Analytics updates this value at most once per minute for one channel. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+                        "smithy.api#documentation": "<p>The last time when a new message arrived in the channel.</p>\n         <p>IoT Analytics updates this value at most once per minute for one channel. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p>\n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
                     }
                 }
             },
@@ -1240,22 +1266,26 @@
             }
         },
         "com.amazonaws.iotanalytics#ChannelStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.iotanalytics#ChannelStorage": {
@@ -1340,7 +1370,7 @@
                 "lastMessageArrivalTime": {
                     "target": "com.amazonaws.iotanalytics#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time when a new message arrived in the channel.</p> \n         <p>IoT Analytics updates this value at most once per minute for one channel. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+                        "smithy.api#documentation": "<p>The last time when a new message arrived in the channel.</p>\n         <p>IoT Analytics updates this value at most once per minute for one channel. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p>\n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
                     }
                 }
             },
@@ -1397,18 +1427,20 @@
             }
         },
         "com.amazonaws.iotanalytics#ComputeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACU_1",
-                        "name": "ACU_1"
-                    },
-                    {
-                        "value": "ACU_2",
-                        "name": "ACU_2"
+            "type": "enum",
+            "members": {
+                "ACU_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACU_1"
                     }
-                ]
+                },
+                "ACU_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACU_2"
+                    }
+                }
             }
         },
         "com.amazonaws.iotanalytics#ContainerDatasetAction": {
@@ -1511,6 +1543,9 @@
                         "smithy.api#documentation": "<p>Metadata which can be used to manage the channel.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#CreateChannelResponse": {
@@ -1534,6 +1569,9 @@
                         "smithy.api#documentation": "<p>How long, in days, message data is kept for the channel.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#CreateDataset": {
@@ -1624,6 +1662,9 @@
                         "smithy.api#documentation": "<p>The version ID of the dataset content. To specify <code>versionId</code> for a dataset\n      content, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a> filter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#CreateDatasetContentResponse": {
@@ -1635,6 +1676,9 @@
                         "smithy.api#documentation": "<p>The version ID of the dataset contents that are being created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#CreateDatasetRequest": {
@@ -1690,6 +1734,9 @@
                         "smithy.api#documentation": "<p>A list of data rules that send notifications to CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a> filter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#CreateDatasetResponse": {
@@ -1713,6 +1760,9 @@
                         "smithy.api#documentation": "<p>How long, in days, dataset contents are kept for the dataset.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#CreateDatastore": {
@@ -1783,7 +1833,7 @@
                 "fileFormatConfiguration": {
                     "target": "com.amazonaws.iotanalytics#FileFormatConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the configuration information of file formats.  IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> \n         <p>The default file format is JSON. You can specify only one format.</p> \n         <p>You can't change the file format after you create the data store.</p>"
+                        "smithy.api#documentation": "<p>Contains the configuration information of file formats.  IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p>\n         <p>The default file format is JSON. You can specify only one format.</p>\n         <p>You can't change the file format after you create the data store.</p>"
                     }
                 },
                 "datastorePartitions": {
@@ -1792,6 +1842,9 @@
                         "smithy.api#documentation": "<p> Contains information about the partition dimensions in a data store. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#CreateDatastoreResponse": {
@@ -1815,6 +1868,9 @@
                         "smithy.api#documentation": "<p>How long, in days, message data is kept for the data store.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#CreatePipeline": {
@@ -1877,6 +1933,9 @@
                         "smithy.api#documentation": "<p>Metadata which can be used to manage the pipeline.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#CreatePipelineResponse": {
@@ -1894,6 +1953,9 @@
                         "smithy.api#documentation": "<p>The ARN of the pipeline.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#CustomerManagedChannelS3Storage": {
@@ -2147,18 +2209,20 @@
             }
         },
         "com.amazonaws.iotanalytics#DatasetActionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "QUERY",
-                        "name": "QUERY"
-                    },
-                    {
-                        "value": "CONTAINER",
-                        "name": "CONTAINER"
+            "type": "enum",
+            "members": {
+                "QUERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY"
                     }
-                ]
+                },
+                "CONTAINER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINER"
+                    }
+                }
             }
         },
         "com.amazonaws.iotanalytics#DatasetActions": {
@@ -2230,22 +2294,26 @@
             }
         },
         "com.amazonaws.iotanalytics#DatasetContentState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotanalytics#DatasetContentStatus": {
@@ -2373,22 +2441,26 @@
             }
         },
         "com.amazonaws.iotanalytics#DatasetStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.iotanalytics#DatasetSummaries": {
@@ -2521,13 +2593,13 @@
                 "lastMessageArrivalTime": {
                     "target": "com.amazonaws.iotanalytics#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time when a new message arrived in the data store.</p> \n         <p>IoT Analytics updates this value at most once per minute for Amazon Simple Storage Service one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+                        "smithy.api#documentation": "<p>The last time when a new message arrived in the data store.</p>\n         <p>IoT Analytics updates this value at most once per minute for Amazon Simple Storage Service one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p>\n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
                     }
                 },
                 "fileFormatConfiguration": {
                     "target": "com.amazonaws.iotanalytics#FileFormatConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the configuration information of file formats.  IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> \n         <p>The default file format is JSON. You can specify only one format.</p> \n         <p>You can't change the file format after you create the data store.</p>"
+                        "smithy.api#documentation": "<p>Contains the configuration information of file formats.  IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p>\n         <p>The default file format is JSON. You can specify only one format.</p>\n         <p>You can't change the file format after you create the data store.</p>"
                     }
                 },
                 "datastorePartitions": {
@@ -2654,22 +2726,26 @@
             }
         },
         "com.amazonaws.iotanalytics#DatastoreStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.iotanalytics#DatastoreStorage": {
@@ -2766,7 +2842,7 @@
                 "lastMessageArrivalTime": {
                     "target": "com.amazonaws.iotanalytics#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time when a new message arrived in the data store.</p> \n         <p>IoT Analytics updates this value at most once per minute for Amazon Simple Storage Service one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+                        "smithy.api#documentation": "<p>The last time when a new message arrived in the data store.</p>\n         <p>IoT Analytics updates this value at most once per minute for Amazon Simple Storage Service one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p>\n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
                     }
                 },
                 "fileFormatType": {
@@ -2831,6 +2907,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#DeleteDataset": {
@@ -2919,6 +2998,9 @@
                         "smithy.api#httpQuery": "versionId"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#DeleteDatasetRequest": {
@@ -2932,6 +3014,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#DeleteDatastore": {
@@ -2979,6 +3064,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#DeletePipeline": {
@@ -3026,6 +3114,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#DeltaTime": {
@@ -3118,6 +3209,9 @@
                         "smithy.api#httpQuery": "includeStatistics"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#DescribeChannelResponse": {
@@ -3135,6 +3229,9 @@
                         "smithy.api#documentation": "<p>Statistics about the channel. Included if the <code>includeStatistics</code> parameter is\n      set to <code>true</code> in the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#DescribeDataset": {
@@ -3182,6 +3279,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#DescribeDatasetResponse": {
@@ -3193,6 +3293,9 @@
                         "smithy.api#documentation": "<p>An object that contains information about the dataset.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#DescribeDatastore": {
@@ -3248,6 +3351,9 @@
                         "smithy.api#httpQuery": "includeStatistics"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#DescribeDatastoreResponse": {
@@ -3265,6 +3371,9 @@
                         "smithy.api#documentation": "<p>Additional statistical information about the data store. Included if the\n        <code>includeStatistics</code> parameter is set to <code>true</code> in the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#DescribeLoggingOptions": {
@@ -3303,7 +3412,10 @@
         },
         "com.amazonaws.iotanalytics#DescribeLoggingOptionsRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.iotanalytics#DescribeLoggingOptionsResponse": {
             "type": "structure",
@@ -3314,6 +3426,9 @@
                         "smithy.api#documentation": "<p>The current settings of the IoT Analytics logging options.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#DescribePipeline": {
@@ -3361,6 +3476,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#DescribePipelineResponse": {
@@ -3372,6 +3490,9 @@
                         "smithy.api#documentation": "<p>A <code>Pipeline</code> object that contains information about the pipeline.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#DeviceRegistryEnrichActivity": {
@@ -3513,22 +3634,24 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the configuration information of file formats.  IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> \n         <p>The default file format is JSON. You can specify only one format.</p> \n         <p>You can't change the file format after you create the data store.</p>"
+                "smithy.api#documentation": "<p>Contains the configuration information of file formats.  IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p>\n         <p>The default file format is JSON. You can specify only one format.</p>\n         <p>You can't change the file format after you create the data store.</p>"
             }
         },
         "com.amazonaws.iotanalytics#FileFormatType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "PARQUET",
-                        "name": "PARQUET"
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
                     }
-                ]
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                }
             }
         },
         "com.amazonaws.iotanalytics#FilterActivity": {
@@ -3620,6 +3743,9 @@
                         "smithy.api#httpQuery": "versionId"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#GetDatasetContentResponse": {
@@ -3643,6 +3769,9 @@
                         "smithy.api#documentation": "<p>The status of the dataset content.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#GlueConfiguration": {
@@ -3976,6 +4105,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#ListChannelsResponse": {
@@ -3993,6 +4125,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more\n      results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#ListDatasetContents": {
@@ -4073,6 +4208,9 @@
                         "smithy.api#httpQuery": "scheduledBefore"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#ListDatasetContentsResponse": {
@@ -4090,6 +4228,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more\n      results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#ListDatasets": {
@@ -4145,6 +4286,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#ListDatasetsResponse": {
@@ -4162,6 +4306,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more\n      results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#ListDatastores": {
@@ -4217,6 +4364,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#ListDatastoresResponse": {
@@ -4234,6 +4384,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more\n      results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#ListPipelines": {
@@ -4289,6 +4442,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#ListPipelinesResponse": {
@@ -4306,6 +4462,9 @@
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more\n      results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#ListTagsForResource": {
@@ -4356,6 +4515,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#ListTagsForResourceResponse": {
@@ -4367,6 +4529,9 @@
                         "smithy.api#documentation": "<p>The tags (metadata) that you have assigned to the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#LogResult": {
@@ -4379,14 +4544,14 @@
             }
         },
         "com.amazonaws.iotanalytics#LoggingLevel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.iotanalytics#LoggingOptions": {
@@ -4840,6 +5005,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#QueryFilter": {
@@ -4903,26 +5071,32 @@
             "type": "string"
         },
         "com.amazonaws.iotanalytics#ReprocessingStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
                     }
-                ]
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotanalytics#ReprocessingSummaries": {
@@ -5116,6 +5290,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#RunPipelineActivityResponse": {
@@ -5133,6 +5310,9 @@
                         "smithy.api#documentation": "<p>In case the pipeline activity fails, the log message that is generated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#S3DestinationConfiguration": {
@@ -5268,6 +5448,9 @@
                         "smithy.api#httpQuery": "endTime"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#SampleChannelDataResponse": {
@@ -5279,6 +5462,9 @@
                         "smithy.api#documentation": "<p>The list of message samples. Each sample message is returned as a base64-encoded\n      string.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#Schedule": {
@@ -5483,6 +5669,9 @@
                         "smithy.api#documentation": "<p>Specifies one or more sets of channel messages that you want to reprocess.</p>\n         <p>If you use the <code>channelMessages</code> object, you must not specify a value for\n        <code>startTime</code> and <code>endTime</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#StartPipelineReprocessingResponse": {
@@ -5494,6 +5683,9 @@
                         "smithy.api#documentation": "<p>The ID of the pipeline reprocessing activity that was started.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotanalytics#StartTime": {
@@ -5618,11 +5810,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.iotanalytics#TagValue": {
             "type": "string",
@@ -5766,11 +5964,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.iotanalytics#UpdateChannel": {
             "type": "operation",
@@ -5829,6 +6033,9 @@
                         "smithy.api#documentation": "<p>How long, in days, message data is kept for the channel. The retention period can't be\n      updated if the channel's Amazon S3 storage is customer-managed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#UpdateDataset": {
@@ -5913,6 +6120,9 @@
                         "smithy.api#documentation": "<p>A list of data rules that send notifications to CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a> filter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#UpdateDatastore": {
@@ -5975,9 +6185,12 @@
                 "fileFormatConfiguration": {
                     "target": "com.amazonaws.iotanalytics#FileFormatConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the configuration information of file formats.  IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> \n         <p>The default file format is JSON. You can specify only one format.</p> \n         <p>You can't change the file format after you create the data store.</p>"
+                        "smithy.api#documentation": "<p>Contains the configuration information of file formats.  IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p>\n         <p>The default file format is JSON. You can specify only one format.</p>\n         <p>You can't change the file format after you create the data store.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#UpdatePipeline": {
@@ -6035,6 +6248,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.iotanalytics#Variable": {

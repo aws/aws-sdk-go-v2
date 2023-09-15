@@ -219,9 +219,290 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        },
+                                                        "aws"
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        false
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        false
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://shield.us-east-1.amazonaws.com",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingName": "shield",
+                                                            "signingRegion": "us-east-1"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        },
+                                                        "aws"
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        false
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://shield-fips.us-east-1.amazonaws.com",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingName": "shield",
+                                                            "signingRegion": "us-east-1"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://shield-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://shield-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -234,15 +515,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://shield.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://shield.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -254,539 +570,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "stringEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "PartitionResult"
-                                                                        },
-                                                                        "name"
-                                                                    ]
-                                                                },
-                                                                "aws"
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        },
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://shield-fips.{Region}.api.aws",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseFIPS"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsFIPS"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://shield-fips.us-east-1.amazonaws.com",
-                                                                                "properties": {
-                                                                                    "authSchemes": [
-                                                                                        {
-                                                                                            "name": "sigv4",
-                                                                                            "signingName": "shield",
-                                                                                            "signingRegion": "us-east-1"
-                                                                                        }
-                                                                                    ]
-                                                                                },
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "UseDualStack"
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [
-                                                                        {
-                                                                            "fn": "booleanEquals",
-                                                                            "argv": [
-                                                                                true,
-                                                                                {
-                                                                                    "fn": "getAttr",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        },
-                                                                                        "supportsDualStack"
-                                                                                    ]
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://shield.{Region}.api.aws",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "conditions": [],
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error"
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://shield.us-east-1.amazonaws.com",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "shield",
-                                                                            "signingRegion": "us-east-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://shield-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "Region"
-                                                                                        },
-                                                                                        "aws-global"
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://shield-fips.us-east-1.amazonaws.com",
-                                                                                "properties": {
-                                                                                    "authSchemes": [
-                                                                                        {
-                                                                                            "name": "sigv4",
-                                                                                            "signingName": "shield",
-                                                                                            "signingRegion": "us-east-1"
-                                                                                        }
-                                                                                    ]
-                                                                                },
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://shield-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://shield.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "aws-global"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://shield.us-east-1.amazonaws.com",
-                                                                "properties": {
-                                                                    "authSchemes": [
-                                                                        {
-                                                                            "name": "sigv4",
-                                                                            "signingName": "shield",
-                                                                            "signingRegion": "us-east-1"
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://shield.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -810,8 +595,8 @@
                             },
                             "params": {
                                 "Region": "aws-global",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -832,8 +617,8 @@
                             },
                             "params": {
                                 "Region": "aws-global",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -845,8 +630,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -867,8 +652,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -880,8 +665,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -902,8 +687,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -915,8 +700,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -928,8 +713,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -941,8 +726,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -954,8 +739,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -967,8 +752,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -980,8 +765,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -993,8 +778,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1006,8 +791,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1019,8 +815,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1032,8 +839,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1045,8 +863,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1058,8 +887,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1071,8 +900,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1084,8 +913,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1096,8 +925,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1108,9 +937,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1165,18 +1000,20 @@
             }
         },
         "com.amazonaws.shield#ApplicationLayerAutomaticResponseStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#AssociateDRTLogBucket": {
@@ -1227,11 +1064,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#AssociateDRTLogBucketResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#AssociateDRTRole": {
             "type": "operation",
@@ -1262,7 +1105,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks. This enables the SRT to inspect your WAF configuration and create or update WAF rules and web ACLs.</p>\n         <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p>\n         <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <code>AWSShieldDRTAccessPolicy</code> managed policy to the role that you'll specify in the request. You can access this policy in the IAM console at <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a>. For more information see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Adding and removing IAM identity permissions</a>. The role must also trust the service principal\n<code>drt.shield.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">IAM JSON policy elements: Principal</a>.</p>\n\n         <p>The SRT will have access only to your WAF and Shield resources. By submitting this request, you authorize the SRT to inspect your WAF and Shield configuration and create and update WAF rules and web ACLs on your behalf. The SRT takes these actions only if explicitly authorized by you.</p>\n         <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a user permissions to pass a role to an Amazon Web Services service</a>. </p>\n         <p>To use the services of the SRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href=\"http://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"http://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
+                "smithy.api#documentation": "<p>Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks. This enables the SRT to inspect your WAF configuration and create or update WAF rules and web ACLs.</p>\n         <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p>\n         <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <code>AWSShieldDRTAccessPolicy</code> managed policy to the role that you'll specify in the request. You can access this policy in the IAM console at <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a>. For more information see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Adding and removing IAM identity permissions</a>. The role must also trust the service principal\n<code>drt.shield.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">IAM JSON policy elements: Principal</a>.</p>\n         <p>The SRT will have access only to your WAF and Shield resources. By submitting this request, you authorize the SRT to inspect your WAF and Shield configuration and create and update WAF rules and web ACLs on your behalf. The SRT takes these actions only if explicitly authorized by you.</p>\n         <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a user permissions to pass a role to an Amazon Web Services service</a>. </p>\n         <p>To use the services of the SRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href=\"http://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"http://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
             }
         },
         "com.amazonaws.shield#AssociateDRTRoleRequest": {
@@ -1271,15 +1114,21 @@
                 "RoleArn": {
                     "target": "com.amazonaws.shield#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role the SRT will use to access your Amazon Web Services account.</p>\n\t        <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a> managed policy to this role.  For more information see <a href=\" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Attaching and Detaching IAM Policies</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role the SRT will use to access your Amazon Web Services account.</p>\n         <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a> managed policy to this role.  For more information see <a href=\" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Attaching and Detaching IAM Policies</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#AssociateDRTRoleResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#AssociateHealthCheck": {
             "type": "operation",
@@ -1330,11 +1179,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#AssociateHealthCheckResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#AssociateProactiveEngagementDetails": {
             "type": "operation",
@@ -1375,11 +1230,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#AssociateProactiveEngagementDetailsResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#AttackDetail": {
             "type": "structure",
@@ -1448,18 +1309,20 @@
             }
         },
         "com.amazonaws.shield#AttackLayer": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NETWORK",
-                        "name": "NETWORK"
-                    },
-                    {
-                        "value": "APPLICATION",
-                        "name": "APPLICATION"
+            "type": "enum",
+            "members": {
+                "NETWORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK"
                     }
-                ]
+                },
+                "APPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#AttackProperties": {
@@ -1492,7 +1355,7 @@
                 "Unit": {
                     "target": "com.amazonaws.shield#Unit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unit used for the <code>Contributor</code> \n            <code>Value</code> property. </p>"
+                        "smithy.api#documentation": "<p>The unit used for the <code>Contributor</code>\n            <code>Value</code> property. </p>"
                     }
                 },
                 "Total": {
@@ -1508,42 +1371,56 @@
             }
         },
         "com.amazonaws.shield#AttackPropertyIdentifier": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DESTINATION_URL",
-                        "name": "DESTINATION_URL"
-                    },
-                    {
-                        "value": "REFERRER",
-                        "name": "REFERRER"
-                    },
-                    {
-                        "value": "SOURCE_ASN",
-                        "name": "SOURCE_ASN"
-                    },
-                    {
-                        "value": "SOURCE_COUNTRY",
-                        "name": "SOURCE_COUNTRY"
-                    },
-                    {
-                        "value": "SOURCE_IP_ADDRESS",
-                        "name": "SOURCE_IP_ADDRESS"
-                    },
-                    {
-                        "value": "SOURCE_USER_AGENT",
-                        "name": "SOURCE_USER_AGENT"
-                    },
-                    {
-                        "value": "WORDPRESS_PINGBACK_REFLECTOR",
-                        "name": "WORDPRESS_PINGBACK_REFLECTOR"
-                    },
-                    {
-                        "value": "WORDPRESS_PINGBACK_SOURCE",
-                        "name": "WORDPRESS_PINGBACK_SOURCE"
+            "type": "enum",
+            "members": {
+                "DESTINATION_URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESTINATION_URL"
                     }
-                ]
+                },
+                "REFERRER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFERRER"
+                    }
+                },
+                "SOURCE_ASN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_ASN"
+                    }
+                },
+                "SOURCE_COUNTRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_COUNTRY"
+                    }
+                },
+                "SOURCE_IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_IP_ADDRESS"
+                    }
+                },
+                "SOURCE_USER_AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_USER_AGENT"
+                    }
+                },
+                "WORDPRESS_PINGBACK_REFLECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORDPRESS_PINGBACK_REFLECTOR"
+                    }
+                },
+                "WORDPRESS_PINGBACK_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORDPRESS_PINGBACK_SOURCE"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#AttackStatisticsDataItem": {
@@ -1627,7 +1504,7 @@
                 "VectorType": {
                     "target": "com.amazonaws.shield#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attack type. Valid values:</p>\n\t        <ul>\n            <li>\n               <p>UDP_TRAFFIC</p>\n            </li>\n            <li>\n               <p>UDP_FRAGMENT</p>\n            </li>\n            <li>\n               <p>GENERIC_UDP_REFLECTION</p>\n            </li>\n            <li>\n               <p>DNS_REFLECTION</p>\n            </li>\n            <li>\n               <p>NTP_REFLECTION</p>\n            </li>\n            <li>\n               <p>CHARGEN_REFLECTION</p>\n            </li>\n            <li>\n               <p>SSDP_REFLECTION</p>\n            </li>\n            <li>\n               <p>PORT_MAPPER</p>\n            </li>\n            <li>\n               <p>RIP_REFLECTION</p>\n            </li>\n            <li>\n               <p>SNMP_REFLECTION</p>\n            </li>\n            <li>\n               <p>MSSQL_REFLECTION</p>\n            </li>\n            <li>\n               <p>NET_BIOS_REFLECTION</p>\n            </li>\n            <li>\n               <p>SYN_FLOOD</p>\n            </li>\n            <li>\n               <p>ACK_FLOOD</p>\n            </li>\n            <li>\n               <p>REQUEST_FLOOD</p> \n            </li>\n            <li>\n               <p>HTTP_REFLECTION</p>\n            </li>\n            <li>\n               <p>UDS_REFLECTION</p>\n            </li>\n            <li>\n               <p>MEMCACHED_REFLECTION</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The attack type. Valid values:</p>\n         <ul>\n            <li>\n               <p>UDP_TRAFFIC</p>\n            </li>\n            <li>\n               <p>UDP_FRAGMENT</p>\n            </li>\n            <li>\n               <p>GENERIC_UDP_REFLECTION</p>\n            </li>\n            <li>\n               <p>DNS_REFLECTION</p>\n            </li>\n            <li>\n               <p>NTP_REFLECTION</p>\n            </li>\n            <li>\n               <p>CHARGEN_REFLECTION</p>\n            </li>\n            <li>\n               <p>SSDP_REFLECTION</p>\n            </li>\n            <li>\n               <p>PORT_MAPPER</p>\n            </li>\n            <li>\n               <p>RIP_REFLECTION</p>\n            </li>\n            <li>\n               <p>SNMP_REFLECTION</p>\n            </li>\n            <li>\n               <p>MSSQL_REFLECTION</p>\n            </li>\n            <li>\n               <p>NET_BIOS_REFLECTION</p>\n            </li>\n            <li>\n               <p>SYN_FLOOD</p>\n            </li>\n            <li>\n               <p>ACK_FLOOD</p>\n            </li>\n            <li>\n               <p>REQUEST_FLOOD</p>\n            </li>\n            <li>\n               <p>HTTP_REFLECTION</p>\n            </li>\n            <li>\n               <p>UDS_REFLECTION</p>\n            </li>\n            <li>\n               <p>MEMCACHED_REFLECTION</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1685,25 +1562,27 @@
             }
         },
         "com.amazonaws.shield#AutoRenew": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#BlockAction": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Specifies that Shield Advanced should configure its WAF rules with the WAF <code>Block</code> action. </p>\n            <p>This is only used in the context of the <code>ResponseAction</code> setting. </p> \n         <p>JSON specification: <code>\"Block\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Specifies that Shield Advanced should configure its WAF rules with the WAF <code>Block</code> action. </p>\n         <p>This is only used in the context of the <code>ResponseAction</code> setting. </p>\n         <p>JSON specification: <code>\"Block\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.shield#ContactNotes": {
@@ -1741,7 +1620,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Specifies that Shield Advanced should configure its WAF rules with the WAF <code>Count</code> action. </p>\n            <p>This is only used in the context of the <code>ResponseAction</code> setting. </p> \n         <p>JSON specification: <code>\"Count\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Specifies that Shield Advanced should configure its WAF rules with the WAF <code>Count</code> action. </p>\n         <p>This is only used in the context of the <code>ResponseAction</code> setting. </p>\n         <p>JSON specification: <code>\"Count\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.shield#CreateProtection": {
@@ -1856,11 +1735,17 @@
                         "smithy.api#documentation": "<p>One or more tag key-value pairs for the protection group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#CreateProtectionGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#CreateProtectionRequest": {
             "type": "structure",
@@ -1885,6 +1770,9 @@
                         "smithy.api#documentation": "<p>One or more tag key-value pairs for the <a>Protection</a> object that is created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#CreateProtectionResponse": {
@@ -1896,6 +1784,9 @@
                         "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object that is created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#CreateSubscription": {
@@ -1915,16 +1806,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Activates Shield Advanced for an account.</p>\n         <note>\n            <p>For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization's payer account,\n              regardless of whether the payer account itself is subscribed. </p> \n         </note>\n         <p>When you initially create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period.  You can change this by submitting an <code>UpdateSubscription</code> request. </p>"
+                "smithy.api#documentation": "<p>Activates Shield Advanced for an account.</p>\n         <note>\n            <p>For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization's payer account,\n              regardless of whether the payer account itself is subscribed. </p>\n         </note>\n         <p>When you initially create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period.  You can change this by submitting an <code>UpdateSubscription</code> request. </p>"
             }
         },
         "com.amazonaws.shield#CreateSubscriptionRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.shield#CreateSubscriptionResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#DeleteProtection": {
             "type": "operation",
@@ -1982,11 +1879,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#DeleteProtectionGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#DeleteProtectionRequest": {
             "type": "structure",
@@ -1998,11 +1901,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#DeleteProtectionResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#DeleteSubscription": {
             "type": "operation",
@@ -2032,14 +1941,16 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#deprecated": {}
+                "smithy.api#deprecated": {},
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#DeleteSubscriptionResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#deprecated": {}
+                "smithy.api#deprecated": {},
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#DescribeAttack": {
@@ -2072,6 +1983,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#DescribeAttackResponse": {
@@ -2083,6 +1997,9 @@
                         "smithy.api#documentation": "<p>The attack that you requested. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#DescribeAttackStatistics": {
@@ -2104,7 +2021,10 @@
         },
         "com.amazonaws.shield#DescribeAttackStatisticsRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.shield#DescribeAttackStatisticsResponse": {
             "type": "structure",
@@ -2123,6 +2043,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#DescribeDRTAccess": {
@@ -2147,7 +2070,10 @@
         },
         "com.amazonaws.shield#DescribeDRTAccessRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.shield#DescribeDRTAccessResponse": {
             "type": "structure",
@@ -2164,6 +2090,9 @@
                         "smithy.api#documentation": "<p>The list of Amazon S3 buckets accessed by the SRT.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#DescribeEmergencyContactSettings": {
@@ -2188,7 +2117,10 @@
         },
         "com.amazonaws.shield#DescribeEmergencyContactSettingsRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.shield#DescribeEmergencyContactSettingsResponse": {
             "type": "structure",
@@ -2199,6 +2131,9 @@
                         "smithy.api#documentation": "<p>A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#DescribeProtection": {
@@ -2254,6 +2189,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#DescribeProtectionGroupResponse": {
@@ -2266,6 +2204,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#DescribeProtectionRequest": {
@@ -2283,6 +2224,9 @@
                         "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the protected Amazon Web Services resource. \n           You must provide either the <code>ResourceArn</code> of the protected resource or the <code>ProtectionID</code> of the protection, but not both.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#DescribeProtectionResponse": {
@@ -2294,6 +2238,9 @@
                         "smithy.api#documentation": "<p>The <a>Protection</a> that you requested. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#DescribeSubscription": {
@@ -2318,7 +2265,10 @@
         },
         "com.amazonaws.shield#DescribeSubscriptionRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.shield#DescribeSubscriptionResponse": {
             "type": "structure",
@@ -2329,6 +2279,9 @@
                         "smithy.api#documentation": "<p>The Shield Advanced subscription details for an account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#DisableApplicationLayerAutomaticResponse": {
@@ -2370,11 +2323,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#DisableApplicationLayerAutomaticResponseResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#DisableProactiveEngagement": {
             "type": "operation",
@@ -2407,11 +2366,17 @@
         },
         "com.amazonaws.shield#DisableProactiveEngagementRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.shield#DisableProactiveEngagementResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#DisassociateDRTLogBucket": {
             "type": "operation",
@@ -2455,11 +2420,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#DisassociateDRTLogBucketResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#DisassociateDRTRole": {
             "type": "operation",
@@ -2489,11 +2460,17 @@
         },
         "com.amazonaws.shield#DisassociateDRTRoleRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.shield#DisassociateDRTRoleResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#DisassociateHealthCheck": {
             "type": "operation",
@@ -2541,11 +2518,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#DisassociateHealthCheckResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#Double": {
             "type": "double",
@@ -2660,11 +2643,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#EnableApplicationLayerAutomaticResponseResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#EnableProactiveEngagement": {
             "type": "operation",
@@ -2697,11 +2686,17 @@
         },
         "com.amazonaws.shield#EnableProactiveEngagementRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.shield#EnableProactiveEngagementResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#GetSubscriptionState": {
             "type": "operation",
@@ -2722,7 +2717,10 @@
         },
         "com.amazonaws.shield#GetSubscriptionStateRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.shield#GetSubscriptionStateResponse": {
             "type": "structure",
@@ -2734,6 +2732,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#HealthCheckArn": {
@@ -3005,15 +3006,18 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n         <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n         <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>\n         <p>On your first call to a list operation, leave this setting empty.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.shield#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p> \n         <p>The default setting is 20.</p>"
+                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p>\n         <p>The default setting is 20.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#ListAttacksResponse": {
@@ -3028,9 +3032,12 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n         <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n         <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#ListProtectionGroups": {
@@ -3067,13 +3074,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n         <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n         <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>\n         <p>On your first call to a list operation, leave this setting empty.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.shield#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p> \n         <p>The default setting is 20.</p>"
+                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p>\n         <p>The default setting is 20.</p>"
                     }
                 },
                 "InclusionFilters": {
@@ -3082,6 +3089,9 @@
                         "smithy.api#documentation": "<p>Narrows the set of protection groups that the call retrieves. You can retrieve a single protection group by its name and you can retrieve all protection groups that are configured with specific pattern or aggregation settings. You can provide up to one criteria per filter type. Shield Advanced returns the protection groups that exactly match all of the search criteria that you provide.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#ListProtectionGroupsResponse": {
@@ -3097,9 +3107,12 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n         <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n         <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#ListProtections": {
@@ -3137,13 +3150,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n         <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n         <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>\n         <p>On your first call to a list operation, leave this setting empty.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.shield#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p> \n         <p>The default setting is 20.</p>"
+                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p>\n         <p>The default setting is 20.</p>"
                     }
                 },
                 "InclusionFilters": {
@@ -3152,6 +3165,9 @@
                         "smithy.api#documentation": "<p>Narrows the set of protections that the call retrieves. You can retrieve a single protection by providing its name or the ARN (Amazon Resource Name) of its protected resource. You can also retrieve all protections for a specific resource type. You can provide up to one criteria per filter type. Shield Advanced returns protections that exactly match all of the filter criteria that you provide.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#ListProtectionsResponse": {
@@ -3166,9 +3182,12 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n         <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n         <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#ListResourcesInProtectionGroup": {
@@ -3212,15 +3231,18 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n         <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n         <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>\n         <p>On your first call to a list operation, leave this setting empty.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.shield#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p> \n         <p>The default setting is 20.</p>"
+                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p>\n         <p>The default setting is 20.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#ListResourcesInProtectionGroupResponse": {
@@ -3236,9 +3258,12 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n         <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n         <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#ListTagsForResource": {
@@ -3274,6 +3299,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#ListTagsForResourceResponse": {
@@ -3285,6 +3313,9 @@
                         "smithy.api#documentation": "<p>A list of tag key and value pairs associated with the specified resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.shield#LockedSubscriptionException": {
@@ -3391,53 +3422,67 @@
             }
         },
         "com.amazonaws.shield#ProactiveEngagementStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#ProtectedResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CLOUDFRONT_DISTRIBUTION",
-                        "name": "CLOUDFRONT_DISTRIBUTION"
-                    },
-                    {
-                        "value": "ROUTE_53_HOSTED_ZONE",
-                        "name": "ROUTE_53_HOSTED_ZONE"
-                    },
-                    {
-                        "value": "ELASTIC_IP_ALLOCATION",
-                        "name": "ELASTIC_IP_ALLOCATION"
-                    },
-                    {
-                        "value": "CLASSIC_LOAD_BALANCER",
-                        "name": "CLASSIC_LOAD_BALANCER"
-                    },
-                    {
-                        "value": "APPLICATION_LOAD_BALANCER",
-                        "name": "APPLICATION_LOAD_BALANCER"
-                    },
-                    {
-                        "value": "GLOBAL_ACCELERATOR",
-                        "name": "GLOBAL_ACCELERATOR"
+            "type": "enum",
+            "members": {
+                "CLOUDFRONT_DISTRIBUTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDFRONT_DISTRIBUTION"
                     }
-                ]
+                },
+                "ROUTE_53_HOSTED_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTE_53_HOSTED_ZONE"
+                    }
+                },
+                "ELASTIC_IP_ALLOCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELASTIC_IP_ALLOCATION"
+                    }
+                },
+                "CLASSIC_LOAD_BALANCER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLASSIC_LOAD_BALANCER"
+                    }
+                },
+                "APPLICATION_LOAD_BALANCER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION_LOAD_BALANCER"
+                    }
+                },
+                "GLOBAL_ACCELERATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLOBAL_ACCELERATOR"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#ProtectedResourceTypeFilters": {
@@ -3545,22 +3590,26 @@
             }
         },
         "com.amazonaws.shield#ProtectionGroupAggregation": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUM",
-                        "name": "SUM"
-                    },
-                    {
-                        "value": "MEAN",
-                        "name": "MEAN"
-                    },
-                    {
-                        "value": "MAX",
-                        "name": "MAX"
+            "type": "enum",
+            "members": {
+                "SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUM"
                     }
-                ]
+                },
+                "MEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEAN"
+                    }
+                },
+                "MAX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#ProtectionGroupAggregationFilters": {
@@ -3649,22 +3698,26 @@
             }
         },
         "com.amazonaws.shield#ProtectionGroupPattern": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "ARBITRARY",
-                        "name": "ARBITRARY"
-                    },
-                    {
-                        "value": "BY_RESOURCE_TYPE",
-                        "name": "BY_RESOURCE_TYPE"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "ARBITRARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARBITRARY"
+                    }
+                },
+                "BY_RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BY_RESOURCE_TYPE"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#ProtectionGroupPatternFilters": {
@@ -3895,18 +3948,20 @@
             }
         },
         "com.amazonaws.shield#SubResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IP",
-                        "name": "IP"
-                    },
-                    {
-                        "value": "URL",
-                        "name": "URL"
+            "type": "enum",
+            "members": {
+                "IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP"
                     }
-                ]
+                },
+                "URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#Subscription": {
@@ -3990,18 +4045,20 @@
             }
         },
         "com.amazonaws.shield#SubscriptionState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#SummarizedAttackVector": {
@@ -4181,11 +4238,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#TagValue": {
             "type": "string",
@@ -4236,26 +4299,32 @@
             }
         },
         "com.amazonaws.shield#Unit": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BITS",
-                        "name": "BITS"
-                    },
-                    {
-                        "value": "BYTES",
-                        "name": "BYTES"
-                    },
-                    {
-                        "value": "PACKETS",
-                        "name": "PACKETS"
-                    },
-                    {
-                        "value": "REQUESTS",
-                        "name": "REQUESTS"
+            "type": "enum",
+            "members": {
+                "BITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITS"
                     }
-                ]
+                },
+                "BYTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYTES"
+                    }
+                },
+                "PACKETS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PACKETS"
+                    }
+                },
+                "REQUESTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUESTS"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#UntagResource": {
@@ -4301,11 +4370,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#UpdateApplicationLayerAutomaticResponse": {
             "type": "operation",
@@ -4353,11 +4428,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#UpdateApplicationLayerAutomaticResponseResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#UpdateEmergencyContactSettings": {
             "type": "operation",
@@ -4394,11 +4475,17 @@
                         "smithy.api#documentation": "<p>A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.</p>\n         <p>If you have proactive engagement enabled, the contact list must include at least one phone number.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#UpdateEmergencyContactSettingsResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#UpdateProtectionGroup": {
             "type": "operation",
@@ -4462,11 +4549,17 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#UpdateProtectionGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#UpdateSubscription": {
             "type": "operation",
@@ -4494,7 +4587,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.</p>\n         <note>\n            <p>For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization's payer account,\n              regardless of whether the payer account itself is subscribed. </p> \n         </note>"
+                "smithy.api#documentation": "<p>Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.</p>\n         <note>\n            <p>For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization's payer account,\n              regardless of whether the payer account itself is subscribed. </p>\n         </note>"
             }
         },
         "com.amazonaws.shield#UpdateSubscriptionRequest": {
@@ -4506,11 +4599,17 @@
                         "smithy.api#documentation": "<p>When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.shield#UpdateSubscriptionResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.shield#ValidationExceptionField": {
             "type": "structure",
@@ -4541,18 +4640,20 @@
             }
         },
         "com.amazonaws.shield#ValidationExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FIELD_VALIDATION_FAILED",
-                        "name": "FIELD_VALIDATION_FAILED"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIELD_VALIDATION_FAILED"
                     }
-                ]
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
             }
         },
         "com.amazonaws.shield#errorMessage": {

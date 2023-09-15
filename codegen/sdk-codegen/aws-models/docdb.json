@@ -68,7 +68,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>AddSourceIdentifierToSubscription</a>.\n        </p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>AddSourceIdentifierToSubscription</a>.\n        </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#AddSourceIdentifierToSubscriptionResult": {
@@ -124,7 +125,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>AddTagsToResource</a>.\n        </p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>AddTagsToResource</a>.\n        </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#AmazonRDSv19": {
@@ -368,9 +370,213 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://rds-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://rds.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://rds-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -383,15 +589,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://rds.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://rds.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -403,283 +644,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://rds-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        "aws-us-gov",
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": [
-                                                                                                {
-                                                                                                    "ref": "PartitionResult"
-                                                                                                },
-                                                                                                "name"
-                                                                                            ]
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://rds.{Region}.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://rds-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://rds.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://rds.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1442,7 +1408,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ApplyPendingMaintenanceAction</a>.\n        </p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>ApplyPendingMaintenanceAction</a>.\n        </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#ApplyPendingMaintenanceActionResult": {
@@ -1591,6 +1558,9 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided if the number of records retrieved is greater than <code>MaxRecords</code>. If this parameter is specified, the marker specifies the next record in the list. Including the value of <code>Marker</code> in the next call to <code>DescribeCertificates</code> results in the next page of certificates.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#CertificateNotFoundFault": {
@@ -1685,7 +1655,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>CopyDBClusterParameterGroup</a>.\n        </p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>CopyDBClusterParameterGroup</a>.\n        </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#CopyDBClusterParameterGroupResult": {
@@ -1774,7 +1745,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>CopyDBClusterSnapshot</a>.\n        </p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>CopyDBClusterSnapshot</a>.\n        </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#CopyDBClusterSnapshotResult": {
@@ -1980,7 +1952,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>CreateDBCluster</a>.\n        </p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>CreateDBCluster</a>.\n        </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#CreateDBClusterParameterGroup": {
@@ -2035,7 +2008,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input of <a>CreateDBClusterParameterGroup</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input of <a>CreateDBClusterParameterGroup</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#CreateDBClusterParameterGroupResult": {
@@ -2114,7 +2088,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input of <a>CreateDBClusterSnapshot</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input of <a>CreateDBClusterSnapshot</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#CreateDBClusterSnapshotResult": {
@@ -2268,7 +2243,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>CreateDBInstance</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>CreateDBInstance</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#CreateDBInstanceResult": {
@@ -2343,7 +2319,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>CreateDBSubnetGroup</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>CreateDBSubnetGroup</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#CreateDBSubnetGroupResult": {
@@ -2441,7 +2418,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>CreateEventSubscription</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>CreateEventSubscription</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#CreateEventSubscriptionResult": {
@@ -2529,7 +2507,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>CreateGlobalCluster</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>CreateGlobalCluster</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#CreateGlobalClusterResult": {
@@ -2831,7 +2810,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribeDBClusters</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DescribeDBClusters</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DBClusterNotFoundFault": {
@@ -2960,7 +2940,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DBClusterParameterGroups</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DBClusterParameterGroups</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DBClusterQuotaExceededFault": {
@@ -3214,7 +3195,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribeDBClusterSnapshots</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DescribeDBClusterSnapshots</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DBClusterSnapshotNotFoundFault": {
@@ -3317,7 +3299,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribeDBEngineVersions</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DescribeDBEngineVersions</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DBInstance": {
@@ -3537,7 +3520,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribeDBInstances</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DescribeDBInstances</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DBInstanceNotFoundFault": {
@@ -3796,7 +3780,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribeDBSubnetGroups</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DescribeDBSubnetGroups</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DBSubnetGroupNotFoundFault": {
@@ -3930,7 +3915,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBCluster</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBCluster</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DeleteDBClusterParameterGroup": {
@@ -3965,7 +3951,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBClusterParameterGroup</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBClusterParameterGroup</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DeleteDBClusterResult": {
@@ -4011,7 +3998,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBClusterSnapshot</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBClusterSnapshot</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DeleteDBClusterSnapshotResult": {
@@ -4066,7 +4054,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBInstance</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBInstance</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DeleteDBInstanceResult": {
@@ -4115,7 +4104,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBSubnetGroup</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBSubnetGroup</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DeleteEventSubscription": {
@@ -4150,7 +4140,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DeleteEventSubscription</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DeleteEventSubscription</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DeleteEventSubscriptionResult": {
@@ -4196,7 +4187,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DeleteGlobalCluster</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DeleteGlobalCluster</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DeleteGlobalClusterResult": {
@@ -4260,6 +4252,9 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>DescribeCertificates</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeDBClusterParameterGroups": {
@@ -4314,7 +4309,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBClusterParameterGroups</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBClusterParameterGroups</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeDBClusterParameters": {
@@ -4376,7 +4372,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBClusterParameters</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBClusterParameters</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeDBClusterSnapshotAttributes": {
@@ -4408,7 +4405,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBClusterSnapshotAttributes</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBClusterSnapshotAttributes</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeDBClusterSnapshotAttributesResult": {
@@ -4500,7 +4498,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBClusterSnapshots</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBClusterSnapshots</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeDBClusters": {
@@ -4555,7 +4554,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBClusters</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBClusters</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeDBEngineVersions": {
@@ -4636,7 +4636,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBEngineVersions</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBEngineVersions</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeDBInstances": {
@@ -4822,7 +4823,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBInstances</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBInstances</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeDBSubnetGroups": {
@@ -4877,7 +4879,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBSubnetGroups</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeDBSubnetGroups</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeEngineDefaultClusterParameters": {
@@ -4922,7 +4925,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeEngineDefaultClusterParameters</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeEngineDefaultClusterParameters</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeEngineDefaultClusterParametersResult": {
@@ -4965,7 +4969,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeEventCategories</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeEventCategories</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeEventSubscriptions": {
@@ -5020,7 +5025,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeEventSubscriptions</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeEventSubscriptions</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeEvents": {
@@ -5100,7 +5106,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeEvents</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeEvents</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeGlobalClusters": {
@@ -5153,6 +5160,9 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribeOrderableDBInstanceOptions": {
@@ -5227,7 +5237,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeOrderableDBInstanceOptions</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribeOrderableDBInstanceOptions</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#DescribePendingMaintenanceActions": {
@@ -5282,7 +5293,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribePendingMaintenanceActions</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>DescribePendingMaintenanceActions</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#Endpoint": {
@@ -5431,7 +5443,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribeEventCategories</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DescribeEventCategories</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#EventList": {
@@ -5555,7 +5568,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribeEventSubscriptions</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DescribeEventSubscriptions</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#EventsMessage": {
@@ -5575,7 +5589,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribeEvents</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DescribeEvents</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#ExceptionMessage": {
@@ -5621,7 +5636,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>FailoverDBCluster</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>FailoverDBCluster</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#FailoverDBClusterResult": {
@@ -5864,6 +5880,9 @@
                         "smithy.api#documentation": "<p></p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#InstanceQuotaExceededFault": {
@@ -6228,7 +6247,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ListTagsForResource</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>ListTagsForResource</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#LogTypeList": {
@@ -6376,7 +6396,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ModifyDBCluster</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>ModifyDBCluster</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#ModifyDBClusterParameterGroup": {
@@ -6418,7 +6439,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ModifyDBClusterParameterGroup</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>ModifyDBClusterParameterGroup</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#ModifyDBClusterResult": {
@@ -6486,7 +6508,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ModifyDBClusterSnapshotAttribute</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>ModifyDBClusterSnapshotAttribute</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#ModifyDBClusterSnapshotAttributeResult": {
@@ -6626,7 +6649,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ModifyDBInstance</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>ModifyDBInstance</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#ModifyDBInstanceResult": {
@@ -6694,7 +6718,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ModifyDBSubnetGroup</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>ModifyDBSubnetGroup</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#ModifyDBSubnetGroupResult": {
@@ -6776,7 +6801,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ModifyEventSubscription</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>ModifyEventSubscription</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#ModifyEventSubscriptionResult": {
@@ -6834,7 +6860,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ModifyGlobalCluster</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>ModifyGlobalCluster</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#ModifyGlobalClusterResult": {
@@ -6919,7 +6946,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribeOrderableDBInstanceOptions</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DescribeOrderableDBInstanceOptions</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#Parameter": {
@@ -7099,7 +7127,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribePendingMaintenanceActions</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>DescribePendingMaintenanceActions</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#PendingModifiedValues": {
@@ -7247,7 +7276,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>RebootDBInstance</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>RebootDBInstance</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#RebootDBInstanceResult": {
@@ -7303,7 +7333,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>RemoveFromGlobalCluster</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>RemoveFromGlobalCluster</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#RemoveFromGlobalClusterResult": {
@@ -7356,7 +7387,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>RemoveSourceIdentifierFromSubscription</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>RemoveSourceIdentifierFromSubscription</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#RemoveSourceIdentifierFromSubscriptionResult": {
@@ -7412,7 +7444,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>RemoveTagsFromResource</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>RemoveTagsFromResource</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#ResetDBClusterParameterGroup": {
@@ -7460,7 +7493,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ResetDBClusterParameterGroup</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>ResetDBClusterParameterGroup</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#ResourceNotFoundFault": {
@@ -7642,7 +7676,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>RestoreDBClusterFromSnapshot</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>RestoreDBClusterFromSnapshot</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#RestoreDBClusterFromSnapshotResult": {
@@ -7795,7 +7830,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>RestoreDBClusterToPointInTime</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the input to <a>RestoreDBClusterToPointInTime</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#RestoreDBClusterToPointInTimeResult": {
@@ -7994,6 +8030,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#StartDBClusterResult": {
@@ -8040,6 +8079,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.docdb#StopDBClusterResult": {
@@ -8245,7 +8287,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>ListTagsForResource</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the output of <a>ListTagsForResource</a>.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#UpgradeTarget": {

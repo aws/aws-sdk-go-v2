@@ -88,7 +88,7 @@
                     "name": "codeguru-reviewer"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a\n         service that uses program analysis and machine learning to detect potential defects that\n         are difficult for developers to find and recommends fixes in your Java and Python\n         code.</p>\n\n         <p>By proactively detecting and providing recommendations for addressing code defects and\n         implementing best practices, CodeGuru Reviewer improves the overall quality and maintainability of\n         your code base during the code review stage. For more information about CodeGuru Reviewer, see the\n               <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n\n         <p>To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection\n         between your VPC and CodeGuru Reviewer by creating an <i>interface VPC endpoint</i>. For\n         more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface VPC\n            endpoints (Amazon Web Services PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User\n         Guide</i>.</p>",
+                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a\n         service that uses program analysis and machine learning to detect potential defects that\n         are difficult for developers to find and recommends fixes in your Java and Python\n         code.</p>\n         <p>By proactively detecting and providing recommendations for addressing code defects and\n         implementing best practices, CodeGuru Reviewer improves the overall quality and maintainability of\n         your code base during the code review stage. For more information about CodeGuru Reviewer, see the\n               <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n         <p>To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection\n         between your VPC and CodeGuru Reviewer by creating an <i>interface VPC endpoint</i>. For\n         more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface VPC\n            endpoints (Amazon Web Services PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User\n         Guide</i>.</p>",
                 "smithy.api#title": "Amazon CodeGuru Reviewer",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -150,9 +150,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://codeguru-reviewer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://codeguru-reviewer-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -165,15 +344,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://codeguru-reviewer.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://codeguru-reviewer.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -185,258 +399,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://codeguru-reviewer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://codeguru-reviewer-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://codeguru-reviewer.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://codeguru-reviewer.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -451,8 +415,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -464,8 +428,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -477,8 +441,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -490,8 +454,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -503,8 +467,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -516,8 +480,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -529,8 +493,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -542,8 +506,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -555,8 +519,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -568,8 +532,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -581,8 +545,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -594,8 +558,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -607,8 +571,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -620,8 +584,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -633,8 +597,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -646,8 +610,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -659,8 +623,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -672,8 +636,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -685,8 +649,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -698,8 +662,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -711,8 +675,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -724,8 +699,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -737,8 +723,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -750,8 +747,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -763,8 +771,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -776,8 +784,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -789,8 +797,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -801,8 +809,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -813,9 +821,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -895,7 +909,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use to associate an Amazon Web Services CodeCommit repository or a repository managed by Amazon Web Services\n         CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews\n         source code changes in the repository's pull requests and provides automatic\n         recommendations. You can view recommendations using the CodeGuru Reviewer console. For more\n         information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html\">Recommendations in\n            Amazon CodeGuru Reviewer</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i>\n         </p>\n\n         <p>If you associate a CodeCommit or S3 repository, it must be in the same Amazon Web Services Region and\n         Amazon Web Services account where its CodeGuru Reviewer code reviews are configured.</p>\n\n         <p>Bitbucket and GitHub Enterprise Server repositories are managed by Amazon Web Services CodeStar\n         Connections to connect to CodeGuru Reviewer. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html\">Associate a\n            repository</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i>\n         </p>\n\n         <note>\n            <p>You cannot use the CodeGuru Reviewer SDK or the Amazon Web Services CLI to associate a GitHub repository with\n            Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html\">Getting started with\n               CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i>\n            </p>\n         </note>",
+                "smithy.api#documentation": "<p>Use to associate an Amazon Web Services CodeCommit repository or a repository managed by Amazon Web Services\n         CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews\n         source code changes in the repository's pull requests and provides automatic\n         recommendations. You can view recommendations using the CodeGuru Reviewer console. For more\n         information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html\">Recommendations in\n            Amazon CodeGuru Reviewer</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i>\n         </p>\n         <p>If you associate a CodeCommit or S3 repository, it must be in the same Amazon Web Services Region and\n         Amazon Web Services account where its CodeGuru Reviewer code reviews are configured.</p>\n         <p>Bitbucket and GitHub Enterprise Server repositories are managed by Amazon Web Services CodeStar\n         Connections to connect to CodeGuru Reviewer. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html\">Associate a\n            repository</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i>\n         </p>\n         <note>\n            <p>You cannot use the CodeGuru Reviewer SDK or the Amazon Web Services CLI to associate a GitHub repository with\n            Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html\">Getting started with\n               CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i>\n            </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/associations",
@@ -923,7 +937,7 @@
                 "Tags": {
                     "target": "com.amazonaws.codegurureviewer#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n         <ul>\n            <li>\n               <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "KMSKeyDetails": {
@@ -932,6 +946,9 @@
                         "smithy.api#documentation": "<p>A <code>KMSKeyDetails</code> object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for this repository association. It is either owned by Amazon Web Services\n               Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed\n                  (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the Amazon Web Services KMS key that is associated with this repository\n               association.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#AssociateRepositoryResponse": {
@@ -946,9 +963,12 @@
                 "Tags": {
                     "target": "com.amazonaws.codegurureviewer#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n         <ul>\n            <li>\n               <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#AssociationArn": {
@@ -1093,7 +1113,7 @@
                 "State": {
                     "target": "com.amazonaws.codegurureviewer#JobState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The valid code review states are:</p>\n         <ul>\n            <li>            \n               <p>\n                  <code>Completed</code>: The code review is complete.</p>            \n            </li>\n            <li>\n               <p>\n                  <code>Pending</code>: The code review started and has not completed or failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>: The code review failed.</p>            \n            </li>\n            <li>\n               <p>\n                  <code>Deleting</code>: The code review is being deleted.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The valid code review states are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Completed</code>: The code review is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Pending</code>: The code review started and has not completed or failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>: The code review failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Deleting</code>: The code review is being deleted.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StateReason": {
@@ -1213,7 +1233,7 @@
                 "State": {
                     "target": "com.amazonaws.codegurureviewer#JobState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the code review.</p>\n         <p>The valid code review states are:</p>\n         <ul>\n            <li>            \n               <p>\n                  <code>Completed</code>: The code review is complete.</p>            \n            </li>\n            <li>\n               <p>\n                  <code>Pending</code>: The code review started and has not completed or failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>: The code review failed.</p>            \n            </li>\n            <li>\n               <p>\n                  <code>Deleting</code>: The code review is being deleted.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the code review.</p>\n         <p>The valid code review states are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Completed</code>: The code review is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Pending</code>: The code review started and has not completed or failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>: The code review failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Deleting</code>: The code review is being deleted.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CreatedTimeStamp": {
@@ -1424,6 +1444,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#CreateCodeReviewResponse": {
@@ -1432,6 +1455,9 @@
                 "CodeReview": {
                     "target": "com.amazonaws.codegurureviewer#CodeReview"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#DescribeCodeReview": {
@@ -1517,6 +1543,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#DescribeCodeReviewResponse": {
@@ -1528,6 +1557,9 @@
                         "smithy.api#documentation": "<p>Information about the code review.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#DescribeRecommendationFeedback": {
@@ -1590,6 +1622,9 @@
                         "smithy.api#httpQuery": "UserId"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#DescribeRecommendationFeedbackResponse": {
@@ -1601,6 +1636,9 @@
                         "smithy.api#documentation": "<p>The recommendation feedback given by the user.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#DescribeRepositoryAssociation": {
@@ -1686,6 +1724,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#DescribeRepositoryAssociationResponse": {
@@ -1700,9 +1741,12 @@
                 "Tags": {
                     "target": "com.amazonaws.codegurureviewer#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n         <ul>\n            <li>\n               <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#DisassociateRepository": {
@@ -1753,6 +1797,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#DisassociateRepositoryResponse": {
@@ -1767,9 +1814,12 @@
                 "Tags": {
                     "target": "com.amazonaws.codegurureviewer#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n         <ul>\n            <li>\n               <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#EncryptionOption": {
@@ -1992,7 +2042,7 @@
                 "States": {
                     "target": "com.amazonaws.codegurureviewer#JobStates",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of states for filtering that needs to be applied before displaying the result. For\n         example, <code>states=[Pending]</code> lists code reviews in the Pending state.</p>\n         <p>The valid code review states are:</p>\n         <ul>\n            <li>            \n               <p>\n                  <code>Completed</code>: The code review is complete.</p>            \n            </li>\n            <li>\n               <p>\n                  <code>Pending</code>: The code review started and has not completed or failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>: The code review failed.</p>            \n            </li>\n            <li>\n               <p>\n                  <code>Deleting</code>: The code review is being deleted.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>List of states for filtering that needs to be applied before displaying the result. For\n         example, <code>states=[Pending]</code> lists code reviews in the Pending state.</p>\n         <p>The valid code review states are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Completed</code>: The code review is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Pending</code>: The code review started and has not completed or failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>: The code review failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Deleting</code>: The code review is being deleted.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "States"
                     }
                 },
@@ -2025,6 +2075,9 @@
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#ListCodeReviewsResponse": {
@@ -2042,6 +2095,9 @@
                         "smithy.api#documentation": "<p>Pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#ListRecommendationFeedback": {
@@ -2122,6 +2178,9 @@
                         "smithy.api#httpQuery": "RecommendationIds"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#ListRecommendationFeedbackResponse": {
@@ -2139,6 +2198,9 @@
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of\n            <code>nextToken</code> is a unique pagination token for each page. Make the call again\n         using the returned token to retrieve the next page. Keep all other arguments\n         unchanged.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#ListRecommendations": {
@@ -2214,6 +2276,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#ListRecommendationsResponse": {
@@ -2231,6 +2296,9 @@
                         "smithy.api#documentation": "<p>Pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#ListRepositoryAssociations": {
@@ -2280,7 +2348,7 @@
                 "States": {
                     "target": "com.amazonaws.codegurureviewer#RepositoryAssociationStates",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of repository association states to use as a filter.</p>\n         <p>The valid repository association states are:</p>\n         <ul>\n            <li>            \n               <p>\n                  <b>Associated</b>: The repository association is complete.</p>            \n            </li>\n            <li>\n               <p>\n                  <b>Associating</b>: CodeGuru Reviewer is:</p>\n               <ul>\n                  <li>\n                     <p>Setting up pull request notifications. This is required \n                     for pull requests to trigger a CodeGuru Reviewer review.</p>\n                     <note>\n                        <p>If your repository <code>ProviderType</code> is <code>GitHub</code>, <code>GitHub Enterprise Server</code>, or <code>Bitbucket</code>, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.</p>\n                  </li>\n               </ul>            \n            </li>\n            <li>\n               <p>\n                  <b>Failed</b>: The repository failed to associate or disassociate.</p>            \n            </li>\n            <li>\n               <p>\n                  <b>Disassociating</b>: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Disassociated</b>: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in anassociated repository with tags after it has been disassociated. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html\">Using tags to control access to associated repositories</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>List of repository association states to use as a filter.</p>\n         <p>The valid repository association states are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Associated</b>: The repository association is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Associating</b>: CodeGuru Reviewer is:</p>\n               <ul>\n                  <li>\n                     <p>Setting up pull request notifications. This is required \n                     for pull requests to trigger a CodeGuru Reviewer review.</p>\n                     <note>\n                        <p>If your repository <code>ProviderType</code> is <code>GitHub</code>, <code>GitHub Enterprise Server</code>, or <code>Bitbucket</code>, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Failed</b>: The repository failed to associate or disassociate.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Disassociating</b>: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Disassociated</b>: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in anassociated repository with tags after it has been disassociated. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html\">Using tags to control access to associated repositories</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "State"
                     }
                 },
@@ -2312,6 +2380,9 @@
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#ListRepositoryAssociationsResponse": {
@@ -2329,6 +2400,9 @@
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListRecommendations</code>\n         request. When the results of a <code>ListRecommendations</code> request exceed\n            <code>maxResults</code>, this value can be used to retrieve the next page of results.\n         This value is <code>null</code> when there are no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#ListTagsForResource": {
@@ -2370,6 +2444,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#ListTagsForResourceResponse": {
@@ -2378,9 +2455,12 @@
                 "Tags": {
                     "target": "com.amazonaws.codegurureviewer#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n         <ul>\n            <li>\n               <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codegurureviewer#LongDescription": {
@@ -2634,11 +2714,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#PutRecommendationFeedbackResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.codegurureviewer#Reaction": {
             "type": "enum",
@@ -2987,7 +3073,7 @@
                 "State": {
                     "target": "com.amazonaws.codegurureviewer#RepositoryAssociationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the repository association.</p>\n         <p>The valid repository association states are:</p>\n         <ul>\n            <li>            \n               <p>\n                  <b>Associated</b>: The repository association is complete.</p>            \n            </li>\n            <li>\n               <p>\n                  <b>Associating</b>: CodeGuru Reviewer is:</p>\n               <ul>\n                  <li>\n                     <p>Setting up pull request notifications. This is required \n                     for pull requests to trigger a CodeGuru Reviewer review.</p>\n                     <note>\n                        <p>If your repository <code>ProviderType</code> is <code>GitHub</code>, <code>GitHub Enterprise Server</code>, or <code>Bitbucket</code>, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.</p>\n                  </li>\n               </ul>            \n            </li>\n            <li>\n               <p>\n                  <b>Failed</b>: The repository failed to associate or disassociate.</p>            \n            </li>\n            <li>\n               <p>\n                  <b>Disassociating</b>: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Disassociated</b>: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in anassociated repository with tags after it has been disassociated. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html\">Using tags to control access to associated repositories</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the repository association.</p>\n         <p>The valid repository association states are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Associated</b>: The repository association is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Associating</b>: CodeGuru Reviewer is:</p>\n               <ul>\n                  <li>\n                     <p>Setting up pull request notifications. This is required \n                     for pull requests to trigger a CodeGuru Reviewer review.</p>\n                     <note>\n                        <p>If your repository <code>ProviderType</code> is <code>GitHub</code>, <code>GitHub Enterprise Server</code>, or <code>Bitbucket</code>, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Failed</b>: The repository failed to associate or disassociate.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Disassociating</b>: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Disassociated</b>: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in anassociated repository with tags after it has been disassociated. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html\">Using tags to control access to associated repositories</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StateReason": {
@@ -3123,7 +3209,7 @@
                 "State": {
                     "target": "com.amazonaws.codegurureviewer#RepositoryAssociationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the repository association.</p>\n         <p>The valid repository association states are:</p>\n         <ul>\n            <li>            \n               <p>\n                  <b>Associated</b>: The repository association is complete.</p>            \n            </li>\n            <li>\n               <p>\n                  <b>Associating</b>: CodeGuru Reviewer is:</p>\n               <ul>\n                  <li>\n                     <p>Setting up pull request notifications. This is required \n                     for pull requests to trigger a CodeGuru Reviewer review.</p>\n                     <note>\n                        <p>If your repository <code>ProviderType</code> is <code>GitHub</code>, <code>GitHub Enterprise Server</code>, or <code>Bitbucket</code>, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.</p>\n                  </li>\n               </ul>            \n            </li>\n            <li>\n               <p>\n                  <b>Failed</b>: The repository failed to associate or disassociate.</p>            \n            </li>\n            <li>\n               <p>\n                  <b>Disassociating</b>: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Disassociated</b>: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in anassociated repository with tags after it has been disassociated. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html\">Using tags to control access to associated repositories</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the repository association.</p>\n         <p>The valid repository association states are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Associated</b>: The repository association is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Associating</b>: CodeGuru Reviewer is:</p>\n               <ul>\n                  <li>\n                     <p>Setting up pull request notifications. This is required \n                     for pull requests to trigger a CodeGuru Reviewer review.</p>\n                     <note>\n                        <p>If your repository <code>ProviderType</code> is <code>GitHub</code>, <code>GitHub Enterprise Server</code>, or <code>Bitbucket</code>, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.</p>\n                     </note>\n                  </li>\n                  <li>\n                     <p>Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Failed</b>: The repository failed to associate or disassociate.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Disassociating</b>: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Disassociated</b>: CodeGuru Reviewer successfully disassociated the repository. You can create a new association with this repository if you want to review source code in it later. You can control access to code reviews created in anassociated repository with tags after it has been disassociated. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html\">Using tags to control access to associated repositories</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3552,15 +3638,21 @@
                 "Tags": {
                     "target": "com.amazonaws.codegurureviewer#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:</p>\n         <ul>\n            <li>\n               <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.codegurureviewer#TagValue": {
             "type": "string",
@@ -3689,11 +3781,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codegurureviewer#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.codegurureviewer#UserId": {
             "type": "string",

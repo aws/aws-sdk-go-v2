@@ -184,6 +184,7 @@
                     "arnNamespace": "elasticbeanstalk",
                     "cloudFormationName": "ElasticBeanstalk",
                     "cloudTrailEventSource": "elasticbeanstalk.amazonaws.com",
+                    "docId": "elasticbeanstalk-2010-12-01",
                     "endpointPrefix": "elasticbeanstalk"
                 },
                 "aws.auth#sigv4": {
@@ -255,9 +256,213 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://elasticbeanstalk-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://elasticbeanstalk.{Region}.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://elasticbeanstalk-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -270,15 +475,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://elasticbeanstalk.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://elasticbeanstalk.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -290,321 +530,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://elasticbeanstalk-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        "aws-us-gov",
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": [
-                                                                                                {
-                                                                                                    "ref": "PartitionResult"
-                                                                                                },
-                                                                                                "name"
-                                                                                            ]
-                                                                                        }
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://elasticbeanstalk.{Region}.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://elasticbeanstalk-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://elasticbeanstalk.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-east-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://elasticbeanstalk.us-gov-east-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-west-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://elasticbeanstalk.us-gov-west-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://elasticbeanstalk.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -619,8 +546,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -632,8 +559,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -645,8 +572,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -658,8 +585,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -671,8 +598,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -684,8 +611,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -697,8 +624,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -710,8 +637,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -723,8 +650,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -736,8 +663,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -749,8 +676,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -762,8 +689,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -775,8 +702,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -788,8 +715,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -801,8 +728,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -814,8 +741,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -827,8 +754,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -840,8 +767,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -853,8 +780,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -866,8 +793,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -879,8 +806,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -892,8 +819,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -905,8 +832,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -918,8 +845,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -931,8 +858,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -944,8 +871,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -957,8 +884,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -970,8 +897,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -983,8 +910,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -996,8 +923,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1009,8 +936,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1022,8 +949,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1035,8 +962,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1048,8 +975,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1061,8 +988,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1074,8 +1001,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1087,8 +1014,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1100,8 +1027,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1113,8 +1040,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1126,8 +1064,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1139,8 +1088,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1152,8 +1112,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1165,8 +1136,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1178,8 +1149,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1191,8 +1162,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1203,8 +1174,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1215,9 +1186,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1239,7 +1216,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels in-progress environment configuration update or application version\n      deployment.</p>"
+                "smithy.api#documentation": "<p>Cancels in-progress environment configuration update or application version\n      deployment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To abort a deployment",
+                        "documentation": "The following code aborts a running application version deployment for an environment named my-env:",
+                        "input": {
+                            "EnvironmentName": "my-env"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#AbortEnvironmentUpdateMessage": {
@@ -1259,7 +1245,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#AbortableOperationInProgress": {
@@ -1430,7 +1417,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Result message containing a list of application descriptions.</p>"
+                "smithy.api#documentation": "<p>Result message containing a list of application descriptions.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ApplicationMetrics": {
@@ -1516,6 +1504,9 @@
                         "smithy.api#documentation": "<p>The lifecycle configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ApplicationVersionArn": {
@@ -1626,7 +1617,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Result message wrapping a list of application version descriptions.</p>"
+                "smithy.api#documentation": "<p>Result message wrapping a list of application version descriptions.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ApplicationVersionLifecycleConfig": {
@@ -1764,7 +1756,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result message containing information about the managed action.</p>"
+                "smithy.api#documentation": "<p>The result message containing information about the managed action.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#AssociateEnvironmentOperationsRole": {
@@ -1803,7 +1796,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to add or change the operations role used by an environment.</p>"
+                "smithy.api#documentation": "<p>Request to add or change the operations role used by an environment.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#AutoCreateApplication": {
@@ -1990,7 +1984,20 @@
                 "target": "com.amazonaws.elasticbeanstalk#CheckDNSAvailabilityResultMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Checks if the specified CNAME is available.</p>"
+                "smithy.api#documentation": "<p>Checks if the specified CNAME is available.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To check the availability of a CNAME",
+                        "documentation": "The following operation checks the availability of the subdomain my-cname:",
+                        "input": {
+                            "CNAMEPrefix": "my-cname"
+                        },
+                        "output": {
+                            "Available": true,
+                            "FullyQualifiedCNAME": "my-cname.us-west-2.elasticbeanstalk.com"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#CheckDNSAvailabilityMessage": {
@@ -2005,7 +2012,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Results message indicating whether a CNAME is available.</p>"
+                "smithy.api#documentation": "<p>Results message indicating whether a CNAME is available.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#CheckDNSAvailabilityResultMessage": {
@@ -2025,7 +2033,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates if the specified CNAME is available.</p>"
+                "smithy.api#documentation": "<p>Indicates if the specified CNAME is available.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#CnameAvailability": {
@@ -2094,7 +2103,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to create or update a group of environments.</p>"
+                "smithy.api#documentation": "<p>Request to create or update a group of environments.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ComputeType": {
@@ -2456,7 +2466,26 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an application that has one configuration template named <code>default</code>\n      and no application versions.</p>"
+                "smithy.api#documentation": "<p>Creates an application that has one configuration template named <code>default</code>\n      and no application versions.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a new application",
+                        "documentation": "The following operation creates a new application named my-app:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "Description": "my application"
+                        },
+                        "output": {
+                            "Application": {
+                                "ApplicationName": "my-app",
+                                "ConfigurationTemplates": [],
+                                "DateUpdated": "2015-02-12T18:32:21.181Z",
+                                "Description": "my application",
+                                "DateCreated": "2015-02-12T18:32:21.181Z"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#CreateApplicationMessage": {
@@ -2489,7 +2518,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to create an application.</p>"
+                "smithy.api#documentation": "<p>Request to create an application.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#CreateApplicationVersion": {
@@ -2518,7 +2548,37 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an application version for the specified application. You can create an\n      application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the\n      output of an AWS CodeBuild build as follows:</p>\n         <p>Specify a commit in an AWS CodeCommit repository with\n        <code>SourceBuildInformation</code>.</p>\n         <p>Specify a build in an AWS CodeBuild with <code>SourceBuildInformation</code> and\n        <code>BuildConfiguration</code>.</p>\n         <p>Specify a source bundle in S3 with <code>SourceBundle</code>\n         </p>\n         <p>Omit both <code>SourceBuildInformation</code> and <code>SourceBundle</code> to use the\n      default sample application.</p>\n         <note>\n            <p>After you create an application version with a specified Amazon S3 bucket and key\n        location, you can't change that Amazon S3 location. If you change the Amazon S3 location,\n        you receive an exception when you attempt to launch an environment from the application\n        version.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates an application version for the specified application. You can create an\n      application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the\n      output of an AWS CodeBuild build as follows:</p>\n         <p>Specify a commit in an AWS CodeCommit repository with\n        <code>SourceBuildInformation</code>.</p>\n         <p>Specify a build in an AWS CodeBuild with <code>SourceBuildInformation</code> and\n        <code>BuildConfiguration</code>.</p>\n         <p>Specify a source bundle in S3 with <code>SourceBundle</code>\n         </p>\n         <p>Omit both <code>SourceBuildInformation</code> and <code>SourceBundle</code> to use the\n      default sample application.</p>\n         <note>\n            <p>After you create an application version with a specified Amazon S3 bucket and key\n        location, you can't change that Amazon S3 location. If you change the Amazon S3 location,\n        you receive an exception when you attempt to launch an environment from the application\n        version.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a new application",
+                        "documentation": "The following operation creates a new version (v1) of an application named my-app:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "VersionLabel": "v1",
+                            "Description": "my-app-v1",
+                            "SourceBundle": {
+                                "S3Bucket": "my-bucket",
+                                "S3Key": "sample.war"
+                            },
+                            "AutoCreateApplication": true,
+                            "Process": true
+                        },
+                        "output": {
+                            "ApplicationVersion": {
+                                "ApplicationName": "my-app",
+                                "VersionLabel": "v1",
+                                "Description": "my-app-v1",
+                                "DateCreated": "2015-02-03T23:01:25.412Z",
+                                "DateUpdated": "2015-02-03T23:01:25.412Z",
+                                "SourceBundle": {
+                                    "S3Bucket": "my-bucket",
+                                    "S3Key": "sample.war"
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#CreateApplicationVersionMessage": {
@@ -2582,7 +2642,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#CreateConfigurationTemplate": {
@@ -2605,7 +2666,25 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an AWS Elastic Beanstalk configuration template, associated with a specific Elastic Beanstalk\n      application. You define application configuration settings in a configuration template. You\n      can then use the configuration template to deploy different versions of the application with\n      the same configuration settings.</p>\n         <p>Templates aren't associated with any environment. The <code>EnvironmentName</code>\n      response element is always <code>null</code>.</p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeConfigurationOptions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeConfigurationSettings</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAvailableSolutionStacks</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates an AWS Elastic Beanstalk configuration template, associated with a specific Elastic Beanstalk\n      application. You define application configuration settings in a configuration template. You\n      can then use the configuration template to deploy different versions of the application with\n      the same configuration settings.</p>\n         <p>Templates aren't associated with any environment. The <code>EnvironmentName</code>\n      response element is always <code>null</code>.</p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeConfigurationOptions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeConfigurationSettings</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAvailableSolutionStacks</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a configuration template",
+                        "documentation": "The following operation creates a configuration template named my-app-v1 from the settings applied to an environment with the id e-rpqsewtp2j:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "TemplateName": "my-app-v1",
+                            "EnvironmentId": "e-rpqsewtp2j"
+                        },
+                        "output": {
+                            "ApplicationName": "my-app",
+                            "TemplateName": "my-app-v1",
+                            "DateCreated": "2015-08-12T18:40:39Z",
+                            "DateUpdated": "2015-08-12T18:40:39Z",
+                            "SolutionStackName": "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#CreateConfigurationTemplateMessage": {
@@ -2669,7 +2748,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to create a configuration template.</p>"
+                "smithy.api#documentation": "<p>Request to create a configuration template.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#CreateEnvironment": {
@@ -2689,7 +2769,37 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Launches an AWS Elastic Beanstalk environment for the specified application using the specified\n      configuration.</p>"
+                "smithy.api#documentation": "<p>Launches an AWS Elastic Beanstalk environment for the specified application using the specified\n      configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a new environment for an application",
+                        "documentation": "The following operation creates a new environment for version v1 of a java application named my-app:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "EnvironmentName": "my-env",
+                            "CNAMEPrefix": "my-app",
+                            "VersionLabel": "v1",
+                            "SolutionStackName": "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8"
+                        },
+                        "output": {
+                            "ApplicationName": "my-app",
+                            "EnvironmentName": "my-env",
+                            "VersionLabel": "v1",
+                            "Status": "Launching",
+                            "EnvironmentId": "e-izqpassy4h",
+                            "SolutionStackName": "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8",
+                            "CNAME": "my-app.elasticbeanstalk.com",
+                            "Health": "Grey",
+                            "Tier": {
+                                "Type": "Standard",
+                                "Name": "WebServer",
+                                "Version": " "
+                            },
+                            "DateUpdated": "2015-02-03T23:04:54.479Z",
+                            "DateCreated": "2015-02-03T23:04:54.479Z"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#CreateEnvironmentMessage": {
@@ -2782,7 +2892,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#CreatePlatformVersion": {
@@ -2871,6 +2982,9 @@
                         "smithy.api#documentation": "<p>The builder used to create the custom platform.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#CreateStorageLocation": {
@@ -2893,7 +3007,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a bucket in Amazon S3 to store application versions, logs, and other files used\n      by Elastic Beanstalk environments. The Elastic Beanstalk console and EB CLI call this API the\n      first time you create an environment in a region. If the storage location already exists,\n        <code>CreateStorageLocation</code> still returns the bucket name but does not create a new\n      bucket.</p>"
+                "smithy.api#documentation": "<p>Creates a bucket in Amazon S3 to store application versions, logs, and other files used\n      by Elastic Beanstalk environments. The Elastic Beanstalk console and EB CLI call this API the\n      first time you create an environment in a region. If the storage location already exists,\n        <code>CreateStorageLocation</code> still returns the bucket name but does not create a new\n      bucket.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a new environment for an application",
+                        "documentation": "The following operation creates a new environment for version v1 of a java application named my-app:",
+                        "output": {
+                            "S3Bucket": "elasticbeanstalk-us-west-2-0123456789012"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#CreateStorageLocationResultMessage": {
@@ -2907,7 +3030,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Results of a <a>CreateStorageLocationResult</a> call.</p>"
+                "smithy.api#documentation": "<p>Results of a <a>CreateStorageLocationResult</a> call.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#CreationDate": {
@@ -2971,7 +3095,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified application along with all associated versions and\n      configurations. The application versions will not be deleted from your Amazon S3\n      bucket.</p>\n         <note>\n            <p>You cannot delete an application that has a running environment.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes the specified application along with all associated versions and\n      configurations. The application versions will not be deleted from your Amazon S3\n      bucket.</p>\n         <note>\n            <p>You cannot delete an application that has a running environment.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete an application",
+                        "documentation": "The following operation deletes an application named my-app:",
+                        "input": {
+                            "ApplicationName": "my-app"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DeleteApplicationMessage": {
@@ -2992,7 +3125,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to delete an application.</p>"
+                "smithy.api#documentation": "<p>Request to delete an application.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DeleteApplicationVersion": {
@@ -3018,7 +3152,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified version from the specified application.</p>\n         <note>\n            <p>You cannot delete an application version that is associated with a running\n        environment.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes the specified version from the specified application.</p>\n         <note>\n            <p>You cannot delete an application version that is associated with a running\n        environment.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete an application version",
+                        "documentation": "The following operation deletes an application version named 22a0-stage-150819_182129 for an application named my-app:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "VersionLabel": "22a0-stage-150819_182129",
+                            "DeleteSourceBundle": true
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DeleteApplicationVersionMessage": {
@@ -3046,7 +3191,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to delete an application version.</p>"
+                "smithy.api#documentation": "<p>Request to delete an application version.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DeleteConfigurationTemplate": {
@@ -3063,7 +3209,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified configuration template.</p>\n         <note>\n            <p>When you launch an environment using a configuration template, the environment gets a\n        copy of the template. You can delete or modify the environment's copy of the template\n        without affecting the running environment.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes the specified configuration template.</p>\n         <note>\n            <p>When you launch an environment using a configuration template, the environment gets a\n        copy of the template. You can delete or modify the environment's copy of the template\n        without affecting the running environment.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a configuration template",
+                        "documentation": "The following operation deletes a configuration template named my-template for an application named my-app:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "TemplateName": "my-template"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DeleteConfigurationTemplateMessage": {
@@ -3085,7 +3241,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to delete a configuration template.</p>"
+                "smithy.api#documentation": "<p>Request to delete a configuration template.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DeleteEnvironmentConfiguration": {
@@ -3097,7 +3254,17 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the draft configuration associated with the running environment.</p>\n         <p>Updating a running environment with any configuration changes creates a draft\n      configuration set. You can get the draft configuration using <a>DescribeConfigurationSettings</a> while the update is in progress or if the update\n      fails. The <code>DeploymentStatus</code> for the draft configuration indicates whether the\n      deployment is in process or has failed. The draft configuration remains in existence until it\n      is deleted with this action.</p>"
+                "smithy.api#documentation": "<p>Deletes the draft configuration associated with the running environment.</p>\n         <p>Updating a running environment with any configuration changes creates a draft\n      configuration set. You can get the draft configuration using <a>DescribeConfigurationSettings</a> while the update is in progress or if the update\n      fails. The <code>DeploymentStatus</code> for the draft configuration indicates whether the\n      deployment is in process or has failed. The draft configuration remains in existence until it\n      is deleted with this action.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a draft configuration",
+                        "documentation": "The following operation deletes a draft configuration for an environment named my-env:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "EnvironmentName": "my-env"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DeleteEnvironmentConfigurationMessage": {
@@ -3119,7 +3286,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to delete a draft environment configuration.</p>"
+                "smithy.api#documentation": "<p>Request to delete a draft environment configuration.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DeletePlatformVersion": {
@@ -3171,6 +3339,9 @@
                         "smithy.api#documentation": "<p>Detailed information about the version of the custom platform.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DeleteSourceBundle": {
@@ -3237,6 +3408,9 @@
                         "smithy.api#documentation": "<p>The Elastic Beanstalk resource quotas associated with the calling AWS account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeApplicationVersions": {
@@ -3248,7 +3422,45 @@
                 "target": "com.amazonaws.elasticbeanstalk#ApplicationVersionDescriptionsMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve a list of application versions.</p>"
+                "smithy.api#documentation": "<p>Retrieve a list of application versions.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view information about an application version",
+                        "documentation": "The following operation retrieves information about an application version labeled v2:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "VersionLabels": [
+                                "v2"
+                            ]
+                        },
+                        "output": {
+                            "ApplicationVersions": [
+                                {
+                                    "ApplicationName": "my-app",
+                                    "VersionLabel": "v2",
+                                    "Description": "update cover page",
+                                    "DateCreated": "2015-07-23T01:32:26.079Z",
+                                    "DateUpdated": "2015-07-23T01:32:26.079Z",
+                                    "SourceBundle": {
+                                        "S3Bucket": "elasticbeanstalk-us-west-2-015321684451",
+                                        "S3Key": "my-app/5026-stage-150723_224258.war"
+                                    }
+                                },
+                                {
+                                    "ApplicationName": "my-app",
+                                    "VersionLabel": "v1",
+                                    "Description": "initial version",
+                                    "DateCreated": "2015-07-23T22:26:10.816Z",
+                                    "DateUpdated": "2015-07-23T22:26:10.816Z",
+                                    "SourceBundle": {
+                                        "S3Bucket": "elasticbeanstalk-us-west-2-015321684451",
+                                        "S3Key": "my-app/5026-stage-150723_222618.war"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeApplicationVersionsMessage": {
@@ -3280,7 +3492,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to describe application versions.</p>"
+                "smithy.api#documentation": "<p>Request to describe application versions.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeApplications": {
@@ -3292,7 +3505,46 @@
                 "target": "com.amazonaws.elasticbeanstalk#ApplicationDescriptionsMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the descriptions of existing applications.</p>"
+                "smithy.api#documentation": "<p>Returns the descriptions of existing applications.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view a list of applications",
+                        "documentation": "The following operation retrieves information about applications in the current region:",
+                        "output": {
+                            "Applications": [
+                                {
+                                    "ApplicationName": "ruby",
+                                    "ConfigurationTemplates": [],
+                                    "DateUpdated": "2015-08-13T21:05:44.376Z",
+                                    "Versions": [
+                                        "Sample Application"
+                                    ],
+                                    "DateCreated": "2015-08-13T21:05:44.376Z"
+                                },
+                                {
+                                    "ApplicationName": "pythonsample",
+                                    "Description": "Application created from the EB CLI using \"eb init\"",
+                                    "Versions": [
+                                        "Sample Application"
+                                    ],
+                                    "DateCreated": "2015-08-13T19:05:43.637Z",
+                                    "ConfigurationTemplates": [],
+                                    "DateUpdated": "2015-08-13T19:05:43.637Z"
+                                },
+                                {
+                                    "ApplicationName": "nodejs-example",
+                                    "ConfigurationTemplates": [],
+                                    "DateUpdated": "2015-08-06T17:50:02.486Z",
+                                    "Versions": [
+                                        "add elasticache",
+                                        "First Release"
+                                    ],
+                                    "DateCreated": "2015-08-06T17:50:02.486Z"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeApplicationsMessage": {
@@ -3306,7 +3558,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to describe one or more applications.</p>"
+                "smithy.api#documentation": "<p>Request to describe one or more applications.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeConfigurationOptions": {
@@ -3323,7 +3576,40 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration options that are used in a particular configuration\n      template or environment, or that a specified solution stack defines. The description includes\n      the values the options, their default values, and an indication of the required action on a\n      running environment if an option value is changed.</p>"
+                "smithy.api#documentation": "<p>Describes the configuration options that are used in a particular configuration\n      template or environment, or that a specified solution stack defines. The description includes\n      the values the options, their default values, and an indication of the required action on a\n      running environment if an option value is changed.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view configuration options for an environment",
+                        "documentation": "The following operation retrieves descriptions of all available configuration options for an environment named my-env:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "EnvironmentName": "my-env"
+                        },
+                        "output": {
+                            "Options": [
+                                {
+                                    "Name": "Interval",
+                                    "UserDefined": false,
+                                    "DefaultValue": "30",
+                                    "ChangeSeverity": "NoInterruption",
+                                    "Namespace": "aws:elb:healthcheck",
+                                    "MaxValue": 300,
+                                    "MinValue": 5,
+                                    "ValueType": "Scalar"
+                                },
+                                {
+                                    "Name": "LowerThreshold",
+                                    "UserDefined": false,
+                                    "DefaultValue": "2000000",
+                                    "ChangeSeverity": "NoInterruption",
+                                    "Namespace": "aws:autoscaling:trigger",
+                                    "MinValue": 0,
+                                    "ValueType": "Scalar"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeConfigurationOptionsMessage": {
@@ -3367,7 +3653,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Result message containing a list of application version descriptions.</p>"
+                "smithy.api#documentation": "<p>Result message containing a list of application version descriptions.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeConfigurationSettings": {
@@ -3384,7 +3671,56 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a description of the settings for the specified configuration set, that is,\n      either a configuration template or the configuration set associated with a running\n      environment.</p>\n         <p>When describing the settings for the configuration set associated with a running\n      environment, it is possible to receive two sets of setting descriptions. One is the deployed\n      configuration set, and the other is a draft configuration of an environment that is either in\n      the process of deployment or that failed to deploy.</p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteEnvironmentConfiguration</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Returns a description of the settings for the specified configuration set, that is,\n      either a configuration template or the configuration set associated with a running\n      environment.</p>\n         <p>When describing the settings for the configuration set associated with a running\n      environment, it is possible to receive two sets of setting descriptions. One is the deployed\n      configuration set, and the other is a draft configuration of an environment that is either in\n      the process of deployment or that failed to deploy.</p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteEnvironmentConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view configurations settings for an environment",
+                        "documentation": "The following operation retrieves configuration settings for an environment named my-env:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "EnvironmentName": "my-env"
+                        },
+                        "output": {
+                            "ConfigurationSettings": [
+                                {
+                                    "ApplicationName": "my-app",
+                                    "EnvironmentName": "my-env",
+                                    "Description": "Environment created from the EB CLI using \"eb create\"",
+                                    "DeploymentStatus": "deployed",
+                                    "DateCreated": "2015-08-13T19:16:25Z",
+                                    "OptionSettings": [
+                                        {
+                                            "OptionName": "Availability Zones",
+                                            "ResourceName": "AWSEBAutoScalingGroup",
+                                            "Namespace": "aws:autoscaling:asg",
+                                            "Value": "Any"
+                                        },
+                                        {
+                                            "OptionName": "Cooldown",
+                                            "ResourceName": "AWSEBAutoScalingGroup",
+                                            "Namespace": "aws:autoscaling:asg",
+                                            "Value": "360"
+                                        },
+                                        {
+                                            "OptionName": "ConnectionDrainingTimeout",
+                                            "ResourceName": "AWSEBLoadBalancer",
+                                            "Namespace": "aws:elb:policies",
+                                            "Value": "20"
+                                        },
+                                        {
+                                            "OptionName": "ConnectionSettingIdleTimeout",
+                                            "ResourceName": "AWSEBLoadBalancer",
+                                            "Namespace": "aws:elb:policies",
+                                            "Value": "60"
+                                        }
+                                    ],
+                                    "DateUpdated": "2015-08-13T23:30:07Z",
+                                    "SolutionStackName": "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeConfigurationSettingsMessage": {
@@ -3411,7 +3747,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Result message containing all of the configuration settings for a specified solution\n      stack or configuration template.</p>"
+                "smithy.api#documentation": "<p>Result message containing all of the configuration settings for a specified solution\n      stack or configuration template.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEnvironmentHealth": {
@@ -3431,7 +3768,56 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the overall health of the specified environment. The\n        <b>DescribeEnvironmentHealth</b> operation is only available with\n      AWS Elastic Beanstalk Enhanced Health.</p>"
+                "smithy.api#documentation": "<p>Returns information about the overall health of the specified environment. The\n        <b>DescribeEnvironmentHealth</b> operation is only available with\n      AWS Elastic Beanstalk Enhanced Health.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view environment health",
+                        "documentation": "The following operation retrieves overall health information for an environment named my-env:",
+                        "input": {
+                            "EnvironmentName": "my-env",
+                            "AttributeNames": [
+                                "All"
+                            ]
+                        },
+                        "output": {
+                            "EnvironmentName": "my-env",
+                            "Color": "Green",
+                            "ApplicationMetrics": {
+                                "Duration": 10,
+                                "Latency": {
+                                    "P99": 0.004,
+                                    "P75": 0.002,
+                                    "P90": 0.003,
+                                    "P95": 0.004,
+                                    "P85": 0.003,
+                                    "P10": 0.001,
+                                    "P999": 0.004,
+                                    "P50": 0.001
+                                },
+                                "RequestCount": 45,
+                                "StatusCodes": {
+                                    "Status3xx": 0,
+                                    "Status2xx": 45,
+                                    "Status5xx": 0,
+                                    "Status4xx": 0
+                                }
+                            },
+                            "RefreshedAt": "2015-08-20T21:09:18Z",
+                            "HealthStatus": "Ok",
+                            "InstancesHealth": {
+                                "Info": 0,
+                                "Ok": 1,
+                                "Unknown": 0,
+                                "Severe": 0,
+                                "Warning": 0,
+                                "Degraded": 0,
+                                "NoData": 0,
+                                "Pending": 0
+                            },
+                            "Causes": []
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEnvironmentHealthRequest": {
@@ -3514,7 +3900,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Health details for an AWS Elastic Beanstalk environment.</p>"
+                "smithy.api#documentation": "<p>Health details for an AWS Elastic Beanstalk environment.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEnvironmentManagedActionHistory": {
@@ -3590,7 +3977,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A result message containing a list of completed and failed managed actions.</p>"
+                "smithy.api#documentation": "<p>A result message containing a list of completed and failed managed actions.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEnvironmentManagedActions": {
@@ -3648,7 +4036,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result message containing a list of managed actions.</p>"
+                "smithy.api#documentation": "<p>The result message containing a list of managed actions.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEnvironmentResources": {
@@ -3665,7 +4054,43 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns AWS resources for this environment.</p>"
+                "smithy.api#documentation": "<p>Returns AWS resources for this environment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view information about the AWS resources in your environment",
+                        "documentation": "The following operation retrieves information about resources in an environment named my-env:",
+                        "input": {
+                            "EnvironmentName": "my-env"
+                        },
+                        "output": {
+                            "EnvironmentResources": {
+                                "EnvironmentName": "my-env",
+                                "AutoScalingGroups": [
+                                    {
+                                        "Name": "awseb-e-qu3fyyjyjs-stack-AWSEBAutoScalingGroup-QSB2ZO88SXZT"
+                                    }
+                                ],
+                                "Triggers": [],
+                                "LoadBalancers": [
+                                    {
+                                        "Name": "awseb-e-q-AWSEBLoa-1EEPZ0K98BIF0"
+                                    }
+                                ],
+                                "Queues": [],
+                                "Instances": [
+                                    {
+                                        "Id": "i-0c91c786"
+                                    }
+                                ],
+                                "LaunchConfigurations": [
+                                    {
+                                        "Name": "awseb-e-qu3fyyjyjs-stack-AWSEBAutoScalingLaunchConfiguration-1UUVQIBC96TQ2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEnvironmentResourcesMessage": {
@@ -3685,7 +4110,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to describe the resources in an environment.</p>"
+                "smithy.api#documentation": "<p>Request to describe the resources in an environment.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEnvironments": {
@@ -3698,6 +4124,40 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returns descriptions for existing environments.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view information about an environment",
+                        "documentation": "The following operation retrieves information about an environment named my-env:",
+                        "input": {
+                            "EnvironmentNames": [
+                                "my-env"
+                            ]
+                        },
+                        "output": {
+                            "Environments": [
+                                {
+                                    "ApplicationName": "my-app",
+                                    "EnvironmentName": "my-env",
+                                    "VersionLabel": "7f58-stage-150812_025409",
+                                    "Status": "Ready",
+                                    "EnvironmentId": "e-rpqsewtp2j",
+                                    "EndpointURL": "awseb-e-w-AWSEBLoa-1483140XB0Q4L-109QXY8121.us-west-2.elb.amazonaws.com",
+                                    "SolutionStackName": "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8",
+                                    "CNAME": "my-env.elasticbeanstalk.com",
+                                    "Health": "Green",
+                                    "AbortableOperationInProgress": false,
+                                    "Tier": {
+                                        "Version": " ",
+                                        "Type": "Standard",
+                                        "Name": "WebServer"
+                                    },
+                                    "DateUpdated": "2015-08-12T18:16:55.019Z",
+                                    "DateCreated": "2015-08-07T20:48:49.599Z"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.waiters#waitable": {
                     "EnvironmentExists": {
                         "acceptors": [
@@ -3830,7 +4290,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to describe one or more environments.</p>"
+                "smithy.api#documentation": "<p>Request to describe one or more environments.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeEvents": {
@@ -3843,6 +4304,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returns list of event descriptions matching criteria up to the last 6 weeks.</p>\n         <note>\n            <p>This action returns the most recent 1,000 events from the specified\n          <code>NextToken</code>.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view events for an environment",
+                        "documentation": "The following operation retrieves events for an environment named my-env:",
+                        "input": {
+                            "EnvironmentName": "my-env"
+                        },
+                        "output": {
+                            "Events": [
+                                {
+                                    "ApplicationName": "my-app",
+                                    "EnvironmentName": "my-env",
+                                    "Message": "Environment health has transitioned from Info to Ok.",
+                                    "EventDate": "2015-08-20T07:06:53.535Z",
+                                    "Severity": "INFO"
+                                },
+                                {
+                                    "ApplicationName": "my-app",
+                                    "EnvironmentName": "my-env",
+                                    "Severity": "INFO",
+                                    "RequestId": "b7f3960b-4709-11e5-ba1e-07e16200da41",
+                                    "Message": "Environment update completed successfully.",
+                                    "EventDate": "2015-08-20T07:06:02.049Z"
+                                },
+                                {
+                                    "ApplicationName": "my-app",
+                                    "EnvironmentName": "my-env",
+                                    "Severity": "INFO",
+                                    "RequestId": "ca8dfbf6-41ef-11e5-988b-651aa638f46b",
+                                    "Message": "Using elasticbeanstalk-us-west-2-012445113685 as Amazon S3 storage bucket for environment data.",
+                                    "EventDate": "2015-08-13T19:16:27.561Z"
+                                },
+                                {
+                                    "ApplicationName": "my-app",
+                                    "EnvironmentName": "my-env",
+                                    "Severity": "INFO",
+                                    "RequestId": "cdfba8f6-41ef-11e5-988b-65638f41aa6b",
+                                    "Message": "createEnvironment is starting.",
+                                    "EventDate": "2015-08-13T19:16:26.581Z"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3928,7 +4433,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to retrieve a list of events for an environment.</p>"
+                "smithy.api#documentation": "<p>Request to retrieve a list of events for an environment.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeInstancesHealth": {
@@ -3948,7 +4454,67 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves detailed information about the health of instances in your AWS Elastic\n      Beanstalk. This operation requires <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html\">enhanced health\n      reporting</a>.</p>"
+                "smithy.api#documentation": "<p>Retrieves detailed information about the health of instances in your AWS Elastic\n      Beanstalk. This operation requires <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html\">enhanced health\n      reporting</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view environment health",
+                        "documentation": "The following operation retrieves health information for instances in an environment named my-env:",
+                        "input": {
+                            "EnvironmentName": "my-env",
+                            "AttributeNames": [
+                                "All"
+                            ]
+                        },
+                        "output": {
+                            "InstanceHealthList": [
+                                {
+                                    "InstanceId": "i-08691cc7",
+                                    "ApplicationMetrics": {
+                                        "Duration": 10,
+                                        "Latency": {
+                                            "P99": 0.006,
+                                            "P75": 0.002,
+                                            "P90": 0.004,
+                                            "P95": 0.005,
+                                            "P85": 0.003,
+                                            "P10": 0,
+                                            "P999": 0.006,
+                                            "P50": 0.001
+                                        },
+                                        "RequestCount": 48,
+                                        "StatusCodes": {
+                                            "Status3xx": 0,
+                                            "Status2xx": 47,
+                                            "Status5xx": 0,
+                                            "Status4xx": 1
+                                        }
+                                    },
+                                    "System": {
+                                        "LoadAverage": [
+                                            0,
+                                            0.02,
+                                            0.05
+                                        ],
+                                        "CPUUtilization": {
+                                            "SoftIRQ": 0.1,
+                                            "IOWait": 0.2,
+                                            "System": 0.3,
+                                            "Idle": 97.8,
+                                            "User": 1.5,
+                                            "IRQ": 0,
+                                            "Nice": 0.1
+                                        }
+                                    },
+                                    "Color": "Green",
+                                    "HealthStatus": "Ok",
+                                    "LaunchedAt": "2015-08-13T19:17:09Z",
+                                    "Causes": []
+                                }
+                            ],
+                            "RefreshedAt": "2015-08-20T21:09:08Z"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribeInstancesHealthRequest": {
@@ -4007,7 +4573,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Detailed health information about the Amazon EC2 instances in an AWS Elastic Beanstalk\n      environment.</p>"
+                "smithy.api#documentation": "<p>Detailed health information about the Amazon EC2 instances in an AWS Elastic Beanstalk\n      environment.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#DescribePlatformVersion": {
@@ -4053,6 +4620,9 @@
                         "smithy.api#documentation": "<p>Detailed information about the platform version.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#Description": {
@@ -4093,7 +4663,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to disassociate the operations role from an environment.</p>"
+                "smithy.api#documentation": "<p>Request to disassociate the operations role from an environment.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#Ec2InstanceId": {
@@ -4599,7 +5170,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Result message containing a list of environment resource descriptions.</p>"
+                "smithy.api#documentation": "<p>Result message containing a list of environment resource descriptions.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#EnvironmentResourcesDescription": {
@@ -4783,7 +5355,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Result message wrapping a list of event descriptions.</p>"
+                "smithy.api#documentation": "<p>Result message wrapping a list of event descriptions.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#EventMessage": {
@@ -5232,7 +5805,53 @@
                 "target": "com.amazonaws.elasticbeanstalk#ListAvailableSolutionStacksResultMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the available solution stack names, with the public version first and\n      then in reverse chronological order.</p>"
+                "smithy.api#documentation": "<p>Returns a list of the available solution stack names, with the public version first and\n      then in reverse chronological order.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view solution stacks",
+                        "documentation": "The following operation lists solution stacks for all currently available platform configurations and any that you have used in the past:",
+                        "output": {
+                            "SolutionStacks": [
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Node.js",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.6",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.5",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.4",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Python 3.4",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Python 2.7",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Python",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.2 (Puma)",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.2 (Passenger Standalone)",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.1 (Puma)",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.1 (Passenger Standalone)",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.0 (Puma)",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.0 (Passenger Standalone)",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Ruby 1.9.3",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 7 Java 7",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 7 Java 6",
+                                "64bit Windows Server Core 2012 R2 running IIS 8.5",
+                                "64bit Windows Server 2012 R2 running IIS 8.5",
+                                "64bit Windows Server 2012 running IIS 8",
+                                "64bit Windows Server 2008 R2 running IIS 7.5",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Docker 1.6.2",
+                                "64bit Amazon Linux 2015.03 v2.0.0 running Multi-container Docker 1.6.2 (Generic)",
+                                "64bit Debian jessie v2.0.0 running GlassFish 4.1 Java 8 (Preconfigured - Docker)",
+                                "64bit Debian jessie v2.0.0 running GlassFish 4.0 Java 7 (Preconfigured - Docker)",
+                                "64bit Debian jessie v2.0.0 running Go 1.4 (Preconfigured - Docker)",
+                                "64bit Debian jessie v2.0.0 running Go 1.3 (Preconfigured - Docker)",
+                                "64bit Debian jessie v2.0.0 running Python 3.4 (Preconfigured - Docker)"
+                            ],
+                            "SolutionStackDetails": [
+                                {
+                                    "PermittedFileTypes": [
+                                        "zip"
+                                    ],
+                                    "SolutionStackName": "64bit Amazon Linux 2015.03 v2.0.0 running Node.js"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#ListAvailableSolutionStacksResultMessage": {
@@ -5252,7 +5871,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of available AWS Elastic Beanstalk solution stacks.</p>"
+                "smithy.api#documentation": "<p>A list of available AWS Elastic Beanstalk solution stacks.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ListPlatformBranches": {
@@ -5313,6 +5933,9 @@
                         "smithy.api#documentation": "<p>In a paginated request, if this value isn't <code>null</code>, it's the token that you can\n      pass in a subsequent request to get the next response page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ListPlatformVersions": {
@@ -5382,6 +6005,9 @@
                         "smithy.api#documentation": "<p>In a paginated request, if this value isn't <code>null</code>, it's the token that you can\n      pass in a subsequent request to get the next response page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ListTagsForResource": {
@@ -5417,6 +6043,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#Listener": {
@@ -6339,7 +6968,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes and recreates all of the AWS resources (for example: the Auto Scaling group,\n      load balancer, etc.) for a specified environment and forces a restart.</p>"
+                "smithy.api#documentation": "<p>Deletes and recreates all of the AWS resources (for example: the Auto Scaling group,\n      load balancer, etc.) for a specified environment and forces a restart.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To rebuild an environment",
+                        "documentation": "The following operation terminates and recreates the resources in an environment named my-env:",
+                        "input": {
+                            "EnvironmentName": "my-env"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#RebuildEnvironmentMessage": {
@@ -6359,7 +6997,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#RefreshedAt": {
@@ -6386,7 +7025,17 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a request to compile the specified type of information of the deployed\n      environment.</p>\n         <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from\n      the application server log files of every Amazon EC2 instance in your environment. </p>\n         <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application\n      server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET\n      containers do not support bundle logs. </p>\n         <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>RetrieveEnvironmentInfo</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Initiates a request to compile the specified type of information of the deployed\n      environment.</p>\n         <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from\n      the application server log files of every Amazon EC2 instance in your environment. </p>\n         <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application\n      server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET\n      containers do not support bundle logs. </p>\n         <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>RetrieveEnvironmentInfo</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To request tailed logs",
+                        "documentation": "The following operation requests logs from an environment named my-env:",
+                        "input": {
+                            "EnvironmentName": "my-env",
+                            "InfoType": "tail"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#RequestEnvironmentInfoMessage": {
@@ -6413,7 +7062,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to retrieve logs from an environment and store them in your Elastic Beanstalk\n      storage bucket.</p>"
+                "smithy.api#documentation": "<p>Request to retrieve logs from an environment and store them in your Elastic Beanstalk\n      storage bucket.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#RequestId": {
@@ -6521,6 +7171,9 @@
                         "smithy.api#documentation": "<p>A list of tag key-value pairs.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ResourceTypeNotSupportedException": {
@@ -6552,7 +7205,16 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Causes the environment to restart the application container server running on each\n      Amazon EC2 instance.</p>"
+                "smithy.api#documentation": "<p>Causes the environment to restart the application container server running on each\n      Amazon EC2 instance.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To restart application servers",
+                        "documentation": "The following operation restarts application servers on all instances in an environment named my-env:",
+                        "input": {
+                            "EnvironmentName": "my-env"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#RestartAppServerMessage": {
@@ -6572,7 +7234,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#RetrieveEnvironmentInfo": {
@@ -6584,7 +7247,27 @@
                 "target": "com.amazonaws.elasticbeanstalk#RetrieveEnvironmentInfoResultMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the compiled information from a <a>RequestEnvironmentInfo</a>\n      request.</p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>RequestEnvironmentInfo</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Retrieves the compiled information from a <a>RequestEnvironmentInfo</a>\n      request.</p>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>RequestEnvironmentInfo</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To retrieve tailed logs",
+                        "documentation": "The following operation retrieves a link to logs from an environment named my-env:",
+                        "input": {
+                            "EnvironmentName": "my-env",
+                            "InfoType": "tail"
+                        },
+                        "output": {
+                            "EnvironmentInfo": [
+                                {
+                                    "SampleTimestamp": "2015-08-20T22:23:17.703Z",
+                                    "Message": "https://elasticbeanstalk-us-west-2-0123456789012.s3.amazonaws.com/resources/environments/logs/tail/e-fyqyju3yjs/i-09c1c867/TailLogs-1440109397703.out?AWSAccessKeyId=AKGPT4J56IAJ2EUBL5CQ&Expires=1440195891&Signature=n%2BEalOV6A2HIOx4Rcfb7LT16bBM%3D",
+                                    "InfoType": "tail",
+                                    "Ec2InstanceId": "i-09c1c867"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#RetrieveEnvironmentInfoMessage": {
@@ -6611,7 +7294,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to download logs retrieved with <a>RequestEnvironmentInfo</a>.</p>"
+                "smithy.api#documentation": "<p>Request to download logs retrieved with <a>RequestEnvironmentInfo</a>.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#RetrieveEnvironmentInfoResultMessage": {
@@ -6625,7 +7309,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Result message containing a description of the requested environment info.</p>"
+                "smithy.api#documentation": "<p>Result message containing a description of the requested environment info.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#S3Bucket": {
@@ -7028,7 +7713,17 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Swaps the CNAMEs of two environments.</p>"
+                "smithy.api#documentation": "<p>Swaps the CNAMEs of two environments.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To swap environment CNAMES",
+                        "documentation": "The following operation swaps the assigned subdomains of two environments:",
+                        "input": {
+                            "SourceEnvironmentName": "my-env-blue",
+                            "DestinationEnvironmentName": "my-env-green"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#SwapEnvironmentCNAMEsMessage": {
@@ -7060,7 +7755,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Swaps the CNAMEs of two environments.</p>"
+                "smithy.api#documentation": "<p>Swaps the CNAMEs of two environments.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#SystemStatus": {
@@ -7156,7 +7852,34 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the specified environment.</p>"
+                "smithy.api#documentation": "<p>Terminates the specified environment.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To terminate an environment",
+                        "documentation": "The following operation terminates an Elastic Beanstalk environment named my-env:",
+                        "input": {
+                            "EnvironmentName": "my-env"
+                        },
+                        "output": {
+                            "ApplicationName": "my-app",
+                            "EnvironmentName": "my-env",
+                            "Status": "Terminating",
+                            "EnvironmentId": "e-fh2eravpns",
+                            "EndpointURL": "awseb-e-f-AWSEBLoa-1I9XUMP4-8492WNUP202574.us-west-2.elb.amazonaws.com",
+                            "SolutionStackName": "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8",
+                            "CNAME": "my-env.elasticbeanstalk.com",
+                            "Health": "Grey",
+                            "AbortableOperationInProgress": false,
+                            "Tier": {
+                                "Version": " ",
+                                "Type": "Standard",
+                                "Name": "WebServer"
+                            },
+                            "DateUpdated": "2015-08-12T19:05:54.744Z",
+                            "DateCreated": "2015-08-12T18:52:53.622Z"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#TerminateEnvironmentMessage": {
@@ -7188,7 +7911,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to terminate an environment.</p>"
+                "smithy.api#documentation": "<p>Request to terminate an environment.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#TerminateEnvironmentResources": {
@@ -7370,7 +8094,33 @@
                 "target": "com.amazonaws.elasticbeanstalk#ApplicationDescriptionMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified application to have the specified properties.</p>\n         <note>\n            <p>If a property (for example, <code>description</code>) is not provided, the value\n        remains unchanged. To clear these properties, specify an empty string.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Updates the specified application to have the specified properties.</p>\n         <note>\n            <p>If a property (for example, <code>description</code>) is not provided, the value\n        remains unchanged. To clear these properties, specify an empty string.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To change an application's description",
+                        "documentation": "The following operation updates the description of an application named my-app:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "Description": "my Elastic Beanstalk application"
+                        },
+                        "output": {
+                            "Application": {
+                                "ApplicationName": "my-app",
+                                "Description": "my Elastic Beanstalk application",
+                                "Versions": [
+                                    "2fba-stage-150819_234450",
+                                    "bf07-stage-150820_214945",
+                                    "93f8",
+                                    "fd7c-stage-150820_000431",
+                                    "22a0-stage-150819_185942"
+                                ],
+                                "DateCreated": "2015-08-13T19:15:50.449Z",
+                                "ConfigurationTemplates": [],
+                                "DateUpdated": "2015-08-20T22:34:56.195Z"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#UpdateApplicationMessage": {
@@ -7391,7 +8141,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to update an application.</p>"
+                "smithy.api#documentation": "<p>Request to update an application.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#UpdateApplicationResourceLifecycle": {
@@ -7428,6 +8179,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#UpdateApplicationVersion": {
@@ -7439,7 +8193,31 @@
                 "target": "com.amazonaws.elasticbeanstalk#ApplicationVersionDescriptionMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified application version to have the specified properties.</p>\n         <note>\n            <p>If a property (for example, <code>description</code>) is not provided, the value\n        remains unchanged. To clear properties, specify an empty string.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Updates the specified application version to have the specified properties.</p>\n         <note>\n            <p>If a property (for example, <code>description</code>) is not provided, the value\n        remains unchanged. To clear properties, specify an empty string.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To change an application version's description",
+                        "documentation": "The following operation updates the description of an application version named 22a0-stage-150819_185942:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "VersionLabel": "22a0-stage-150819_185942",
+                            "Description": "new description"
+                        },
+                        "output": {
+                            "ApplicationVersion": {
+                                "ApplicationName": "my-app",
+                                "VersionLabel": "22a0-stage-150819_185942",
+                                "Description": "new description",
+                                "DateCreated": "2015-08-19T18:59:17.646Z",
+                                "DateUpdated": "2015-08-20T22:53:28.871Z",
+                                "SourceBundle": {
+                                    "S3Bucket": "elasticbeanstalk-us-west-2-0123456789012",
+                                    "S3Key": "my-app/22a0-stage-150819_185942.war"
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#UpdateApplicationVersionMessage": {
@@ -7467,7 +8245,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#UpdateConfigurationTemplate": {
@@ -7487,7 +8266,30 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified configuration template to have the specified properties or\n      configuration option values.</p>\n         <note>\n            <p>If a property (for example, <code>ApplicationName</code>) is not provided, its value\n        remains unchanged. To clear such properties, specify an empty string.</p>\n         </note>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeConfigurationOptions</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Updates the specified configuration template to have the specified properties or\n      configuration option values.</p>\n         <note>\n            <p>If a property (for example, <code>ApplicationName</code>) is not provided, its value\n        remains unchanged. To clear such properties, specify an empty string.</p>\n         </note>\n         <p>Related Topics</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeConfigurationOptions</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a configuration template",
+                        "documentation": "The following operation removes the configured CloudWatch custom health metrics configuration ConfigDocument from a saved configuration template named my-template:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "TemplateName": "my-template",
+                            "OptionsToRemove": [
+                                {
+                                    "Namespace": "aws:elasticbeanstalk:healthreporting:system",
+                                    "OptionName": "ConfigDocument"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "ApplicationName": "my-app",
+                            "TemplateName": "my-template",
+                            "DateCreated": "2015-08-20T22:39:31Z",
+                            "DateUpdated": "2015-08-20T22:43:11Z",
+                            "SolutionStackName": "64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#UpdateConfigurationTemplateMessage": {
@@ -7527,7 +8329,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result message containing the options for the specified solution stack.</p>"
+                "smithy.api#documentation": "<p>The result message containing the options for the specified solution stack.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#UpdateDate": {
@@ -7550,7 +8353,35 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the environment description, deploys a new application version, updates the\n      configuration settings to an entirely new configuration template, or updates select\n      configuration option values in the running environment.</p>\n         <p> Attempting to update both the release and configuration is not allowed and AWS Elastic\n      Beanstalk returns an <code>InvalidParameterCombination</code> error. </p>\n         <p> When updating the configuration settings to a new template or individual settings, a\n      draft configuration is created and <a>DescribeConfigurationSettings</a> for this\n      environment returns two setting descriptions with different <code>DeploymentStatus</code>\n      values. </p>"
+                "smithy.api#documentation": "<p>Updates the environment description, deploys a new application version, updates the\n      configuration settings to an entirely new configuration template, or updates select\n      configuration option values in the running environment.</p>\n         <p> Attempting to update both the release and configuration is not allowed and AWS Elastic\n      Beanstalk returns an <code>InvalidParameterCombination</code> error. </p>\n         <p> When updating the configuration settings to a new template or individual settings, a\n      draft configuration is created and <a>DescribeConfigurationSettings</a> for this\n      environment returns two setting descriptions with different <code>DeploymentStatus</code>\n      values. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update an environment to a new version",
+                        "documentation": "The following operation updates an environment named \"my-env\" to version \"v2\" of the application to which it belongs:",
+                        "input": {
+                            "EnvironmentName": "my-env",
+                            "VersionLabel": "v2"
+                        },
+                        "output": {
+                            "ApplicationName": "my-app",
+                            "EnvironmentName": "my-env",
+                            "VersionLabel": "v2",
+                            "Status": "Updating",
+                            "EnvironmentId": "e-szqipays4h",
+                            "EndpointURL": "awseb-e-i-AWSEBLoa-1RDLX6TC9VUAO-0123456789.us-west-2.elb.amazonaws.com",
+                            "SolutionStackName": "64bit Amazon Linux running Tomcat 7",
+                            "CNAME": "my-env.elasticbeanstalk.com",
+                            "Health": "Grey",
+                            "Tier": {
+                                "Version": " ",
+                                "Type": "Standard",
+                                "Name": "WebServer"
+                            },
+                            "DateUpdated": "2015-02-03T23:12:29.119Z",
+                            "DateCreated": "2015-02-03T23:04:54.453Z"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#UpdateEnvironmentMessage": {
@@ -7630,7 +8461,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request to update an environment.</p>"
+                "smithy.api#documentation": "<p>Request to update an environment.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#UpdateTagsForResource": {
@@ -7684,6 +8516,9 @@
                         "smithy.api#documentation": "<p>A list of tag keys to remove. If a tag key doesn't exist, it is silently ignored.</p>\n         <p>Specify at least one of these parameters: <code>TagsToAdd</code>,\n      <code>TagsToRemove</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#UserDefinedOption": {
@@ -7706,7 +8541,27 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Takes a set of configuration settings and either a configuration template or\n      environment, and determines whether those values are valid.</p>\n         <p>This action returns a list of messages indicating any errors or warnings associated\n      with the selection of option values.</p>"
+                "smithy.api#documentation": "<p>Takes a set of configuration settings and either a configuration template or\n      environment, and determines whether those values are valid.</p>\n         <p>This action returns a list of messages indicating any errors or warnings associated\n      with the selection of option values.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To validate configuration settings",
+                        "documentation": "The following operation validates a CloudWatch custom metrics config document:",
+                        "input": {
+                            "ApplicationName": "my-app",
+                            "EnvironmentName": "my-env",
+                            "OptionSettings": [
+                                {
+                                    "Namespace": "aws:elasticbeanstalk:healthreporting:system",
+                                    "OptionName": "ConfigDocument",
+                                    "Value": "{\"CloudWatchMetrics\": {\"Environment\": {\"ApplicationLatencyP99.9\": null,\"InstancesSevere\": 60,\"ApplicationLatencyP90\": 60,\"ApplicationLatencyP99\": null,\"ApplicationLatencyP95\": 60,\"InstancesUnknown\": 60,\"ApplicationLatencyP85\": 60,\"InstancesInfo\": null,\"ApplicationRequests2xx\": null,\"InstancesDegraded\": null,\"InstancesWarning\": 60,\"ApplicationLatencyP50\": 60,\"ApplicationRequestsTotal\": null,\"InstancesNoData\": null,\"InstancesPending\": 60,\"ApplicationLatencyP10\": null,\"ApplicationRequests5xx\": null,\"ApplicationLatencyP75\": null,\"InstancesOk\": 60,\"ApplicationRequests3xx\": null,\"ApplicationRequests4xx\": null},\"Instance\": {\"ApplicationLatencyP99.9\": null,\"ApplicationLatencyP90\": 60,\"ApplicationLatencyP99\": null,\"ApplicationLatencyP95\": null,\"ApplicationLatencyP85\": null,\"CPUUser\": 60,\"ApplicationRequests2xx\": null,\"CPUIdle\": null,\"ApplicationLatencyP50\": null,\"ApplicationRequestsTotal\": 60,\"RootFilesystemUtil\": null,\"LoadAverage1min\": null,\"CPUIrq\": null,\"CPUNice\": 60,\"CPUIowait\": 60,\"ApplicationLatencyP10\": null,\"LoadAverage5min\": null,\"ApplicationRequests5xx\": null,\"ApplicationLatencyP75\": 60,\"CPUSystem\": 60,\"ApplicationRequests3xx\": 60,\"ApplicationRequests4xx\": null,\"InstanceHealth\": null,\"CPUSoftirq\": 60}},\"Version\": 1}"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "Messages": []
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticbeanstalk#ValidateConfigurationSettingsMessage": {
@@ -7740,7 +8595,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of validation messages for a specified configuration template.</p>"
+                "smithy.api#documentation": "<p>A list of validation messages for a specified configuration template.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elasticbeanstalk#ValidationMessage": {

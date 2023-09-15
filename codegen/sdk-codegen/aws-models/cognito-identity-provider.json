@@ -359,6 +359,7 @@
                     "arnNamespace": "cognito-idp",
                     "cloudFormationName": "Cognito",
                     "cloudTrailEventSource": "cognitoidentityprovider.amazonaws.com",
+                    "docId": "cognito-idp-2016-04-18",
                     "endpointPrefix": "cognito-idp"
                 },
                 "aws.auth#sigv4": {

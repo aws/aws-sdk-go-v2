@@ -98,6 +98,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#CancelQueryResponse": {
@@ -109,6 +112,9 @@
                         "smithy.api#documentation": "<p> A <code>CancellationMessage</code> is returned when a <code>CancelQuery</code>\n            request for the query specified by <code>QueryId</code> has already been issued. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreamquery#ClientRequestToken": {
@@ -223,7 +229,7 @@
                 "QueryString": {
                     "target": "com.amazonaws.timestreamquery#QueryString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query string to run. Parameter\n            names can be specified in the query string <code>@</code> character followed by an\n            identifier. The named Parameter <code>@scheduled_runtime</code> is reserved and can be used in the query to get the time at which the query is scheduled to run.</p>\n            <p>The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of <code>@scheduled_runtime</code> paramater for each query run. \n            For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the <code>@scheduled_runtime</code> parameter is \n            initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.</p>",
+                        "smithy.api#documentation": "<p>The query string to run. Parameter\n            names can be specified in the query string <code>@</code> character followed by an\n            identifier. The named Parameter <code>@scheduled_runtime</code> is reserved and can be used in the query to get the time at which the query is scheduled to run.</p>\n         <p>The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of <code>@scheduled_runtime</code> paramater for each query run. \n            For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the <code>@scheduled_runtime</code> parameter is \n            initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -250,7 +256,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.timestreamquery#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making \n            multiple identical CreateScheduledQuery requests has the same effect as making a single request.\n\n </p>\n         <ul>\n            <li>\n                <p> If CreateScheduledQuery is called without a <code>ClientToken</code>, the\n                    Query SDK generates a <code>ClientToken</code> on your behalf.</p>\n            </li>\n            <li>\n                <p> After 8 hours, any request with the same <code>ClientToken</code> is treated\n                    as a new request. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making \n            multiple identical CreateScheduledQuery requests has the same effect as making a single request.\n\n </p>\n         <ul>\n            <li>\n               <p> If CreateScheduledQuery is called without a <code>ClientToken</code>, the\n                    Query SDK generates a <code>ClientToken</code> on your behalf.</p>\n            </li>\n            <li>\n               <p> After 8 hours, any request with the same <code>ClientToken</code> is treated\n                    as a new request. </p>\n            </li>\n         </ul>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -270,7 +276,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.timestreamquery#StringValue2048",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS\n            key is not specified, the scheduled query resource will be encrypted with a Timestream\n            owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias\n            ARN. When using an alias name, prefix the name with <i>alias/</i>\n         </p>\n            <p>If ErrorReportConfiguration uses <code>SSE_KMS</code> as encryption type, the same KmsKeyId is used to encrypt the error report at rest.</p>"
+                        "smithy.api#documentation": "<p>The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS\n            key is not specified, the scheduled query resource will be encrypted with a Timestream\n            owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias\n            ARN. When using an alias name, prefix the name with <i>alias/</i>\n         </p>\n         <p>If ErrorReportConfiguration uses <code>SSE_KMS</code> as encryption type, the same KmsKeyId is used to encrypt the error report at rest.</p>"
                     }
                 },
                 "ErrorReportConfiguration": {
@@ -280,6 +286,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#CreateScheduledQueryResponse": {
@@ -292,6 +301,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreamquery#Datum": {
@@ -384,6 +396,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#DescribeEndpoints": {
@@ -406,12 +421,15 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>DescribeEndpoints returns a list of available endpoints to make Timestream\n            API calls against. This API is available through both Write and Query.</p>\n        <p>Because the Timestream SDKs are designed to transparently work with the\n            service’s architecture, including the management and mapping of the service endpoints,\n                <i>it is not recommended that you use this API unless</i>:</p>\n        <ul>\n            <li>\n                <p>You are using <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints\">VPC endpoints (Amazon Web Services PrivateLink) with Timestream\n                    </a>\n               </p>\n            </li>\n            <li>\n                <p>Your application uses a programming language that does not yet have SDK\n                    support</p>\n            </li>\n            <li>\n                <p>You require better control over the client-side implementation</p>\n            </li>\n         </ul>\n        <p>For detailed information on how and when to use and implement DescribeEndpoints, see\n                <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery\">The Endpoint Discovery Pattern</a>.</p>"
+                "smithy.api#documentation": "<p>DescribeEndpoints returns a list of available endpoints to make Timestream\n            API calls against. This API is available through both Write and Query.</p>\n         <p>Because the Timestream SDKs are designed to transparently work with the\n            service’s architecture, including the management and mapping of the service endpoints,\n                <i>it is not recommended that you use this API unless</i>:</p>\n         <ul>\n            <li>\n               <p>You are using <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints\">VPC endpoints (Amazon Web Services PrivateLink) with Timestream\n                    </a>\n               </p>\n            </li>\n            <li>\n               <p>Your application uses a programming language that does not yet have SDK\n                    support</p>\n            </li>\n            <li>\n               <p>You require better control over the client-side implementation</p>\n            </li>\n         </ul>\n         <p>For detailed information on how and when to use and implement DescribeEndpoints, see\n                <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery\">The Endpoint Discovery Pattern</a>.</p>"
             }
         },
         "com.amazonaws.timestreamquery#DescribeEndpointsRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.timestreamquery#DescribeEndpointsResponse": {
             "type": "structure",
@@ -423,6 +441,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreamquery#DescribeScheduledQuery": {
@@ -470,6 +491,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#DescribeScheduledQueryResponse": {
@@ -482,6 +506,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreamquery#DimensionMapping": {
@@ -513,14 +540,14 @@
             }
         },
         "com.amazonaws.timestreamquery#DimensionValueType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VARCHAR",
-                        "name": "VARCHAR"
+            "type": "enum",
+            "members": {
+                "VARCHAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARCHAR"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.timestreamquery#Double": {
@@ -650,6 +677,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#ExecutionStats": {
@@ -754,6 +784,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ScheduledQueries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -773,6 +804,9 @@
                         "smithy.api#documentation": "<p> A pagination token to resume pagination.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#ListScheduledQueriesResponse": {
@@ -791,6 +825,9 @@
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously\n            truncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreamquery#ListTagsForResource": {
@@ -823,6 +860,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Tags",
                     "pageSize": "MaxResults"
                 }
             }
@@ -849,6 +887,9 @@
                         "smithy.api#documentation": "<p>A pagination token to resume pagination.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#ListTagsForResourceResponse": {
@@ -867,6 +908,9 @@
                         "smithy.api#documentation": "<p>A pagination token to resume pagination with a subsequent call to\n                <code>ListTagsForResourceResponse</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreamquery#Long": {
@@ -903,30 +947,38 @@
             }
         },
         "com.amazonaws.timestreamquery#MeasureValueType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BIGINT",
-                        "name": "BIGINT"
-                    },
-                    {
-                        "value": "BOOLEAN",
-                        "name": "BOOLEAN"
-                    },
-                    {
-                        "value": "DOUBLE",
-                        "name": "DOUBLE"
-                    },
-                    {
-                        "value": "VARCHAR",
-                        "name": "VARCHAR"
-                    },
-                    {
-                        "value": "MULTI",
-                        "name": "MULTI"
+            "type": "enum",
+            "members": {
+                "BIGINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BIGINT"
                     }
-                ]
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN"
+                    }
+                },
+                "DOUBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOUBLE"
+                    }
+                },
+                "VARCHAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARCHAR"
+                    }
+                },
+                "MULTI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI"
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#MixedMeasureMapping": {
@@ -1148,6 +1200,9 @@
                         "smithy.api#documentation": "<p>By setting this value to <code>true</code>, Timestream will only validate that the\n            query string is a valid Timestream query, and not store the prepared query for later\n            use.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#PrepareQueryResponse": {
@@ -1174,6 +1229,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreamquery#Query": {
@@ -1211,7 +1269,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>\n            <code>Query</code> is a synchronous operation that enables you to run a query against\n            your Amazon Timestream data. <code>Query</code> will time out after 60 seconds.\n            You must update the default timeout in the SDK to support a timeout of 60 seconds. See\n            the <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html\">code\n                sample</a> for details. </p>\n        <p>Your query request will fail in the following cases:</p>\n        <ul>\n            <li>\n                <p> If you submit a <code>Query</code> request with the same client token outside\n                    of the 5-minute idempotency window. </p>\n            </li>\n            <li>\n                <p> If you submit a <code>Query</code> request with the same client token, but\n                    change other parameters, within the 5-minute idempotency window. </p>\n            </li>\n            <li>\n                <p> If the size of the row (including the query metadata) exceeds 1 MB, then the\n                    query will fail with the following error message: </p>\n                <p>\n                  <code>Query aborted as max page response size has been exceeded by the output\n                        result row</code>\n                </p>\n            </li>\n            <li>\n                <p> If the IAM principal of the query initiator and the result reader are not the\n                    same and/or the query initiator and the result reader do not have the same query\n                    string in the query requests, the query will fail with an <code>Invalid\n                        pagination token</code> error. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>\n            <code>Query</code> is a synchronous operation that enables you to run a query against\n            your Amazon Timestream data. <code>Query</code> will time out after 60 seconds.\n            You must update the default timeout in the SDK to support a timeout of 60 seconds. See\n            the <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html\">code\n                sample</a> for details. </p>\n         <p>Your query request will fail in the following cases:</p>\n         <ul>\n            <li>\n               <p> If you submit a <code>Query</code> request with the same client token outside\n                    of the 5-minute idempotency window. </p>\n            </li>\n            <li>\n               <p> If you submit a <code>Query</code> request with the same client token, but\n                    change other parameters, within the 5-minute idempotency window. </p>\n            </li>\n            <li>\n               <p> If the size of the row (including the query metadata) exceeds 1 MB, then the\n                    query will fail with the following error message: </p>\n               <p>\n                  <code>Query aborted as max page response size has been exceeded by the output\n                        result row</code>\n               </p>\n            </li>\n            <li>\n               <p> If the IAM principal of the query initiator and the result reader are not the\n                    same and/or the query initiator and the result reader do not have the same query\n                    string in the query requests, the query will fail with an <code>Invalid\n                        pagination token</code> error. </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -1257,22 +1315,25 @@
                 "ClientToken": {
                     "target": "com.amazonaws.timestreamquery#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> Unique, case-sensitive string of up to 64 ASCII characters specified when a\n                <code>Query</code> request is made. Providing a <code>ClientToken</code> makes the\n            call to <code>Query</code>\n            <i>idempotent</i>. This means that running the same query repeatedly will\n            produce the same result. In other words, making multiple identical <code>Query</code>\n            requests has the same effect as making a single request. When using\n                <code>ClientToken</code> in a query, note the following: </p>\n        <ul>\n            <li>\n                <p> If the Query API is instantiated without a <code>ClientToken</code>, the\n                    Query SDK generates a <code>ClientToken</code> on your behalf.</p>\n            </li>\n            <li>\n                <p>If the <code>Query</code> invocation only contains the\n                        <code>ClientToken</code> but does not include a <code>NextToken</code>, that\n                    invocation of <code>Query</code> is assumed to be a new query run.</p>\n            </li>\n            <li>\n                <p>If the invocation contains <code>NextToken</code>, that particular invocation\n                    is assumed to be a subsequent invocation of a prior call to the Query API, and a\n                    result set is returned.</p>\n            </li>\n            <li>\n                <p> After 4 hours, any request with the same <code>ClientToken</code> is treated\n                    as a new request. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p> Unique, case-sensitive string of up to 64 ASCII characters specified when a\n                <code>Query</code> request is made. Providing a <code>ClientToken</code> makes the\n            call to <code>Query</code>\n            <i>idempotent</i>. This means that running the same query repeatedly will\n            produce the same result. In other words, making multiple identical <code>Query</code>\n            requests has the same effect as making a single request. When using\n                <code>ClientToken</code> in a query, note the following: </p>\n         <ul>\n            <li>\n               <p> If the Query API is instantiated without a <code>ClientToken</code>, the\n                    Query SDK generates a <code>ClientToken</code> on your behalf.</p>\n            </li>\n            <li>\n               <p>If the <code>Query</code> invocation only contains the\n                        <code>ClientToken</code> but does not include a <code>NextToken</code>, that\n                    invocation of <code>Query</code> is assumed to be a new query run.</p>\n            </li>\n            <li>\n               <p>If the invocation contains <code>NextToken</code>, that particular invocation\n                    is assumed to be a subsequent invocation of a prior call to the Query API, and a\n                    result set is returned.</p>\n            </li>\n            <li>\n               <p> After 4 hours, any request with the same <code>ClientToken</code> is treated\n                    as a new request. </p>\n            </li>\n         </ul>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.timestreamquery#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A pagination token used to return a set of results. When the <code>Query</code> API\n            is invoked using <code>NextToken</code>, that particular invocation is assumed to be a\n            subsequent invocation of a prior call to <code>Query</code>, and a result set is\n            returned. However, if the <code>Query</code> invocation only contains the\n                <code>ClientToken</code>, that invocation of <code>Query</code> is assumed to be a\n            new query run. </p>\n        <p>Note the following when using NextToken in a query:</p>\n        <ul>\n            <li>\n                <p>A pagination token can be used for up to five <code>Query</code> invocations,\n                    OR for a duration of up to 1 hour – whichever comes first.</p>\n            </li>\n            <li>\n                <p>Using the same <code>NextToken</code> will return the same set of records. To\n                    keep paginating through the result set, you must to use the most recent\n                        <code>nextToken</code>.</p>\n            </li>\n            <li>\n                <p>Suppose a <code>Query</code> invocation returns two <code>NextToken</code>\n                    values, <code>TokenA</code> and <code>TokenB</code>. If <code>TokenB</code> is\n                    used in a subsequent <code>Query</code> invocation, then <code>TokenA</code> is\n                    invalidated and cannot be reused.</p>\n            </li>\n            <li>\n                <p>To request a previous result set from a query after pagination has begun, you\n                    must re-invoke the Query API.</p>\n            </li>\n            <li>\n                <p>The latest <code>NextToken</code> should be used to paginate until\n                        <code>null</code> is returned, at which point a new <code>NextToken</code>\n                    should be used.</p>\n            </li>\n            <li>\n                <p> If the IAM principal of the query initiator and the result reader are not the\n                    same and/or the query initiator and the result reader do not have the same query\n                    string in the query requests, the query will fail with an <code>Invalid\n                        pagination token</code> error. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> A pagination token used to return a set of results. When the <code>Query</code> API\n            is invoked using <code>NextToken</code>, that particular invocation is assumed to be a\n            subsequent invocation of a prior call to <code>Query</code>, and a result set is\n            returned. However, if the <code>Query</code> invocation only contains the\n                <code>ClientToken</code>, that invocation of <code>Query</code> is assumed to be a\n            new query run. </p>\n         <p>Note the following when using NextToken in a query:</p>\n         <ul>\n            <li>\n               <p>A pagination token can be used for up to five <code>Query</code> invocations,\n                    OR for a duration of up to 1 hour – whichever comes first.</p>\n            </li>\n            <li>\n               <p>Using the same <code>NextToken</code> will return the same set of records. To\n                    keep paginating through the result set, you must to use the most recent\n                        <code>nextToken</code>.</p>\n            </li>\n            <li>\n               <p>Suppose a <code>Query</code> invocation returns two <code>NextToken</code>\n                    values, <code>TokenA</code> and <code>TokenB</code>. If <code>TokenB</code> is\n                    used in a subsequent <code>Query</code> invocation, then <code>TokenA</code> is\n                    invalidated and cannot be reused.</p>\n            </li>\n            <li>\n               <p>To request a previous result set from a query after pagination has begun, you\n                    must re-invoke the Query API.</p>\n            </li>\n            <li>\n               <p>The latest <code>NextToken</code> should be used to paginate until\n                        <code>null</code> is returned, at which point a new <code>NextToken</code>\n                    should be used.</p>\n            </li>\n            <li>\n               <p> If the IAM principal of the query initiator and the result reader are not the\n                    same and/or the query initiator and the result reader do not have the same query\n                    string in the query requests, the query will fail with an <code>Invalid\n                        pagination token</code> error. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxRows": {
                     "target": "com.amazonaws.timestreamquery#MaxQueryResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> The total number of rows to be returned in the <code>Query</code> output. The initial\n            run of <code>Query</code> with a <code>MaxRows</code> value specified will return the\n            result set of the query in two cases: </p>\n        <ul>\n            <li>\n                <p>The size of the result is less than <code>1MB</code>.</p>\n            </li>\n            <li>\n                <p>The number of rows in the result set is less than the value of\n                        <code>maxRows</code>.</p>\n            </li>\n         </ul>\n        <p>Otherwise, the initial invocation of <code>Query</code> only returns a\n                <code>NextToken</code>, which can then be used in subsequent calls to fetch the\n            result set. To resume pagination, provide the <code>NextToken</code> value in the\n            subsequent command.</p>\n        <p>If the row size is large (e.g. a row has many columns), Timestream may return\n            fewer rows to keep the response size from exceeding the 1 MB limit. If\n                <code>MaxRows</code> is not provided, Timestream will send the necessary\n            number of rows to meet the 1 MB limit.</p>"
+                        "smithy.api#documentation": "<p> The total number of rows to be returned in the <code>Query</code> output. The initial\n            run of <code>Query</code> with a <code>MaxRows</code> value specified will return the\n            result set of the query in two cases: </p>\n         <ul>\n            <li>\n               <p>The size of the result is less than <code>1MB</code>.</p>\n            </li>\n            <li>\n               <p>The number of rows in the result set is less than the value of\n                        <code>maxRows</code>.</p>\n            </li>\n         </ul>\n         <p>Otherwise, the initial invocation of <code>Query</code> only returns a\n                <code>NextToken</code>, which can then be used in subsequent calls to fetch the\n            result set. To resume pagination, provide the <code>NextToken</code> value in the\n            subsequent command.</p>\n         <p>If the row size is large (e.g. a row has many columns), Timestream may return\n            fewer rows to keep the response size from exceeding the 1 MB limit. If\n                <code>MaxRows</code> is not provided, Timestream will send the necessary\n            number of rows to meet the 1 MB limit.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#QueryResponse": {
@@ -1311,6 +1372,9 @@
                         "smithy.api#documentation": "<p>Information about the status of the query, including progress and bytes\n            scanned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreamquery#QueryStatus": {
@@ -1433,18 +1497,20 @@
             }
         },
         "com.amazonaws.timestreamquery#S3EncryptionOption": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SSE_S3",
-                        "name": "SSE_S3"
-                    },
-                    {
-                        "value": "SSE_KMS",
-                        "name": "SSE_KMS"
+            "type": "enum",
+            "members": {
+                "SSE_S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSE_S3"
                     }
-                ]
+                },
+                "SSE_KMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSE_KMS"
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#S3ObjectKey": {
@@ -1481,81 +1547,109 @@
             }
         },
         "com.amazonaws.timestreamquery#ScalarMeasureValueType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BIGINT",
-                        "name": "BIGINT"
-                    },
-                    {
-                        "value": "BOOLEAN",
-                        "name": "BOOLEAN"
-                    },
-                    {
-                        "value": "DOUBLE",
-                        "name": "DOUBLE"
-                    },
-                    {
-                        "value": "VARCHAR",
-                        "name": "VARCHAR"
-                    },
-                    {
-                        "value": "TIMESTAMP",
-                        "name": "TIMESTAMP"
+            "type": "enum",
+            "members": {
+                "BIGINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BIGINT"
                     }
-                ]
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN"
+                    }
+                },
+                "DOUBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOUBLE"
+                    }
+                },
+                "VARCHAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARCHAR"
+                    }
+                },
+                "TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMESTAMP"
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#ScalarType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VARCHAR",
-                        "name": "VARCHAR"
-                    },
-                    {
-                        "value": "BOOLEAN",
-                        "name": "BOOLEAN"
-                    },
-                    {
-                        "value": "BIGINT",
-                        "name": "BIGINT"
-                    },
-                    {
-                        "value": "DOUBLE",
-                        "name": "DOUBLE"
-                    },
-                    {
-                        "value": "TIMESTAMP",
-                        "name": "TIMESTAMP"
-                    },
-                    {
-                        "value": "DATE",
-                        "name": "DATE"
-                    },
-                    {
-                        "value": "TIME",
-                        "name": "TIME"
-                    },
-                    {
-                        "value": "INTERVAL_DAY_TO_SECOND",
-                        "name": "INTERVAL_DAY_TO_SECOND"
-                    },
-                    {
-                        "value": "INTERVAL_YEAR_TO_MONTH",
-                        "name": "INTERVAL_YEAR_TO_MONTH"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
-                    },
-                    {
-                        "value": "INTEGER",
-                        "name": "INTEGER"
+            "type": "enum",
+            "members": {
+                "VARCHAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARCHAR"
                     }
-                ]
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN"
+                    }
+                },
+                "BIGINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BIGINT"
+                    }
+                },
+                "DOUBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOUBLE"
+                    }
+                },
+                "TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMESTAMP"
+                    }
+                },
+                "DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE"
+                    }
+                },
+                "TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME"
+                    }
+                },
+                "INTERVAL_DAY_TO_SECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERVAL_DAY_TO_SECOND"
+                    }
+                },
+                "INTERVAL_YEAR_TO_MONTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERVAL_YEAR_TO_MONTH"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGER"
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#ScalarValue": {
@@ -1771,26 +1865,32 @@
             }
         },
         "com.amazonaws.timestreamquery#ScheduledQueryRunStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AUTO_TRIGGER_SUCCESS",
-                        "name": "AUTO_TRIGGER_SUCCESS"
-                    },
-                    {
-                        "value": "AUTO_TRIGGER_FAILURE",
-                        "name": "AUTO_TRIGGER_FAILURE"
-                    },
-                    {
-                        "value": "MANUAL_TRIGGER_SUCCESS",
-                        "name": "MANUAL_TRIGGER_SUCCESS"
-                    },
-                    {
-                        "value": "MANUAL_TRIGGER_FAILURE",
-                        "name": "MANUAL_TRIGGER_FAILURE"
+            "type": "enum",
+            "members": {
+                "AUTO_TRIGGER_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO_TRIGGER_SUCCESS"
                     }
-                ]
+                },
+                "AUTO_TRIGGER_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO_TRIGGER_FAILURE"
+                    }
+                },
+                "MANUAL_TRIGGER_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL_TRIGGER_SUCCESS"
+                    }
+                },
+                "MANUAL_TRIGGER_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL_TRIGGER_FAILURE"
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#ScheduledQueryRunSummary": {
@@ -1844,18 +1944,20 @@
             }
         },
         "com.amazonaws.timestreamquery#ScheduledQueryState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#SchemaName": {
@@ -2049,11 +2151,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.timestreamquery#TagValue": {
             "type": "string",
@@ -2274,7 +2382,7 @@
                     "name": "timestream"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<fullname>Amazon Timestream Query\n        </fullname>\n        <p></p>",
+                "smithy.api#documentation": "<fullname>Amazon Timestream Query\n        </fullname>\n         <p></p>",
                 "smithy.api#title": "Amazon Timestream Query",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2336,9 +2444,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://query.timestream-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://query.timestream-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2351,15 +2638,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://query.timestream.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://query.timestream.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2371,258 +2693,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://query.timestream-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://query.timestream-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://query.timestream.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://query.timestream.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -2637,8 +2709,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2650,8 +2722,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2663,8 +2735,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2676,8 +2748,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2689,8 +2761,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2702,8 +2774,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2715,8 +2787,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2728,8 +2800,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2741,8 +2813,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2754,8 +2826,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2767,8 +2839,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2780,8 +2852,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2793,8 +2876,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2806,8 +2900,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2819,8 +2924,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2832,8 +2948,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2845,8 +2961,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2858,8 +2974,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2870,8 +2986,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2882,9 +2998,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2970,11 +3092,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.timestreamquery#UpdateScheduledQuery": {
             "type": "operation",
@@ -3028,6 +3156,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.timestreamquery#ValidationException": {

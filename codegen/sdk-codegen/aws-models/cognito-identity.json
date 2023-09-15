@@ -189,9 +189,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://cognito-identity-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://cognito-identity-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -204,15 +383,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://cognito-identity.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://cognito-identity.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -224,258 +438,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://cognito-identity-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://cognito-identity-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://cognito-identity.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://cognito-identity.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -490,8 +454,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -503,8 +467,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -516,8 +480,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -529,8 +493,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -542,8 +506,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -555,8 +519,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -568,8 +532,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -581,8 +545,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -594,8 +558,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -607,8 +571,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -620,8 +584,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -633,8 +597,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -646,8 +610,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -659,8 +623,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -672,8 +636,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -685,8 +649,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -698,8 +662,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -711,8 +675,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -724,8 +688,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -737,8 +701,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -750,8 +714,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -763,8 +727,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -776,8 +740,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -789,8 +753,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -802,8 +766,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -815,8 +779,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -828,8 +792,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -841,8 +805,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -854,8 +818,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -867,8 +831,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -880,8 +844,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -893,8 +857,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -906,8 +881,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -919,8 +905,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -932,8 +929,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -945,8 +953,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -958,8 +966,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -971,8 +979,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -983,8 +991,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -995,9 +1003,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1015,22 +1029,24 @@
                     "min": 1,
                     "max": 15
                 },
-                "smithy.api#pattern": "\\d+"
+                "smithy.api#pattern": "^\\d+$"
             }
         },
         "com.amazonaws.cognitoidentity#AmbiguousRoleResolutionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AuthenticatedRole",
-                        "name": "AUTHENTICATED_ROLE"
-                    },
-                    {
-                        "value": "Deny",
-                        "name": "DENY"
+            "type": "enum",
+            "members": {
+                "AUTHENTICATED_ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuthenticatedRole"
                     }
-                ]
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deny"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitoidentity#ClaimName": {
@@ -1040,7 +1056,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
             }
         },
         "com.amazonaws.cognitoidentity#ClaimValue": {
@@ -1089,7 +1105,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w_]+"
+                "smithy.api#pattern": "^[\\w_]+$"
             }
         },
         "com.amazonaws.cognitoidentity#CognitoIdentityProviderList": {
@@ -1105,7 +1121,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w._:/-]+"
+                "smithy.api#pattern": "^[\\w._:/-]+$"
             }
         },
         "com.amazonaws.cognitoidentity#CognitoIdentityProviderTokenCheck": {
@@ -1224,7 +1240,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the CreateIdentityPool action.</p>"
+                "smithy.api#documentation": "<p>Input to the CreateIdentityPool action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#Credentials": {
@@ -1297,7 +1314,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the <code>DeleteIdentities</code> action.</p>"
+                "smithy.api#documentation": "<p>Input to the <code>DeleteIdentities</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#DeleteIdentitiesResponse": {
@@ -1311,7 +1329,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned in response to a successful <code>DeleteIdentities</code>\n         operation.</p>"
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>DeleteIdentities</code>\n         operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#DeleteIdentityPool": {
@@ -1355,7 +1374,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the DeleteIdentityPool action.</p>"
+                "smithy.api#documentation": "<p>Input to the DeleteIdentityPool action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#DescribeIdentity": {
@@ -1399,7 +1419,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the <code>DescribeIdentity</code> action.</p>"
+                "smithy.api#documentation": "<p>Input to the <code>DescribeIdentity</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#DescribeIdentityPool": {
@@ -1443,7 +1464,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the DescribeIdentityPool action.</p>"
+                "smithy.api#documentation": "<p>Input to the DescribeIdentityPool action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#DeveloperProviderName": {
@@ -1453,7 +1475,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w._-]+"
+                "smithy.api#pattern": "^[\\w._-]+$"
             }
         },
         "com.amazonaws.cognitoidentity#DeveloperUserAlreadyRegisteredException": {
@@ -1488,18 +1510,20 @@
             }
         },
         "com.amazonaws.cognitoidentity#ErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AccessDenied",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "InternalServerError",
-                        "name": "INTERNAL_SERVER_ERROR"
+            "type": "enum",
+            "members": {
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDenied"
                     }
-                ]
+                },
+                "INTERNAL_SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalServerError"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitoidentity#ExternalServiceException": {
@@ -1582,7 +1606,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the <code>GetCredentialsForIdentity</code> action.</p>"
+                "smithy.api#documentation": "<p>Input to the <code>GetCredentialsForIdentity</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetCredentialsForIdentityResponse": {
@@ -1602,7 +1627,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned in response to a successful <code>GetCredentialsForIdentity</code>\n         operation.</p>"
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>GetCredentialsForIdentity</code>\n         operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetId": {
@@ -1669,7 +1695,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the GetId action.</p>"
+                "smithy.api#documentation": "<p>Input to the GetId action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetIdResponse": {
@@ -1683,7 +1710,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned in response to a GetId request.</p>"
+                "smithy.api#documentation": "<p>Returned in response to a GetId request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetIdentityPoolRoles": {
@@ -1730,7 +1758,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the <code>GetIdentityPoolRoles</code> action.</p>"
+                "smithy.api#documentation": "<p>Input to the <code>GetIdentityPoolRoles</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetIdentityPoolRolesResponse": {
@@ -1756,7 +1785,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned in response to a successful <code>GetIdentityPoolRoles</code>\n         operation.</p>"
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>GetIdentityPoolRoles</code>\n         operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetOpenIdToken": {
@@ -1868,7 +1898,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.</p>"
+                "smithy.api#documentation": "<p>Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityResponse": {
@@ -1888,7 +1919,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned in response to a successful <code>GetOpenIdTokenForDeveloperIdentity</code>\n         request.</p>"
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>GetOpenIdTokenForDeveloperIdentity</code>\n         request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetOpenIdTokenInput": {
@@ -1909,7 +1941,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the GetOpenIdToken action.</p>"
+                "smithy.api#documentation": "<p>Input to the GetOpenIdToken action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetOpenIdTokenResponse": {
@@ -1929,7 +1962,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned in response to a successful GetOpenIdToken request.</p>"
+                "smithy.api#documentation": "<p>Returned in response to a successful GetOpenIdToken request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMap": {
@@ -1978,6 +2012,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapResponse": {
@@ -2007,6 +2044,9 @@
                         "smithy.api#documentation": "<p>You can use this operation to add principal tags. The <code>PrincipalTags</code>operation enables you to reference user attributes in your IAM permissions policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#HideDisabled": {
@@ -2060,7 +2100,7 @@
                     "min": 1,
                     "max": 55
                 },
-                "smithy.api#pattern": "[\\w-]+:[0-9a-f-]+"
+                "smithy.api#pattern": "^[\\w-]+:[0-9a-f-]+$"
             }
         },
         "com.amazonaws.cognitoidentity#IdentityIdList": {
@@ -2154,7 +2194,7 @@
                     "min": 1,
                     "max": 55
                 },
-                "smithy.api#pattern": "[\\w-]+:[0-9a-f-]+"
+                "smithy.api#pattern": "^[\\w-]+:[0-9a-f-]+$"
             }
         },
         "com.amazonaws.cognitoidentity#IdentityPoolName": {
@@ -2164,7 +2204,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w\\s+=,.@-]+"
+                "smithy.api#pattern": "^[\\w\\s+=,.@-]+$"
             }
         },
         "com.amazonaws.cognitoidentity#IdentityPoolShortDescription": {
@@ -2221,7 +2261,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w.;_/-]+"
+                "smithy.api#pattern": "^[\\w.;_/-]+$"
             }
         },
         "com.amazonaws.cognitoidentity#IdentityProviderName": {
@@ -2382,7 +2422,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the ListIdentities action.</p>"
+                "smithy.api#documentation": "<p>Input to the ListIdentities action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#ListIdentitiesResponse": {
@@ -2408,7 +2449,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The response to a ListIdentities request.</p>"
+                "smithy.api#documentation": "<p>The response to a ListIdentities request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#ListIdentityPools": {
@@ -2465,7 +2507,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the ListIdentityPools action.</p>"
+                "smithy.api#documentation": "<p>Input to the ListIdentityPools action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#ListIdentityPoolsResponse": {
@@ -2485,7 +2528,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a successful ListIdentityPools action.</p>"
+                "smithy.api#documentation": "<p>The result of a successful ListIdentityPools action.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#ListTagsForResource": {
@@ -2527,6 +2571,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#ListTagsForResourceResponse": {
@@ -2538,6 +2585,9 @@
                         "smithy.api#documentation": "<p>The tags that are assigned to the identity pool.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#LoginsList": {
@@ -2630,7 +2680,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the <code>LookupDeveloperIdentityInput</code> action.</p>"
+                "smithy.api#documentation": "<p>Input to the <code>LookupDeveloperIdentityInput</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#LookupDeveloperIdentityResponse": {
@@ -2656,7 +2707,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned in response to a successful <code>LookupDeveloperIdentity</code>\n         action.</p>"
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>LookupDeveloperIdentity</code>\n         action.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#MappingRule": {
@@ -2696,26 +2748,32 @@
             }
         },
         "com.amazonaws.cognitoidentity#MappingRuleMatchType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Equals",
-                        "name": "EQUALS"
-                    },
-                    {
-                        "value": "Contains",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "StartsWith",
-                        "name": "STARTS_WITH"
-                    },
-                    {
-                        "value": "NotEqual",
-                        "name": "NOT_EQUAL"
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Equals"
                     }
-                ]
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Contains"
+                    }
+                },
+                "STARTS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StartsWith"
+                    }
+                },
+                "NOT_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotEqual"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitoidentity#MappingRulesList": {
@@ -2795,7 +2853,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the <code>MergeDeveloperIdentities</code> action.</p>"
+                "smithy.api#documentation": "<p>Input to the <code>MergeDeveloperIdentities</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesResponse": {
@@ -2809,7 +2868,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned in response to a successful <code>MergeDeveloperIdentities</code>\n         action.</p>"
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>MergeDeveloperIdentities</code>\n         action.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#NotAuthorizedException": {
@@ -2844,7 +2904,7 @@
                     "min": 1,
                     "max": 65535
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.cognitoidentity#PrincipalTagID": {
@@ -2965,18 +3025,20 @@
             }
         },
         "com.amazonaws.cognitoidentity#RoleMappingType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Token",
-                        "name": "TOKEN"
-                    },
-                    {
-                        "value": "Rules",
-                        "name": "RULES"
+            "type": "enum",
+            "members": {
+                "TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Token"
                     }
-                ]
+                },
+                "RULES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Rules"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitoidentity#RoleType": {
@@ -2986,7 +3048,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "(un)?authenticated"
+                "smithy.api#pattern": "^(un)?authenticated$"
             }
         },
         "com.amazonaws.cognitoidentity#RolesMap": {
@@ -3091,7 +3153,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the <code>SetIdentityPoolRoles</code> action.</p>"
+                "smithy.api#documentation": "<p>Input to the <code>SetIdentityPoolRoles</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMap": {
@@ -3152,6 +3215,9 @@
                         "smithy.api#documentation": "<p>You can use this operation to add principal tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapResponse": {
@@ -3181,6 +3247,9 @@
                         "smithy.api#documentation": "<p>You can use this operation to add principal tags. The <code>PrincipalTags</code>operation enables you to reference user attributes in your IAM permissions policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cognitoidentity#String": {
@@ -3241,11 +3310,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.cognitoidentity#TagValueType": {
             "type": "string",
@@ -3346,7 +3421,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the <code>UnlinkDeveloperIdentity</code> action.</p>"
+                "smithy.api#documentation": "<p>Input to the <code>UnlinkDeveloperIdentity</code> action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#UnlinkIdentity": {
@@ -3412,7 +3488,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input to the UnlinkIdentity action.</p>"
+                "smithy.api#documentation": "<p>Input to the UnlinkIdentity action.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#UnprocessedIdentityId": {
@@ -3493,11 +3570,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cognitoidentity#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.cognitoidentity#UpdateIdentityPool": {
             "type": "operation",

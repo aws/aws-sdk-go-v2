@@ -189,9 +189,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://snowball-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://snowball-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -204,15 +383,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://snowball.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://snowball.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -224,258 +438,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://snowball-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://snowball-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://snowball.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://snowball.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -1457,7 +1421,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a cluster job. You can only cancel a cluster job while it's in the\n        <code>AwaitingQuorum</code> status. You'll have at least an hour after creating a cluster\n      job to cancel it.</p>"
+                "smithy.api#documentation": "<p>Cancels a cluster job. You can only cancel a cluster job while it's in the\n        <code>AwaitingQuorum</code> status. You'll have at least an hour after creating a cluster\n      job to cancel it.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To cancel a cluster job",
+                        "documentation": "This operation cancels a cluster job. You can only cancel a cluster job while it's in the AwaitingQuorum status.",
+                        "input": {
+                            "ClusterId": "CID123e4567-e89b-12d3-a456-426655440000"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#CancelClusterRequest": {
@@ -1502,7 +1475,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels the specified job. You can only cancel a job before its <code>JobState</code>\n      value changes to <code>PreparingAppliance</code>. Requesting the <code>ListJobs</code> or\n        <code>DescribeJob</code> action returns a job's <code>JobState</code> as part of the\n      response element data returned.</p>"
+                "smithy.api#documentation": "<p>Cancels the specified job. You can only cancel a job before its <code>JobState</code>\n      value changes to <code>PreparingAppliance</code>. Requesting the <code>ListJobs</code> or\n        <code>DescribeJob</code> action returns a job's <code>JobState</code> as part of the\n      response element data returned.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To cancel a job for a Snowball device",
+                        "documentation": "This operation cancels a job. You can only cancel a job before its JobState value changes to PreparingAppliance.",
+                        "input": {
+                            "JobId": "JID123e4567-e89b-12d3-a456-426655440000"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#CancelJobRequest": {
@@ -1781,7 +1763,28 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an address for a Snow device to be shipped to. In most regions,\n      addresses are validated at the time of creation. The address you provide must be located\n      within the serviceable area of your region. If the address is invalid or unsupported, then an\n      exception is thrown.</p>"
+                "smithy.api#documentation": "<p>Creates an address for a Snow device to be shipped to. In most regions,\n      addresses are validated at the time of creation. The address you provide must be located\n      within the serviceable area of your region. If the address is invalid or unsupported, then an\n      exception is thrown.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create an address for a job",
+                        "documentation": "This operation creates an address for a job. Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.",
+                        "input": {
+                            "Address": {
+                                "City": "Seattle",
+                                "Company": "My Company's Name",
+                                "Country": "USA",
+                                "Name": "My Name",
+                                "PhoneNumber": "425-555-5555",
+                                "PostalCode": "98101",
+                                "StateOrProvince": "WA",
+                                "Street1": "123 Main Street"
+                            }
+                        },
+                        "output": {
+                            "AddressId": "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#CreateAddressRequest": {
@@ -1836,7 +1839,37 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an empty cluster. Each cluster supports five nodes. You use the <a>CreateJob</a> action separately to create the jobs for each of these nodes. The\n      cluster does not ship until these five node jobs have been created.</p>"
+                "smithy.api#documentation": "<p>Creates an empty cluster. Each cluster supports five nodes. You use the <a>CreateJob</a> action separately to create the jobs for each of these nodes. The\n      cluster does not ship until these five node jobs have been created.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a cluster",
+                        "documentation": "Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action separately to create the jobs for each of these nodes. The cluster does not ship until these five node jobs have been created.",
+                        "input": {
+                            "JobType": "LOCAL_USE",
+                            "Resources": {
+                                "S3Resources": [
+                                    {
+                                        "BucketArn": "arn:aws:s3:::MyBucket",
+                                        "KeyRange": {}
+                                    }
+                                ]
+                            },
+                            "Description": "MyCluster",
+                            "AddressId": "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b",
+                            "KmsKeyARN": "arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456",
+                            "RoleARN": "arn:aws:iam::123456789012:role/snowball-import-S3-role",
+                            "SnowballType": "EDGE",
+                            "ShippingOption": "SECOND_DAY",
+                            "Notification": {
+                                "NotifyAll": false,
+                                "JobStatesToNotify": []
+                            }
+                        },
+                        "output": {
+                            "ClusterId": "CID123e4567-e89b-12d3-a456-426655440000"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#CreateClusterRequest": {
@@ -2000,7 +2033,38 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data\n      center. Your Amazon Web Services account must have the right trust policies and permissions in\n      place to create a job for a Snow device. If you're creating a job for a node in a cluster, you\n      only need to provide the <code>clusterId</code> value; the other job attributes are inherited\n      from the cluster. </p>\n         <note>\n            <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p>\n            <p>The device capacity is optional.</p>\n            <p>Availability of device types differ by Amazon Web Services Region. For more information\n        about Region availability, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4\">Amazon Web Services Regional Services</a>.</p>\n         </note>\n         <p></p>\n         <p class=\"title\">\n            <b>Snow Family devices and their capacities.</b>\n         </p>\n         <ul>\n            <li>\n               <p>Device type: <b>SNC1_SSD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T14</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>SNC1_HDD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T8</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_S</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T98</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized for data transfer only </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_CG</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized with GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized without GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T100</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p>\n                  </li>\n               </ul>\n               <note>\n                  <p>This device is replaced with T98.</p>\n               </note>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T50</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region\n              </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T80</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region. </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Snow Family device type: <b>RACK_5U_C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T13 </p>\n                  </li>\n                  <li>\n                     <p>Description: Snowblade.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Device type: <b>V3_5S</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T240</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized 210TB</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data\n      center. Your Amazon Web Services account must have the right trust policies and permissions in\n      place to create a job for a Snow device. If you're creating a job for a node in a cluster, you\n      only need to provide the <code>clusterId</code> value; the other job attributes are inherited\n      from the cluster. </p>\n         <note>\n            <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p>\n            <p>The device capacity is optional.</p>\n            <p>Availability of device types differ by Amazon Web Services Region. For more information\n        about Region availability, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4\">Amazon Web Services Regional Services</a>.</p>\n         </note>\n         <p></p>\n         <p class=\"title\">\n            <b>Snow Family devices and their capacities.</b>\n         </p>\n         <ul>\n            <li>\n               <p>Device type: <b>SNC1_SSD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T14</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>SNC1_HDD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T8</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_S</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T98</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized for data transfer only </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_CG</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized with GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized without GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T100</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p>\n                  </li>\n               </ul>\n               <note>\n                  <p>This device is replaced with T98.</p>\n               </note>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T50</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region\n              </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T80</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region. </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Snow Family device type: <b>RACK_5U_C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T13 </p>\n                  </li>\n                  <li>\n                     <p>Description: Snowblade.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Device type: <b>V3_5S</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T240</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized 210TB</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a job",
+                        "documentation": "Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.",
+                        "input": {
+                            "JobType": "IMPORT",
+                            "Resources": {
+                                "S3Resources": [
+                                    {
+                                        "BucketArn": "arn:aws:s3:::MyBucket",
+                                        "KeyRange": {}
+                                    }
+                                ]
+                            },
+                            "Description": "My Job",
+                            "AddressId": "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b",
+                            "KmsKeyARN": "arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456",
+                            "RoleARN": "arn:aws:iam::123456789012:role/snowball-import-S3-role",
+                            "SnowballCapacityPreference": "T80",
+                            "ShippingOption": "SECOND_DAY",
+                            "Notification": {
+                                "NotifyAll": false,
+                                "JobStatesToNotify": []
+                            },
+                            "SnowballType": "STANDARD"
+                        },
+                        "output": {
+                            "JobId": "JID123e4567-e89b-12d3-a456-426655440000"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#CreateJobRequest": {
@@ -2338,7 +2402,29 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Takes an <code>AddressId</code> and returns specific details about that address in the\n      form of an <code>Address</code> object.</p>"
+                "smithy.api#documentation": "<p>Takes an <code>AddressId</code> and returns specific details about that address in the\n      form of an <code>Address</code> object.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe an address for a job",
+                        "documentation": "This operation describes an address for a job.",
+                        "input": {
+                            "AddressId": "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"
+                        },
+                        "output": {
+                            "Address": {
+                                "City": "Seattle",
+                                "Name": "My Name",
+                                "AddressId": "ADID5643ec50-3eec-4eb3-9be6-9374c10eb51b",
+                                "Street1": "123 Main Street",
+                                "Company": "My Company",
+                                "PhoneNumber": "425-555-5555",
+                                "Country": "US",
+                                "PostalCode": "98101",
+                                "StateOrProvince": "WA"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#DescribeAddressRequest": {
@@ -2388,6 +2474,27 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a specified number of <code>ADDRESS</code> objects. Calling this API in one of\n      the US regions will return addresses from the list of all addresses associated with this\n      account in all US regions.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe all the addresses you've created for AWS Snowball",
+                        "documentation": "This operation describes all the addresses that you've created for AWS Snowball. Calling this API in one of the US regions will return addresses from the list of all addresses associated with this account in all US regions.",
+                        "output": {
+                            "Addresses": [
+                                {
+                                    "City": "Seattle",
+                                    "Name": "My Name",
+                                    "AddressId": "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b",
+                                    "Street1": "123 Main Street",
+                                    "Company": "My Company",
+                                    "PhoneNumber": "425-555-5555",
+                                    "Country": "US",
+                                    "PostalCode": "98101",
+                                    "StateOrProvince": "WA"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2756,7 +2863,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the\n      specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes\n      after this request has been made. To access the manifest file after 60 minutes have passed,\n      you'll have to make another call to the <code>GetJobManifest</code> action.</p>\n         <p>The manifest is an encrypted file that you can download after your job enters the\n        <code>WithCustomer</code> status. This is the only valid status for calling this API as the\n      manifest and <code>UnlockCode</code> code value are used for securing your device and should\n      only be used when you have the device.  The manifest is decrypted by using the\n        <code>UnlockCode</code> code value, when you pass both values to the Snow device through the\n      Snowball client when the client is started for the first time. </p>\n         <p>As a best practice, we recommend that you don't save a copy of an\n        <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving\n      these separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>\n         <p>The credentials of a given job, including its manifest file and unlock code, expire 360\n      days after the job is created.</p>"
+                "smithy.api#documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the\n      specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes\n      after this request has been made. To access the manifest file after 60 minutes have passed,\n      you'll have to make another call to the <code>GetJobManifest</code> action.</p>\n         <p>The manifest is an encrypted file that you can download after your job enters the\n        <code>WithCustomer</code> status. This is the only valid status for calling this API as the\n      manifest and <code>UnlockCode</code> code value are used for securing your device and should\n      only be used when you have the device.  The manifest is decrypted by using the\n        <code>UnlockCode</code> code value, when you pass both values to the Snow device through the\n      Snowball client when the client is started for the first time. </p>\n         <p>As a best practice, we recommend that you don't save a copy of an\n        <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving\n      these separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>\n         <p>The credentials of a given job, including its manifest file and unlock code, expire 360\n      days after the job is created.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get the manifest for a job you've created for AWS Snowball",
+                        "documentation": "Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action.\n\nThe manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time.\n\nAs a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.\n\nThe credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.",
+                        "input": {
+                            "JobId": "JID123e4567-e89b-12d3-a456-426655440000"
+                        },
+                        "output": {
+                            "ManifestURI": "https://awsie-frosty-manifests-prod.s3.amazonaws.com/JID123e4567-e89b-12d3-a456-426655440000_manifest.bin?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20161224T005115Z&X-Amz-SignedHeaders=..."
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#GetJobManifestRequest": {
@@ -2805,7 +2924,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular\n        <code>UnlockCode</code> value can be accessed for up to 360 days after the associated job\n      has been created.</p>\n         <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric\n      characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed\n      along with the manifest to the Snow device through the Snowball client when the client is\n      started for the first time. The only valid status for calling this API is\n        <code>WithCustomer</code> as the manifest and <code>Unlock</code> code values are used for\n      securing your device and should only be used when you have the device.</p>\n         <p>As a best practice, we recommend that you don't save a copy of the\n        <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these\n      separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>"
+                "smithy.api#documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular\n        <code>UnlockCode</code> value can be accessed for up to 360 days after the associated job\n      has been created.</p>\n         <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric\n      characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed\n      along with the manifest to the Snow device through the Snowball client when the client is\n      started for the first time. The only valid status for calling this API is\n        <code>WithCustomer</code> as the manifest and <code>Unlock</code> code values are used for\n      securing your device and should only be used when you have the device.</p>\n         <p>As a best practice, we recommend that you don't save a copy of the\n        <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these\n      separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get the unlock code for a job you've created for AWS Snowball",
+                        "documentation": "Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created.\n\nThe UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time.\n\nAs a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.",
+                        "input": {
+                            "JobId": "JID123e4567-e89b-12d3-a456-426655440000"
+                        },
+                        "output": {
+                            "UnlockCode": "12345-abcde-56789-fghij-01234"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#GetJobUnlockCodeRequest": {
@@ -2846,7 +2977,17 @@
                 "target": "com.amazonaws.snowball#GetSnowballUsageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the Snow Family service limit for your account, and also the\n      number of Snow devices your account has in use.</p>\n         <p>The default service limit for the number of Snow devices that you can have at one time\n      is 1. If you want to increase your service limit, contact Amazon Web Services Support.</p>"
+                "smithy.api#documentation": "<p>Returns information about the Snow Family service limit for your account, and also the\n      number of Snow devices your account has in use.</p>\n         <p>The default service limit for the number of Snow devices that you can have at one time\n      is 1. If you want to increase your service limit, contact Amazon Web Services Support.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To see your Snowball service limit and the number of Snowballs you have in use",
+                        "documentation": "Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use.\n\nThe default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.",
+                        "output": {
+                            "SnowballLimit": 1,
+                            "SnowballsInUse": 0
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#GetSnowballUsageRequest": {
@@ -3870,6 +4011,27 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>A list of locations from which the customer can choose to pickup a device.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a list of locations from which the customer can choose to pickup a device.",
+                        "documentation": "Returns a specified number of Address objects. Each Address is a pickup location address for Snow Family devices.",
+                        "output": {
+                            "Addresses": [
+                                {
+                                    "City": "Seattle",
+                                    "Name": "My Name",
+                                    "AddressId": "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b",
+                                    "Street1": "123 Main Street",
+                                    "Company": "My Company",
+                                    "PhoneNumber": "425-555-5555",
+                                    "Country": "US",
+                                    "PostalCode": "98101",
+                                    "StateOrProvince": "WA"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4891,7 +5053,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>While a cluster's <code>ClusterState</code> value is in the <code>AwaitingQuorum</code>\n      state, you can update some of the information associated with a cluster. Once the cluster\n      changes to a different job state, usually 60 minutes after the cluster being created, this\n      action is no longer available.</p>"
+                "smithy.api#documentation": "<p>While a cluster's <code>ClusterState</code> value is in the <code>AwaitingQuorum</code>\n      state, you can update some of the information associated with a cluster. Once the cluster\n      changes to a different job state, usually 60 minutes after the cluster being created, this\n      action is no longer available.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a cluster",
+                        "documentation": "This action allows you to update certain parameters for a cluster. Once the cluster changes to a different state, usually within 60 minutes of it being created, this action is no longer available.",
+                        "input": {
+                            "ClusterId": "CID123e4567-e89b-12d3-a456-426655440000",
+                            "Description": "updated-cluster-name",
+                            "AddressId": "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#UpdateClusterRequest": {
@@ -4993,7 +5166,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>While a job's <code>JobState</code> value is <code>New</code>, you can update some of\n      the information associated with a job. Once the job changes to a different job state, usually\n      within 60 minutes of the job being created, this action is no longer available.</p>"
+                "smithy.api#documentation": "<p>While a job's <code>JobState</code> value is <code>New</code>, you can update some of\n      the information associated with a job. Once the job changes to a different job state, usually\n      within 60 minutes of the job being created, this action is no longer available.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a job",
+                        "documentation": "This action allows you to update certain parameters for a job. Once the job changes to a different job state, usually within 60 minutes of the job being created, this action is no longer available.",
+                        "input": {
+                            "JobId": "JID123e4567-e89b-12d3-a456-426655440000",
+                            "AddressId": "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b",
+                            "ShippingOption": "NEXT_DAY",
+                            "Description": "updated-job-name",
+                            "SnowballCapacityPreference": "T100"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.snowball#UpdateJobRequest": {

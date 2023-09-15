@@ -527,7 +527,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a device pool.</p>"
+                "smithy.api#documentation": "<p>Creates a device pool.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a new device pool",
+                        "documentation": "The following example creates a new device pool named MyDevicePool inside an existing project.",
+                        "input": {
+                            "projectArn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456",
+                            "name": "MyDevicePool",
+                            "description": "My Android devices",
+                            "rules": []
+                        },
+                        "output": {
+                            "devicePool": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#CreateDevicePoolRequest": {
@@ -568,7 +583,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the create device pool operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the create device pool operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#CreateDevicePoolResult": {
@@ -582,7 +598,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a create device pool request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a create device pool request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#CreateInstanceProfile": {
@@ -645,6 +662,9 @@
                         "smithy.api#documentation": "<p>When set to <code>true</code>, Device Farm reboots the instance after a test run. The default value is\n                <code>true</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#CreateInstanceProfileResult": {
@@ -656,6 +676,9 @@
                         "smithy.api#documentation": "<p>An object that contains information about your instance profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#CreateNetworkProfile": {
@@ -763,6 +786,9 @@
                         "smithy.api#documentation": "<p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#CreateNetworkProfileResult": {
@@ -774,6 +800,9 @@
                         "smithy.api#documentation": "<p>The network profile that is returned by the create network profile\n            request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#CreateProject": {
@@ -829,7 +858,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the create project operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the create project operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#CreateProjectResult": {
@@ -843,7 +873,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a create project request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a create project request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#CreateRemoteAccessSession": {
@@ -869,7 +900,24 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies and starts a remote access session.</p>"
+                "smithy.api#documentation": "<p>Specifies and starts a remote access session.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a remote access session",
+                        "documentation": "The following example creates a remote access session named MySession.",
+                        "input": {
+                            "projectArn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456",
+                            "deviceArn": "arn:aws:devicefarm:us-west-2::device:123EXAMPLE",
+                            "name": "MySession",
+                            "configuration": {
+                                "billingMethod": "METERED"
+                            }
+                        },
+                        "output": {
+                            "remoteAccessSession": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#CreateRemoteAccessSessionConfiguration": {
@@ -971,7 +1019,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates and submits a request to start a remote access session.</p>"
+                "smithy.api#documentation": "<p>Creates and submits a request to start a remote access session.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#CreateRemoteAccessSessionResult": {
@@ -985,7 +1034,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the server response from a request to create a remote access\n            session.</p>"
+                "smithy.api#documentation": "<p>Represents the server response from a request to create a remote access\n            session.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#CreateTestGridProject": {
@@ -1033,6 +1083,9 @@
                         "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#CreateTestGridProjectResult": {
@@ -1044,6 +1097,9 @@
                         "smithy.api#documentation": "<p>ARN of the Selenium testing project that was created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#CreateTestGridUrl": {
@@ -1086,6 +1142,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#CreateTestGridUrlResult": {
@@ -1103,6 +1162,9 @@
                         "smithy.api#documentation": "<p>The number of seconds the URL from <a>CreateTestGridUrlResult$url</a> stays active.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#CreateUpload": {
@@ -1163,7 +1225,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the create upload operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the create upload operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#CreateUploadResult": {
@@ -1177,7 +1240,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a create upload request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a create upload request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#CreateVPCEConfiguration": {
@@ -1233,6 +1297,9 @@
                         "smithy.api#documentation": "<p>An optional description that provides details about your VPC endpoint configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#CreateVPCEConfigurationResult": {
@@ -1244,6 +1311,9 @@
                         "smithy.api#documentation": "<p>An object that contains information about your VPC endpoint configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#CurrencyCode": {
@@ -1309,7 +1379,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a device pool given the pool ARN. Does not allow deletion of curated pools\n            owned by the system.</p>"
+                "smithy.api#documentation": "<p>Deletes a device pool given the pool ARN. Does not allow deletion of curated pools\n            owned by the system.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a device pool",
+                        "documentation": "The following example deletes a specific device pool.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#DeleteDevicePoolRequest": {
@@ -1324,14 +1404,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the delete device pool operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the delete device pool operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteDevicePoolResult": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a delete device pool request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a delete device pool request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteInstanceProfile": {
@@ -1370,11 +1452,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteInstanceProfileResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.devicefarm#DeleteNetworkProfile": {
             "type": "operation",
@@ -1412,11 +1500,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteNetworkProfileResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.devicefarm#DeleteProject": {
             "type": "operation",
@@ -1441,7 +1535,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an AWS Device Farm project, given the project ARN.</p>\n        <p> Deleting this resource does not stop an in-progress run.</p>"
+                "smithy.api#documentation": "<p>Deletes an AWS Device Farm project, given the project ARN.</p>\n        <p> Deleting this resource does not stop an in-progress run.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a project",
+                        "documentation": "The following example deletes a specific project.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#DeleteProjectRequest": {
@@ -1456,14 +1560,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the delete project operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the delete project operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteProjectResult": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a delete project request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a delete project request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteRemoteAccessSession": {
@@ -1489,7 +1595,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a completed remote access session and its results.</p>"
+                "smithy.api#documentation": "<p>Deletes a completed remote access session and its results.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a specific remote access session",
+                        "documentation": "The following example deletes a specific remote access session.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#DeleteRemoteAccessSessionRequest": {
@@ -1504,14 +1620,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the request to delete the specified remote access session.</p>"
+                "smithy.api#documentation": "<p>Represents the request to delete the specified remote access session.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteRemoteAccessSessionResult": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The response from the server when a request is made to delete the remote access\n            session.</p>"
+                "smithy.api#documentation": "<p>The response from the server when a request is made to delete the remote access\n            session.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteRun": {
@@ -1537,7 +1655,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the run, given the run ARN.</p>\n        <p> Deleting this resource does not stop an in-progress run.</p>"
+                "smithy.api#documentation": "<p>Deletes the run, given the run ARN.</p>\n        <p> Deleting this resource does not stop an in-progress run.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a run",
+                        "documentation": "The following example deletes a specific test run.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#DeleteRunRequest": {
@@ -1552,14 +1680,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the delete run operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the delete run operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteRunResult": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a delete run request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a delete run request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteTestGridProject": {
@@ -1598,11 +1728,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteTestGridProjectResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.devicefarm#DeleteUpload": {
             "type": "operation",
@@ -1627,7 +1763,17 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an upload given the upload ARN.</p>"
+                "smithy.api#documentation": "<p>Deletes an upload given the upload ARN.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a specific upload",
+                        "documentation": "The following example deletes a specific upload.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {}
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#DeleteUploadRequest": {
@@ -1642,14 +1788,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the delete upload operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the delete upload operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteUploadResult": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a delete upload request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a delete upload request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteVPCEConfiguration": {
@@ -1688,11 +1836,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#DeleteVPCEConfigurationResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.devicefarm#Device": {
             "type": "structure",
@@ -2192,6 +2346,7 @@
                     "arnNamespace": "devicefarm",
                     "cloudFormationName": "DeviceFarm",
                     "cloudTrailEventSource": "devicefarm.amazonaws.com",
+                    "docId": "devicefarm-2015-06-23",
                     "endpointPrefix": "devicefarm"
                 },
                 "aws.auth#sigv4": {
@@ -2263,9 +2418,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://devicefarm-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://devicefarm-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2278,15 +2612,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://devicefarm.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://devicefarm.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2298,258 +2667,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://devicefarm-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://devicefarm-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://devicefarm.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://devicefarm.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -2564,8 +2683,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2577,8 +2696,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2590,8 +2709,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2603,8 +2722,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2616,8 +2735,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2629,8 +2748,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2642,8 +2761,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2655,8 +2774,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2668,8 +2787,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2681,8 +2800,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2694,8 +2813,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2707,8 +2826,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2720,8 +2839,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2733,8 +2863,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2746,8 +2887,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2759,8 +2911,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2772,8 +2935,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2785,8 +2948,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2798,8 +2961,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2810,8 +2973,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2822,9 +2985,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -3418,14 +3587,30 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the number of unmetered iOS or unmetered Android devices that have been purchased by the\n            account.</p>"
+                "smithy.api#documentation": "<p>Returns the number of unmetered iOS or unmetered Android devices that have been purchased by the\n            account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about account settings",
+                        "documentation": "The following example returns information about your Device Farm account settings.",
+                        "output": {
+                            "accountSettings": {
+                                "unmeteredDevices": {
+                                    "ANDROID": 1,
+                                    "IOS": 2
+                                },
+                                "awsAccountNumber": "123456789101"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#GetAccountSettingsRequest": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Represents the request sent to retrieve the account settings.</p>"
+                "smithy.api#documentation": "<p>Represents the request sent to retrieve the account settings.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetAccountSettingsResult": {
@@ -3439,7 +3624,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the account settings return values from the\n                <code>GetAccountSettings</code> request.</p>"
+                "smithy.api#documentation": "<p>Represents the account settings return values from the\n                <code>GetAccountSettings</code> request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetDevice": {
@@ -3465,7 +3651,39 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a unique device type.</p>"
+                "smithy.api#documentation": "<p>Gets information about a unique device type.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a device",
+                        "documentation": "The following example returns information about a specific device.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2::device:123EXAMPLE"
+                        },
+                        "output": {
+                            "device": {
+                                "formFactor": "PHONE",
+                                "name": "LG G2 (Sprint)",
+                                "resolution": {
+                                    "width": 1080,
+                                    "height": 1920
+                                },
+                                "image": "75B2B7EF6C12345EXAMPLE",
+                                "platform": "ANDROID",
+                                "heapSize": 256000000,
+                                "memory": 16000000000,
+                                "model": "G2 (Sprint)",
+                                "os": "4.2.2",
+                                "cpu": {
+                                    "frequency": "MHz",
+                                    "architecture": "armeabi-v7a",
+                                    "clock": 2265.6
+                                },
+                                "arn": "arn:aws:devicefarm:us-west-2::device:A0E6E6E1059E45918208DF75B2B7EF6C",
+                                "manufacturer": "LG"
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#GetDeviceInstance": {
@@ -3504,6 +3722,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetDeviceInstanceResult": {
@@ -3515,6 +3736,9 @@
                         "smithy.api#documentation": "<p>An object that contains information about your device instance.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetDevicePool": {
@@ -3540,7 +3764,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a device pool.</p>"
+                "smithy.api#documentation": "<p>Gets information about a device pool.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a device pool",
+                        "documentation": "The following example returns information about a specific device pool, given a project ARN.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {
+                            "devicePool": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#GetDevicePoolCompatibility": {
@@ -3566,7 +3802,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about compatibility with a device pool.</p>"
+                "smithy.api#documentation": "<p>Gets information about compatibility with a device pool.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about the compatibility of a device pool",
+                        "documentation": "The following example returns information about the compatibility of a specific device pool, given its ARN.",
+                        "input": {
+                            "devicePoolArn": "arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID",
+                            "appArn": "arn:aws:devicefarm:us-west-2::app:123-456-EXAMPLE-GUID",
+                            "testType": "APPIUM_PYTHON"
+                        },
+                        "output": {
+                            "compatibleDevices": [],
+                            "incompatibleDevices": []
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#GetDevicePoolCompatibilityRequest": {
@@ -3605,7 +3856,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the get device pool compatibility operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the get device pool compatibility operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetDevicePoolCompatibilityResult": {
@@ -3625,7 +3877,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of describe device pool compatibility request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of describe device pool compatibility request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetDevicePoolRequest": {
@@ -3640,7 +3893,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the get device pool operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the get device pool operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetDevicePoolResult": {
@@ -3654,7 +3908,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a get device pool request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a get device pool request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetDeviceRequest": {
@@ -3669,7 +3924,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the get device request.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the get device request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetDeviceResult": {
@@ -3683,7 +3939,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a get device request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a get device request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetInstanceProfile": {
@@ -3722,6 +3979,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetInstanceProfileResult": {
@@ -3733,6 +3993,9 @@
                         "smithy.api#documentation": "<p>An object that contains information about an instance profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetJob": {
@@ -3758,7 +4021,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a job.</p>"
+                "smithy.api#documentation": "<p>Gets information about a job.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a job",
+                        "documentation": "The following example returns information about a specific job.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2::job:123-456-EXAMPLE-GUID"
+                        },
+                        "output": {
+                            "job": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#GetJobRequest": {
@@ -3773,7 +4048,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the get job operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the get job operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetJobResult": {
@@ -3787,7 +4063,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a get job request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a get job request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetNetworkProfile": {
@@ -3826,6 +4103,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetNetworkProfileResult": {
@@ -3837,6 +4117,9 @@
                         "smithy.api#documentation": "<p>The network profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetOfferingStatus": {
@@ -3883,7 +4166,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the request to retrieve the offering status for the specified customer\n            or account.</p>"
+                "smithy.api#documentation": "<p>Represents the request to retrieve the offering status for the specified customer\n            or account.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetOfferingStatusResult": {
@@ -3909,7 +4193,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the status result for a device offering.</p>"
+                "smithy.api#documentation": "<p>Returns the status result for a device offering.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetProject": {
@@ -3950,7 +4235,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the get project operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the get project operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetProjectResult": {
@@ -3964,7 +4250,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a get project request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a get project request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetRemoteAccessSession": {
@@ -3990,7 +4277,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a link to a currently running remote access session.</p>"
+                "smithy.api#documentation": "<p>Returns a link to a currently running remote access session.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a remote access session",
+                        "documentation": "The following example gets a specific remote access session.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {
+                            "remoteAccessSession": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#GetRemoteAccessSessionRequest": {
@@ -4005,7 +4304,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the request to get information about the specified remote access\n            session.</p>"
+                "smithy.api#documentation": "<p>Represents the request to get information about the specified remote access\n            session.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetRemoteAccessSessionResult": {
@@ -4019,7 +4319,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the response from the server that lists detailed information about the\n            remote access session.</p>"
+                "smithy.api#documentation": "<p>Represents the response from the server that lists detailed information about the\n            remote access session.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetRun": {
@@ -4060,7 +4361,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the get run operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the get run operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetRunResult": {
@@ -4074,7 +4376,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a get run request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a get run request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetSuite": {
@@ -4100,7 +4403,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a suite.</p>"
+                "smithy.api#documentation": "<p>Gets information about a suite.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a test suite",
+                        "documentation": "The following example gets information about a specific test suite.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:suite:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {
+                            "suite": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#GetSuiteRequest": {
@@ -4115,7 +4430,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the get suite operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the get suite operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetSuiteResult": {
@@ -4129,7 +4445,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a get suite request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a get suite request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetTest": {
@@ -4155,7 +4472,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a test.</p>"
+                "smithy.api#documentation": "<p>Gets information about a test.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a specific test",
+                        "documentation": "The following example gets information about a specific test.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {
+                            "test": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#GetTestGridProject": {
@@ -4191,6 +4520,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetTestGridProjectResult": {
@@ -4202,6 +4534,9 @@
                         "smithy.api#documentation": "<p>A <a>TestGridProject</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetTestGridSession": {
@@ -4248,6 +4583,9 @@
                         "smithy.api#documentation": "<p>An ARN that uniquely identifies a <a>TestGridSession</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetTestGridSessionResult": {
@@ -4259,6 +4597,9 @@
                         "smithy.api#documentation": "<p>The <a>TestGridSession</a> that was requested.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetTestRequest": {
@@ -4273,7 +4614,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the get test operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the get test operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetTestResult": {
@@ -4287,7 +4629,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a get test request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a get test request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetUpload": {
@@ -4313,7 +4656,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about an upload.</p>"
+                "smithy.api#documentation": "<p>Gets information about an upload.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a specific upload",
+                        "documentation": "The following example gets information about a specific upload.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {
+                            "upload": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#GetUploadRequest": {
@@ -4328,7 +4683,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the get upload operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the get upload operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetUploadResult": {
@@ -4342,7 +4698,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a get upload request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a get upload request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#GetVPCEConfiguration": {
@@ -4378,6 +4735,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#GetVPCEConfigurationResult": {
@@ -4389,6 +4749,9 @@
                         "smithy.api#documentation": "<p>An object that contains information about your VPC endpoint configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#HostAddress": {
@@ -4464,7 +4827,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Installs an application to the device in a remote access session. For Android\n            applications, the file must be in .apk format. For iOS applications, the file must be in\n            .ipa format.</p>"
+                "smithy.api#documentation": "<p>Installs an application to the device in a remote access session. For Android\n            applications, the file must be in .apk format. For iOS applications, the file must be in\n            .ipa format.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To install to a remote access session",
+                        "documentation": "The following example installs a specific app to a device in a specific remote access session.",
+                        "input": {
+                            "remoteAccessSessionArn": "arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456",
+                            "appArn": "arn:aws:devicefarm:us-west-2:123456789101:app:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {
+                            "appUpload": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#InstallToRemoteAccessSessionRequest": {
@@ -4486,7 +4862,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the request to install an Android application (in .apk format) or an iOS\n            application (in .ipa format) as part of a remote access session.</p>"
+                "smithy.api#documentation": "<p>Represents the request to install an Android application (in .apk format) or an iOS\n            application (in .ipa format) as part of a remote access session.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#InstallToRemoteAccessSessionResult": {
@@ -4500,7 +4877,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the response from the server after AWS Device Farm makes a request to\n            install to a remote access session.</p>"
+                "smithy.api#documentation": "<p>Represents the response from the server after AWS Device Farm makes a request to\n            install to a remote access session.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#InstanceLabels": {
@@ -4797,6 +5175,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about artifacts.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list artifacts for a resource",
+                        "documentation": "The following example lists screenshot artifacts for a specific run.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456",
+                            "type": "SCREENSHOT"
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4829,7 +5217,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the list artifacts operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the list artifacts operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListArtifactsResult": {
@@ -4849,7 +5238,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list artifacts operation.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list artifacts operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListDeviceInstances": {
@@ -4893,6 +5283,9 @@
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n            used to return the next set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListDeviceInstancesResult": {
@@ -4910,6 +5303,9 @@
                         "smithy.api#documentation": "<p>An identifier that can be used in the next call to this operation to return the next\n            set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListDevicePools": {
@@ -4936,6 +5332,44 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about device pools.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about device pools",
+                        "documentation": "The following example returns information about the private device pools in a specific project.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456",
+                            "type": "PRIVATE"
+                        },
+                        "output": {
+                            "devicePools": [
+                                {
+                                    "rules": [
+                                        {
+                                            "operator": "IN",
+                                            "attribute": "ARN",
+                                            "value": "[\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\"]"
+                                        }
+                                    ],
+                                    "name": "Top Devices",
+                                    "arn": "arn:aws:devicefarm:us-west-2::devicepool:082d10e5-d7d7-48a5-ba5c-12345EXAMPLE",
+                                    "description": "Top devices"
+                                },
+                                {
+                                    "rules": [
+                                        {
+                                            "operator": "IN",
+                                            "attribute": "ARN",
+                                            "value": "[\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\",\"arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE\"]"
+                                        }
+                                    ],
+                                    "name": "My Android Device Pool",
+                                    "arn": "arn:aws:devicefarm:us-west-2:123456789101:devicepool:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/bf96e75a-28f6-4e61-b6a7-12345EXAMPLE",
+                                    "description": "Samsung Galaxy Android devices"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4967,7 +5401,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list device pools request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list device pools request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListDevicePoolsResult": {
@@ -4987,7 +5422,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list device pools request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list device pools request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListDevices": {
@@ -5014,6 +5450,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about unique device types.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about devices",
+                        "documentation": "The following example returns information about the available devices in a specific project.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -5044,7 +5490,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list devices request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list devices request.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListDevicesResult": {
@@ -5064,7 +5511,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list devices operation.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list devices operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListInstanceProfiles": {
@@ -5108,6 +5556,9 @@
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n            used to return the next set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListInstanceProfilesResult": {
@@ -5125,6 +5576,9 @@
                         "smithy.api#documentation": "<p>An identifier that can be used in the next call to this operation to return the next\n            set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListJobs": {
@@ -5151,6 +5605,15 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about jobs for a given test run.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about jobs",
+                        "documentation": "The following example returns information about jobs in a specific project.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -5176,7 +5639,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the list jobs operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the list jobs operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListJobsResult": {
@@ -5196,7 +5660,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list jobs request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list jobs request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListNetworkProfiles": {
@@ -5247,6 +5712,9 @@
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can\n            be used to return the next set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListNetworkProfilesResult": {
@@ -5264,6 +5732,9 @@
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can\n            be used to return the next set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListOfferingPromotions": {
@@ -5304,6 +5775,9 @@
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can\n            be used to return the next set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListOfferingPromotionsResult": {
@@ -5321,6 +5795,9 @@
                         "smithy.api#documentation": "<p>An identifier to be used in the next call to this operation, to return the next set\n            of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListOfferingTransactions": {
@@ -5368,7 +5845,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the request to list the offering transaction history.</p>"
+                "smithy.api#documentation": "<p>Represents the request to list the offering transaction history.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListOfferingTransactionsResult": {
@@ -5388,7 +5866,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the transaction log of the specified offerings.</p>"
+                "smithy.api#documentation": "<p>Returns the transaction log of the specified offerings.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListOfferings": {
@@ -5418,6 +5897,79 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of products or offerings that the user can manage through the API. Each offering record\n            indicates the recurring price per unit and the frequency for that offering. The API returns a\n                <code>NotEligible</code> error if the user is not permitted to invoke the operation.  If you must be\n            able to invoke this operation, contact <a href=\"mailto:aws-devicefarm-support@amazon.com\">aws-devicefarm-support@amazon.com</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about device offerings",
+                        "documentation": "The following example returns information about available device offerings.",
+                        "input": {
+                            "nextToken": "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE="
+                        },
+                        "output": {
+                            "offerings": [
+                                {
+                                    "recurringCharges": [
+                                        {
+                                            "cost": {
+                                                "amount": 250,
+                                                "currencyCode": "USD"
+                                            },
+                                            "frequency": "MONTHLY"
+                                        }
+                                    ],
+                                    "platform": "IOS",
+                                    "type": "RECURRING",
+                                    "id": "A53D4D73-A6F6-4B82-A0B0-12345EXAMPLE",
+                                    "description": "iOS Unmetered Device Slot"
+                                },
+                                {
+                                    "recurringCharges": [
+                                        {
+                                            "cost": {
+                                                "amount": 250,
+                                                "currencyCode": "USD"
+                                            },
+                                            "frequency": "MONTHLY"
+                                        }
+                                    ],
+                                    "platform": "ANDROID",
+                                    "type": "RECURRING",
+                                    "id": "8980F81C-00D7-469D-8EC6-12345EXAMPLE",
+                                    "description": "Android Unmetered Device Slot"
+                                },
+                                {
+                                    "recurringCharges": [
+                                        {
+                                            "cost": {
+                                                "amount": 250,
+                                                "currencyCode": "USD"
+                                            },
+                                            "frequency": "MONTHLY"
+                                        }
+                                    ],
+                                    "platform": "ANDROID",
+                                    "type": "RECURRING",
+                                    "id": "D68B3C05-1BA6-4360-BC69-12345EXAMPLE",
+                                    "description": "Android Remote Access Unmetered Device Slot"
+                                },
+                                {
+                                    "recurringCharges": [
+                                        {
+                                            "cost": {
+                                                "amount": 250,
+                                                "currencyCode": "USD"
+                                            },
+                                            "frequency": "MONTHLY"
+                                        }
+                                    ],
+                                    "platform": "IOS",
+                                    "type": "RECURRING",
+                                    "id": "552B4DAD-A6C9-45C4-94FB-12345EXAMPLE",
+                                    "description": "iOS Remote Access Unmetered Device Slot"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -5436,7 +5988,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the request to list all offerings.</p>"
+                "smithy.api#documentation": "<p>Represents the request to list all offerings.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListOfferingsResult": {
@@ -5456,7 +6009,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the return values of the list of offerings.</p>"
+                "smithy.api#documentation": "<p>Represents the return values of the list of offerings.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListProjects": {
@@ -5507,7 +6061,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the list projects operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the list projects operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListProjectsResult": {
@@ -5527,7 +6082,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list projects request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list projects request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListRemoteAccessSessions": {
@@ -5553,7 +6109,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all currently running remote access sessions.</p>"
+                "smithy.api#documentation": "<p>Returns a list of all currently running remote access sessions.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a remote access session",
+                        "documentation": "The following example returns information about a specific Device Farm remote access session.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456",
+                            "nextToken": "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE="
+                        },
+                        "output": {
+                            "remoteAccessSessions": []
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#ListRemoteAccessSessionsRequest": {
@@ -5574,7 +6143,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the request to return information about the remote access\n            session.</p>"
+                "smithy.api#documentation": "<p>Represents the request to return information about the remote access\n            session.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListRemoteAccessSessionsResult": {
@@ -5594,7 +6164,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the response from the server after AWS Device Farm makes a request to\n            return information about the remote access session.</p>"
+                "smithy.api#documentation": "<p>Represents the response from the server after AWS Device Farm makes a request to\n            return information about the remote access session.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListRuns": {
@@ -5646,7 +6217,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the list runs operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the list runs operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListRunsResult": {
@@ -5666,7 +6238,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list runs request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list runs request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListSamples": {
@@ -5693,6 +6266,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about samples, given an AWS Device Farm job ARN.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about samples",
+                        "documentation": "The following example returns information about samples, given a specific Device Farm project.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456",
+                            "nextToken": "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"
+                        },
+                        "output": {
+                            "samples": []
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -5718,7 +6304,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the list samples operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the list samples operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListSamplesResult": {
@@ -5738,7 +6325,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list samples request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list samples request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListSuites": {
@@ -5765,6 +6353,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about test suites for a given job.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about suites",
+                        "documentation": "The following example returns information about suites, given a specific Device Farm job.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:job:EXAMPLE-GUID-123-456",
+                            "nextToken": "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"
+                        },
+                        "output": {
+                            "suites": []
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -5790,7 +6391,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the list suites operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the list suites operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListSuitesResult": {
@@ -5810,7 +6412,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list suites request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list suites request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListTagsForResource": {
@@ -5846,6 +6449,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListTagsForResourceResponse": {
@@ -5857,6 +6463,9 @@
                         "smithy.api#documentation": "<p>The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum\n            character length of 128 characters. Tag values can have a maximum length of 256 characters.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListTestGridProjects": {
@@ -5899,6 +6508,9 @@
                         "smithy.api#documentation": "<p>From a response, used to continue a paginated listing. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListTestGridProjectsResult": {
@@ -5916,6 +6528,9 @@
                         "smithy.api#documentation": "<p>Used for pagination. Pass into <a>ListTestGridProjects</a> to get more results in a paginated\n         request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListTestGridSessionActions": {
@@ -5968,6 +6583,9 @@
                         "smithy.api#documentation": "<p>Pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListTestGridSessionActionsResult": {
@@ -5985,6 +6603,9 @@
                         "smithy.api#documentation": "<p>Pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListTestGridSessionArtifacts": {
@@ -6043,6 +6664,9 @@
                         "smithy.api#documentation": "<p>Pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListTestGridSessionArtifactsResult": {
@@ -6060,6 +6684,9 @@
                         "smithy.api#documentation": "<p>Pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListTestGridSessions": {
@@ -6142,6 +6769,9 @@
                         "smithy.api#documentation": "<p>Pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListTestGridSessionsResult": {
@@ -6159,6 +6789,9 @@
                         "smithy.api#documentation": "<p>Pagination token.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListTests": {
@@ -6185,6 +6818,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about tests in a given test suite.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about tests",
+                        "documentation": "The following example returns information about tests, given a specific Device Farm project.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456",
+                            "nextToken": "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"
+                        },
+                        "output": {
+                            "tests": []
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6210,7 +6856,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the list tests operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the list tests operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListTestsResult": {
@@ -6230,7 +6877,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list tests request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list tests request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListUniqueProblems": {
@@ -6257,6 +6905,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about unique problems, such as exceptions or crashes.</p>\n        <p>Unique problems are defined as a single instance of an error across a run, job, or suite. For example,\n            if a call in your application consistently raises an exception (<code>OutOfBoundsException in\n                MyActivity.java:386</code>), <code>ListUniqueProblems</code> returns a single entry instead of many\n            individual entries for that exception.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about unique problems",
+                        "documentation": "The following example returns information about unique problems, given a specific Device Farm project.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456",
+                            "nextToken": "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"
+                        },
+                        "output": {
+                            "uniqueProblems": {}
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6282,7 +6943,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the list unique problems operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the list unique problems operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListUniqueProblemsResult": {
@@ -6302,7 +6964,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list unique problems request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list unique problems request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListUploads": {
@@ -6329,6 +6992,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets information about uploads, given an AWS Device Farm project ARN.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about uploads",
+                        "documentation": "The following example returns information about uploads, given a specific Device Farm project.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456",
+                            "nextToken": "RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"
+                        },
+                        "output": {
+                            "uploads": []
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -6360,7 +7036,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the list uploads operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the list uploads operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListUploadsResult": {
@@ -6380,7 +7057,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a list uploads request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a list uploads request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ListVPCEConfigurations": {
@@ -6418,6 +7096,9 @@
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n            used to return the next set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ListVPCEConfigurationsResult": {
@@ -6435,6 +7116,9 @@
                         "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n            used to return the next set of items in the list.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#Location": {
@@ -7076,7 +7760,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request for a purchase offering.</p>"
+                "smithy.api#documentation": "<p>Represents a request for a purchase offering.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#PurchaseOfferingResult": {
@@ -7090,7 +7775,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of the purchase offering (for example, success or failure).</p>"
+                "smithy.api#documentation": "<p>The result of the purchase offering (for example, success or failure).</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#PurchasedDevicesMap": {
@@ -7365,7 +8051,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request that represents an offering renewal.</p>"
+                "smithy.api#documentation": "<p>A request that represents an offering renewal.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#RenewOfferingResult": {
@@ -7379,7 +8066,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a renewal offering.</p>"
+                "smithy.api#documentation": "<p>The result of a renewal offering.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#Resolution": {
@@ -7888,7 +8576,25 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Schedules a run.</p>"
+                "smithy.api#documentation": "<p>Schedules a run.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To schedule a test run",
+                        "documentation": "The following example schedules a test run named MyRun.",
+                        "input": {
+                            "projectArn": "arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456",
+                            "devicePoolArn": "arn:aws:devicefarm:us-west-2:123456789101:pool:EXAMPLE-GUID-123-456",
+                            "name": "MyRun",
+                            "test": {
+                                "type": "APPIUM_JAVA_JUNIT",
+                                "testPackageArn": "arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456"
+                            }
+                        },
+                        "output": {
+                            "run": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#ScheduleRunConfiguration": {
@@ -8008,7 +8714,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the schedule run operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the schedule run operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#ScheduleRunResult": {
@@ -8022,7 +8729,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of a schedule run request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of a schedule run request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#ScheduleRunTest": {
@@ -8174,6 +8882,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#StopJobResult": {
@@ -8185,6 +8896,9 @@
                         "smithy.api#documentation": "<p>The job that was stopped.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#StopRemoteAccessSession": {
@@ -8225,7 +8939,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the request to stop the remote access session.</p>"
+                "smithy.api#documentation": "<p>Represents the request to stop the remote access session.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#StopRemoteAccessSessionResult": {
@@ -8239,7 +8954,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the response from the server that describes the remote access session\n            when AWS Device Farm stops the session.</p>"
+                "smithy.api#documentation": "<p>Represents the response from the server that describes the remote access session\n            when AWS Device Farm stops the session.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#StopRun": {
@@ -8265,7 +8981,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a stop request for the current test run. AWS Device Farm immediately stops the run on devices\n            where tests have not started. You are not billed for these devices. On devices where tests have started\n            executing, setup suite and teardown suite tests run to completion on those devices. You are billed for\n            setup, teardown, and any tests that were in progress or already completed.</p>"
+                "smithy.api#documentation": "<p>Initiates a stop request for the current test run. AWS Device Farm immediately stops the run on devices\n            where tests have not started. You are not billed for these devices. On devices where tests have started\n            executing, setup suite and teardown suite tests run to completion on those devices. You are billed for\n            setup, teardown, and any tests that were in progress or already completed.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To stop a test run",
+                        "documentation": "The following example stops a specific test run.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456"
+                        },
+                        "output": {
+                            "run": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#StopRunRequest": {
@@ -8280,7 +9008,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the request to stop a specific run.</p>"
+                "smithy.api#documentation": "<p>Represents the request to stop a specific run.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#StopRunResult": {
@@ -8294,7 +9023,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the results of your stop run attempt.</p>"
+                "smithy.api#documentation": "<p>Represents the results of your stop run attempt.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#String": {
@@ -8535,11 +9265,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.devicefarm#TagValue": {
             "type": "string",
@@ -9169,11 +9905,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.devicefarm#UpdateDeviceInstance": {
             "type": "operation",
@@ -9223,6 +9965,9 @@
                         "smithy.api#documentation": "<p>An array of strings that you want to associate with the device instance.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateDeviceInstanceResult": {
@@ -9234,6 +9979,9 @@
                         "smithy.api#documentation": "<p>An object that contains information about your device instance.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateDevicePool": {
@@ -9259,7 +10007,28 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the name, description, and rules in a device pool given the attributes and\n            the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a\n            whole (or not at all).</p>"
+                "smithy.api#documentation": "<p>Modifies the name, description, and rules in a device pool given the attributes and\n            the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a\n            whole (or not at all).</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a device pool",
+                        "documentation": "The following example updates the specified device pool with a new name and description. It also enables remote access of devices in the device pool.",
+                        "input": {
+                            "arn": "arn:aws:devicefarm:us-west-2::devicepool:082d10e5-d7d7-48a5-ba5c-12345EXAMPLE",
+                            "name": "NewName",
+                            "description": "NewDescription",
+                            "rules": [
+                                {
+                                    "attribute": "REMOTE_ACCESS_ENABLED",
+                                    "operator": "EQUALS",
+                                    "value": "True"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "devicePool": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.devicefarm#UpdateDevicePoolRequest": {
@@ -9304,7 +10073,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the update device pool operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the update device pool operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateDevicePoolResult": {
@@ -9318,7 +10088,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of an update device pool request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of an update device pool request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateInstanceProfile": {
@@ -9387,6 +10158,9 @@
                         "smithy.api#documentation": "<p>The updated choice for whether you want to reboot the device after use. The default\n            value is <code>true</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateInstanceProfileResult": {
@@ -9398,6 +10172,9 @@
                         "smithy.api#documentation": "<p>An object that contains information about your instance profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateNetworkProfile": {
@@ -9504,6 +10281,9 @@
                         "smithy.api#documentation": "<p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateNetworkProfileResult": {
@@ -9515,6 +10295,9 @@
                         "smithy.api#documentation": "<p>A list of the available network profiles.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateProject": {
@@ -9573,7 +10356,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to the update project operation.</p>"
+                "smithy.api#documentation": "<p>Represents a request to the update project operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateProjectResult": {
@@ -9587,7 +10371,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the result of an update project request.</p>"
+                "smithy.api#documentation": "<p>Represents the result of an update project request.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateTestGridProject": {
@@ -9644,6 +10429,9 @@
                         "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateTestGridProjectResult": {
@@ -9655,6 +10443,9 @@
                         "smithy.api#documentation": "<p>The project, including updated information.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateUpload": {
@@ -9711,6 +10502,9 @@
                         "smithy.api#documentation": "<p>Set to true if the YAML file has changed and must be updated. Otherwise, set to false.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateUploadResult": {
@@ -9722,6 +10516,9 @@
                         "smithy.api#documentation": "<p>A test spec uploaded to Device Farm.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateVPCEConfiguration": {
@@ -9784,6 +10581,9 @@
                         "smithy.api#documentation": "<p>An optional description that provides details about your VPC endpoint configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.devicefarm#UpdateVPCEConfigurationResult": {
@@ -9795,6 +10595,9 @@
                         "smithy.api#documentation": "<p>An object that contains information about your VPC endpoint configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.devicefarm#Upload": {

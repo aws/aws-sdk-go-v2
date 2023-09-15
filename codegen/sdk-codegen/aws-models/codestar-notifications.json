@@ -108,7 +108,7 @@
                     "name": "codestar-notifications"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This AWS CodeStar Notifications API Reference provides descriptions and usage examples of the\n      operations and data types for the AWS CodeStar Notifications API. You can use the AWS CodeStar Notifications API\n      to work with the following objects:</p>\n      \n         <p>Notification rules, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateNotificationRule</a>, which creates a notification rule for a\n                    resource in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteNotificationRule</a>, which deletes a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeNotificationRule</a>, which provides information about a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListNotificationRules</a>, which lists the notification rules associated with\n          your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateNotificationRule</a>, which changes the name, events, or targets associated with a\n          notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>Subscribe</a>, which subscribes a target to a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>Unsubscribe</a>, which removes a target from a notification rule. </p>\n            </li>\n         </ul>\n      \n         <p>Targets, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteTarget</a>, which removes a notification rule target from a\n          notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListTargets</a>, which lists the targets associated with a\n                    notification rule. </p>\n            </li>\n         </ul>\n      \n         <p>Events, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListEventTypes</a>, which lists the event types you can include in\n                    a notification rule. </p>\n            </li>\n         </ul>\n         <p>Tags, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a>, which lists the tags already associated\n                    with a notification rule in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a>, which associates a tag you provide with a\n                    notification rule in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a>, which removes a tag from a notification rule in\n                    your account. </p>\n            </li>\n         </ul>\n      \n\n      \n        <p> For information about how to use AWS CodeStar Notifications, see the <a href=\"https://docs.aws.amazon.com/dtconsole/latest/userguide/what-is-dtconsole.html\">Amazon Web Services Developer Tools Console User Guide</a>.\n    </p>",
+                "smithy.api#documentation": "<p>This AWS CodeStar Notifications API Reference provides descriptions and usage examples of the\n      operations and data types for the AWS CodeStar Notifications API. You can use the AWS CodeStar Notifications API\n      to work with the following objects:</p>\n         <p>Notification rules, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateNotificationRule</a>, which creates a notification rule for a\n                    resource in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteNotificationRule</a>, which deletes a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeNotificationRule</a>, which provides information about a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListNotificationRules</a>, which lists the notification rules associated with\n          your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateNotificationRule</a>, which changes the name, events, or targets associated with a\n          notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>Subscribe</a>, which subscribes a target to a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>Unsubscribe</a>, which removes a target from a notification rule. </p>\n            </li>\n         </ul>\n         <p>Targets, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteTarget</a>, which removes a notification rule target from a\n          notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListTargets</a>, which lists the targets associated with a\n                    notification rule. </p>\n            </li>\n         </ul>\n         <p>Events, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListEventTypes</a>, which lists the event types you can include in\n                    a notification rule. </p>\n            </li>\n         </ul>\n         <p>Tags, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a>, which lists the tags already associated\n                    with a notification rule in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a>, which associates a tag you provide with a\n                    notification rule in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a>, which removes a tag from a notification rule in\n                    your account. </p>\n            </li>\n         </ul>\n         <p> For information about how to use AWS CodeStar Notifications, see the <a href=\"https://docs.aws.amazon.com/dtconsole/latest/userguide/what-is-dtconsole.html\">Amazon Web Services Developer Tools Console User Guide</a>.\n    </p>",
                 "smithy.api#title": "AWS CodeStar Notifications",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -170,9 +170,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://codestar-notifications-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://codestar-notifications-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -185,15 +364,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://codestar-notifications.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://codestar-notifications.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -205,258 +419,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://codestar-notifications-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://codestar-notifications-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://codestar-notifications.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://codestar-notifications.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -471,8 +435,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -484,8 +448,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -497,8 +461,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -510,8 +474,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -523,8 +487,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -536,8 +500,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -549,8 +513,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -562,8 +526,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -575,8 +539,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -588,8 +552,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -601,8 +565,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -614,8 +578,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -627,8 +602,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -640,8 +626,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -653,8 +650,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -666,8 +674,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -679,8 +687,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -692,8 +700,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -704,8 +712,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -716,9 +724,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -830,7 +844,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.codestarnotifications#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, client-generated idempotency token that, when provided in a request, ensures\n            the request cannot be repeated with a changed parameter. If a request with the same\n            parameters is received and a token is included, the request returns information about\n            the initial request that used that token.</p>\n        <note>\n            <p>The Amazon Web Services SDKs prepopulate client request tokens. If you are using an Amazon Web Services SDK, an\n                idempotency token is created for you.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>A unique, client-generated idempotency token that, when provided in a request, ensures\n            the request cannot be repeated with a changed parameter. If a request with the same\n            parameters is received and a token is included, the request returns information about\n            the initial request that used that token.</p>\n         <note>\n            <p>The Amazon Web Services SDKs prepopulate client request tokens. If you are using an Amazon Web Services SDK, an\n                idempotency token is created for you.</p>\n         </note>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -846,6 +860,9 @@
                         "smithy.api#documentation": "<p>The status of the notification rule. The default value is <code>ENABLED</code>. If the status is\n            set to <code>DISABLED</code>, notifications aren't sent for the notification rule.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#CreateNotificationRuleResult": {
@@ -857,6 +874,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notification rule.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codestarnotifications#CreatedTimestamp": {
@@ -900,6 +920,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#DeleteNotificationRuleResult": {
@@ -911,6 +934,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deleted notification rule.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codestarnotifications#DeleteTarget": {
@@ -952,11 +978,17 @@
                         "smithy.api#documentation": "<p>A Boolean value that can be used to delete all associations with this Chatbot topic. The\n            default value is FALSE. If set to TRUE, all associations between that target and every\n            notification rule in your Amazon Web Services account are deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#DeleteTargetResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.codestarnotifications#DescribeNotificationRule": {
             "type": "operation",
@@ -993,6 +1025,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#DescribeNotificationRuleResult": {
@@ -1065,6 +1100,9 @@
                         "smithy.api#documentation": "<p>The tags associated with the notification rule.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codestarnotifications#DetailType": {
@@ -1276,6 +1314,9 @@
                         "smithy.api#documentation": "<p>A non-negative integer used to limit the number of returned results. The default number is 50. The maximum number of\n      results that can be returned is 100.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#ListEventTypesResult": {
@@ -1293,6 +1334,9 @@
                         "smithy.api#documentation": "<p>An enumeration token that can be used in a request to return the next batch of the results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codestarnotifications#ListNotificationRules": {
@@ -1414,6 +1458,9 @@
                         "smithy.api#documentation": "<p>A non-negative integer used to limit the number of returned results. The maximum number of\n      results that can be returned is 100.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#ListNotificationRulesResult": {
@@ -1431,6 +1478,9 @@
                         "smithy.api#documentation": "<p>The list of notification rules for the Amazon Web Services account, by Amazon Resource Name (ARN) and ID. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codestarnotifications#ListTagsForResource": {
@@ -1468,6 +1518,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#ListTagsForResourceResult": {
@@ -1479,6 +1532,9 @@
                         "smithy.api#documentation": "<p>The tags associated with the notification rule.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codestarnotifications#ListTargets": {
@@ -1594,6 +1650,9 @@
                         "smithy.api#documentation": "<p>A non-negative integer used to limit the number of returned results. The maximum number of\n      results that can be returned is 100.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#ListTargetsResult": {
@@ -1611,6 +1670,9 @@
                         "smithy.api#documentation": "<p>An enumeration token that can be used in a request to return the next batch of\n            results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codestarnotifications#MaxResults": {
@@ -1808,6 +1870,9 @@
                         "smithy.api#documentation": "<p>An enumeration token that, when provided in a request, returns the next batch of the\n            results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#SubscribeResult": {
@@ -1819,6 +1884,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notification rule for which you have created assocations.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codestarnotifications#TagKey": {
@@ -1885,6 +1953,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#TagResourceResult": {
@@ -1896,6 +1967,9 @@
                         "smithy.api#documentation": "<p>The list of tags associated with the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codestarnotifications#TagValue": {
@@ -2071,6 +2145,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#UnsubscribeResult": {
@@ -2083,6 +2160,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codestarnotifications#UntagResource": {
@@ -2135,11 +2215,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#UntagResourceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.codestarnotifications#UpdateNotificationRule": {
             "type": "operation",
@@ -2209,11 +2295,17 @@
                         "smithy.api#documentation": "<p>The level of detail to include in the notifications for this resource. BASIC will include only the \n            contents of the event as it would appear in Amazon CloudWatch. FULL will include any supplemental information\n            provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.codestarnotifications#UpdateNotificationRuleResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.codestarnotifications#ValidationException": {
             "type": "structure",

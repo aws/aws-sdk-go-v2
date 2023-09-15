@@ -14463,6 +14463,7 @@
                     "arnNamespace": "config",
                     "cloudFormationName": "Config",
                     "cloudTrailEventSource": "configservice.amazonaws.com",
+                    "docId": "config-2014-11-12",
                     "endpointPrefix": "config"
                 },
                 "aws.auth#sigv4": {

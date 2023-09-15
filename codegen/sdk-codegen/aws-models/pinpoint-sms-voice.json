@@ -56,10 +56,7 @@
             }
         },
         "com.amazonaws.pinpointsmsvoice#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "type": "boolean"
         },
         "com.amazonaws.pinpointsmsvoice#CallInstructionsMessageType": {
             "type": "structure",
@@ -197,14 +194,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Create a new event destination in a configuration set."
+                "smithy.api#documentation": "Create a new event destination in a configuration set.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#CreateConfigurationSetEventDestinationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "An empty object that indicates that the event destination was created successfully."
+                "smithy.api#documentation": "An empty object that indicates that the event destination was created successfully.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#CreateConfigurationSetRequest": {
@@ -218,14 +217,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A request to create a new configuration set."
+                "smithy.api#documentation": "A request to create a new configuration set.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#CreateConfigurationSetResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "An empty object that indicates that the configuration set was successfully created."
+                "smithy.api#documentation": "An empty object that indicates that the configuration set was successfully created.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#DeleteConfigurationSet": {
@@ -309,13 +310,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#DeleteConfigurationSetEventDestinationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "An empty object that indicates that the event destination was deleted successfully."
+                "smithy.api#documentation": "An empty object that indicates that the event destination was deleted successfully.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#DeleteConfigurationSetRequest": {
@@ -329,13 +334,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#DeleteConfigurationSetResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "An empty object that indicates that the configuration set was deleted successfully."
+                "smithy.api#documentation": "An empty object that indicates that the configuration set was deleted successfully.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#EventDestination": {
@@ -347,7 +356,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpointsmsvoice#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination."
                     }
                 },
@@ -380,7 +388,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpointsmsvoice#Boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination."
                     }
                 },
@@ -408,39 +415,53 @@
             }
         },
         "com.amazonaws.pinpointsmsvoice#EventType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "The types of events that are sent to the event destination.",
-                "smithy.api#enum": [
-                    {
-                        "value": "INITIATED_CALL",
-                        "name": "INITIATED_CALL"
-                    },
-                    {
-                        "value": "RINGING",
-                        "name": "RINGING"
-                    },
-                    {
-                        "value": "ANSWERED",
-                        "name": "ANSWERED"
-                    },
-                    {
-                        "value": "COMPLETED_CALL",
-                        "name": "COMPLETED_CALL"
-                    },
-                    {
-                        "value": "BUSY",
-                        "name": "BUSY"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "NO_ANSWER",
-                        "name": "NO_ANSWER"
+            "type": "enum",
+            "members": {
+                "INITIATED_CALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIATED_CALL"
                     }
-                ]
+                },
+                "RINGING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RINGING"
+                    }
+                },
+                "ANSWERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANSWERED"
+                    }
+                },
+                "COMPLETED_CALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED_CALL"
+                    }
+                },
+                "BUSY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUSY"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "NO_ANSWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_ANSWER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The types of events that are sent to the event destination."
             }
         },
         "com.amazonaws.pinpointsmsvoice#EventTypes": {
@@ -494,6 +515,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#GetConfigurationSetEventDestinationsResponse": {
@@ -504,7 +528,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "An object that contains information about an event destination."
+                "smithy.api#documentation": "An object that contains information about an event destination.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#InternalServiceErrorException": {
@@ -598,6 +623,9 @@
                         "smithy.api#httpQuery": "PageSize"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#ListConfigurationSetsResponse": {
@@ -617,7 +645,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "An object that contains information about the configuration sets for your account in the current region."
+                "smithy.api#documentation": "An object that contains information about the configuration sets for your account in the current region.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#NextTokenString": {
@@ -1035,158 +1064,6 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://sms-voice.pinpoint-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://sms-voice.pinpoint-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://sms-voice.pinpoint.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://sms-voice.pinpoint.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://sms-voice.pinpoint-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://sms-voice.pinpoint-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://sms-voice.pinpoint.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://sms-voice.pinpoint.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "cn-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://sms-voice.pinpoint-fips.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://sms-voice.pinpoint.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
-                            }
-                        },
-                        {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
@@ -1194,9 +1071,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1207,9 +1084,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1220,9 +1097,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1233,9 +1110,161 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.pinpoint-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.pinpoint-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.pinpoint.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.pinpoint.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.pinpoint-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.pinpoint-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.pinpoint.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.pinpoint.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.pinpoint-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://sms-voice.pinpoint.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1244,9 +1273,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1257,9 +1286,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1268,9 +1297,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1281,22 +1310,35 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1306,9 +1348,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1318,10 +1360,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1441,7 +1489,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "SendVoiceMessageRequest"
+                "smithy.api#documentation": "SendVoiceMessageRequest",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#SendVoiceMessageResponse": {
@@ -1455,7 +1504,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "An object that that contains the Message ID of a Voice message that was sent successfully."
+                "smithy.api#documentation": "An object that that contains the Message ID of a Voice message that was sent successfully.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#SnsDestination": {
@@ -1543,14 +1593,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "UpdateConfigurationSetEventDestinationRequest"
+                "smithy.api#documentation": "UpdateConfigurationSetEventDestinationRequest",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#UpdateConfigurationSetEventDestinationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "An empty object that indicates that the event destination was updated successfully."
+                "smithy.api#documentation": "An empty object that indicates that the event destination was updated successfully.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoice#VoiceMessageContent": {

@@ -51,110 +51,160 @@
             "type": "string"
         },
         "com.amazonaws.marketplacecommerceanalytics#DataSetType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "customer_subscriber_hourly_monthly_subscriptions",
-                        "name": "CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS"
-                    },
-                    {
-                        "value": "customer_subscriber_annual_subscriptions",
-                        "name": "CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS"
-                    },
-                    {
-                        "value": "daily_business_usage_by_instance_type",
-                        "name": "DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE"
-                    },
-                    {
-                        "value": "daily_business_fees",
-                        "name": "DAILY_BUSINESS_FEES"
-                    },
-                    {
-                        "value": "daily_business_free_trial_conversions",
-                        "name": "DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS"
-                    },
-                    {
-                        "value": "daily_business_new_instances",
-                        "name": "DAILY_BUSINESS_NEW_INSTANCES"
-                    },
-                    {
-                        "value": "daily_business_new_product_subscribers",
-                        "name": "DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS"
-                    },
-                    {
-                        "value": "daily_business_canceled_product_subscribers",
-                        "name": "DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS"
-                    },
-                    {
-                        "value": "monthly_revenue_billing_and_revenue_data",
-                        "name": "MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA"
-                    },
-                    {
-                        "value": "monthly_revenue_annual_subscriptions",
-                        "name": "MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS"
-                    },
-                    {
-                        "value": "monthly_revenue_field_demonstration_usage",
-                        "name": "MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE"
-                    },
-                    {
-                        "value": "monthly_revenue_flexible_payment_schedule",
-                        "name": "MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE"
-                    },
-                    {
-                        "value": "disbursed_amount_by_product",
-                        "name": "DISBURSED_AMOUNT_BY_PRODUCT"
-                    },
-                    {
-                        "value": "disbursed_amount_by_product_with_uncollected_funds",
-                        "name": "DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS"
-                    },
-                    {
-                        "value": "disbursed_amount_by_instance_hours",
-                        "name": "DISBURSED_AMOUNT_BY_INSTANCE_HOURS"
-                    },
-                    {
-                        "value": "disbursed_amount_by_customer_geo",
-                        "name": "DISBURSED_AMOUNT_BY_CUSTOMER_GEO"
-                    },
-                    {
-                        "value": "disbursed_amount_by_age_of_uncollected_funds",
-                        "name": "DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS"
-                    },
-                    {
-                        "value": "disbursed_amount_by_age_of_disbursed_funds",
-                        "name": "DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS"
-                    },
-                    {
-                        "value": "disbursed_amount_by_age_of_past_due_funds",
-                        "name": "DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS"
-                    },
-                    {
-                        "value": "disbursed_amount_by_uncollected_funds_breakdown",
-                        "name": "DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN"
-                    },
-                    {
-                        "value": "customer_profile_by_industry",
-                        "name": "CUSTOMER_PROFILE_BY_INDUSTRY"
-                    },
-                    {
-                        "value": "customer_profile_by_revenue",
-                        "name": "CUSTOMER_PROFILE_BY_REVENUE"
-                    },
-                    {
-                        "value": "customer_profile_by_geography",
-                        "name": "CUSTOMER_PROFILE_BY_GEOGRAPHY"
-                    },
-                    {
-                        "value": "sales_compensation_billed_revenue",
-                        "name": "SALES_COMPENSATION_BILLED_REVENUE"
-                    },
-                    {
-                        "value": "us_sales_and_use_tax_records",
-                        "name": "US_SALES_AND_USE_TAX_RECORDS"
+            "type": "enum",
+            "members": {
+                "CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "customer_subscriber_hourly_monthly_subscriptions"
                     }
-                ],
+                },
+                "CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "customer_subscriber_annual_subscriptions"
+                    }
+                },
+                "DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "daily_business_usage_by_instance_type"
+                    }
+                },
+                "DAILY_BUSINESS_FEES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "daily_business_fees"
+                    }
+                },
+                "DAILY_BUSINESS_FREE_TRIAL_CONVERSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "daily_business_free_trial_conversions"
+                    }
+                },
+                "DAILY_BUSINESS_NEW_INSTANCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "daily_business_new_instances"
+                    }
+                },
+                "DAILY_BUSINESS_NEW_PRODUCT_SUBSCRIBERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "daily_business_new_product_subscribers"
+                    }
+                },
+                "DAILY_BUSINESS_CANCELED_PRODUCT_SUBSCRIBERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "daily_business_canceled_product_subscribers"
+                    }
+                },
+                "MONTHLY_REVENUE_BILLING_AND_REVENUE_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "monthly_revenue_billing_and_revenue_data"
+                    }
+                },
+                "MONTHLY_REVENUE_ANNUAL_SUBSCRIPTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "monthly_revenue_annual_subscriptions"
+                    }
+                },
+                "MONTHLY_REVENUE_FIELD_DEMONSTRATION_USAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "monthly_revenue_field_demonstration_usage"
+                    }
+                },
+                "MONTHLY_REVENUE_FLEXIBLE_PAYMENT_SCHEDULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "monthly_revenue_flexible_payment_schedule"
+                    }
+                },
+                "DISBURSED_AMOUNT_BY_PRODUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disbursed_amount_by_product"
+                    }
+                },
+                "DISBURSED_AMOUNT_BY_PRODUCT_WITH_UNCOLLECTED_FUNDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disbursed_amount_by_product_with_uncollected_funds"
+                    }
+                },
+                "DISBURSED_AMOUNT_BY_INSTANCE_HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disbursed_amount_by_instance_hours"
+                    }
+                },
+                "DISBURSED_AMOUNT_BY_CUSTOMER_GEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disbursed_amount_by_customer_geo"
+                    }
+                },
+                "DISBURSED_AMOUNT_BY_AGE_OF_UNCOLLECTED_FUNDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disbursed_amount_by_age_of_uncollected_funds"
+                    }
+                },
+                "DISBURSED_AMOUNT_BY_AGE_OF_DISBURSED_FUNDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disbursed_amount_by_age_of_disbursed_funds"
+                    }
+                },
+                "DISBURSED_AMOUNT_BY_AGE_OF_PAST_DUE_FUNDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disbursed_amount_by_age_of_past_due_funds"
+                    }
+                },
+                "DISBURSED_AMOUNT_BY_UNCOLLECTED_FUNDS_BREAKDOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disbursed_amount_by_uncollected_funds_breakdown"
+                    }
+                },
+                "CUSTOMER_PROFILE_BY_INDUSTRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "customer_profile_by_industry"
+                    }
+                },
+                "CUSTOMER_PROFILE_BY_REVENUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "customer_profile_by_revenue"
+                    }
+                },
+                "CUSTOMER_PROFILE_BY_GEOGRAPHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "customer_profile_by_geography"
+                    }
+                },
+                "SALES_COMPENSATION_BILLED_REVENUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sales_compensation_billed_revenue"
+                    }
+                },
+                "US_SALES_AND_USE_TAX_RECORDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us_sales_and_use_tax_records"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
@@ -247,7 +297,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Container for the parameters to the GenerateDataSet operation."
+                "smithy.api#documentation": "Container for the parameters to the GenerateDataSet operation.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecommerceanalytics#GenerateDataSetResult": {
@@ -261,7 +312,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Container for the result of the GenerateDataSet operation."
+                "smithy.api#documentation": "Container for the result of the GenerateDataSet operation.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecommerceanalytics#MarketplaceCommerceAnalytics20150701": {
@@ -281,6 +333,7 @@
                     "arnNamespace": "marketplacecommerceanalytics",
                     "cloudFormationName": "MarketplaceCommerceAnalytics",
                     "cloudTrailEventSource": "marketplacecommerceanalytics.amazonaws.com",
+                    "docId": "marketplacecommerceanalytics-2015-07-01",
                     "endpointPrefix": "marketplacecommerceanalytics"
                 },
                 "aws.auth#sigv4": {
@@ -349,9 +402,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://marketplacecommerceanalytics-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://marketplacecommerceanalytics-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -364,15 +596,50 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://marketplacecommerceanalytics.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://marketplacecommerceanalytics.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -384,258 +651,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://marketplacecommerceanalytics-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://marketplacecommerceanalytics-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://marketplacecommerceanalytics.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://marketplacecommerceanalytics.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -650,8 +667,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -663,8 +680,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -676,8 +693,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -689,8 +706,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -702,8 +719,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -715,8 +732,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -728,8 +745,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -741,8 +758,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -754,8 +771,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -767,8 +784,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -780,8 +797,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -793,8 +810,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -806,8 +834,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -819,8 +858,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -832,8 +882,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -845,8 +906,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -858,8 +919,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -871,8 +932,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -883,8 +944,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -895,9 +956,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1023,7 +1090,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Container for the parameters to the StartSupportDataExport operation."
+                "smithy.api#documentation": "Container for the parameters to the StartSupportDataExport operation.",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.marketplacecommerceanalytics#StartSupportDataExportResult": {
@@ -1037,22 +1105,27 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Container for the result of the StartSupportDataExport operation."
+                "smithy.api#documentation": "Container for the result of the StartSupportDataExport operation.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecommerceanalytics#SupportDataSetType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "customer_support_contacts_data",
-                        "name": "customer_support_contacts_data"
-                    },
-                    {
-                        "value": "test_customer_support_contacts_data",
-                        "name": "test_customer_support_contacts_data"
+            "type": "enum",
+            "members": {
+                "customer_support_contacts_data": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "customer_support_contacts_data"
                     }
-                ],
+                },
+                "test_customer_support_contacts_data": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "test_customer_support_contacts_data"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255

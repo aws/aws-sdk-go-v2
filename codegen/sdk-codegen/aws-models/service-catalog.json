@@ -310,6 +310,7 @@
                     "arnNamespace": "servicecatalog",
                     "cloudFormationName": "ServiceCatalog",
                     "cloudTrailEventSource": "servicecatalog.amazonaws.com",
+                    "docId": "servicecatalog-2015-12-10",
                     "endpointPrefix": "servicecatalog"
                 },
                 "aws.auth#sigv4": {

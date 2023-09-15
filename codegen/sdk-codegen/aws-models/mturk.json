@@ -65,11 +65,17 @@
                         "smithy.api#documentation": "<p>\n            The value of the Qualification. You can omit this value if you are using the\n            presence or absence of the Qualification as the basis for a HIT requirement.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#AcceptQualificationRequestResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#ApproveAssignment": {
             "type": "operation",
@@ -114,11 +120,17 @@
                         "smithy.api#documentation": "<p>\n            A flag indicating that an assignment should be approved even if it was previously rejected. Defaults to <code>False</code>.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ApproveAssignmentResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#Assignment": {
             "type": "structure",
@@ -207,22 +219,26 @@
             }
         },
         "com.amazonaws.mturk#AssignmentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Submitted",
-                        "name": "Submitted"
-                    },
-                    {
-                        "value": "Approved",
-                        "name": "Approved"
-                    },
-                    {
-                        "value": "Rejected",
-                        "name": "Rejected"
+            "type": "enum",
+            "members": {
+                "Submitted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Submitted"
                     }
-                ]
+                },
+                "Approved": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Approved"
+                    }
+                },
+                "Rejected": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Rejected"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#AssignmentStatusList": {
@@ -280,11 +296,17 @@
                         "smithy.api#documentation": "<p>\n            Specifies whether to send a notification email message to the Worker\n            saying that the qualification was assigned to the Worker.\n            Note: this is true by default.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#AssociateQualificationWithWorkerResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#BonusPayment": {
             "type": "structure",
@@ -331,50 +353,68 @@
             "type": "boolean"
         },
         "com.amazonaws.mturk#Comparator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LessThan",
-                        "name": "LessThan"
-                    },
-                    {
-                        "value": "LessThanOrEqualTo",
-                        "name": "LessThanOrEqualTo"
-                    },
-                    {
-                        "value": "GreaterThan",
-                        "name": "GreaterThan"
-                    },
-                    {
-                        "value": "GreaterThanOrEqualTo",
-                        "name": "GreaterThanOrEqualTo"
-                    },
-                    {
-                        "value": "EqualTo",
-                        "name": "EqualTo"
-                    },
-                    {
-                        "value": "NotEqualTo",
-                        "name": "NotEqualTo"
-                    },
-                    {
-                        "value": "Exists",
-                        "name": "Exists"
-                    },
-                    {
-                        "value": "DoesNotExist",
-                        "name": "DoesNotExist"
-                    },
-                    {
-                        "value": "In",
-                        "name": "In"
-                    },
-                    {
-                        "value": "NotIn",
-                        "name": "NotIn"
+            "type": "enum",
+            "members": {
+                "LessThan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThan"
                     }
-                ]
+                },
+                "LessThanOrEqualTo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThanOrEqualTo"
+                    }
+                },
+                "GreaterThan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThan"
+                    }
+                },
+                "GreaterThanOrEqualTo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThanOrEqualTo"
+                    }
+                },
+                "EqualTo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EqualTo"
+                    }
+                },
+                "NotEqualTo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotEqualTo"
+                    }
+                },
+                "Exists": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Exists"
+                    }
+                },
+                "DoesNotExist": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DoesNotExist"
+                    }
+                },
+                "In": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "In"
+                    }
+                },
+                "NotIn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotIn"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#CountryParameters": {
@@ -429,11 +469,17 @@
                         "smithy.api#documentation": "<p>\n            A unique identifier for this request, which allows you to retry the call on error\n            without extending the HIT multiple times.\n            This is useful in cases such as network timeouts where it is unclear whether or not\n            the call succeeded on the server. If the extend HIT already exists in the system\n            from a previous call using the same <code>UniqueRequestToken</code>,\n            subsequent calls will return an error with a message containing the request ID.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#CreateAdditionalAssignmentsForHITResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#CreateHIT": {
             "type": "operation",
@@ -559,6 +605,9 @@
                         "smithy.api#documentation": "<p>\n            If the HITLayoutId is provided, any placeholder values must be filled in with values\n            using the HITLayoutParameter structure. For more information, see HITLayout.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#CreateHITResponse": {
@@ -570,6 +619,9 @@
                         "smithy.api#documentation": "<p> Contains the newly created HIT data. For a description of\n            the HIT data structure as it appears in responses, see the HIT Data\n            Structure documentation.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#CreateHITType": {
@@ -642,6 +694,9 @@
                         "smithy.api#documentation": "<p>\n            Conditions that a Worker's Qualifications must meet in order\n            to accept the HIT. A HIT can have between zero and ten\n            Qualification requirements. All requirements must be met in\n            order for a Worker to accept the HIT. Additionally, other\n            actions can be restricted using the <code>ActionsGuarded</code>\n            field on each <code>QualificationRequirement</code> structure.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#CreateHITTypeResponse": {
@@ -653,6 +708,9 @@
                         "smithy.api#documentation": "<p> The ID of the newly registered HIT type.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#CreateHITWithHITType": {
@@ -740,6 +798,9 @@
                         "smithy.api#documentation": "<p>\n            If the HITLayoutId is provided, any placeholder values must be filled in with values\n            using the HITLayoutParameter structure. For more information, see HITLayout.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#CreateHITWithHITTypeResponse": {
@@ -751,6 +812,9 @@
                         "smithy.api#documentation": "<p> Contains the newly created HIT data. For a description of\n            the HIT data structure as it appears in responses, see the HIT Data\n            Structure documentation.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#CreateQualificationType": {
@@ -839,6 +903,9 @@
                         "smithy.api#documentation": "<p>The Qualification value to use for automatically granted\n            Qualifications. This parameter is used only if the AutoGranted\n            parameter is true.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#CreateQualificationTypeResponse": {
@@ -850,6 +917,9 @@
                         "smithy.api#documentation": "<p>The created Qualification type, returned as a\n            QualificationType data structure.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#CreateWorkerBlock": {
@@ -889,11 +959,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#CreateWorkerBlockResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#CurrencyAmount": {
             "type": "string",
@@ -949,11 +1025,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#DeleteHITResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#DeleteQualificationType": {
             "type": "operation",
@@ -986,11 +1068,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#DeleteQualificationTypeResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#DeleteWorkerBlock": {
             "type": "operation",
@@ -1029,11 +1117,17 @@
                         "smithy.api#documentation": "<p>A message that explains the reason for unblocking the Worker. The Worker does not see this message.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#DeleteWorkerBlockResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#DisassociateQualificationFromWorker": {
             "type": "operation",
@@ -1078,11 +1172,17 @@
                         "smithy.api#documentation": "<p>A text message that explains why the Qualification was revoked. The user who had the Qualification sees this message.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#DisassociateQualificationFromWorkerResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#EntityId": {
             "type": "string",
@@ -1095,58 +1195,80 @@
             }
         },
         "com.amazonaws.mturk#EventType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AssignmentAccepted",
-                        "name": "AssignmentAccepted"
-                    },
-                    {
-                        "value": "AssignmentAbandoned",
-                        "name": "AssignmentAbandoned"
-                    },
-                    {
-                        "value": "AssignmentReturned",
-                        "name": "AssignmentReturned"
-                    },
-                    {
-                        "value": "AssignmentSubmitted",
-                        "name": "AssignmentSubmitted"
-                    },
-                    {
-                        "value": "AssignmentRejected",
-                        "name": "AssignmentRejected"
-                    },
-                    {
-                        "value": "AssignmentApproved",
-                        "name": "AssignmentApproved"
-                    },
-                    {
-                        "value": "HITCreated",
-                        "name": "HITCreated"
-                    },
-                    {
-                        "value": "HITExpired",
-                        "name": "HITExpired"
-                    },
-                    {
-                        "value": "HITReviewable",
-                        "name": "HITReviewable"
-                    },
-                    {
-                        "value": "HITExtended",
-                        "name": "HITExtended"
-                    },
-                    {
-                        "value": "HITDisposed",
-                        "name": "HITDisposed"
-                    },
-                    {
-                        "value": "Ping",
-                        "name": "Ping"
+            "type": "enum",
+            "members": {
+                "AssignmentAccepted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AssignmentAccepted"
                     }
-                ]
+                },
+                "AssignmentAbandoned": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AssignmentAbandoned"
+                    }
+                },
+                "AssignmentReturned": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AssignmentReturned"
+                    }
+                },
+                "AssignmentSubmitted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AssignmentSubmitted"
+                    }
+                },
+                "AssignmentRejected": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AssignmentRejected"
+                    }
+                },
+                "AssignmentApproved": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AssignmentApproved"
+                    }
+                },
+                "HITCreated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HITCreated"
+                    }
+                },
+                "HITExpired": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HITExpired"
+                    }
+                },
+                "HITReviewable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HITReviewable"
+                    }
+                },
+                "HITExtended": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HITExtended"
+                    }
+                },
+                "HITDisposed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HITDisposed"
+                    }
+                },
+                "Ping": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ping"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#EventTypeList": {
@@ -1181,7 +1303,10 @@
         },
         "com.amazonaws.mturk#GetAccountBalanceRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.mturk#GetAccountBalanceResponse": {
             "type": "structure",
@@ -1192,6 +1317,9 @@
                 "OnHoldBalance": {
                     "target": "com.amazonaws.mturk#CurrencyAmount"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#GetAssignment": {
@@ -1225,6 +1353,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#GetAssignmentResponse": {
@@ -1242,6 +1373,9 @@
                         "smithy.api#documentation": "<p> The HIT associated with this assignment. The response\n            includes one HIT element.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#GetFileUploadURL": {
@@ -1282,6 +1416,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#GetFileUploadURLResponse": {
@@ -1293,6 +1430,9 @@
                         "smithy.api#documentation": "<p> A temporary URL for the file that the Worker uploaded for\n            the answer.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#GetHIT": {
@@ -1326,6 +1466,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#GetHITResponse": {
@@ -1337,6 +1480,9 @@
                         "smithy.api#documentation": "<p> Contains the requested HIT data.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#GetQualificationScore": {
@@ -1377,6 +1523,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#GetQualificationScoreResponse": {
@@ -1388,6 +1537,9 @@
                         "smithy.api#documentation": "<p> The Qualification data structure of the Qualification\n            assigned to a user, including the Qualification type and the value\n            (score).\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#GetQualificationType": {
@@ -1421,6 +1573,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#GetQualificationTypeResponse": {
@@ -1432,6 +1587,9 @@
                         "smithy.api#documentation": "<p> The returned Qualification Type</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#HIT": {
@@ -1566,22 +1724,26 @@
             }
         },
         "com.amazonaws.mturk#HITAccessActions": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Accept",
-                        "name": "Accept"
-                    },
-                    {
-                        "value": "PreviewAndAccept",
-                        "name": "PreviewAndAccept"
-                    },
-                    {
-                        "value": "DiscoverPreviewAndAccept",
-                        "name": "DiscoverPreviewAndAccept"
+            "type": "enum",
+            "members": {
+                "Accept": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Accept"
                     }
-                ]
+                },
+                "PreviewAndAccept": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PreviewAndAccept"
+                    }
+                },
+                "DiscoverPreviewAndAccept": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DiscoverPreviewAndAccept"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#HITLayoutParameter": {
@@ -1619,53 +1781,67 @@
             }
         },
         "com.amazonaws.mturk#HITReviewStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NotReviewed",
-                        "name": "NotReviewed"
-                    },
-                    {
-                        "value": "MarkedForReview",
-                        "name": "MarkedForReview"
-                    },
-                    {
-                        "value": "ReviewedAppropriate",
-                        "name": "ReviewedAppropriate"
-                    },
-                    {
-                        "value": "ReviewedInappropriate",
-                        "name": "ReviewedInappropriate"
+            "type": "enum",
+            "members": {
+                "NotReviewed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotReviewed"
                     }
-                ]
+                },
+                "MarkedForReview": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MarkedForReview"
+                    }
+                },
+                "ReviewedAppropriate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReviewedAppropriate"
+                    }
+                },
+                "ReviewedInappropriate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReviewedInappropriate"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#HITStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Assignable",
-                        "name": "Assignable"
-                    },
-                    {
-                        "value": "Unassignable",
-                        "name": "Unassignable"
-                    },
-                    {
-                        "value": "Reviewable",
-                        "name": "Reviewable"
-                    },
-                    {
-                        "value": "Reviewing",
-                        "name": "Reviewing"
-                    },
-                    {
-                        "value": "Disposed",
-                        "name": "Disposed"
+            "type": "enum",
+            "members": {
+                "Assignable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Assignable"
                     }
-                ]
+                },
+                "Unassignable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unassignable"
+                    }
+                },
+                "Reviewable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Reviewable"
+                    }
+                },
+                "Reviewing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Reviewing"
+                    }
+                },
+                "Disposed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disposed"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#IdempotencyToken": {
@@ -1737,6 +1913,9 @@
                         "smithy.api#documentation": "<p>The status of the assignments to return: Submitted | Approved\n            | Rejected</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ListAssignmentsForHITResponse": {
@@ -1757,6 +1936,9 @@
                         "smithy.api#documentation": "<p> The collection of Assignment data structures returned by\n            this call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#ListBonusPayments": {
@@ -1809,6 +1991,9 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mturk#ResultSize"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ListBonusPaymentsResponse": {
@@ -1829,6 +2014,9 @@
                         "smithy.api#documentation": "<p>A successful request to the ListBonusPayments operation\n            returns a list of BonusPayment objects.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#ListHITs": {
@@ -1905,6 +2093,9 @@
                         "smithy.api#documentation": "<p>\n            Limit the number of results returned.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ListHITsForQualificationTypeResponse": {
@@ -1925,6 +2116,9 @@
                         "smithy.api#documentation": "<p> The list of HIT elements returned by the query.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#ListHITsRequest": {
@@ -1939,6 +2133,9 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mturk#ResultSize"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ListHITsResponse": {
@@ -1959,6 +2156,9 @@
                         "smithy.api#documentation": "<p> The list of HIT elements returned by the query.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#ListQualificationRequests": {
@@ -2005,6 +2205,9 @@
                         "smithy.api#documentation": "<p> The maximum number of results to return in a single call.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ListQualificationRequestsResponse": {
@@ -2025,6 +2228,9 @@
                         "smithy.api#documentation": "<p>The Qualification request. The response includes one\n            QualificationRequest element\n            for each Qualification request returned\n            by the query.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#ListQualificationTypes": {
@@ -2084,6 +2290,9 @@
                         "smithy.api#documentation": "<p> The maximum number of results to return in a single call.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ListQualificationTypesResponse": {
@@ -2104,6 +2313,9 @@
                         "smithy.api#documentation": "<p> The list of QualificationType elements returned by the\n            query.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#ListReviewPolicyResultsForHIT": {
@@ -2172,6 +2384,9 @@
                         "smithy.api#documentation": "<p>Limit the number of results returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ListReviewPolicyResultsForHITResponse": {
@@ -2210,6 +2425,9 @@
                 "NextToken": {
                     "target": "com.amazonaws.mturk#PaginationToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#ListReviewableHITs": {
@@ -2265,6 +2483,9 @@
                         "smithy.api#documentation": "<p>\n            Limit the number of results returned.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ListReviewableHITsResponse": {
@@ -2285,6 +2506,9 @@
                         "smithy.api#documentation": "<p> The list of HIT elements returned by the query.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#ListWorkerBlocks": {
@@ -2325,6 +2549,9 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mturk#ResultSize"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ListWorkerBlocksResponse": {
@@ -2345,6 +2572,9 @@
                         "smithy.api#documentation": "<p> The list of WorkerBlocks, containing the collection of\n            Worker IDs and reasons for blocking.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#ListWorkersWithQualificationType": {
@@ -2401,6 +2631,9 @@
                         "smithy.api#documentation": "<p>\n            Limit the number of results returned.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#ListWorkersWithQualificationTypeResponse": {
@@ -2421,6 +2654,9 @@
                         "smithy.api#documentation": "<p> The list of Qualification elements returned by this call.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#Locale": {
@@ -2581,6 +2817,7 @@
                     "arnNamespace": "mturk-requester",
                     "cloudFormationName": "MTurk",
                     "cloudTrailEventSource": "mturk.amazonaws.com",
+                    "docId": "mturk-requester-2017-01-17",
                     "endpointPrefix": "mturk-requester"
                 },
                 "aws.auth#sigv4": {
@@ -2652,9 +2889,188 @@
                                     "type": "error"
                                 },
                                 {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
                                     "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
                                     "type": "tree",
                                     "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://mturk-requester-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://mturk-requester-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
                                         {
                                             "conditions": [
                                                 {
@@ -2667,15 +3083,69 @@
                                                     ]
                                                 }
                                             ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://mturk-requester.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "sandbox"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://mturk-requester-sandbox.us-east-1.amazonaws.com",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
+                                                "url": "https://mturk-requester.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -2687,277 +3157,8 @@
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "isSet",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    "type": "tree",
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "aws.partition",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "Region"
-                                                        }
-                                                    ],
-                                                    "assign": "PartitionResult"
-                                                }
-                                            ],
-                                            "type": "tree",
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://mturk-requester-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://mturk-requester-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "type": "tree",
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "type": "tree",
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://mturk-requester.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "type": "tree",
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "sandbox"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://mturk-requester-sandbox.us-east-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://mturk-requester.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "conditions": [],
-                                    "error": "Invalid Configuration: Missing Region",
-                                    "type": "error"
-                                }
-                            ]
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
                         }
                     ]
                 },
@@ -2972,8 +3173,8 @@
                             },
                             "params": {
                                 "Region": "sandbox",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2985,8 +3186,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2998,8 +3199,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3011,8 +3212,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3024,8 +3225,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3037,8 +3238,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3050,8 +3251,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3063,8 +3264,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3076,8 +3277,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3089,8 +3290,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3102,8 +3303,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3115,8 +3316,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3128,8 +3329,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3141,8 +3353,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3154,8 +3377,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3167,8 +3401,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3180,8 +3425,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3193,8 +3438,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3206,8 +3451,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3218,8 +3463,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3230,9 +3475,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -3277,22 +3528,26 @@
             }
         },
         "com.amazonaws.mturk#NotificationTransport": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Email",
-                        "name": "Email"
-                    },
-                    {
-                        "value": "SQS",
-                        "name": "SQS"
-                    },
-                    {
-                        "value": "SNS",
-                        "name": "SNS"
+            "type": "enum",
+            "members": {
+                "Email": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Email"
                     }
-                ]
+                },
+                "SQS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQS"
+                    }
+                },
+                "SNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNS"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#NotifyWorkers": {
@@ -3316,18 +3571,20 @@
             }
         },
         "com.amazonaws.mturk#NotifyWorkersFailureCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SoftFailure",
-                        "name": "SoftFailure"
-                    },
-                    {
-                        "value": "HardFailure",
-                        "name": "HardFailure"
+            "type": "enum",
+            "members": {
+                "SoftFailure": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SoftFailure"
                     }
-                ]
+                },
+                "HardFailure": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HardFailure"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#NotifyWorkersFailureStatus": {
@@ -3386,6 +3643,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#NotifyWorkersResponse": {
@@ -3397,6 +3657,9 @@
                         "smithy.api#documentation": "<p> When MTurk sends notifications to the list of Workers, it\n            returns back any failures it encounters in this list of\n            NotifyWorkersFailureStatus objects.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#PaginationToken": {
@@ -3618,18 +3881,20 @@
             }
         },
         "com.amazonaws.mturk#QualificationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Granted",
-                        "name": "Granted"
-                    },
-                    {
-                        "value": "Revoked",
-                        "name": "Revoked"
+            "type": "enum",
+            "members": {
+                "Granted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Granted"
                     }
-                ]
+                },
+                "Revoked": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Revoked"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#QualificationType": {
@@ -3725,18 +3990,20 @@
             }
         },
         "com.amazonaws.mturk#QualificationTypeStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Active",
-                        "name": "Active"
-                    },
-                    {
-                        "value": "Inactive",
-                        "name": "Inactive"
+            "type": "enum",
+            "members": {
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
                     }
-                ]
+                },
+                "Inactive": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inactive"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#RejectAssignment": {
@@ -3777,11 +4044,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#RejectAssignmentResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#RejectQualificationRequest": {
             "type": "operation",
@@ -3819,11 +4092,17 @@
                         "smithy.api#documentation": "<p>A text message explaining why the request was rejected, to be\n            shown to the Worker who made the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#RejectQualificationRequestResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#RequestError": {
             "type": "structure",
@@ -3836,6 +4115,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RequestError",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Your request is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3913,26 +4196,32 @@
             }
         },
         "com.amazonaws.mturk#ReviewActionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Intended",
-                        "name": "Intended"
-                    },
-                    {
-                        "value": "Succeeded",
-                        "name": "Succeeded"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
-                    },
-                    {
-                        "value": "Cancelled",
-                        "name": "Cancelled"
+            "type": "enum",
+            "members": {
+                "Intended": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Intended"
                     }
-                ]
+                },
+                "Succeeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Succeeded"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Cancelled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cancelled"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#ReviewPolicy": {
@@ -3957,18 +4246,20 @@
             }
         },
         "com.amazonaws.mturk#ReviewPolicyLevel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Assignment",
-                        "name": "Assignment"
-                    },
-                    {
-                        "value": "HIT",
-                        "name": "HIT"
+            "type": "enum",
+            "members": {
+                "Assignment": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Assignment"
                     }
-                ]
+                },
+                "HIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIT"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#ReviewPolicyLevelList": {
@@ -4048,18 +4339,20 @@
             }
         },
         "com.amazonaws.mturk#ReviewableHITStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Reviewable",
-                        "name": "Reviewable"
-                    },
-                    {
-                        "value": "Reviewing",
-                        "name": "Reviewing"
+            "type": "enum",
+            "members": {
+                "Reviewable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Reviewable"
                     }
-                ]
+                },
+                "Reviewing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Reviewing"
+                    }
+                }
             }
         },
         "com.amazonaws.mturk#SendBonus": {
@@ -4119,11 +4412,17 @@
                         "smithy.api#documentation": "<p>A unique identifier for this request, which allows you to\n            retry the call on error without granting multiple bonuses. This is\n            useful in cases such as network timeouts where it is unclear whether\n            or not the call succeeded on the server. If the bonus already exists\n            in the system from a previous call using the same UniqueRequestToken,\n            subsequent calls will return an error with a message containing the\n            request ID.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#SendBonusResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#SendTestEventNotification": {
             "type": "operation",
@@ -4162,11 +4461,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#SendTestEventNotificationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#ServiceFault": {
             "type": "structure",
@@ -4179,6 +4484,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceFault",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -4237,11 +4546,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#UpdateExpirationForHITResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#UpdateHITReviewStatus": {
             "type": "operation",
@@ -4280,11 +4595,17 @@
                         "smithy.api#documentation": "<p>\n            Specifies how to update the HIT status. Default is <code>False</code>.\n        </p>\n        <ul>\n            <li>\n                <p>\n                    Setting this to false will only transition a HIT from <code>Reviewable</code> to <code>Reviewing</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    Setting this to true will only transition a HIT from <code>Reviewing</code> to <code>Reviewable</code>\n                </p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#UpdateHITReviewStatusResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#UpdateHITTypeOfHIT": {
             "type": "operation",
@@ -4324,11 +4645,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#UpdateHITTypeOfHITResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#UpdateNotificationSettings": {
             "type": "operation",
@@ -4373,11 +4700,17 @@
                         "smithy.api#documentation": "<p>\n            Specifies whether notifications are sent for HITs of this HIT type,\n            according to the notification specification.\n            You must specify either the Notification parameter or the Active parameter\n            for the call to UpdateNotificationSettings to succeed.\n        </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#UpdateNotificationSettingsResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.mturk#UpdateQualificationType": {
             "type": "operation",
@@ -4457,6 +4790,9 @@
                         "smithy.api#documentation": "<p>The Qualification value to use for automatically granted Qualifications. This parameter is used only if the AutoGranted parameter is true.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mturk#UpdateQualificationTypeResponse": {
@@ -4468,6 +4804,9 @@
                         "smithy.api#documentation": "<p> Contains a QualificationType data structure.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mturk#WorkerBlock": {
