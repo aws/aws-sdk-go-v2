@@ -65,7 +65,7 @@ type CreateTapesInput struct {
 	TapeBarcodePrefix *string
 
 	// The size, in bytes, of the virtual tapes that you want to create. The size must
-	// be aligned by gigabyte (102410241024 bytes).
+	// be aligned by gigabyte (1024*1024*1024 bytes).
 	//
 	// This member is required.
 	TapeSizeInBytes *int64

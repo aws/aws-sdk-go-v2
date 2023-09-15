@@ -66,10 +66,8 @@ type StartModelInput struct {
 	// you. This prevents retries after a network error from making multiple start
 	// requests. You'll need to provide your own value for other use cases. An error
 	// occurs if the other input parameters are not the same as in the first request.
-	// Using a different
-	//
-	// value for ClientToken is considered a new call to StartModel . An idempotency
-	// token is active for 8 hours.
+	// Using a different value for ClientToken is considered a new call to StartModel .
+	// An idempotency token is active for 8 hours.
 	ClientToken *string
 
 	// The maximum number of inference units to use for auto-scaling the model. If you

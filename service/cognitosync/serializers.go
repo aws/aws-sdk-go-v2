@@ -651,8 +651,8 @@ func awsRestjson1_serializeOpHttpBindingsListDatasetsInput(v *ListDatasetsInput,
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -715,8 +715,8 @@ func awsRestjson1_serializeOpHttpBindingsListIdentityPoolUsageInput(v *ListIdent
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -810,8 +810,8 @@ func awsRestjson1_serializeOpHttpBindingsListRecordsInput(v *ListRecordsInput, e
 		encoder.SetQuery("lastSyncCount").Long(*v.LastSyncCount)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

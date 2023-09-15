@@ -716,8 +716,28 @@ func TestEndpointCase17(t *testing.T) {
 	}
 }
 
-// For region us-iso-east-1 with FIPS enabled and DualStack disabled
+// For region us-iso-east-1 with FIPS enabled and DualStack enabled
 func TestEndpointCase18(t *testing.T) {
+	var params = EndpointParameters{
+		Region:       ptr.String("us-iso-east-1"),
+		UseFIPS:      ptr.Bool(true),
+		UseDualStack: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// For region us-iso-east-1 with FIPS enabled and DualStack disabled
+func TestEndpointCase19(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-iso-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -755,8 +775,28 @@ func TestEndpointCase18(t *testing.T) {
 	}
 }
 
+// For region us-iso-east-1 with FIPS disabled and DualStack enabled
+func TestEndpointCase20(t *testing.T) {
+	var params = EndpointParameters{
+		Region:       ptr.String("us-iso-east-1"),
+		UseFIPS:      ptr.Bool(false),
+		UseDualStack: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
 // For region us-iso-east-1 with FIPS disabled and DualStack disabled
-func TestEndpointCase19(t *testing.T) {
+func TestEndpointCase21(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-iso-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -794,8 +834,28 @@ func TestEndpointCase19(t *testing.T) {
 	}
 }
 
+// For region us-isob-east-1 with FIPS enabled and DualStack enabled
+func TestEndpointCase22(t *testing.T) {
+	var params = EndpointParameters{
+		Region:       ptr.String("us-isob-east-1"),
+		UseFIPS:      ptr.Bool(true),
+		UseDualStack: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "FIPS and DualStack are enabled, but this partition does not support one or both", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
 // For region us-isob-east-1 with FIPS enabled and DualStack disabled
-func TestEndpointCase20(t *testing.T) {
+func TestEndpointCase23(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-isob-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -833,8 +893,28 @@ func TestEndpointCase20(t *testing.T) {
 	}
 }
 
+// For region us-isob-east-1 with FIPS disabled and DualStack enabled
+func TestEndpointCase24(t *testing.T) {
+	var params = EndpointParameters{
+		Region:       ptr.String("us-isob-east-1"),
+		UseFIPS:      ptr.Bool(false),
+		UseDualStack: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
 // For region us-isob-east-1 with FIPS disabled and DualStack disabled
-func TestEndpointCase21(t *testing.T) {
+func TestEndpointCase25(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-isob-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -873,7 +953,7 @@ func TestEndpointCase21(t *testing.T) {
 }
 
 // For custom endpoint with region set and fips disabled and dualstack disabled
-func TestEndpointCase22(t *testing.T) {
+func TestEndpointCase26(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -913,7 +993,7 @@ func TestEndpointCase22(t *testing.T) {
 }
 
 // For custom endpoint with region not set and fips disabled and dualstack disabled
-func TestEndpointCase23(t *testing.T) {
+func TestEndpointCase27(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS:      ptr.Bool(false),
 		UseDualStack: ptr.Bool(false),
@@ -952,7 +1032,7 @@ func TestEndpointCase23(t *testing.T) {
 }
 
 // For custom endpoint with fips enabled and dualstack disabled
-func TestEndpointCase24(t *testing.T) {
+func TestEndpointCase28(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -973,7 +1053,7 @@ func TestEndpointCase24(t *testing.T) {
 }
 
 // For custom endpoint with fips disabled and dualstack enabled
-func TestEndpointCase25(t *testing.T) {
+func TestEndpointCase29(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -989,6 +1069,22 @@ func TestEndpointCase25(t *testing.T) {
 		t.Fatalf("expect error, got none")
 	}
 	if e, a := "Invalid Configuration: Dualstack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Missing region
+func TestEndpointCase30(t *testing.T) {
+	var params = EndpointParameters{}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Missing Region", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }

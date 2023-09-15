@@ -1999,10 +1999,10 @@ func TestEndpointCase53(t *testing.T) {
 // UseGlobalEndpoint with legacy region `ap-northeast-1`
 func TestEndpointCase54(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("ap-northeast-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2022,9 +2022,9 @@ func TestEndpointCase54(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2049,10 +2049,10 @@ func TestEndpointCase54(t *testing.T) {
 // UseGlobalEndpoint with legacy region `ap-south-1`
 func TestEndpointCase55(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("ap-south-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2072,9 +2072,9 @@ func TestEndpointCase55(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2099,10 +2099,10 @@ func TestEndpointCase55(t *testing.T) {
 // UseGlobalEndpoint with legacy region `ap-southeast-1`
 func TestEndpointCase56(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("ap-southeast-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2122,9 +2122,9 @@ func TestEndpointCase56(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2149,10 +2149,10 @@ func TestEndpointCase56(t *testing.T) {
 // UseGlobalEndpoint with legacy region `ap-southeast-2`
 func TestEndpointCase57(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("ap-southeast-2"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2172,9 +2172,9 @@ func TestEndpointCase57(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2199,10 +2199,10 @@ func TestEndpointCase57(t *testing.T) {
 // UseGlobalEndpoint with legacy region `aws-global`
 func TestEndpointCase58(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("aws-global"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2222,9 +2222,9 @@ func TestEndpointCase58(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2249,10 +2249,10 @@ func TestEndpointCase58(t *testing.T) {
 // UseGlobalEndpoint with legacy region `ca-central-1`
 func TestEndpointCase59(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("ca-central-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2272,9 +2272,9 @@ func TestEndpointCase59(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2299,10 +2299,10 @@ func TestEndpointCase59(t *testing.T) {
 // UseGlobalEndpoint with legacy region `eu-central-1`
 func TestEndpointCase60(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("eu-central-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2322,9 +2322,9 @@ func TestEndpointCase60(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2349,10 +2349,10 @@ func TestEndpointCase60(t *testing.T) {
 // UseGlobalEndpoint with legacy region `eu-north-1`
 func TestEndpointCase61(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("eu-north-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2372,9 +2372,9 @@ func TestEndpointCase61(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2399,10 +2399,10 @@ func TestEndpointCase61(t *testing.T) {
 // UseGlobalEndpoint with legacy region `eu-west-1`
 func TestEndpointCase62(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("eu-west-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2422,9 +2422,9 @@ func TestEndpointCase62(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2449,10 +2449,10 @@ func TestEndpointCase62(t *testing.T) {
 // UseGlobalEndpoint with legacy region `eu-west-2`
 func TestEndpointCase63(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("eu-west-2"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2472,9 +2472,9 @@ func TestEndpointCase63(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2499,10 +2499,10 @@ func TestEndpointCase63(t *testing.T) {
 // UseGlobalEndpoint with legacy region `eu-west-3`
 func TestEndpointCase64(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("eu-west-3"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2522,9 +2522,9 @@ func TestEndpointCase64(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2549,10 +2549,10 @@ func TestEndpointCase64(t *testing.T) {
 // UseGlobalEndpoint with legacy region `sa-east-1`
 func TestEndpointCase65(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("sa-east-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2572,9 +2572,9 @@ func TestEndpointCase65(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2599,10 +2599,10 @@ func TestEndpointCase65(t *testing.T) {
 // UseGlobalEndpoint with legacy region `us-east-1`
 func TestEndpointCase66(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("us-east-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2622,9 +2622,9 @@ func TestEndpointCase66(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2649,10 +2649,10 @@ func TestEndpointCase66(t *testing.T) {
 // UseGlobalEndpoint with legacy region `us-east-2`
 func TestEndpointCase67(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("us-east-2"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2672,9 +2672,9 @@ func TestEndpointCase67(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2699,10 +2699,10 @@ func TestEndpointCase67(t *testing.T) {
 // UseGlobalEndpoint with legacy region `us-west-1`
 func TestEndpointCase68(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("us-west-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2722,9 +2722,9 @@ func TestEndpointCase68(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2749,10 +2749,10 @@ func TestEndpointCase68(t *testing.T) {
 // UseGlobalEndpoint with legacy region `us-west-2`
 func TestEndpointCase69(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("us-west-2"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2772,9 +2772,9 @@ func TestEndpointCase69(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-1",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2799,10 +2799,10 @@ func TestEndpointCase69(t *testing.T) {
 // UseGlobalEndpoint with Non-legacy region `us-east-3`
 func TestEndpointCase70(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("us-east-3"),
+		UseGlobalEndpoint: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
@@ -2822,9 +2822,9 @@ func TestEndpointCase70(t *testing.T) {
 			var properties smithy.Properties
 			properties.Set("authSchemes", []interface{}{
 				map[string]interface{}{
-					"signingName":   "sts",
 					"name":          "sigv4",
 					"signingRegion": "us-east-3",
+					"signingName":   "sts",
 				},
 			})
 			return properties
@@ -2849,10 +2849,10 @@ func TestEndpointCase70(t *testing.T) {
 // UseGlobalEndpoint with legacy region and custom endpoint
 func TestEndpointCase71(t *testing.T) {
 	var params = EndpointParameters{
-		UseGlobalEndpoint: ptr.Bool(true),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
 		Region:            ptr.String("us-west-1"),
+		UseGlobalEndpoint: ptr.Bool(true),
 		Endpoint:          ptr.String("https://example.com"),
 	}
 
@@ -2890,10 +2890,10 @@ func TestEndpointCase71(t *testing.T) {
 // UseGlobalEndpoint with unset region and custom endpoint
 func TestEndpointCase72(t *testing.T) {
 	var params = EndpointParameters{
-		Endpoint:          ptr.String("https://example.com"),
-		UseGlobalEndpoint: ptr.Bool(false),
 		UseDualStack:      ptr.Bool(false),
 		UseFIPS:           ptr.Bool(false),
+		Endpoint:          ptr.String("https://example.com"),
+		UseGlobalEndpoint: ptr.Bool(false),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()
