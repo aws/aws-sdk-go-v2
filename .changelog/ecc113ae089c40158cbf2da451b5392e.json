@@ -1,0 +1,8 @@
+{
+    "id": "ecc113ae-089c-4015-8cbf-2da451b5392e",
+    "type": "feature",
+    "description": "This release introduces Skip Model Validation for Model Packages",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

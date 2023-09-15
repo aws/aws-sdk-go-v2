@@ -55814,6 +55814,15 @@ func awsAwsjson11_deserializeDocumentModelPackage(v **types.ModelPackage, value 
 				sv.SamplePayloadUrl = ptr.String(jtv)
 			}
 
+		case "SkipModelValidation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SkipModelValidation to be of type string, got %T instead", value)
+				}
+				sv.SkipModelValidation = types.SkipModelValidation(jtv)
+			}
+
 		case "SourceAlgorithmSpecification":
 			if err := awsAwsjson11_deserializeDocumentSourceAlgorithmSpecification(&sv.SourceAlgorithmSpecification, value); err != nil {
 				return err
@@ -82623,6 +82632,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelPackageOutput(v **DescribeMo
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.SamplePayloadUrl = ptr.String(jtv)
+			}
+
+		case "SkipModelValidation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SkipModelValidation to be of type string, got %T instead", value)
+				}
+				sv.SkipModelValidation = types.SkipModelValidation(jtv)
 			}
 
 		case "SourceAlgorithmSpecification":

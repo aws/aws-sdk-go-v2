@@ -227,7 +227,6 @@ const (
 	FleetAttributeIamRoleArn                       FleetAttribute = "IAM_ROLE_ARN"
 	FleetAttributeUsbDeviceFilterStrings           FleetAttribute = "USB_DEVICE_FILTER_STRINGS"
 	FleetAttributeSessionScriptS3Location          FleetAttribute = "SESSION_SCRIPT_S3_LOCATION"
-	FleetAttributeMaxSessionsPerInstance           FleetAttribute = "MAX_SESSIONS_PER_INSTANCE"
 )
 
 // Values returns all known values for FleetAttribute. Note that this can be
@@ -241,7 +240,6 @@ func (FleetAttribute) Values() []FleetAttribute {
 		"IAM_ROLE_ARN",
 		"USB_DEVICE_FILTER_STRINGS",
 		"SESSION_SCRIPT_S3_LOCATION",
-		"MAX_SESSIONS_PER_INSTANCE",
 	}
 }
 

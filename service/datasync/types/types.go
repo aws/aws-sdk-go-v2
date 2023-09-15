@@ -876,9 +876,7 @@ type ReportOverrides struct {
 	Transferred *ReportOverride
 
 	// Specifies the level of reporting for the files, objects, and directories that
-	// DataSync attempted to verify at the end of your transfer. This only applies if
-	// you configure your task (https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html)
-	// to verify data during and after the transfer (which DataSync does by default).
+	// DataSync attempted to verify at the end of your transfer.
 	Verified *ReportOverride
 
 	noSmithyDocumentSerde

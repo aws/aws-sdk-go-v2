@@ -52,9 +52,6 @@ type DescribeSessionsInput struct {
 	// users using a streaming URL.
 	AuthenticationType types.AuthenticationType
 
-	// The identifier for the instance hosting the session.
-	InstanceId *string
-
 	// The size of each page of results. The default value is 20 and the maximum value
 	// is 50.
 	Limit *int32

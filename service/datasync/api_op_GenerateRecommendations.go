@@ -22,9 +22,7 @@ import (
 // information, see Recommendations provided by DataSync Discovery (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html)
 // . Once generated, you can view your recommendations by using the
 // DescribeStorageSystemResources (https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeStorageSystemResources.html)
-// operation. If your discovery job completes successfully (https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table)
-// , you don't need to use this operation. DataSync Discovery generates the
-// recommendations for you automatically.
+// operation.
 func (c *Client) GenerateRecommendations(ctx context.Context, params *GenerateRecommendationsInput, optFns ...func(*Options)) (*GenerateRecommendationsOutput, error) {
 	if params == nil {
 		params = &GenerateRecommendationsInput{}

@@ -161,10 +161,6 @@ type UpdateFleetInput struct {
 	// The maximum number of concurrent sessions for a fleet.
 	MaxConcurrentSessions *int32
 
-	// The maximum number of user sessions on an instance. This only applies to
-	// multi-session fleets.
-	MaxSessionsPerInstance *int32
-
 	// The maximum amount of time that a streaming session can remain active, in
 	// seconds. If users are still connected to a streaming instance five minutes
 	// before this limit is reached, they are prompted to save any open documents

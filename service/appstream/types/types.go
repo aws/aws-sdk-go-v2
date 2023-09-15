@@ -298,13 +298,9 @@ type CertificateBasedAuthProperties struct {
 type ComputeCapacity struct {
 
 	// The desired number of streaming instances.
+	//
+	// This member is required.
 	DesiredInstances *int32
-
-	// The desired number of user sessions for a multi-session fleet. This is not
-	// allowed for single-session fleets. When you create a fleet, you must set either
-	// the DesiredSessions or DesiredInstances attribute, based on the type of fleet
-	// you create. You can’t define both attributes or leave both attributes blank.
-	DesiredSessions *int32
 
 	noSmithyDocumentSerde
 }
@@ -317,29 +313,8 @@ type ComputeCapacityStatus struct {
 	// This member is required.
 	Desired *int32
 
-	// The number of user sessions currently being used for streaming sessions. This
-	// only applies to multi-session fleets.
-	ActiveUserSessions *int32
-
-	// The total number of session slots that are available for streaming or are
-	// currently streaming. ActualUserSessionCapacity = AvailableUserSessionCapacity +
-	// ActiveUserSessions This only applies to multi-session fleets.
-	ActualUserSessions *int32
-
 	// The number of currently available instances that can be used to stream sessions.
 	Available *int32
-
-	// The number of idle session slots currently available for user sessions.
-	// AvailableUserSessionCapacity = ActualUserSessionCapacity - ActiveUserSessions
-	// This only applies to multi-session fleets.
-	AvailableUserSessions *int32
-
-	// The total number of sessions slots that are either running or pending. This
-	// represents the total number of concurrent streaming sessions your fleet can
-	// support in a steady state. DesiredUserSessionCapacity =
-	// ActualUserSessionCapacity + PendingUserSessionCapacity This only applies to
-	// multi-session fleets.
-	DesiredUserSessions *int32
 
 	// The number of instances in use for streaming.
 	InUse *int32
@@ -623,10 +598,6 @@ type Fleet struct {
 
 	// The maximum number of concurrent sessions for the fleet.
 	MaxConcurrentSessions *int32
-
-	// The maximum number of user sessions on an instance. This only applies to
-	// multi-session fleets.
-	MaxSessionsPerInstance *int32
 
 	// The maximum amount of time that a streaming session can remain active, in
 	// seconds. If users are still connected to a streaming instance five minutes
@@ -1020,9 +991,6 @@ type Session struct {
 
 	// Specifies whether a user is connected to the streaming session.
 	ConnectionState SessionConnectionState
-
-	// The identifier for the instance hosting the session.
-	InstanceId *string
 
 	// The time when the streaming session is set to expire. This time is based on the
 	// MaxUserDurationinSeconds value, which determines the maximum length of time that

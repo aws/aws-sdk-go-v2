@@ -5048,6 +5048,24 @@ func (SecondaryStatus) Values() []SecondaryStatus {
 	}
 }
 
+type SkipModelValidation string
+
+// Enum values for SkipModelValidation
+const (
+	SkipModelValidationAll  SkipModelValidation = "All"
+	SkipModelValidationNone SkipModelValidation = "None"
+)
+
+// Values returns all known values for SkipModelValidation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SkipModelValidation) Values() []SkipModelValidation {
+	return []SkipModelValidation{
+		"All",
+		"None",
+	}
+}
+
 type SortActionsBy string
 
 // Enum values for SortActionsBy

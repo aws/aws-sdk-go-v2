@@ -114,6 +114,9 @@ type CreateModelPackageInput struct {
 	// call.
 	SamplePayloadUrl *string
 
+	// Indicates if you want to skip model validation.
+	SkipModelValidation types.SkipModelValidation
+
 	// Details about the algorithm that was used to create the model package.
 	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
 

@@ -28115,6 +28115,11 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 		ok.String(*v.SamplePayloadUrl)
 	}
 
+	if len(v.SkipModelValidation) > 0 {
+		ok := object.Key("SkipModelValidation")
+		ok.String(string(v.SkipModelValidation))
+	}
+
 	if v.SourceAlgorithmSpecification != nil {
 		ok := object.Key("SourceAlgorithmSpecification")
 		if err := awsAwsjson11_serializeDocumentSourceAlgorithmSpecification(v.SourceAlgorithmSpecification, ok); err != nil {
