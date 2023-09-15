@@ -4321,18 +4321,18 @@
                 "CsvContentTypes": {
                     "target": "com.amazonaws.sagemaker#CsvContentTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of all content type headers that SageMaker will treat as CSV and capture accordingly.</p>"
+                        "smithy.api#documentation": "<p>The list of all content type headers that Amazon SageMaker will treat as CSV and\n         capture accordingly.</p>"
                     }
                 },
                 "JsonContentTypes": {
                     "target": "com.amazonaws.sagemaker#JsonContentTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of all content type headers that SageMaker will treat as JSON and capture accordingly.</p>"
+                        "smithy.api#documentation": "<p>The list of all content type headers that SageMaker will treat as JSON and\n         capture accordingly.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration specifying how to treat different headers. If no headers are specified SageMaker \n         will by default base64 encode when capturing the data.</p>"
+                "smithy.api#documentation": "<p>Configuration specifying how to treat different headers. If no headers are specified\n            Amazon SageMaker will by default base64 encode when capturing the data.</p>"
             }
         },
         "com.amazonaws.sagemaker#CaptureMode": {
@@ -7310,7 +7310,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a definition for a job that monitors data quality and drift. For information\n         about model monitor, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html\">Amazon SageMaker Model Monitor</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a definition for a job that monitors data quality and drift. For information\n         about model monitor, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html\">Amazon SageMaker Model\n         Monitor</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateDataQualityJobDefinitionRequest": {
@@ -7364,7 +7364,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to\n         perform tasks on your behalf.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can \n   assume to perform tasks on your behalf.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7374,7 +7374,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management\n            User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see \n   <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">\n   Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>"
                     }
                 }
             },
@@ -8968,7 +8968,7 @@
                 "JobDefinitionName": {
                     "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the bias job definition. The name must be unique within an Amazon Web Services Region in the\n         Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the bias job definition. The name must be unique within an Amazon Web Services \n   Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9013,7 +9013,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to\n         perform tasks on your behalf.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can \n   assume to perform tasks on your behalf.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9023,7 +9023,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management\n            User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see \n   <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">\n   Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>"
                     }
                 }
             },
@@ -9222,7 +9222,7 @@
                 "JobDefinitionName": {
                     "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the model explainability job definition. The name must be unique within an\n         Amazon Web Services Region in the Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p> The name of the model explainability job definition. The name must be unique within an\n            Amazon Web Services Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9235,7 +9235,7 @@
                 "ModelExplainabilityAppSpecification": {
                     "target": "com.amazonaws.sagemaker#ModelExplainabilityAppSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the model explainability job to run a specified Docker container\n         image.</p>",
+                        "smithy.api#documentation": "<p>Configures the model explainability job to run a specified Docker container image.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9267,7 +9267,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to\n         perform tasks on your behalf.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can \n   assume to perform tasks on your behalf.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9277,7 +9277,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management\n            User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see \n   <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">\n   Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>"
                     }
                 }
             },
@@ -9562,6 +9562,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of additional Inference Specification objects. Each additional \n    Inference Specification specifies artifacts based on this model package that can \n    be used on inference endpoints. Generally used with SageMaker Neo to store the \n    compiled artifacts. </p>"
                     }
+                },
+                "SkipModelValidation": {
+                    "target": "com.amazonaws.sagemaker#SkipModelValidation",
+                    "traits": {
+                        "smithy.api#default": "None",
+                        "smithy.api#documentation": "<p>Indicates if you want to skip model validation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9600,7 +9607,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a definition for a job that monitors model quality and drift. For information\n         about model monitor, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html\">Amazon SageMaker Model Monitor</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a definition for a job that monitors model quality and drift. For information\n         about model monitor, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html\">Amazon SageMaker Model\n         Monitor</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateModelQualityJobDefinitionRequest": {
@@ -9654,7 +9661,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to\n         perform tasks on your behalf.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can \n   assume to perform tasks on your behalf.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9664,7 +9671,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management\n            User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see \n   <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">\n   Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>"
                     }
                 }
             },
@@ -9704,7 +9711,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data\n         captured for an Amazon SageMaker Endpoint.</p>"
+                "smithy.api#documentation": "<p>Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to\n         monitor the data captured for an Amazon SageMaker Endpoint.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateMonitoringScheduleRequest": {
@@ -9713,21 +9720,21 @@
                 "MonitoringScheduleName": {
                     "target": "com.amazonaws.sagemaker#MonitoringScheduleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the monitoring schedule. The name must be unique within an Amazon Web Services Region within\n         an Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the monitoring schedule. The name must be unique within an Amazon Web Services \n   Region within an Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MonitoringScheduleConfig": {
                     "target": "com.amazonaws.sagemaker#MonitoringScheduleConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration object that specifies the monitoring schedule and defines the\n         monitoring job.</p>",
+                        "smithy.api#documentation": "<p>The configuration object that specifies the monitoring schedule and defines the monitoring \n   job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see <a href=\" https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management\n            User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) An array of key-value pairs. For more information, see <a href=\" https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost\n            Management User Guide</i>.</p>"
                     }
                 }
             },
@@ -11351,7 +11358,7 @@
                 "InitialSamplingPercentage": {
                     "target": "com.amazonaws.sagemaker#SamplingPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of requests SageMaker will capture. A lower value is recommended for \n         Endpoints with high traffic.</p>",
+                        "smithy.api#documentation": "<p>The percentage of requests SageMaker will capture. A lower value is recommended\n         for Endpoints with high traffic.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11365,20 +11372,20 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt the\n          captured data at rest using Amazon S3 server-side encryption.</p>\n         <p>The KmsKeyId can be any of the following formats: </p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN:\n               <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name ARN:\n               <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Key Management Service key that SageMaker\n         uses to encrypt the captured data at rest using Amazon S3 server-side\n         encryption.</p>\n         <p>The KmsKeyId can be any of the following formats: </p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN:\n                  <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name ARN:\n               <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "CaptureOptions": {
                     "target": "com.amazonaws.sagemaker#CaptureOptionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies data Model Monitor will capture. You can configure whether to \n         collect only input, only output, or both</p>",
+                        "smithy.api#documentation": "<p>Specifies data Model Monitor will capture. You can configure whether to collect only\n         input, only output, or both</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CaptureContentTypeHeader": {
                     "target": "com.amazonaws.sagemaker#CaptureContentTypeHeader",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration specifying how to treat different headers. If no headers are specified SageMaker will \n         by default base64 encode when capturing the data.</p>"
+                        "smithy.api#documentation": "<p>Configuration specifying how to treat different headers. If no headers are specified\n            SageMaker will by default base64 encode when capturing the data.</p>"
                     }
                 }
             },
@@ -11545,13 +11552,13 @@
                 "RecordPreprocessorSourceUri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called per row prior to running analysis. It can\n         base64 decode the payload and convert it into a flatted json so that the built-in container\n         can use the converted data. Applicable only for the built-in (first party)\n         containers.</p>"
+                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called per row prior to running analysis. It can \n   base64 decode the payload and convert it into a flattened JSON so that the built-in container can use \n   the converted data. Applicable only for the built-in (first party) containers.</p>"
                     }
                 },
                 "PostAnalyticsProcessorSourceUri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called after analysis has been performed.\n         Applicable only for the built-in (first party) containers.</p>"
+                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called after analysis has been performed. Applicable \n   only for the built-in (first party) containers.</p>"
                     }
                 },
                 "Environment": {
@@ -11582,7 +11589,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration for monitoring constraints and monitoring statistics. These baseline\n         resources are compared against the results of the current job from the series of jobs\n         scheduled to collect data periodically.</p>"
+                "smithy.api#documentation": "<p>Configuration for monitoring constraints and monitoring statistics. These baseline resources are \n   compared against the results of the current job from the series of jobs scheduled to collect data \n   periodically.</p>"
             }
         },
         "com.amazonaws.sagemaker#DataQualityJobInput": {
@@ -15138,7 +15145,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to\n         perform tasks on your behalf.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can \n   assume to perform tasks on your behalf.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17967,7 +17974,7 @@
                 "JobDefinitionName": {
                     "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model bias job definition. The name must be unique within an Amazon Web Services Region\n         in the Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the model bias job definition. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -17989,7 +17996,7 @@
                 "JobDefinitionName": {
                     "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the bias job definition. The name must be unique within an Amazon Web Services Region in the\n         Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the bias job definition. The name must be unique within an Amazon Web Services \n   Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18041,7 +18048,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that\n         has read permission to the input data location and write permission to the output data\n         location in Amazon S3.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that has read permission to the \n   input data location and write permission to the output data location in Amazon S3.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18302,7 +18309,7 @@
                 "JobDefinitionName": {
                     "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model explainability job definition. The name must be unique within an\n         Amazon Web Services Region in the Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the model explainability job definition. The name must be unique within an\n            Amazon Web Services Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -18324,7 +18331,7 @@
                 "JobDefinitionName": {
                     "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the explainability job definition. The name must be unique within an Amazon Web Services\n         Region in the Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the explainability job definition. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18344,7 +18351,7 @@
                 "ModelExplainabilityAppSpecification": {
                     "target": "com.amazonaws.sagemaker#ModelExplainabilityAppSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the model explainability job to run a specified Docker container\n         image.</p>",
+                        "smithy.api#documentation": "<p>Configures the model explainability job to run a specified Docker container image.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18376,7 +18383,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that\n         has read permission to the input data location and write permission to the output data\n         location in Amazon S3.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that has read permission to the \n   input data location and write permission to the output data location in Amazon S3.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18727,6 +18734,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of additional Inference Specification objects. Each additional \n    Inference Specification specifies artifacts based on this model package that can \n    be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts.</p>"
                     }
+                },
+                "SkipModelValidation": {
+                    "target": "com.amazonaws.sagemaker#SkipModelValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if you want to skip model validation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18756,7 +18769,7 @@
                 "JobDefinitionName": {
                     "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model quality job. The name must be unique within an Amazon Web Services Region in the\n         Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the model quality job. The name must be unique within an Amazon Web Services\n         Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -18778,7 +18791,7 @@
                 "JobDefinitionName": {
                     "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the quality job definition. The name must be unique within an Amazon Web Services Region in\n         the Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the quality job definition. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18830,7 +18843,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to\n         perform tasks on your behalf.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can \n   assume to perform tasks on your behalf.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18927,7 +18940,7 @@
                 "MonitoringScheduleConfig": {
                     "target": "com.amazonaws.sagemaker#MonitoringScheduleConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration object that specifies the monitoring schedule and defines the\n         monitoring job.</p>",
+                        "smithy.api#documentation": "<p>The configuration object that specifies the monitoring schedule and defines the monitoring \n   job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -22984,7 +22997,7 @@
                 "S3DataDistributionType": {
                     "target": "com.amazonaws.sagemaker#ProcessingS3DataDistributionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key.\n         Defaults to <code>FullyReplicated</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether input data distributed in Amazon S3 is fully replicated or sharded by an\n            Amazon S3 key. Defaults to <code>FullyReplicated</code>\n         </p>"
                     }
                 },
                 "FeaturesAttribute": {
@@ -31463,7 +31476,7 @@
                 "SortOrder": {
                     "target": "com.amazonaws.sagemaker#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sort order for results. The default is <code>Descending</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order. \n   The default is <code>Descending</code>.</p>"
                     }
                 },
                 "NextToken": {
@@ -33909,19 +33922,19 @@
                 "SortBy": {
                     "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionSortKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to sort results by the <code>Name</code> or <code>CreationTime</code> field. The\n         default is <code>CreationTime</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to sort results by the <code>Name</code> or <code>CreationTime</code> field. \n   The default is <code>CreationTime</code>.</p>"
                     }
                 },
                 "SortOrder": {
                     "target": "com.amazonaws.sagemaker#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.\n         The default is <code>Descending</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order. \n   The default is <code>Descending</code>.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job\n         executions, use it in the next request.</p>"
+                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job executions, use \n   it in the next request.</p>"
                     }
                 },
                 "MaxResults": {
@@ -33966,7 +33979,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs,\n         use it in the subsequent request.</p>"
+                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job executions, use \n   it in the next request.</p>"
                     }
                 }
             },
@@ -34309,19 +34322,19 @@
                 "SortBy": {
                     "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionSortKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to sort results by the <code>Name</code> or <code>CreationTime</code> field. The\n         default is <code>CreationTime</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to sort results by the <code>Name</code> or <code>CreationTime</code> field. \n   The default is <code>CreationTime</code>.</p>"
                     }
                 },
                 "SortOrder": {
                     "target": "com.amazonaws.sagemaker#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.\n         The default is <code>Descending</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order. \n   The default is <code>Descending</code>.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job\n         executions, use it in the next request.</p>"
+                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job executions, use \n   it in the next request.</p>"
                     }
                 },
                 "MaxResults": {
@@ -34366,7 +34379,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs,\n         use it in the subsequent request.</p>"
+                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job executions, use \n   it in the next request.</p>"
                     }
                 }
             },
@@ -34671,7 +34684,7 @@
                 "SortOrder": {
                     "target": "com.amazonaws.sagemaker#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sort order for results. The default is <code>Descending</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order. \n   The default is <code>Descending</code>.</p>"
                     }
                 },
                 "NextToken": {
@@ -34722,7 +34735,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of model\n         quality monitoring job definitions, use it in the next request.</p>"
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the\n         next set of model quality monitoring job definitions, use it in the next request.</p>"
                     }
                 }
             },
@@ -35030,19 +35043,19 @@
                 "SortBy": {
                     "target": "com.amazonaws.sagemaker#MonitoringExecutionSortKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to sort results by <code>Status</code>, <code>CreationTime</code>,\n            <code>ScheduledTime</code> field. The default is <code>CreationTime</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to sort the results by the <code>Status</code>, <code>CreationTime</code>, or \n   <code>ScheduledTime</code> field. The default is <code>CreationTime</code>.</p>"
                     }
                 },
                 "SortOrder": {
                     "target": "com.amazonaws.sagemaker#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.\n         The default is <code>Descending</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order. \n   The default is <code>Descending</code>.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job\n         executions, use it in the next request.</p>"
+                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job executions, use \n   it in the next request.</p>"
                     }
                 },
                 "MaxResults": {
@@ -35123,7 +35136,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs,\n         use it in the subsequent reques</p>"
+                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job executions, use \n   it in the next request.</p>"
                     }
                 }
             },
@@ -35161,19 +35174,19 @@
                 "SortBy": {
                     "target": "com.amazonaws.sagemaker#MonitoringScheduleSortKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to sort results by <code>Status</code>, <code>CreationTime</code>,\n            <code>ScheduledTime</code> field. The default is <code>CreationTime</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to sort the results by the <code>Status</code>, <code>CreationTime</code>, or \n   <code>ScheduledTime</code> field. The default is <code>CreationTime</code>.</p>"
                     }
                 },
                 "SortOrder": {
                     "target": "com.amazonaws.sagemaker#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.\n         The default is <code>Descending</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order. \n   The default is <code>Descending</code>.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job\n         executions, use it in the next request.</p>"
+                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job executions, use \n   it in the next request.</p>"
                     }
                 },
                 "MaxResults": {
@@ -35248,7 +35261,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs,\n         use it in the subsequent request.</p>"
+                        "smithy.api#documentation": "<p>The token returned if the response is truncated. To retrieve the next set of job executions, use \n   it in the next request.</p>"
                     }
                 }
             },
@@ -37902,7 +37915,7 @@
                 "ConfigUri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>JSON formatted S3 file that defines bias parameters. For more information on this JSON\n         configuration file, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-bias-parameters.html\">Configure bias\n         parameters</a>.</p>",
+                        "smithy.api#documentation": "<p>JSON formatted S3 file that defines bias parameters. For more information on this JSON\n         configuration file, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-bias-parameters.html\">Configure\n            bias parameters</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -38904,7 +38917,7 @@
                 "ConfigUri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>JSON formatted S3 file that defines explainability parameters. For more information on\n         this JSON configuration file, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-model-explainability-parameters.html\">Configure model\n            explainability parameters</a>.</p>",
+                        "smithy.api#documentation": "<p>JSON formatted Amazon S3 file that defines explainability parameters. For more\n         information on this JSON configuration file, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-model-explainability-parameters.html\">Configure model explainability parameters</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -39378,6 +39391,12 @@
                     "target": "com.amazonaws.sagemaker#DriftCheckBaselines",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the drift check baselines that can be used when the model monitor is set using the model package.</p>"
+                    }
+                },
+                "SkipModelValidation": {
+                    "target": "com.amazonaws.sagemaker#SkipModelValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if you want to skip model validation.</p>"
                     }
                 }
             },
@@ -39975,13 +39994,13 @@
                 "RecordPreprocessorSourceUri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called per row prior to running analysis. It can\n         base64 decode the payload and convert it into a flatted json so that the built-in container\n         can use the converted data. Applicable only for the built-in (first party)\n         containers.</p>"
+                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called per row prior to running analysis. It can \n   base64 decode the payload and convert it into a flattened JSON so that the built-in container can use \n   the converted data. Applicable only for the built-in (first party) containers.</p>"
                     }
                 },
                 "PostAnalyticsProcessorSourceUri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called after analysis has been performed.\n         Applicable only for the built-in (first party) containers.</p>"
+                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called after analysis has been performed. Applicable \n   only for the built-in (first party) containers.</p>"
                     }
                 },
                 "ProblemType": {
@@ -40015,7 +40034,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration for monitoring constraints and monitoring statistics. These baseline\n         resources are compared against the results of the current job from the series of jobs\n         scheduled to collect data periodically.</p>"
+                "smithy.api#documentation": "<p>Configuration for monitoring constraints and monitoring statistics. These baseline resources are \n   compared against the results of the current job from the series of jobs scheduled to collect data \n   periodically.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelQualityJobInput": {
@@ -40039,7 +40058,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input for the model quality monitoring job. Currently endponts are supported for\n         input for model quality monitoring jobs.</p>"
+                "smithy.api#documentation": "<p>The input for the model quality monitoring job. Currently endpoints are supported for\n         input for model quality monitoring jobs.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelRegisterSettings": {
@@ -40496,13 +40515,13 @@
                 "RecordPreprocessorSourceUri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called per row prior to running analysis. It can\n         base64 decode the payload and convert it into a flatted json so that the built-in container\n         can use the converted data. Applicable only for the built-in (first party)\n         containers.</p>"
+                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called per row prior to running analysis. It can \n   base64 decode the payload and convert it into a flattened JSON so that the built-in container can use \n   the converted data. Applicable only for the built-in (first party) containers.</p>"
                     }
                 },
                 "PostAnalyticsProcessorSourceUri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called after analysis has been performed.\n         Applicable only for the built-in (first party) containers.</p>"
+                        "smithy.api#documentation": "<p>An Amazon S3 URI to a script that is called after analysis has been performed. Applicable \n   only for the built-in (first party) containers.</p>"
                     }
                 }
             },
@@ -40528,12 +40547,12 @@
                 "StatisticsResource": {
                     "target": "com.amazonaws.sagemaker#MonitoringStatisticsResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The baseline statistics file in Amazon S3 that the current monitoring job should be\n         validated against.</p>"
+                        "smithy.api#documentation": "<p>The baseline statistics file in Amazon S3 that the current monitoring job should\n         be validated against.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration for monitoring constraints and monitoring statistics. These baseline\n         resources are compared against the results of the current job from the series of jobs\n         scheduled to collect data periodically.</p>"
+                "smithy.api#documentation": "<p>Configuration for monitoring constraints and monitoring statistics. These baseline resources are \n   compared against the results of the current job from the series of jobs scheduled to collect data \n   periodically.</p>"
             }
         },
         "com.amazonaws.sagemaker#MonitoringClusterConfig": {
@@ -40563,7 +40582,7 @@
                 "VolumeKmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data\n         on the storage volume attached to the ML compute instance(s) that run the model monitoring\n         job.</p>"
+                        "smithy.api#documentation": "<p>The Key Management Service (KMS) key that Amazon SageMaker uses to\n         encrypt data on the storage volume attached to the ML compute instance(s) that run the\n         model monitoring job.</p>"
                     }
                 }
             },
@@ -40831,14 +40850,14 @@
                 "MonitoringInputs": {
                     "target": "com.amazonaws.sagemaker#MonitoringInputs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of inputs for the monitoring job. Currently we support monitoring an Amazon SageMaker\n         Endpoint.</p>",
+                        "smithy.api#documentation": "<p>The array of inputs for the monitoring job. Currently we support monitoring an Amazon SageMaker Endpoint.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MonitoringOutputConfig": {
                     "target": "com.amazonaws.sagemaker#MonitoringOutputConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of outputs from the monitoring job to be uploaded to Amazon Simple Storage\n         Service (Amazon S3).</p>",
+                        "smithy.api#documentation": "<p>The array of outputs from the monitoring job to be uploaded to Amazon S3.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -40877,7 +40896,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on\n         your behalf.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can \n   assume to perform tasks on your behalf.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -40972,7 +40991,7 @@
                     "target": "com.amazonaws.sagemaker#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates if the file should be read as a json object per line.\n</p>"
+                        "smithy.api#documentation": "<p>Indicates if the file should be read as a JSON object per line. </p>"
                     }
                 }
             },
@@ -41021,7 +41040,7 @@
                 "S3Output": {
                     "target": "com.amazonaws.sagemaker#MonitoringS3Output",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 storage location where the results of a monitoring job are saved.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 storage location where the results of a monitoring job are\n         saved.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -41043,7 +41062,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the model\n         artifacts at rest using Amazon S3 server-side encryption.</p>"
+                        "smithy.api#documentation": "<p>The Key Management Service (KMS) key that Amazon SageMaker uses to\n         encrypt the model artifacts at rest using Amazon S3 server-side encryption.</p>"
                     }
                 }
             },
@@ -41114,14 +41133,14 @@
                 "S3Uri": {
                     "target": "com.amazonaws.sagemaker#MonitoringS3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a\n         monitoring job.</p>",
+                        "smithy.api#documentation": "<p>A URI that identifies the Amazon S3 storage location where Amazon SageMaker\n         saves the results of a monitoring job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LocalPath": {
                     "target": "com.amazonaws.sagemaker#ProcessingLocalPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a\n         monitoring job. LocalPath is an absolute path for the output data.</p>",
+                        "smithy.api#documentation": "<p>The local path to the Amazon S3 storage location where Amazon SageMaker\n         saves the results of a monitoring job. LocalPath is an absolute path for the output\n         data.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -41383,7 +41402,7 @@
                     "target": "com.amazonaws.sagemaker#MonitoringMaxRuntimeInSeconds",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum runtime allowed in seconds.</p>\n         <note>\n            <p>The <code>MaxRuntimeInSeconds</code> cannot exceed the frequency of the job. For data quality and\n            model explainability, this can be up to 3600 seconds for an hourly schedule. For model\n            bias and model quality hourly schedules, this can be up to 1800 seconds.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum runtime allowed in seconds.</p>\n         <note>\n            <p>The <code>MaxRuntimeInSeconds</code> cannot exceed the frequency of the job. For data\n            quality and model explainability, this can be up to 3600 seconds for an hourly schedule.\n            For model bias and model quality hourly schedules, this can be up to 1800\n            seconds.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -51901,6 +51920,23 @@
                 "smithy.api#pattern": "^UserName$"
             }
         },
+        "com.amazonaws.sagemaker#SkipModelValidation": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#SnsTopicArn": {
             "type": "string",
             "traits": {
@@ -58661,14 +58697,14 @@
                 "MonitoringScheduleName": {
                     "target": "com.amazonaws.sagemaker#MonitoringScheduleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the monitoring schedule. The name must be unique within an Amazon Web Services Region within\n         an Amazon Web Services account.</p>",
+                        "smithy.api#documentation": "<p>The name of the monitoring schedule. The name must be unique within an Amazon Web Services \n   Region within an Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MonitoringScheduleConfig": {
                     "target": "com.amazonaws.sagemaker#MonitoringScheduleConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration object that specifies the monitoring schedule and defines the\n         monitoring job.</p>",
+                        "smithy.api#documentation": "<p>The configuration object that specifies the monitoring schedule and defines the monitoring \n   job.</p>",
                         "smithy.api#required": {}
                     }
                 }

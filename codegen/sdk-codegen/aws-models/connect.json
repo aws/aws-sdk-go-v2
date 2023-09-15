@@ -12142,6 +12142,12 @@
                     "traits": {
                         "smithy.api#enumValue": "OnContactEvaluationSubmit"
                     }
+                },
+                "OnMetricDataUpdate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnMetricDataUpdate"
+                    }
                 }
             }
         },
