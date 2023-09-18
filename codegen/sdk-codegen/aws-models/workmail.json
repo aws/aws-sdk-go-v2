@@ -227,7 +227,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1011
-                }
+                },
+                "smithy.api#pattern": "^arn:aws:workmail:[a-z0-9-]*:[a-z0-9-]+:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
             }
         },
         "com.amazonaws.workmail#AssociateDelegateToResource": {
@@ -253,6 +254,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -271,16 +275,16 @@
                     }
                 },
                 "ResourceId": {
-                    "target": "com.amazonaws.workmail#ResourceId",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource for which members (users or groups) are associated.</p>",
+                        "smithy.api#documentation": "<p>The resource for which members (users or groups) are associated.</p>\n         <p>The identifier can accept <i>ResourceId</i>, <i>Resourcename</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Resource ID: r-0123456789a0123456789b0123456789</p>\n            </li>\n            <li>\n               <p>Email address: resource@domain.tld</p>\n            </li>\n            <li>\n               <p>Resource name: resource</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "EntityId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The member (user or group) to associate to the resource.</p>",
+                        "smithy.api#documentation": "<p>The member (user or group) to associate to the resource.</p>\n         <p>The entity ID can accept <i>UserId or GroupID</i>, <i>Username or Groupname</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Entity: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: entity@domain.tld</p>\n            </li>\n            <li>\n               <p>Entity: entity</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -346,16 +350,16 @@
                     }
                 },
                 "GroupId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The group to which the member (user or group) is associated.</p>",
+                        "smithy.api#documentation": "<p>The group to which the member (user or group) is associated.</p>\n         <p>The identifier can accept <i>GroupId</i>, <i>Groupname</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: group@domain.tld</p>\n            </li>\n            <li>\n               <p>Group name: group</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "MemberId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The member (user or group) to associate to the group.</p>",
+                        "smithy.api#documentation": "<p>The member (user or group) to associate to the group.</p>\n         <p>The member ID can accept <i>UserID or GroupId</i>, <i>Username or Groupname</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Member: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: member@domain.tld</p>\n            </li>\n            <li>\n               <p>Member name: member</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -819,6 +823,13 @@
                         "smithy.api#documentation": "<p>The name of the group.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "HiddenFromGlobalAddressList": {
+                    "target": "com.amazonaws.workmail#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If this parameter is enabled, the group will be hidden from the address book.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1184,6 +1195,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#ReservedNameException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -1213,6 +1227,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of the new resource. The available types are <code>equipment</code> and\n            <code>room</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource description.</p>"
+                    }
+                },
+                "HiddenFromGlobalAddressList": {
+                    "target": "com.amazonaws.workmail#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If this parameter is enabled, the resource will be hidden from the address book.</p>"
                     }
                 }
             },
@@ -1294,7 +1321,7 @@
                     }
                 },
                 "DisplayName": {
-                    "target": "com.amazonaws.workmail#String",
+                    "target": "com.amazonaws.workmail#UserAttribute",
                     "traits": {
                         "smithy.api#documentation": "<p>The display name for the new user.</p>",
                         "smithy.api#required": {}
@@ -1303,8 +1330,32 @@
                 "Password": {
                     "target": "com.amazonaws.workmail#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password for the new user.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The password for the new user.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.workmail#UserRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the new user.</p>\n         <p>You cannot pass <i>SYSTEM_USER</i> or <i>RESOURCE</i> role in a single request. When a user role is not selected, the default role of <i>USER</i> is selected.</p>"
+                    }
+                },
+                "FirstName": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the new user.</p>"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last name of the new user. </p>"
+                    }
+                },
+                "HiddenFromGlobalAddressList": {
+                    "target": "com.amazonaws.workmail#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If this parameter is enabled, the user will be hidden from the address book.</p>"
                     }
                 }
             },
@@ -1606,9 +1657,9 @@
                     }
                 },
                 "GroupId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the group to be deleted.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the group to be deleted.</p>\n         <p>The identifier can be the <i>GroupId</i>, or <i>Groupname</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Group name: group</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1717,16 +1768,16 @@
                     }
                 },
                 "EntityId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the member (user or group) that owns the mailbox.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the entity that owns the mailbox.</p>\n         <p>The identifier can be <i>UserId or Group Id</i>, <i>Username or Groupname</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: entity@domain.tld</p>\n            </li>\n            <li>\n               <p>Entity name: entity</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "GranteeId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the member (user or group) for which to delete granted\n         permissions.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the entity for which to delete granted permissions.</p>\n         <p>The identifier can be <i>UserId, ResourceID, or Group Id</i>, <i>Username or Groupname</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Grantee ID: 12345678-1234-1234-1234-123456789012,r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: grantee@domain.tld</p>\n            </li>\n            <li>\n               <p>Grantee name: grantee</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1904,6 +1955,13 @@
                         "smithy.api#documentation": "<p>If true, deletes the AWS Directory Service directory associated with the organization.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ForceDelete": {
+                    "target": "com.amazonaws.workmail#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Deletes a WorkMail organization even if the organization has enabled users.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1950,6 +2008,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -1968,9 +2029,9 @@
                     }
                 },
                 "ResourceId": {
-                    "target": "com.amazonaws.workmail#ResourceId",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the resource to be deleted.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the resource to be deleted.</p>\n         <p>The identifier can accept <i>ResourceId</i>, or <i>Resourcename</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Resource ID: r-0123456789a0123456789b0123456789</p>\n            </li>\n            <li>\n               <p>Resource name: resource</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2086,9 +2147,9 @@
                     }
                 },
                 "UserId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the user to be deleted.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the user to be deleted.</p>\n         <p>The identifier can be the <i>UserId</i> or <i>Username</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>User name: user</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2145,9 +2206,9 @@
                     }
                 },
                 "EntityId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the member (user or group) to be updated.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the member to be updated.</p>\n         <p>The identifier can be <i>UserId, ResourceId, or Group Id</i>, <i>Username, Resourcename, or Groupname</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: entity@domain.tld</p>\n            </li>\n            <li>\n               <p>Entity name: entity</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2284,6 +2345,81 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workmail#DescribeEntity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#DescribeEntityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#DescribeEntityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns basic details about an entity in WorkMail. </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#DescribeEntityRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the organization under which the entity exists.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Email": {
+                    "target": "com.amazonaws.workmail#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email under which the entity exists.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#DescribeEntityResponse": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity ID under which the entity exists.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Username, GroupName, or ResourceName based on entity type.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.workmail#EntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Entity type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workmail#DescribeGroup": {
             "type": "operation",
             "input": {
@@ -2322,9 +2458,9 @@
                     }
                 },
                 "GroupId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the group to be described.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the group to be described.</p>\n         <p>The identifier can accept <i>GroupId</i>, <i>Groupname</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: group@domain.tld</p>\n            </li>\n            <li>\n               <p>Group name: group</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2370,6 +2506,13 @@
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when a user was deregistered from WorkMail, in UNIX epoch time\n         format.</p>"
+                    }
+                },
+                "HiddenFromGlobalAddressList": {
+                    "target": "com.amazonaws.workmail#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If the value is set to <i>true</i>, the group is hidden from the address book.</p>"
                     }
                 }
             },
@@ -2650,6 +2793,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the organization.</p>"
                     }
+                },
+                "MigrationAdmin": {
+                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID of the migration admin if migration is enabled for the organization.</p>"
+                    }
+                },
+                "InteroperabilityEnabled": {
+                    "target": "com.amazonaws.workmail#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates if interoperability is enabled for this organization.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2676,6 +2832,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -2694,9 +2853,9 @@
                     }
                 },
                 "ResourceId": {
-                    "target": "com.amazonaws.workmail#ResourceId",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the resource to be described.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the resource to be described.</p>\n         <p>The identifier can accept <i>ResourceId</i>, <i>Resourcename</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Resource ID: r-0123456789a0123456789b0123456789</p>\n            </li>\n            <li>\n               <p>Email address: resource@domain.tld</p>\n            </li>\n            <li>\n               <p>Resource name: resource</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2755,6 +2914,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when a resource was disabled from WorkMail, in UNIX epoch time\n         format.</p>"
                     }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the resource.</p>"
+                    }
+                },
+                "HiddenFromGlobalAddressList": {
+                    "target": "com.amazonaws.workmail#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If enabled, the resource is hidden from the global address list.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2799,9 +2971,9 @@
                     }
                 },
                 "UserId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the user to be described.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the user to be described.</p>\n         <p>The identifier can be the <i>UserId</i>, <i>Username</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: user@domain.tld</p>\n            </li>\n            <li>\n               <p>User name: user</p>\n            </li>\n         </ul>\n         <p></p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2832,7 +3004,7 @@
                     }
                 },
                 "DisplayName": {
-                    "target": "com.amazonaws.workmail#String",
+                    "target": "com.amazonaws.workmail#UserAttribute",
                     "traits": {
                         "smithy.api#documentation": "<p>The display name of the user.</p>"
                     }
@@ -2846,7 +3018,7 @@
                 "UserRole": {
                     "target": "com.amazonaws.workmail#UserRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>In certain cases, other entities are modeled as users. If interoperability is\n         enabled, resources are imported into WorkMail as users. Because different WorkMail\n         organizations rely on different directory types, administrators can distinguish between an\n         unregistered user (account is disabled and has a user role) and the directory\n         administrators. The values are USER, RESOURCE, and SYSTEM_USER.</p>"
+                        "smithy.api#documentation": "<p>In certain cases, other entities are modeled as users. If interoperability is\n         enabled, resources are imported into WorkMail as users. Because different WorkMail\n         organizations rely on different directory types, administrators can distinguish between an\n         unregistered user (account is disabled and has a user role) and the directory\n         administrators. The values are USER, RESOURCE, SYSTEM_USER, and REMOTE_USER.</p>"
                     }
                 },
                 "EnabledDate": {
@@ -2859,6 +3031,97 @@
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time at which the user was disabled for WorkMail usage, in UNIX epoch\n         time format.</p>"
+                    }
+                },
+                "MailboxProvisionedDate": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the mailbox was created for the user.</p>"
+                    }
+                },
+                "MailboxDeprovisionedDate": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the mailbox was removed for the user.</p>"
+                    }
+                },
+                "FirstName": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>First name of the user.</p>"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last name of the user.</p>"
+                    }
+                },
+                "HiddenFromGlobalAddressList": {
+                    "target": "com.amazonaws.workmail#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If enabled, the user is hidden from the global address list.</p>"
+                    }
+                },
+                "Initials": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Initials of the user.</p>"
+                    }
+                },
+                "Telephone": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User's contact number.</p>"
+                    }
+                },
+                "Street": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Street where the user is located.</p>"
+                    }
+                },
+                "JobTitle": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job title of the user.</p>"
+                    }
+                },
+                "City": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>City where the user is located.</p>"
+                    }
+                },
+                "Company": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Company of the user.</p>"
+                    }
+                },
+                "ZipCode": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Zip code of the user.</p>"
+                    }
+                },
+                "Department": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Department of the user.</p>"
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Country where the user is located.</p>"
+                    }
+                },
+                "Office": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Office where the user is located.</p>"
                     }
                 }
             },
@@ -3043,6 +3306,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -3061,16 +3327,16 @@
                     }
                 },
                 "ResourceId": {
-                    "target": "com.amazonaws.workmail#ResourceId",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the resource from which delegates' set members are removed.\n      </p>",
+                        "smithy.api#documentation": "<p>The identifier of the resource from which delegates' set members are removed.\n      </p>\n         <p>The identifier can accept <i>ResourceId</i>, <i>Resourcename</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Resource ID: r-0123456789a0123456789b0123456789</p>\n            </li>\n            <li>\n               <p>Email address: resource@domain.tld</p>\n            </li>\n            <li>\n               <p>Resource name: resource</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "EntityId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the member (user, group) to be removed from the resource's\n         delegates.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the member (user, group) to be removed from the resource's\n         delegates.</p>\n         <p>The entity ID can accept <i>UserId or GroupID</i>, <i>Username or Groupname</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Entity: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: entity@domain.tld</p>\n            </li>\n            <li>\n               <p>Entity: entity</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3136,16 +3402,16 @@
                     }
                 },
                 "GroupId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the group from which members are removed.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the group from which members are removed.</p>\n         <p>The identifier can accept <i>GroupId</i>, <i>Groupname</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: group@domain.tld</p>\n            </li>\n            <li>\n               <p>Group name: group</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "MemberId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the member to be removed to the group.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the member to be removed from the group.</p>\n         <p>The member ID can accept <i>UserID or GroupId</i>, <i>Username or Groupname</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Member ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: member@domain.tld</p>\n            </li>\n            <li>\n               <p>Member name: member</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3222,7 +3488,8 @@
                 "DomainName": {
                     "target": "com.amazonaws.workmail#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fully qualified domain name.</p>"
+                        "smithy.api#documentation": "<p>The fully qualified domain name.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "HostedZoneId": {
@@ -3243,7 +3510,7 @@
                     "min": 3,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9.-]+\\.[a-zA-Z-]{2,}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9.-]+$"
             }
         },
         "com.amazonaws.workmail#Domains": {
@@ -3347,6 +3614,29 @@
             "traits": {
                 "smithy.api#documentation": "<p>You are performing an operation on a user, group, or resource that isn't in the\n         expected state, such as trying to delete an active user.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.workmail#EntityType": {
+            "type": "enum",
+            "members": {
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP"
+                    }
+                },
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
+                    }
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#EwsAvailabilityProvider": {
@@ -3911,6 +4201,9 @@
                     "target": "com.amazonaws.workmail#EntityNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
                     "target": "com.amazonaws.workmail#OrganizationNotFoundException"
                 },
                 {
@@ -3933,9 +4226,9 @@
                     }
                 },
                 "UserId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the user whose mailbox details are being requested.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the user whose mailbox details are being requested.</p>\n         <p>The identifier can be the <i>UserId</i>, <i>Username</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: user@domain.tld</p>\n            </li>\n            <li>\n               <p>User name: user</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4193,6 +4486,32 @@
                 "smithy.api#documentation": "<p>The representation of an WorkMail group.</p>"
             }
         },
+        "com.amazonaws.workmail#GroupIdentifier": {
+            "type": "structure",
+            "members": {
+                "GroupId": {
+                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Group ID that matched the group.</p>"
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.workmail#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Group name that matched the group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier that contains the Group ID and name of a group.</p>"
+            }
+        },
+        "com.amazonaws.workmail#GroupIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#GroupIdentifier"
+            }
+        },
         "com.amazonaws.workmail#GroupName": {
             "type": "string",
             "traits": {
@@ -4216,7 +4535,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "^[\\S\\s]*$"
+                "smithy.api#pattern": "^[^/\\\\]*$"
             }
         },
         "com.amazonaws.workmail#IdempotencyClientToken": {
@@ -4858,9 +5177,9 @@
                     }
                 },
                 "GroupId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the group to which the members (users or groups) are\n         associated.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the group to which the members (users or groups) are\n         associated.</p>\n         <p>The identifier can accept <i>GroupId</i>, <i>Groupname</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: group@domain.tld</p>\n            </li>\n            <li>\n               <p>Group name: group</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4933,6 +5252,141 @@
                 }
             }
         },
+        "com.amazonaws.workmail#ListGroupsFilters": {
+            "type": "structure",
+            "members": {
+                "NamePrefix": {
+                    "target": "com.amazonaws.workmail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only groups with the provided name prefix.</p>"
+                    }
+                },
+                "PrimaryEmailPrefix": {
+                    "target": "com.amazonaws.workmail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only groups with the provided primary email prefix.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workmail#EntityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only groups with the provided state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Filtering options for <i>ListGroups</i> operation. This is only used as input to Operation.</p>"
+            }
+        },
+        "com.amazonaws.workmail#ListGroupsForEntity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#ListGroupsForEntityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#ListGroupsForEntityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#EntityStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all the groups to which an entity belongs.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.workmail#ListGroupsForEntityFilters": {
+            "type": "structure",
+            "members": {
+                "GroupNamePrefix": {
+                    "target": "com.amazonaws.workmail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only group names that start with the provided name prefix.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Filtering options for <i>ListGroupsForEntity</i> operation. This is only used as input to Operation.</p>"
+            }
+        },
+        "com.amazonaws.workmail#ListGroupsForEntityRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the organization under which the entity exists.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityId": {
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the entity.</p>\n         <p>The entity ID can accept <i>UserId or GroupID</i>, <i>Username or Groupname</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Entity ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: entity@domain.tld</p>\n            </li>\n            <li>\n               <p>Entity name: entity</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.workmail#ListGroupsForEntityFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limit the search results based on the filter criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workmail#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. The first call does not contain any tokens.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.workmail#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#ListGroupsForEntityResponse": {
+            "type": "structure",
+            "members": {
+                "Groups": {
+                    "target": "com.amazonaws.workmail#GroupIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overview of groups in an organization.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workmail#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is `null` when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workmail#ListGroupsRequest": {
             "type": "structure",
             "members": {
@@ -4953,6 +5407,12 @@
                     "target": "com.amazonaws.workmail#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.workmail#ListGroupsFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limit the search results based on the filter criteria. Only one filter per request is supported.</p>"
                     }
                 }
             },
@@ -5250,9 +5710,9 @@
                     }
                 },
                 "EntityId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the user, group, or resource for which to list mailbox\n         permissions.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the user, or resource for which to list mailbox\n         permissions.</p>\n         <p>The entity ID can accept <i>UserId or ResourceId</i>, <i>Username or Resourcename</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Entity ID: 12345678-1234-1234-1234-123456789012, or r-0123456789a0123456789b0123456789</p>\n            </li>\n            <li>\n               <p>Email address: entity@domain.tld</p>\n            </li>\n            <li>\n               <p>Entity name: entity</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5521,6 +5981,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -5544,9 +6007,9 @@
                     }
                 },
                 "ResourceId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the resource whose delegates are listed.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the resource whose delegates are listed.</p>\n         <p>The identifier can accept <i>ResourceId</i>, <i>Resourcename</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Resource ID: r-0123456789a0123456789b0123456789</p>\n            </li>\n            <li>\n               <p>Email address: resource@domain.tld</p>\n            </li>\n            <li>\n               <p>Resource name: resource</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5604,6 +6067,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -5614,6 +6080,32 @@
                     "outputToken": "NextToken",
                     "pageSize": "MaxResults"
                 }
+            }
+        },
+        "com.amazonaws.workmail#ListResourcesFilters": {
+            "type": "structure",
+            "members": {
+                "NamePrefix": {
+                    "target": "com.amazonaws.workmail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only resource that start with the entered name prefix .</p>"
+                    }
+                },
+                "PrimaryEmailPrefix": {
+                    "target": "com.amazonaws.workmail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only resource with the provided primary email prefix.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workmail#EntityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only resource with the provided state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filtering options for <i>ListResources</i> operation. This is only used as input to Operation.</p>"
             }
         },
         "com.amazonaws.workmail#ListResourcesRequest": {
@@ -5636,6 +6128,12 @@
                     "target": "com.amazonaws.workmail#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.workmail#ListResourcesFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limit the resource search results based on the filter criteria. You can only use one filter per request.</p>"
                     }
                 }
             },
@@ -5738,6 +6236,38 @@
                 }
             }
         },
+        "com.amazonaws.workmail#ListUsersFilters": {
+            "type": "structure",
+            "members": {
+                "UsernamePrefix": {
+                    "target": "com.amazonaws.workmail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only users with the provided username prefix.</p>"
+                    }
+                },
+                "DisplayNamePrefix": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only users with the provided display name prefix.</p>"
+                    }
+                },
+                "PrimaryEmailPrefix": {
+                    "target": "com.amazonaws.workmail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only users with the provided email prefix.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workmail#EntityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only users with the provided state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Filtering options for <i>ListUsers</i> operation. This is only used as input to Operation.</p>"
+            }
+        },
         "com.amazonaws.workmail#ListUsersRequest": {
             "type": "structure",
             "members": {
@@ -5758,6 +6288,12 @@
                     "target": "com.amazonaws.workmail#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.workmail#ListUsersFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limit the user search results based on the filter criteria. You can only use one filter per request.</p>"
                     }
                 }
             },
@@ -6308,6 +6844,15 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.workmail#NewResourceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.workmail#NextToken": {
             "type": "string",
             "traits": {
@@ -6779,16 +7324,16 @@
                     }
                 },
                 "EntityId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the user, group, or resource for which to update mailbox\n         permissions.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the user or resource for which to update mailbox\n         permissions.</p>\n         <p>The identifier can be <i>UserId, ResourceID, or Group Id</i>, <i>Username, Resourcename, or Groupname</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: entity@domain.tld</p>\n            </li>\n            <li>\n               <p>Entity name: entity</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "GranteeId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the user, group, or resource to which to grant the\n         permissions.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the user, group, or resource to which to grant the\n         permissions.</p>\n         <p>The identifier can be <i>UserId, ResourceID, or Group Id</i>, <i>Username, Resourcename, or Groupname</i>, or <i>email</i>.</p>\n         <ul>\n            <li>\n               <p>Grantee ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: grantee@domain.tld</p>\n            </li>\n            <li>\n               <p>Grantee name: grantee</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7109,9 +7654,9 @@
                     }
                 },
                 "EntityId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the user, group, or resource to be updated.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the user, group, or resource to be updated.</p>\n         <p>The identifier can accept <i>UserId, ResourceId, or GroupId</i>, or <i>Username, Resourcename, or Groupname</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Entity name: entity</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7268,6 +7813,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date indicating when the resource was disabled from WorkMail use.</p>"
                     }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource description.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7278,6 +7829,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.workmail#Delegate"
+            }
+        },
+        "com.amazonaws.workmail#ResourceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
             }
         },
         "com.amazonaws.workmail#ResourceId": {
@@ -7374,7 +7934,8 @@
                 "smithy.api#length": {
                     "min": 20,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^arn:aws:iam:[a-z0-9-]*:[a-z0-9-]+:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
             }
         },
         "com.amazonaws.workmail#S3BucketName": {
@@ -7456,9 +8017,9 @@
                     }
                 },
                 "EntityId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the user or resource associated with the mailbox.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the user or resource associated with the mailbox.</p>\n         <p>The identifier can accept <i>UserId or ResourceId</i>, <i>Username or Resourcename</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789\n            , or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: entity@domain.tld</p>\n            </li>\n            <li>\n               <p>Entity name: entity</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7588,6 +8149,9 @@
                 "target": "com.amazonaws.workmail#TagResourceResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
                 },
@@ -7927,6 +8491,74 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workmail#UpdateGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#UpdateGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#UpdateGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#EntityStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates attibutes in a group.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#UpdateGroupRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the organization under which the group exists.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the group to be updated.</p>\n         <p>The identifier can accept <i>GroupId</i>, <i>Groupname</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: group@domain.tld</p>\n            </li>\n            <li>\n               <p>Group name: group</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HiddenFromGlobalAddressList": {
+                    "target": "com.amazonaws.workmail#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If enabled, the group is hidden from the global address list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#UpdateGroupResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workmail#UpdateImpersonationRole": {
             "type": "operation",
             "input": {
@@ -8059,9 +8691,9 @@
                     }
                 },
                 "UserId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifer for the user for whom to update the mailbox quota.</p>",
+                        "smithy.api#documentation": "<p>The identifer for the user for whom to update the mailbox quota.</p>\n         <p>The identifier can be the <i>UserId</i>, <i>Username</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: user@domain.tld</p>\n            </li>\n            <li>\n               <p>User name: user</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8266,9 +8898,9 @@
                     }
                 },
                 "EntityId": {
-                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user, group, or resource to update.</p>",
+                        "smithy.api#documentation": "<p>The user, group, or resource to update.</p>\n         <p>The identifier can accept <i>UseriD, ResourceId, or GroupId</i>, <i>Username, Resourcename, or Groupname</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: entity@domain.tld</p>\n            </li>\n            <li>\n               <p>Entity name: entity</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8316,6 +8948,9 @@
                     "target": "com.amazonaws.workmail#InvalidConfigurationException"
                 },
                 {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
                     "target": "com.amazonaws.workmail#MailDomainNotFoundException"
                 },
                 {
@@ -8329,6 +8964,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -8347,9 +8985,9 @@
                     }
                 },
                 "ResourceId": {
-                    "target": "com.amazonaws.workmail#ResourceId",
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the resource to be updated.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the resource to be updated.</p>\n         <p>The identifier can accept <i>ResourceId</i>, <i>Resourcename</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>Resource ID: r-0123456789a0123456789b0123456789</p>\n            </li>\n            <li>\n               <p>Email address: resource@domain.tld</p>\n            </li>\n            <li>\n               <p>Resource name: resource</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8364,6 +9002,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The resource's booking options to be updated.</p>"
                     }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#NewResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the resource description.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.workmail#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the resource type.</p>"
+                    }
+                },
+                "HiddenFromGlobalAddressList": {
+                    "target": "com.amazonaws.workmail#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If enabled, the resource is hidden from the global address list.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8371,6 +9027,164 @@
             }
         },
         "com.amazonaws.workmail#UpdateResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workmail#UpdateUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#UpdateUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#UpdateUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#DirectoryServiceAuthenticationFailedException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#EntityStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates data for the user. To have the latest information, it must be preceded by a\n            <a>DescribeUser</a> call. The dataset in the request should be the one\n         expected when performing another <code>DescribeUser</code> call.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#UpdateUserRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the organization under which the user exists.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the user to be updated.</p>\n         <p>The identifier can be the <i>UserId</i>, <i>Username</i>, or <i>email</i>. The following identity formats are available:</p>\n         <ul>\n            <li>\n               <p>User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234</p>\n            </li>\n            <li>\n               <p>Email address: user@domain.tld</p>\n            </li>\n            <li>\n               <p>User name: user</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.workmail#UserRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user role.</p>\n         <p>You cannot pass <i>SYSTEM_USER</i> or <i>RESOURCE</i>.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the display name of the user.</p>"
+                    }
+                },
+                "FirstName": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's first name.</p>"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's last name.</p>"
+                    }
+                },
+                "HiddenFromGlobalAddressList": {
+                    "target": "com.amazonaws.workmail#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If enabled, the user is hidden from the global address list.</p>"
+                    }
+                },
+                "Initials": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's initials.</p>"
+                    }
+                },
+                "Telephone": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's contact details.</p>"
+                    }
+                },
+                "Street": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's street address.</p>"
+                    }
+                },
+                "JobTitle": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's job title.</p>"
+                    }
+                },
+                "City": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's city.</p>"
+                    }
+                },
+                "Company": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's company.</p>"
+                    }
+                },
+                "ZipCode": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's zipcode.</p>"
+                    }
+                },
+                "Department": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's department.</p>"
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's country.</p>"
+                    }
+                },
+                "Office": {
+                    "target": "com.amazonaws.workmail#UserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the user's office.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#UpdateUserResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -8443,6 +9257,16 @@
                 "smithy.api#documentation": "<p>The representation of an WorkMail user.</p>"
             }
         },
+        "com.amazonaws.workmail#UserAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.workmail#UserIdList": {
             "type": "list",
             "member": {
@@ -8485,6 +9309,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SYSTEM_USER"
                     }
+                },
+                "REMOTE_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOTE_USER"
+                    }
                 }
             }
         },
@@ -8501,7 +9331,7 @@
                     "min": 3,
                     "max": 209
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9.-]+\\.[a-zA-Z-]{2,}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9.-]+$"
             }
         },
         "com.amazonaws.workmail#WorkMailIdentifier": {
@@ -8602,6 +9432,9 @@
                     "target": "com.amazonaws.workmail#DescribeEmailMonitoringConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.workmail#DescribeEntity"
+                },
+                {
                     "target": "com.amazonaws.workmail#DescribeGroup"
                 },
                 {
@@ -8663,6 +9496,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#ListGroups"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ListGroupsForEntity"
                 },
                 {
                     "target": "com.amazonaws.workmail#ListImpersonationRoles"
@@ -8743,6 +9579,9 @@
                     "target": "com.amazonaws.workmail#UpdateDefaultMailDomain"
                 },
                 {
+                    "target": "com.amazonaws.workmail#UpdateGroup"
+                },
+                {
                     "target": "com.amazonaws.workmail#UpdateImpersonationRole"
                 },
                 {
@@ -8756,6 +9595,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#UpdateResource"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UpdateUser"
                 }
             ],
             "traits": {

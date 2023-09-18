@@ -969,7 +969,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Network details about the host where the agent/collector resides.</p>"
+                "smithy.api#documentation": "<p>Network details about the host where the agent/collector resides.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.applicationdiscoveryservice#AgentNetworkInfoList": {
